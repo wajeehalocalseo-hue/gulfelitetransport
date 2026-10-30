@@ -37,7 +37,6 @@ export const proposals: Proposal[] = [
   { main: "freight-cargo-transport", name: "Raw Material Transportation", status: PV, note: unverified },
   { main: "freight-cargo-transport", name: "Finished Goods Transportation", status: PV, note: unverified },
   { main: "freight-cargo-transport", name: "Palletized Cargo Transportation", status: PV, note: unverified },
-  { main: "freight-cargo-transport", name: "Bulk Cargo Transportation", status: PV, note: unverified },
   { main: "freight-cargo-transport", name: "Full Truckload Transportation", status: PV, note: "Implies specific vehicle and load capability; needs owner confirmation." },
   { main: "freight-cargo-transport", name: "Less-than-Truckload Transportation", status: PV, note: "Implies shared or consolidated loads; needs owner confirmation." },
   { main: "freight-cargo-transport", name: "Supplier-to-Business Deliveries", status: D, note: "Covered as a use case on Commercial Cargo Transportation.", mergedInto: "commercial-cargo-transportation" },
@@ -71,8 +70,6 @@ export const proposals: Proposal[] = [
   { main: "contract-fleet-services", name: "Long-Term Transport Contracts", status: D, note: "Covered on Monthly Vehicle Contracts.", mergedInto: "monthly-vehicle-contracts" },
 
   /* Candidate sub-services for the other main services (no sub-services were supplied for these) */
-  { main: "international-freight-forwarding", name: "Import Freight Coordination", status: PV, note: unverified },
-  { main: "international-freight-forwarding", name: "Export Freight Coordination", status: PV, note: unverified },
   { main: "container-transportation", name: "Port Container Collection and Delivery", status: PV, note: "Port access needs owner confirmation." },
   { main: "container-transportation", name: "Empty Container Returns", status: PV, note: unverified },
   { main: "last-mile-delivery", name: "Business-to-Business Deliveries", status: PV, note: unverified },

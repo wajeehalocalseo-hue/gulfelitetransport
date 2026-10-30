@@ -1,3 +1,4 @@
+import { masterTaxonomy } from "./master-taxonomy";
 import { microServices, publishedMicroServices } from "./microservices";
 import { microProposals, type Verification } from "./microproposals";
 import { proposals, statusOverrides } from "./proposals";
@@ -235,6 +236,80 @@ const children = (): Raw[] => {
       note: m.recommendation === "merge" ? `Merged: ${m.useCase}` : "Needs owner confirmation before publication.",
       mergedInto: m.mergedInto,
     });
+  }
+  // Owner-supplied master roadmap. Everything here is pending-verification and has no page.
+  const stub = (
+    id: string,
+    level: 1 | 2 | 3,
+    name: string,
+    parentId: string | null,
+    mainServiceId: string,
+    extra: Partial<Raw> = {},
+  ): Raw => ({
+    id,
+    level,
+    name,
+    slug: slugify(name),
+    parentId,
+    parentSubServiceId: level === 3 ? (parentId ?? undefined) : undefined,
+    mainServiceId,
+    shortDescription: extra.note ?? name,
+    fullDescription: extra.note ?? name,
+    status: "pending-verification",
+    verificationStatus: "pending-verification",
+    featured: false,
+    order: 99,
+    seoTitle: name,
+    metaDescription: extra.note ?? name,
+    primaryKeyword: name.toLowerCase(),
+    secondaryKeywords: [],
+    semanticKeywords: [],
+    searchIntent: "",
+    relatedServices: [],
+    relatedMicroServices: [],
+    relatedEntities: [],
+    faqs: [],
+    schema: { type: "Service", serviceType: name },
+    cta: { label: "Get a Free Quote", href: "#quote" },
+    image: { sceneSlug: mainServiceId, alt: name },
+    icon: "check",
+    audienceShort: "",
+    ...extra,
+  });
+
+  for (const m of masterTaxonomy) {
+    if (!byId.has(m.id)) {
+      // A candidate main category that is not one of the 12 existing services.
+      add(stub(m.id, 1, m.name, null, m.id, { slug: m.id, note: "Candidate main service; needs owner confirmation." }));
+    }
+    for (const g of m.groups) {
+      const groupSlug = slugify(g.name);
+      let groupId: string;
+      if (g.covers) {
+        if (!byId.has(g.covers)) throw new Error(`Master taxonomy: unknown covered service "${g.covers}"`);
+        groupId = g.covers;
+      } else {
+        groupId = `rm:${m.id}:${groupSlug}`;
+        add(
+          stub(groupId, 2, g.name, m.id, m.id, {
+            status: g.overlaps ? "draft" : "pending-verification",
+            mergedInto: g.overlaps,
+            note: [g.overlaps ? `Overlaps the published page "${g.overlaps}".` : "", ...g.notes].filter(Boolean).join(" ") || "Needs owner confirmation.",
+          }),
+        );
+      }
+      for (const it of g.items) {
+        add(
+          stub(`${groupId}:${slugify(it.name)}`.replace(/^/, groupId === g.covers ? `rm:${m.id}:` : ""), 3, it.name, groupId, m.id, {
+            secondaryKeywords: it.topics,
+            semanticKeywords: it.topics,
+            faqTopics: it.topics,
+            useCase: `${it.name} (${g.name})`,
+            note: g.notes.join(" ") || "Needs owner confirmation before publication.",
+          }),
+        );
+      }
+    }
   }
   return out;
 };
