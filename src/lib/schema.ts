@@ -50,6 +50,8 @@ type PageOpts = {
   crumbs?: { name: string; path: string }[];
   service?: { name: string; description: string; serviceType: string };
   items?: { name: string; path: string }[];
+  /** Visible FAQ content on the page; emitted as FAQPage (valid markup, no Google rich result for most commercial sites). */
+  faqs?: { q: string; a: string }[];
 };
 
 /** Per-page WebPage (or subtype), optional Service and BreadcrumbList; links to the base entities by @id. */
@@ -89,6 +91,19 @@ export function pageGraph(o: PageOpts) {
         position: i + 1,
         name: it.name,
         url: abs(it.path),
+        item: { "@id": `${abs(it.path)}#service` },
+      })),
+    });
+  }
+  if (o.faqs?.length) {
+    graph.push({
+      "@type": "FAQPage",
+      "@id": `${url}#faq`,
+      isPartOf: { "@id": pageId },
+      mainEntity: o.faqs.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
       })),
     });
   }

@@ -1,13 +1,41 @@
 import type { Faq } from "./services";
 
-export const hubIntro = {
-  h2: "Transport and logistics services for businesses",
-  paragraphs: [
-    "Gulf Elite Transport helps businesses and organisations arrange the movement of goods, people and equipment. Every service on this page follows the same principle: describe what you need, receive an assessment and a clear quotation, and confirm only when you are comfortable with the plan.",
-    "The services are grouped by the kind of problem they solve. If you are moving goods, start with freight and cargo. If you are moving people, look at passenger transport. If the load is heavy or industrial, see equipment and industrial transportation. If the need is regular, fleet and distribution arrangements save you from repeating the same request.",
-    "Availability depends on your pickup and delivery locations, the type of service and the dates involved. We confirm it individually for every request instead of assuming it.",
+export const hubAnswer = {
+  h2: "What transport services does Gulf Elite Transport provide?",
+  answer:
+    "Gulf Elite Transport provides freight and cargo transport, passenger transport, equipment and machinery moving, and contract fleet services for businesses and organisations. Every request is assessed individually and you receive a clear quotation before you commit. Availability depends on the pickup and delivery locations, the type of service and the dates, and is confirmed for each request.",
+  more: "Every service follows the same principle: describe what you need, receive an assessment and a quotation, and confirm only when you are comfortable with the plan.",
+};
+
+export const hubFacts = {
+  h2: "Service facts at a glance",
+  rows: [
+    { label: "Who the services are for", value: "Businesses and organisations that need to move goods, passengers or equipment" },
+    { label: "How to request a service", value: "Use the quote form on this page, or the contact page" },
+    { label: "Quotation", value: "Provided before you commit; nothing is arranged until you confirm" },
+    { label: "Pricing basis", value: "Quotation-based, depending on the details of each request" },
+    { label: "Availability", value: "Confirmed individually for each request, never assumed" },
   ],
 };
+
+export const groupsIntro = {
+  h2: "Services grouped by what you need to move",
+  text: "Start with the kind of movement you have in mind. Goods, people, heavy equipment and recurring supply each have their own service, with a dedicated page covering what is included and what we need to prepare a quotation.",
+};
+
+export const midCta = {
+  h2: "Not sure which service fits?",
+  text: "Describe your requirement in your own words. We will tell you which service suits it best, and what we need to prepare your quotation.",
+};
+
+export const hubOnPage = [
+  { href: "#answer", label: "Overview" },
+  { href: "#services", label: "Services" },
+  { href: "#compare", label: "Compare" },
+  { href: "#guide", label: "Which service?" },
+  { href: "#faq", label: "FAQ" },
+  { href: "#quote", label: "Get a quote" },
+];
 
 export const hubIndustries = {
   h2: "Industries these services support",
@@ -68,26 +96,42 @@ export const selectionGuide = {
 export const hubFaqs: Faq[] = [
   {
     q: "What services does Gulf Elite Transport offer?",
-    a: "The services listed on this page, covering freight and cargo, passenger transport, equipment and machinery moving, and contract fleet arrangements. Each service has its own page with details and a quote form.",
+    a: "Gulf Elite Transport offers freight and cargo transport, passenger transport, equipment and machinery moving, and contract fleet services. Each has its own page describing what is included, who it is for and what information is needed for a quotation.",
+  },
+  {
+    q: "Who are these transport services for?",
+    a: "They are for businesses and organisations, such as manufacturers, contractors, retailers, distributors, hotels, event organisers and corporate teams. Individual requirements are assessed case by case.",
   },
   {
     q: "How do I choose the right service?",
-    a: "Use the selection guide above, or describe your requirement in a quote request and we will tell you which service fits it best.",
+    a: "Match the service to what you are moving: goods go with freight and cargo, people with passenger transport, heavy loads with equipment moving and regular needs with contract fleet. The selection guide on this page helps, and we can advise if your request spans several services.",
   },
   {
-    q: "Can I combine more than one service?",
-    a: "Yes. If your requirement spans several services, describe it in one enquiry and we will help you plan it together.",
+    q: "Can I combine more than one service in one request?",
+    a: "Yes. If your requirement spans several services, for example moving equipment and then supplying a site regularly, describe the whole picture in one enquiry and we will help you plan it together.",
   },
   {
     q: "How do I request a quotation?",
-    a: "Use the quote form on this page or on any service page. Include the service, locations, date and details of the cargo, passengers or equipment.",
+    a: "Use the quote form on this page or on any service page, and include the service, locations, date and details of the cargo, passengers or equipment. We reply with a quotation or with the questions we need answered.",
   },
   {
-    q: "Is availability the same everywhere?",
-    a: "No. Availability depends on the locations, service type and dates. We confirm it for each request.",
+    q: "What information do you need to prepare a quotation?",
+    a: "Generally the type of service, pickup and delivery locations, preferred date, and details of the goods, passengers or equipment such as weight, size or number. Each service page lists exactly what helps for that service.",
   },
   {
-    q: "Do you offer recurring arrangements?",
-    a: "Yes, recurring requirements can be discussed. Ask about contract fleet services if your need is ongoing.",
+    q: "Are your prices published online?",
+    a: "No. Prices depend on the distance, the load or passenger numbers, the vehicle type and the timing, so each request receives a quotation based on its own details before you commit.",
+  },
+  {
+    q: "Is availability the same in every location?",
+    a: "No. Availability depends on the pickup and delivery locations, the type of service and the dates involved. We confirm it individually for each request instead of assuming it.",
+  },
+  {
+    q: "Do you offer airport transfers and staff transport?",
+    a: "Yes, both are part of our passenger transport service, along with corporate passenger movement and event transport. Share the passenger numbers, route and timing and we confirm availability.",
+  },
+  {
+    q: "Do you offer recurring or monthly arrangements?",
+    a: "Yes. Recurring requirements can be discussed under contract fleet services, which cover dedicated fleet arrangements and monthly vehicle contracts for ongoing transport needs.",
   },
 ];

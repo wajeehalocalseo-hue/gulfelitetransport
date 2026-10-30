@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { services } from "@/content/services";
 import { mailtoUrl, site, whatsappUrl } from "@/lib/site";
 
@@ -13,7 +13,19 @@ const labelCls = "grid gap-1.5 text-sm font-semibold text-navy";
 
 const canSubmit = Boolean(site.whatsapp || site.email);
 
-export default function QuoteForm({ defaultService = "" }: { defaultService?: string }) {
+/**
+ * `variant="quick"` is a shorter form (name, phone, email, service, details) for placing
+ * near the top of a page. `full` also asks for locations, date and extra requirements.
+ */
+export default function QuoteForm({
+  defaultService = "",
+  variant = "full",
+}: {
+  defaultService?: string;
+  variant?: "full" | "quick";
+}) {
+  const quick = variant === "quick";
+  const uid = useId();
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<Status>("idle");
   const [channel, setChannel] = useState<"whatsapp" | "email" | null>(null);
@@ -29,8 +41,8 @@ export default function QuoteForm({ defaultService = "" }: { defaultService?: st
     if (!/^[+\d][\d\s()-]{6,}$/.test(v.phone)) e.phone = "Please enter a valid phone number.";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email)) e.email = "Please enter a valid email address.";
     if (!v.service) e.service = "Please choose the service you need.";
-    if (!v.pickup) e.pickup = "Please enter the pickup location.";
-    if (!v.delivery) e.delivery = "Please enter the delivery location.";
+    if (!quick && !v.pickup) e.pickup = "Please enter the pickup location.";
+    if (!quick && !v.delivery) e.delivery = "Please enter the delivery location.";
     if (v.date) {
       const today = new Date();
       today.setHours(0, 0, 0, 0);
@@ -69,8 +81,8 @@ export default function QuoteForm({ defaultService = "" }: { defaultService?: st
       `Phone: ${v.phone}`,
       `Email: ${v.email}`,
       `Service: ${v.service}`,
-      `Pickup: ${v.pickup}`,
-      `Delivery: ${v.delivery}`,
+      v.pickup && `Pickup: ${v.pickup}`,
+      v.delivery && `Delivery: ${v.delivery}`,
       v.date && `Preferred date: ${v.date}`,
       `Details: ${v.details}`,
       v.extra && `Additional requirements: ${v.extra}`,
@@ -100,11 +112,11 @@ export default function QuoteForm({ defaultService = "" }: { defaultService?: st
   const common = (k: string) => ({
     name: k,
     "aria-invalid": err(k) ? (true as const) : undefined,
-    "aria-describedby": err(k) ? `${k}-error` : undefined,
+    "aria-describedby": err(k) ? `${uid}-${k}-error` : undefined,
   });
   const msg = (k: string) =>
     err(k) ? (
-      <span id={`${k}-error`} role="alert" className="text-sm font-normal text-red-700">
+      <span id={`${uid}-${k}-error`} role="alert" className="text-sm font-normal text-red-700">
         {err(k)}
       </span>
     ) : null;
@@ -145,16 +157,18 @@ export default function QuoteForm({ defaultService = "" }: { defaultService?: st
 
   return (
     <div className="@container">
-    <form onSubmit={onSubmit} noValidate className="grid gap-4 @lg:grid-cols-2" aria-describedby="form-note">
+    <form onSubmit={onSubmit} noValidate className="grid gap-4 @lg:grid-cols-2" aria-describedby={`${uid}-note`}>
       <label className={labelCls}>
         Full name
         <input {...common("name")} required autoComplete="name" className={input} />
         {msg("name")}
       </label>
-      <label className={labelCls}>
-        Business name <span className="font-normal text-muted">(optional)</span>
-        <input name="business" autoComplete="organization" className={input} />
-      </label>
+      {!quick && (
+        <label className={labelCls}>
+          Business name <span className="font-normal text-muted">(optional)</span>
+          <input name="business" autoComplete="organization" className={input} />
+        </label>
+      )}
       <label className={labelCls}>
         Phone number
         <input {...common("phone")} type="tel" required autoComplete="tel" className={input} />
@@ -179,30 +193,36 @@ export default function QuoteForm({ defaultService = "" }: { defaultService?: st
         </select>
         {msg("service")}
       </label>
-      <label className={labelCls}>
-        Pickup location
-        <input {...common("pickup")} required className={input} />
-        {msg("pickup")}
-      </label>
-      <label className={labelCls}>
-        Delivery location
-        <input {...common("delivery")} required className={input} />
-        {msg("delivery")}
-      </label>
+      {!quick && (
+        <>
+          <label className={labelCls}>
+            Pickup location
+            <input {...common("pickup")} required className={input} />
+            {msg("pickup")}
+          </label>
+          <label className={labelCls}>
+            Delivery location
+            <input {...common("delivery")} required className={input} />
+            {msg("delivery")}
+          </label>
+          <label className={`${labelCls} @lg:col-span-2`}>
+            Preferred date <span className="font-normal text-muted">(optional)</span>
+            <input {...common("date")} type="date" className={input} />
+            {msg("date")}
+          </label>
+        </>
+      )}
       <label className={`${labelCls} @lg:col-span-2`}>
-        Preferred date <span className="font-normal text-muted">(optional)</span>
-        <input {...common("date")} type="date" className={input} />
-        {msg("date")}
-      </label>
-      <label className={`${labelCls} @lg:col-span-2`}>
-        Shipment / passenger / equipment details
-        <textarea {...common("details")} rows={4} required className={input} />
+        {quick ? "What do you need to move?" : "Shipment / passenger / equipment details"}
+        <textarea {...common("details")} rows={quick ? 3 : 4} required className={input} />
         {msg("details")}
       </label>
-      <label className={`${labelCls} @lg:col-span-2`}>
-        Additional requirements <span className="font-normal text-muted">(optional)</span>
-        <textarea name="extra" rows={3} className={input} />
-      </label>
+      {!quick && (
+        <label className={`${labelCls} @lg:col-span-2`}>
+          Additional requirements <span className="font-normal text-muted">(optional)</span>
+          <textarea name="extra" rows={3} className={input} />
+        </label>
+      )}
 
       {/* Honeypot: hidden from people and assistive tech, bots tend to fill it in */}
       <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
@@ -218,7 +238,7 @@ export default function QuoteForm({ defaultService = "" }: { defaultService?: st
         </p>
       )}
 
-      <p id="form-note" className="text-sm leading-6 text-muted @lg:col-span-2">
+      <p id={`${uid}-note`} className="text-sm leading-6 text-muted @lg:col-span-2">
         This form opens {site.whatsapp ? "WhatsApp" : "your email app"} with your request
         prefilled so you can send it. Nothing is stored on this website.
       </p>
