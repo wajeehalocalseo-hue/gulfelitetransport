@@ -20,9 +20,12 @@ const canSubmit = Boolean(site.whatsapp || site.email);
 export default function QuoteForm({
   defaultService = "",
   variant = "full",
+  topic = "",
 }: {
   defaultService?: string;
   variant?: "full" | "quick";
+  /** Sub-service the visitor is viewing; added to the message as context, not to the fields. */
+  topic?: string;
 }) {
   const quick = variant === "quick";
   const uid = useId();
@@ -81,6 +84,7 @@ export default function QuoteForm({
       `Phone: ${v.phone}`,
       `Email: ${v.email}`,
       `Service: ${v.service}`,
+      topic && `Topic: ${topic}`,
       v.pickup && `Pickup: ${v.pickup}`,
       v.delivery && `Delivery: ${v.delivery}`,
       v.date && `Preferred date: ${v.date}`,

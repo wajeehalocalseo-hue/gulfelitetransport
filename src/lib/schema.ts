@@ -66,7 +66,15 @@ type PageOpts = {
   description: string;
   type?: "WebPage" | "AboutPage" | "ContactPage" | "CollectionPage";
   crumbs?: { name: string; path: string }[];
-  service?: { name: string; description: string; serviceType: string };
+  service?: {
+    name: string;
+    description: string;
+    serviceType: string;
+    /** Page path of the parent service (Level 2 and 3). */
+    parentPath?: string;
+    /** Published child services (Level 1 and 2). */
+    children?: { name: string; path: string }[];
+  };
   items?: { name: string; path: string }[];
 };
 
@@ -124,6 +132,19 @@ export function pageGraph(o: PageOpts) {
       url,
       mainEntityOfPage: { "@id": pageId },
       provider: { "@id": orgId },
+      ...(o.service.parentPath ? { isRelatedTo: { "@id": `${abs(o.service.parentPath)}#service` } } : {}),
+      ...(o.service.children?.length
+        ? {
+            hasOfferCatalog: {
+              "@type": "OfferCatalog",
+              name: `${o.service.name} solutions`,
+              itemListElement: o.service.children.map((c) => ({
+                "@type": "Offer",
+                itemOffered: { "@id": `${abs(c.path)}#service` },
+              })),
+            },
+          }
+        : {}),
       ...(site.serviceAreas.length
         ? { areaServed: site.serviceAreas.map((a) => ({ "@type": "Place", name: a })) }
         : {}),

@@ -10,7 +10,8 @@ import QuoteForm from "@/components/QuoteForm";
 import ServiceCard from "@/components/ServiceCard";
 import ServiceImage from "@/components/ServiceImage";
 import { getService, services } from "@/content/services";
-import { breadcrumbFor, getNode, pathOf } from "@/content/taxonomy";
+import SubServiceCard from "@/components/SubServiceCard";
+import { breadcrumbFor, getNode, pathOf, publishedChildren } from "@/content/taxonomy";
 import { pageGraph } from "@/lib/schema";
 
 export const dynamicParams = false;
@@ -57,6 +58,7 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
   const node = getNode(s.slug);
   if (!node) notFound();
   const crumbs = breadcrumbFor(node);
+  const subs = publishedChildren(node.id);
 
   return (
     <main id="main" className="flex-1">
@@ -66,7 +68,12 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
           name: s.metaTitle,
           description: s.metaDescription,
           crumbs,
-          service: { name: s.title, description: s.directAnswer, serviceType: s.title },
+          service: {
+            name: s.title,
+            description: s.directAnswer,
+            serviceType: s.title,
+            children: subs.map((k) => ({ name: k.name, path: k.fullUrl })),
+          },
         })}
       />
       <PageHero
@@ -87,6 +94,7 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
           {[
             ["#overview", "Overview"],
             ["#included", "What's included"],
+            ...(subs.length ? [["#solutions", "Solutions"]] : []),
             ["#how", "How it works"],
             ["#considerations", "Planning"],
             ["#info", "Quotation info"],
@@ -134,6 +142,23 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
               ))}
             </div>
           </section>
+
+          {subs.length > 0 && (
+            <section id="solutions" aria-labelledby="solutions-title">
+              <h2 id="solutions-title" className={h2}>Explore Our {s.title} Solutions</h2>
+              <p className="mt-4 text-lg leading-8 text-muted">
+                {s.title} covers several specific needs. Choose the one closest to your requirement
+                for details on what it includes, who it suits and what we need to prepare a quotation.
+              </p>
+              <ul className="mt-6 grid gap-5 sm:grid-cols-2">
+                {subs.map((k) => (
+                  <li key={k.id} className="flex">
+                    <SubServiceCard node={k} />
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
 
           <section aria-labelledby="how">
             <h2 id="how" className={h2}>How the service works</h2>

@@ -357,10 +357,13 @@ export default function ServiceScene({
   slug,
   title,
   className = "",
+  flip = false,
 }: {
   slug: string;
   title: string;
   className?: string;
+  /** Mirror the scene so sibling pages under one parent do not look identical. */
+  flip?: boolean;
 }) {
   return (
     <svg
@@ -371,7 +374,7 @@ export default function ServiceScene({
       className={className}
     >
       <Sky />
-      {scene(slug)}
+      {flip ? <g transform="translate(800 0) scale(-1 1)">{scene(slug)}</g> : scene(slug)}
     </svg>
   );
 }

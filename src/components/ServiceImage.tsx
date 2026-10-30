@@ -18,11 +18,14 @@ function findPhoto(slug: string): string | null {
 /**
  * Shows a real photo if one has been added for this service, otherwise the built-in illustration.
  * To use real photography, drop `<slug>.webp` (or .jpg/.avif/.png, ~1200x750) into public/images/services/.
+ * Sub-services use their own slug for the photo and their main service's scene as the fallback.
  */
 export default function ServiceImage({
   slug,
   title,
   alt,
+  sceneSlug,
+  flip = false,
   className = "",
   priority = false,
 }: {
@@ -30,6 +33,9 @@ export default function ServiceImage({
   title: string;
   /** Descriptive alt text for a real photo. */
   alt?: string;
+  /** Scene to draw when there is no photo (defaults to `slug`). */
+  sceneSlug?: string;
+  flip?: boolean;
   className?: string;
   priority?: boolean;
 }) {
@@ -46,5 +52,12 @@ export default function ServiceImage({
       />
     );
   }
-  return <ServiceScene slug={slug} title={title} className={`object-cover ${className}`} />;
+  return (
+    <ServiceScene
+      slug={sceneSlug ?? slug}
+      title={title}
+      flip={flip}
+      className={`object-cover ${className}`}
+    />
+  );
 }

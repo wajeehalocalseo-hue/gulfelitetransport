@@ -1,5 +1,6 @@
 import { hubAnswer, hubFaqs } from "@/content/hub";
 import { services } from "@/content/services";
+import { publishedChildren } from "@/content/taxonomy";
 import { abs, site } from "@/lib/site";
 
 export const dynamic = "force-static";
@@ -23,7 +24,12 @@ export function GET() {
     hubAnswer.answer,
     "",
     "## Services",
-    ...services.map((s) => `- [${s.title}](${abs(`/services/${s.slug}`)}): ${s.short}`),
+    ...services.flatMap((s) => [
+      `- [${s.title}](${abs(`/services/${s.slug}`)}): ${s.short}`,
+      ...publishedChildren(s.slug).map(
+        (k) => `  - [${k.name}](${abs(k.fullUrl)}): ${k.shortDescription}`,
+      ),
+    ]),
     "",
     "## Main pages",
     `- [Home](${abs("/")})`,

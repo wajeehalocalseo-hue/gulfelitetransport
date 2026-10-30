@@ -1,4 +1,5 @@
 import { services } from "@/content/services";
+import { publishedChildren } from "@/content/taxonomy";
 import { abs, site } from "@/lib/site";
 
 export const dynamic = "force-static";
@@ -36,6 +37,25 @@ export function GET() {
       "",
       "### Frequently asked questions",
       ...s.faqs.flatMap((f) => [`Q: ${f.q}`, `A: ${f.a}`, ""]),
+      ...publishedChildren(s.slug).flatMap((k) =>
+        k.content
+          ? [
+              `### Sub-service: ${k.name}`,
+              `URL: ${abs(k.fullUrl)}`,
+              "",
+              k.content.directAnswer,
+              "",
+              k.content.differs.text,
+              "",
+              "Includes:",
+              ...k.content.includes.map((i) => `- ${i.title}: ${i.text}`),
+              "",
+              "Information needed for a quotation:",
+              ...list(k.content.quoteInfo),
+              "",
+            ]
+          : [],
+      ),
     ]),
   ].join("\n");
 
