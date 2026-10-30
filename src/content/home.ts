@@ -48,8 +48,8 @@ export const valueProps = [
 
 export const servicesIntro = {
   eyebrow: "Our services",
-  h2: "Four transport categories, one coordinated service",
-  text: "Gulf Elite Transport covers the four most common commercial transport needs. Each service has its own page with full details, the information we need for a quotation and answers to common questions. If your requirement combines more than one category, for example equipment delivery followed by a recurring supply run, simply describe the whole picture in one request and we will help you plan it together.",
+  h2: "Transport categories, one coordinated service",
+  text: "Gulf Elite Transport covers the most common commercial transport needs. Each service has its own page with full details, the information we need for a quotation and answers to common questions. If your requirement combines more than one category, for example equipment delivery followed by a recurring supply run, simply describe the whole picture in one request and we will help you plan it together.",
 };
 
 export const about = {

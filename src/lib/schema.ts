@@ -49,6 +49,7 @@ type PageOpts = {
   type?: "WebPage" | "AboutPage" | "ContactPage" | "CollectionPage";
   crumbs?: { name: string; path: string }[];
   service?: { name: string; description: string; serviceType: string };
+  items?: { name: string; path: string }[];
 };
 
 /** Per-page WebPage (or subtype), optional Service and BreadcrumbList; links to the base entities by @id. */
@@ -76,6 +77,18 @@ export function pageGraph(o: PageOpts) {
         position: i + 1,
         name: c.name,
         item: abs(c.path),
+      })),
+    });
+  }
+  if (o.items?.length) {
+    graph.push({
+      "@type": "ItemList",
+      "@id": `${url}#services`,
+      itemListElement: o.items.map((it, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: it.name,
+        url: abs(it.path),
       })),
     });
   }

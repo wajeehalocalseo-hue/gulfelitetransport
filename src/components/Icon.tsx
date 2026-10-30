@@ -19,6 +19,14 @@ const paths: Record<string, string> = {
   phone: "M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2z",
   mail: "M3 6h18v12H3zM3 7l9 6 9-6",
   arrow: "M5 12h14M13 6l6 6-6 6",
+  globe: "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18",
+  container: "M3 7h18v10H3zM7 7v10M11 7v10M15 7v10M19 7v10M3 19h18",
+  box: "M3 8l9-5 9 5v8l-9 5-9-5zM3 8l9 5 9-5M12 13v8",
+  bolt: "M13 2L4 14h7l-1 8 9-12h-7z",
+  warehouse: "M3 10l9-6 9 6v10H3zM8 20v-6h8v6M8 17h8",
+  snowflake: "M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9M9 4l3 2 3-2M9 20l3-2 3 2",
+  layers: "M12 3l9 5-9 5-9-5zM3 13l9 5 9-5M3 17l9 5 9-5",
+  network: "M12 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zM5 21a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zM19 21a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zM12 8v4M12 12l-6 4M12 12l6 4",
 };
 
 export default function Icon({
