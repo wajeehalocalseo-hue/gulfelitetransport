@@ -1,11 +1,10 @@
 ﻿import { ImageResponse } from "next/og";
 
+export const dynamic = "force-static";
 export const size = { width: 64, height: 64 };
 export const contentType = "image/png";
 
 // TODO: replace with the real logo when available.
-export const dynamic = "force-static";
-
 export default function Icon() {
   return new ImageResponse(
     (
@@ -16,10 +15,10 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#0b3d6b",
-          color: "#c9a24b",
-          fontSize: 36,
-          fontWeight: 700,
+          background: "#101c2c",
+          color: "#f5a623",
+          fontSize: 34,
+          fontWeight: 800,
           borderRadius: 12,
         }}
       >
