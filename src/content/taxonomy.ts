@@ -1,4 +1,5 @@
 import { microServices, publishedMicroServices } from "./microservices";
+import { microProposals, type Verification } from "./microproposals";
 import { proposals, statusOverrides } from "./proposals";
 import { allServices, services } from "./services";
 import type { Faq } from "./services";
@@ -22,11 +23,16 @@ export type ServiceNode = {
   name: string;
   slug: string;
   parentId: string | null;
+  /** Level 3 only: the sub-service this micro-service belongs to (same as parentId). */
+  parentSubServiceId?: string;
   mainServiceId: string;
+  /** Full nested path, e.g. /services/<main>/<sub>/<micro>. */
   fullUrl: string;
+  canonicalUrl: string;
   shortDescription: string;
   fullDescription: string;
   status: NodeStatus;
+  verificationStatus: Verification;
   featured: boolean;
   order: number;
   seoTitle: string;
@@ -37,6 +43,7 @@ export type ServiceNode = {
   searchIntent: string;
   relatedServices: string[];
   relatedMicroServices: string[];
+  relatedEntities: string[];
   faqs: Faq[];
   breadcrumbs: { name: string; path: string }[];
   schema: { type: "Service"; serviceType: string };
@@ -44,13 +51,17 @@ export type ServiceNode = {
   image: { sceneSlug: string; alt: string };
   icon: string;
   audienceShort: string;
+  publishedAt?: string;
   /** Page body for sub / micro-services (Level 1 pages use their own content in ./services). */
   content?: PageContent;
+  /** Unpublished proposals: the customer use case and FAQ topics to cover when written. */
+  useCase?: string;
+  faqTopics?: string[];
   note?: string;
   mergedInto?: string;
 };
 
-type Raw = Omit<ServiceNode, "fullUrl" | "breadcrumbs">;
+type Raw = Omit<ServiceNode, "fullUrl" | "canonicalUrl" | "breadcrumbs">;
 
 // Keyword themes for Level 1 services (supporting data; never output as a keywords meta tag).
 const l1Keywords: Record<string, { primary: string; secondary: string[] }> = {
@@ -76,6 +87,7 @@ const level1: Raw[] = allServices.map((s, i) => ({
   shortDescription: s.short,
   fullDescription: s.overview.join(" "),
   status: publishedSlugs.has(s.slug) ? "published" : "pending-verification",
+  verificationStatus: publishedSlugs.has(s.slug) ? "verified" : "pending-verification",
   featured: i < 4,
   order: i + 1,
   seoTitle: s.metaTitle,
@@ -86,6 +98,7 @@ const level1: Raw[] = allServices.map((s, i) => ({
   searchIntent: "Commercial: a business researching or requesting this transport service.",
   relatedServices: s.related,
   relatedMicroServices: [],
+  relatedEntities: s.audience,
   faqs: s.faqs,
   schema: { type: "Service", serviceType: s.title },
   cta: { label: "Get a Free Quote", href: `/services/${s.slug}#quote` },
@@ -102,20 +115,29 @@ const mainOf = (parentId: string, byId: Map<string, Raw>): string => {
 const children = (): Raw[] => {
   const byId = new Map<string, Raw>(level1.map((n) => [n.id, n]));
   const out: Raw[] = [];
+  const add = (node: Raw) => {
+    if (byId.has(node.id)) throw new Error(`Duplicate service id in taxonomy: ${node.id}`);
+    byId.set(node.id, node);
+    out.push(node);
+  };
+
+  // Records with full page content (Level 2 sub-services, then Level 3 micro-services).
   for (const r of [...subServices, ...microServices]) {
     const status: NodeStatus =
       statusOverrides[r.id] ??
       (r.level === 2 || publishedMicroServices.includes(r.id) ? "published" : "pending-verification");
-    const node: Raw = {
+    add({
       id: r.id,
       level: r.level,
       name: r.name,
       slug: r.slug,
       parentId: r.parentId,
+      parentSubServiceId: r.level === 3 ? r.parentId : undefined,
       mainServiceId: mainOf(r.parentId, byId),
       shortDescription: r.short,
       fullDescription: r.content.overview.join(" "),
       status,
+      verificationStatus: status === "published" ? "verified" : "pending-verification",
       featured: r.featured,
       order: r.order,
       seoTitle: r.seoTitle,
@@ -125,23 +147,23 @@ const children = (): Raw[] => {
       semanticKeywords: r.semanticKeywords,
       searchIntent: r.searchIntent,
       relatedServices: [...r.related, ...r.relatedMain],
-      relatedMicroServices: [],
+      relatedMicroServices: r.level === 3 ? r.related.filter((id) => microServices.some((m) => m.id === id)) : [],
+      relatedEntities: r.content.audience,
       faqs: r.content.faqs,
       schema: { type: "Service", serviceType: r.name },
       cta: { label: "Get a Free Quote", href: "#quote" },
       image: { sceneSlug: mainOf(r.parentId, byId), alt: `Illustration for ${r.name}` },
       icon: r.icon,
       audienceShort: r.audienceShort,
+      publishedAt: r.publishedAt,
       content: r.content,
-    };
-    byId.set(node.id, node);
-    out.push(node);
+    });
   }
-  // Proposals without a page: kept in the graph with their status so nothing is lost.
+
+  // Level 2 proposals without a page.
   for (const p of proposals) {
     const id = slugify(p.name);
-    if (byId.has(id)) continue;
-    out.push({
+    add({
       id,
       level: 2,
       name: p.name,
@@ -151,6 +173,7 @@ const children = (): Raw[] => {
       shortDescription: p.note,
       fullDescription: p.note,
       status: p.status,
+      verificationStatus: p.status === "archived" ? "not-applicable" : "pending-verification",
       featured: false,
       order: 99,
       seoTitle: p.name,
@@ -161,6 +184,7 @@ const children = (): Raw[] => {
       searchIntent: "",
       relatedServices: [],
       relatedMicroServices: [],
+      relatedEntities: [],
       faqs: [],
       schema: { type: "Service", serviceType: p.name },
       cta: { label: "Get a Free Quote", href: "#quote" },
@@ -169,6 +193,47 @@ const children = (): Raw[] => {
       audienceShort: "",
       note: p.note,
       mergedInto: p.mergedInto,
+    });
+  }
+
+  // Level 3 proposals without a page.
+  for (const m of microProposals) {
+    const id = slugify(m.name);
+    const parent = byId.get(m.sub);
+    if (!parent) throw new Error(`Micro-service "${m.name}" has an unknown sub-service: ${m.sub}`);
+    add({
+      id,
+      level: 3,
+      name: m.name,
+      slug: id,
+      parentId: m.sub,
+      parentSubServiceId: m.sub,
+      mainServiceId: parent.mainServiceId,
+      shortDescription: m.useCase,
+      fullDescription: m.useCase,
+      status: m.verification === "not-applicable" ? "archived" : m.recommendation === "merge" ? "draft" : "pending-verification",
+      verificationStatus: m.verification,
+      featured: false,
+      order: 99,
+      seoTitle: m.name,
+      metaDescription: m.useCase,
+      primaryKeyword: m.name.toLowerCase(),
+      secondaryKeywords: m.themes,
+      semanticKeywords: m.themes,
+      searchIntent: `Commercial: ${m.useCase.charAt(0).toLowerCase()}${m.useCase.slice(1)}`,
+      relatedServices: [],
+      relatedMicroServices: [],
+      relatedEntities: m.entities,
+      faqs: [],
+      schema: { type: "Service", serviceType: m.name },
+      cta: { label: "Get a Free Quote", href: "#quote" },
+      image: { sceneSlug: parent.mainServiceId, alt: m.name },
+      icon: "check",
+      audienceShort: m.entities.join(", "),
+      useCase: m.useCase,
+      faqTopics: m.faqTopics,
+      note: m.recommendation === "merge" ? `Merged: ${m.useCase}` : "Needs owner confirmation before publication.",
+      mergedInto: m.mergedInto,
     });
   }
   return out;
@@ -192,12 +257,22 @@ const pathFor = (n: Raw) => `/services/${chainOf(n).map((x) => x.slug).join("/")
 export const serviceNodes: ServiceNode[] = raw.map((n) => ({
   ...n,
   fullUrl: pathFor(n),
+  canonicalUrl: pathFor(n),
   breadcrumbs: [
     { name: "Home", path: "/" },
     { name: "Services", path: "/services" },
     ...chainOf(n).map((x) => ({ name: x.name, path: pathFor(x) })),
   ],
 }));
+
+// Slugs must be unique within a parent and full URLs must be unique across the whole graph.
+{
+  const seen = new Set<string>();
+  for (const n of serviceNodes) {
+    if (seen.has(n.fullUrl)) throw new Error(`Duplicate service URL in taxonomy: ${n.fullUrl}`);
+    seen.add(n.fullUrl);
+  }
+}
 
 const byId = new Map(serviceNodes.map((n) => [n.id, n]));
 

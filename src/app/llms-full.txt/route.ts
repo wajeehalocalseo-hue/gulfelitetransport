@@ -37,10 +37,10 @@ export function GET() {
       "",
       "### Frequently asked questions",
       ...s.faqs.flatMap((f) => [`Q: ${f.q}`, `A: ${f.a}`, ""]),
-      ...publishedChildren(s.slug).flatMap((k) =>
+      ...publishedChildren(s.slug).flatMap((k) => [k, ...publishedChildren(k.id)]).flatMap((k) =>
         k.content
           ? [
-              `### Sub-service: ${k.name}`,
+              `### ${k.level === 3 ? "Micro-service" : "Sub-service"}: ${k.name}`,
               `URL: ${abs(k.fullUrl)}`,
               "",
               k.content.directAnswer,

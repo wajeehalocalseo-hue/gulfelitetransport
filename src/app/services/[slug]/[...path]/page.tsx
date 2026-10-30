@@ -126,6 +126,7 @@ export default async function SubServicePage({ params }: PageProps<"/services/[s
           {[
             ["#overview", "Overview"],
             ["#included", "What's included"],
+            ...(children.length ? [["#solutions", "Solutions"]] : []),
             ["#applications", "Applications"],
             ["#how", "How it works"],
             ["#info", "Quotation info"],
@@ -152,9 +153,18 @@ export default async function SubServicePage({ params }: PageProps<"/services/[s
               {c.directAnswer}
             </p>
             <p className="mt-4 text-sm text-muted">
-              Part of{" "}
-              <Link href={parent.fullUrl} className={textLink}>{parent.name}</Link>
-              {" "}| <Link href="/services" className={textLink}>All services</Link>
+              {node.level === 3 && main.id !== parent.id ? (
+                <>
+                  Part of{" "}
+                  <Link href={parent.fullUrl} className={textLink}>{parent.name}</Link>, within{" "}
+                  <Link href={main.fullUrl} className={textLink}>{main.name}</Link>
+                </>
+              ) : (
+                <>
+                  Part of <Link href={parent.fullUrl} className={textLink}>{parent.name}</Link>
+                </>
+              )}{" "}
+              | <Link href="/services" className={textLink}>All services</Link>
             </p>
           </section>
 
@@ -184,6 +194,22 @@ export default async function SubServicePage({ params }: PageProps<"/services/[s
             </div>
           </section>
 
+          {children.length > 0 && (
+            <section id="solutions" aria-labelledby="solutions-title">
+              <h2 id="solutions-title" className={h2}>Explore Our {node.name} Solutions</h2>
+              <p className="mt-4 text-lg leading-8 text-muted">
+                {node.name} covers some specific requirements. Choose the closest one for details on
+                what it includes and what we need to prepare a quotation.
+              </p>
+              <ul className="mt-6 grid gap-5 sm:grid-cols-2">
+                {children.map((k) => (
+                  <li key={k.id} className="flex">
+                    <SubServiceCard node={k} />
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
           <section aria-labelledby="audience">
             <h2 id="audience" className={h2}>Who needs {node.name.toLowerCase()}?</h2>
             <Checklist items={c.audience} />
@@ -235,19 +261,6 @@ export default async function SubServicePage({ params }: PageProps<"/services/[s
             </p>
           </section>
 
-          {children.length > 0 && (
-            <section aria-labelledby="options">
-              <h2 id="options" className={h2}>Explore {node.name} options</h2>
-              <ul className="mt-6 grid gap-5 sm:grid-cols-2">
-                {children.map((k) => (
-                  <li key={k.id} className="flex">
-                    <SubServiceCard node={k} />
-                  </li>
-                ))}
-              </ul>
-            </section>
-          )}
-
           <section aria-labelledby="faq">
             <h2 id="faq" className={h2}>{node.name}: frequently asked questions</h2>
             <div className="mt-6">
@@ -269,7 +282,13 @@ export default async function SubServicePage({ params }: PageProps<"/services/[s
           )}
 
           <p className="text-muted">
-            Back to <Link href={parent.fullUrl} className={textLink}>{parent.name}</Link>, see all{" "}
+            Back to <Link href={parent.fullUrl} className={textLink}>{parent.name}</Link>,{" "}
+            {node.level === 3 && main.id !== parent.id && (
+              <>
+                <Link href={main.fullUrl} className={textLink}>{main.name}</Link>,{" "}
+              </>
+            )}
+            see all{" "}
             <Link href="/services" className={textLink}>transport services</Link>, read{" "}
             <Link href="/about" className={textLink}>about Gulf Elite Transport</Link> or{" "}
             <Link href="/contact" className={textLink}>contact the team</Link>.

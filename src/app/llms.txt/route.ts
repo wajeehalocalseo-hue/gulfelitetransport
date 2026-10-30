@@ -26,9 +26,10 @@ export function GET() {
     "## Services",
     ...services.flatMap((s) => [
       `- [${s.title}](${abs(`/services/${s.slug}`)}): ${s.short}`,
-      ...publishedChildren(s.slug).map(
-        (k) => `  - [${k.name}](${abs(k.fullUrl)}): ${k.shortDescription}`,
-      ),
+      ...publishedChildren(s.slug).flatMap((k) => [
+        `  - [${k.name}](${abs(k.fullUrl)}): ${k.shortDescription}`,
+        ...publishedChildren(k.id).map((m) => `    - [${m.name}](${abs(m.fullUrl)}): ${m.shortDescription}`),
+      ]),
     ]),
     "",
     "## Main pages",

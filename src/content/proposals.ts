@@ -40,20 +40,14 @@ export const proposals: Proposal[] = [
   { main: "freight-cargo-transport", name: "Bulk Cargo Transportation", status: PV, note: unverified },
   { main: "freight-cargo-transport", name: "Full Truckload Transportation", status: PV, note: "Implies specific vehicle and load capability; needs owner confirmation." },
   { main: "freight-cargo-transport", name: "Less-than-Truckload Transportation", status: PV, note: "Implies shared or consolidated loads; needs owner confirmation." },
-  { main: "freight-cargo-transport", name: "Inter-site Cargo Transportation", status: PV, note: unverified },
-  { main: "freight-cargo-transport", name: "Retail Stock Transportation", status: PV, note: unverified },
   { main: "freight-cargo-transport", name: "Supplier-to-Business Deliveries", status: D, note: "Covered as a use case on Commercial Cargo Transportation.", mergedInto: "commercial-cargo-transportation" },
   { main: "freight-cargo-transport", name: "Project Cargo Transportation", status: D, note: "Overlaps the Industrial & Project Logistics service.", mergedInto: "industrial-project-logistics" },
 
   /* B. Passenger Transport */
-  { main: "passenger-transport", name: "Employee Shuttle Services", status: D, note: "Covered on Staff Transportation.", mergedInto: "staff-transportation" },
-  { main: "passenger-transport", name: "Executive Transportation", status: PV, note: "Implies a premium vehicle category; needs owner confirmation." },
   { main: "passenger-transport", name: "Business Guest Transportation", status: D, note: "Covered on Corporate Passenger Transport.", mergedInto: "corporate-passenger-transport" },
-  { main: "passenger-transport", name: "Conference Transportation", status: D, note: "Covered on Event Passenger Transport.", mergedInto: "event-passenger-transport" },
   { main: "passenger-transport", name: "Hotel Guest Transportation", status: PV, note: unverified },
   { main: "passenger-transport", name: "Group Passenger Transportation", status: D, note: "Covered on Event Passenger Transport.", mergedInto: "event-passenger-transport" },
   { main: "passenger-transport", name: "Scheduled Passenger Transport", status: D, note: "Covered on Staff Transportation.", mergedInto: "staff-transportation" },
-  { main: "passenger-transport", name: "Inter-office Staff Transportation", status: D, note: "Covered on Staff Transportation.", mergedInto: "staff-transportation" },
 
   /* C. Equipment & Machinery Moving */
   { main: "equipment-machinery-moving", name: "Industrial Machinery Transportation", status: D, note: "Covered on Industrial Machinery Relocation.", mergedInto: "industrial-machinery-relocation" },
@@ -64,13 +58,11 @@ export const proposals: Proposal[] = [
   { main: "equipment-machinery-moving", name: "Commercial Equipment Delivery", status: PV, note: unverified },
   { main: "equipment-machinery-moving", name: "Workshop Equipment Relocation", status: D, note: "Covered on Industrial Machinery Relocation.", mergedInto: "industrial-machinery-relocation" },
   { main: "equipment-machinery-moving", name: "Plant and Facility Equipment Moving", status: D, note: "Covered on Industrial Machinery Relocation.", mergedInto: "industrial-machinery-relocation" },
-  { main: "equipment-machinery-moving", name: "Loading and Unloading Coordination", status: D, note: "A step in every equipment move, so shown as a section on the equipment pages, not a thin standalone page.", mergedInto: "heavy-equipment-transportation" },
   { main: "equipment-machinery-moving", name: "Project Equipment Transportation", status: D, note: "Overlaps the Industrial & Project Logistics service.", mergedInto: "industrial-project-logistics" },
   { main: "equipment-machinery-moving", name: "Oversized Equipment Transportation", status: PV, note: "Implies permits and specialist capability; needs owner confirmation." },
 
   /* D. Contract Fleet Services */
   { main: "contract-fleet-services", name: "Corporate Fleet Arrangements", status: D, note: "Covered on Dedicated Fleet Services.", mergedInto: "dedicated-fleet-services" },
-  { main: "contract-fleet-services", name: "Staff Transport Contracts", status: D, note: "Covered by Staff Transportation and Monthly Vehicle Contracts.", mergedInto: "monthly-vehicle-contracts" },
   { main: "contract-fleet-services", name: "Recurring Cargo Transportation", status: D, note: "Covered by Scheduled Cargo Transportation.", mergedInto: "scheduled-cargo-transportation" },
   { main: "contract-fleet-services", name: "Scheduled Delivery Fleet", status: D, note: "Covered by Scheduled Cargo Transportation.", mergedInto: "scheduled-cargo-transportation" },
   { main: "contract-fleet-services", name: "Business Distribution Fleet", status: PV, note: unverified },

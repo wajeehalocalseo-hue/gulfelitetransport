@@ -45,6 +45,8 @@ export type ChildRecord = {
   related: string[];
   /** Other Level 1 service ids that are genuinely related. */
   relatedMain: string[];
+  /** ISO date the page was first published. */
+  publishedAt?: string;
   content: PageContent;
 };
 
