@@ -17,7 +17,7 @@ export function GET() {
   const body = [
     `# ${site.name}`,
     "",
-    `> ${site.name} is a transport and logistics service for businesses and organisations. It provides freight and cargo transport, passenger transport, equipment and machinery moving, and contract fleet services.`,
+    `> ${site.name} is a transport and logistics service for businesses and organisations. It provides twelve services: freight and cargo transport, international freight forwarding, container transportation, express and urgent delivery, refrigerated transportation, passenger transport, equipment and machinery moving, industrial and project logistics, contract fleet services, last-mile delivery, commercial distribution, and warehousing and storage.`,
     "",
     "## Summary",
     hubAnswer.answer,

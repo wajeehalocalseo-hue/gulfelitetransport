@@ -3,7 +3,7 @@ import type { Faq } from "./services";
 export const hubAnswer = {
   h2: "What transport services does Gulf Elite Transport provide?",
   answer:
-    "Gulf Elite Transport provides freight and cargo transport, passenger transport, equipment and machinery moving, and contract fleet services for businesses and organisations. Every request is assessed individually and you receive a clear quotation before you commit. Availability depends on the pickup and delivery locations, the type of service and the dates, and is confirmed for each request.",
+    "Gulf Elite Transport provides twelve transport and logistics services for businesses and organisations: freight and cargo (including international freight forwarding, container transportation, express and urgent delivery and refrigerated transportation), passenger transport, equipment and industrial transportation, and fleet and distribution services. Every request is assessed individually and you receive a clear quotation before you commit. Availability depends on the pickup and delivery locations, the type of service and the dates, and is confirmed for each request.",
   more: "Together they cover business transportation services from commercial cargo transportation and corporate passenger transport to industrial machinery relocation and recurring business transport. Every service follows the same principle: describe what you need, receive an assessment and a quotation, and confirm only when you are comfortable with the plan.",
 };
 
@@ -42,7 +42,63 @@ export const hubQa: Record<
     pointsLabel: "Included:",
     points: "includes",
   },
+  "international-freight-forwarding": {
+    q: "What is international freight forwarding?",
+    a: "International freight forwarding is the planning and coordination of goods that move between countries, including routing, documentation awareness and the handover between each stage of the journey. Customs responsibilities are agreed clearly before a shipment moves.",
+    pointsLabel: "Included:",
+    points: "includes",
+  },
+  "container-transportation": {
+    q: "How does container transportation work?",
+    a: "A container movement is planned around the container size and weight, the collection point, and access at the delivery site. We assess vehicle suitability and timing, confirm what can be supported, and provide a quotation before collection and delivery are arranged.",
+    pointsLabel: "The process:",
+    points: "steps",
+  },
+  "last-mile-delivery": {
+    q: "What is last-mile delivery?",
+    a: "Last-mile delivery is the final stage of a goods journey, moving goods from a local hub or storage point to the recipient. It is planned around addresses, delivery windows and handover requirements, for one-off runs or recurring routes.",
+    pointsLabel: "Included:",
+    points: "includes",
+  },
+  "express-urgent-delivery": {
+    q: "How do express and urgent deliveries work?",
+    a: "Express and urgent delivery is the priority transport of time-sensitive shipments. You state the deadline, we check whether it can be supported for the route and timing, and only then confirm a quotation. No delivery time is assumed in advance.",
+    pointsLabel: "The process:",
+    points: "steps",
+  },
+  "warehousing-storage": {
+    q: "What does warehousing and storage involve?",
+    a: "Warehousing and storage is the holding of goods between receipt and onward movement, together with the handling needed to receive and release them. It is planned around what is stored, how much, for how long and how it connects to onward transport.",
+    pointsLabel: "Included:",
+    points: "includes",
+  },
+  "refrigerated-transportation": {
+    q: "How is refrigerated transportation arranged?",
+    a: "Refrigerated transportation starts with the goods and the temperature range they must stay within. We confirm individually whether a suitable arrangement can be supported for the route and timing before a quotation is agreed.",
+    pointsLabel: "The process:",
+    points: "steps",
+  },
+  "industrial-project-logistics": {
+    q: "What is industrial and project logistics?",
+    a: "Industrial and project logistics is the planning and coordination of transport for projects where equipment and materials arrive at a site over time. It is organised by project phase, with site access and delivery sequence agreed in advance.",
+    pointsLabel: "Included:",
+    points: "includes",
+  },
+  "commercial-distribution-services": {
+    q: "What are commercial distribution services?",
+    a: "Commercial distribution is the planned, often repeated movement of goods from a supplier or storage point to several business customers, stores or sites. It is built around routes, schedules and volumes and can run as a recurring arrangement.",
+    pointsLabel: "Included:",
+    points: "includes",
+  },
 };
+
+export const pricingFactors = [
+  "Distance and route",
+  "Type, size and weight of the load, or number of passengers",
+  "Vehicle type required",
+  "Loading, unloading and waiting time",
+  "Timing, including urgency and recurring schedules",
+];
 
 export const hubQuotation = {
   h2: "Quotation, pricing and availability",
@@ -97,11 +153,11 @@ export const midCta = {
 };
 
 export const hubOnPage = [
+  { href: "#services", label: "All services" },
+  { href: "#guide", label: "Find your service" },
   { href: "#answer", label: "Overview" },
-  { href: "#services", label: "Services" },
   { href: "#compare", label: "Compare" },
   { href: "#quotation", label: "Quotation" },
-  { href: "#guide", label: "Which service?" },
   { href: "#faq", label: "FAQ" },
   { href: "#quote", label: "Get a quote" },
 ];
@@ -165,7 +221,7 @@ export const selectionGuide = {
 export const hubFaqs: Faq[] = [
   {
     q: "What services does Gulf Elite Transport offer?",
-    a: "Gulf Elite Transport offers freight and cargo transport, passenger transport, equipment and machinery moving, and contract fleet services. Each has its own page describing what is included, who it is for and what information is needed for a quotation.",
+    a: "Gulf Elite Transport offers twelve services: freight and cargo transport, international freight forwarding, container transportation, express and urgent delivery, refrigerated transportation, passenger transport, equipment and machinery moving, industrial and project logistics, contract fleet services, last-mile delivery, commercial distribution, and warehousing and storage. Each has its own page describing what is included, who it is for and what information is needed for a quotation.",
   },
   {
     q: "Who are these transport services for?",
@@ -173,7 +229,7 @@ export const hubFaqs: Faq[] = [
   },
   {
     q: "How do I choose the right service?",
-    a: "Match the service to what you are moving: goods go with freight and cargo, people with passenger transport, heavy loads with equipment moving and regular needs with contract fleet. The selection guide on this page helps, and we can advise if your request spans several services.",
+    a: "Match the service to what you are moving: goods go with freight and cargo, people with passenger transport, heavy loads with equipment moving or project logistics, and regular needs with contract fleet, last-mile delivery or distribution. The service finder on this page helps, and we can advise if your request spans several services.",
   },
   {
     q: "Can I combine more than one service in one request?",

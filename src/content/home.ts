@@ -56,7 +56,7 @@ export const about = {
   eyebrow: "About Gulf Elite Transport",
   h2: "Transport support for businesses that need things to move on time",
   paragraphs: [
-    "Gulf Elite Transport is a transport and logistics service for businesses and organisations. We help customers arrange the movement of goods, people and equipment, and we offer contract fleet arrangements for operations that need transport on a regular basis. Our four core service categories are freight and cargo transport, passenger transport, equipment and machinery moving, and contract fleet services.",
+    "Gulf Elite Transport is a transport and logistics service for businesses and organisations. We help customers arrange the movement of goods, people and equipment, and we offer contract fleet arrangements for operations that need transport on a regular basis. Our services fall into four groups: freight and cargo (including international freight forwarding, container transportation, express and urgent delivery and refrigerated transportation), passenger transport, equipment and industrial transportation, and fleet and distribution (contract fleet, last-mile delivery, commercial distribution, and warehousing and storage).",
     "Our approach is straightforward. We start by understanding what you need to move, where it is going and when it needs to arrive. We then assess the requirement, confirm availability for your locations and dates, and provide a clear quotation. Nothing is arranged until you are comfortable with the details. This keeps the process transparent and helps prevent the misunderstandings that tend to cause delays on the day of a movement.",
     "We serve customers who value dependable coordination: operations managers moving stock between sites, project teams relocating machinery, human resources teams arranging staff transport and administrators booking airport transfers for visiting colleagues. Whatever the size of the request, the aim is the same, to make transport one less thing that your team has to worry about.",
   ],
@@ -318,7 +318,7 @@ export const benefits = {
 export const faqs: Faq[] = [
   {
     q: "What transport services does Gulf Elite Transport provide?",
-    a: "Gulf Elite Transport provides four categories of service: freight and cargo transport, passenger transport, equipment and machinery moving, and contract fleet services. Each is designed for business requirements, and you can request one-off jobs or recurring arrangements.",
+    a: "Gulf Elite Transport provides twelve services in four groups: freight and cargo, passenger transport, equipment and industrial transportation, and fleet and distribution. They include freight and cargo transport, international freight forwarding, container transportation, express and urgent delivery, refrigerated transportation, passenger transport, equipment and machinery moving, industrial and project logistics, contract fleet services, last-mile delivery, commercial distribution, and warehousing and storage. Each is designed for business requirements, and you can request one-off jobs or recurring arrangements.",
   },
   {
     q: "Do you offer freight and cargo transportation?",

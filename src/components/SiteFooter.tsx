@@ -6,22 +6,22 @@ export default function SiteFooter() {
   const wa = whatsappUrl();
   return (
     <footer className="bg-navy pb-24 pt-16 text-white/75 md:pb-10">
-      <div className="mx-auto grid max-w-7xl gap-10 px-5 md:grid-cols-2 lg:grid-cols-4">
+      <div className="mx-auto grid max-w-7xl gap-10 px-5 md:grid-cols-2 lg:grid-cols-[1fr_1.7fr_0.8fr_1fr]">
         <div>
           <p className="text-lg font-extrabold text-white">
             Gulf Elite <span className="text-accent">Transport</span>
           </p>
           <p className="mt-4 text-sm leading-7">
             Freight and cargo, passenger transport, equipment and machinery
-            moving, and contract fleet services for businesses.
+            moving, contract fleet, delivery, distribution and storage services for businesses.
           </p>
         </div>
 
         <nav aria-label="Services">
           <p className="font-semibold text-white">Services</p>
-          <ul className="mt-4 space-y-2 text-sm">
+          <ul className="mt-4 space-y-2 text-sm sm:columns-2 sm:gap-x-6">
             {services.map((s) => (
-              <li key={s.slug}>
+              <li key={s.slug} className="break-inside-avoid">
                 <Link href={`/services/${s.slug}`} className="hover:text-accent">
                   {s.title}
                 </Link>

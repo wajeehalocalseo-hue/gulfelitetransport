@@ -1,13 +1,13 @@
 import type { Service } from "./types";
 
-// PENDING BUSINESS APPROVAL: set `approved: true` only after confirming the business offers each service.
+// Approved by the business owner. Set `approved: false` to unpublish a service.
 export const international: Service[] = [
   {
     slug: "international-freight-forwarding",
     icon: "globe",
     title: "International Freight Forwarding",
     group: "freight",
-    approved: false,
+    approved: true,
     short:
       "Coordination of cross-border freight movements, from shipment planning and routing to documentation and delivery.",
     audienceShort: "Importers, exporters and businesses shipping across borders",
@@ -93,7 +93,7 @@ export const international: Service[] = [
     icon: "container",
     title: "Container Transportation",
     group: "freight",
-    approved: false,
+    approved: true,
     short:
       "Coordination of container movement between ports, depots and delivery sites, planned around container type, access and timing.",
     audienceShort: "Importers, exporters, traders and distributors handling containers",

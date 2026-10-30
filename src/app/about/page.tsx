@@ -8,7 +8,7 @@ import { pageGraph } from "@/lib/schema";
 
 const title = "About Gulf Elite Transport";
 const description =
-  "Learn how Gulf Elite Transport helps businesses arrange freight, passenger transport, equipment moving and contract fleet services.";
+  "Learn how Gulf Elite Transport helps businesses arrange freight and cargo, passenger transport, equipment moving, contract fleet, delivery and storage services.";
 
 export const metadata: Metadata = {
   title: "About Us",

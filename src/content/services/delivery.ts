@@ -1,13 +1,13 @@
 import type { Service } from "./types";
 
-// PENDING BUSINESS APPROVAL: set `approved: true` only after confirming the business offers each service.
+// Approved by the business owner. Set `approved: false` to unpublish a service.
 export const delivery: Service[] = [
   {
     slug: "last-mile-delivery",
     icon: "box",
     title: "Last-Mile Delivery",
     group: "fleet",
-    approved: false,
+    approved: true,
     short:
       "Final-stage delivery of goods to businesses and customers, planned around delivery windows, addresses and recipient requirements.",
     audienceShort: "Retailers, suppliers and businesses delivering to customers or branches",
@@ -93,7 +93,7 @@ export const delivery: Service[] = [
     icon: "bolt",
     title: "Express & Urgent Delivery",
     group: "freight",
-    approved: false,
+    approved: true,
     short:
       "Priority coordination for time-sensitive shipments, planned around delivery deadlines, routes and shipment readiness.",
     audienceShort: "Businesses with time-critical shipments and deadlines",
@@ -179,7 +179,7 @@ export const delivery: Service[] = [
     icon: "network",
     title: "Commercial Distribution Services",
     group: "fleet",
-    approved: false,
+    approved: true,
     short:
       "Coordinated movement of goods from a supplier or storage point to multiple business customers, stores or sites on a planned schedule.",
     audienceShort: "Suppliers, wholesalers and manufacturers serving several customers",

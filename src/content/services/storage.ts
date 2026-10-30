@@ -1,13 +1,13 @@
 import type { Service } from "./types";
 
-// PENDING BUSINESS APPROVAL: set `approved: true` only after confirming the business offers each service.
+// Approved by the business owner. Set `approved: false` to unpublish a service.
 export const storage: Service[] = [
   {
     slug: "warehousing-storage",
     icon: "warehouse",
     title: "Warehousing & Storage",
     group: "fleet",
-    approved: false,
+    approved: true,
     short:
       "Storage and handling coordination for goods that need to be held before onward distribution or delivery.",
     audienceShort: "Businesses holding stock between supply and delivery",
@@ -93,7 +93,7 @@ export const storage: Service[] = [
     icon: "snowflake",
     title: "Refrigerated Transportation",
     group: "freight",
-    approved: false,
+    approved: true,
     short:
       "Coordination of temperature-sensitive transport, planned around the temperature range, handling and delivery timing your goods need.",
     audienceShort: "Suppliers of temperature-sensitive goods",
@@ -179,7 +179,7 @@ export const storage: Service[] = [
     icon: "layers",
     title: "Industrial & Project Logistics",
     group: "equipment",
-    approved: false,
+    approved: true,
     short:
       "Coordination of transport for industrial projects, from machinery and materials to phased deliveries to site.",
     audienceShort: "Contractors, industrial operators and project teams",

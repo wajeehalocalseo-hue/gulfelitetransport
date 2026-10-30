@@ -4,6 +4,7 @@ import FaqList from "@/components/Faq";
 import Icon from "@/components/Icon";
 import JsonLd from "@/components/JsonLd";
 import QuoteForm from "@/components/QuoteForm";
+import ServiceCard from "@/components/ServiceCard";
 import * as c from "@/content/home";
 import { services } from "@/content/services";
 import { pageGraph } from "@/lib/schema";
@@ -70,7 +71,7 @@ export default function Home() {
           <nav aria-label="Service categories" className="rounded-2xl bg-navy-2 p-6 ring-1 ring-white/10 sm:p-8">
             <p className="text-sm font-bold uppercase tracking-[0.18em] text-white/60">What we help move</p>
             <ul className="mt-5 grid gap-3">
-              {services.map((s) => (
+              {services.slice(0, 5).map((s) => (
                 <li key={s.slug}>
                   <Link
                     href={`/services/${s.slug}`}
@@ -84,6 +85,11 @@ export default function Home() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link href="/services" className="block rounded-xl border border-white/20 p-4 text-center font-bold text-accent hover:bg-white/5">
+                  View all {services.length} services
+                </Link>
+              </li>
             </ul>
           </nav>
         </div>
@@ -113,32 +119,17 @@ export default function Home() {
           <p className={eyebrow}>{c.servicesIntro.eyebrow}</p>
           <h2 id="services-title" className={h2}>{c.servicesIntro.h2}</h2>
           <p className={lead}>{c.servicesIntro.text}</p>
-          <div className="mt-10 grid gap-6 md:grid-cols-2">
+          <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((s) => (
-              <article
-                key={s.slug}
-                className="flex flex-col rounded-2xl border border-navy/10 bg-surface p-7 transition hover:shadow-lg"
-              >
-                <div className="flex aspect-[16/7] items-center justify-center rounded-xl bg-navy text-accent">
-                  <Icon name={s.icon} className="h-14 w-14" />
-                </div>
-                <h3 className="mt-6 text-2xl font-extrabold text-navy">{s.title}</h3>
-                <p className="mt-3 leading-7 text-muted">{s.short}</p>
-                <ul className="mt-4 space-y-2">
-                  {s.benefits.map((b) => (
-                    <li key={b} className="flex gap-2 text-sm font-medium text-navy">
-                      <Icon name="check" className="mt-0.5 h-4 w-4 shrink-0 text-accent" /> {b}
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  href={`/services/${s.slug}`}
-                  className="mt-6 inline-flex items-center gap-2 font-bold text-navy underline decoration-accent decoration-2 underline-offset-4"
-                >
-                  Learn more about {s.title} <Icon name="arrow" className="h-4 w-4" />
-                </Link>
-              </article>
+              <li key={s.slug} className="flex">
+                <ServiceCard s={s} />
+              </li>
             ))}
+          </ul>
+          <div className="mt-10 text-center">
+            <Link href="/services" className={btnPrimary}>
+              Compare all {services.length} services
+            </Link>
           </div>
         </div>
       </section>

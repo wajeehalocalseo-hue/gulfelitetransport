@@ -7,7 +7,8 @@ import Icon from "@/components/Icon";
 import JsonLd from "@/components/JsonLd";
 import PageHero from "@/components/PageHero";
 import QuoteForm from "@/components/QuoteForm";
-import ServiceArt from "@/components/ServiceArt";
+import ServiceCard from "@/components/ServiceCard";
+import ServiceImage from "@/components/ServiceImage";
 import { getService, services } from "@/content/services";
 import { breadcrumbFor, getNode, pathOf } from "@/content/taxonomy";
 import { pageGraph } from "@/lib/schema";
@@ -73,16 +74,36 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
         h1={s.h1}
         lead={s.lead}
         aside={
-          <ServiceArt
-            icon={s.icon}
-            slug={s.slug}
-            title={s.title}
-            className="hidden aspect-[4/3] rounded-2xl ring-1 ring-white/10 lg:flex"
-          />
+          <div className="relative aspect-[16/10] overflow-hidden rounded-2xl ring-1 ring-white/10">
+            <ServiceImage slug={s.slug} title={s.title} priority className="h-full w-full" />
+          </div>
         }
       >
         <ContactButtons service={s.title} />
       </PageHero>
+
+      <nav aria-label="On this page" className="border-b border-navy/10 bg-white">
+        <ul className="mx-auto flex max-w-7xl gap-2 overflow-x-auto px-5 py-3">
+          {[
+            ["#overview", "Overview"],
+            ["#included", "What's included"],
+            ["#how", "How it works"],
+            ["#considerations", "Planning"],
+            ["#info", "Quotation info"],
+            ["#faq", "FAQ"],
+            ["#quote", "Get a quote"],
+          ].map(([href, label]) => (
+            <li key={href} className="shrink-0">
+              <a
+                href={href}
+                className="inline-block rounded-full px-4 py-2 text-sm font-semibold text-navy ring-1 ring-navy/15 hover:bg-accent hover:ring-accent"
+              >
+                {label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
 
       <div className="mx-auto grid max-w-7xl gap-12 px-5 py-16 lg:grid-cols-[1.45fr_1fr]">
         <div className="min-w-0 space-y-14">
@@ -181,11 +202,10 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
 
           <section aria-labelledby="related">
             <h2 id="related" className={h2}>Related services</h2>
-            <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+            <ul className="mt-6 grid gap-5 sm:grid-cols-2">
               {related.map((o) => (
-                <li key={o.slug} className="rounded-xl border border-navy/10 bg-white p-4">
-                  <Link href={`/services/${o.slug}`} className={textLink}>{o.title}</Link>
-                  <p className="mt-1.5 text-sm leading-6 text-muted">{o.short}</p>
+                <li key={o.slug} className="flex">
+                  <ServiceCard s={o} headingLevel={3} />
                 </li>
               ))}
             </ul>

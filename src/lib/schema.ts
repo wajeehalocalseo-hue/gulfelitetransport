@@ -14,7 +14,7 @@ const orgId = `${site.url}/#organization`;
 const siteId = `${site.url}/#website`;
 
 const description =
-  "Gulf Elite Transport provides freight and cargo transport, passenger transport, equipment and machinery moving, and contract fleet services for businesses.";
+  "Gulf Elite Transport provides freight and cargo transport, passenger transport, equipment and machinery moving, contract fleet, delivery, distribution and storage services for businesses.";
 
 /** Organization + WebSite. Rendered once, in the root layout. No unverified data is included. */
 export const baseGraph = {
