@@ -1,5 +1,15 @@
+import { services } from "@/content/services";
 import { abs, site } from "./site";
 
+/**
+ * Entity model (stable @ids):
+ *   Organization (/#organization)
+ *     |- hasOfferCatalog -> Service (<page>#service) for each published service
+ *   WebSite (/#website) -> publisher Organization
+ *   WebPage (<page>#webpage) -> isPartOf WebSite, about Organization,
+ *                               breadcrumb BreadcrumbList, mainEntity Service / ItemList
+ *   Service (<page>#service) -> provider Organization
+ */
 const orgId = `${site.url}/#organization`;
 const siteId = `${site.url}/#website`;
 
@@ -30,6 +40,14 @@ export const baseGraph = {
         ? { address: { "@type": "PostalAddress", streetAddress: site.address, addressCountry: site.country } }
         : {}),
       ...(site.socialProfiles.length ? { sameAs: [...site.socialProfiles] } : {}),
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: `${site.name} services`,
+        itemListElement: services.map((s) => ({
+          "@type": "Offer",
+          itemOffered: { "@id": `${abs(`/services/${s.slug}`)}#service` },
+        })),
+      },
     },
     {
       "@type": "WebSite",
@@ -50,27 +68,26 @@ type PageOpts = {
   crumbs?: { name: string; path: string }[];
   service?: { name: string; description: string; serviceType: string };
   items?: { name: string; path: string }[];
-  /** Visible FAQ content on the page; emitted as FAQPage (valid markup, no Google rich result for most commercial sites). */
-  faqs?: { q: string; a: string }[];
 };
 
-/** Per-page WebPage (or subtype), optional Service and BreadcrumbList; links to the base entities by @id. */
+/** Per-page WebPage (or subtype), optional Service, ItemList and BreadcrumbList, all linked by @id. */
 export function pageGraph(o: PageOpts) {
   const url = abs(o.path);
   const pageId = `${url}#webpage`;
-  const graph: object[] = [
-    {
-      "@type": o.type ?? "WebPage",
-      "@id": pageId,
-      url,
-      name: o.name,
-      description: o.description,
-      isPartOf: { "@id": siteId },
-      about: { "@id": orgId },
-      inLanguage: site.language,
-    },
-  ];
+  const page: Record<string, unknown> = {
+    "@type": o.type ?? "WebPage",
+    "@id": pageId,
+    url,
+    name: o.name,
+    description: o.description,
+    isPartOf: { "@id": siteId },
+    about: { "@id": orgId },
+    inLanguage: site.language,
+  };
+  const graph: object[] = [page];
+
   if (o.crumbs?.length) {
+    page.breadcrumb = { "@id": `${url}#breadcrumb` };
     graph.push({
       "@type": "BreadcrumbList",
       "@id": `${url}#breadcrumb`,
@@ -83,6 +100,7 @@ export function pageGraph(o: PageOpts) {
     });
   }
   if (o.items?.length) {
+    page.mainEntity = { "@id": `${url}#services` };
     graph.push({
       "@type": "ItemList",
       "@id": `${url}#services`,
@@ -95,19 +113,8 @@ export function pageGraph(o: PageOpts) {
       })),
     });
   }
-  if (o.faqs?.length) {
-    graph.push({
-      "@type": "FAQPage",
-      "@id": `${url}#faq`,
-      isPartOf: { "@id": pageId },
-      mainEntity: o.faqs.map((f) => ({
-        "@type": "Question",
-        name: f.q,
-        acceptedAnswer: { "@type": "Answer", text: f.a },
-      })),
-    });
-  }
   if (o.service) {
+    page.mainEntity = { "@id": `${url}#service` };
     graph.push({
       "@type": "Service",
       "@id": `${url}#service`,
@@ -115,6 +122,7 @@ export function pageGraph(o: PageOpts) {
       description: o.service.description,
       serviceType: o.service.serviceType,
       url,
+      mainEntityOfPage: { "@id": pageId },
       provider: { "@id": orgId },
       ...(site.serviceAreas.length
         ? { areaServed: site.serviceAreas.map((a) => ({ "@type": "Place", name: a })) }

@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import PageHero from "@/components/PageHero";
 import QuoteForm from "@/components/QuoteForm";
+import { services } from "@/content/services";
 import { pageGraph } from "@/lib/schema";
 import { site, telUrl, whatsappUrl } from "@/lib/site";
 
@@ -66,6 +68,14 @@ export default function ContactPage() {
             To confirm availability for your pickup and delivery locations, include them in your
             request.
           </p>
+          <h3 className="mt-8 text-lg font-extrabold text-navy">What can we help you with?</h3>
+          <ul className="mt-3 space-y-2">
+            {services.map((s) => (
+              <li key={s.slug}>
+                <Link href={`/services/${s.slug}`} className={link}>{s.title}</Link>
+              </li>
+            ))}
+          </ul>
         </section>
         <section aria-labelledby="form-title" className="rounded-2xl border border-navy/10 bg-white p-6 shadow-sm sm:p-8">
           <h2 id="form-title" className="mb-6 text-2xl font-extrabold text-navy">Request a free quote</h2>

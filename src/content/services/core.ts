@@ -15,9 +15,9 @@ export const core: Service[] = [
       "Route and schedule planning",
       "Support for one-off and repeat shipments",
     ],
-    metaTitle: "Freight & Cargo Transport Services",
+    metaTitle: "Commercial Freight & Cargo Transportation",
     metaDescription:
-      "Request commercial freight and cargo transportation with pickup and delivery coordination, route planning and a clear quotation from Gulf Elite Transport.",
+      "Request commercial cargo transportation with pickup and delivery coordination and route planning. Gulf Elite Transport sends a clear quotation before you commit.",
     h1: "Freight & Cargo Transport Services",
     lead: "Commercial freight and cargo movement, coordinated around your pickup point, delivery point and delivery window.",
     directAnswer:
@@ -101,9 +101,9 @@ export const core: Service[] = [
       "Airport passenger transfers",
       "Event and group transportation",
     ],
-    metaTitle: "Passenger Transport & Staff Transportation",
+    metaTitle: "Corporate, Staff & Airport Passenger Transport",
     metaDescription:
-      "Arrange corporate passenger transport, staff transportation, airport transfers and event transport with Gulf Elite Transport. Request a quotation today.",
+      "Arrange corporate passenger transport, staff transportation services, airport passenger transfers and event transport. Request a quotation from Gulf Elite Transport.",
     h1: "Passenger Transport Services",
     lead: "Staff transportation, corporate passenger movement, airport transfers and event transport arranged around your schedule.",
     directAnswer:
@@ -189,7 +189,7 @@ export const core: Service[] = [
     ],
     metaTitle: "Heavy Equipment & Machinery Moving Services",
     metaDescription:
-      "Plan the transportation of heavy equipment, industrial machinery and commercial equipment with suitable vehicle coordination. Request a quote from Gulf Elite Transport.",
+      "Plan heavy equipment moving and industrial machinery relocation with vehicle suitability and loading planning. Request a quotation from Gulf Elite Transport.",
     h1: "Equipment & Machinery Moving Services",
     lead: "Transportation and relocation of heavy equipment, industrial machinery and commercial equipment, planned around the load.",
     directAnswer:
@@ -273,9 +273,9 @@ export const core: Service[] = [
       "Monthly vehicle arrangements",
       "A consistent point of contact",
     ],
-    metaTitle: "Contract Fleet & Monthly Vehicle Services",
+    metaTitle: "Contract Fleet Services & Monthly Vehicle Contracts",
     metaDescription:
-      "Arrange a dedicated business fleet or monthly vehicle contract for recurring transport needs with Gulf Elite Transport. Request a contract fleet quotation.",
+      "Arrange dedicated fleet arrangements and monthly fleet contracts for recurring business transport. Request a contract fleet quotation from Gulf Elite Transport.",
     h1: "Contract Fleet Services",
     lead: "Dedicated fleet arrangements and monthly vehicle contracts for businesses that need transport on a recurring basis.",
     directAnswer:

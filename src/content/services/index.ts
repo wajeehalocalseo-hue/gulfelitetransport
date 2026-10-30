@@ -26,21 +26,21 @@ export const groups: {
   {
     id: "freight",
     title: "Freight and cargo solutions",
-    text: "Moving goods from one place to another is the foundation of most commercial transport. These services cover the movement of cargo, from a single commercial shipment to more specialised freight requirements. Each one starts the same way: a clear description of the goods, the route and the timing, followed by an assessment and a quotation.",
+    text: "Moving goods from one place to another is the foundation of most commercial transport. These services cover commercial cargo transportation, from a single shipment to more specialised freight requirements. Each one starts the same way: a clear description of the goods, the route and the timing, followed by an assessment and a quotation.",
   },
   {
     id: "passenger",
     title: "Passenger transportation solutions",
-    text: "People need transport that is predictable. Passenger services cover staff movement, corporate travel, airport transfers and event groups, planned around a schedule so that passengers are collected and delivered where and when they expect.",
+    text: "People need transport that is predictable. Passenger services cover staff transportation, corporate passenger transport, airport passenger transfers and event groups, planned around a schedule so that passengers are collected and delivered where and when they expect.",
   },
   {
     id: "equipment",
     title: "Equipment and industrial transportation",
-    text: "Heavy equipment and project loads need more planning than ordinary cargo. Weight, size, access and loading method all shape the move, so these services focus on gathering that information early and coordinating a suitable arrangement.",
+    text: "Heavy equipment moving and industrial machinery relocation need more planning than ordinary cargo. Weight, size, access and loading method all shape the move, so these services focus on gathering that information early and coordinating a suitable arrangement.",
   },
   {
     id: "fleet",
     title: "Fleet and distribution solutions",
-    text: "Businesses that move goods regularly benefit from arrangements that do not have to be rebuilt each time. Fleet and distribution services support recurring routes, scheduled deliveries and ongoing supply to customers or stores.",
+    text: "Businesses that move goods regularly benefit from arrangements that do not have to be rebuilt each time. Fleet services such as monthly fleet contracts support recurring business transport, including regular routes, scheduled deliveries and ongoing supply to customers or stores.",
   },
 ];

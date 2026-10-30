@@ -9,6 +9,7 @@ import PageHero from "@/components/PageHero";
 import QuoteForm from "@/components/QuoteForm";
 import ServiceArt from "@/components/ServiceArt";
 import { getService, services } from "@/content/services";
+import { breadcrumbFor, getNode, pathOf } from "@/content/taxonomy";
 import { pageGraph } from "@/lib/schema";
 
 export const dynamicParams = false;
@@ -52,24 +53,23 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
   const related = s.related
     .map((r) => services.find((x) => x.slug === r))
     .filter((x): x is NonNullable<typeof x> => Boolean(x));
+  const node = getNode(s.slug);
+  if (!node) notFound();
+  const crumbs = breadcrumbFor(node);
 
   return (
     <main id="main" className="flex-1">
       <JsonLd
         data={pageGraph({
-          path: `/services/${s.slug}`,
+          path: pathOf(node),
           name: s.metaTitle,
           description: s.metaDescription,
-          crumbs: [
-            { name: "Home", path: "/" },
-            { name: "Services", path: "/services" },
-            { name: s.title, path: `/services/${s.slug}` },
-          ],
-          service: { name: s.title, description: s.metaDescription, serviceType: s.title },
+          crumbs,
+          service: { name: s.title, description: s.directAnswer, serviceType: s.title },
         })}
       />
       <PageHero
-        crumbs={[{ name: "Home", href: "/" }, { name: "Services", href: "/services" }, { name: s.title }]}
+        crumbs={crumbs.map((c, i) => (i === crumbs.length - 1 ? { name: c.name } : { name: c.name, href: c.path }))}
         h1={s.h1}
         lead={s.lead}
         aside={

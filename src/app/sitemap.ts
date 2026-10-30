@@ -1,16 +1,17 @@
 import type { MetadataRoute } from "next";
-import { services } from "@/content/services";
+import { indexableNodes, pathOf } from "@/content/taxonomy";
 import { abs } from "@/lib/site";
 
 export const dynamic = "force-static";
 
+// Only published, canonical, indexable pages are listed.
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: abs("/"), priority: 1, changeFrequency: "monthly" },
     { url: abs("/services"), priority: 0.9, changeFrequency: "monthly" },
-    ...services.map((s) => ({
-      url: abs(`/services/${s.slug}`),
-      priority: 0.8,
+    ...indexableNodes().map((n) => ({
+      url: abs(pathOf(n)),
+      priority: n.level === 1 ? 0.8 : 0.7,
       changeFrequency: "monthly" as const,
     })),
     { url: abs("/about"), priority: 0.6, changeFrequency: "yearly" },

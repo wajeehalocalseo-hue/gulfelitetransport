@@ -12,12 +12,12 @@ import { groups, services } from "@/content/services";
 import { pageGraph } from "@/lib/schema";
 import { site, telUrl } from "@/lib/site";
 
-const title = "Freight, Passenger, Equipment & Fleet Transport Services";
+const title = "Transport & Logistics Services for Businesses";
 const description =
-  "Compare Gulf Elite Transport services: freight and cargo, passenger transport, equipment and machinery moving and contract fleet. See what each covers and request a free quote.";
+  "Compare freight and cargo, passenger, equipment moving and contract fleet services from Gulf Elite Transport. Quotation before you commit.";
 
 export const metadata: Metadata = {
-  title: "Freight, Passenger & Fleet Transport Services",
+  title,
   description,
   alternates: { canonical: "/services" },
   openGraph: { title, description, url: "/services" },
@@ -53,7 +53,6 @@ export default function ServicesPage() {
             { name: "Services", path: "/services" },
           ],
           items: services.map((s) => ({ name: s.title, path: `/services/${s.slug}` })),
-          faqs: hub.hubFaqs,
         })}
       />
 
@@ -105,6 +104,8 @@ export default function ServicesPage() {
           <h2 id="answer-title" className={h2}>{hub.hubAnswer.h2}</h2>
           <p className="mt-5 text-lg font-medium leading-8 text-navy">{hub.hubAnswer.answer}</p>
           <p className="mt-4 leading-8 text-muted">{hub.hubAnswer.more}</p>
+          <h3 className="mt-8 text-xl font-extrabold text-navy">{hub.hubAudience.h2}</h3>
+          <p className="mt-2 leading-8 text-muted">{hub.hubAudience.answer}</p>
           <dl className="mt-8 space-y-4">
             {services.map((s) => (
               <div key={s.slug} className="rounded-xl border border-navy/10 bg-white p-4">
@@ -213,6 +214,36 @@ export default function ServicesPage() {
         </div>
       </section>
 
+      {/* Answer-first explanation of each service */}
+      <section id="service-questions" aria-labelledby="sq-title" className={`${wrap} py-16`}>
+        <p className={eyebrow}>Service questions answered</p>
+        <h2 id="sq-title" className={h2}>What each service means in practice</h2>
+        <div className="mt-10 grid gap-5 md:grid-cols-2">
+          {services.map((s) => {
+            const qa = hub.hubQa[s.slug];
+            if (!qa) return null;
+            const points = qa.points === "steps" ? s.steps.map((x) => x.title) : s.includes.map((x) => x.title);
+            return (
+              <article key={s.slug} className="rounded-2xl border border-navy/10 bg-white p-6">
+                <h3 className="text-xl font-extrabold text-navy">{qa.q}</h3>
+                <p className="mt-3 leading-7 text-muted">{qa.a}</p>
+                <p className="mt-4 text-xs font-bold uppercase tracking-wider text-muted">{qa.pointsLabel}</p>
+                <ul className="mt-2 space-y-1.5">
+                  {points.map((p) => (
+                    <li key={p} className="flex gap-2 text-sm text-navy">
+                      <Icon name="check" className="mt-0.5 h-4 w-4 shrink-0 text-accent" /> {p}
+                    </li>
+                  ))}
+                </ul>
+                <Link href={`/services/${s.slug}`} className={`${textLink} mt-5 inline-block text-sm`}>
+                  Read the full {s.title} guide
+                </Link>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
       {/* Mid-page CTA */}
       <section aria-labelledby="mid-cta-title" className="bg-navy text-white">
         <div className={`${wrap} flex flex-col items-start justify-between gap-6 py-12 lg:flex-row lg:items-center`}>
@@ -232,10 +263,11 @@ export default function ServicesPage() {
           A side-by-side view of what each service covers, who it suits and what we ask for when
           preparing your quotation.
         </p>
-        <div className="mt-8 overflow-x-auto rounded-2xl border border-navy/10 bg-white">
-          <table className="w-full min-w-[720px] border-collapse text-left text-sm">
+        {/* Table on desktop; each row becomes a stacked card on small screens (same markup, CSS only) */}
+        <div className="mt-8 overflow-hidden rounded-2xl border border-navy/10 bg-white">
+          <table className="w-full border-collapse text-left text-sm max-md:block">
             <caption className="sr-only">Comparison of Gulf Elite Transport services</caption>
-            <thead className="bg-navy text-white">
+            <thead className="bg-navy text-white max-md:sr-only">
               <tr>
                 <th scope="col" className="p-4 font-bold">Service</th>
                 <th scope="col" className="p-4 font-bold">Best for</th>
@@ -243,19 +275,72 @@ export default function ServicesPage() {
                 <th scope="col" className="p-4 font-bold text-accent">What we ask for</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-navy/10">
+            <tbody className="divide-y divide-navy/10 max-md:block">
               {services.map((s) => (
-                <tr key={s.slug} className="align-top">
-                  <th scope="row" className="p-4 font-bold text-navy">
+                <tr key={s.slug} className="align-top max-md:block max-md:p-5">
+                  <th scope="row" className="p-4 font-bold text-navy max-md:block max-md:p-0 max-md:pb-2 max-md:text-base">
                     <Link href={`/services/${s.slug}`} className={textLink}>{s.title}</Link>
                   </th>
-                  <td className="p-4 leading-6 text-muted">{s.audienceShort}</td>
-                  <td className="p-4 leading-6 text-muted">{s.includes.slice(0, 3).map((i) => i.title).join("; ")}</td>
-                  <td className="p-4 leading-6 text-muted">{s.quoteInfo.slice(0, 3).join("; ")}</td>
+                  {[
+                    ["Best for", s.audienceShort],
+                    ["What it covers", s.includes.slice(0, 3).map((i) => i.title).join("; ")],
+                    ["What we ask for", s.quoteInfo.slice(0, 3).join("; ")],
+                  ].map(([label, value]) => (
+                    <td
+                      key={label}
+                      data-label={label}
+                      className="p-4 leading-6 text-muted before:mb-0.5 before:block before:text-xs before:font-bold before:uppercase before:tracking-wider before:text-navy before:content-[attr(data-label)] max-md:block max-md:px-0 max-md:py-1.5 md:before:hidden"
+                    >
+                      {value}
+                    </td>
+                  ))}
                 </tr>
               ))}
             </tbody>
           </table>
+        </div>
+      </section>
+
+      {/* Quotation, pricing and availability: answer-first */}
+      <section id="quotation" aria-labelledby="quotation-title" className="bg-white py-16">
+        <div className={wrap}>
+          <p className={eyebrow}>Before you request</p>
+          <h2 id="quotation-title" className={h2}>{hub.hubQuotation.h2}</h2>
+          <p className="mt-4 max-w-3xl text-lg leading-8 text-muted">{hub.hubQuotation.text}</p>
+          <div className="mt-10 grid gap-5 lg:grid-cols-3">
+            <article className="rounded-2xl border border-navy/10 bg-surface p-6">
+              <h3 className="text-lg font-extrabold text-navy">{hub.hubQuotation.info.q}</h3>
+              <p className="mt-3 text-sm leading-7 text-muted">{hub.hubQuotation.info.a}</p>
+              <ul className="mt-4 space-y-1.5">
+                {hub.hubQuotation.info.list.map((i) => (
+                  <li key={i} className="flex gap-2 text-sm text-navy">
+                    <Icon name="check" className="mt-0.5 h-4 w-4 shrink-0 text-accent" /> {i}
+                  </li>
+                ))}
+              </ul>
+            </article>
+            <article className="rounded-2xl border border-navy/10 bg-surface p-6">
+              <h3 className="text-lg font-extrabold text-navy">{hub.hubQuotation.pricing.q}</h3>
+              <p className="mt-3 text-sm leading-7 text-muted">{hub.hubQuotation.pricing.a}</p>
+              <dl className="mt-4 space-y-3 text-sm">
+                {services.map((s) => (
+                  <div key={s.slug}>
+                    <dt className="font-bold text-navy">{s.title}</dt>
+                    <dd className="mt-0.5 leading-6 text-muted">{s.quoteFactors.join("; ")}</dd>
+                  </div>
+                ))}
+              </dl>
+            </article>
+            <article className="rounded-2xl border border-navy/10 bg-surface p-6">
+              <h3 className="text-lg font-extrabold text-navy">{hub.hubQuotation.availability.q}</h3>
+              <p className="mt-3 text-sm leading-7 text-muted">{hub.hubQuotation.availability.a}</p>
+              <ol className="mt-4 list-decimal space-y-1.5 pl-5 text-sm text-navy marker:font-bold marker:text-accent">
+                {hub.hubQuotation.availability.steps.map((s) => (
+                  <li key={s}>{s}</li>
+                ))}
+              </ol>
+            </article>
+          </div>
         </div>
       </section>
 
@@ -295,7 +380,7 @@ export default function ServicesPage() {
           <h2 id="guide-title" className="text-3xl font-extrabold tracking-tight text-navy">{hub.selectionGuide.h2}</h2>
           <p className="mt-4 max-w-3xl text-lg leading-8 text-muted">{hub.selectionGuide.text}</p>
           <div className="mt-8 overflow-x-auto rounded-2xl border border-navy/10 bg-surface">
-            <table className="w-full min-w-[520px] border-collapse text-left text-sm">
+            <table className="w-full border-collapse text-left text-sm">
               <caption className="sr-only">Service selection guide</caption>
               <thead className="bg-navy text-white">
                 <tr>
