@@ -1,4 +1,4 @@
-﻿# Gulf Elite Transport
+# Gulf Elite Transport
 
 Next.js site. Edit business details in `src/lib/site.ts`.
 

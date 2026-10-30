@@ -1,4 +1,4 @@
-﻿import { ImageResponse } from "next/og";
+import { ImageResponse } from "next/og";
 import { site } from "@/lib/site";
 
 export const dynamic = "force-static";
