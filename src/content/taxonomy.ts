@@ -1,10 +1,11 @@
+import { freightBatch1CommercialMicro, freightBatch1Micro, freightBatch1Sub } from "./batches/freight-batch-1";
 import { masterTaxonomy } from "./master-taxonomy";
-import { microServices, publishedMicroServices } from "./microservices";
+import { microServices } from "./microservices";
 import { microProposals, type Verification } from "./microproposals";
 import { proposals, statusOverrides } from "./proposals";
 import { allServices, services } from "./services";
 import type { Faq } from "./services";
-import { subServices, type PageContent } from "./subservices";
+import { subServices, type Layout, type PageContent } from "./subservices";
 
 /**
  * Three-level service graph, the single source of truth for URLs, breadcrumbs, sitemap,
@@ -53,6 +54,7 @@ export type ServiceNode = {
   icon: string;
   audienceShort: string;
   publishedAt?: string;
+  layout?: Layout;
   /** Page body for sub / micro-services (Level 1 pages use their own content in ./services). */
   content?: PageContent;
   /** Unpublished proposals: the customer use case and FAQ topics to cover when written. */
@@ -123,10 +125,11 @@ const children = (): Raw[] => {
   };
 
   // Records with full page content (Level 2 sub-services, then Level 3 micro-services).
-  for (const r of [...subServices, ...microServices]) {
-    const status: NodeStatus =
-      statusOverrides[r.id] ??
-      (r.level === 2 || publishedMicroServices.includes(r.id) ? "published" : "pending-verification");
+  // Every record with page content is published unless statusOverrides holds it back.
+  // Level 2 records must be added before Level 3 so parents exist.
+  const withContent = [...subServices, ...freightBatch1Sub, ...microServices, ...freightBatch1Micro, ...freightBatch1CommercialMicro];
+  for (const r of withContent) {
+    const status: NodeStatus = statusOverrides[r.id] ?? "published";
     add({
       id: r.id,
       level: r.level,
@@ -157,6 +160,7 @@ const children = (): Raw[] => {
       icon: r.icon,
       audienceShort: r.audienceShort,
       publishedAt: r.publishedAt,
+      layout: r.layout,
       content: r.content,
     });
   }

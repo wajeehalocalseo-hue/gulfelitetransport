@@ -431,6 +431,3 @@ export const microServices: ChildRecord[] = [
     },
   },
 ];
-
-/** Ids of micro-services the owner has verified and approved for publication. */
-export const publishedMicroServices: string[] = microServices.map((m) => m.id);

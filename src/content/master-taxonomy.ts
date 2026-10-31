@@ -18,31 +18,25 @@
  */
 const RAW = `
 @ Freight & Cargo Transport | freight-cargo-transport
-## Road Freight Transportation
-- Full Truckload (FTL) Transportation :: Dedicated full truckload delivery | Point-to-point truckload movement | Long-distance full truckload transport | Scheduled truckload transportation
-- Less Than Truckload (LTL) Transportation :: Partial truckload shipping | Shared cargo transportation | Consolidated freight delivery | Multi-customer cargo movement
-- Part Load Transportation :: Small commercial load transport | Medium-sized cargo transport | Mixed shipment transportation
-- Regional Road Freight :: Domestic road freight | Intercity cargo transport | Regional commercial freight | Cross-border road freight (where authorized)
+## Road Freight Transportation => road-freight-transportation
 ## General Cargo Transportation => commercial-cargo-transportation
 - Commercial Goods Transport :: Retail goods transportation | Wholesale goods transportation | Business inventory movement
-- Industrial Cargo Transport :: Industrial raw materials | Factory supplies | Production materials
 - Consumer Goods Transport :: Household goods | Packaged consumer products | General merchandise
-- Palletized Cargo Transport :: Standard pallet delivery | Multiple pallet transportation | Mixed pallet cargo
 - Boxed Cargo Transport :: Carton transportation | Crated goods movement | Packaged shipment transport
-## Specialized Cargo Transportation
+## Specialized Cargo Transportation => specialized-cargo-transportation
 - Fragile Cargo Transport :: Glass products | Ceramics and porcelain | Sensitive packaged goods
 - High-Value Cargo Transport :: Valuable commercial goods | Electronics transportation | Sensitive business equipment
 - Oversized Cargo Transport :: Long-length cargo | Wide-load cargo | Large industrial components
 - Heavy Cargo Transport :: High-weight commercial goods | Dense industrial materials | Heavy palletized cargo
 - Dangerous Goods Transportation :: Regulated hazardous cargo | Chemical cargo transportation | Flammable material transport | Special handling and compliance coordination
 ! Dangerous goods are regulated; do not advertise without the licences, vehicles and procedures required.
-## Building Materials Transportation
+## Building Materials Transportation => building-materials-transportation
 - Cement Transportation :: Bagged cement delivery | Bulk cement logistics
 - Steel Transportation :: Steel bars and rods | Steel coils | Structural steel | Steel sheets
 - Timber Transportation :: Lumber movement | Wooden boards | Construction timber
 - Construction Materials :: Bricks and blocks | Tiles and ceramics | Sand and aggregates | Pipes and fittings
 - Roofing Materials :: Roofing sheets | Insulation materials | Roofing components
-## Bulk Cargo Transportation
+## Bulk Cargo Transportation => bulk-cargo-transportation
 - Dry Bulk Cargo :: Sand transportation | Gravel transportation | Mineral materials | Agricultural bulk commodities
 - Liquid Bulk Cargo :: Industrial liquids | Non-hazardous liquid materials | Tank-based liquid transport
 - Bulk Raw Materials :: Industrial raw materials | Manufacturing inputs | Bulk commercial commodities

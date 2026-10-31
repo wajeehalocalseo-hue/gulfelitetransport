@@ -32,13 +32,9 @@ const unverified = "Not covered by the business information supplied; needs owne
 export const proposals: Proposal[] = [
   /* A. Freight & Cargo Transport */
   { main: "freight-cargo-transport", name: "General Freight Transportation", status: D, note: "Same topic as Commercial Cargo Transportation.", mergedInto: "commercial-cargo-transportation" },
-  { main: "freight-cargo-transport", name: "Industrial Cargo Transportation", status: PV, note: unverified },
   { main: "freight-cargo-transport", name: "Business Stock Transportation", status: PV, note: unverified },
   { main: "freight-cargo-transport", name: "Raw Material Transportation", status: PV, note: unverified },
   { main: "freight-cargo-transport", name: "Finished Goods Transportation", status: PV, note: unverified },
-  { main: "freight-cargo-transport", name: "Palletized Cargo Transportation", status: PV, note: unverified },
-  { main: "freight-cargo-transport", name: "Full Truckload Transportation", status: PV, note: "Implies specific vehicle and load capability; needs owner confirmation." },
-  { main: "freight-cargo-transport", name: "Less-than-Truckload Transportation", status: PV, note: "Implies shared or consolidated loads; needs owner confirmation." },
   { main: "freight-cargo-transport", name: "Supplier-to-Business Deliveries", status: D, note: "Covered as a use case on Commercial Cargo Transportation.", mergedInto: "commercial-cargo-transportation" },
   { main: "freight-cargo-transport", name: "Project Cargo Transportation", status: D, note: "Overlaps the Industrial & Project Logistics service.", mergedInto: "industrial-project-logistics" },
 
