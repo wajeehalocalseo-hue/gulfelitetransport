@@ -54,8 +54,6 @@ const RAW = `
 - Business Travel Transportation :: Corporate travel transfers | Business visitor transportation | Intercity business transfers
 ## Staff & Workforce Transportation => staff-transportation
 - Factory Staff Transport :: Factory shift pickup | Factory shift drop-off | Employee bus services
-- Construction Workforce Transport :: Construction site transfers | Workforce camp transportation | Site-to-site staff movement
-- Industrial Staff Transport :: Industrial workforce shuttle | Plant employee transfers | Scheduled worker transportation
 - Remote Workforce Transport :: Remote site transfers | Long-distance employee movement | Staff camp transportation
 ## Airport Transportation => airport-transfers
 - Airport Pickup :: Individual airport pickup | Corporate airport pickup | Group airport pickup
@@ -65,10 +63,8 @@ const RAW = `
 ## Event Transportation => event-passenger-transport
 - Corporate Event Transport :: Conference transportation | Seminar transportation | Business exhibition transfers
 - Wedding Transportation :: Guest transportation | Wedding party transfers | Group wedding shuttles
-- Exhibition Transportation :: Exhibition visitor transfers | Exhibitor transportation | Venue shuttle services
 - Sports Event Transportation :: Team transportation | Spectator group transfers | Event staff transportation
-## Group Transportation
-- Small Group Transfers :: Small business groups | Family group transfers | Private group transportation
+## Group Transportation => group-transportation
 - Large Group Transfers :: Corporate groups | Event attendees | Organized tour groups
 - Intercity Passenger Transfers :: City-to-city transfers | Business group transfers | Scheduled group journeys
 ## Private & Dedicated Passenger Services

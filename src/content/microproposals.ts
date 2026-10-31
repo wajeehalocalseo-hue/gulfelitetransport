@@ -64,24 +64,19 @@ export const microProposals: MicroProposal[] = [
   /* corporate-passenger-transport */
   hold("corporate-passenger-transport", "Executive Business Transfers", "Senior visitors transferred between hotel, office and meetings.", ["executive transfer", "VIP business travel"], ["executives", "assistants"], ["What vehicle is used?", "How are itineraries shared?"]),
   merge("corporate-passenger-transport", "Inter-Office Passenger Transfers", "staff-transportation", "pending-verification", "Covered as inter-office movement on Staff Transportation."),
-  hold("corporate-passenger-transport", "Corporate Meeting Transportation", "Transport to and from a day of meetings at another venue.", ["meeting transport", "business meeting transfers"], ["meeting organisers"], ["How are meeting overruns handled?"]),
-  hold("corporate-passenger-transport", "Business Delegation Transfers", "A delegation moved across a multi-day programme.", ["delegation transport", "visiting delegation transfers"], ["delegations", "protocol teams"], ["How is a multi-day programme planned?"]),
   merge("corporate-passenger-transport", "Scheduled Corporate Passenger Movement", "corporate-passenger-transport", "verified", "Same purpose as the parent page, which is itinerary-based."),
 
   /* staff-transportation */
-  hold("staff-transportation", "Shift-Based Staff Transport", "Pickups timed to the start and end of work shifts.", ["shift transport", "employee commute"], ["employers", "site managers"], ["How are shift changes communicated?"]),
   hold("staff-transportation", "Employee Shuttle Routes", "A fixed route with set stops for employees.", ["employee shuttle", "staff shuttle route"], ["HR teams"], ["How are stops chosen?"]),
   hold("staff-transportation", "Inter-Office Staff Shuttles", "A regular run between two company offices.", ["inter-office shuttle", "office to office transport"], ["multi-site companies"], ["How is the timetable set?"]),
-  hold("staff-transportation", "Worker Transport to Project Sites", "Workers moved from accommodation or a gathering point to a site.", ["worker transport", "site commute"], ["contractors", "project teams"], ["How are headcount changes handled?"]),
+  merge("staff-transportation", "Worker Transport to Project Sites", "construction-workforce-transport", "pending-verification", "Same intent as Construction Workforce Transport."),
   hold("staff-transportation", "Temporary Project Staff Transport", "Staff transport for the duration of a project.", ["project staff transport", "temporary staff shuttle"], ["project managers"], ["How is the end date handled?"]),
 
   /* airport-transfers (2 verified micro-services are published) */
-  hold("airport-transfers", "Group Airport Transfers", "Several passengers travelling to or from the airport together.", ["group airport transfer", "team airport transport"], ["travel coordinators"], ["How many passengers can travel together?"]),
   hold("airport-transfers", "Early-Morning and Late-Night Airport Transfers", "Transfers for flights outside normal hours.", ["night airport transfer", "dawn airport pickup"], ["travellers"], ["How are out-of-hours transfers confirmed?"]),
   merge("airport-transfers", "Return Airport Transfers", "airport-departure-drop-offs", "verified", "Arrival and departure are covered by two pages; a return booking combines them."),
 
   /* event-passenger-transport */
-  hold("event-passenger-transport", "Conference Shuttle Services", "Delegates shuttled between a hotel and a conference centre.", ["conference shuttle", "delegate transport"], ["conference organisers"], ["How is the shuttle loop scheduled?"]),
   hold("event-passenger-transport", "Corporate Function Transport", "Guests collected and returned after a company event.", ["corporate event transport", "company function transfers"], ["event planners"], ["How are return times set?"]),
   hold("event-passenger-transport", "Hotel-to-Venue Guest Shuttles", "Hotel guests moved to an event venue and back.", ["hotel shuttle", "guest shuttle to venue"], ["hotels"], ["How are pickup points agreed?"]),
   hold("event-passenger-transport", "Multi-Venue Event Transport", "Movement between more than one location during an event.", ["multi-venue transport", "event day transfers"], ["festival organisers"], ["How are multi-venue days planned?"]),

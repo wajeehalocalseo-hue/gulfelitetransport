@@ -41,7 +41,6 @@ export const proposals: Proposal[] = [
   /* B. Passenger Transport */
   { main: "passenger-transport", name: "Business Guest Transportation", status: D, note: "Covered on Corporate Passenger Transport.", mergedInto: "corporate-passenger-transport" },
   { main: "passenger-transport", name: "Hotel Guest Transportation", status: PV, note: unverified },
-  { main: "passenger-transport", name: "Group Passenger Transportation", status: D, note: "Covered on Event Passenger Transport.", mergedInto: "event-passenger-transport" },
   { main: "passenger-transport", name: "Scheduled Passenger Transport", status: D, note: "Covered on Staff Transportation.", mergedInto: "staff-transportation" },
 
   /* C. Equipment & Machinery Moving */
