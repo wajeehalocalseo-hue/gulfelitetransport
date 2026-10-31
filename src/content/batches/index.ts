@@ -1,0 +1,10 @@
+import type { ChildRecord } from "../subservices";
+import { equipmentBatch2Micro, equipmentBatch2Sub } from "./equipment-batch-2";
+import { freightBatch1CommercialMicro, freightBatch1Micro, freightBatch1Sub } from "./freight-batch-1";
+
+/**
+ * Register each new batch here. Level 2 records must come before Level 3 records so parents exist.
+ * Every record listed is published unless held back in statusOverrides (see ../proposals.ts).
+ */
+export const batchSub: ChildRecord[] = [...freightBatch1Sub, ...equipmentBatch2Sub];
+export const batchMicro: ChildRecord[] = [...freightBatch1Micro, ...freightBatch1CommercialMicro, ...equipmentBatch2Micro];

@@ -87,13 +87,13 @@ export const microProposals: MicroProposal[] = [
   hold("event-passenger-transport", "Multi-Venue Event Transport", "Movement between more than one location during an event.", ["multi-venue transport", "event day transfers"], ["festival organisers"], ["How are multi-venue days planned?"]),
 
   /* heavy-equipment-transportation (2 verified micro-services are published) */
-  merge("heavy-equipment-transportation", "Construction Plant Delivery", "construction-equipment-transportation", "pending-verification", "Same intent as Construction Equipment Transportation."),
+  merge("heavy-equipment-transportation", "Construction Plant Delivery", "construction-equipment-transport", "pending-verification", "Same intent as Construction Equipment Transport."),
   hold("heavy-equipment-transportation", "Equipment Return to Yard", "Equipment collected at the end of a job.", ["equipment return", "plant collection"], ["hire companies", "contractors"], ["How is collection timing agreed?"]),
   merge("heavy-equipment-transportation", "Machine Transport with Attachments", "vehicle-suitability-for-heavy-equipment", "verified", "Attachments are part of the vehicle suitability assessment."),
   merge("heavy-equipment-transportation", "Oversized Heavy Equipment Moves", "oversized-equipment-transportation", "pending-verification", "Same intent as Oversized Equipment Transportation."),
 
   /* industrial-machinery-relocation */
-  hold("industrial-machinery-relocation", "Production Line Relocation", "A whole production line moved to a new facility.", ["production line move", "factory line relocation"], ["manufacturers"], ["How is downtime limited?"]),
+  merge("industrial-machinery-relocation", "Production Line Relocation", "factory-machinery-relocation", "pending-verification", "Same intent as Factory Machinery Relocation."),
   merge("industrial-machinery-relocation", "Multi-Machine Move Sequencing", "industrial-machinery-relocation", "verified", "Sequencing is already a core section of the parent page."),
   hold("industrial-machinery-relocation", "Facility Consolidation Moves", "Equipment from two sites brought together.", ["site consolidation", "facility merge relocation"], ["multi-site manufacturers"], ["How is a two-site move sequenced?"]),
 

@@ -46,12 +46,8 @@ export const proposals: Proposal[] = [
 
   /* C. Equipment & Machinery Moving */
   { main: "equipment-machinery-moving", name: "Industrial Machinery Transportation", status: D, note: "Covered on Industrial Machinery Relocation.", mergedInto: "industrial-machinery-relocation" },
-  { main: "equipment-machinery-moving", name: "Construction Equipment Transportation", status: PV, note: unverified },
-  { main: "equipment-machinery-moving", name: "Factory Machinery Relocation", status: D, note: "Covered on Industrial Machinery Relocation.", mergedInto: "industrial-machinery-relocation" },
   { main: "equipment-machinery-moving", name: "Manufacturing Equipment Moving", status: D, note: "Covered on Industrial Machinery Relocation.", mergedInto: "industrial-machinery-relocation" },
-  { main: "equipment-machinery-moving", name: "Agricultural Equipment Transportation", status: PV, note: "No evidence of agricultural work in the business information." },
   { main: "equipment-machinery-moving", name: "Commercial Equipment Delivery", status: PV, note: unverified },
-  { main: "equipment-machinery-moving", name: "Workshop Equipment Relocation", status: D, note: "Covered on Industrial Machinery Relocation.", mergedInto: "industrial-machinery-relocation" },
   { main: "equipment-machinery-moving", name: "Plant and Facility Equipment Moving", status: D, note: "Covered on Industrial Machinery Relocation.", mergedInto: "industrial-machinery-relocation" },
   { main: "equipment-machinery-moving", name: "Project Equipment Transportation", status: D, note: "Overlaps the Industrial & Project Logistics service.", mergedInto: "industrial-project-logistics" },
   { main: "equipment-machinery-moving", name: "Oversized Equipment Transportation", status: PV, note: "Implies permits and specialist capability; needs owner confirmation." },

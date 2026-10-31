@@ -1,4 +1,4 @@
-import { freightBatch1CommercialMicro, freightBatch1Micro, freightBatch1Sub } from "./batches/freight-batch-1";
+import { batchMicro, batchSub } from "./batches";
 import { masterTaxonomy } from "./master-taxonomy";
 import { microServices } from "./microservices";
 import { microProposals, type Verification } from "./microproposals";
@@ -127,7 +127,7 @@ const children = (): Raw[] => {
   // Records with full page content (Level 2 sub-services, then Level 3 micro-services).
   // Every record with page content is published unless statusOverrides holds it back.
   // Level 2 records must be added before Level 3 so parents exist.
-  const withContent = [...subServices, ...freightBatch1Sub, ...microServices, ...freightBatch1Micro, ...freightBatch1CommercialMicro];
+  const withContent = [...subServices, ...batchSub, ...microServices, ...batchMicro];
   for (const r of withContent) {
     const status: NodeStatus = statusOverrides[r.id] ?? "published";
     add({

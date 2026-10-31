@@ -77,23 +77,15 @@ const RAW = `
 
 @ Equipment & Machinery Moving | equipment-machinery-moving
 ## Heavy Equipment Transportation => heavy-equipment-transportation
-- Construction Equipment Transport :: Excavator transportation | Bulldozer transportation | Wheel loader transportation | Road roller transportation | Backhoe loader transportation
 - Mining Equipment Transport :: Mining machinery movement | Drilling equipment transport | Crushing equipment transport
-- Agricultural Equipment Transport :: Tractor transportation | Harvester transportation | Agricultural machinery movement
-- Industrial Equipment Transport :: Production machinery | Manufacturing equipment | Processing equipment
 ## Industrial Machinery Moving => industrial-machinery-relocation
-- Factory Machinery Relocation :: Production line movement | Manufacturing machine relocation | Factory equipment shifting
-- Workshop Equipment Moving :: Workshop machinery | Industrial tools and equipment | Production workshop relocation
-- Plant Equipment Transportation :: Industrial plant components | Processing units | Mechanical equipment
-- Generator Transportation :: Industrial generators | Commercial generators | Power equipment
 ## Oversized & Abnormal Load Transportation
 - Wide Load Transportation :: Wide industrial components | Large machinery | Oversized structures
 - Long Load Transportation :: Long steel structures | Industrial beams | Long pipes and components
 - Heavy Load Transportation :: High-weight machinery | Large equipment components | Heavy industrial units
 - Special Trailer Transportation :: Low-bed trailer movement | Extendable trailer movement | Modular trailer transport
 ! Oversized and abnormal loads may need permits and specialist vehicles; confirm capability first.
-## Construction Machinery Relocation
-- Excavation Equipment Relocation :: Excavator relocation | Backhoe relocation | Mini excavator relocation
+## Construction Machinery Relocation => construction-machinery-relocation
 - Earthmoving Equipment Relocation :: Bulldozer movement | Wheel loader movement | Grader movement
 - Road Construction Equipment :: Asphalt paver movement | Road roller movement | Milling machine movement
 - Concrete Equipment :: Concrete pump transport | Concrete mixer equipment | Batching plant components
@@ -101,7 +93,7 @@ const RAW = `
 - Machinery Loading Coordination :: Loading area preparation | Loading equipment assessment | Loading sequence planning
 - Machinery Unloading Coordination :: Destination access assessment | Unloading area planning | Delivery placement coordination
 - Securing & Handling Coordination :: Load securing assessment | Transportation restraints | Handling requirement planning
-## Machinery Relocation Planning
+## Machinery Relocation Planning => machinery-relocation-planning
 - Site-to-Site Machinery Moving :: Factory-to-factory relocation | Warehouse-to-factory relocation | Industrial site relocation
 - Equipment Collection & Delivery :: Supplier equipment collection | Project site delivery | Machinery return movement
 
