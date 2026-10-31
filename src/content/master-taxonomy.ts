@@ -123,18 +123,11 @@ const RAW = `
 ## International Road Freight
 - Cross-Border Trucking :: Full truckload cross-border freight | Partial load cross-border freight | Commercial road cargo
 - Regional Freight Coordination :: Border-to-border transport | Multi-country route coordination | International delivery planning
-## Import Freight Coordination
-- Import Shipment Planning :: Supplier pickup coordination | International freight booking coordination | Destination delivery planning
-- Import Documentation Coordination :: Commercial invoice information | Packing list coordination | Transport documentation
-- Import Cargo Delivery :: Port-to-warehouse delivery | Airport-to-warehouse delivery | Customs-release-dependent delivery
-## Export Freight Coordination
-- Export Shipment Planning :: Export cargo collection | International freight arrangements | Export route planning
-- Export Documentation Coordination :: Shipping document coordination | Commercial invoice coordination | Packing list coordination
-- Export Cargo Movement :: Warehouse-to-port transportation | Factory-to-port transportation | Airport cargo delivery
-## Customs & Border Coordination
+## Import Freight Coordination => import-freight-coordination
+## Export Freight Coordination => export-freight-coordination
+## Customs & Border Coordination => customs-and-border-coordination
 - Customs Documentation Support
 - Customs Clearance Coordination
-- Cross-Border Shipment Documentation
 - Border Transit Coordination
 - Import/Export Compliance Coordination
 ! Customs brokerage and clearance services must only be advertised if legally authorized and actually available.
