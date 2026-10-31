@@ -201,32 +201,27 @@ const RAW = `
 - Pallet Delivery
 
 @ Express & Urgent Delivery | express-urgent-delivery
-## Express Road Delivery
-- Priority Cargo Delivery
+## Express Road Delivery => express-road-delivery
 - Direct Truck Delivery
-- Dedicated Vehicle Delivery
 - Non-Stop Route Coordination
 - Urgent Commercial Shipment
-## Same-Day Delivery
-- Same-Day Business Delivery
+## Same-Day Delivery => same-day-delivery
 - Same-Day Commercial Cargo
 - Same-Day Document Delivery
 - Same-Day Retail Shipment
 - Same-Day Parts Delivery
-## Next-Day Delivery
+## Next-Day Delivery => next-day-delivery
 - Next-Day Commercial Cargo
 - Next-Day Business Supplies
 - Next-Day Retail Distribution
 - Next-Day Spare Parts Delivery
-## Emergency Industrial Delivery
-- Emergency Spare Parts
+## Emergency Industrial Delivery => emergency-industrial-delivery
 - Urgent Factory Supplies
 - Urgent Machinery Components
 - Production-Critical Materials
 - Emergency Site Supplies
-## Priority Shipment Coordination
+## Priority Shipment Coordination => priority-shipment-coordination
 - Priority Pickup Scheduling
-- Priority Vehicle Allocation
 - Priority Route Planning
 - Urgent Shipment Tracking Coordination
 - Priority Delivery Communication
@@ -483,7 +478,6 @@ const RAW = `
 - Machinery Components
 - Maintenance Supplies
 ## Urgent Parts Transportation
-- Emergency Spare Parts
 - Scheduled Spare Parts
 - Dealer Parts Distribution
 `;
