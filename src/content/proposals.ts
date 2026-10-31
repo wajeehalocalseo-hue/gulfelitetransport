@@ -68,6 +68,4 @@ export const proposals: Proposal[] = [
   { main: "refrigerated-transportation", name: "Temperature-Controlled Delivery", status: PV, note: "Refrigerated vehicles need owner confirmation." },
   { main: "industrial-project-logistics", name: "Phased Site Deliveries", status: PV, note: unverified },
   { main: "industrial-project-logistics", name: "Plant Installation Logistics", status: PV, note: unverified },
-  { main: "commercial-distribution-services", name: "Multi-Drop Distribution", status: PV, note: unverified },
-  { main: "commercial-distribution-services", name: "Retail Store Supply", status: PV, note: unverified },
 ];

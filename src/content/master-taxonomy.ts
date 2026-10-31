@@ -385,11 +385,9 @@ const RAW = `
 - Project Cargo Dispatch
 
 @ Commercial Distribution Services | commercial-distribution-services
-## Retail Distribution
-- Supermarket Distribution :: Grocery product delivery | Retail stock replenishment | Multi-store grocery supply
-- Shopping Mall Distribution :: Retail store supply | Commercial stock delivery | Mall-based business distribution
+## Retail Distribution => retail-distribution
 - General Retail Distribution :: Consumer goods distribution | Retail inventory movement | Store-to-store stock transfer
-## Wholesale Distribution
+## Wholesale Distribution => wholesale-distribution
 - Wholesale Goods Delivery
 - Bulk Merchandise Distribution
 - Dealer Supply Distribution
@@ -401,21 +399,18 @@ const RAW = `
 - Household Product Distribution
 - Personal Care Product Distribution
 - Consumer Goods Replenishment
-## Industrial Distribution
+## Industrial Distribution => industrial-distribution
 - Industrial Raw Material Delivery
 - Manufacturing Supply Distribution
-- Industrial Spare Parts Delivery
 - Factory Supply Distribution
 - Production Material Replenishment
-## Multi-Location Distribution
-- Multi-Branch Distribution
+## Multi-Location Distribution => multi-location-distribution
 - Multi-Warehouse Distribution
 - Regional Distribution
 - Scheduled Multi-Location Delivery
 - Central Warehouse-to-Branch Distribution
-## Distribution Route Management
+## Distribution Route Management => distribution-route-management
 - Delivery Route Planning
-- Multi-Drop Route Planning
 - Delivery Schedule Coordination
 - Vehicle Allocation
 - Delivery Sequence Planning
