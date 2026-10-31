@@ -2,11 +2,12 @@ import { core } from "./core";
 import { international } from "./international";
 import { delivery } from "./delivery";
 import { storage } from "./storage";
+import { extended } from "./extended";
 import type { Service, ServiceGroup } from "./types";
 
 export type { Faq, Service, ServiceGroup } from "./types";
 
-export const allServices: Service[] = [...core, ...international, ...delivery, ...storage];
+export const allServices: Service[] = [...core, ...international, ...delivery, ...storage, ...extended];
 
 // Set PUBLISH_PENDING=1 at build time to preview services that are still pending approval.
 const previewPending = process.env.PUBLISH_PENDING === "1";

@@ -3,7 +3,7 @@ import type { Faq } from "./services";
 export const hubAnswer = {
   h2: "What transport services does Gulf Elite Transport provide?",
   answer:
-    "Gulf Elite Transport provides twelve transport and logistics services for businesses and organisations: freight and cargo (including international freight forwarding, container transportation, express and urgent delivery and refrigerated transportation), passenger transport, equipment and industrial transportation, and fleet and distribution services. Every request is assessed individually and you receive a clear quotation before you commit. Availability depends on the pickup and delivery locations, the type of service and the dates, and is confirmed for each request.",
+    "Gulf Elite Transport provides seventeen transport and logistics services for businesses and organisations: freight and cargo (including international freight forwarding, container transportation, express and urgent delivery and refrigerated transportation), passenger transport, equipment and industrial transportation, and fleet and distribution services. Every request is assessed individually and you receive a clear quotation before you commit. Availability depends on the pickup and delivery locations, the type of service and the dates, and is confirmed for each request.",
   more: "Together they cover business transportation services from commercial cargo transportation and corporate passenger transport to industrial machinery relocation and recurring business transport. Every service follows the same principle: describe what you need, receive an assessment and a quotation, and confirm only when you are comfortable with the plan.",
 };
 
@@ -87,6 +87,36 @@ export const hubQa: Record<
   "commercial-distribution-services": {
     q: "What are commercial distribution services?",
     a: "Commercial distribution is the planned, often repeated movement of goods from a supplier or storage point to several business customers, stores or sites. It is built around routes, schedules and volumes and can run as a recurring arrangement.",
+    pointsLabel: "Included:",
+    points: "includes",
+  },
+  "vehicle-transportation": {
+    q: "What is vehicle transportation?",
+    a: "Vehicle transportation is the movement of cars, vans, buses, trucks and company vehicles from one location to another without driving them. We review the vehicle details and route and confirm individually whether a suitable arrangement can be supported before a quotation.",
+    pointsLabel: "Included:",
+    points: "includes",
+  },
+  "furniture-household-moving": {
+    q: "What does furniture and household moving cover?",
+    a: "It covers office relocation, commercial furniture transport for shops, hotels and restaurants, and household goods transport. We plan around the item list and the access at both locations, and packing or dismantling is only provided if agreed.",
+    pointsLabel: "Included:",
+    points: "includes",
+  },
+  "packaging-cargo-handling": {
+    q: "What is packaging and cargo handling?",
+    a: "It is the coordination of how cargo is packed, loaded, secured and unloaded around its transport. What labour and equipment can be provided is confirmed for each request.",
+    pointsLabel: "Included:",
+    points: "includes",
+  },
+  "trade-show-exhibition-logistics": {
+    q: "What is trade show and exhibition logistics?",
+    a: "It is the transport of booth materials, display items and event equipment to an exhibition venue and back, planned around the venue's access windows. Stand building and installation are not assumed.",
+    pointsLabel: "The process:",
+    points: "steps",
+  },
+  "spare-parts-automotive-logistics": {
+    q: "What are spare parts and automotive logistics?",
+    a: "It is the delivery of vehicle parts, industrial spare parts and maintenance supplies from suppliers to workshops, dealers and factories, scheduled or urgent. Urgent delivery times are assessed for each request.",
     pointsLabel: "Included:",
     points: "includes",
   },
@@ -215,13 +245,18 @@ export const selectionGuide = {
     { need: "My goods must stay within a temperature range", slug: "refrigerated-transportation" },
     { need: "I am coordinating transport for an industrial project", slug: "industrial-project-logistics" },
     { need: "I supply several customers on a regular schedule", slug: "commercial-distribution-services" },
+    { need: "I need a car, van or company vehicle moved", slug: "vehicle-transportation" },
+    { need: "I am moving an office, shop or home", slug: "furniture-household-moving" },
+    { need: "My cargo needs packing, loading or unloading help", slug: "packaging-cargo-handling" },
+    { need: "I am exhibiting at an event", slug: "trade-show-exhibition-logistics" },
+    { need: "I need spare parts delivered to a workshop or factory", slug: "spare-parts-automotive-logistics" },
   ],
 };
 
 export const hubFaqs: Faq[] = [
   {
     q: "What services does Gulf Elite Transport offer?",
-    a: "Gulf Elite Transport offers twelve services: freight and cargo transport, international freight forwarding, container transportation, express and urgent delivery, refrigerated transportation, passenger transport, equipment and machinery moving, industrial and project logistics, contract fleet services, last-mile delivery, commercial distribution, and warehousing and storage. Each has its own page describing what is included, who it is for and what information is needed for a quotation.",
+    a: "Gulf Elite Transport offers seventeen services: freight and cargo transport, international freight forwarding, container transportation, express and urgent delivery, refrigerated transportation, passenger transport, equipment and machinery moving, industrial and project logistics, contract fleet services, last-mile delivery, commercial distribution, warehousing and storage, vehicle transportation, furniture and household moving, packaging and cargo handling, trade show and exhibition logistics, and spare parts and automotive logistics. Each has its own page describing what is included, who it is for and what information is needed for a quotation.",
   },
   {
     q: "Who are these transport services for?",

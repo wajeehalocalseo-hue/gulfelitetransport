@@ -395,7 +395,7 @@ const RAW = `
 - Reusable Container Returns
 
 @ Vehicle Transportation | vehicle-transportation
-## Car Transportation
+## Car Transportation => car-transportation
 - Single Car Transport
 - Multiple Car Transport
 - Dealership Vehicle Transport
@@ -408,7 +408,7 @@ const RAW = `
 - Vehicle Collection and Delivery
 
 @ Furniture & Household Moving | furniture-household-moving
-## Office Relocation
+## Office Relocation => office-relocation
 - Office Furniture Moving
 - Office Equipment Moving
 - Office Workstation Relocation
@@ -426,7 +426,7 @@ const RAW = `
 - Carton Packaging
 - Pallet Packaging
 - Industrial Packaging
-## Cargo Loading Support
+## Cargo Loading Support => cargo-loading-support
 - Pallet Loading
 - Container Loading
 - Cargo Securing
@@ -436,7 +436,7 @@ const RAW = `
 - Warehouse Unloading
 
 @ Trade Show & Exhibition Logistics | trade-show-exhibition-logistics
-## Exhibition Cargo Transportation
+## Exhibition Cargo Transportation => exhibition-cargo-transportation
 - Booth Material Delivery
 - Exhibition Equipment Delivery
 - Display Material Transportation
@@ -450,7 +450,7 @@ const RAW = `
 - Exhibition Cargo Relocation
 
 @ Spare Parts & Automotive Logistics | spare-parts-automotive-logistics
-## Automotive Spare Parts Delivery
+## Automotive Spare Parts Delivery => automotive-spare-parts-delivery
 - Engine Parts Transportation
 - Vehicle Component Delivery
 - Workshop Supply Delivery
