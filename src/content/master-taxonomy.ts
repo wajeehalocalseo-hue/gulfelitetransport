@@ -182,23 +182,18 @@ const RAW = `
 - Next-Day Scheduled Delivery
 - Fixed-Time Delivery
 - Recurring Delivery
-## Multi-Stop Delivery
+## Multi-Stop Delivery => multi-stop-delivery
 - Multiple Customer Deliveries
-- Multi-Store Deliveries
 - Route-Based Distribution
-- Clustered Delivery Routes
 - Multi-Address Commercial Delivery
 ## Reverse Logistics => reverse-logistics
 - Retail Return Collection
 - Exchange Product Collection
 - Returned Goods Transportation
 - Reusable Packaging Collection
-## Specialized Last-Mile Delivery
-- Furniture Delivery
-- Appliance Delivery
+## Specialized Last-Mile Delivery => specialized-last-mile-delivery
 - Office Equipment Delivery
 - Commercial Supply Delivery
-- Pallet Delivery
 
 @ Express & Urgent Delivery | express-urgent-delivery
 ## Express Road Delivery => express-road-delivery
@@ -388,9 +383,7 @@ const RAW = `
 - Vehicle Allocation
 - Delivery Sequence Planning
 - Distribution Reporting
-## Dealer & Distributor Logistics
-- Dealer Stock Delivery
-- Distributor Replenishment
+## Dealer & Distributor Logistics => dealer-distributor-logistics
 - Retailer Supply Movement
 - Dealer-to-Dealer Stock Transfer
 - Regional Dealer Distribution

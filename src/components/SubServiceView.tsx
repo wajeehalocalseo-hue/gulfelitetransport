@@ -79,6 +79,22 @@ function Rows({ items, numbered = false }: { items: { title: string; text: strin
   );
 }
 
+function Tiles({ items, numbered = false }: { items: { title: string; text: string }[]; numbered?: boolean }) {
+  return (
+    <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {items.map((it, i) => (
+        <li key={it.title} className="rounded-2xl bg-surface p-5 ring-1 ring-navy/10">
+          <span className="text-xs font-bold uppercase tracking-wider text-accent">
+            {numbered ? `Step ${i + 1}` : String(i + 1).padStart(2, "0")}
+          </span>
+          <h3 className="mt-2 font-bold text-navy">{it.title}</h3>
+          <p className="mt-1.5 text-sm leading-7 text-muted">{it.text}</p>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 type Props = {
   node: ServiceNode;
   parent: ServiceNode;
@@ -166,6 +182,35 @@ export default function SubServiceView({ node, parent, main, subs, related }: Pr
                 <ContactButtons quoteHref={quoteHref} service={node.name} className="mt-8" />
               </div>
               {L.form === "hero" && quickForm}
+            </div>
+          </section>
+        );
+      case "ribbon":
+        return (
+          <section className="border-b border-navy/10 bg-white">
+            <div className="relative h-44 w-full overflow-hidden bg-navy sm:h-60">
+              <ServiceImage slug={node.slug} sceneSlug={node.image.sceneSlug} flip={node.order % 2 === 0} title={node.name} priority className="h-full w-full" />
+            </div>
+            <div className="mx-auto max-w-5xl px-5 py-10 sm:py-14">
+              <Breadcrumbs items={crumbs} tone="light" />
+              <h1 className="mt-5 max-w-3xl text-4xl font-extrabold leading-tight tracking-tight text-navy sm:text-5xl">{c.h1}</h1>
+              <p className="mt-4 max-w-2xl text-lg leading-8 text-muted">{c.lead}</p>
+              <ContactButtons quoteHref={quoteHref} service={node.name} tone="light" className="mt-7" />
+              {L.form === "hero" && <div className="mt-8 max-w-xl">{quickForm}</div>}
+            </div>
+          </section>
+        );
+      case "mirror":
+        return (
+          <section className="border-b border-navy/10 bg-surface">
+            <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 py-12 sm:py-16 lg:grid-cols-[0.9fr_1.1fr]">
+              <div className="order-2 lg:order-1">{L.form === "hero" ? quickForm : image}</div>
+              <div className="order-1 lg:order-2">
+                <Breadcrumbs items={crumbs} tone="light" />
+                <h1 className="mt-6 max-w-3xl text-4xl font-extrabold leading-tight tracking-tight text-navy sm:text-5xl">{c.h1}</h1>
+                <p className="mt-5 max-w-2xl text-lg leading-8 text-muted">{c.lead}</p>
+                <ContactButtons quoteHref={quoteHref} service={node.name} tone="light" className="mt-8" />
+              </div>
             </div>
           </section>
         );
@@ -327,7 +372,9 @@ export default function SubServiceView({ node, parent, main, subs, related }: Pr
       node: (
         <section id="included" aria-labelledby="included-title">
           <h2 id="included-title" className={h2}>What {node.name.toLowerCase()} includes</h2>
-          {L.body === "columns" ? (
+          {L.body === "tiles" ? (
+            <Tiles items={c.includes} />
+          ) : L.body === "columns" ? (
             <Rows items={c.includes} />
           ) : L.body === "accordion" ? (
             <Accordion items={c.includes} />
@@ -398,7 +445,9 @@ export default function SubServiceView({ node, parent, main, subs, related }: Pr
       node: (
         <section id="applications" aria-labelledby="applications-title">
           <h2 id="applications-title" className={h2}>Typical applications</h2>
-          {L.body === "columns" ? (
+          {L.body === "tiles" ? (
+            <Tiles items={c.applications} />
+          ) : L.body === "columns" ? (
             <Rows items={c.applications} />
           ) : L.body === "accordion" ? (
             <Accordion items={c.applications} />
@@ -430,7 +479,9 @@ export default function SubServiceView({ node, parent, main, subs, related }: Pr
       node: (
         <section id="how" aria-labelledby="how-title">
           <h2 id="how-title" className={h2}>How it works</h2>
-          {L.body === "columns" ? (
+          {L.body === "tiles" ? (
+            <Tiles items={c.steps} numbered />
+          ) : L.body === "columns" ? (
             <Rows items={c.steps} numbered />
           ) : L.body === "accordion" ? (
             <Accordion items={c.steps} numbered />
@@ -485,7 +536,9 @@ export default function SubServiceView({ node, parent, main, subs, related }: Pr
       node: (
         <section id="considerations" aria-labelledby="considerations-title">
           <h2 id="considerations-title" className={h2}>Planning considerations</h2>
-          {L.body === "columns" ? (
+          {L.body === "tiles" ? (
+            <Tiles items={c.considerations} />
+          ) : L.body === "columns" ? (
             <Rows items={c.considerations} />
           ) : L.body === "accordion" ? (
             <Accordion items={c.considerations} />
@@ -583,6 +636,7 @@ export default function SubServiceView({ node, parent, main, subs, related }: Pr
     cards: ["answer", "overview", "differs", "includes", "solutions", "audience", "applications", "steps", "considerations", "info", "faq", "related"],
     timeline: ["answer", "overview", "steps", "differs", "includes", "solutions", "applications", "audience", "considerations", "info", "faq", "related"],
     table: ["answer", "differs", "includes", "solutions", "overview", "applications", "steps", "considerations", "audience", "info", "faq", "related"],
+    tiles: ["answer", "includes", "overview", "differs", "solutions", "applications", "audience", "steps", "considerations", "info", "faq", "related"],
     columns: ["answer", "overview", "audience", "includes", "solutions", "differs", "steps", "applications", "considerations", "info", "faq", "related"],
     checklist: ["answer", "info", "overview", "differs", "includes", "solutions", "audience", "steps", "applications", "considerations", "faq", "related"],
   };
