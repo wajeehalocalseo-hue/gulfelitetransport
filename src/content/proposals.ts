@@ -62,7 +62,6 @@ export const proposals: Proposal[] = [
 
   /* Candidate sub-services for the other main services (no sub-services were supplied for these) */
   { main: "express-urgent-delivery", name: "Time-Critical Shipment Delivery", status: PV, note: "Delivery-time capability needs owner confirmation." },
-  { main: "warehousing-storage", name: "Pre-Distribution Storage", status: PV, note: "Storage facilities need owner confirmation." },
   { main: "refrigerated-transportation", name: "Temperature-Controlled Delivery", status: PV, note: "Refrigerated vehicles need owner confirmation." },
   { main: "industrial-project-logistics", name: "Plant Installation Logistics", status: PV, note: unverified },
 ];

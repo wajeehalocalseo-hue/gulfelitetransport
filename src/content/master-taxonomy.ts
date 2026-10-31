@@ -234,30 +234,25 @@ const RAW = `
 ! Same-day, emergency and express commitments depend on actual operating hours, geography, vehicle availability and capability.
 
 @ Warehousing & Storage | warehousing-storage
-## General Warehousing
-- Short-Term Storage :: Temporary commercial storage | Transit cargo storage | Temporary inventory holding
+## General Warehousing => general-warehousing
 - Long-Term Storage :: Business inventory storage | Industrial material storage | Commercial goods storage
 - Overflow Storage :: Seasonal inventory storage | Excess stock storage | Peak-demand storage
-## Pallet Storage
-- Standard Pallet Storage
+## Pallet Storage => pallet-storage
 - Bulk Pallet Storage
 - Mixed Pallet Storage
 - Industrial Pallet Storage
 - High-Volume Pallet Storage
-## Commercial Inventory Storage
+## Commercial Inventory Storage => commercial-inventory-storage
 - Retail Inventory Storage
 - Wholesale Inventory Storage
-- E-commerce Inventory Storage
 - Distributor Inventory Storage
 - Business Stock Storage
-## Industrial Storage
-- Raw Material Storage
+## Industrial Storage => industrial-storage
 - Production Material Storage
 - Machinery Component Storage
 - Industrial Spare Parts Storage
 - Construction Material Storage
-## Warehouse Handling
-- Goods Receiving
+## Warehouse Handling => warehouse-handling
 - Cargo Unloading
 - Pallet Handling
 - Goods Sorting
