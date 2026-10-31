@@ -280,13 +280,8 @@ const RAW = `
 ! Warehouse ownership, bonded storage, security, temperature control and inventory technology must be verified before being advertised.
 
 @ Refrigerated Transportation | refrigerated-transportation
-## Chilled Transportation
-- Fresh Food Transport :: Fresh fruits transportation | Fresh vegetables transportation | Dairy products transportation
-- Chilled Beverage Transport :: Refrigerated beverage delivery | Temperature-sensitive beverage movement
-- Chilled Food Distribution :: Restaurant supply delivery | Grocery supply delivery | Food distributor transportation
-## Frozen Transportation
-- Frozen Food Transport :: Frozen meat transportation | Frozen seafood transportation | Frozen poultry transportation
-- Frozen Product Distribution :: Frozen retail goods | Frozen wholesale goods | Frozen food supply delivery
+## Chilled Transportation => chilled-transportation
+## Frozen Transportation => frozen-transportation
 ## Pharmaceutical Cold Chain
 - Pharmaceutical Product Transport
 - Temperature-Sensitive Medicine Transport
@@ -294,11 +289,9 @@ const RAW = `
 - Vaccine Transportation Coordination
 - Temperature-Controlled Healthcare Shipments
 ! Only provide these regulated services with appropriate equipment, procedures, licensing and documented temperature controls.
-## Temperature-Controlled Cargo
-- Controlled-Temperature Transport
+## Temperature-Controlled Cargo => temperature-controlled-cargo
 - Chilled Cargo Delivery
 - Frozen Cargo Delivery
-- Multi-Temperature Cargo Planning
 - Temperature-Sensitive Product Distribution
 ## Refrigerated Container Transportation
 - Reefer Container Transport
