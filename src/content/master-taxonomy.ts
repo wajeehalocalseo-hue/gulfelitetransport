@@ -325,8 +325,7 @@ const RAW = `
 - Refrigerated Shipment Handover
 
 @ Industrial & Project Logistics | industrial-project-logistics
-## Industrial Project Transportation
-- Factory Project Cargo :: Factory machinery delivery | Production line component transport | Industrial material transportation
+## Industrial Project Transportation => industrial-project-transportation
 - Plant Project Cargo :: Plant equipment movement | Processing unit transportation | Industrial structure transport
 - Industrial Site Logistics :: Site material deliveries | Site equipment movement | Multi-phase project deliveries
 ## Project Cargo Transportation
@@ -335,9 +334,8 @@ const RAW = `
 - Long-Length Cargo
 - High-Weight Cargo
 - Multi-Component Project Cargo
-## Construction Project Logistics
+## Construction Project Logistics => construction-project-logistics
 - Construction Equipment Delivery
-- Construction Material Supply
 - Site Machinery Relocation
 - Concrete Equipment Transport
 - Construction Component Movement
@@ -356,22 +354,19 @@ const RAW = `
 - Renewable Energy Equipment Transport
 - Solar Panel Logistics
 - Wind Energy Component Transportation
-## Project Logistics Planning
+## Project Logistics Planning => project-logistics-planning
 - Project Cargo Assessment
 - Transport Route Assessment
 - Vehicle and Trailer Selection
 - Delivery Schedule Planning
-- Site Access Assessment
-- Multi-Phase Delivery Coordination
 - Transport Documentation Coordination
-## Industrial Relocation
+## Industrial Relocation => industrial-relocation
 - Factory Relocation
 - Production Line Relocation
 - Warehouse Relocation
 - Industrial Machinery Relocation
 - Plant Equipment Relocation
-- Workshop Relocation
-## Project Site Logistics
+## Project Site Logistics => project-site-logistics
 - Equipment Delivery Scheduling
 - Material Delivery Scheduling
 - Multiple Site Transportation
