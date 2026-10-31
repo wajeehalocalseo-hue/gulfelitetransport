@@ -99,25 +99,18 @@ const RAW = `
 
 @ Contract Fleet Services | contract-fleet-services
 ## Dedicated Fleet Solutions => dedicated-fleet-services
-- Dedicated Truck Fleet :: Dedicated cargo trucks | Dedicated commercial vehicles | Dedicated distribution trucks
-- Dedicated Passenger Fleet :: Dedicated employee transport vehicles | Dedicated corporate passenger vehicles | Dedicated shuttle fleet
 - Dedicated Equipment Transport Fleet :: Dedicated machinery transport vehicles | Dedicated heavy transport arrangements
 ## Monthly Vehicle Contracts => monthly-vehicle-contracts
-- Monthly Truck Contracts :: Monthly cargo truck arrangements | Monthly commercial transport | Monthly dedicated truck availability
-- Monthly Passenger Vehicle Contracts :: Monthly staff transport | Monthly corporate shuttle | Monthly passenger vehicle arrangements
-- Monthly Fleet Arrangements :: Multi-vehicle contracts | Recurring vehicle arrangements | Business fleet planning
 ## Long-Term Fleet Leasing & Allocation
 - Long-Term Vehicle Allocation :: Business vehicle allocation | Dedicated vehicle scheduling | Recurring fleet assignment
 - Commercial Fleet Arrangements :: Multi-location vehicle arrangements | Department-based vehicle allocation | Project-based vehicle allocation
 ! Leasing is a different offering from contract allocation; confirm before using the word.
-## Driver & Vehicle Coordination
+## Driver & Vehicle Coordination => driver-vehicle-coordination
 - Driver Coordination :: Scheduled driver assignment | Route-based driver coordination | Shift-based driver planning
 - Vehicle Coordination :: Vehicle scheduling | Vehicle availability planning | Replacement vehicle planning where available
-## Staff Transportation Contracts
-- Factory Employee Contracts :: Fixed-route staff transportation | Multi-shift employee transport
-- Office Employee Contracts :: Daily office commute | Corporate shuttle contracts
+## Staff Transportation Contracts => staff-transportation-contracts
 - Industrial Workforce Contracts :: Site workforce transport | Recurring employee transfers
-## Fleet Management Support
+## Fleet Management Support => fleet-management-support
 - Transport Scheduling :: Daily vehicle scheduling | Weekly vehicle scheduling | Monthly transport planning
 - Fleet Utilization Planning :: Vehicle allocation | Route allocation | Transport demand planning
 - Fleet Reporting :: Trip reporting | Vehicle usage reporting | Transport activity summaries

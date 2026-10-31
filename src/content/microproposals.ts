@@ -98,14 +98,14 @@ export const microProposals: MicroProposal[] = [
   hold("industrial-machinery-relocation", "Facility Consolidation Moves", "Equipment from two sites brought together.", ["site consolidation", "facility merge relocation"], ["multi-site manufacturers"], ["How is a two-site move sequenced?"]),
 
   /* dedicated-fleet-services */
-  hold("dedicated-fleet-services", "Daily Delivery Route Vehicles", "A vehicle assigned to one daily delivery route.", ["dedicated delivery vehicle", "daily route fleet"], ["distributors"], ["How is the route fixed?"]),
+  merge("dedicated-fleet-services", "Daily Delivery Route Vehicles", "dedicated-truck-fleet", "pending-verification", "Same intent as Dedicated Truck Fleet."),
   hold("dedicated-fleet-services", "Project Fleet Support", "Vehicles allocated to a project for its duration.", ["project fleet", "site vehicles"], ["project teams"], ["How is the end of the project handled?"]),
   merge("dedicated-fleet-services", "Peak-Season Fleet Capacity", "seasonal-fleet-arrangements", "pending-verification", "Same intent as Seasonal Fleet Arrangements."),
-  hold("dedicated-fleet-services", "Dedicated Staff Transport Vehicles", "Vehicles assigned only to staff transport.", ["dedicated staff vehicle", "employee fleet"], ["employers"], ["Are drivers included?"]),
+  merge("dedicated-fleet-services", "Dedicated Staff Transport Vehicles", "dedicated-passenger-fleet", "pending-verification", "Same intent as Dedicated Passenger Fleet."),
 
   /* monthly-vehicle-contracts */
-  hold("monthly-vehicle-contracts", "Monthly Staff Transport Contracts", "A monthly contract for employee transport.", ["monthly staff transport", "staff transport contract"], ["employers"], ["How long is the minimum term?"]),
-  hold("monthly-vehicle-contracts", "Monthly Delivery Contracts", "A monthly contract for regular deliveries.", ["monthly delivery contract", "recurring delivery contract"], ["suppliers"], ["How are extra deliveries handled?"]),
+  merge("monthly-vehicle-contracts", "Monthly Staff Transport Contracts", "monthly-passenger-vehicle-contracts", "pending-verification", "Same intent as Monthly Passenger Vehicle Contracts."),
+  merge("monthly-vehicle-contracts", "Monthly Delivery Contracts", "monthly-truck-contracts", "pending-verification", "Same intent as Monthly Truck Contracts."),
   hold("monthly-vehicle-contracts", "Fixed-Term Project Contracts", "A contract for the fixed length of a project.", ["project transport contract", "fixed-term vehicle contract"], ["contractors"], ["How is early termination handled?"]),
   merge("monthly-vehicle-contracts", "Contract Review and Renewal", "monthly-vehicle-contracts", "pending-verification", "A part of the contract process on the parent page, not a separate service."),
 ];
