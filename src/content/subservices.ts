@@ -26,13 +26,13 @@ export type PageContent = {
 /**
  * Visual layout of a page, so pages do not all look the same. Defaults to split / cards / aside.
  *  hero: split (image beside text), banner (light, with a facts card), facts (dark, with a facts strip),
- *        route (pickup to delivery route line)
- *  body: how the long sections are shown - cards, timeline, table or checklist
+ *        route (pickup to delivery route line), centered (centred title on a soft gradient, facts as pills)
+ *  body: how the long sections are shown - cards, timeline, table, checklist or accordion (collapsible items)
  *  form: aside (sticky beside content), bottom (full-width at the end), hero (quick form in the hero + full form at the end)
  */
 export type Layout = {
-  hero: "split" | "banner" | "facts" | "route";
-  body: "cards" | "timeline" | "table" | "checklist";
+  hero: "split" | "banner" | "facts" | "route" | "centered";
+  body: "cards" | "timeline" | "table" | "checklist" | "accordion";
   form: "aside" | "bottom" | "hero";
 };
 

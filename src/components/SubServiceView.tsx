@@ -45,6 +45,24 @@ function Table({ head, rows }: { head: [string, string]; rows: [string, string][
     </div>
   );
 }
+function Accordion({ items, numbered = false }: { items: { title: string; text: string }[]; numbered?: boolean }) {
+  return (
+    <div className="mt-6 divide-y divide-navy/10 rounded-2xl border border-navy/10 bg-white">
+      {items.map((it, i) => (
+        <details key={it.title} className="group p-5" open={i === 0}>
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-bold text-navy">
+            <span>
+              {numbered && <span className="mr-3 text-accent">{i + 1}.</span>}
+              {it.title}
+            </span>
+            <Icon name="chevron" className="h-5 w-5 shrink-0 text-accent transition-transform group-open:rotate-180" />
+          </summary>
+          <p className="mt-2 text-sm leading-7 text-muted">{it.text}</p>
+        </details>
+      ))}
+    </div>
+  );
+}
 type Props = {
   node: ServiceNode;
   parent: ServiceNode;
@@ -98,7 +116,25 @@ export default function SubServiceView({ node, parent, main, subs, related }: Pr
 
   const hero: ReactNode = (() => {
     switch (L.hero) {
-      case "banner":
+      case "centered":
+        return (
+          <section className="border-b border-navy/10 bg-gradient-to-b from-white to-surface">
+            <div className="mx-auto max-w-4xl px-5 py-14 text-center sm:py-20">
+              <Breadcrumbs items={crumbs} tone="light" center />
+              <h1 className="mt-6 text-4xl font-extrabold leading-tight tracking-tight text-navy sm:text-5xl">{c.h1}</h1>
+              <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-muted">{c.lead}</p>
+              <ContactButtons quoteHref={quoteHref} service={node.name} tone="light" className="mt-8 justify-center" />
+              <ul className="mt-8 flex flex-wrap justify-center gap-2">
+                {facts.map((f) => (
+                  <li key={f.label} className="rounded-full bg-white px-4 py-2 text-xs text-muted ring-1 ring-navy/10">
+                    <strong className="text-navy">{f.label}:</strong> {f.value}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            {L.form === "hero" && <div className="mx-auto max-w-xl px-5 pb-14">{quickForm}</div>}
+          </section>
+        );      case "banner":
         return (
           <section className="border-b border-navy/10 bg-white">
             <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 py-12 sm:py-16 lg:grid-cols-[1.2fr_0.8fr]">
@@ -228,7 +264,9 @@ export default function SubServiceView({ node, parent, main, subs, related }: Pr
       node: (
         <section id="included" aria-labelledby="included-title">
           <h2 id="included-title" className={h2}>What {node.name.toLowerCase()} includes</h2>
-          {L.body === "table" ? (
+          {L.body === "accordion" ? (
+            <Accordion items={c.includes} />
+          ) : L.body === "table" ? (
             <Table head={["Component", "What it means"]} rows={c.includes.map((i) => [i.title, i.text])} />
           ) : L.body === "timeline" ? (
             <ul className="mt-6 space-y-5 border-l-2 border-accent/50 pl-6">
@@ -295,7 +333,9 @@ export default function SubServiceView({ node, parent, main, subs, related }: Pr
       node: (
         <section id="applications" aria-labelledby="applications-title">
           <h2 id="applications-title" className={h2}>Typical applications</h2>
-          {L.body === "table" ? (
+          {L.body === "accordion" ? (
+            <Accordion items={c.applications} />
+          ) : L.body === "table" ? (
             <Table head={["Use case", "Example"]} rows={c.applications.map((u) => [u.title, u.text])} />
           ) : L.body === "timeline" || L.body === "checklist" ? (
             <ul className="mt-6 space-y-3">
@@ -323,7 +363,9 @@ export default function SubServiceView({ node, parent, main, subs, related }: Pr
       node: (
         <section id="how" aria-labelledby="how-title">
           <h2 id="how-title" className={h2}>How it works</h2>
-          {L.body === "timeline" ? (
+          {L.body === "accordion" ? (
+            <Accordion items={c.steps} numbered />
+          ) : L.body === "timeline" ? (
             <ol className="mt-8 space-y-0">
               {c.steps.map((st, i) => (
                 <li key={st.title} className="relative flex gap-5 pb-8 last:pb-0">
@@ -374,7 +416,9 @@ export default function SubServiceView({ node, parent, main, subs, related }: Pr
       node: (
         <section id="considerations" aria-labelledby="considerations-title">
           <h2 id="considerations-title" className={h2}>Planning considerations</h2>
-          {L.body === "table" ? (
+          {L.body === "accordion" ? (
+            <Accordion items={c.considerations} />
+          ) : L.body === "table" ? (
             <Table head={["Consideration", "Why it matters"]} rows={c.considerations.map((x) => [x.title, x.text])} />
           ) : L.body === "timeline" ? (
             <div className="mt-6 divide-y divide-navy/10 rounded-2xl border border-navy/10 bg-white">
@@ -464,6 +508,7 @@ export default function SubServiceView({ node, parent, main, subs, related }: Pr
   };
 
   const orders: Record<Layout["body"], string[]> = {
+    accordion: ["answer", "overview", "includes", "solutions", "steps", "differs", "applications", "audience", "considerations", "info", "faq", "related"],
     cards: ["answer", "overview", "differs", "includes", "solutions", "audience", "applications", "steps", "considerations", "info", "faq", "related"],
     timeline: ["answer", "overview", "steps", "differs", "includes", "solutions", "applications", "audience", "considerations", "info", "faq", "related"],
     table: ["answer", "differs", "includes", "solutions", "overview", "applications", "steps", "considerations", "audience", "info", "faq", "related"],
@@ -500,7 +545,7 @@ export default function SubServiceView({ node, parent, main, subs, related }: Pr
   );
 
   return (
-    <main id="main" className="flex-1">
+    <main id="main" data-layout={`${L.hero}/${L.body}/${L.form}`} className="flex-1">
       {hero}
 
       <nav aria-label="On this page" className="border-b border-navy/10 bg-white">

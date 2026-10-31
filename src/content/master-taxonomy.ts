@@ -140,29 +140,23 @@ const RAW = `
 ! Customs brokerage and clearance services must only be advertised if legally authorized and actually available.
 
 @ Container Transportation | container-transportation
-## Standard Container Transportation
-- 20-Foot Container Transport :: 20ft dry container movement | 20ft commercial cargo delivery
-- 40-Foot Container Transport :: 40ft dry container movement | 40ft commercial container delivery
-- 40-Foot High-Cube Transport :: High-cube container movement | High-cube commercial delivery
-## Port Container Transportation
-- Port-to-Warehouse Transport
+## Standard Container Transportation => standard-container-transportation
+## Port Container Transportation => port-container-transportation
 - Port-to-Factory Transport
 - Port-to-Distribution Centre Transport
 - Port-to-Project Site Transport
 - Empty Container Collection
-## Container Delivery & Collection
+## Container Delivery & Collection => container-delivery-and-collection
 - Warehouse Container Delivery
 - Factory Container Delivery
 - Commercial Site Container Delivery
-- Empty Container Return
 - Container Relocation
 ## Specialized Container Transport
 - Refrigerated Container Transport :: Reefer container movement | Temperature-sensitive container movement
 - Open-Top Container Transport :: Top-loading cargo | Oversized cargo coordination
 - Flat-Rack Container Transport :: Industrial machinery | Oversized equipment
 - Tank Container Transport :: Approved liquid cargo | Specialized tank container movement
-## Container Handling Coordination
-- Container Loading Coordination
+## Container Handling Coordination => container-handling-coordination
 - Container Unloading Coordination
 - Container Securing
 - Container Placement
