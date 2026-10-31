@@ -63,6 +63,22 @@ function Accordion({ items, numbered = false }: { items: { title: string; text: 
     </div>
   );
 }
+function Rows({ items, numbered = false }: { items: { title: string; text: string }[]; numbered?: boolean }) {
+  return (
+    <div className="mt-6 divide-y divide-navy/10 border-y border-navy/10">
+      {items.map((it, i) => (
+        <div key={it.title} className="grid gap-1 py-5 md:grid-cols-[1fr_2fr] md:gap-8">
+          <h3 className="font-bold text-navy">
+            {numbered && <span className="mr-3 text-accent">{String(i + 1).padStart(2, "0")}</span>}
+            {it.title}
+          </h3>
+          <p className="text-sm leading-7 text-muted">{it.text}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 type Props = {
   node: ServiceNode;
   parent: ServiceNode;
@@ -134,7 +150,54 @@ export default function SubServiceView({ node, parent, main, subs, related }: Pr
             </div>
             {L.form === "hero" && <div className="mx-auto max-w-xl px-5 pb-14">{quickForm}</div>}
           </section>
-        );      case "banner":
+        );
+      case "overlay":
+        return (
+          <section className="relative isolate overflow-hidden bg-navy text-white">
+            <div aria-hidden="true" className="absolute inset-0 -z-10">
+              <ServiceImage slug={node.slug} sceneSlug={node.image.sceneSlug} flip={node.order % 2 === 0} title={node.name} priority className="h-full w-full" />
+              <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/90 to-navy/50" />
+            </div>
+            <div className={`mx-auto max-w-7xl px-5 py-16 sm:py-24 ${L.form === "hero" ? "grid items-start gap-10 lg:grid-cols-[1.15fr_0.85fr]" : ""}`}>
+              <div>
+                <Breadcrumbs items={crumbs} />
+                <h1 className="mt-6 max-w-3xl text-4xl font-extrabold leading-tight tracking-tight sm:text-6xl">{c.h1}</h1>
+                <p className="mt-5 max-w-2xl text-lg leading-8 text-white/85">{c.lead}</p>
+                <ContactButtons quoteHref={quoteHref} service={node.name} className="mt-8" />
+              </div>
+              {L.form === "hero" && quickForm}
+            </div>
+          </section>
+        );
+      case "ledger":
+        return (
+          <section className="border-b border-navy/10 bg-surface">
+            <div className="mx-auto grid max-w-7xl items-start gap-10 px-5 py-12 sm:py-16 lg:grid-cols-[1.1fr_0.9fr]">
+              <div className="border-l-4 border-accent pl-6">
+                <Breadcrumbs items={crumbs} tone="light" />
+                <h1 className="mt-6 max-w-3xl text-4xl font-extrabold leading-tight tracking-tight text-navy sm:text-5xl">{c.h1}</h1>
+                <p className="mt-5 max-w-2xl text-lg leading-8 text-muted">{c.lead}</p>
+                <ContactButtons quoteHref={quoteHref} service={node.name} tone="light" className="mt-8" />
+              </div>
+              {L.form === "hero" ? (
+                quickForm
+              ) : (
+                <ol className="divide-y divide-navy/10 rounded-2xl border border-navy/10 bg-white">
+                  {facts.map((f, i) => (
+                    <li key={f.label} className="flex gap-4 p-5">
+                      <span className="text-2xl font-extrabold text-accent">{String(i + 1).padStart(2, "0")}</span>
+                      <div>
+                        <span className="text-xs font-bold uppercase tracking-wider text-navy">{f.label}</span>
+                        <p className="mt-1 text-sm leading-6 text-muted">{f.value}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              )}
+            </div>
+          </section>
+        );
+      case "banner":
         return (
           <section className="border-b border-navy/10 bg-white">
             <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 py-12 sm:py-16 lg:grid-cols-[1.2fr_0.8fr]">
@@ -264,7 +327,9 @@ export default function SubServiceView({ node, parent, main, subs, related }: Pr
       node: (
         <section id="included" aria-labelledby="included-title">
           <h2 id="included-title" className={h2}>What {node.name.toLowerCase()} includes</h2>
-          {L.body === "accordion" ? (
+          {L.body === "columns" ? (
+            <Rows items={c.includes} />
+          ) : L.body === "accordion" ? (
             <Accordion items={c.includes} />
           ) : L.body === "table" ? (
             <Table head={["Component", "What it means"]} rows={c.includes.map((i) => [i.title, i.text])} />
@@ -333,7 +398,9 @@ export default function SubServiceView({ node, parent, main, subs, related }: Pr
       node: (
         <section id="applications" aria-labelledby="applications-title">
           <h2 id="applications-title" className={h2}>Typical applications</h2>
-          {L.body === "accordion" ? (
+          {L.body === "columns" ? (
+            <Rows items={c.applications} />
+          ) : L.body === "accordion" ? (
             <Accordion items={c.applications} />
           ) : L.body === "table" ? (
             <Table head={["Use case", "Example"]} rows={c.applications.map((u) => [u.title, u.text])} />
@@ -363,7 +430,9 @@ export default function SubServiceView({ node, parent, main, subs, related }: Pr
       node: (
         <section id="how" aria-labelledby="how-title">
           <h2 id="how-title" className={h2}>How it works</h2>
-          {L.body === "accordion" ? (
+          {L.body === "columns" ? (
+            <Rows items={c.steps} numbered />
+          ) : L.body === "accordion" ? (
             <Accordion items={c.steps} numbered />
           ) : L.body === "timeline" ? (
             <ol className="mt-8 space-y-0">
@@ -416,7 +485,9 @@ export default function SubServiceView({ node, parent, main, subs, related }: Pr
       node: (
         <section id="considerations" aria-labelledby="considerations-title">
           <h2 id="considerations-title" className={h2}>Planning considerations</h2>
-          {L.body === "accordion" ? (
+          {L.body === "columns" ? (
+            <Rows items={c.considerations} />
+          ) : L.body === "accordion" ? (
             <Accordion items={c.considerations} />
           ) : L.body === "table" ? (
             <Table head={["Consideration", "Why it matters"]} rows={c.considerations.map((x) => [x.title, x.text])} />
@@ -512,6 +583,7 @@ export default function SubServiceView({ node, parent, main, subs, related }: Pr
     cards: ["answer", "overview", "differs", "includes", "solutions", "audience", "applications", "steps", "considerations", "info", "faq", "related"],
     timeline: ["answer", "overview", "steps", "differs", "includes", "solutions", "applications", "audience", "considerations", "info", "faq", "related"],
     table: ["answer", "differs", "includes", "solutions", "overview", "applications", "steps", "considerations", "audience", "info", "faq", "related"],
+    columns: ["answer", "overview", "audience", "includes", "solutions", "differs", "steps", "applications", "considerations", "info", "faq", "related"],
     checklist: ["answer", "info", "overview", "differs", "includes", "solutions", "audience", "steps", "applications", "considerations", "faq", "related"],
   };
   const order = orders[L.body].filter((k) => sections[k]);

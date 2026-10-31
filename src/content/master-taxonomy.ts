@@ -162,38 +162,33 @@ const RAW = `
 - Multi-Location Container Movement
 
 @ Last-Mile Delivery | last-mile-delivery
-## Business-to-Business Delivery (B2B)
+## Business-to-Business Delivery (B2B) => business-to-business-delivery
 - Factory-to-Retailer Delivery
-- Warehouse-to-Retailer Delivery
 - Supplier-to-Business Delivery
 - Distributor-to-Dealer Delivery
 - Business-to-Branch Delivery
-## Business-to-Consumer Delivery (B2C)
+## Business-to-Consumer Delivery (B2C) => business-to-consumer-delivery
 - Retail Customer Delivery
-- Online Order Delivery
-- Home Delivery
 - Scheduled Customer Delivery
 - Bulk Customer Order Delivery
-## Retail & E-commerce Delivery
+## Retail & E-commerce Delivery => retail-ecommerce-delivery
 - E-commerce Parcel Delivery
 - Retail Merchandise Delivery
 - Multi-Order Delivery
 - Store Replenishment Delivery
 - Online Furniture Delivery
-## Scheduled Delivery
+## Scheduled Delivery => scheduled-delivery
 - Same-Day Scheduled Delivery
 - Next-Day Scheduled Delivery
 - Fixed-Time Delivery
 - Recurring Delivery
-- Appointment-Based Delivery
 ## Multi-Stop Delivery
 - Multiple Customer Deliveries
 - Multi-Store Deliveries
 - Route-Based Distribution
 - Clustered Delivery Routes
 - Multi-Address Commercial Delivery
-## Reverse Logistics
-- Customer Return Collection
+## Reverse Logistics => reverse-logistics
 - Retail Return Collection
 - Exchange Product Collection
 - Returned Goods Transportation

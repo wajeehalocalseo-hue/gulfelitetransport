@@ -61,8 +61,6 @@ export const proposals: Proposal[] = [
   { main: "contract-fleet-services", name: "Long-Term Transport Contracts", status: D, note: "Covered on Monthly Vehicle Contracts.", mergedInto: "monthly-vehicle-contracts" },
 
   /* Candidate sub-services for the other main services (no sub-services were supplied for these) */
-  { main: "last-mile-delivery", name: "Business-to-Business Deliveries", status: PV, note: unverified },
-  { main: "last-mile-delivery", name: "Scheduled Local Delivery Runs", status: PV, note: unverified },
   { main: "express-urgent-delivery", name: "Time-Critical Shipment Delivery", status: PV, note: "Delivery-time capability needs owner confirmation." },
   { main: "warehousing-storage", name: "Pre-Distribution Storage", status: PV, note: "Storage facilities need owner confirmation." },
   { main: "refrigerated-transportation", name: "Temperature-Controlled Delivery", status: PV, note: "Refrigerated vehicles need owner confirmation." },
