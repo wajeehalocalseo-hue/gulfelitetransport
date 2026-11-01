@@ -396,10 +396,7 @@ const RAW = `
 
 @ Vehicle Transportation | vehicle-transportation
 ## Car Transportation => car-transportation
-- Multiple Car Transport
-- Dealership Vehicle Transport
 ## Commercial Vehicle Transport => commercial-vehicle-transport
-- Van Transportation
 - Bus Transportation
 - Truck Transportation
 ## Fleet Relocation
@@ -412,30 +409,24 @@ const RAW = `
 - Office Workstation Relocation
 ## Commercial Furniture Transport => commercial-furniture-transport
 - Retail Furniture Delivery
-- Hotel Furniture Transportation
 - Restaurant Furniture Transportation
 ## Household Goods Transport => household-goods-transport
-- Furniture Collection
 - Household Goods Delivery
 - Appliance Transportation
 
 @ Packaging & Cargo Handling | packaging-cargo-handling
 ## Cargo Packaging Coordination => cargo-packaging-coordination
 - Carton Packaging
-- Pallet Packaging
 - Industrial Packaging
 ## Cargo Loading Support => cargo-loading-support
-- Pallet Loading
 - Container Loading
 - Cargo Securing
 ## Cargo Unloading Support => cargo-unloading-support
 - Commercial Cargo Unloading
 - Machinery Unloading Coordination
-- Warehouse Unloading
 
 @ Trade Show & Exhibition Logistics | trade-show-exhibition-logistics
 ## Exhibition Cargo Transportation => exhibition-cargo-transportation
-- Booth Material Delivery
 - Exhibition Equipment Delivery
 - Display Material Transportation
 ## Event Equipment Logistics => event-equipment-logistics
@@ -449,7 +440,6 @@ const RAW = `
 
 @ Spare Parts & Automotive Logistics | spare-parts-automotive-logistics
 ## Automotive Spare Parts Delivery => automotive-spare-parts-delivery
-- Engine Parts Transportation
 - Vehicle Component Delivery
 - Workshop Supply Delivery
 ## Industrial Spare Parts Delivery
