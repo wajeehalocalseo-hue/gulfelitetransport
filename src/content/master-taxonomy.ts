@@ -396,10 +396,9 @@ const RAW = `
 
 @ Vehicle Transportation | vehicle-transportation
 ## Car Transportation => car-transportation
-- Single Car Transport
 - Multiple Car Transport
 - Dealership Vehicle Transport
-## Commercial Vehicle Transport
+## Commercial Vehicle Transport => commercial-vehicle-transport
 - Van Transportation
 - Bus Transportation
 - Truck Transportation
@@ -409,20 +408,19 @@ const RAW = `
 
 @ Furniture & Household Moving | furniture-household-moving
 ## Office Relocation => office-relocation
-- Office Furniture Moving
 - Office Equipment Moving
 - Office Workstation Relocation
-## Commercial Furniture Transport
+## Commercial Furniture Transport => commercial-furniture-transport
 - Retail Furniture Delivery
 - Hotel Furniture Transportation
 - Restaurant Furniture Transportation
-## Household Goods Transport
+## Household Goods Transport => household-goods-transport
 - Furniture Collection
 - Household Goods Delivery
 - Appliance Transportation
 
 @ Packaging & Cargo Handling | packaging-cargo-handling
-## Cargo Packaging Coordination
+## Cargo Packaging Coordination => cargo-packaging-coordination
 - Carton Packaging
 - Pallet Packaging
 - Industrial Packaging
@@ -430,7 +428,7 @@ const RAW = `
 - Pallet Loading
 - Container Loading
 - Cargo Securing
-## Cargo Unloading Support
+## Cargo Unloading Support => cargo-unloading-support
 - Commercial Cargo Unloading
 - Machinery Unloading Coordination
 - Warehouse Unloading
@@ -440,11 +438,11 @@ const RAW = `
 - Booth Material Delivery
 - Exhibition Equipment Delivery
 - Display Material Transportation
-## Event Equipment Logistics
+## Event Equipment Logistics => event-equipment-logistics
 - Stage Equipment Transportation
 - Lighting Equipment Transportation
 - Audio Equipment Transportation
-## Exhibition Return Logistics
+## Exhibition Return Logistics => exhibition-return-logistics
 - Booth Material Collection
 - Equipment Return Transportation
 - Exhibition Cargo Relocation
@@ -458,7 +456,7 @@ const RAW = `
 - Factory Spare Parts
 - Machinery Components
 - Maintenance Supplies
-## Urgent Parts Transportation
+## Urgent Parts Transportation => urgent-parts-transportation
 - Scheduled Spare Parts
 - Dealer Parts Distribution
 `;
