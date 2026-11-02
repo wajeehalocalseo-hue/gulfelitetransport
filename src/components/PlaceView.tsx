@@ -12,6 +12,14 @@ const h2 = "text-2xl font-extrabold tracking-tight text-navy sm:text-3xl";
 const textLink = "font-bold text-navy underline decoration-accent decoration-2 underline-offset-4";
 const pad = (n: number) => String(n + 1).padStart(2, "0");
 
+/** Wraps Arabic runs in a language-tagged span so screen readers and search engines read them as Arabic. */
+const ARABIC = /([\u0600-\u06FF]+(?:\s+[\u0600-\u06FF]+)*)/;
+function t(s: string): ReactNode {
+  const parts = s.split(ARABIC);
+  if (parts.length === 1) return s;
+  return parts.map((p, i) => (i % 2 ? <span key={i} lang="ar" dir="rtl">{p}</span> : p));
+}
+
 /* ------------------------------------------------------------------ section bodies */
 type Item = { title: string; text: string };
 
@@ -24,9 +32,9 @@ function Items({ items, style, steps = false }: { items: Item[]; style: PlacePag
           <div key={it.title} className="grid gap-1 py-5 md:grid-cols-[1fr_2fr] md:gap-8">
             <h3 className="font-bold text-navy">
               <span className="mr-3 text-accent">{pad(i)}</span>
-              {it.title}
+              {t(it.title)}
             </h3>
-            <p className="text-sm leading-7 text-muted">{it.text}</p>
+            <p className="text-sm leading-7 text-muted">{t(it.text)}</p>
           </div>
         ))}
       </div>
@@ -38,8 +46,8 @@ function Items({ items, style, steps = false }: { items: Item[]; style: PlacePag
         {items.map((it, i) => (
           <li key={it.title} className="rounded-2xl bg-surface p-5 ring-1 ring-navy/10">
             <span className="text-xs font-bold uppercase tracking-wider text-accent">{label(i)}</span>
-            <h3 className="mt-2 font-bold text-navy">{it.title}</h3>
-            <p className="mt-1.5 text-sm leading-7 text-muted">{it.text}</p>
+            <h3 className="mt-2 font-bold text-navy">{t(it.title)}</h3>
+            <p className="mt-1.5 text-sm leading-7 text-muted">{t(it.text)}</p>
           </li>
         ))}
       </ul>
@@ -52,7 +60,7 @@ function Items({ items, style, steps = false }: { items: Item[]; style: PlacePag
           <li key={it.title} className="flex gap-3 leading-7 text-muted">
             <Icon name="check" className="mt-1 h-5 w-5 shrink-0 text-accent" />
             <span>
-              <strong className="text-navy">{it.title}.</strong> {it.text}
+              <strong className="text-navy">{t(it.title)}.</strong> {t(it.text)}
             </span>
           </li>
         ))}
@@ -64,8 +72,8 @@ function Items({ items, style, steps = false }: { items: Item[]; style: PlacePag
       {items.map((it, i) => (
         <article key={it.title} className="rounded-2xl border border-navy/10 bg-white p-5">
           {steps && <span className="flex h-9 w-9 items-center justify-center rounded-full bg-accent font-extrabold text-navy">{i + 1}</span>}
-          <h3 className={`font-bold text-navy ${steps ? "mt-3" : ""}`}>{it.title}</h3>
-          <p className="mt-1.5 text-sm leading-7 text-muted">{it.text}</p>
+          <h3 className={`font-bold text-navy ${steps ? "mt-3" : ""}`}>{t(it.title)}</h3>
+          <p className="mt-1.5 text-sm leading-7 text-muted">{t(it.text)}</p>
         </article>
       ))}
     </div>
@@ -79,8 +87,8 @@ function Links({ items, style }: { items: { name: string; href: string; note?: s
         {items.map((l) => (
           <li key={l.href}>
             <Link href={l.href} className="grid gap-1 py-4 hover:bg-surface md:grid-cols-[2fr_1fr] md:gap-6">
-              <span className="font-bold text-navy">{l.name}</span>
-              <span className="text-sm text-muted">{l.note}</span>
+              <span className="font-bold text-navy">{t(l.name)}</span>
+              <span className="text-sm text-muted">{l.note ? t(l.note) : null}</span>
             </Link>
           </li>
         ))}
@@ -94,9 +102,9 @@ function Links({ items, style }: { items: { name: string; href: string; note?: s
           <li key={l.href} className="flex gap-3">
             <Icon name="arrow" className="mt-1 h-5 w-5 shrink-0 text-accent" />
             <Link href={l.href} className={textLink}>
-              {l.name}
+              {t(l.name)}
             </Link>
-            {l.note && <span className="text-sm text-muted">{l.note}</span>}
+            {l.note && <span className="text-sm text-muted">{t(l.note)}</span>}
           </li>
         ))}
       </ul>
@@ -111,8 +119,8 @@ function Links({ items, style }: { items: { name: string; href: string; note?: s
             href={l.href}
             className={`block h-full rounded-2xl p-4 transition hover:border-accent ${tile ? "bg-surface ring-1 ring-navy/10 hover:ring-accent" : "border border-navy/10 bg-white"}`}
           >
-            <span className="font-bold text-navy">{l.name}</span>
-            {l.note && <span className="mt-1 block text-sm text-muted">{l.note}</span>}
+            <span className="font-bold text-navy">{t(l.name)}</span>
+            {l.note && <span className="mt-1 block text-sm text-muted">{t(l.note)}</span>}
           </Link>
         </li>
       ))}
@@ -129,7 +137,7 @@ function SectionBlock({ s, style }: { s: Section; style: PlacePage["layout"]["bo
       {s.kind === "text" && (
         <div className="mt-5 space-y-4 text-lg leading-8 text-muted">
           {s.paragraphs.map((p) => (
-            <p key={p.slice(0, 30)}>{p}</p>
+            <p key={p.slice(0, 30)}>{t(p)}</p>
           ))}
         </div>
       )}
@@ -176,7 +184,7 @@ export default function PlaceView({ page }: { page: PlacePage }) {
       {page.facts.map((f) => (
         <div key={f.label} className={tone === "dark" ? "border-b border-white/10 py-3 first:pt-0 last:border-0 last:pb-0" : "py-3"}>
           <dt className="text-xs font-bold uppercase tracking-wider text-accent">{f.label}</dt>
-          <dd className={`mt-1 text-sm leading-6 ${tone === "dark" ? "text-white/85" : "text-muted"}`}>{f.value}</dd>
+          <dd className={`mt-1 text-sm leading-6 ${tone === "dark" ? "text-white/85" : "text-muted"}`}>{t(f.value)}</dd>
         </div>
       ))}
     </dl>
@@ -217,7 +225,7 @@ export default function PlaceView({ page }: { page: PlacePage }) {
                 {page.facts.map((f) => (
                   <div key={f.label} className="bg-white p-5">
                     <dt className="text-xs font-bold uppercase tracking-wider text-accent">{f.label}</dt>
-                    <dd className="mt-1.5 text-sm leading-6 text-muted">{f.value}</dd>
+                    <dd className="mt-1.5 text-sm leading-6 text-muted">{t(f.value)}</dd>
                   </div>
                 ))}
               </dl>
@@ -240,7 +248,7 @@ export default function PlaceView({ page }: { page: PlacePage }) {
                     <span className="text-2xl font-extrabold text-accent">{pad(i)}</span>
                     <div>
                       <span className="text-xs font-bold uppercase tracking-wider text-navy">{f.label}</span>
-                      <p className="mt-1 text-sm leading-6 text-muted">{f.value}</p>
+                      <p className="mt-1 text-sm leading-6 text-muted">{t(f.value)}</p>
                     </div>
                   </li>
                 ))}
@@ -360,7 +368,7 @@ export default function PlaceView({ page }: { page: PlacePage }) {
     <div className="min-w-0 space-y-14">
       <section id="answer" aria-labelledby="answer-title">
         <h2 id="answer-title" className="sr-only">Summary</h2>
-        <p className="rounded-2xl border-l-4 border-accent bg-white p-6 text-lg font-medium leading-8 text-navy">{page.directAnswer}</p>
+        <p className="rounded-2xl border-l-4 border-accent bg-white p-6 text-lg font-medium leading-8 text-navy">{t(page.directAnswer)}</p>
         <p className="mt-4 text-sm text-muted">
           Part of <Link href="/services/taxi-cab-services" className={textLink}>Taxi &amp; Cab Services</Link> | <Link href="/taxi-saudi-arabia" className={textLink}>All of Saudi Arabia</Link>
         </p>

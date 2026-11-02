@@ -1,3 +1,4 @@
+import { placePages } from "@/content/saudi/build";
 import { services } from "@/content/services";
 import { publishedChildren } from "@/content/taxonomy";
 import { abs, site } from "@/lib/site";
@@ -56,6 +57,18 @@ export function GET() {
             ]
           : [],
       ),
+    ]),
+    "",
+    "# Taxi and cab services in Saudi Arabia",
+    "",
+    ...placePages.flatMap((p) => [
+      `## ${p.name}`,
+      `URL: ${abs(p.path)}`,
+      "",
+      p.directAnswer,
+      "",
+      ...p.facts.map((f) => `- ${f.label}: ${f.value}`),
+      "",
     ]),
   ].join("\n");
 

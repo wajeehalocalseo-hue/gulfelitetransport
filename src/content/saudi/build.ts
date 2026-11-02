@@ -1,5 +1,6 @@
 import { airports, areas, routes } from "./places";
 import { cities } from "./cities";
+import { cityGeo, regionExtras } from "./geo";
 import { regions } from "./regions";
 import type { Airport, City, PageKind, PlaceLayout, PlacePage, Section } from "./types";
 
@@ -36,6 +37,9 @@ function layoutFor(kind: PageKind, i: number): PlaceLayout {
 
 // ---------------------------------------------------------------------------- shared text
 const names = (ids: string[]) => ids.map((id) => need(cityById.get(id), `city ${id}`).name);
+const and = (xs: string[]) => (xs.length <= 1 ? (xs[0] ?? "") : `${xs.slice(0, -1).join(", ")} and ${xs[xs.length - 1]}`);
+const cityEntity = (c: City) => ({ type: "City" as const, name: c.name, wiki: c.wiki, ar: cityGeo[c.id]?.ar, lat: cityGeo[c.id]?.lat, lng: cityGeo[c.id]?.lng });
+const regionEntity = (id: string, name: string) => ({ type: "AdministrativeArea" as const, name, wiki: regionExtras[id]?.wiki, ar: regionExtras[id]?.ar });
 const join = (xs: string[]) => (xs.length <= 1 ? (xs[0] ?? "") : `${xs.slice(0, -1).join(", ")} or ${xs[xs.length - 1]}`);
 
 const bookingSteps = (where: string) => ({
@@ -164,78 +168,106 @@ function hubPage(): PlacePage {
 
 function regionPages(): PlacePage[] {
   return regions.map((r, i) => {
+    const x = need(regionExtras[r.id], `region extras ${r.id}`);
     const regionCities = cities.filter((c) => c.region === r.id);
     const regionAirports = airports.filter((a) => need(cityById.get(a.city), a.city).region === r.id);
     const cityIds = new Set(regionCities.map((c) => c.id));
-    const regionRoutes = routes.filter((x) => cityIds.has(x.from) || cityIds.has(x.to));
+    const regionRoutes = routes.filter((q) => cityIds.has(q.from) || cityIds.has(q.to));
     const capital = need(cityById.get(r.capital), r.capital);
+    const capGeo = need(cityGeo[r.capital], `geo ${r.capital}`);
+    const codes = regionAirports.map((a) => a.code);
+    const routeText = regionRoutes.slice(0, 2).map((q) => `${need(cityById.get(q.from), q.from).name} to ${need(cityById.get(q.to), q.to).name}`);
+    const direct = `Gulf Elite Transport arranges taxi and cab rides in ${r.name} (${x.ar}), including ${and(regionCities.map((c) => c.name))}. ${r.tagline.replace(/\.$/, "")}. Rides cover city trips${codes.length ? `, airport transfers at ${and(codes)}` : ""}${routeText.length ? ` and intercity routes such as ${and(routeText)}` : ""}. Fares, journey times and availability are confirmed for each request and are not published.`;
     const sections: Section[] = [
-      { id: "about", h2: `Getting around ${r.name}`, kind: "text", paragraphs: [r.about] },
+      {
+        id: "about",
+        h2: `Getting around ${r.name}`,
+        kind: "text",
+        paragraphs: [r.about, `${r.name} is also written ${x.ar} in Arabic. Its capital is ${capital.name} (${cityGeo[r.capital]?.ar ?? ""}).`],
+      },
+      { id: "getting-in", h2: `How people reach and cross ${r.name}`, kind: "text", paragraphs: [x.gettingIn] },
       {
         id: "cities",
-        h2: `Cities in ${r.name}`,
+        h2: `Cities with a ride guide in ${r.name}`,
         kind: "links",
-        intro: `The regional capital is ${capital.name}.`,
-        items: regionCities.map((c) => ({ name: c.name, href: cityPath(c), note: c.tagline.split(",")[0] })),
+        intro: `The regional capital is ${capital.name}. Each guide lists the real places riders travel to.`,
+        items: regionCities.map((c) => ({ name: `${c.name} (${cityGeo[c.id]?.ar ?? ""})`, href: cityPath(c), note: c.tagline.replace(/\.$/, "") })),
       },
-      {
-        id: "other",
-        h2: "Other towns in the region",
-        kind: "text",
-        paragraphs: [`Requests from other towns such as ${join(r.other)} can be discussed. These towns do not have their own page yet, and availability is confirmed for each request.`],
-      },
+      { id: "requests", h2: `Common ride requests in ${r.name}`, kind: "items", items: x.scenarios },
     ];
     if (regionAirports.length) {
       sections.push({
         id: "airports",
-        h2: `Airports in ${r.name}`,
+        h2: `Airport transfers in ${r.name}`,
         kind: "links",
-        items: regionAirports.map((a) => ({ name: a.name, href: `${BASE}/airports/${a.id}`, note: a.code })),
+        items: regionAirports.map((a) => ({ name: `${a.name} (${a.code})`, href: `${BASE}/airports/${a.id}`, note: a.tagline.replace(/\.$/, "") })),
       });
     }
     if (regionRoutes.length) {
       sections.push({
         id: "routes",
-        h2: `Routes from ${r.name}`,
+        h2: `Intercity routes from ${r.name}`,
         kind: "links",
-        items: regionRoutes.slice(0, 8).map((x) => ({ name: `${need(cityById.get(x.from), x.from).name} to ${need(cityById.get(x.to), x.to).name}`, href: `${BASE}/routes/${x.id}`, note: `about ${x.km} km` })),
+        intro: "Road distances are approximate. The exact route, vehicle and fare are confirmed for each request.",
+        items: regionRoutes.slice(0, 8).map((q) => ({ name: `${need(cityById.get(q.from), q.from).name} to ${need(cityById.get(q.to), q.to).name}`, href: `${BASE}/routes/${q.id}`, note: `about ${q.km} km` })),
       });
     }
-    sections.push(notAssumed, bookingSteps(`in ${r.name}`), {
-      id: "faq",
-      h2: `${r.name}: questions`,
-      kind: "faq",
-      items: [
-        { q: `Do you cover every town in ${r.name}?`, a: `Main cities have their own page, and requests from other towns in the region can be discussed. Availability is confirmed for each request.` },
-        { q: `Can I travel from ${capital.name} to another region?`, a: "Yes, intercity rides can be requested. The route, vehicle and fare are confirmed for each request." },
-        { q: "Are fares published?", a: "No. The fare is confirmed with you before you commit." },
-      ],
-    });
+    sections.push(
+      { id: "tips", h2: `Planning notes for ${r.name}`, kind: "items", items: x.tips },
+      {
+        id: "nearby",
+        h2: "Neighbouring regions",
+        kind: "links",
+        items: x.neighbours.map((id) => ({ name: need(regionById.get(id), id).name, href: `${BASE}/${id}`, note: need(regionExtras[id], id).ar })),
+      },
+      {
+        id: "other",
+        h2: `Other towns in ${r.name}`,
+        kind: "text",
+        paragraphs: [`Requests from other towns such as ${and(r.other)} can be discussed. These towns do not have their own page yet, and availability is confirmed for each request.`],
+      },
+      bookingSteps(`in ${r.name}`),
+      notAssumed,
+      {
+        id: "faq",
+        h2: `${r.name}: questions`,
+        kind: "faq",
+        items: [
+          ...x.faqs,
+          { q: `Do you cover every town in ${r.name}?`, a: `Main cities have their own guide, and requests from other towns in the region can be discussed. Availability is confirmed for each request.` },
+          { q: `Can I travel from ${capital.name} to another region?`, a: "Yes, intercity rides can be requested. The route, vehicle and fare are confirmed for each request." },
+          { q: "Are taxi fares published?", a: "No. The fare is confirmed with you before you commit, so there is no standard price list." },
+        ],
+      },
+    );
     return {
       kind: "region" as const,
       path: `${BASE}/${r.id}`,
       name: r.name,
       title: `Taxi & Cab Rides in ${r.name}, Saudi Arabia`,
-      description: `Taxi and cab rides in ${r.name}: ${join(regionCities.slice(0, 3).map((c) => c.name))} and more, with airports and routes. Fares confirmed for each request.`,
+      description: `Taxi and cab rides in ${r.name} (${x.ar}): ${and(regionCities.slice(0, 3).map((c) => c.name))}${codes.length ? `, ${and(codes)} airport transfers` : ""} and intercity routes. Fares confirmed for each request.`,
       h1: `Taxi & Cab Services in ${r.name}`,
       lead: r.tagline,
-      directAnswer: `Gulf Elite Transport arranges taxi and cab rides in ${r.name}, including ${join(regionCities.slice(0, 4).map((c) => c.name))}. ${r.about.split(". ")[0]}. Fares, journey times and availability are confirmed for each request and are not published.`,
+      directAnswer: direct,
       crumbs: [{ name: "Home", path: "/" }, { name: "Taxi & Cab Services in Saudi Arabia", path: BASE }, { name: r.name, path: `${BASE}/${r.id}` }],
       facts: [
-        { label: "Capital", value: capital.name },
-        { label: "City pages", value: String(regionCities.length) },
-        { label: "Airports", value: regionAirports.length ? regionAirports.map((a) => a.code).join(", ") : "Not listed yet" },
-        { label: "Routes", value: String(regionRoutes.length) },
+        { label: "Capital", value: `${capital.name} (${cityGeo[r.capital]?.ar ?? ""})` },
+        { label: "Arabic name", value: x.ar },
+        { label: "Main airports", value: codes.length ? and(codes) : "See city pages" },
+        { label: "Ride guides", value: `${regionCities.length} cities, ${regionRoutes.length} routes` },
       ],
       sections,
       layout: layoutFor("region", i),
-      entities: [{ type: "AdministrativeArea", name: r.name }, country],
+      entities: [
+        { type: "AdministrativeArea", name: r.name, wiki: x.wiki, ar: x.ar, lat: capGeo.lat, lng: capGeo.lng },
+        ...regionCities.map(cityEntity),
+        country,
+      ],
       children: regionCities.map((c) => ({ name: c.name, path: cityPath(c) })),
       prefill: { pickup: capital.name },
     };
   });
 }
-
 function cityPages(): PlacePage[] {
   return cities.map((c, i) => {
     const region = need(regionById.get(c.region), c.region);
@@ -267,7 +299,7 @@ function cityPages(): PlacePage[] {
       ...c.nearby.map((id) => ({ name: need(cityById.get(id), id).name, href: cityPath(need(cityById.get(id), id)), note: "Nearby city" })),
     ];
     const sections: Section[] = [
-      { id: "about", h2: `Riding in ${c.name}`, kind: "text", paragraphs: [c.about, c.getting] },
+      { id: "about", h2: `Riding in ${c.name}`, kind: "text", paragraphs: [c.about, c.getting, `${c.name} (${cityGeo[c.id]?.ar ?? ""}) is in ${region.name}, Saudi Arabia.`] },
       { id: "places", h2: `Places people travel to in ${c.name}`, kind: "items", items: c.places.map((x) => ({ title: x.name, text: x.note })) },
       rides,
       bookingSteps(`in ${c.name}`),
@@ -307,7 +339,7 @@ function cityPages(): PlacePage[] {
       ],
       sections,
       layout: layoutFor("city", i),
-      entities: [{ type: "City", name: c.name, wiki: c.wiki }, { type: "AdministrativeArea", name: region.name }, country, ...(ap ? [{ type: "Airport" as const, name: ap.name, iata: ap.code }] : [])],
+      entities: [cityEntity(c), regionEntity(region.id, region.name), country, ...(ap ? [{ type: "Airport" as const, name: ap.name, iata: ap.code }] : [])],
       children: cityAreas.map((a) => ({ name: a.name, path: `${cityPath(c)}/${a.id}` })),
       prefill: { pickup: c.name },
     };
@@ -356,7 +388,7 @@ function areaPages(): PlacePage[] {
         { id: "faq", h2: `${a.name}: questions`, kind: "faq", items: [a.faq, { q: "Do you publish fares?", a: "No. The fare is confirmed with you before you commit." }] },
       ],
       layout: layoutFor("area", i),
-      entities: [{ type: "Place", name: `${a.name}, ${c.name}` }, { type: "City", name: c.name, wiki: c.wiki }, country],
+      entities: [{ type: "Place", name: `${a.name}, ${c.name}` }, cityEntity(c), country],
       children: [],
       prefill: { pickup: `${a.name}, ${c.name}` },
     };
@@ -412,7 +444,7 @@ function airportPages(): PlacePage[] {
         },
       ],
       layout: layoutFor("airport", i),
-      entities: [{ type: "Airport", name: a.name, iata: a.code }, { type: "City", name: c.name, wiki: c.wiki }, country],
+      entities: [{ type: "Airport", name: a.name, iata: a.code }, cityEntity(c), country],
       children: [],
       prefill: { pickup: a.name },
     };
@@ -479,7 +511,7 @@ function routePages(): PlacePage[] {
       ],
       layout: layoutFor("route", i),
       route: { from: from.name, to: to.name, km: r.km },
-      entities: [{ type: "City", name: from.name, wiki: from.wiki }, { type: "City", name: to.name, wiki: to.wiki }, country],
+      entities: [cityEntity(from), cityEntity(to), country],
       children: [],
       prefill: { pickup: from.name, dropoff: to.name },
     };

@@ -88,7 +88,7 @@ export type PlacePage = {
   sections: Section[];
   layout: PlaceLayout;
   /** Entities for schema.org. */
-  entities: { type: "Country" | "AdministrativeArea" | "City" | "Place" | "Airport"; name: string; wiki?: string; iata?: string }[];
+  entities: { type: "Country" | "AdministrativeArea" | "City" | "Place" | "Airport"; name: string; wiki?: string; iata?: string; ar?: string; lat?: number; lng?: number }[];
   route?: { from: string; to: string; km: number };
   /** Used to prefill the quote form. */
   prefill?: { pickup?: string; dropoff?: string };
