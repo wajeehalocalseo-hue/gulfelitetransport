@@ -71,7 +71,7 @@ export default function SiteFooter() {
         </div>
       </div>
       <p className="mx-auto mt-12 max-w-7xl border-t border-white/10 px-5 pt-6 text-xs text-white/60">
-        © {new Date().getFullYear()} {site.name}. All rights reserved.
+        © {new Date().getFullYear()} {site.legalName}. All rights reserved.
       </p>
     </footer>
   );

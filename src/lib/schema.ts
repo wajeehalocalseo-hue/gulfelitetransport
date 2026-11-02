@@ -24,6 +24,7 @@ export const baseGraph = {
       "@type": "Organization",
       "@id": orgId,
       name: site.name,
+      legalName: site.legalName,
       url: site.url,
       description,
       ...(site.email || site.phone
