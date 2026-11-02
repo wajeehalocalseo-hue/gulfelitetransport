@@ -163,25 +163,17 @@ const RAW = `
 
 @ Last-Mile Delivery | last-mile-delivery
 ## Business-to-Business Delivery (B2B) => business-to-business-delivery
-- Factory-to-Retailer Delivery
-- Supplier-to-Business Delivery
 - Distributor-to-Dealer Delivery
-- Business-to-Branch Delivery
 ## Business-to-Consumer Delivery (B2C) => business-to-consumer-delivery
 - Retail Customer Delivery
-- Scheduled Customer Delivery
-- Bulk Customer Order Delivery
 ## Retail & E-commerce Delivery => retail-ecommerce-delivery
 - E-commerce Parcel Delivery
 - Retail Merchandise Delivery
-- Multi-Order Delivery
 - Store Replenishment Delivery
 - Online Furniture Delivery
 ## Scheduled Delivery => scheduled-delivery
 - Same-Day Scheduled Delivery
 - Next-Day Scheduled Delivery
-- Fixed-Time Delivery
-- Recurring Delivery
 ## Multi-Stop Delivery => multi-stop-delivery
 - Multiple Customer Deliveries
 - Route-Based Distribution
@@ -190,7 +182,6 @@ const RAW = `
 - Retail Return Collection
 - Exchange Product Collection
 - Returned Goods Transportation
-- Reusable Packaging Collection
 ## Specialized Last-Mile Delivery => specialized-last-mile-delivery
 - Office Equipment Delivery
 - Commercial Supply Delivery
@@ -431,7 +422,6 @@ const RAW = `
 - Display Material Transportation
 ## Event Equipment Logistics => event-equipment-logistics
 - Stage Equipment Transportation
-- Lighting Equipment Transportation
 - Audio Equipment Transportation
 ## Exhibition Return Logistics => exhibition-return-logistics
 - Booth Material Collection

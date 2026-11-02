@@ -14,6 +14,7 @@ import { leftoverBatch13Micro, leftoverBatch13Sub } from "./leftover-batch-13";
 import { categoryBatch14Sub } from "./category-batch-14";
 import { categoryBatch15Micro, categoryBatch15Sub } from "./category-batch-15";
 import { categoryBatch16Micro } from "./category-batch-16";
+import { lastMileBatch17Micro } from "./last-mile-batch-17";
 import { passengerBatch4Group, passengerBatch4Micro, passengerBatch4Sub } from "./passenger-batch-4";
 
 /**
@@ -47,4 +48,5 @@ export const batchMicro: ChildRecord[] = [
   ...leftoverBatch13Micro,
   ...categoryBatch15Micro,
   ...categoryBatch16Micro,
+  ...lastMileBatch17Micro,
 ];

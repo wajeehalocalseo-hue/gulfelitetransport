@@ -185,6 +185,44 @@ export default function SubServiceView({ node, parent, main, subs, related }: Pr
             </div>
           </section>
         );
+      case "inset":
+        return (
+          <section className="bg-navy text-white">
+            <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 py-12 sm:py-16 lg:grid-cols-[0.85fr_1.15fr]">
+              <div className="order-2 lg:order-1">{L.form === "hero" ? quickForm : image}</div>
+              <div className="order-1 lg:order-2">
+                <Breadcrumbs items={crumbs} />
+                <h1 className="mt-6 max-w-3xl text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">{c.h1}</h1>
+                <p className="mt-5 max-w-2xl text-lg leading-8 text-white/80">{c.lead}</p>
+                <ContactButtons quoteHref={quoteHref} service={node.name} className="mt-8" />
+              </div>
+            </div>
+          </section>
+        );
+      case "editorial":
+        return (
+          <section className="border-b border-navy/10 bg-white">
+            <div className="mx-auto max-w-7xl px-5 py-12 sm:py-16">
+              <Breadcrumbs items={crumbs} tone="light" />
+              <div className="mt-6 grid gap-8 lg:grid-cols-2 lg:items-end">
+                <h1 className="text-4xl font-extrabold leading-[1.05] tracking-tight text-navy sm:text-6xl">{c.h1}</h1>
+                <div>
+                  <p className="text-lg leading-8 text-muted">{c.lead}</p>
+                  <ContactButtons quoteHref={quoteHref} service={node.name} tone="light" className="mt-6" />
+                </div>
+              </div>
+              {L.form === "hero" && <div className="mt-8 max-w-xl">{quickForm}</div>}
+              <dl className="mt-10 grid gap-px overflow-hidden rounded-2xl bg-navy/10 sm:grid-cols-2 lg:grid-cols-4">
+                {facts.map((f) => (
+                  <div key={f.label} className="bg-white p-5">
+                    <dt className="text-xs font-bold uppercase tracking-wider text-accent">{f.label}</dt>
+                    <dd className="mt-1.5 text-sm leading-6 text-muted">{f.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </section>
+        );
       case "ribbon":
         return (
           <section className="border-b border-navy/10 bg-white">

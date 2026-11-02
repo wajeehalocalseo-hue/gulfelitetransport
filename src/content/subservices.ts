@@ -30,11 +30,12 @@ export type PageContent = {
  *        overlay (full-width photo behind the title), ledger (light, accent rail with a numbered facts list)
  *  body: how the long sections are shown - cards, timeline, table, checklist, accordion (collapsible items)
  *        columns (title on the left, text on the right, ruled rows) or tiles (numbered tiles in a grid)
- *  hero (more): ribbon (wide photo strip above a light title block), mirror (light, photo or form on the left)
+ *  hero (more): ribbon (wide photo strip above a light title block), mirror (light, photo or form on the left),
+ *        inset (dark, photo or form on the left), editorial (light two-column title and lead, facts row below)
  *  form: aside (sticky beside content), bottom (full-width at the end), hero (quick form in the hero + full form at the end)
  */
 export type Layout = {
-  hero: "split" | "banner" | "facts" | "route" | "centered" | "overlay" | "ledger" | "ribbon" | "mirror";
+  hero: "split" | "banner" | "facts" | "route" | "centered" | "overlay" | "ledger" | "ribbon" | "mirror" | "inset" | "editorial";
   body: "cards" | "timeline" | "table" | "checklist" | "accordion" | "columns" | "tiles";
   form: "aside" | "bottom" | "hero";
 };
