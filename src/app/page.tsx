@@ -398,21 +398,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 13. CTA band */}
-      <section aria-labelledby="cta-title" className="bg-navy text-white">
-        <div className="mx-auto max-w-4xl px-5 py-20 text-center">
-          <h2 id="cta-title" className="text-3xl font-extrabold tracking-tight sm:text-4xl">{c.ctaBand.h2}</h2>
-          <p className="mx-auto mt-4 max-w-xl text-lg text-white/75">{c.ctaBand.text}</p>
-          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-            <Link href="#quote" className={btnPrimary}>Request a Ride or Quote</Link>
-            {telUrl && <a href={telUrl} className={btnGhost}>Call Now</a>}
-            {wa && (
-              <a href={wa} target="_blank" rel="noopener noreferrer" className={btnGhost}>WhatsApp Us</a>
-            )}
-          </div>
-        </div>
-      </section>
-
       {/* 14. Request form */}
       <section id="quote" aria-labelledby="quote-title" className={`${wrap} py-20`}>
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">

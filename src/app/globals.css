@@ -16,6 +16,7 @@ html {
 }
 
 body {
+  -webkit-font-smoothing: antialiased;
   background: var(--color-surface);
   color: var(--color-body);
   font-family: var(--font-jakarta), Arial, Helvetica, sans-serif;
@@ -27,7 +28,22 @@ body {
 }
 
 [id] {
-  scroll-margin-top: 5.5rem;
+  scroll-margin-top: 8rem;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-navy);
 }
 
 summary::-webkit-details-marker {
