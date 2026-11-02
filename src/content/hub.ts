@@ -3,7 +3,7 @@ import type { Faq } from "./services";
 export const hubAnswer = {
   h2: "What transport services does Gulf Elite Transport provide?",
   answer:
-    "Gulf Elite Transport provides seventeen transport and logistics services for businesses and organisations: freight and cargo (including international freight forwarding, container transportation, express and urgent delivery and refrigerated transportation), passenger transport, equipment and industrial transportation, and fleet and distribution services. Every request is assessed individually and you receive a clear quotation before you commit. Availability depends on the pickup and delivery locations, the type of service and the dates, and is confirmed for each request.",
+    "Gulf Elite Transport provides eighteen transport and logistics services for businesses and organisations: freight and cargo (including international freight forwarding, container transportation, express and urgent delivery and refrigerated transportation), passenger transport, equipment and industrial transportation, and fleet and distribution services. Every request is assessed individually and you receive a clear quotation before you commit. Availability depends on the pickup and delivery locations, the type of service and the dates, and is confirmed for each request.",
   more: "Together they cover business transportation services from commercial cargo transportation and corporate passenger transport to industrial machinery relocation and recurring business transport. Every service follows the same principle: describe what you need, receive an assessment and a quotation, and confirm only when you are comfortable with the plan.",
 };
 
@@ -117,6 +117,12 @@ export const hubQa: Record<
   "spare-parts-automotive-logistics": {
     q: "What are spare parts and automotive logistics?",
     a: "It is the delivery of vehicle parts, industrial spare parts and maintenance supplies from suppliers to workshops, dealers and factories, scheduled or urgent. Urgent delivery times are assessed for each request.",
+    pointsLabel: "Included:",
+    points: "includes",
+  },
+  "taxi-cab-services": {
+    q: "What are taxi and cab services?",
+    a: "Taxi and cab services are passenger rides by car between a pickup point and a destination. We arrange city rides, airport transfers and intercity trips across Saudi Arabia, organised by region, city and route, and confirm the vehicle, driver and fare for each request before you commit.",
     pointsLabel: "Included:",
     points: "includes",
   },
@@ -250,13 +256,14 @@ export const selectionGuide = {
     { need: "My cargo needs packing, loading or unloading help", slug: "packaging-cargo-handling" },
     { need: "I am exhibiting at an event", slug: "trade-show-exhibition-logistics" },
     { need: "I need spare parts delivered to a workshop or factory", slug: "spare-parts-automotive-logistics" },
+    { need: "I need a taxi or cab in Saudi Arabia", slug: "taxi-cab-services" },
   ],
 };
 
 export const hubFaqs: Faq[] = [
   {
     q: "What services does Gulf Elite Transport offer?",
-    a: "Gulf Elite Transport offers seventeen services: freight and cargo transport, international freight forwarding, container transportation, express and urgent delivery, refrigerated transportation, passenger transport, equipment and machinery moving, industrial and project logistics, contract fleet services, last-mile delivery, commercial distribution, warehousing and storage, vehicle transportation, furniture and household moving, packaging and cargo handling, trade show and exhibition logistics, and spare parts and automotive logistics. Each has its own page describing what is included, who it is for and what information is needed for a quotation.",
+    a: "Gulf Elite Transport offers eighteen services: freight and cargo transport, international freight forwarding, container transportation, express and urgent delivery, refrigerated transportation, passenger transport, equipment and machinery moving, industrial and project logistics, contract fleet services, last-mile delivery, commercial distribution, warehousing and storage, vehicle transportation, furniture and household moving, packaging and cargo handling, trade show and exhibition logistics, spare parts and automotive logistics, and taxi and cab services. Each has its own page describing what is included, who it is for and what information is needed for a quotation.",
   },
   {
     q: "Who are these transport services for?",

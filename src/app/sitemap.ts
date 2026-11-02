@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { indexableNodes, pathOf } from "@/content/taxonomy";
+import { placePages } from "@/content/saudi/build";
 import { abs } from "@/lib/site";
 
 export const dynamic = "force-static";
@@ -12,6 +13,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...indexableNodes().map((n) => ({
       url: abs(pathOf(n)),
       priority: n.level === 1 ? 0.8 : 0.7,
+      changeFrequency: "monthly" as const,
+    })),
+    ...placePages.map((p) => ({
+      url: abs(p.path),
+      priority: p.kind === "hub" ? 0.8 : p.kind === "region" ? 0.7 : p.kind === "city" ? 0.7 : 0.6,
       changeFrequency: "monthly" as const,
     })),
     { url: abs("/about"), priority: 0.6, changeFrequency: "yearly" },

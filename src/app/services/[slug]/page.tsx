@@ -143,6 +143,30 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
             </div>
           </section>
 
+          {s.slug === "taxi-cab-services" && (
+            <section id="coverage-saudi" aria-labelledby="coverage-saudi-title">
+              <h2 id="coverage-saudi-title" className={h2}>Find your region, city or route</h2>
+              <p className="mt-4 text-lg leading-8 text-muted">
+                Taxi and cab pages are organised across Saudi Arabia by region, city, area, airport and intercity route. Each page lists real places and what to include in your request.
+              </p>
+              <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+                {[
+                  ["/taxi-saudi-arabia", "All of Saudi Arabia", "Regions, cities, airports and routes"],
+                  ["/taxi-saudi-arabia/routes", "Intercity routes", "Riyadh to Jeddah, Dammam to Al Khobar and more"],
+                  ["/taxi-saudi-arabia/riyadh-region/riyadh", "Riyadh", "Capital city rides and airport transfers"],
+                  ["/taxi-saudi-arabia/makkah-region/jeddah", "Jeddah", "City rides and Jeddah airport transfers"],
+                ].map(([href, name, note]) => (
+                  <li key={href}>
+                    <Link href={href} className="block h-full rounded-2xl border border-navy/10 bg-white p-4 transition hover:border-accent">
+                      <span className="font-bold text-navy">{name}</span>
+                      <span className="mt-1 block text-sm text-muted">{note}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
           {subs.length > 0 && (
             <section id="solutions" aria-labelledby="solutions-title">
               <h2 id="solutions-title" className={h2}>Explore Our {s.title} Solutions</h2>

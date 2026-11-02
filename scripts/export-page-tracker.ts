@@ -11,6 +11,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { site } from "../src/lib/site";
 import { isIndexable, serviceNodes, type ServiceNode } from "../src/content/taxonomy";
+import { placePages } from "../src/content/saudi/build";
 
 const root = path.resolve(__dirname, "..");
 
@@ -102,6 +103,25 @@ for (const n of sorted) {
   });
 }
 
+// Saudi Arabia taxi and cab pages (hub, regions, cities, areas, airports, routes).
+const placeLevel = { hub: "Location hub", region: "Location - region", city: "Location - city", area: "Location - area", airport: "Location - airport", route: "Location - route" } as const;
+for (const p of placePages) {
+  const id = p.path.split("/").pop() ?? p.path;
+  const [date, commit] = firstCommitFor(`"${id}"`);
+  rows.push({
+    level: placeLevel[p.kind],
+    name: p.name,
+    urlPath: p.path,
+    main: "Taxi & Cab Services",
+    parent: p.crumbs.length > 1 ? (p.crumbs[p.crumbs.length - 2]?.name ?? "") : "",
+    built: "Yes",
+    status: "Built and published",
+    date,
+    commit,
+    notes: "",
+  });
+}
+
 const esc = (v: string) => (/[",\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v);
 const header = ["No", "Level", "Page name", "URL path", "Full URL", "Main service", "Parent", "Built?", "Status", "Date pushed", "Commit", "Notes"];
 const lines = [
@@ -119,5 +139,5 @@ fs.writeFileSync(path.join(root, "docs", "page-tracker.csv"), lines.join("\n") +
 const built = rows.filter((r) => r.built === "Yes");
 const count = (lvl: string) => built.filter((r) => r.level === lvl).length;
 console.log(`rows: ${rows.length}`);
-console.log(`built: ${built.length} (site pages ${count("Site page")}, main ${count("Main service")}, sub ${count("Sub-service")}, micro ${count("Micro-service")})`);
+console.log(`built: ${built.length} (site pages ${count("Site page")}, main ${count("Main service")}, sub ${count("Sub-service")}, micro ${count("Micro-service")}, Saudi taxi pages ${built.filter((r) => r.level.startsWith("Location")).length})`);
 console.log(`not built: ${rows.length - built.length}`);

@@ -16,11 +16,11 @@ export const site = {
   whatsapp: "", // digits only with country code, e.g. "971500000000"
   email: "", // e.g. "info@yourdomain.com"
   address: "", // full verified street address, if you want it shown
-  country: "", // verified business country
+  country: "Saudi Arabia", // business country
   hours: "", // verified opening hours, if any
 
   // --- Verified facts (leave empty until confirmed) ---
-  serviceAreas: [] as string[], // e.g. ["Dubai", "Abu Dhabi"] - only verified ones
+  serviceAreas: ["Saudi Arabia"] as string[], // only confirmed areas
   socialProfiles: [] as string[], // full URLs of real profiles
   certifications: [] as string[], // verified certifications only
 };
@@ -47,7 +47,7 @@ export const nav = [
   { href: "/services", label: "Services" },
   { href: "/about", label: "About" },
   { href: "/#industries", label: "Industries" },
-  { href: "/#coverage", label: "Coverage Areas" },
+  { href: "/taxi-saudi-arabia", label: "Coverage Areas" },
   { href: "/contact", label: "Contact" },
 ] as const;
 

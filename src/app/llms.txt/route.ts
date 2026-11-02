@@ -1,6 +1,7 @@
 import { hubAnswer, hubFaqs } from "@/content/hub";
 import { services } from "@/content/services";
 import { publishedChildren } from "@/content/taxonomy";
+import { placePages } from "@/content/saudi/build";
 import { abs, site } from "@/lib/site";
 
 export const dynamic = "force-static";
@@ -18,7 +19,7 @@ export function GET() {
   const body = [
     `# ${site.name}`,
     "",
-    `> ${site.name} is a transport and logistics service for businesses and organisations. It provides seventeen services: freight and cargo transport, international freight forwarding, container transportation, express and urgent delivery, refrigerated transportation, passenger transport, equipment and machinery moving, industrial and project logistics, contract fleet services, last-mile delivery, commercial distribution, warehousing and storage, vehicle transportation, furniture and household moving, packaging and cargo handling, trade show and exhibition logistics, and spare parts and automotive logistics.`,
+    `> ${site.name} is a transport and logistics service for businesses and organisations. It provides eighteen services: freight and cargo transport, international freight forwarding, container transportation, express and urgent delivery, refrigerated transportation, passenger transport, equipment and machinery moving, industrial and project logistics, contract fleet services, last-mile delivery, commercial distribution, warehousing and storage, vehicle transportation, furniture and household moving, packaging and cargo handling, trade show and exhibition logistics, spare parts and automotive logistics, and taxi and cab services.`,
     "",
     "## Summary",
     hubAnswer.answer,
@@ -31,6 +32,9 @@ export function GET() {
         ...publishedChildren(k.id).map((m) => `    - [${m.name}](${abs(m.fullUrl)}): ${m.shortDescription}`),
       ]),
     ]),
+    "",
+    "## Taxi and cab services in Saudi Arabia",
+    ...placePages.map((p) => `- [${p.name}](${abs(p.path)}): ${p.lead}`),
     "",
     "## Main pages",
     `- [Home](${abs("/")})`,

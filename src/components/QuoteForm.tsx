@@ -21,13 +21,19 @@ export default function QuoteForm({
   defaultService = "",
   variant = "full",
   topic = "",
+  pickupDefault = "",
+  dropoffDefault = "",
 }: {
   defaultService?: string;
   variant?: "full" | "quick";
   /** Sub-service the visitor is viewing; added to the message as context, not to the fields. */
   topic?: string;
+  /** Prefills for location pages. */
+  pickupDefault?: string;
+  dropoffDefault?: string;
 }) {
   const quick = variant === "quick";
+  const ride = defaultService === "Taxi & Cab Services";
   const uid = useId();
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<Status>("idle");
@@ -45,13 +51,13 @@ export default function QuoteForm({
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email)) e.email = "Please enter a valid email address.";
     if (!v.service) e.service = "Please choose the service you need.";
     if (!quick && !v.pickup) e.pickup = "Please enter the pickup location.";
-    if (!quick && !v.delivery) e.delivery = "Please enter the delivery location.";
+    if (!quick && !v.delivery) e.delivery = ride ? "Please enter the drop-off location." : "Please enter the delivery location.";
     if (v.date) {
       const today = new Date();
       today.setHours(0, 0, 0, 0);
       if (new Date(`${v.date}T00:00`) < today) e.date = "Please choose today or a future date.";
     }
-    if (v.details.length < 10) e.details = "Please describe what needs to be moved (at least a few words).";
+    if (v.details.length < 10) e.details = ride ? "Please tell us how many passengers and bags, and when." : "Please describe what needs to be moved (at least a few words).";
     return e;
   }
 
@@ -86,7 +92,7 @@ export default function QuoteForm({
       `Service: ${v.service}`,
       topic && `Topic: ${topic}`,
       v.pickup && `Pickup: ${v.pickup}`,
-      v.delivery && `Delivery: ${v.delivery}`,
+      v.delivery && `${ride ? "Drop-off" : "Delivery"}: ${v.delivery}`,
       v.date && `Preferred date: ${v.date}`,
       `Details: ${v.details}`,
       v.extra && `Additional requirements: ${v.extra}`,
@@ -201,12 +207,12 @@ export default function QuoteForm({
         <>
           <label className={labelCls}>
             Pickup location
-            <input {...common("pickup")} required className={input} />
+            <input {...common("pickup")} defaultValue={pickupDefault} required className={input} />
             {msg("pickup")}
           </label>
           <label className={labelCls}>
-            Delivery location
-            <input {...common("delivery")} required className={input} />
+            {ride ? "Drop-off location" : "Delivery location"}
+            <input {...common("delivery")} defaultValue={dropoffDefault} required className={input} />
             {msg("delivery")}
           </label>
           <label className={`${labelCls} @lg:col-span-2`}>
@@ -217,7 +223,13 @@ export default function QuoteForm({
         </>
       )}
       <label className={`${labelCls} @lg:col-span-2`}>
-        {quick ? "What do you need to move?" : "Shipment / passenger / equipment details"}
+        {quick
+          ? ride
+            ? "Passengers, bags and time"
+            : "What do you need to move?"
+          : ride
+            ? "Ride details (passengers, bags, time)"
+            : "Shipment / passenger / equipment details"}
         <textarea {...common("details")} rows={quick ? 3 : 4} required className={input} />
         {msg("details")}
       </label>
