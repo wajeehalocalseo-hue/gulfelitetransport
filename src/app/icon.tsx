@@ -8,10 +8,10 @@ export const contentType = "image/png";
 export default function Icon() {
   return new ImageResponse(
     (
-      <svg width="64" height="64" viewBox="0 0 48 48">
-        <rect width="48" height="48" rx="12" fill="#f5a623" />
-        <path d="M32.5 13.5A12 12 0 1 0 36 22H25" fill="none" stroke="#101c2c" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M12 40h6M22 40h6M32 40h4" stroke="#101c2c" strokeWidth="2.4" strokeLinecap="round" />
+      <svg width="64" height="64" viewBox="0 0 64 64">
+        <path d="M32 3L57.1 17.5V46.5L32 61L6.9 46.5V17.5Z" fill="#101c2c" stroke="#f5a623" strokeWidth="3.4" strokeLinejoin="round" />
+        <path d="M41.5 23.5A13 13 0 1 0 45 32H33" fill="none" stroke="#ffffff" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M48.5 26l6 6-6 6" fill="none" stroke="#f5a623" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
     size,
