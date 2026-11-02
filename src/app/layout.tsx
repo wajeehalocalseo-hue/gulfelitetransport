@@ -19,9 +19,9 @@ export const viewport: Viewport = {
   themeColor: "#101c2c",
 };
 
-const defaultTitle = "Gulf Elite Transport | Freight, Cargo & Passenger Transport";
+const defaultTitle = "Gulf Elite Transport | Taxi, Freight & Passenger Transport in Saudi Arabia";
 const defaultDescription =
-  "Explore professional freight, cargo, passenger transport, equipment moving and contract fleet solutions with Gulf Elite Transport. Request a transport quote today.";
+  "Request taxi and cab rides by Saudi city and route, or arrange freight, cargo, passenger transport, equipment moving and fleet services. Fares are confirmed before you commit.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),

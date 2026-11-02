@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import Icon from "./Icon";
+import Logo from "./Logo";
 import { nav, site, telUrl } from "@/lib/site";
 
 export default function SiteHeader() {
@@ -18,9 +19,10 @@ export default function SiteHeader() {
         <Link
           href="/"
           onClick={() => setOpen(false)}
-          className="text-lg font-extrabold tracking-tight"
+          aria-label="Gulf Elite Transport, home"
+          className="rounded-lg"
         >
-          Gulf Elite <span className="text-accent">Transport</span>
+          <Logo tone="dark" />
         </Link>
 
         <nav aria-label="Main" className="hidden items-center gap-7 text-sm font-medium lg:flex">

@@ -14,7 +14,7 @@ const orgId = `${site.url}/#organization`;
 const siteId = `${site.url}/#website`;
 
 const description =
-  "Gulf Elite Transport provides freight and cargo transport, passenger transport, equipment and machinery moving, contract fleet, delivery, distribution and storage services for businesses.";
+  "Gulf Elite Transport provides taxi and cab rides, freight and cargo transport, passenger transport, equipment and machinery moving, contract fleet, delivery, distribution and storage services in Saudi Arabia.";
 
 /** Organization + WebSite. Rendered once, in the root layout. No unverified data is included. */
 export const baseGraph = {
@@ -26,6 +26,8 @@ export const baseGraph = {
       name: site.name,
       legalName: site.legalName,
       url: site.url,
+      logo: { "@type": "ImageObject", url: abs("/logo.svg"), width: 512, height: 512 },
+      image: abs("/opengraph-image"),
       description,
       ...(site.email || site.phone
         ? {

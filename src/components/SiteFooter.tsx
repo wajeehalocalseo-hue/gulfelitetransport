@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Logo from "./Logo";
 import { services } from "@/content/services";
 import { site, telUrl, whatsappUrl } from "@/lib/site";
 
@@ -8,12 +9,17 @@ export default function SiteFooter() {
     <footer className="bg-navy pb-24 pt-16 text-white/75 md:pb-10">
       <div className="mx-auto grid max-w-7xl gap-10 px-5 md:grid-cols-2 lg:grid-cols-[1fr_1.7fr_0.8fr_1fr]">
         <div>
-          <p className="text-lg font-extrabold text-white">
-            Gulf Elite <span className="text-accent">Transport</span>
-          </p>
+          <Link href="/" aria-label="Gulf Elite Transport, home" className="inline-block rounded-lg">
+            <Logo tone="dark" />
+          </Link>
           <p className="mt-4 text-sm leading-7">
-            Freight and cargo, passenger transport, equipment and machinery
-            moving, contract fleet, delivery, distribution and storage services for businesses.
+            Taxi and cab rides, freight and cargo, passenger transport, equipment moving, contract fleet,
+            delivery, distribution and storage in Saudi Arabia, for individuals and businesses.
+          </p>
+          <p className="mt-4 text-sm">
+            <Link href="/taxi-saudi-arabia" className="font-semibold text-accent hover:underline">
+              Taxi &amp; cab rides by city and route
+            </Link>
           </p>
         </div>
 
