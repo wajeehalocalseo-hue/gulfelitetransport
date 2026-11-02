@@ -15,13 +15,14 @@ import { categoryBatch14Sub } from "./category-batch-14";
 import { categoryBatch15Micro, categoryBatch15Sub } from "./category-batch-15";
 import { categoryBatch16Micro } from "./category-batch-16";
 import { lastMileBatch17Micro } from "./last-mile-batch-17";
+import { distinctBatch18Micro, distinctBatch18Sub } from "./distinct-batch-18";
 import { passengerBatch4Group, passengerBatch4Micro, passengerBatch4Sub } from "./passenger-batch-4";
 
 /**
  * Register each new batch here. Level 2 records must come before Level 3 records so parents exist.
  * Every record listed is published unless held back in statusOverrides (see ../proposals.ts).
  */
-export const batchSub: ChildRecord[] = [...freightBatch1Sub, ...equipmentBatch2Sub, ...fleetBatch3Sub, ...passengerBatch4Sub, ...containerBatch5Sub, ...internationalBatch6Sub, ...distributionBatch7Sub, ...lastMileBatch8Sub, ...projectBatch9Sub, ...expressBatch10Sub, ...warehouseBatch11Sub, ...refrigeratedBatch12Sub, ...leftoverBatch13Sub, ...categoryBatch14Sub, ...categoryBatch15Sub];
+export const batchSub: ChildRecord[] = [...freightBatch1Sub, ...equipmentBatch2Sub, ...fleetBatch3Sub, ...passengerBatch4Sub, ...containerBatch5Sub, ...internationalBatch6Sub, ...distributionBatch7Sub, ...lastMileBatch8Sub, ...projectBatch9Sub, ...expressBatch10Sub, ...warehouseBatch11Sub, ...refrigeratedBatch12Sub, ...leftoverBatch13Sub, ...categoryBatch14Sub, ...categoryBatch15Sub, ...distinctBatch18Sub];
 export const batchMicro: ChildRecord[] = [
   ...freightBatch1Micro,
   ...freightBatch1CommercialMicro,
@@ -49,4 +50,5 @@ export const batchMicro: ChildRecord[] = [
   ...categoryBatch15Micro,
   ...categoryBatch16Micro,
   ...lastMileBatch17Micro,
+  ...distinctBatch18Micro,
 ];

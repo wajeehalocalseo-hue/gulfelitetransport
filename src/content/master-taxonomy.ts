@@ -24,20 +24,14 @@ const RAW = `
 - Consumer Goods Transport :: Household goods | Packaged consumer products | General merchandise
 - Boxed Cargo Transport :: Carton transportation | Crated goods movement | Packaged shipment transport
 ## Specialized Cargo Transportation => specialized-cargo-transportation
-- Fragile Cargo Transport :: Glass products | Ceramics and porcelain | Sensitive packaged goods
 - High-Value Cargo Transport :: Valuable commercial goods | Electronics transportation | Sensitive business equipment
 - Oversized Cargo Transport :: Long-length cargo | Wide-load cargo | Large industrial components
 - Heavy Cargo Transport :: High-weight commercial goods | Dense industrial materials | Heavy palletized cargo
 - Dangerous Goods Transportation :: Regulated hazardous cargo | Chemical cargo transportation | Flammable material transport | Special handling and compliance coordination
 ! Dangerous goods are regulated; do not advertise without the licences, vehicles and procedures required.
 ## Building Materials Transportation => building-materials-transportation
-- Cement Transportation :: Bagged cement delivery | Bulk cement logistics
-- Steel Transportation :: Steel bars and rods | Steel coils | Structural steel | Steel sheets
-- Timber Transportation :: Lumber movement | Wooden boards | Construction timber
 - Construction Materials :: Bricks and blocks | Tiles and ceramics | Sand and aggregates | Pipes and fittings
-- Roofing Materials :: Roofing sheets | Insulation materials | Roofing components
 ## Bulk Cargo Transportation => bulk-cargo-transportation
-- Dry Bulk Cargo :: Sand transportation | Gravel transportation | Mineral materials | Agricultural bulk commodities
 - Liquid Bulk Cargo :: Industrial liquids | Non-hazardous liquid materials | Tank-based liquid transport
 - Bulk Raw Materials :: Industrial raw materials | Manufacturing inputs | Bulk commercial commodities
 ## Pickup & Delivery Freight Services ~ commercial-shipment-pickup-and-delivery
@@ -154,10 +148,9 @@ const RAW = `
 - Container Securing
 - Container Placement
 - Container Yard Movement
-## Container Logistics
+## Container Logistics => container-logistics
 - Container Positioning
 - Container Repositioning
-- Empty Container Management
 - Container Return Coordination
 - Multi-Location Container Movement
 
@@ -378,7 +371,7 @@ const RAW = `
 - Retailer Supply Movement
 - Dealer-to-Dealer Stock Transfer
 - Regional Dealer Distribution
-## Reverse Distribution
+## Reverse Distribution ~ reverse-logistics
 - Retail Returns Collection
 - Distributor Returns
 - Product Exchange Movement
@@ -390,9 +383,8 @@ const RAW = `
 ## Commercial Vehicle Transport => commercial-vehicle-transport
 - Bus Transportation
 - Truck Transportation
-## Fleet Relocation
+## Fleet Relocation => fleet-relocation
 - Company Fleet Relocation
-- Vehicle Collection and Delivery
 
 @ Furniture & Household Moving | furniture-household-moving
 ## Office Relocation => office-relocation
@@ -432,7 +424,7 @@ const RAW = `
 ## Automotive Spare Parts Delivery => automotive-spare-parts-delivery
 - Vehicle Component Delivery
 - Workshop Supply Delivery
-## Industrial Spare Parts Delivery
+## Industrial Spare Parts Delivery ~ industrial-spare-parts-delivery
 - Factory Spare Parts
 - Machinery Components
 - Maintenance Supplies

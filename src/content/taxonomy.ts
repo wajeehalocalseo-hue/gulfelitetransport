@@ -1,5 +1,6 @@
 import { batchMicro, batchSub } from "./batches";
 import { masterTaxonomy } from "./master-taxonomy";
+import { mergedItems } from "./merge-map";
 import { microServices } from "./microservices";
 import { microProposals, type Verification } from "./microproposals";
 import { proposals, statusOverrides } from "./proposals";
@@ -309,7 +310,9 @@ const children = (): Raw[] => {
             semanticKeywords: it.topics,
             faqTopics: it.topics,
             useCase: `${it.name} (${g.name})`,
-            note: g.notes.join(" ") || "Needs owner confirmation before publication.",
+            ...(mergedItems[it.name] && byId.has(mergedItems[it.name])
+              ? { status: "draft" as const, mergedInto: mergedItems[it.name], note: `Covered by the published page "${mergedItems[it.name]}"; not built as a separate page to avoid a near-duplicate.` }
+              : { note: g.notes.join(" ") || "Needs owner confirmation before publication." }),
           }),
         );
       }
