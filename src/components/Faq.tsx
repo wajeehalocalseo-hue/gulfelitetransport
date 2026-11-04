@@ -1,4 +1,5 @@
 import Icon from "./Icon";
+import RichText from "./RichText";
 import type { Faq } from "@/content/services";
 
 export default function FaqList({ items }: { items: Faq[] }) {
@@ -13,7 +14,7 @@ export default function FaqList({ items }: { items: Faq[] }) {
               className="h-5 w-5 shrink-0 text-accent transition-transform group-open:rotate-180"
             />
           </summary>
-          <p className="mt-3 leading-7 text-muted">{f.a}</p>
+          <p className="mt-3 leading-7 text-muted"><RichText text={f.a} /></p>
         </details>
       ))}
     </div>

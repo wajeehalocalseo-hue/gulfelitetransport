@@ -4,6 +4,7 @@ import FaqList from "@/components/Faq";
 import Icon from "@/components/Icon";
 import JsonLd from "@/components/JsonLd";
 import QuoteForm from "@/components/QuoteForm";
+import RichText from "@/components/RichText";
 import ServiceImage from "@/components/ServiceImage";
 import { HeroPanorama } from "@/components/ServiceScene";
 import * as c from "@/content/home";
@@ -67,7 +68,7 @@ export default function Home() {
             <h1 id="hero-title" className="mt-4 text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.4rem]">
               {c.hero.h1}
             </h1>
-            <p className="mt-6 max-w-xl text-lg leading-8 text-white/80">{c.hero.text}</p>
+            <p className="mt-6 max-w-xl text-lg leading-8 text-white/80"><RichText text={c.hero.text} tone="dark" /></p>
             <ul className="mt-6 flex flex-wrap gap-2" aria-label="What we arrange">
               {c.hero.chips.map((x) => (
                 <li key={x} className="rounded-full bg-white/10 px-3.5 py-1.5 text-sm font-semibold text-white/90 ring-1 ring-white/15">
@@ -124,7 +125,7 @@ export default function Home() {
                 </span>
                 <div>
                   <h2 className="text-2xl font-extrabold text-navy">{p.title}</h2>
-                  <p className="mt-2 leading-7 text-muted">{p.text}</p>
+                  <p className="mt-2 leading-7 text-muted"><RichText text={p.text} /></p>
                 </div>
               </div>
               <ul className="mt-5 grid gap-2 sm:grid-cols-1">
@@ -150,7 +151,7 @@ export default function Home() {
           <h2 id="answer-title" className="mt-2 text-2xl font-extrabold text-navy sm:text-3xl">
             {c.answer.h2}
           </h2>
-          <p className="mt-4 text-lg leading-8 text-muted">{c.answer.text}</p>
+          <p className="mt-4 text-lg leading-8 text-muted"><RichText text={c.answer.text} /></p>
         </div>
       </section>
 
@@ -188,7 +189,7 @@ export default function Home() {
           <div>
             <p className={eyebrow}>{c.taxi.eyebrow}</p>
             <h2 id="taxi-title" className={h2}>{c.taxi.h2}</h2>
-            <p className={lead}>{c.taxi.text}</p>
+            <p className={lead}><RichText text={c.taxi.text} /></p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link href={BASE} className={`${btn} bg-navy text-white hover:bg-navy-2`}>Browse all of Saudi Arabia</Link>
               <Link href={`${BASE}/routes`} className={`${btn} border border-navy/25 text-navy hover:border-accent hover:bg-accent/10`}>Intercity routes</Link>
@@ -272,7 +273,7 @@ export default function Home() {
       <section aria-labelledby="services-title" className={`${wrap} py-20`}>
         <p className={eyebrow}>{c.servicesIntro.eyebrow}</p>
         <h2 id="services-title" className={h2}>{c.servicesIntro.h2}</h2>
-        <p className={lead}>{c.servicesIntro.text}</p>
+        <p className={lead}><RichText text={c.servicesIntro.text} /></p>
         <div className="mt-10 grid items-start gap-6 lg:grid-cols-2">
           {groups.map((g) => {
             const list = services.filter((s) => s.group === g.id);
@@ -316,7 +317,7 @@ export default function Home() {
                 )}
                 <span className="flex h-12 w-12 items-center justify-center rounded-full bg-accent text-xl font-extrabold text-navy">{i + 1}</span>
                 <h3 className="mt-5 text-lg font-bold text-navy">{s.title}</h3>
-                <p className="mt-2 text-sm leading-7 text-muted">{s.text}</p>
+                <p className="mt-2 text-sm leading-7 text-muted"><RichText text={s.text} /></p>
               </li>
             ))}
           </ol>
@@ -335,7 +336,7 @@ export default function Home() {
                 <Icon name={w.icon} />
               </span>
               <h3 className="mt-5 text-xl font-bold text-navy">{w.title}</h3>
-              <p className="mt-2 leading-7 text-muted">{w.text}</p>
+              <p className="mt-2 leading-7 text-muted"><RichText text={w.text} /></p>
             </article>
           ))}
         </div>
@@ -352,7 +353,7 @@ export default function Home() {
               <article key={i.title} className="rounded-2xl bg-navy-2 p-5 ring-1 ring-white/10">
                 <Icon name={i.icon} className="h-7 w-7 text-accent" />
                 <h3 className="mt-3 text-lg font-bold">{i.title}</h3>
-                <p className="mt-1.5 text-sm leading-6 text-white/75">{i.text}</p>
+                <p className="mt-1.5 text-sm leading-6 text-white/75"><RichText text={i.text} tone="dark" /></p>
               </article>
             ))}
           </div>
@@ -379,7 +380,7 @@ export default function Home() {
                 <tr key={r.topic}>
                   <th scope="row" className="p-4 font-bold text-navy">{r.topic}</th>
                   <td className="p-4 leading-6 text-muted">{r.alone}</td>
-                  <td className="p-4 leading-6 text-navy">{r.with}</td>
+                  <td className="p-4 leading-6 text-navy"><RichText text={r.with} /></td>
                 </tr>
               ))}
             </tbody>
