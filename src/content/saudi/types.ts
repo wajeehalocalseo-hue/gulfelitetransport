@@ -57,7 +57,7 @@ export type Route = {
   tips: string[];
 };
 
-export type PageKind = "hub" | "region" | "city" | "area" | "airport" | "route";
+export type PageKind = "hub" | "region" | "city" | "area" | "airport" | "route" | "pair";
 
 export type Section =
   | { id: string; h2: string; kind: "text"; paragraphs: string[] }
@@ -67,8 +67,8 @@ export type Section =
   | { id: string; h2: string; kind: "faq"; items: Faq[] };
 
 export type PlaceLayout = {
-  hero: "dark" | "light" | "ledger" | "inset" | "centered" | "board" | "routeline" | "routeband";
-  body: "cards" | "columns" | "tiles" | "checklist";
+  hero: "dark" | "light" | "ledger" | "inset" | "centered" | "board" | "routeline" | "routeband" | "schematic";
+  body: "cards" | "columns" | "tiles" | "checklist" | "accordion" | "table";
   form: "aside" | "bottom" | "hero";
 };
 
@@ -90,6 +90,8 @@ export type PlacePage = {
   /** Entities for schema.org. */
   entities: { type: "Country" | "AdministrativeArea" | "City" | "Place" | "Airport"; name: string; wiki?: string; iata?: string; ar?: string; lat?: number; lng?: number }[];
   route?: { from: string; to: string; km: number };
+  /** Two points inside one city, used for the schematic hero and structured data. */
+  pair?: { a: { name: string; lat: number; lng: number }; b: { name: string; lat: number; lng: number }; km: number; type: "airport" | "hub" | "district" };
   /** Used to prefill the quote form. */
   prefill?: { pickup?: string; dropoff?: string };
   /** Child pages listed in an ItemList. */

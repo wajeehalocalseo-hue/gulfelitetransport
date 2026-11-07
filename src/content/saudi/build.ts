@@ -1,8 +1,10 @@
 import { airports, areas, routes } from "./places";
+import { buildPairs } from "./pairs";
+import { riyadhAreas } from "./riyadh-areas";
 import { cities } from "./cities";
 import { cityGeo, regionExtras } from "./geo";
 import { regions } from "./regions";
-import type { Airport, City, PageKind, PlaceLayout, PlacePage, Section } from "./types";
+import type { Airport, Area, City, PageKind, PlaceLayout, PlacePage, Section } from "./types";
 
 export const BASE = "/taxi-saudi-arabia";
 export const TAXI_SERVICE = "Taxi & Cab Services";
@@ -26,8 +28,9 @@ const HEROES: Record<PageKind, PlaceLayout["hero"][]> = {
   area: ["light", "ledger", "inset", "dark"],
   airport: ["board", "dark"],
   route: ["routeline", "routeband"],
+  pair: ["schematic", "routeline", "routeband", "ledger", "light", "inset", "dark"],
 };
-const BODIES: PlaceLayout["body"][] = ["cards", "columns", "tiles", "checklist"];
+const BODIES: PlaceLayout["body"][] = ["cards", "columns", "tiles", "checklist", "accordion", "table"];
 const FORMS: PlaceLayout["form"][] = ["aside", "bottom", "hero"];
 
 /** Placeholder; real layouts are assigned after all pages exist (see assignLayouts) so no two pages share a combination. */
@@ -99,6 +102,38 @@ function cityPath(c: City) {
 }
 
 const country = { type: "Country" as const, name: "Saudi Arabia", wiki: COUNTRY_WIKI };
+
+// ---------------------------------------------------------------------------- Riyadh pilot: area-to-area rides
+const RIYADH = need(cityById.get("riyadh"), "riyadh");
+const RIYADH_PATH = `${BASE}/riyadh-region/riyadh`;
+const shortName = (n: string) => n.replace(/\s*\(.*\)\s*$/, "");
+/** Riyadh areas that do not yet have a hand-written area page get one generated from the area data. */
+const riyadhExtraAreas: Area[] = riyadhAreas
+  .filter((a) => a.kind !== "airport" && !areas.some((x) => x.id === a.id && x.city === "riyadh"))
+  .map((a) => ({
+    id: a.id,
+    city: "riyadh",
+    name: a.name,
+    tagline: a.tagline,
+    about: a.about,
+    places: a.landmarks.map((l) => ({ name: l, note: `Found in or around ${shortName(a.name)}` })),
+    faq: a.faq,
+  }));
+const allAreas: Area[] = [...areas, ...riyadhExtraAreas];
+const riyadhAccess = Object.fromEntries(riyadhAreas.map((a) => [a.id, a.access]));
+const riyadhPairs = buildPairs(riyadhAreas, {
+  cityName: "Riyadh",
+  basePath: BASE,
+  hubPath: BASE,
+  regionName: "Riyadh Region",
+  regionPath: `${BASE}/riyadh-region`,
+  cityPath: RIYADH_PATH,
+  areaHref: (id) => (riyadhAreas.find((a) => a.id === id)?.kind === "airport" ? `${BASE}/airports/king-khalid-international-airport` : `${RIYADH_PATH}/${id}`),
+  bookingSteps,
+  notAssumed,
+  entities: [country],
+  cityEntity: cityEntity(RIYADH),
+});
 
 function hubPage(): PlacePage {
   return {
@@ -296,6 +331,7 @@ function cityPages(): PlacePage[] {
       ...(ap ? [{ name: ap.name, href: `${BASE}/airports/${ap.id}`, note: `Airport ${ap.code}` }] : []),
       ...cityAreas.map((a) => ({ name: a.name, href: `${cityPath(c)}/${a.id}`, note: "Area guide" })),
       ...cityRoutes.map((x) => ({ name: `${need(cityById.get(x.from), x.from).name} to ${need(cityById.get(x.to), x.to).name}`, href: `${BASE}/routes/${x.id}`, note: `about ${x.km} km` })),
+      ...(c.id === "riyadh" ? riyadhPairs.pages.slice(0, 12).map((x) => ({ name: x.name, href: x.path, note: "Area-to-area ride" })) : []),
       ...c.nearby.map((id) => ({ name: need(cityById.get(id), id).name, href: cityPath(need(cityById.get(id), id)), note: "Nearby city" })),
     ];
     const sections: Section[] = [
@@ -347,12 +383,12 @@ function cityPages(): PlacePage[] {
 }
 
 function areaPages(): PlacePage[] {
-  return areas.map((a, i) => {
+  return allAreas.map((a, i) => {
     const c = need(cityById.get(a.city), a.city);
     const region = need(regionById.get(c.region), c.region);
     const ap = airportOf(c);
     const path = `${cityPath(c)}/${a.id}`;
-    const siblings = areas.filter((x) => x.city === a.city && x.id !== a.id);
+    const siblings = allAreas.filter((x) => x.city === a.city && x.id !== a.id);
     const links = [
       { name: `Taxi & Cab Service in ${c.name}`, href: cityPath(c), note: "City page" },
       ...(ap ? [{ name: ap.name, href: `${BASE}/airports/${ap.id}`, note: `Airport ${ap.code}` }] : []),
@@ -381,8 +417,11 @@ function areaPages(): PlacePage[] {
         { label: "Airport", value: ap ? ap.code : "See city page" },
       ],
       sections: [
-        { id: "about", h2: `About ${a.name}`, kind: "text", paragraphs: [a.about, areaGetting[a.id] ?? ""].filter(Boolean) },
+        { id: "about", h2: `About ${a.name}`, kind: "text", paragraphs: [a.about, areaGetting[a.id] ?? (a.city === "riyadh" ? riyadhAccess[a.id] : undefined) ?? ""].filter(Boolean) },
         { id: "places", h2: `Places in and around ${a.name}`, kind: "items", items: a.places.map((x) => ({ title: x.name, text: x.note })) },
+        ...(a.city === "riyadh" && riyadhPairs.index[a.id]
+          ? [{ id: "rides", h2: `Rides from ${shortName(a.name)} to nearby areas`, kind: "links" as const, intro: "Each page covers both directions, so the ride back is on the same page.", items: (riyadhPairs.index[a.id] ?? []).map((r) => ({ name: r.name, href: r.href, note: `about ${r.km < 10 ? r.km.toFixed(1) : Math.round(r.km)} km` })) }]
+          : []),
         bookingSteps(`in ${a.name}`),
         { id: "links", h2: `More in ${c.name}`, kind: "links", items: links },
         { id: "faq", h2: `${a.name}: questions`, kind: "faq", items: [a.faq, { q: "Do you publish fares?", a: "No. The fare is confirmed with you before you commit." }] },
@@ -403,6 +442,7 @@ function airportPages(): PlacePage[] {
     const served = cities.filter((x) => x.airport === a.id);
     const links = [
       ...served.map((x) => ({ name: `Taxi & Cab Service in ${x.name}`, href: cityPath(x), note: "City page" })),
+      ...(a.id === "king-khalid-international-airport" ? riyadhPairs.pages.filter((x) => x.pair?.type === "airport").slice(0, 8).map((x) => ({ name: x.name, href: x.path, note: "Area-to-area ride" })) : []),
       ...routes.filter((r) => served.some((x) => x.id === r.from || x.id === r.to)).slice(0, 6).map((r) => ({ name: `${need(cityById.get(r.from), r.from).name} to ${need(cityById.get(r.to), r.to).name}`, href: `${BASE}/routes/${r.id}`, note: `about ${r.km} km` })),
     ];
     return {
@@ -552,7 +592,10 @@ function routesIndex(): PlacePage {
   };
 }
 
-export const placePages: PlacePage[] = [hubPage(), ...regionPages(), ...cityPages(), ...areaPages(), ...airportPages(), routesIndex(), ...routePages()];
+export const placePages: PlacePage[] = [hubPage(), ...regionPages(), ...cityPages(), ...areaPages(), ...airportPages(), routesIndex(), ...routePages(), ...riyadhPairs.pages];
+
+/** Pairs that the quality gate left out, for the build log. */
+export const droppedPairs = riyadhPairs.dropped;
 
 /**
  * Gives every page its own hero/body/form combination. Routes and airports are placed first because they
@@ -583,6 +626,27 @@ function assignLayouts(pages: PlacePage[]) {
         throw new Error(`No unused layout left for ${p.path}`);
       });
   }
+  // Area-to-area pages have their own pool: each gets a different hero/body/form combination from the others.
+  const usedPair = new Set<string>();
+  pages
+    .filter((p) => p.kind === "pair")
+    .forEach((p, i) => {
+      const h: PlaceLayout["hero"][] = p.pair?.type === "airport" ? ["board", "schematic"] : HEROES.pair;
+      for (let k = 0; k < h.length * BODIES.length * FORMS.length; k++) {
+        const n = i + k;
+        const cand: PlaceLayout = {
+          hero: h[n % h.length],
+          body: BODIES[Math.floor(n / h.length) % BODIES.length],
+          form: FORMS[Math.floor(n / (h.length * BODIES.length)) % FORMS.length],
+        };
+        if (!usedPair.has(key(cand))) {
+          usedPair.add(key(cand));
+          p.layout = cand;
+          return;
+        }
+      }
+      throw new Error(`No unused layout left for ${p.path}`);
+    });
 }
 assignLayouts(placePages);
 

@@ -20,11 +20,96 @@ function t(s: string): ReactNode {
   return parts.map((p, i) => (i % 2 ? <span key={i} lang="ar" dir="rtl">{p}</span> : p));
 }
 
+/** Two points drawn at their true relative positions (north is up), with the distance between them. */
+function Schematic({ pair }: { pair: NonNullable<PlacePage["pair"]> }) {
+  const { a, b, km } = pair;
+  const W = 520;
+  const H = 340;
+  const pad = 70;
+  const kx = Math.cos((((a.lat + b.lat) / 2) * Math.PI) / 180);
+  const dx = (b.lng - a.lng) * kx;
+  const dy = b.lat - a.lat;
+  const span = Math.max(Math.abs(dx), Math.abs(dy), 0.0001);
+  const scale = (Math.min(W, H) - 2 * pad) / span;
+  const cx = W / 2;
+  const cy = H / 2;
+  const ax = cx - (dx * scale) / 2;
+  const ay = cy + (dy * scale) / 2;
+  const bx = cx + (dx * scale) / 2;
+  const by = cy - (dy * scale) / 2;
+  const mx = (ax + bx) / 2;
+  const my = (ay + by) / 2;
+  const label = (x: number, y: number, name: string, up: boolean) => (
+    <text x={x} y={y + (up ? -16 : 28)} textAnchor="middle" className="fill-navy text-[15px] font-bold">
+      {name.length > 26 ? `${name.slice(0, 24)}...` : name}
+    </text>
+  );
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`Relative positions of ${a.name} and ${b.name}, about ${km < 10 ? km.toFixed(1) : Math.round(km)} kilometres apart`} className="w-full rounded-3xl bg-surface ring-1 ring-navy/10">
+      <defs>
+        <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+          <path d="M32 0H0V32" fill="none" stroke="#101c2c" strokeOpacity="0.07" />
+        </pattern>
+      </defs>
+      <rect width={W} height={H} rx="24" fill="url(#grid)" />
+      <path d={`M${ax} ${ay} Q ${mx + (ay - by) * 0.12} ${my + (bx - ax) * 0.12} ${bx} ${by}`} fill="none" stroke="#f5a623" strokeWidth="4" strokeDasharray="10 10" strokeLinecap="round" />
+      <circle cx={ax} cy={ay} r="11" fill="#101c2c" />
+      <circle cx={ax} cy={ay} r="4.5" fill="#f5a623" />
+      <circle cx={bx} cy={by} r="11" fill="#f5a623" />
+      <circle cx={bx} cy={by} r="4.5" fill="#101c2c" />
+      {label(ax, ay, a.name, ay >= by)}
+      {label(bx, by, b.name, by > ay)}
+      <g transform={`translate(${mx} ${my})`}>
+        <rect x="-44" y="-15" width="88" height="30" rx="15" fill="#101c2c" />
+        <text textAnchor="middle" y="5" className="fill-white text-[13px] font-bold">about {km < 10 ? km.toFixed(1) : Math.round(km)} km</text>
+      </g>
+      <g transform={`translate(${W - 34} 36)`}>
+        <circle r="17" fill="#fff" stroke="#101c2c" strokeOpacity="0.2" />
+        <path d="M0 -10L5 6L0 3L-5 6Z" fill="#101c2c" />
+        <text y="-19" textAnchor="middle" className="fill-navy text-[11px] font-bold">N</text>
+      </g>
+    </svg>
+  );
+}
 /* ------------------------------------------------------------------ section bodies */
 type Item = { title: string; text: string };
 
 function Items({ items, style, steps = false }: { items: Item[]; style: PlacePage["layout"]["body"]; steps?: boolean }) {
   const label = (i: number) => (steps ? `Step ${i + 1}` : pad(i));
+  if (style === "accordion") {
+    return (
+      <div className="mt-6 divide-y divide-navy/10 rounded-2xl border border-navy/10 bg-white">
+        {items.map((it, i) => (
+          <details key={it.title} className="group p-5" open={i === 0}>
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-bold text-navy">
+              <span>
+                {steps && <span className="mr-3 text-accent">{i + 1}.</span>}
+                {t(it.title)}
+              </span>
+              <Icon name="chevron" className="h-5 w-5 shrink-0 text-accent transition-transform group-open:rotate-180" />
+            </summary>
+            <p className="mt-2 text-sm leading-7 text-muted">{t(it.text)}</p>
+          </details>
+        ))}
+      </div>
+    );
+  }
+  if (style === "table") {
+    return (
+      <div className="mt-6 overflow-hidden rounded-2xl border border-navy/10 bg-white">
+        <table className="w-full border-collapse text-left text-sm max-md:block">
+          <tbody className="divide-y divide-navy/10 max-md:block">
+            {items.map((it) => (
+              <tr key={it.title} className="align-top max-md:block max-md:p-4">
+                <th scope="row" className="w-1/3 p-4 font-bold text-navy max-md:block max-md:w-auto max-md:p-0 max-md:pb-1">{t(it.title)}</th>
+                <td className="p-4 leading-6 text-muted max-md:block max-md:p-0">{t(it.text)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  }
   if (style === "columns") {
     return (
       <div className="mt-6 divide-y divide-navy/10 border-y border-navy/10">
@@ -81,7 +166,7 @@ function Items({ items, style, steps = false }: { items: Item[]; style: PlacePag
 }
 
 function Links({ items, style }: { items: { name: string; href: string; note?: string }[]; style: PlacePage["layout"]["body"] }) {
-  if (style === "columns") {
+  if (style === "columns" || style === "table") {
     return (
       <ul className="mt-6 divide-y divide-navy/10 border-y border-navy/10">
         {items.map((l) => (
@@ -301,8 +386,28 @@ export default function PlaceView({ page }: { page: PlacePage }) {
             </div>
           </section>
         );
-      case "routeline":
+      case "schematic":
         return (
+          <section className="border-b border-navy/10 bg-white">
+            <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 py-12 sm:py-16 lg:grid-cols-[1fr_1fr]">
+              <div>
+                <Breadcrumbs items={crumbs} tone="light" />
+                <h1 className="mt-6 max-w-3xl text-4xl font-extrabold leading-tight tracking-tight text-navy sm:text-5xl">{page.h1}</h1>
+                <p className="mt-5 max-w-xl text-lg leading-8 text-muted">{page.lead}</p>
+                {btns("light")}
+                <ul className="mt-8 flex flex-wrap gap-2">
+                  {page.facts.slice(1, 4).map((f) => (
+                    <li key={f.label} className="rounded-full bg-surface px-4 py-2 text-xs text-muted ring-1 ring-navy/10">
+                      <strong className="text-navy">{f.label}:</strong> {t(f.value)}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              {page.pair && <Schematic pair={page.pair} />}
+            </div>
+          </section>
+        );
+      case "routeline":        return (
           <section className="border-b border-navy/10 bg-white">
             <div className="mx-auto max-w-5xl px-5 py-12 sm:py-16">
               <Breadcrumbs items={crumbs} tone="light" />

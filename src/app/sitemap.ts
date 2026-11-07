@@ -17,7 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     ...placePages.map((p) => ({
       url: abs(p.path),
-      priority: p.kind === "hub" ? 0.8 : p.kind === "region" ? 0.7 : p.kind === "city" ? 0.7 : 0.6,
+      priority: p.kind === "hub" ? 0.8 : p.kind === "region" || p.kind === "city" ? 0.7 : p.kind === "pair" ? 0.5 : 0.6,
       changeFrequency: "monthly" as const,
     })),
     { url: abs("/about"), priority: 0.6, changeFrequency: "yearly" },

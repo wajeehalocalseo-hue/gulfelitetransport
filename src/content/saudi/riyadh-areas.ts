@@ -1,0 +1,401 @@
+import type { Faq } from "./types";
+
+/**
+ * Riyadh pilot: the areas that area-to-area ride pages are built from.
+ *
+ * NOTE FOR REVIEW: coordinates are approximate (to about 1-2 km) and the descriptions are deliberately general.
+ * They must be checked and enriched by someone who knows Riyadh before this list is extended. The build only
+ * publishes a pair page when it has enough distinct facts, so adding true local detail here (landmarks, access
+ * rules, what riders go there for) directly adds pages and improves them.
+ */
+export type CityArea = {
+  id: string;
+  name: string;
+  ar: string;
+  lat: number;
+  lng: number;
+  /** Hubs are the places most rides start or end at: airport, business and heritage centres. */
+  tier: "hub" | "district";
+  kind: "airport" | "business" | "heritage" | "diplomatic" | "residential" | "commercial";
+  /** Entry is controlled by gates or passes. */
+  controlled?: boolean;
+  /** Lower number = more prominent; decides which area comes first in a page name (A to B). */
+  rank: number;
+  tagline: string;
+  about: string;
+  landmarks: string[];
+  /** Pickup and drop-off notes. */
+  access: string;
+  /** Who typically starts a ride here. */
+  riders: string;
+  /** What people go there for. */
+  purpose: string;
+  faq: Faq;
+};
+
+export const riyadhAreas: CityArea[] = [
+  {
+    id: "king-khalid-international-airport",
+    name: "King Khalid International Airport",
+    ar: "مطار الملك خالد الدولي",
+    lat: 24.9578,
+    lng: 46.6989,
+    tier: "hub",
+    kind: "airport",
+    rank: 1,
+    tagline: "The main international airport of Riyadh, in the far north of the city.",
+    about:
+      "King Khalid International Airport lies north of the built-up centre, so almost every ride to or from it is a long city ride rather than a short hop. Arrivals and departures cluster around flight times, which makes advance planning more useful here than almost anywhere else in the city.",
+    landmarks: ["Passenger terminals", "Airport Road", "Hotel and car-park zones"],
+    access: "Give your terminal and flight number. Pickups and drop-offs follow the airport's own approach roads and designated areas.",
+    riders: "Arriving and departing air passengers",
+    purpose: "flights and airport hotels",
+    faq: { q: "How early should I request an airport ride?", a: "Send your flight details as early as you can. How early we need them depends on the day and time, and is confirmed for each request." },
+  },
+  {
+    id: "king-abdullah-financial-district",
+    name: "King Abdullah Financial District (KAFD)",
+    ar: "مركز الملك عبدالله المالي",
+    lat: 24.7667,
+    lng: 46.6428,
+    tier: "hub",
+    kind: "business",
+    controlled: true,
+    rank: 2,
+    tagline: "A purpose-built financial district in north Riyadh, built around a cluster of towers.",
+    about:
+      "KAFD is a planned district of offices, hotels and residences with its own internal roads, car parks and a metro station. Because it is a campus rather than an ordinary neighbourhood, rides here depend on naming the right tower and entrance.",
+    landmarks: ["Office towers", "KAFD metro station", "KAFD Grand Mosque"],
+    access: "Entrances and car parks are controlled. Name the tower and the entrance you will use, and the contact who expects you.",
+    riders: "Office workers, visitors to meetings and hotel guests",
+    purpose: "meetings in the towers and the metro interchange",
+    faq: { q: "Can a taxi enter KAFD?", a: "Entrances and parking are controlled, so tell us the tower and gate. What is possible is confirmed for each request." },
+  },
+  {
+    id: "olaya",
+    name: "Olaya",
+    ar: "العليا",
+    lat: 24.69,
+    lng: 46.685,
+    tier: "hub",
+    kind: "business",
+    rank: 3,
+    tagline: "Riyadh's main business, hotel and shopping district, along Olaya Street.",
+    about:
+      "Olaya is built along a long north-south street lined with towers, hotels and malls, with Tahlia Street crossing it. It is where many visitors stay and where business meetings cluster, so it is the most common start or end point for rides in the centre of the city.",
+    landmarks: ["Kingdom Centre", "Al Faisaliah Tower", "Olaya Street", "Tahlia Street"],
+    access: "Olaya Street is busy at lunchtime and in the evening, so a pickup on a side street beside the tower or hotel is often quicker.",
+    riders: "Hotel guests, office workers and shoppers",
+    purpose: "meetings, hotels, malls and restaurants",
+    faq: { q: "Where is the best place to be picked up in Olaya?", a: "A side street next to your tower or hotel entrance is usually quicker than the main road. Give the exact building when you request the ride." },
+  },
+  {
+    id: "diplomatic-quarter",
+    name: "Diplomatic Quarter",
+    ar: "الحي الدبلوماسي",
+    lat: 24.676,
+    lng: 46.619,
+    tier: "hub",
+    kind: "diplomatic",
+    controlled: true,
+    rank: 4,
+    tagline: "The enclosed district of embassies and international organisations in west Riyadh.",
+    about:
+      "The Diplomatic Quarter is a walled, green district with security checks at its gates. Visits are arranged by the embassy or organisation being visited, so a ride here is built around a named host and gate rather than a street address.",
+    landmarks: ["Embassies", "Security gates", "Wadi Hanifah (nearby)"],
+    access: "Ask your host which gate and which pass reference apply, and give us the host's name. Queues form at the gates at busy times.",
+    riders: "Embassy staff, official visitors and residents",
+    purpose: "embassy and organisation appointments",
+    faq: { q: "Can I enter the Diplomatic Quarter by taxi?", a: "Entry is controlled by the district. Your host must register you, and we confirm what is possible for each request." },
+  },
+  {
+    id: "diriyah",
+    name: "Diriyah",
+    ar: "الدرعية",
+    lat: 24.734,
+    lng: 46.575,
+    tier: "hub",
+    kind: "heritage",
+    rank: 5,
+    tagline: "The historic birthplace of the first Saudi state, now a major heritage and cultural destination.",
+    about:
+      "Diriyah, on the north-west edge of Riyadh, includes the At-Turaif district, a UNESCO World Heritage Site, and a growing dining and cultural area. Visits peak in the evening and at weekends, which makes the return ride the part most worth arranging in advance.",
+    landmarks: ["At-Turaif", "Bujairi Terrace", "Wadi Hanifah"],
+    access: "Visitor car parks sit apart from the heritage area. Say which entrance you will be dropped at and agree the return pickup time before you go in.",
+    riders: "Visitors, tourists and families on evening outings",
+    purpose: "heritage sites, restaurants and evening visits",
+    faq: { q: "Can I arrange my return ride from Diriyah in advance?", a: "Yes. Arranging the return pickup in advance is sensible on busy evenings. The plan is confirmed for each request." },
+  },
+  {
+    id: "ad-dirah",
+    name: "Ad Dirah (Old Riyadh)",
+    ar: "الديرة",
+    lat: 24.6313,
+    lng: 46.7134,
+    tier: "hub",
+    kind: "heritage",
+    rank: 6,
+    tagline: "The historic centre of Riyadh, around Masmak Fort and the old markets.",
+    about:
+      "Ad Dirah is the old heart of the city, where Masmak Fort, Souq Al Zal and Qasr Al Hukm stand close together. Streets are tighter and busier than in the new north, and visitors usually walk the last part of the journey.",
+    landmarks: ["Masmak Fort", "Souq Al Zal", "Qasr Al Hukm"],
+    access: "Roads around the old centre are narrow and crowded. Expect the car to meet you at the edge of the market area and allow time to walk.",
+    riders: "Visitors, shoppers and people going to the old markets",
+    purpose: "the fort, the souq and heritage walks",
+    faq: { q: "Can a car go right up to Masmak Fort?", a: "Streets around the fort are busy and partly restricted, so the drop-off point is usually on a nearby road. We confirm it for each request." },
+  },
+  {
+    id: "al-murabba",
+    name: "Al Murabba",
+    ar: "المربع",
+    lat: 24.65,
+    lng: 46.71,
+    tier: "district",
+    kind: "heritage",
+    rank: 7,
+    tagline: "A central district known for the National Museum and the King Abdulaziz Historical Centre.",
+    about:
+      "Al Murabba sits just north of the old centre and is where the National Museum of Saudi Arabia and the King Abdulaziz Historical Centre are found. It is a cultural stop for many visitors and an easy ride from the old city and from Olaya.",
+    landmarks: ["National Museum of Saudi Arabia", "King Abdulaziz Historical Centre", "Murabba Palace"],
+    access: "Museum and centre entrances have their own set-down areas. Name the building you are visiting.",
+    riders: "Museum visitors, school groups and tourists",
+    purpose: "museums and historical sites",
+    faq: { q: "Is Al Murabba close to Ad Dirah?", a: "Yes, the two are neighbours in the older centre of the city. The distance is shown on the ride page between them." },
+  },
+  {
+    id: "al-malaz",
+    name: "Al Malaz",
+    ar: "الملز",
+    lat: 24.665,
+    lng: 46.73,
+    tier: "district",
+    kind: "residential",
+    rank: 8,
+    tagline: "An established eastern-central district of apartments, schools and neighbourhood markets.",
+    about:
+      "Al Malaz is one of the older residential districts east of the centre, with dense housing, schools, clinics and local shops. It is a common starting point for rides to Olaya, the old centre and the airport.",
+    landmarks: ["Neighbourhood markets", "Schools and clinics", "Main arterial roads"],
+    access: "Streets are busy at school and work hours. A pickup on a main road or a well-known shop is easiest for the driver to find.",
+    riders: "Residents and families",
+    purpose: "local shopping and family visits",
+    faq: { q: "Is Al Malaz a good starting point for the airport?", a: "Yes, many airport rides start in eastern districts like Al Malaz. Allow for traffic and give your flight time, and the plan is confirmed for each request." },
+  },
+  {
+    id: "al-sulaimaniyah",
+    name: "Al Sulaimaniyah",
+    ar: "السليمانية",
+    lat: 24.7,
+    lng: 46.695,
+    tier: "district",
+    kind: "commercial",
+    rank: 9,
+    tagline: "A mixed commercial and residential district next to Olaya.",
+    about:
+      "Al Sulaimaniyah lies directly beside Olaya and shares its mix of apartment towers, offices, cafes and clinics. Rides between the two are short, and many are simply a way to avoid walking along busy roads.",
+    landmarks: ["Apartment towers", "Cafes and clinics", "Streets running toward Olaya"],
+    access: "The district is dense and parking is limited, so a clear building name or shop landmark helps the driver.",
+    riders: "Residents, office workers and clinic visitors",
+    purpose: "cafes, offices and clinics",
+    faq: { q: "Is Al Sulaimaniyah within walking distance of Olaya?", a: "It borders Olaya, but roads are busy and hot weather makes short rides popular. The distance is shown on the ride page between them." },
+  },
+  {
+    id: "al-wurud",
+    name: "Al Wurud",
+    ar: "الورود",
+    lat: 24.71,
+    lng: 46.675,
+    tier: "district",
+    kind: "commercial",
+    rank: 10,
+    tagline: "A central district north-west of Olaya with offices, shops and apartment blocks.",
+    about:
+      "Al Wurud sits just north-west of Olaya and blends office buildings, restaurants and apartments. It is a short ride from Olaya and a convenient midpoint between the centre and the north of the city.",
+    landmarks: ["Offices and restaurants", "Apartment blocks", "Roads toward the north"],
+    access: "Give a building name or a landmark on the main street. Side streets can be narrow at busy times.",
+    riders: "Residents and office workers",
+    purpose: "offices and restaurants",
+    faq: { q: "Is Al Wurud close to the north of Riyadh?", a: "It lies between Olaya and the northern districts. The ride pages for its neighbours show the distances." },
+  },
+  {
+    id: "al-mohammadiyah",
+    name: "Al Mohammadiyah",
+    ar: "المحمدية",
+    lat: 24.74,
+    lng: 46.65,
+    tier: "district",
+    kind: "residential",
+    rank: 11,
+    tagline: "A north-central residential and commercial district.",
+    about:
+      "Al Mohammadiyah is north of Olaya and west of the main northern roads, with villas, apartment buildings, shops and offices. It connects the centre with KAFD and the northern districts, so many rides here pass through on the way elsewhere.",
+    landmarks: ["Villas and apartment blocks", "Shops and offices", "Main roads to the north"],
+    access: "Say the street and a nearby landmark. Gated villas and compounds may need the gate number.",
+    riders: "Residents and families",
+    purpose: "shopping and offices",
+    faq: { q: "Is Al Mohammadiyah on the way to KAFD?", a: "It lies between Olaya and KAFD, so rides toward KAFD often pass near it. The distance is shown on the ride page between them." },
+  },
+  {
+    id: "al-nakheel",
+    name: "Al Nakheel",
+    ar: "النخيل",
+    lat: 24.745,
+    lng: 46.63,
+    tier: "district",
+    kind: "residential",
+    rank: 12,
+    tagline: "A north-west residential district known for Al Nakheel Mall.",
+    about:
+      "Al Nakheel is a residential district in the north-west of the city, close to Hittin and KAFD. Al Nakheel Mall is the best-known destination, and families make up much of the ride traffic.",
+    landmarks: ["Al Nakheel Mall", "Residential streets", "Roads toward KAFD and Diriyah"],
+    access: "For the mall, say which entrance you will use. For homes, give a street and a landmark.",
+    riders: "Families and shoppers",
+    purpose: "shopping and family outings",
+    faq: { q: "Can I get a ride from Al Nakheel to Diriyah?", a: "Yes, rides on that route can be requested. The ride page between the two areas shows the distance." },
+  },
+  {
+    id: "hittin",
+    name: "Hittin",
+    ar: "حطين",
+    lat: 24.765,
+    lng: 46.59,
+    tier: "district",
+    kind: "residential",
+    rank: 13,
+    tagline: "A north-west Riyadh district of villas, offices and shopping.",
+    about:
+      "Hittin lies in the north-west of Riyadh, mainly residential with business parks and shopping. It is a frequent starting point for rides to the airport, Olaya and KAFD.",
+    landmarks: ["District shops", "Business parks", "Northern ring road"],
+    access: "A gate number or building name speeds up the pickup, as many homes are in gated streets.",
+    riders: "Residents and families",
+    purpose: "homes, shops and business parks",
+    faq: { q: "Can I book a ride from Hittin to the airport?", a: "Yes. Airport rides can be requested, and timing is confirmed with you for each request." },
+  },
+  {
+    id: "al-malqa",
+    name: "Al Malqa",
+    ar: "الملقا",
+    lat: 24.81,
+    lng: 46.6,
+    tier: "district",
+    kind: "residential",
+    rank: 14,
+    tagline: "A large northern residential district with villas, schools and shops.",
+    about:
+      "Al Malqa is a northern district of villas and apartments, with schools and neighbourhood shops. It is closer to the airport than the centre of the city, so airport rides from here are shorter than from Olaya.",
+    landmarks: ["Villas and apartments", "Schools", "Neighbourhood shops"],
+    access: "Many streets are quiet and look alike, so give the street name and a landmark.",
+    riders: "Families and residents",
+    purpose: "homes, schools and shops",
+    faq: { q: "Is Al Malqa close to the airport?", a: "It is in the north, so the airport is closer than from central districts. The ride page shows the distance." },
+  },
+  {
+    id: "al-yasmin",
+    name: "Al Yasmin",
+    ar: "الياسمين",
+    lat: 24.825,
+    lng: 46.645,
+    tier: "district",
+    kind: "residential",
+    rank: 15,
+    tagline: "A northern residential district between Al Malqa and Al Narjis.",
+    about:
+      "Al Yasmin is a northern residential district with villas, apartments and neighbourhood services. It lies on the way between the centre and the airport, so rides here often combine local trips with airport runs.",
+    landmarks: ["Villas and apartments", "Neighbourhood services", "Roads toward the airport"],
+    access: "Give a street and a landmark. For gated compounds, give the gate.",
+    riders: "Residents and families",
+    purpose: "homes and local services",
+    faq: { q: "Is Al Yasmin on the way to the airport?", a: "It lies in the north between the centre and the airport. The distance appears on the relevant ride page." },
+  },
+  {
+    id: "al-narjis",
+    name: "Al Narjis",
+    ar: "النرجس",
+    lat: 24.845,
+    lng: 46.65,
+    tier: "district",
+    kind: "residential",
+    rank: 16,
+    tagline: "A fast-growing district in the far north of the city.",
+    about:
+      "Al Narjis is one of the northern districts that has grown quickly, with new villas and apartment buildings. It is among the closest residential areas to the airport, but a long way from Ad Dirah and the south.",
+    landmarks: ["New villas and apartments", "Northern roads", "Roads toward the airport"],
+    access: "Newer streets may be missing from some maps, so a pin location or a nearby landmark helps.",
+    riders: "Residents and families in newer housing",
+    purpose: "homes and schools",
+    faq: { q: "Is Al Narjis far from the centre?", a: "It is in the far north, so rides to central areas are long. The ride pages show approximate distances." },
+  },
+  {
+    id: "al-sahafah",
+    name: "Al Sahafah",
+    ar: "الصحافة",
+    lat: 24.8,
+    lng: 46.63,
+    tier: "district",
+    kind: "residential",
+    rank: 17,
+    tagline: "A northern residential district with villas and neighbourhood shops.",
+    about:
+      "Al Sahafah is a northern residential district that lies between Hittin and Al Yasmin. It is mostly villas and apartment buildings, and rides from here usually head south to Olaya and KAFD or north to the airport.",
+    landmarks: ["Villas and apartments", "Neighbourhood shops", "Main northern roads"],
+    access: "Say the street and a nearby landmark. Gated homes need the gate number.",
+    riders: "Residents and families",
+    purpose: "homes and local shops",
+    faq: { q: "Can I book a ride from Al Sahafah to KAFD?", a: "Yes, rides between northern districts and KAFD can be requested. The distance is shown on the ride page between them." },
+  },
+  {
+    id: "qurtubah",
+    name: "Qurtubah",
+    ar: "قرطبة",
+    lat: 24.81,
+    lng: 46.75,
+    tier: "district",
+    kind: "residential",
+    rank: 18,
+    tagline: "A north-eastern residential and commercial district.",
+    about:
+      "Qurtubah lies in the north-east of Riyadh and mixes housing with shops and services. It is closer to the airport road than the central districts, and many rides here are to the airport, Olaya or the eastern centre.",
+    landmarks: ["Housing and shops", "Roads toward the airport", "Eastern ring road"],
+    access: "Give a street and a landmark. Main roads here carry heavy traffic at peak times.",
+    riders: "Residents and commuters",
+    purpose: "homes and local services",
+    faq: { q: "Is Qurtubah convenient for the airport?", a: "It is in the north-east, closer to the airport than the centre. The ride page shows the approximate distance." },
+  },
+  {
+    id: "al-rawdah",
+    name: "Al Rawdah",
+    ar: "الروضة",
+    lat: 24.735,
+    lng: 46.725,
+    tier: "district",
+    kind: "residential",
+    rank: 19,
+    tagline: "A central-eastern district of homes, shops and schools.",
+    about:
+      "Al Rawdah sits east of Olaya and north of Al Malaz, a settled district of homes, shops and schools. It links the centre with the eastern districts, so rides here often start on the way to somewhere else.",
+    landmarks: ["Homes and schools", "Local shops", "Roads linking the centre and the east"],
+    access: "A main-road landmark is the easiest pickup reference. Side streets can be busy at school times.",
+    riders: "Residents and families",
+    purpose: "homes, schools and local shops",
+    faq: { q: "How far is Al Rawdah from Olaya?", a: "It is east of Olaya. The ride page between the two shows the approximate distance." },
+  },
+  {
+    id: "al-suwaidi",
+    name: "Al Suwaidi",
+    ar: "السويدي",
+    lat: 24.595,
+    lng: 46.635,
+    tier: "district",
+    kind: "residential",
+    rank: 20,
+    tagline: "A south-western residential district.",
+    about:
+      "Al Suwaidi is in the south-west of Riyadh, mainly residential with local markets and services. It is far from the northern districts and the airport, so rides to those areas are among the longest city rides.",
+    landmarks: ["Residential streets", "Local markets", "Roads toward the centre"],
+    access: "Give a street and a landmark. Allow extra time for rides to the north of the city.",
+    riders: "Residents and families",
+    purpose: "homes and local markets",
+    faq: { q: "Is Al Suwaidi far from the airport?", a: "It is in the south-west and the airport is in the far north, so the ride is long. The ride pages show approximate distances." },
+  },
+];
+
+export const riyadhAreaById = new Map(riyadhAreas.map((a) => [a.id, a]));
