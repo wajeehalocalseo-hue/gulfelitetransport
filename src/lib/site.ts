@@ -10,7 +10,7 @@ export const site = {
   // Registered company name, used in the footer and in structured data.
   legalName: "Gulf Elite Transport Group",
   // Production origin used for canonical URLs, sitemap, schema and llms.txt.
-  url: "https://gulfelitetransport.wajeehalocalseo.workers.dev",
+  url: "https://gulfelitetransportgroup.com",
   language: "en",
 
   // --- Contact (REQUIRED before launch) ---
