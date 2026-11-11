@@ -26,7 +26,20 @@ export type QuoteRequestRow = {
 /* ------------------------------------------------------------ admin (Supabase Auth) */
 export type AdminSession = { access: string; refresh: string; exp: number; email: string };
 export type QuoteStatus = "new" | "contacted" | "quoted" | "won" | "lost" | "spam";
-export type QuoteRecord = QuoteRequestRow & { id: string; created_at: string; status: QuoteStatus };
+export type Priority = "low" | "normal" | "high" | "urgent";
+export type QuoteRecord = QuoteRequestRow & {
+  id: string;
+  created_at: string;
+  updated_at?: string;
+  status: QuoteStatus;
+  priority?: Priority;
+  assigned_to?: string | null;
+  quote_amount?: number | null;
+  follow_up_at?: string | null;
+  internal_notes?: string | null;
+};
+export type QuotePatch = Partial<Pick<QuoteRecord, "status" | "priority" | "assigned_to" | "quote_amount" | "follow_up_at" | "internal_notes">>;
+export type EventRecord = { id: string; request_id: string; created_at: string; actor: string; kind: string; text: string };
 
 const KEY = "ge_admin_session";
 const baseHeaders = { apikey: anonKey, "Content-Type": "application/json" };
@@ -83,22 +96,45 @@ async function authed(path: string, init: RequestInit = {}): Promise<Response> {
     store(null);
     throw new Error("Session expired. Please sign in again.");
   }
-  if (!res.ok) throw new Error(`Request failed (${res.status}). Have you run supabase/admin.sql?`);
+  if (!res.ok) {
+    const detail = (await res.text().catch(() => "")).slice(0, 160);
+    throw new Error(`Request failed (${res.status}). Run supabase/admin.sql and supabase/admin-advanced.sql in the Supabase SQL Editor. ${detail}`);
+  }
   return res;
 }
 
 export async function listQuoteRequests(): Promise<QuoteRecord[]> {
-  return (await authed("quote_requests?select=*&order=created_at.desc&limit=1000")).json();
+  return (await authed("quote_requests?select=*&order=created_at.desc&limit=5000")).json();
 }
 
-export async function setQuoteStatus(id: string, status: QuoteStatus): Promise<void> {
-  await authed(`quote_requests?id=eq.${encodeURIComponent(id)}`, { method: "PATCH", headers: { Prefer: "return=minimal" }, body: JSON.stringify({ status }) });
+const NO_BODY = { Prefer: "return=minimal" };
+const idList = (ids: string[]) => `in.(${ids.map(encodeURIComponent).join(",")})`;
+
+export async function updateQuotes(ids: string[], patch: QuotePatch): Promise<void> {
+  if (!ids.length) return;
+  await authed(`quote_requests?id=${idList(ids)}`, { method: "PATCH", headers: NO_BODY, body: JSON.stringify(patch) });
 }
 
-export async function deleteQuote(id: string): Promise<void> {
-  await authed(`quote_requests?id=eq.${encodeURIComponent(id)}`, { method: "DELETE", headers: { Prefer: "return=minimal" } });
+export async function deleteQuotes(ids: string[]): Promise<void> {
+  if (!ids.length) return;
+  await authed(`quote_requests?id=${idList(ids)}`, { method: "DELETE", headers: NO_BODY });
 }
 
+export async function listEvents(): Promise<EventRecord[]> {
+  return (await authed("request_events?select=*&order=created_at.desc&limit=5000")).json();
+}
+
+export async function addEvents(events: Omit<EventRecord, "id" | "created_at">[]): Promise<void> {
+  if (!events.length) return;
+  await authed("request_events", { method: "POST", headers: NO_BODY, body: JSON.stringify(events) });
+}
+
+export async function changePassword(password: string): Promise<void> {
+  const s = await adminSession();
+  if (!s) throw new Error("Session expired. Please sign in again.");
+  const res = await fetch(`${url}/auth/v1/user`, { method: "PUT", headers: { ...baseHeaders, Authorization: `Bearer ${s.access}` }, body: JSON.stringify({ password }) });
+  if (!res.ok) throw new Error((await res.json().catch(() => ({}))).msg ?? "Could not change the password.");
+}
 export async function saveQuoteRequest(row: QuoteRequestRow): Promise<void> {
   if (!supabaseConfigured) throw new Error("Supabase is not configured");
   const body = Object.fromEntries(Object.entries(row).filter(([, v]) => v !== undefined && v !== ""));

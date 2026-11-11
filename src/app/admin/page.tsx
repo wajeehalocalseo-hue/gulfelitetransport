@@ -1,9 +1,9 @@
-import AdminDashboard from "@/components/admin/AdminDashboard";
+import OverviewPage from "@/components/admin/OverviewPage";
 
-export default function AdminPage() {
+export default function Page() {
   return (
-    <main id="main" className="flex-1 bg-surface">
-      <AdminDashboard />
+    <main id="main">
+      <OverviewPage />
     </main>
   );
 }
