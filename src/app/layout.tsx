@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import Script from "next/script";
 import { site } from "@/lib/site";
 import { baseGraph } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
@@ -42,6 +43,10 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
   manifest: "/manifest.webmanifest",
+  verification: {
+    google: "E22uAF4yShQUOkUXE5-RynF_Nj7NR5CFiTbtotX_jm0",
+    other: { "msvalidate.01": "D7FCDD3CA769F65AC026CAE8FD46EDEF" },
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -59,6 +64,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         {children}
         <SiteFooter />
         <StickyCta />
+        <Script id="clarity" strategy="afterInteractive">
+          {`(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","zbv8e0hevw");`}
+        </Script>
       </body>
     </html>
   );

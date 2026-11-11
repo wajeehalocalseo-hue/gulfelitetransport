@@ -52,8 +52,10 @@ export default function PrivacyPage() {
           Supabase hosts the database that stores quote requests. If you choose to contact us
           through WhatsApp or email, those services process your
           message under their own privacy policies. The website also loads its font from Google
-          Fonts at build time and serves it from this website. It does not use advertising or
-          analytics cookies at the time of writing.
+          Fonts at build time and serves it from this website. It does not use advertising
+          cookies. We use Microsoft Clarity, an analytics service that records how visitors use
+          the website (for example clicks, scrolling and pages viewed) so we can improve it. It
+          may set cookies and process data under Microsoft&apos;s privacy statement.
         </p>
         <h2 className="text-2xl font-extrabold text-navy">Your choices</h2>
         <p>
