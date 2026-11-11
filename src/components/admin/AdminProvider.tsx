@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { useAdminTheme, type Theme } from "@/lib/admin-theme";
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import {
   addEvents,
@@ -29,6 +30,8 @@ type Ctx = {
   patch: (ids: string[], p: QuotePatch) => Promise<void>;
   remove: (ids: string[]) => Promise<void>;
   signOut: () => Promise<void>;
+  theme: Theme;
+  setTheme: (t: Theme) => void;
 };
 
 const AdminCtx = createContext<Ctx | null>(null);
@@ -67,6 +70,12 @@ export default function AdminProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
   const [now, setNow] = useState(0);
   const [error, setError] = useState("");
+  const [theme, setTheme] = useAdminTheme();
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("admin-dark", theme === "dark");
+    return () => document.documentElement.classList.remove("admin-dark");
+  }, [theme]);
 
   const load = useCallback(async () => {
     try {
@@ -147,7 +156,7 @@ export default function AdminProvider({ children }: { children: ReactNode }) {
     return <p className="px-5 py-24 text-center text-muted">{error ? <span role="alert" className="text-red-700">{error}</span> : "Loading..."}</p>;
   }
 
-  const ctx: Ctx = { session, rows, events, loading, now, error, reload: load, patch, remove, signOut };
+  const ctx: Ctx = { session, rows, events, loading, now, error, reload: load, patch, remove, signOut, theme, setTheme };
   return (
     <AdminCtx.Provider value={ctx}>
       <div className="flex min-h-screen flex-col bg-surface lg:flex-row">
@@ -155,7 +164,10 @@ export default function AdminProvider({ children }: { children: ReactNode }) {
           <div className="flex items-center justify-between px-5 py-4 lg:block lg:py-6">
             <p className="text-lg font-extrabold">Gulf Elite <span className="text-accent">Admin</span></p>
             <p className="hidden truncate text-xs text-white/60 lg:mt-1 lg:block">{session.email}</p>
-            <button onClick={signOut} className="rounded-full px-3 py-1 text-xs font-bold ring-1 ring-white/25 lg:hidden">Sign out</button>
+            <div className="flex gap-2 lg:hidden">
+              <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")} className="rounded-full px-3 py-1 text-xs font-bold ring-1 ring-white/25">{theme === "dark" ? "Light" : "Dark"}</button>
+              <button onClick={signOut} className="rounded-full px-3 py-1 text-xs font-bold ring-1 ring-white/25">Sign out</button>
+            </div>
           </div>
           <nav aria-label="Admin" className="flex gap-1 overflow-x-auto px-3 pb-3 lg:flex-col lg:px-3 lg:pb-0">
             {nav.map((n) => {
@@ -175,6 +187,9 @@ export default function AdminProvider({ children }: { children: ReactNode }) {
             })}
           </nav>
           <div className="hidden px-3 pt-6 lg:block">
+            <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")} aria-pressed={theme === "dark"} className="mb-2 w-full rounded-lg px-3 py-2.5 text-left text-sm font-semibold text-white/80 ring-1 ring-white/20 hover:bg-white/10">
+              {theme === "dark" ? "Light mode" : "Dark mode"}
+            </button>
             <button onClick={signOut} className="w-full rounded-lg px-3 py-2.5 text-left text-sm font-semibold text-white/80 ring-1 ring-white/20 hover:bg-white/10">Sign out</button>
           </div>
         </aside>
