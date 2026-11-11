@@ -6,7 +6,7 @@ import JsonLd from "@/components/JsonLd";
 import QuoteForm from "@/components/QuoteForm";
 import RichText from "@/components/RichText";
 import ServiceImage from "@/components/ServiceImage";
-import { HeroPanorama } from "@/components/ServiceScene";
+import { BookingCard } from "@/components/HeroBooking";
 import * as c from "@/content/home";
 import { airports, routes } from "@/content/saudi/places";
 import { cities } from "@/content/saudi/cities";
@@ -96,17 +96,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="relative">
-            <div className="overflow-hidden rounded-3xl ring-1 ring-white/15 shadow-2xl">
-              <HeroPanorama className="block aspect-[10/7] h-full w-full" />
-            </div>
-            <p className="absolute -bottom-4 left-4 flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-navy shadow-lg">
-              <Icon name="network" className="h-4 w-4 text-accent" /> {c.hero.routeChip}
-            </p>
-            <p className="absolute -top-4 right-4 flex items-center gap-2 rounded-full bg-accent px-4 py-2 text-sm font-bold text-navy shadow-lg">
-              <Icon name="check" className="h-4 w-4" /> {c.hero.fareChip}
-            </p>
-          </div>
+          <BookingCard className="w-full max-w-xl justify-self-end lg:max-w-none" />
         </div>
       </section>
 

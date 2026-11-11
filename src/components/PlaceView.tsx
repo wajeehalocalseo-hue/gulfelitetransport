@@ -4,6 +4,7 @@ import Breadcrumbs from "./Breadcrumbs";
 import ContactButtons from "./ContactButtons";
 import FaqList from "./Faq";
 import Icon from "./Icon";
+import HeroBooking from "./HeroBooking";
 import QuoteForm from "./QuoteForm";
 import { TAXI_SERVICE } from "@/content/saudi/build";
 import type { PlacePage, Section } from "@/content/saudi/types";
@@ -250,8 +251,10 @@ function SectionBlock({ s, style }: { s: Section; style: PlacePage["layout"]["bo
 
 /* ------------------------------------------------------------------ page */
 export default function PlaceView({ page }: { page: PlacePage }) {
-  const L = page.layout;
-  const quoteHref = L.form === "hero" ? "#hero-quote" : "#quote";
+  const L0 = page.layout;
+  // The booking form always sits in the hero (HeroBooking), so the old "hero" form placement falls back to the page-bottom form.
+  const L = { ...L0, form: (L0.form === "hero" ? "aside" : L0.form) as typeof L0.form };
+  const quoteHref = "#hero-quote";
   const crumbs = page.crumbs.map((c, i, a) => (i === a.length - 1 ? { name: c.name } : { name: c.name, href: c.path }));
   const pre = page.prefill ?? {};
 
@@ -486,7 +489,9 @@ export default function PlaceView({ page }: { page: PlacePage }) {
 
   return (
     <main id="main" data-layout={`${L.hero}/${L.body}/${L.form}`} className="flex-1">
-      {hero}
+      <HeroBooking service={TAXI_SERVICE} topic={page.name} pickup={pre.pickup} dropoff={pre.dropoff}>
+        {hero}
+      </HeroBooking>
       <nav aria-label="On this page" className="border-b border-navy/10 bg-white">
         <ul className="mx-auto flex max-w-7xl gap-2 overflow-x-auto px-5 py-3">
           {chips.map((ch) => (

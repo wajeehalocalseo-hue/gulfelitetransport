@@ -8,7 +8,6 @@ import JsonLd from "@/components/JsonLd";
 import PageHero from "@/components/PageHero";
 import QuoteForm from "@/components/QuoteForm";
 import ServiceCard from "@/components/ServiceCard";
-import ServiceImage from "@/components/ServiceImage";
 import { getService, services } from "@/content/services";
 import SubServiceCard from "@/components/SubServiceCard";
 import { breadcrumbFor, getNode, pathOf, publishedChildren } from "@/content/taxonomy";
@@ -80,11 +79,7 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
         crumbs={crumbs.map((c, i) => (i === crumbs.length - 1 ? { name: c.name } : { name: c.name, href: c.path }))}
         h1={s.h1}
         lead={s.lead}
-        aside={
-          <div className="relative aspect-[16/10] overflow-hidden rounded-2xl ring-1 ring-white/10">
-            <ServiceImage slug={s.slug} title={s.title} priority className="h-full w-full" />
-          </div>
-        }
+        booking={{ service: s.title }}
       >
         <ContactButtons service={s.title} />
       </PageHero>

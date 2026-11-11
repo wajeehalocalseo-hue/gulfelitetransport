@@ -69,15 +69,6 @@ export default function ServicesPage() {
         crumbs={[{ name: "Home", href: "/" }, { name: "Services" }]}
         h1="Transport & Logistics Services"
         lead={`${services.length} services for businesses, from freight and cargo to passenger transport, equipment moving and contract fleets, with a clear quotation before you commit.`}
-        aside={
-          <div id="hero-quote" className="rounded-2xl bg-white p-6 text-navy shadow-2xl sm:p-7">
-            <h2 className="text-xl font-extrabold">Get a free quote</h2>
-            <p className="mb-5 mt-1 text-sm leading-6 text-muted">
-              Tell us what you need and we will reply with a quotation or any questions.
-            </p>
-            <QuoteForm variant="quick" />
-          </div>
-        }
       >
         <ul className="mb-7 flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium text-white/85">
           {["Quotation before you commit", "Availability confirmed per request", "Recurring arrangements available"].map((t) => (

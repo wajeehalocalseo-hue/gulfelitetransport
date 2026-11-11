@@ -26,13 +26,14 @@ export default function QuoteForm({
   dropoffDefault = "",
 }: {
   defaultService?: string;
-  variant?: "full" | "quick";
+  variant?: "full" | "quick" | "booking";
   /** Sub-service the visitor is viewing; added to the message as context, not to the fields. */
   topic?: string;
   /** Prefills for location pages. */
   pickupDefault?: string;
   dropoffDefault?: string;
 }) {
+  const booking = variant === "booking";
   const quick = variant === "quick";
   const ride = defaultService === "Taxi & Cab Services";
   const uid = useId();
@@ -51,8 +52,8 @@ export default function QuoteForm({
     if (!/^[+\d][\d\s()-]{6,}$/.test(v.phone)) e.phone = "Please enter a valid phone number.";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email)) e.email = "Please enter a valid email address.";
     if (!v.service) e.service = "Please choose the service you need.";
-    if (!quick && !v.pickup) e.pickup = "Please enter the pickup location.";
-    if (!quick && !v.delivery) e.delivery = ride ? "Please enter the drop-off location." : "Please enter the delivery location.";
+    if ((booking || !quick) && !v.pickup) e.pickup = "Please enter the pickup location.";
+    if ((booking || !quick) && !v.delivery) e.delivery = ride ? "Please enter the drop-off location." : "Please enter the delivery location.";
     if (v.date) {
       const today = new Date();
       today.setHours(0, 0, 0, 0);
@@ -66,8 +67,13 @@ export default function QuoteForm({
     ev.preventDefault();
     const d = new FormData(ev.currentTarget);
     const v: Record<string, string> = {};
-    for (const k of ["name", "business", "phone", "email", "service", "pickup", "delivery", "date", "details", "extra"]) {
+    for (const k of ["name", "business", "phone", "email", "service", "pickup", "delivery", "date", "details", "extra", "time", "passengers", "vehicle", "notes"]) {
       v[k] = String(d.get(k) ?? "").trim();
+    }
+    if (booking && ride) {
+      v.details = [`Passengers: ${v.passengers || "1"}`, v.time && `Time: ${v.time}`, v.vehicle && `Vehicle: ${v.vehicle}`, v.notes && `Notes: ${v.notes}`]
+        .filter(Boolean)
+        .join(" | ");
     }
 
     // Spam protection: hidden honeypot field + a minimum fill time. Bots get a fake "sent" state.
@@ -191,6 +197,130 @@ export default function QuoteForm({
           Submit another request
         </button>
       </div>
+    );
+  }
+
+  if (booking) {
+    const sm =
+      "w-full rounded-lg border border-navy/20 bg-white px-3 py-2.5 text-sm text-navy placeholder:text-muted/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/40 aria-[invalid=true]:border-red-600";
+    const lbl = "grid gap-1 text-xs font-bold uppercase tracking-wide text-navy/80";
+    const full = "col-span-2";
+    return (
+      <form onSubmit={onSubmit} noValidate className="grid grid-cols-2 gap-x-3 gap-y-3" aria-describedby={`${uid}-note`}>
+        {ride ? (
+          <input type="hidden" name="service" value={defaultService} />
+        ) : (
+          <label className={`${lbl} ${full}`}>
+            Service
+            <select {...common("service")} required defaultValue={defaultService} className={sm}>
+              <option value="" disabled>
+                Select a service
+              </option>
+              {services.map((s) => (
+                <option key={s.slug} value={s.title}>
+                  {s.title}
+                </option>
+              ))}
+            </select>
+            {msg("service")}
+          </label>
+        )}
+        <label className={`${lbl} ${full}`}>
+          {ride ? "Pickup" : "Pickup location"}
+          <input {...common("pickup")} defaultValue={pickupDefault} required autoComplete="off" placeholder={ride ? "Address, hotel or airport" : "City or address"} className={sm} />
+          {msg("pickup")}
+        </label>
+        <label className={`${lbl} ${full}`}>
+          {ride ? "Drop-off" : "Delivery location"}
+          <input {...common("delivery")} defaultValue={dropoffDefault} required autoComplete="off" placeholder={ride ? "Address, hotel or airport" : "City or address"} className={sm} />
+          {msg("delivery")}
+        </label>
+        <label className={`${lbl} ${ride ? "" : full}`}>
+          Date
+          <input {...common("date")} type="date" className={sm} />
+          {msg("date")}
+        </label>
+        {ride && (
+          <>
+            <label className={lbl}>
+              Time
+              <input name="time" type="time" className={sm} />
+            </label>
+            <label className={lbl}>
+              Passengers
+              <select name="passengers" defaultValue="1" className={sm}>
+                {Array.from({ length: 14 }, (_, i) => i + 1).map((n) => (
+                  <option key={n} value={n}>
+                    {n}
+                  </option>
+                ))}
+                <option value="15+">15 or more</option>
+              </select>
+            </label>
+            <label className={lbl}>
+              Vehicle
+              <select name="vehicle" defaultValue="Any" className={sm}>
+                {["Any", "Sedan", "SUV", "Family van", "Minibus", "Luxury"].map((o) => (
+                  <option key={o} value={o}>
+                    {o}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </>
+        )}
+        <label className={lbl}>
+          Full name
+          <input {...common("name")} required autoComplete="name" className={sm} />
+          {msg("name")}
+        </label>
+        <label className={lbl}>
+          Phone
+          <input {...common("phone")} type="tel" required autoComplete="tel" placeholder="+966..." className={sm} />
+          {msg("phone")}
+        </label>
+        <label className={`${lbl} ${full}`}>
+          Email
+          <input {...common("email")} type="email" required autoComplete="email" className={sm} />
+          {msg("email")}
+        </label>
+        {ride ? (
+          <label className={`${lbl} ${full}`}>
+            Notes <span className="font-normal normal-case text-muted">(optional: bags, child seat, flight no.)</span>
+            <input name="notes" className={sm} />
+          </label>
+        ) : (
+          <label className={`${lbl} ${full}`}>
+            What do you need to move?
+            <textarea {...common("details")} rows={2} required className={sm} />
+            {msg("details")}
+          </label>
+        )}
+
+        <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+          <label>
+            Leave this field empty
+            <input name="company_website" tabIndex={-1} autoComplete="off" />
+          </label>
+        </div>
+
+        {status === "error" && (
+          <p role="alert" className="col-span-2 text-sm text-red-700">
+            Sorry, we could not send your request. Please try again or contact us directly.
+          </p>
+        )}
+
+        <button
+          type="submit"
+          disabled={status === "sending"}
+          className="col-span-2 rounded-full bg-accent px-6 py-3 font-extrabold text-navy transition hover:brightness-95 focus-visible:outline-navy disabled:opacity-60"
+        >
+          {status === "sending" ? "Sending..." : ride ? "Book this ride" : "Request my quote"}
+        </button>
+        <p id={`${uid}-note`} className="col-span-2 text-center text-xs leading-5 text-muted">
+          No payment now. We confirm the vehicle, driver and price before you commit.
+        </p>
+      </form>
     );
   }
 

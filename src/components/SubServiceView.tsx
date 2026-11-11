@@ -4,6 +4,7 @@ import Breadcrumbs from "./Breadcrumbs";
 import ContactButtons from "./ContactButtons";
 import FaqList from "./Faq";
 import Icon from "./Icon";
+import HeroBooking from "./HeroBooking";
 import QuoteForm from "./QuoteForm";
 import ServiceImage from "./ServiceImage";
 import SubServiceCard from "./SubServiceCard";
@@ -110,9 +111,11 @@ type Props = {
  */
 export default function SubServiceView({ node, parent, main, subs, related }: Props) {
   const c = node.content as PageContent;
-  const L = node.layout ?? defaultLayout;
+  const L0 = node.layout ?? defaultLayout;
+  // The booking form always sits in the hero (HeroBooking), so the old "hero" form placement falls back to the page-bottom form.
+  const L = { ...L0, form: (L0.form === "hero" ? "aside" : L0.form) as typeof L0.form };
   const crumbs = node.breadcrumbs.map((b, i, a) => (i === a.length - 1 ? { name: b.name } : { name: b.name, href: b.path }));
-  const quoteHref = L.form === "hero" ? "#hero-quote" : "#quote";
+  const quoteHref = "#hero-quote";
   const facts = [
     { label: "Best for", value: node.audienceShort },
     { label: "Typical use", value: c.applications[0]?.title ?? "" },
@@ -710,7 +713,9 @@ export default function SubServiceView({ node, parent, main, subs, related }: Pr
 
   return (
     <main id="main" data-layout={`${L.hero}/${L.body}/${L.form}`} className="flex-1">
-      {hero}
+      <HeroBooking service={main.name} topic={node.name}>
+        {hero}
+      </HeroBooking>
 
       <nav aria-label="On this page" className="border-b border-navy/10 bg-white">
         <ul className="mx-auto flex max-w-7xl gap-2 overflow-x-auto px-5 py-3">
