@@ -53,7 +53,7 @@ export default function PrivacyPage() {
           through WhatsApp or email, those services process your
           message under their own privacy policies. The website also loads its font from Google
           Fonts at build time and serves it from this website. It does not use advertising
-          cookies. We use Microsoft Clarity, an analytics service that records how visitors use
+          cookies. We use Google Tag Manager, Ahrefs Analytics and Microsoft Clarity, analytics services that measure and record how visitors use
           the website (for example clicks, scrolling and pages viewed) so we can improve it. It
           may set cookies and process data under Microsoft&apos;s privacy statement.
         </p>
