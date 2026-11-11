@@ -37,8 +37,10 @@ export default function PrivacyPage() {
         <p>
           When you use the quote form, you may provide your name, business name, phone number,
           email address, pickup and delivery locations, preferred date and details about your
-          transport requirement. This website does not store these details. The form prepares a
-          message that you send yourself through WhatsApp or your email application.
+          transport requirement. When you submit the form, these details are saved in a database
+          provided by Supabase so our team can reply. If the database cannot be reached, the form
+          instead prepares a message that you send yourself through WhatsApp or your email
+          application.
         </p>
         <h2 className="text-2xl font-extrabold text-navy">How we use it</h2>
         <p>
@@ -47,7 +49,8 @@ export default function PrivacyPage() {
         </p>
         <h2 className="text-2xl font-extrabold text-navy">Third-party services</h2>
         <p>
-          If you choose to contact us through WhatsApp or email, those services process your
+          Supabase hosts the database that stores quote requests. If you choose to contact us
+          through WhatsApp or email, those services process your
           message under their own privacy policies. The website also loads its font from Google
           Fonts at build time and serves it from this website. It does not use advertising or
           analytics cookies at the time of writing.

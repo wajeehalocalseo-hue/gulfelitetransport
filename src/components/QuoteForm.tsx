@@ -3,6 +3,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { services } from "@/content/services";
 import { mailtoUrl, site, whatsappUrl } from "@/lib/site";
+import { saveQuoteRequest, supabaseConfigured } from "@/lib/supabase";
 
 type Errors = Partial<Record<string, string>>;
 type Status = "idle" | "sending" | "sent" | "error";
@@ -11,7 +12,7 @@ const input =
   "w-full rounded-lg border border-navy/20 bg-white px-3.5 py-3 text-base text-navy placeholder:text-muted/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/40 aria-[invalid=true]:border-red-600";
 const labelCls = "grid gap-1.5 text-sm font-semibold text-navy";
 
-const canSubmit = Boolean(site.whatsapp || site.email);
+const canSubmit = Boolean(supabaseConfigured || site.whatsapp || site.email);
 
 /**
  * `variant="quick"` is a shorter form (name, phone, email, service, details) for placing
@@ -37,7 +38,7 @@ export default function QuoteForm({
   const uid = useId();
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<Status>("idle");
-  const [channel, setChannel] = useState<"whatsapp" | "email" | null>(null);
+  const [channel, setChannel] = useState<"whatsapp" | "email" | "saved" | null>(null);
   const loadedAt = useRef(0);
 
   useEffect(() => {
@@ -100,7 +101,31 @@ export default function QuoteForm({
     const text = lines.join("\n");
 
     setStatus("sending");
+    void (async () => {
     try {
+      if (supabaseConfigured) {
+        try {
+          await saveQuoteRequest({
+            name: v.name,
+            business: v.business,
+            phone: v.phone,
+            email: v.email,
+            service: v.service,
+            topic,
+            pickup: v.pickup,
+            dropoff: v.delivery,
+            preferred_date: v.date,
+            details: v.details,
+            extra: v.extra,
+            page_path: window.location.pathname,
+          });
+          setChannel("saved");
+          setStatus("sent");
+          return;
+        } catch {
+          // Fall through to WhatsApp / email so the request is never lost.
+        }
+      }
       const wa = whatsappUrl(text);
       const mail = mailtoUrl(`Quote request: ${v.service}`, text);
       if (wa) {
@@ -116,6 +141,7 @@ export default function QuoteForm({
     } catch {
       setStatus("error");
     }
+    })();
   }
 
   const err = (k: string) => errors[k];
@@ -147,12 +173,15 @@ export default function QuoteForm({
   if (status === "sent") {
     return (
       <div role="status" className="rounded-xl border border-green-700/30 bg-green-50 p-6 text-navy">
-        <p className="font-semibold">Your request is ready to send.</p>
+        <p className="font-semibold">
+          {channel === "saved" ? "Thank you, your request has been received." : "Your request is ready to send."}
+        </p>
         <p className="mt-2 text-sm leading-6">
-          {channel === "email"
-            ? "Your email app has opened with your request. Please press send there to complete it."
-            : "WhatsApp has opened with your request. Please press send there to complete it."}{" "}
-          Nothing is stored on this website.
+          {channel === "saved"
+            ? "Our team will review it and contact you on the phone number or email you gave."
+            : channel === "email"
+              ? "Your email app has opened with your request. Please press send there to complete it."
+              : "WhatsApp has opened with your request. Please press send there to complete it."}
         </p>
         <button
           type="button"
@@ -255,8 +284,9 @@ export default function QuoteForm({
       )}
 
       <p id={`${uid}-note`} className="text-sm leading-6 text-muted @lg:col-span-2">
-        This form opens {site.whatsapp ? "WhatsApp" : "your email app"} with your request
-        prefilled so you can send it. Nothing is stored on this website.
+        {supabaseConfigured
+          ? "Your details are saved securely and used only to reply to your request. See our privacy policy."
+          : `This form opens ${site.whatsapp ? "WhatsApp" : "your email app"} with your request prefilled so you can send it. Nothing is stored on this website.`}
       </p>
 
       <button
