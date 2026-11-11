@@ -1,21 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { fmtDate, followUpState, isRide, PRIORITIES, pri, STATUSES, waNumber } from "@/lib/admin-stats";
-import type { EventRecord, QuotePatch, QuoteRecord, QuoteStatus } from "@/lib/supabase";
+import { useEffect, useMemo, useState } from "react";
+import { fill, useAdminSettings } from "@/lib/admin-settings";
+import { fmtDate, followUpState, isRide, PRIORITIES, pri, sameCustomer, spamSignals, STATUSES, waNumber } from "@/lib/admin-stats";
+import { printQuote, refOf } from "@/lib/admin-quote";
+import type { QuoteRecord, QuoteStatus } from "@/lib/supabase";
+import { useAdmin } from "./AdminProvider";
 import { btn, btnDark, field, Pill, priorityTone, statusTone } from "./ui";
-
-type Props = {
-  r: QuoteRecord;
-  events: EventRecord[];
-  onClose: () => void;
-  onPatch: (p: QuotePatch) => Promise<void>;
-  onDelete: () => Promise<void>;
-};
 
 const label = "text-xs font-bold uppercase tracking-wide text-muted";
 
-export default function RequestDrawer({ r, events, onClose, onPatch, onDelete }: Props) {
+export default function RequestDrawer({ r, onClose }: { r: QuoteRecord; onClose: () => void }) {
+  const { rows, events, patch, remove, openRequest, now } = useAdmin();
+  const [settings] = useAdminSettings();
   const [assigned, setAssigned] = useState(r.assigned_to ?? "");
   const [amount, setAmount] = useState(r.quote_amount != null ? String(r.quote_amount) : "");
   const [follow, setFollow] = useState(r.follow_up_at ?? "");
@@ -29,11 +26,20 @@ export default function RequestDrawer({ r, events, onClose, onPatch, onDelete }:
     return () => window.removeEventListener("keydown", onKey);
   }, [onClose]);
 
-  const route = r.pickup && r.dropoff ? ` from ${r.pickup} to ${r.dropoff}` : "";
-  const when = r.preferred_date ? ` on ${r.preferred_date}` : "";
-  const hello = `Hello ${r.name}, this is Gulf Elite Transport Group about your ${isRide(r) ? "ride" : r.service} request${route}${when}. `;
-  const waText = `${hello}Could you confirm the details so we can send you the price and arrange it?`;
-  const mailBody = `Hello ${r.name},\n\nThank you for contacting Gulf Elite Transport Group about your ${isRide(r) ? "ride" : r.service} request${route}${when}.\n\n[Add the quote or your questions here]\n\nKind regards,\nGulf Elite Transport Group`;
+  const mine = useMemo(() => events.filter((e) => e.request_id === r.id), [events, r.id]);
+  const earlier = useMemo(() => sameCustomer(rows, r), [rows, r]);
+  const spam = spamSignals(r);
+
+  const vars = {
+    name: r.name,
+    service: isRide(r) ? "ride" : r.service,
+    route: r.pickup && r.dropoff ? ` from ${r.pickup} to ${r.dropoff}` : "",
+    date: r.preferred_date ? ` on ${r.preferred_date}` : "",
+    amount: r.quote_amount != null ? String(r.quote_amount) : "[amount]",
+    ref: refOf(r),
+  };
+  const wa = (text: string) => `https://wa.me/${waNumber(r.phone)}?text=${encodeURIComponent(text)}`;
+  const mailBody = fill(settings.emailTemplate, vars);
 
   const run = async (fn: () => Promise<void>, ok: string) => {
     setBusy(true);
@@ -51,13 +57,10 @@ export default function RequestDrawer({ r, events, onClose, onPatch, onDelete }:
   const save = () => {
     const n = amount.trim() === "" ? null : Number(amount);
     if (n !== null && (!Number.isFinite(n) || n < 0)) return setMsg("Quote amount must be a positive number.");
-    return run(
-      () => onPatch({ assigned_to: assigned.trim() || null, quote_amount: n, follow_up_at: follow || null, internal_notes: notes.trim() || null }),
-      "Saved.",
-    );
+    return run(() => patch([r.id], { assigned_to: assigned.trim() || null, quote_amount: n, follow_up_at: follow || null, internal_notes: notes.trim() || null }), "Saved.");
   };
 
-  const fu = followUpState({ ...r, follow_up_at: follow || null });
+  const fu = followUpState({ ...r, follow_up_at: follow || null }, now);
   const details: [string, string | null | undefined][] = [
     ["Phone", r.phone],
     ["Email", r.email],
@@ -69,6 +72,7 @@ export default function RequestDrawer({ r, events, onClose, onPatch, onDelete }:
     ["Preferred date", r.preferred_date],
     ["Extra", r.extra],
     ["Sent from", r.page_path],
+    ["Reference", refOf(r)],
   ];
 
   return (
@@ -84,17 +88,29 @@ export default function RequestDrawer({ r, events, onClose, onPatch, onDelete }:
               <Pill className={priorityTone[pri(r)]}>{pri(r)}</Pill>
               {fu === "overdue" && <Pill className="bg-red-100 text-red-800">follow-up overdue</Pill>}
               {fu === "today" && <Pill className="bg-amber-100 text-amber-900">follow-up today</Pill>}
+              {earlier.length > 0 && <Pill className="bg-violet-100 text-violet-900">repeat customer</Pill>}
             </div>
           </div>
           <button onClick={onClose} className={btn}>Close</button>
         </div>
 
         <div className="space-y-6 p-5">
+          {spam.length > 0 && r.status !== "spam" && (
+            <div role="note" className="flex flex-wrap items-center justify-between gap-3 rounded-xl bg-red-50 p-3 text-sm text-red-800">
+              <span>Possible spam: {spam.join(", ")}.</span>
+              <button disabled={busy} onClick={() => run(() => patch([r.id], { status: "spam" }), "Marked as spam.")} className="rounded-full bg-red-600 px-3 py-1 text-xs font-bold text-white">Mark as spam</button>
+            </div>
+          )}
+
           <div className="flex flex-wrap gap-2">
             <a href={`tel:${r.phone}`} className={btnDark}>Call</a>
-            <a href={`https://wa.me/${waNumber(r.phone)}?text=${encodeURIComponent(waText)}`} target="_blank" rel="noopener noreferrer" className="rounded-full bg-green-600 px-4 py-2 text-sm font-bold text-white">WhatsApp</a>
-            <a href={`mailto:${r.email}?subject=${encodeURIComponent(`Your ${isRide(r) ? "ride" : r.service} request`)}&body=${encodeURIComponent(mailBody)}`} className={btn}>Email</a>
-            <button onClick={() => navigator.clipboard?.writeText(`${r.name} | ${r.phone} | ${r.email}\n${r.service}${route}\n${r.details}`).then(() => setMsg("Copied."))} className={btn}>Copy</button>
+            <a href={wa(fill(settings.waTemplate, vars))} target="_blank" rel="noopener noreferrer" className="rounded-full bg-green-600 px-4 py-2 text-sm font-bold text-white">WhatsApp</a>
+            {r.quote_amount != null && (
+              <a href={wa(fill(settings.quoteWaTemplate, vars))} target="_blank" rel="noopener noreferrer" className="rounded-full bg-green-700 px-4 py-2 text-sm font-bold text-white">Send quote on WhatsApp</a>
+            )}
+            <a href={`mailto:${r.email}?subject=${encodeURIComponent(`Your ${vars.service} request`)}&body=${encodeURIComponent(mailBody)}`} className={btn}>Email</a>
+            <button onClick={() => (printQuote(r, settings.quoteTerms) ? undefined : setMsg("Allow pop-ups to open the quotation."))} className={btn}>Print quote</button>
+            <button onClick={() => navigator.clipboard?.writeText(`${r.name} | ${r.phone} | ${r.email}\n${r.service}${vars.route}\n${r.details}`).then(() => setMsg("Copied."))} className={btn}>Copy</button>
           </div>
 
           <div>
@@ -104,7 +120,7 @@ export default function RequestDrawer({ r, events, onClose, onPatch, onDelete }:
                 <button
                   key={s}
                   disabled={busy}
-                  onClick={() => run(() => onPatch({ status: s as QuoteStatus }), `Status set to ${s}.`)}
+                  onClick={() => run(() => patch([r.id], { status: s as QuoteStatus }), `Status set to ${s}.`)}
                   className={`rounded-full px-3.5 py-1.5 text-sm font-bold capitalize ring-1 transition ${r.status === s ? "bg-navy text-white ring-navy" : "bg-white text-navy ring-navy/20 hover:bg-accent/20"}`}
                 >
                   {s}
@@ -116,7 +132,7 @@ export default function RequestDrawer({ r, events, onClose, onPatch, onDelete }:
           <div className="grid gap-4 sm:grid-cols-2">
             <label className="grid gap-1">
               <span className={label}>Priority</span>
-              <select value={pri(r)} onChange={(e) => run(() => onPatch({ priority: e.target.value as never }), "Priority updated.")} className={field}>
+              <select value={pri(r)} onChange={(e) => run(() => patch([r.id], { priority: e.target.value as never }), "Priority updated.")} className={field}>
                 {PRIORITIES.map((p) => <option key={p} value={p}>{p}</option>)}
               </select>
             </label>
@@ -139,6 +155,11 @@ export default function RequestDrawer({ r, events, onClose, onPatch, onDelete }:
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <button disabled={busy} onClick={save} className={btnDark}>{busy ? "Saving..." : "Save changes"}</button>
+            {[1, 2, 7].map((d) => (
+              <button key={d} type="button" onClick={() => setFollow(new Date(now + d * 86_400_000).toLocaleDateString("en-CA", { timeZone: "Asia/Riyadh" }))} className="text-xs font-bold text-muted underline">
+                Follow up in {d === 1 ? "1 day" : `${d} days`}
+              </button>
+            ))}
             {msg && <p role="status" className="text-sm text-muted">{msg}</p>}
           </div>
 
@@ -158,13 +179,29 @@ export default function RequestDrawer({ r, events, onClose, onPatch, onDelete }:
             </dl>
           </div>
 
+          {earlier.length > 0 && (
+            <div>
+              <p className={label}>Earlier requests from this customer ({earlier.length})</p>
+              <ul className="mt-2 divide-y divide-navy/10 rounded-xl border border-navy/10">
+                {earlier.slice(0, 8).map((x) => (
+                  <li key={x.id}>
+                    <button onClick={() => openRequest(x.id)} className="flex w-full items-center justify-between gap-3 px-3 py-2 text-left text-sm">
+                      <span className="min-w-0 truncate text-navy">{isRide(x) ? "Ride" : x.service}{x.pickup && x.dropoff ? `: ${x.pickup} → ${x.dropoff}` : ""}</span>
+                      <Pill className={statusTone[x.status]}>{x.status}</Pill>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
           <div>
             <p className={label}>Activity</p>
-            {events.length === 0 ? (
+            {mine.length === 0 ? (
               <p className="mt-2 text-sm text-muted">No activity yet.</p>
             ) : (
               <ol className="mt-2 space-y-3 border-l-2 border-accent/60 pl-4">
-                {events.map((e) => (
+                {mine.map((e) => (
                   <li key={e.id} className="text-sm">
                     <p className="break-words text-navy">{e.text}</p>
                     <p className="text-xs text-muted">{fmtDate(e.created_at)} · {e.actor}</p>
@@ -177,7 +214,7 @@ export default function RequestDrawer({ r, events, onClose, onPatch, onDelete }:
           <div className="border-t border-navy/10 pt-4">
             <button
               disabled={busy}
-              onClick={() => window.confirm("Delete this request permanently?") && run(onDelete, "Deleted.").then(onClose)}
+              onClick={() => window.confirm("Delete this request permanently?") && run(() => remove([r.id]), "Deleted.").then(onClose)}
               className="rounded-full px-4 py-2 text-sm font-bold text-red-700 hover:bg-red-50"
             >
               Delete request

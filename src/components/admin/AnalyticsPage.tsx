@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { avgFirstResponseHours, isRide, kpis, money, pageOf, perDay, perHour, perWeek, perWeekday, placeOf, tally } from "@/lib/admin-stats";
+import { avgFirstResponseHours, heatmap, isRide, kpis, money, pageOf, perDay, perHour, perWeek, perWeekday, placeOf, tally } from "@/lib/admin-stats";
 import { useAdmin } from "./AdminProvider";
 import { BarChart, btn, btnDark, Card, PageHead, RankList, Stat } from "./ui";
 
@@ -61,6 +61,32 @@ export default function AnalyticsPage() {
         <Card title="By hour of day (Saudi time)"><BarChart data={perHour(scoped)} every={3} /></Card>
         <Card title="By weekday"><BarChart data={perWeekday(scoped)} /></Card>
       </div>
+
+      <Card title="When requests arrive (weekday by hour, Saudi time)">
+        <div className="overflow-x-auto">
+          {(() => {
+            const m = heatmap(scoped);
+            const max = Math.max(1, ...m.flat());
+            return (
+              <div className="min-w-[520px] text-[10px] text-muted">
+                <div className="ml-10 grid grid-cols-24 gap-0.5" style={{ gridTemplateColumns: "repeat(24, minmax(0, 1fr))" }}>
+                  {Array.from({ length: 24 }, (_, h) => <span key={h} className="text-center">{h % 3 === 0 ? h : ""}</span>)}
+                </div>
+                {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((d, i) => (
+                  <div key={d} className="mt-0.5 flex items-center gap-2">
+                    <span className="w-8">{d}</span>
+                    <div className="grid flex-1 gap-0.5" style={{ gridTemplateColumns: "repeat(24, minmax(0, 1fr))" }}>
+                      {m[i].map((v, h) => (
+                        <span key={h} title={`${d} ${String(h).padStart(2, "0")}:00 - ${v}`} className="h-5 rounded-sm bg-accent" style={{ opacity: v ? 0.2 + 0.8 * (v / max) : 0.06 }} />
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            );
+          })()}
+        </div>
+      </Card>
 
       <div className="grid gap-6 lg:grid-cols-3">
         <Card title="Top cities"><RankList data={tally(scoped, placeOf, 10)} empty="Appears when requests come from city pages." /></Card>

@@ -1,9 +1,9 @@
-import AccountPage from "@/components/admin/AccountPage";
+import ActivityPage from "@/components/admin/ActivityPage";
 
 export default function Page() {
   return (
     <main id="main">
-      <AccountPage />
+      <ActivityPage />
     </main>
   );
 }

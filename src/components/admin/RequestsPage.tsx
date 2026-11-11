@@ -4,14 +4,13 @@ import { useMemo, useState } from "react";
 import { ago, dayKey, download, fmtDate, followUpState, isRide, PRIORITIES, pri, priorityRank, STATUSES, toCsv } from "@/lib/admin-stats";
 import type { QuoteStatus } from "@/lib/supabase";
 import { useAdmin } from "./AdminProvider";
-import RequestDrawer from "./RequestDrawer";
 import { btn, btnDark, field, PageHead, Pill, priorityTone, statusTone } from "./ui";
 
 const PAGE = 25;
 type Sort = "newest" | "oldest" | "priority" | "amount" | "followup";
 
 export default function RequestsPage() {
-  const { rows, events, loading, reload, patch, remove, now } = useAdmin();
+  const { rows, loading, reload, patch, remove, now, openRequest } = useAdmin();
   const [status, setStatus] = useState<QuoteStatus | "all" | "active">("active");
   const [priority, setPriority] = useState("");
   const [service, setService] = useState("");
@@ -24,7 +23,6 @@ export default function RequestsPage() {
   const [sort, setSort] = useState<Sort>("newest");
   const [page, setPage] = useState(0);
   const [picked, setPicked] = useState<Set<string>>(new Set());
-  const [open, setOpen] = useState<string | null>(() => (typeof window === "undefined" ? null : new URLSearchParams(window.location.search).get("open")));
   const [notice, setNotice] = useState("");
 
   const services = useMemo(() => [...new Set(rows.map((r) => r.service))].sort(), [rows]);
@@ -62,7 +60,6 @@ export default function RequestsPage() {
   const counts = (s: string) => (s === "all" ? rows.length : s === "active" ? rows.filter((r) => ["new", "contacted", "quoted"].includes(r.status)).length : rows.filter((r) => r.status === s).length);
   const selected = [...picked].filter((id) => rows.some((r) => r.id === id));
   const allOnPage = shown.length > 0 && shown.every((r) => picked.has(r.id));
-  const openRow = open ? rows.find((r) => r.id === open) : undefined;
 
   const reset = (fn: () => void) => { fn(); setPage(0); };
   const attempt = async (fn: () => Promise<void>) => {
@@ -169,7 +166,7 @@ export default function RequestsPage() {
               return (
                 <li key={r.id} className={`flex items-center gap-3 px-4 py-3 ${r.status === "new" ? "bg-accent/10" : ""}`}>
                   <input type="checkbox" aria-label={`Select ${r.name}`} checked={picked.has(r.id)} onChange={() => toggle(r.id)} />
-                  <button onClick={() => setOpen(r.id)} className="flex min-w-0 flex-1 flex-wrap items-center gap-x-3 gap-y-1 text-left md:flex-nowrap">
+                  <button onClick={() => openRequest(r.id)} className="flex min-w-0 flex-1 flex-wrap items-center gap-x-3 gap-y-1 text-left md:flex-nowrap">
                     <span className="w-full min-w-0 md:w-56">
                       <span className="block truncate font-extrabold text-navy">{r.name}</span>
                       <span className="block truncate text-xs text-muted">{r.phone}{r.assigned_to ? ` · ${r.assigned_to}` : ""}</span>
@@ -198,18 +195,7 @@ export default function RequestsPage() {
           <span className="text-sm text-muted">Page {cur + 1} of {pages}</span>
           <button disabled={cur >= pages - 1} onClick={() => setPage(cur + 1)} className={btnDark}>Next</button>
         </div>
-      )}
-
-      {openRow && (
-        <RequestDrawer
-          key={openRow.id}
-          r={openRow}
-          events={events.filter((e) => e.request_id === openRow.id)}
-          onClose={() => setOpen(null)}
-          onPatch={(p) => patch([openRow.id], p)}
-          onDelete={() => remove([openRow.id])}
-        />
-      )}
+            )}
     </div>
   );
 }

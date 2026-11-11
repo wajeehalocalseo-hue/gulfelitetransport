@@ -167,3 +167,86 @@ export function waNumber(p: string) {
   if (d.startsWith("0") && d.length === 10) return `966${d.slice(1)}`;
   return d;
 }
+
+/* ------------------------------------------------------------------ customers */
+/** Same person across requests: matched by the last 9 digits of the phone, else by email. */
+export const customerKey = (r: QuoteRecord): string => {
+  const d = digits(r.phone);
+  return d.length >= 7 ? `p${d.slice(-9)}` : `e${r.email.toLowerCase()}`;
+};
+const emailKey = (r: QuoteRecord) => `e${r.email.toLowerCase()}`;
+
+export type Customer = {
+  key: string;
+  name: string;
+  phone: string;
+  email: string;
+  requests: QuoteRecord[];
+  won: number;
+  wonValue: number;
+  first: string;
+  last: string;
+};
+
+export function groupCustomers(rows: QuoteRecord[]): Customer[] {
+  const m = new Map<string, QuoteRecord[]>();
+  for (const r of rows) {
+    if (r.status === "spam") continue;
+    const k = customerKey(r);
+    m.set(k, [...(m.get(k) ?? []), r]);
+  }
+  return [...m.entries()].map(([key, list]) => {
+    const sorted = [...list].sort((a, b) => b.created_at.localeCompare(a.created_at));
+    const won = sorted.filter((r) => r.status === "won");
+    return {
+      key,
+      name: sorted[0].name,
+      phone: sorted[0].phone,
+      email: sorted[0].email,
+      requests: sorted,
+      won: won.length,
+      wonValue: won.reduce((a, r) => a + (Number(r.quote_amount) || 0), 0),
+      first: sorted[sorted.length - 1].created_at,
+      last: sorted[0].created_at,
+    };
+  });
+}
+
+/** Other requests from the same person (by phone or email). */
+export const sameCustomer = (rows: QuoteRecord[], r: QuoteRecord) =>
+  rows.filter((x) => x.id !== r.id && (customerKey(x) === customerKey(r) || emailKey(x) === emailKey(r)));
+
+/* ------------------------------------------------------------------ spam hints */
+export function spamSignals(r: QuoteRecord): string[] {
+  const text = [r.details, r.extra, r.pickup, r.dropoff, r.name].filter(Boolean).join(" ");
+  const out: string[] = [];
+  if (/https?:\/\/|www\./i.test(text)) out.push("contains a link");
+  if (/\b(seo|backlinks?|crypto|bitcoin|casino|viagra|forex|loan|guest post|rank your)\b/i.test(text)) out.push("sales / spam wording");
+  if (/(.)\1{5,}/.test(text)) out.push("repeated characters");
+  if (/^\d+$/.test(r.name.trim())) out.push("name is only numbers");
+  if (digits(r.phone).length > 15 || new Set(digits(r.phone)).size <= 2) out.push("unlikely phone number");
+  return out;
+}
+
+/* ------------------------------------------------------------------ calendar */
+export type CalItem = { id: string; day: string; kind: "pickup" | "followup"; r: QuoteRecord };
+export function calendarItems(rows: QuoteRecord[]): CalItem[] {
+  const out: CalItem[] = [];
+  for (const r of rows) {
+    if (r.status === "spam") continue;
+    if (r.preferred_date && r.status !== "lost") out.push({ id: `${r.id}-p`, day: r.preferred_date, kind: "pickup", r });
+    if (r.follow_up_at && !["won", "lost"].includes(r.status)) out.push({ id: `${r.id}-f`, day: r.follow_up_at, kind: "followup", r });
+  }
+  return out;
+}
+
+/** Weekday (Mon=0) by hour matrix for a heat map. */
+export function heatmap(rows: QuoteRecord[]): number[][] {
+  const order = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  const m = order.map(() => Array.from({ length: 24 }, () => 0));
+  for (const r of rows) {
+    const d = order.indexOf(weekdayOf(r.created_at));
+    if (d >= 0) m[d][hourOf(r.created_at)]++;
+  }
+  return m;
+}
