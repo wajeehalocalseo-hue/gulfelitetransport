@@ -195,3 +195,31 @@ export const formIntro = {
   h2: "Tell us where and what",
   text: "Complete the form with as much detail as you can. A clear description lets us assess your request faster and respond with a confirmation, a quotation or any questions we need answered. There is no obligation, and nothing is arranged until you confirm.",
 };
+
+export const fleet = {
+  eyebrow: "Choose the right vehicle",
+  h2: "Vehicles for every group size",
+  text: "Tell us how many passengers and bags you have and we recommend the right vehicle. These are typical capacities; the exact vehicle and its seats and luggage space are confirmed for each booking. If you carry a lot of luggage, choose the next size up.",
+  items: [
+    { name: "Sedan", pax: "1-4", bags: "2 large bags", best: "Individuals, couples and small families on city and airport rides." },
+    { name: "SUV", pax: "4-6", bags: "3-4 large bags", best: "Families wanting more space and comfort, including longer trips." },
+    { name: "Family van", pax: "6-8", bags: "5-7 large bags", best: "Extended families and small groups travelling together." },
+    { name: "Group van", pax: "8-12", bags: "8-10 large bags", best: "Larger groups with luggage, airport transfers and intercity trips." },
+    { name: "Minibus", pax: "13-29", bags: "Ample luggage space", best: "Organised groups, events and tours." },
+    { name: "Coach", pax: "30+", bags: "Under-coach storage", best: "Large groups and coordinated corporate or event travel." },
+  ],
+  note: "Child seats and special assistance can be requested; availability is confirmed per booking.",
+};
+
+export const pricing = {
+  eyebrow: "Pricing",
+  h2: "A clear price before you commit",
+  points: [
+    { title: "One price per vehicle", text: "Quotes are for the whole vehicle, not per person, so a full car costs the same as one with a single passenger." },
+    { title: "Confirmed before you book", text: "We confirm the vehicle, driver and price with you first. You agree to it before anything is arranged." },
+    { title: "Told you what affects it", text: "Distance, vehicle size, waiting time, luggage and time of day can change a price. We explain what applies to your trip." },
+  ],
+  tableTitle: "Fixed prices on popular routes",
+  tableNote: "Prices are per vehicle in Saudi riyals (SAR) and confirmed when you book.",
+  cta: "Get your price",
+};
