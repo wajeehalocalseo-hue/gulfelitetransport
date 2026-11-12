@@ -1,3 +1,4 @@
+import { fitDescription, fitTitle } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import ContactButtons from "@/components/ContactButtons";
@@ -18,8 +19,8 @@ const description =
   "Compare freight and cargo, passenger, equipment moving, fleet, delivery and storage services from Gulf Elite Transport. Quotation before you commit.";
 
 export const metadata: Metadata = {
-  title,
-  description,
+  title: fitTitle(title),
+  description: fitDescription(description),
   alternates: { canonical: "/services" },
   openGraph: { title, description, url: "/services" },
   twitter: { card: "summary_large_image", title, description },

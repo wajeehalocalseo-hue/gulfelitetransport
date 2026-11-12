@@ -1,3 +1,4 @@
+import { fitDescription, fitTitle } from "@/lib/seo";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
@@ -11,8 +12,8 @@ export function generateMetadata(): Metadata {
   const p = page();
   if (!p) return {};
   return {
-    title: p.title,
-    description: p.description,
+    title: fitTitle(p.title),
+    description: fitDescription(p.description),
     alternates: { canonical: p.path },
     openGraph: { title: p.title, description: p.description, url: p.path },
     twitter: { card: "summary_large_image", title: p.title, description: p.description },

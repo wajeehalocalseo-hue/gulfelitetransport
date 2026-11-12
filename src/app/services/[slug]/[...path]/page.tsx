@@ -1,3 +1,4 @@
+import { fitDescription, fitTitle } from "@/lib/seo";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
@@ -37,8 +38,8 @@ export async function generateMetadata({ params }: PageProps<"/services/[slug]/[
   const node = await find(params);
   if (!node) return {};
   return {
-    title: node.seoTitle,
-    description: node.metaDescription,
+    title: fitTitle(node.seoTitle),
+    description: fitDescription(node.metaDescription),
     alternates: { canonical: node.fullUrl },
     // Unpublished nodes (preview builds only) must never be indexed.
     robots: node.status === "published" ? undefined : { index: false, follow: false },

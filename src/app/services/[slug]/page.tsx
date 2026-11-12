@@ -1,3 +1,4 @@
+import { fitDescription, fitTitle } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -24,8 +25,8 @@ export async function generateMetadata({ params }: PageProps<"/services/[slug]">
   const s = getService(slug);
   if (!s) return {};
   return {
-    title: s.metaTitle,
-    description: s.metaDescription,
+    title: fitTitle(s.metaTitle),
+    description: fitDescription(s.metaDescription),
     alternates: { canonical: `/services/${s.slug}` },
     openGraph: { title: s.metaTitle, description: s.metaDescription, url: `/services/${s.slug}` },
     twitter: { card: "summary_large_image", title: s.metaTitle, description: s.metaDescription },

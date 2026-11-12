@@ -8,9 +8,9 @@ const orgId = `${site.url}/#organization`;
 const countryId = `${site.url}/#saudi-arabia`;
 const plain = (s: string) => s.replace(/\[([^\]]+)\]\([^)]+\)/g, "$1");
 
-export const homeTitle = "Gulf Elite Transport | Taxi, Cab, Freight & Passenger Transport in Saudi Arabia";
+export const homeTitle = "Gulf Elite Transport | Taxi, Cab & Freight in Saudi Arabia";
 export const homeDescription =
-  "Request taxi and cab rides in Saudi cities, airport transfers and intercity trips, or arrange freight, cargo and fleet services. Fare confirmed before you commit.";
+  "Book taxi and cab rides in Saudi cities, airport transfers and intercity trips, or arrange freight and fleet services. Fare confirmed before you commit.";
 
 /**
  * Home page graph: WebPage (with speakable answer block) -> ItemList of services, a taxi Service whose
