@@ -37,8 +37,25 @@ export type QuoteRecord = QuoteRequestRow & {
   quote_amount?: number | null;
   follow_up_at?: string | null;
   internal_notes?: string | null;
+  driver_id?: string | null;
 };
-export type QuotePatch = Partial<Pick<QuoteRecord, "status" | "priority" | "assigned_to" | "quote_amount" | "follow_up_at" | "internal_notes">>;
+export type QuotePatch = Partial<Pick<QuoteRecord, "status" | "priority" | "assigned_to" | "quote_amount" | "follow_up_at" | "internal_notes" | "driver_id">>;
+export type DriverStatus = "available" | "busy" | "off";
+export type Driver = {
+  id: string;
+  created_at: string;
+  name: string;
+  phone: string;
+  city?: string | null;
+  vehicle_type?: string | null;
+  vehicle_model?: string | null;
+  plate?: string | null;
+  languages?: string | null;
+  status: DriverStatus;
+  active: boolean;
+  notes?: string | null;
+};
+export type DriverInput = Omit<Driver, "id" | "created_at">;
 export type EventRecord = { id: string; request_id: string; created_at: string; actor: string; kind: string; text: string };
 
 const KEY = "ge_admin_session";
@@ -127,6 +144,23 @@ export async function listEvents(): Promise<EventRecord[]> {
 export async function addEvents(events: Omit<EventRecord, "id" | "created_at">[]): Promise<void> {
   if (!events.length) return;
   await authed("request_events", { method: "POST", headers: NO_BODY, body: JSON.stringify(events) });
+}
+
+export async function listDrivers(): Promise<Driver[]> {
+  return (await authed("drivers?select=*&order=name.asc&limit=1000")).json();
+}
+
+export async function createDriver(d: DriverInput): Promise<Driver> {
+  const res = await authed("drivers", { method: "POST", headers: { Prefer: "return=representation" }, body: JSON.stringify(d) });
+  return (await res.json())[0];
+}
+
+export async function updateDriver(id: string, d: Partial<DriverInput>): Promise<void> {
+  await authed(`drivers?id=eq.${encodeURIComponent(id)}`, { method: "PATCH", headers: NO_BODY, body: JSON.stringify(d) });
+}
+
+export async function deleteDriver(id: string): Promise<void> {
+  await authed(`drivers?id=eq.${encodeURIComponent(id)}`, { method: "DELETE", headers: NO_BODY });
 }
 
 export async function changePassword(password: string): Promise<void> {

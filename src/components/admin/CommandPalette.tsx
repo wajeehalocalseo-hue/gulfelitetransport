@@ -12,6 +12,7 @@ const pages: [string, string][] = [
   ["Requests", "/admin/requests"],
   ["Board (pipeline)", "/admin/board"],
   ["Calendar", "/admin/calendar"],
+  ["Drivers", "/admin/drivers"],
   ["Customers", "/admin/customers"],
   ["Activity", "/admin/activity"],
   ["Analytics", "/admin/analytics"],

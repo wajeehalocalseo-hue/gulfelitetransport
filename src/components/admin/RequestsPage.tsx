@@ -10,7 +10,8 @@ const PAGE = 25;
 type Sort = "newest" | "oldest" | "priority" | "amount" | "followup";
 
 export default function RequestsPage() {
-  const { rows, loading, reload, patch, remove, now, openRequest } = useAdmin();
+  const { rows, drivers, loading, reload, patch, remove, now, openRequest } = useAdmin();
+  const [driverF, setDriverF] = useState("");
   const [status, setStatus] = useState<QuoteStatus | "all" | "active">("active");
   const [priority, setPriority] = useState("");
   const [service, setService] = useState("");
@@ -34,6 +35,7 @@ export default function RequestsPage() {
       if (status === "active" ? !["new", "contacted", "quoted"].includes(r.status) : status !== "all" && r.status !== status) return false;
       if (priority && pri(r) !== priority) return false;
       if (service && r.service !== service) return false;
+      if (driverF && (driverF === "__none" ? r.driver_id : r.driver_id !== driverF)) return false;
       if (kind && (kind === "ride") !== isRide(r)) return false;
       if (assignee && (assignee === "__none" ? r.assigned_to : r.assigned_to !== assignee)) return false;
       const d = dayKey(r.created_at);
@@ -52,7 +54,7 @@ export default function RequestsPage() {
       : t(b) - t(a),
     );
     return list;
-  }, [rows, now, status, priority, service, kind, assignee, from, to, due, q, sort]);
+  }, [rows, now, driverF, status, priority, service, kind, assignee, from, to, due, q, sort]);
 
   const pages = Math.max(1, Math.ceil(filtered.length / PAGE));
   const cur = Math.min(page, pages - 1);
@@ -110,6 +112,11 @@ export default function RequestsPage() {
           <option value="">Anyone</option>
           <option value="__none">Unassigned</option>
           {people.map((p) => <option key={p}>{p}</option>)}
+        </select>
+        <select value={driverF} onChange={(e) => reset(() => setDriverF(e.target.value))} className={field} aria-label="Driver">
+          <option value="">Any driver</option>
+          <option value="__none">No driver yet</option>
+          {drivers.map((d) => <option key={d.id} value={d.id}>{d.name}</option>)}
         </select>
         <label className="flex items-center gap-2 text-xs font-bold text-muted">From <input type="date" value={from} onChange={(e) => reset(() => setFrom(e.target.value))} className={`${field} flex-1`} /></label>
         <label className="flex items-center gap-2 text-xs font-bold text-muted">To <input type="date" value={to} onChange={(e) => reset(() => setTo(e.target.value))} className={`${field} flex-1`} /></label>
@@ -169,7 +176,7 @@ export default function RequestsPage() {
                   <button onClick={() => openRequest(r.id)} className="flex min-w-0 flex-1 flex-wrap items-center gap-x-3 gap-y-1 text-left md:flex-nowrap">
                     <span className="w-full min-w-0 md:w-56">
                       <span className="block truncate font-extrabold text-navy">{r.name}</span>
-                      <span className="block truncate text-xs text-muted">{r.phone}{r.assigned_to ? ` · ${r.assigned_to}` : ""}</span>
+                      <span className="block truncate text-xs text-muted">{r.phone}{r.assigned_to ? ` · ${r.assigned_to}` : ""}{r.driver_id ? ` · Driver: ${drivers.find((d) => d.id === r.driver_id)?.name ?? "?"}` : ""}</span>
                     </span>
                     <span className="min-w-0 flex-1">
                       <span className="block truncate text-sm text-navy">{isRide(r) ? "Ride" : r.service}{r.pickup && r.dropoff ? `: ${r.pickup} → ${r.dropoff}` : ""}</span>

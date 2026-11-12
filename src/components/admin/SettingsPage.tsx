@@ -44,7 +44,7 @@ export default function SettingsPage() {
     setSaved("");
   }
 
-  const area = (k: "waTemplate" | "quoteWaTemplate" | "emailTemplate" | "quoteTerms", title: string, rowsN = 4) => (
+  const area = (k: "waTemplate" | "quoteWaTemplate" | "emailTemplate" | "quoteEmailTemplate" | "driverTemplate" | "quoteTerms", title: string, rowsN = 4) => (
     <label className={label}>
       {title}
       <textarea value={s[k]} onChange={(e) => update({ [k]: e.target.value })} rows={rowsN} className={field} />
@@ -79,13 +79,15 @@ export default function SettingsPage() {
       </Card>
 
       <Card title="Message templates">
-        <p className="mb-3 text-xs text-muted">Placeholders: {"{name} {service} {route} {date} {amount} {ref}"}</p>
+        <p className="mb-3 text-xs text-muted">Placeholders: {"{name} {service} {route} {date} {amount} {ref} {driver} {day} {pickup} {dropoff} {phone} {details}"}</p>
         <div className="grid gap-4">
           {area("waTemplate", "WhatsApp: first reply", 3)}
           {area("quoteWaTemplate", "WhatsApp: send the quote", 3)}
           {area("emailTemplate", "Email reply", 6)}
+          {area("quoteEmailTemplate", "Email: send the quotation", 7)}
+          {area("driverTemplate", "WhatsApp: job message to a driver", 7)}
           {area("quoteTerms", "Text printed at the bottom of a quotation", 3)}
-          <button onClick={() => update({ waTemplate: defaultSettings.waTemplate, quoteWaTemplate: defaultSettings.quoteWaTemplate, emailTemplate: defaultSettings.emailTemplate, quoteTerms: defaultSettings.quoteTerms })} className={`${btn} w-fit`}>Reset templates</button>
+          <button onClick={() => update({ waTemplate: defaultSettings.waTemplate, quoteWaTemplate: defaultSettings.quoteWaTemplate, emailTemplate: defaultSettings.emailTemplate, quoteEmailTemplate: defaultSettings.quoteEmailTemplate, driverTemplate: defaultSettings.driverTemplate, quoteTerms: defaultSettings.quoteTerms })} className={`${btn} w-fit`}>Reset templates</button>
         </div>
       </Card>
 

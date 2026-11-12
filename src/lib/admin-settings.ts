@@ -13,6 +13,10 @@ export type AdminSettings = {
   waTemplate: string;
   quoteWaTemplate: string;
   emailTemplate: string;
+  /** Email that carries a quotation (placeholders as above). */
+  quoteEmailTemplate: string;
+  /** WhatsApp job message sent to a driver. Extra placeholders: {driver} {day} {pickup} {dropoff} {phone} {details} */
+  driverTemplate: string;
   /** Printed at the bottom of a quotation. */
   quoteTerms: string;
 };
@@ -24,6 +28,8 @@ export const defaultSettings: AdminSettings = {
   waTemplate: "Hello {name}, this is Gulf Elite Transport Group about your {service} request{route}{date}. Could you confirm the details so we can send you the price and arrange it?",
   quoteWaTemplate: "Hello {name}, thank you for contacting Gulf Elite Transport Group. For your {service} request{route}{date} our price is SAR {amount}. Reply YES to confirm and we will arrange it.",
   emailTemplate: "Hello {name},\n\nThank you for contacting Gulf Elite Transport Group about your {service} request{route}{date}.\n\n[Add the quote or your questions here]\n\nKind regards,\nGulf Elite Transport Group",
+  quoteEmailTemplate: "Hello {name},\n\nThank you for contacting Gulf Elite Transport Group. Our quotation {ref} for your {service} request{route}{date} is SAR {amount}.\n\nPlease reply to this email to confirm and we will arrange everything.\n\nKind regards,\nGulf Elite Transport Group",
+  driverTemplate: "New ride {ref}\nDate: {day}\nCustomer: {name} ({phone})\nPickup: {pickup}\nDrop-off: {dropoff}\nDetails: {details}\n\nPlease reply to confirm.",
   quoteTerms: "The price is confirmed before the service is booked. Please reply to this quotation to confirm.",
 };
 

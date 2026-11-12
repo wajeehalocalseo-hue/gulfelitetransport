@@ -11,7 +11,7 @@ import { btn, btnDark, field, Pill, priorityTone, statusTone } from "./ui";
 const label = "text-xs font-bold uppercase tracking-wide text-muted";
 
 export default function RequestDrawer({ r, onClose }: { r: QuoteRecord; onClose: () => void }) {
-  const { rows, events, patch, remove, openRequest, now } = useAdmin();
+  const { rows, events, drivers, patch, remove, openRequest, now } = useAdmin();
   const [settings] = useAdminSettings();
   const [assigned, setAssigned] = useState(r.assigned_to ?? "");
   const [amount, setAmount] = useState(r.quote_amount != null ? String(r.quote_amount) : "");
@@ -30,7 +30,18 @@ export default function RequestDrawer({ r, onClose }: { r: QuoteRecord; onClose:
   const earlier = useMemo(() => sameCustomer(rows, r), [rows, r]);
   const spam = spamSignals(r);
 
+  const driver = drivers.find((x) => x.id === r.driver_id);
+  const clash = useMemo(
+    () => (r.driver_id && r.preferred_date ? rows.filter((x) => x.id !== r.id && x.driver_id === r.driver_id && x.preferred_date === r.preferred_date && !["lost", "spam"].includes(x.status)) : []),
+    [rows, r],
+  );
   const vars = {
+    driver: driver?.name ?? "",
+    day: r.preferred_date ?? "to be confirmed",
+    pickup: r.pickup ?? "-",
+    dropoff: r.dropoff ?? "-",
+    phone: r.phone,
+    details: r.details,
     name: r.name,
     service: isRide(r) ? "ride" : r.service,
     route: r.pickup && r.dropoff ? ` from ${r.pickup} to ${r.dropoff}` : "",
@@ -40,6 +51,7 @@ export default function RequestDrawer({ r, onClose }: { r: QuoteRecord; onClose:
   };
   const wa = (text: string) => `https://wa.me/${waNumber(r.phone)}?text=${encodeURIComponent(text)}`;
   const mailBody = fill(settings.emailTemplate, vars);
+  const quoteMailBody = fill(settings.quoteEmailTemplate, vars);
 
   const run = async (fn: () => Promise<void>, ok: string) => {
     setBusy(true);
@@ -109,6 +121,9 @@ export default function RequestDrawer({ r, onClose }: { r: QuoteRecord; onClose:
               <a href={wa(fill(settings.quoteWaTemplate, vars))} target="_blank" rel="noopener noreferrer" className="rounded-full bg-green-700 px-4 py-2 text-sm font-bold text-white">Send quote on WhatsApp</a>
             )}
             <a href={`mailto:${r.email}?subject=${encodeURIComponent(`Your ${vars.service} request`)}&body=${encodeURIComponent(mailBody)}`} className={btn}>Email</a>
+            {r.quote_amount != null && (
+              <a href={`mailto:${r.email}?subject=${encodeURIComponent(`Quotation ${refOf(r)} - ${vars.service}`)}&body=${encodeURIComponent(quoteMailBody)}`} className={btn}>Email quotation</a>
+            )}
             <button onClick={() => (printQuote(r, settings.quoteTerms) ? undefined : setMsg("Allow pop-ups to open the quotation."))} className={btn}>Print quote</button>
             <button onClick={() => navigator.clipboard?.writeText(`${r.name} | ${r.phone} | ${r.email}\n${r.service}${vars.route}\n${r.details}`).then(() => setMsg("Copied."))} className={btn}>Copy</button>
           </div>
@@ -127,6 +142,41 @@ export default function RequestDrawer({ r, onClose }: { r: QuoteRecord; onClose:
                 </button>
               ))}
             </div>
+          </div>
+
+          <div className="rounded-xl border border-navy/10 p-4">
+            <p className={label}>Driver</p>
+            <div className="mt-2 flex flex-wrap items-center gap-2">
+              <select
+                aria-label="Driver"
+                value={r.driver_id ?? ""}
+                onChange={(e) => run(() => patch([r.id], { driver_id: e.target.value || null }), e.target.value ? "Driver assigned." : "Driver removed.")}
+                className={`${field} min-w-52 flex-1`}
+              >
+                <option value="">No driver yet</option>
+                {drivers.filter((x) => x.active || x.id === r.driver_id).map((x) => (
+                  <option key={x.id} value={x.id}>{x.name} · {x.vehicle_type ?? "vehicle"} · {x.status}</option>
+                ))}
+              </select>
+              {driver && (
+                <a
+                  href={`https://wa.me/${waNumber(driver.phone)}?text=${encodeURIComponent(fill(settings.driverTemplate, vars))}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full bg-green-600 px-4 py-2 text-sm font-bold text-white"
+                >
+                  Send job to driver
+                </a>
+              )}
+              {driver && <a href={`tel:${driver.phone}`} className={btn}>Call driver</a>}
+            </div>
+            {drivers.length === 0 && <p className="mt-2 text-xs text-muted">No drivers yet. Add them in the Drivers page.</p>}
+            {driver && <p className="mt-2 text-xs text-muted">{[driver.vehicle_model, driver.plate, driver.phone].filter(Boolean).join(" · ")}</p>}
+            {clash.length > 0 && (
+              <p role="alert" className="mt-2 rounded-lg bg-amber-50 px-3 py-2 text-xs font-semibold text-amber-900">
+                {driver?.name} already has {clash.length} other ride{clash.length > 1 ? "s" : ""} on {r.preferred_date}: {clash.map((x) => x.name).join(", ")}.
+              </p>
+            )}
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">

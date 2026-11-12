@@ -10,12 +10,18 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 import {
   addEvents,
   adminSession,
+  createDriver,
+  deleteDriver,
+  listDrivers,
+  updateDriver,
   adminSignOut,
   deleteQuotes,
   listEvents,
   listQuoteRequests,
   updateQuotes,
   type AdminSession,
+  type Driver,
+  type DriverInput,
   type EventRecord,
   type QuotePatch,
   type QuoteRecord,
@@ -25,6 +31,10 @@ type Ctx = {
   session: AdminSession;
   rows: QuoteRecord[];
   events: EventRecord[];
+  drivers: Driver[];
+  addDriver: (d: DriverInput) => Promise<void>;
+  editDriver: (id: string, d: Partial<DriverInput>) => Promise<void>;
+  removeDriver: (id: string) => Promise<void>;
   loading: boolean;
   /** Time of the last data load; use this instead of Date.now() while rendering. */
   now: number;
@@ -51,6 +61,7 @@ const nav = [
   { href: "/admin/requests", label: "Requests", icon: "M4 6h16M4 12h16M4 18h10" },
   { href: "/admin/board", label: "Board", icon: "M4 4h5v16H4zM10 4h5v10h-5zM16 4h4v13h-4z" },
   { href: "/admin/calendar", label: "Calendar", icon: "M7 3v4m10-4v4M4 9h16M5 5h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z" },
+  { href: "/admin/drivers", label: "Drivers", icon: "M5 17h14M5 17a2 2 0 1 0 4 0m6 0a2 2 0 1 0 4 0M3 13l2-6h14l2 6v4H3v-4Zm0 0h18" },
   { href: "/admin/customers", label: "Customers", icon: "M16 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm0 2c-3 0-6 1.5-6 4v2h12v-2c0-2.5-3-4-6-4Zm8 0c-.5 0-1 0-1.500.1 1.700 1 2.500 2.300 2.500 3.900v2h5v-2c0-2.500-3-4-6-4Z" },
   { href: "/admin/activity", label: "Activity", icon: "M3 12h4l3-8 4 16 3-8h4" },
   { href: "/admin/analytics", label: "Analytics", icon: "M4 20V10m6 10V4m6 16v-7m4 7H2" },
@@ -75,13 +86,17 @@ function beep() {
   }
 }
 
-function describe(prev: QuoteRecord, p: QuotePatch): { kind: string; text: string }[] {
+function describe(prev: QuoteRecord, p: QuotePatch, drivers: Driver[]): { kind: string; text: string }[] {
   const out: { kind: string; text: string }[] = [];
   if (p.status && p.status !== prev.status) out.push({ kind: "status", text: `Status: ${prev.status} → ${p.status}` });
   if (p.priority && p.priority !== (prev.priority ?? "normal")) out.push({ kind: "priority", text: `Priority: ${prev.priority ?? "normal"} → ${p.priority}` });
   if (p.assigned_to !== undefined && (p.assigned_to ?? "") !== (prev.assigned_to ?? "")) out.push({ kind: "assign", text: p.assigned_to ? `Assigned to ${p.assigned_to}` : "Unassigned" });
   if (p.quote_amount !== undefined && (p.quote_amount ?? null) !== (prev.quote_amount ?? null)) out.push({ kind: "quote", text: p.quote_amount == null ? "Quote amount cleared" : `Quote amount: SAR ${p.quote_amount}` });
   if (p.follow_up_at !== undefined && (p.follow_up_at ?? null) !== (prev.follow_up_at ?? null)) out.push({ kind: "followup", text: p.follow_up_at ? `Follow-up set for ${p.follow_up_at}` : "Follow-up cleared" });
+  if (p.driver_id !== undefined && (p.driver_id ?? null) !== (prev.driver_id ?? null)) {
+    const d = drivers.find((x) => x.id === p.driver_id);
+    out.push({ kind: "driver", text: d ? `Driver assigned: ${d.name}` : "Driver removed" });
+  }
   if (p.internal_notes !== undefined && (p.internal_notes ?? "") !== (prev.internal_notes ?? "")) out.push({ kind: "note", text: p.internal_notes ? `Note: ${p.internal_notes.slice(0, 500)}` : "Note cleared" });
   return out;
 }
@@ -94,6 +109,7 @@ export default function AdminProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<AdminSession | null>(null);
   const [rows, setRows] = useState<QuoteRecord[]>([]);
   const [events, setEvents] = useState<EventRecord[]>([]);
+  const [drivers, setDrivers] = useState<Driver[]>([]);
   const [loading, setLoading] = useState(true);
   const [now, setNow] = useState(0);
   const [error, setError] = useState("");
@@ -122,7 +138,7 @@ export default function AdminProvider({ children }: { children: ReactNode }) {
         router.replace("/admin/login");
         return;
       }
-      const [r, e] = await Promise.all([listQuoteRequests(), listEvents().catch(() => [] as EventRecord[])]);
+      const [r, e, dr] = await Promise.all([listQuoteRequests(), listEvents().catch(() => [] as EventRecord[]), listDrivers().catch(() => [] as Driver[])]);
       if (known.current === null) {
         const wanted = new URLSearchParams(window.location.search).get("open");
         if (wanted && r.some((x) => x.id === wanted)) setOpenId(wanted);
@@ -141,6 +157,7 @@ export default function AdminProvider({ children }: { children: ReactNode }) {
       setSession(s);
       setRows(r);
       setEvents(e);
+      setDrivers(dr);
       setNow(Date.now());
       setError("");
     } catch (err) {
@@ -171,7 +188,7 @@ export default function AdminProvider({ children }: { children: ReactNode }) {
       const prev = rows;
       const evs = ids.flatMap((id) => {
         const r = prev.find((x) => x.id === id);
-        return r ? describe(r, p).map((d) => ({ request_id: id, actor: session?.email ?? "admin", ...d })) : [];
+        return r ? describe(r, p, drivers).map((d) => ({ request_id: id, actor: session?.email ?? "admin", ...d })) : [];
       });
       setRows(prev.map((r) => (ids.includes(r.id) ? { ...r, ...p } : r)));
       try {
@@ -183,8 +200,22 @@ export default function AdminProvider({ children }: { children: ReactNode }) {
         throw err;
       }
     },
-    [rows, session],
+    [rows, session, drivers],
   );
+
+  const addDriver = useCallback(async (d: DriverInput) => {
+    const created = await createDriver(d);
+    setDrivers((cur) => [...cur, created].sort((a, b) => a.name.localeCompare(b.name)));
+  }, []);
+  const editDriver = useCallback(async (id: string, d: Partial<DriverInput>) => {
+    await updateDriver(id, d);
+    setDrivers((cur) => cur.map((x) => (x.id === id ? { ...x, ...d } : x)));
+  }, []);
+  const removeDriver = useCallback(async (id: string) => {
+    await deleteDriver(id);
+    setDrivers((cur) => cur.filter((x) => x.id !== id));
+    setRows((cur) => cur.map((r) => (r.driver_id === id ? { ...r, driver_id: null } : r)));
+  }, []);
 
   const remove = useCallback(
     async (ids: string[]) => {
@@ -226,7 +257,7 @@ export default function AdminProvider({ children }: { children: ReactNode }) {
     return <p className="px-5 py-24 text-center text-muted">{error ? <span role="alert" className="text-red-700">{error}</span> : "Loading..."}</p>;
   }
 
-  const ctx: Ctx = { session, rows, events, loading, now, error, reload: load, patch, remove, signOut, theme, setTheme, openRequest: setOpenId, openPalette: () => setPalette(true) };
+  const ctx: Ctx = { session, rows, events, drivers, addDriver, editDriver, removeDriver, loading, now, error, reload: load, patch, remove, signOut, theme, setTheme, openRequest: setOpenId, openPalette: () => setPalette(true) };
   const openRow = openId ? rows.find((r) => r.id === openId) : undefined;
   return (
     <AdminCtx.Provider value={ctx}>
