@@ -26,7 +26,7 @@ export const airports: Airport[] = [
     tips: [
       "State whether you are going into Jeddah or on to Makkah, as the two journeys are very different.",
       "Vehicle access near the Haram in Makkah is controlled, so the drop-off point is agreed in advance.",
-      "Pilgrim group transport is not offered through this page.",
+      "Pilgrim groups of any size can be arranged: tell us how many people and bags so the right vehicles are planned.",
     ],
   },
   {

@@ -77,7 +77,7 @@ export const regionExtras: Record<string, RegionExtra> = {
     ],
     tips: [
       { title: "Haram access is controlled", text: "Vehicle access near Al-Masjid al-Haram is restricted, so the drop-off point is agreed in advance. Entry to Makkah is for Muslims only." },
-      { title: "Ramadan and Hajj are very busy", text: "Request early in those periods. Organised pilgrim and Hajj group transport is not offered through these pages." },
+      { title: "Ramadan and Hajj are very busy", text: "Request early in those periods. Movement during the Hajj season is controlled by the authorities, so we confirm what can be arranged for your dates." },
     ],
     neighbours: ["madinah-region", "riyadh-region", "al-bahah-region", "asir-region"],
     faqs: [

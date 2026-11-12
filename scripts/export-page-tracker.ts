@@ -104,7 +104,7 @@ for (const n of sorted) {
 }
 
 // Saudi Arabia taxi and cab pages (hub, regions, cities, areas, airports, routes).
-const placeLevel = { hub: "Location hub", region: "Location - region", city: "Location - city", area: "Location - area", airport: "Location - airport", route: "Location - route", pair: "Location - area ride" } as const;
+const placeLevel = { hub: "Location hub", region: "Location - region", city: "Location - city", area: "Location - area", airport: "Location - airport", route: "Location - route", pair: "Location - area ride", topic: "Umrah & Hajj topic" } as const;
 for (const p of placePages) {
   const id = p.path.split("/").pop() ?? p.path;
   const [date, commit] = p.kind === "pair" ? firstCommitOfFile("src/content/saudi/riyadh-areas.ts") : firstCommitFor(`"${id}"`);

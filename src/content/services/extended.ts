@@ -413,7 +413,7 @@ export const extended: Service[] = [
       { q: "Where can I request a taxi or cab?", a: "Across Saudi Arabia. The Saudi Arabia taxi pages list regions, cities, airports and routes. Availability is confirmed for each request." },
       { q: "Are fares fixed?", a: "No standard fares are published. The fare is confirmed with you before you commit." },
       { q: "Can I book an airport transfer?", a: "Yes. Send your flight details and destination." },
-      { q: "Do you provide Hajj or Umrah group transport?", a: "No. This service covers individual ride requests only." },
+      { q: "Do you provide Hajj or Umrah transport?", a: "Yes. We arrange taxi and car transport for Umrah and Hajj visitors in Makkah, Madinah and Jeddah, for individuals and groups of any size. Hajj-season movement is controlled by the authorities, so what can be arranged is confirmed for your dates." },
       { q: "How do I request a ride?", a: "Use the form or the call and WhatsApp buttons when they are available." },
     ],
     related: ["passenger-transport", "vehicle-transportation", "express-urgent-delivery"],

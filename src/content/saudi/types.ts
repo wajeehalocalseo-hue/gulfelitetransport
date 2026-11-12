@@ -57,7 +57,7 @@ export type Route = {
   tips: string[];
 };
 
-export type PageKind = "hub" | "region" | "city" | "area" | "airport" | "route" | "pair";
+export type PageKind = "hub" | "region" | "city" | "area" | "airport" | "route" | "pair" | "topic";
 
 export type Section =
   | { id: string; h2: string; kind: "text"; paragraphs: string[] }

@@ -6,7 +6,7 @@ export const hero = {
   eyebrow: "Transport & logistics in Saudi Arabia",
   h1: "Taxi, Freight and Passenger Transport Across Saudi Arabia",
   text: "Request a ride in a [Saudi city](/taxi-saudi-arabia), book an [airport transfer](/taxi-saudi-arabia#airports) or an [intercity trip](/taxi-saudi-arabia/routes), or arrange [freight and cargo](/services/freight-cargo-transport), [equipment moving](/services/equipment-machinery-moving) and [fleet services](/services/contract-fleet-services) for your business. We confirm the vehicle, driver and fare before you commit.",
-  chips: ["Taxi & cab rides", "Airport transfers", "Freight & cargo", "Equipment moving", "Contract fleet"],
+  chips: ["Taxi & cab rides", "Umrah & Hajj transport", "Airport transfers", "Freight & cargo", "Equipment moving", "Contract fleet"],
   routeChip: "Riyadh to Jeddah, about 950 km",
   fareChip: "Fare confirmed before you commit",
 };
@@ -92,7 +92,7 @@ export const why = {
     { icon: "network", title: "Organised by place", text: "Regions, cities, areas, airports and routes each have a guide, so you can see how your trip works before you ask." },
     { icon: "briefcase", title: "Business and personal in one place", text: "Rides for individuals and visitors, and [transport and logistics for companies](/services), handled by one team." },
     { icon: "calendar", title: "One-off or recurring", text: "Request a single ride or delivery, or set up a [scheduled delivery](/services/last-mile-delivery/scheduled-delivery) pattern or [monthly vehicle contracts](/services/contract-fleet-services/monthly-vehicle-contracts) when your needs repeat." },
-    { icon: "shield", title: "Honest about limits", text: "Where something needs checking or is not offered, such as pilgrim group transport, we say so plainly." },
+    { icon: "shield", title: "Honest about limits", text: "Where something needs checking, such as Hajj-season movement that the authorities control, we say so plainly." },
     { icon: "headset", title: "Clear communication", text: "Questions and changes are handled directly, and details are confirmed in writing where it matters. You can [contact our team](/contact) at any time." },
   ],
 };
@@ -160,8 +160,8 @@ export const faqs: Faq[] = [
     a: "Yes. Send your flight details, terminal if you know it, your destination and the number of passengers and bags. Each airport guide explains what to include.",
   },
   {
-    q: "Do you provide Hajj or Umrah group transport?",
-    a: "No. The taxi pages cover individual ride requests only. Organised pilgrim or Hajj group transport is not offered through this website.",
+    q: "Do you provide Hajj or Umrah transport?",
+    a: "Yes. We arrange taxi and car transport for Umrah and Hajj visitors in Makkah, Madinah and Jeddah: [airport transfers](/umrah-hajj-taxi/jeddah-airport-to-makkah), rides to the Haram, journeys between the holy cities and [group transport](/umrah-hajj-taxi/group-transport-for-umrah) of any size. Movement during Hajj is controlled by the authorities, so we confirm what can be arranged for your dates. See [Umrah and Hajj taxi](/umrah-hajj-taxi).",
   },
   {
     q: "What transport services does Gulf Elite Transport provide?",
@@ -222,4 +222,19 @@ export const pricing = {
   tableTitle: "Fixed prices on popular routes",
   tableNote: "Prices are per vehicle in Saudi riyals (SAR) and confirmed when you book.",
   cta: "Get your price",
+};
+
+export const umrah = {
+  eyebrow: "Makkah & Madinah",
+  h2: "Taxi and transport for Umrah and Hajj visitors",
+  text: "Pilgrims and visitors travel to Makkah and Madinah every month of the year. We arrange the rides around the journey: from the airport to your hotel, from your hotel to the Haram and back, and between the two holy cities, for a single traveller or a large group. Tell us your group and your luggage and we arrange the right vehicles.",
+  items: [
+    { title: "Airport to hotel", text: "From [Jeddah airport to Makkah](/umrah-hajj-taxi/jeddah-airport-to-makkah), [Jeddah airport to Madinah](/umrah-hajj-taxi/jeddah-airport-to-madinah) or [Madinah airport to your hotel](/umrah-hajj-taxi/madinah-airport-to-madinah-hotel)." },
+    { title: "Hotel to the Haram", text: "Rides to [Al-Masjid al-Haram](/umrah-hajj-taxi/makkah-hotel-to-haram) and the [Prophet's Mosque](/umrah-hajj-taxi/madinah-hotel-to-prophets-mosque), with a timed pickup afterwards." },
+    { title: "Between the holy cities", text: "[Madinah to Makkah for Umrah](/umrah-hajj-taxi/madinah-to-makkah-for-umrah), with a stop at the Miqat, and [Makkah to Madinah](/umrah-hajj-taxi/makkah-to-madinah-for-umrah) afterwards." },
+    { title: "Groups of any size", text: "Cars, vans, minibuses and coaches, arranged together for your party: [group transport for Umrah](/umrah-hajj-taxi/group-transport-for-umrah)." },
+    { title: "Families and elders", text: "Pickups and stops planned around slower walkers and young children: [family and elderly pilgrims](/umrah-hajj-taxi/family-and-elderly-pilgrims)." },
+    { title: "Ramadan and Hajj", text: "Plan early for the busiest weeks: [Ramadan Umrah transport](/umrah-hajj-taxi/ramadan-umrah-transport) and [Hajj season transport](/umrah-hajj-taxi/hajj-season-transport)." },
+  ],
+  cta: "See all Umrah & Hajj rides",
 };

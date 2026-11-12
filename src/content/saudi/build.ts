@@ -1,3 +1,4 @@
+import { umrahPages, UMRAH_BASE } from "../umrah/pages";
 import { airports, areas, routes } from "./places";
 import { buildPairs } from "./pairs";
 import { riyadhAreas } from "./riyadh-areas";
@@ -29,6 +30,7 @@ const HEROES: Record<PageKind, PlaceLayout["hero"][]> = {
   airport: ["board", "dark"],
   route: ["routeline", "routeband"],
   pair: ["schematic", "routeline", "routeband", "ledger", "light", "inset", "dark"],
+  topic: ["dark", "light", "ledger", "inset", "centered"],
 };
 const BODIES: PlaceLayout["body"][] = ["cards", "columns", "tiles", "checklist", "accordion", "table"];
 const FORMS: PlaceLayout["form"][] = ["aside", "bottom", "hero"];
@@ -190,7 +192,7 @@ function hubPage(): PlacePage {
           { q: "Which cities can I request a ride in?", a: "Pages are published for the main cities of every region, and requests from other towns can be discussed. Availability is confirmed for each request." },
           { q: "Are your fares fixed?", a: "No standard fares are published. We confirm the fare for your ride before you commit." },
           { q: "Can I book an airport transfer?", a: "Yes. Each airport page explains what to tell us, such as your terminal, flight number and final destination." },
-          { q: "Do you provide Hajj or Umrah group transport?", a: "No. These pages cover individual ride requests only. Organised pilgrim transport is not offered through them." },
+          { q: "Do you provide Hajj or Umrah transport?", a: "Yes. See the Umrah & Hajj taxi pages for airport transfers, rides to the Haram, journeys between Makkah and Madinah and groups of any size. Movement during Hajj is controlled by the authorities, so we confirm what can be arranged for your dates." },
           { q: "Do you serve countries other than Saudi Arabia?", a: "These pages cover Saudi Arabia only." },
         ],
       },
@@ -329,6 +331,7 @@ function cityPages(): PlacePage[] {
     };
     const links: { name: string; href: string; note?: string }[] = [
       ...(ap ? [{ name: ap.name, href: `${BASE}/airports/${ap.id}`, note: `Airport ${ap.code}` }] : []),
+      ...(["makkah", "madinah", "jeddah", "taif"].includes(c.id) ? [{ name: "Umrah & Hajj taxi", href: UMRAH_BASE, note: "Pilgrim rides" }] : []),
       ...cityAreas.map((a) => ({ name: a.name, href: `${cityPath(c)}/${a.id}`, note: "Area guide" })),
       ...cityRoutes.map((x) => ({ name: `${need(cityById.get(x.from), x.from).name} to ${need(cityById.get(x.to), x.to).name}`, href: `${BASE}/routes/${x.id}`, note: `about ${x.km} km` })),
       ...(c.id === "riyadh" ? riyadhPairs.pages.slice(0, 12).map((x) => ({ name: x.name, href: x.path, note: "Area-to-area ride" })) : []),
@@ -441,6 +444,7 @@ function airportPages(): PlacePage[] {
     const path = `${BASE}/airports/${a.id}`;
     const served = cities.filter((x) => x.airport === a.id);
     const links = [
+      ...(["king-abdulaziz-international-airport", "prince-mohammad-bin-abdulaziz-international-airport"].includes(a.id) ? [{ name: "Umrah & Hajj taxi", href: UMRAH_BASE, note: "Pilgrim rides" }] : []),
       ...served.map((x) => ({ name: `Taxi & Cab Service in ${x.name}`, href: cityPath(x), note: "City page" })),
       ...(a.id === "king-khalid-international-airport" ? riyadhPairs.pages.filter((x) => x.pair?.type === "airport").slice(0, 8).map((x) => ({ name: x.name, href: x.path, note: "Area-to-area ride" })) : []),
       ...routes.filter((r) => served.some((x) => x.id === r.from || x.id === r.to)).slice(0, 6).map((r) => ({ name: `${need(cityById.get(r.from), r.from).name} to ${need(cityById.get(r.to), r.to).name}`, href: `${BASE}/routes/${r.id}`, note: `about ${r.km} km` })),
@@ -592,7 +596,7 @@ function routesIndex(): PlacePage {
   };
 }
 
-export const placePages: PlacePage[] = [hubPage(), ...regionPages(), ...cityPages(), ...areaPages(), ...airportPages(), routesIndex(), ...routePages(), ...riyadhPairs.pages];
+export const placePages: PlacePage[] = [hubPage(), ...regionPages(), ...cityPages(), ...areaPages(), ...airportPages(), routesIndex(), ...routePages(), ...riyadhPairs.pages, ...umrahPages];
 
 /** Pairs that the quality gate left out, for the build log. */
 export const droppedPairs = riyadhPairs.dropped;
@@ -605,7 +609,7 @@ function assignLayouts(pages: PlacePage[]) {
   const key = (l: PlaceLayout) => `${l.hero}/${l.body}/${l.form}`;
   const used = new Set<string>();
   for (const p of pages) if (p.kind === "hub") used.add(key(p.layout));
-  for (const kind of ["route", "airport", "region", "area", "city"] as PageKind[]) {
+  for (const kind of ["route", "airport", "region", "area", "city", "topic"] as PageKind[]) {
     const h = HEROES[kind];
     pages
       .filter((p) => p.kind === kind)
@@ -662,4 +666,6 @@ for (const p of placePages) {
 }
 
 export const placeByPath = (path: string) => byPath.get(path);
-export const subPages = placePages.filter((p) => p.path !== BASE);
+export const subPages = placePages.filter((p) => p.path.startsWith(`${BASE}/`));
+export const umrahHub = placePages.find((p) => p.path === UMRAH_BASE)!;
+export const umrahSubPages = placePages.filter((p) => p.path.startsWith(`${UMRAH_BASE}/`));

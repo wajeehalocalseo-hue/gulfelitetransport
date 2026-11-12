@@ -62,7 +62,7 @@ export const cities: City[] = [
     about:
       "Makkah is organised around Al-Masjid al-Haram, and local travel is shaped by the movement of pilgrims, especially in Ramadan and the Hajj season. Hotels cluster near the Haram, while other visitors and residents stay in districts such as Aziziyah and travel in by road. Entry to Makkah is restricted to Muslims.",
     getting:
-      "Roads close to the Haram are controlled and can be restricted at busy times, so the practical pickup or drop-off point may be some distance from a hotel door. The Haramain high-speed railway has a station in Makkah. We do not provide organised pilgrim or Hajj transport through this page; ride requests are confirmed individually.",
+      "Roads close to the Haram are controlled and can be restricted at busy times, so the practical pickup or drop-off point may be some distance from a hotel door. The Haramain high-speed railway has a station in Makkah. We arrange taxi and car transport for Umrah and Hajj visitors, from airport transfers to rides to the Haram, for any size of group; each request is confirmed individually.",
     places: [
       { name: "Al-Masjid al-Haram", note: "The Grand Mosque; vehicle access nearby is controlled" },
       { name: "Abraj Al Bait", note: "Clock Tower complex next to the Haram" },
@@ -74,7 +74,7 @@ export const cities: City[] = [
     nearby: ["jeddah", "taif", "madinah"],
     faq: {
       q: "Do you provide Hajj or Umrah transport?",
-      a: "No. This page does not offer organised pilgrim or Hajj transport. Individual ride requests in and around Makkah can be made, and their availability and arrangements are confirmed for each request.",
+      a: "Yes. We arrange taxi and car transport for Umrah and Hajj visitors in and around Makkah, including airport transfers, rides to the Haram and journeys to Madinah, for individuals and groups of any size. Movement during the Hajj season is controlled by the authorities, so availability and arrangements are confirmed for each request.",
     },
   },
   {
@@ -86,7 +86,7 @@ export const cities: City[] = [
     about:
       "Madinah is a smaller, quieter city than Jeddah or Riyadh, built around the Prophet's Mosque. Most visitors stay in the Central Area close to the mosque and make short trips to sites such as Quba Mosque and Mount Uhud. Entry to the central area is restricted to Muslims.",
     getting:
-      "Traffic around the Central Area can be restricted at prayer times and during busy seasons, so a pickup is often arranged on a nearby road. Prince Mohammad bin Abdulaziz International Airport is north-east of the city, and the Haramain station connects Madinah to Makkah and Jeddah. Pilgrim group transport is not offered through this page.",
+      "Traffic around the Central Area can be restricted at prayer times and during busy seasons, so a pickup is often arranged on a nearby road. Prince Mohammad bin Abdulaziz International Airport is north-east of the city, and the Haramain station connects Madinah to Makkah and Jeddah. Taxi and car transport for Umrah and Hajj visitors, including groups, can be requested for the airport, the Prophet's Mosque and the journey to Makkah.",
     places: [
       { name: "Al-Masjid an-Nabawi", note: "The Prophet's Mosque" },
       { name: "Quba Mosque", note: "First mosque built in Islam, south of the centre" },

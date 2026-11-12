@@ -34,14 +34,17 @@ function build(): Map<string, SitemapEntry[]> {
   const cityPages = placePages.filter((p) => p.kind === "city");
   const inCity = (p: { path: string }) => cityPages.find((c) => p.path === c.path || p.path.startsWith(`${c.path}/`));
   const taxi: SitemapEntry[] = [];
+  const umrah: SitemapEntry[] = [];
   for (const c of cityPages) groups.set(`taxi-${c.path.split("/").pop()}`, []);
   for (const p of placePages) {
     const entry: SitemapEntry = { path: p.path, priority: priorityFor(p.kind), changefreq: "monthly" };
     const city = inCity(p);
-    if (city) groups.get(`taxi-${city.path.split("/").pop()}`)!.push(entry);
+    if (p.path === "/umrah-hajj-taxi" || p.path.startsWith("/umrah-hajj-taxi/")) umrah.push({ ...entry, priority: p.kind === "hub" ? 0.9 : 0.7 });
+    else if (city) groups.get(`taxi-${city.path.split("/").pop()}`)!.push(entry);
     else taxi.push(entry);
   }
   groups.set("taxi", taxi);
+  groups.set("umrah-hajj-taxi", umrah);
   return groups;
 }
 

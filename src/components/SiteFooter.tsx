@@ -70,6 +70,7 @@ export default function SiteFooter() {
           <p className={head}>Taxi &amp; Cab</p>
           <ul className="mt-5 space-y-2.5 text-sm">
             <li><Link href={BASE} className={`${link} font-semibold text-accent`}>All of Saudi Arabia</Link></li>
+            <li><Link href="/umrah-hajj-taxi" className={`${link} font-semibold text-accent`}>Umrah &amp; Hajj taxi</Link></li>
             {cities.slice(0, 8).map((c) => (
               <li key={c.id}><Link href={`${BASE}/${c.region}/${c.id}`} className={link}>{c.name}</Link></li>
             ))}

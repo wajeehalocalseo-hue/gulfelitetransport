@@ -269,6 +269,22 @@ export default function Home() {
         <p className="mt-10 border-l-4 border-accent bg-accent/10 p-5 text-sm font-semibold leading-6 text-navy">{c.taxi.note}</p>
       </section>
 
+      {/* 6b. Makkah and Madinah: Umrah and Hajj transport */}
+      <section id="umrah" aria-labelledby="umrah-title" className="bg-navy py-20 text-white">
+        <div className={wrap}>
+          <Head id="umrah-title" eyebrow={c.umrah.eyebrow} title={c.umrah.h2} lead={c.umrah.text} dark />
+          <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {c.umrah.items.map((i) => (
+              <li key={i.title} className="rounded-lg bg-navy-2 p-6 ring-1 ring-white/10">
+                <h3 className="font-display text-xl">{i.title}</h3>
+                <p className="mt-2 text-sm leading-7 text-white/75"><RichText text={i.text} tone="dark" /></p>
+              </li>
+            ))}
+          </ul>
+          <Link href="/umrah-hajj-taxi" className={`${btnPrimary} mt-8`}>{c.umrah.cta}</Link>
+        </div>
+      </section>
+
       {/* 7. Vehicles */}
       <section aria-labelledby="fleet-title" className="bg-ivory py-20">
         <div className={wrap}>
