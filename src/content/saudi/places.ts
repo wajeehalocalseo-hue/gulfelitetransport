@@ -22,9 +22,10 @@ export const airports: Airport[] = [
     city: "jeddah",
     tagline: "The gateway airport for Jeddah, Makkah and many Umrah and Hajj travellers.",
     about:
-      "King Abdulaziz International Airport lies north of Jeddah and is the main arrival point for visitors to Makkah and Jeddah. It has a Haramain high-speed rail station, which some travellers use for Makkah and Madinah, while others request a car for a direct ride to their hotel.",
+      "King Abdulaziz International Airport lies north of Jeddah and is the main arrival point for visitors to Makkah and Jeddah. It has a Haramain high-speed rail station, which some travellers use for Makkah and Madinah, while others request a car for a direct ride to their hotel. The airport has several terminals, including a dedicated Hajj Terminal that is used for pilgrim flights in the Hajj season.",
     tips: [
       "State whether you are going into Jeddah or on to Makkah, as the two journeys are very different.",
+      "Give your airline: the airport has more than one terminal, and pilgrim flights in the Hajj season use the Hajj Terminal.",
       "Vehicle access near the Haram in Makkah is controlled, so the drop-off point is agreed in advance.",
       "Pilgrim groups of any size can be arranged: tell us how many people and bags so the right vehicles are planned.",
     ],
@@ -36,7 +37,7 @@ export const airports: Airport[] = [
     city: "madinah",
     tagline: "The airport serving Madinah and the pilgrims and visitors who come to the Prophet's Mosque.",
     about:
-      "Prince Mohammad bin Abdulaziz International Airport lies north-east of Madinah. Arrivals are heavily weighted toward pilgrims and visitors heading to hotels near Al-Masjid an-Nabawi, so the practical drop-off point is often a road near the Central Area rather than the hotel door.",
+      "Prince Mohammad bin Abdulaziz International Airport lies north-east of Madinah. Arrivals are heavily weighted toward pilgrims and visitors heading to hotels near Al-Masjid an-Nabawi, so the practical drop-off point is often a road near the Central Area rather than the hotel door. The airport also receives charter international flights during the Hajj and Umrah seasons.",
     tips: [
       "Tell us which hotel you are staying at so we can agree the nearest drop-off.",
       "Road access near the mosque can be restricted at prayer times and busy periods.",
@@ -64,7 +65,7 @@ export const airports: Airport[] = [
     city: "taif",
     tagline: "The airport serving Taif and the mountain area above Makkah.",
     about:
-      "Taif International Airport serves a city that is a summer escape for visitors from Jeddah and Riyadh. Rides from the airport usually go either into the city or up to the Al Hada and Al Shafa highlands, which are on steep, winding roads.",
+      "Taif International Airport lies about 30 km east of Taif and serves a city that is a summer escape for visitors from Jeddah and Riyadh. Rides from the airport usually go either into the city or up to the Al Hada and Al Shafa highlands, which are on steep, winding roads.",
     tips: [
       "Mention if you are going to Al Hada or Al Shafa, as the mountain roads take longer.",
       "Summer holiday periods are busy, so request early.",

@@ -1345,6 +1345,8 @@ type Spot = {
   lat: number;
   lng: number;
   kind: "holy-site" | "district";
+  /** Extra sections, e.g. a verified hotel list. */
+  extra?: Section[];
   tagline: string;
   about: string;
   know: { title: string; text: string }[];
@@ -1686,6 +1688,29 @@ const spots: Spot[] = [
   },
 ];
 
+const withExtra = (slug: string, extra: Section[]) => {
+  const s = spots.find((x) => x.slug === slug);
+  if (s) s.extra = extra;
+};
+
+// Hotels of the Clock Towers complex. Names, towers and brands are from theclocktowers.com and Wikipedia ("The Clock Towers").
+withExtra("abraj-al-bait-jabal-omar-taxi", [
+  {
+    id: "hotels",
+    h2: "Hotels in the Clock Towers complex",
+    kind: "items",
+    intro: "The complex is about 300 metres from the Haram. These are its hotels by tower; tell us the hotel and tower name when you request a ride. Hotels in the Jabal Omar development are not listed here.",
+    items: [
+      { title: "Makkah Clock Royal Tower, A Fairmont Hotel", text: "Fairmont, in the Clock Tower itself." },
+      { title: "Mövenpick Hotel & Residences Hajar Tower Makkah", text: "Mövenpick, in the Hajar Tower." },
+      { title: "Pullman ZamZam Makkah", text: "Pullman, in the Zamzam Tower." },
+      { title: "Swissôtel Al Maqam Makkah", text: "Swissôtel, in the Al Maqam Tower." },
+      { title: "Swissôtel Makkah", text: "Swissôtel, in the Qibla Tower, with an entrance on Ajyad Street." },
+      { title: "Raffles Makkah Palace", text: "Raffles, in the Al Safa Tower; the hotel describes itself as about a five-minute walk from the Haram." },
+      { title: "Al Marwa Rayhaan by Rotana", text: "Rotana, in the Marwah Tower." },
+    ],
+  },
+]);
 function spotPage(s: Spot): PlacePage {
   const from = s.from ?? (s.city === "makkah" ? HARAM : NABAWI);
   const d = dist(s, from);
@@ -1716,6 +1741,7 @@ function spotPage(s: Spot): PlacePage {
       { id: "about", h2: `About ${s.name}`, kind: "text", paragraphs: [s.about, `${s.name} is about ${km1} km from ${from.name} in a straight line, and roughly ${lo} to ${hi} km by road depending on the route. These are approximate figures; the actual route and the time it takes depend on traffic and road controls at the time you travel.`] },
       { id: "know", h2: `What to know before you go to ${s.name}`, kind: "items", items: s.know },
       { id: "taxi", h2: `Getting to ${s.name} by taxi`, kind: "items", items: s.taxi },
+      ...(s.extra ?? []),
       related([cityLink, ...sameCity.slice(0, 3).map((x) => ({ name: x.name, href: `${UMRAH_BASE}/${x.slug}`, note: "Place guide" })), ...(s.city === "makkah" || s.city === "madinah" ? [topic(s.city === "makkah" ? "makkah-ziyarat-rides" : "madinah-ziyarat-rides", s.city === "makkah" ? "Rides to places in Makkah" : "Rides to places in Madinah")] : []), L.hub]),
       { id: "faq", h2: `${s.name}: questions`, kind: "faq", items: [...s.faq, { q: "Do you publish fares?", a: "No. The fare is confirmed with you before you commit." }] },
     ],
@@ -1800,6 +1826,141 @@ function vehiclePage(v: Veh): PlacePage {
 const spotPages = spots.map(spotPage);
 const vehiclePages = vehicleTopics.map(vehiclePage);
 
+// ------------------------------------------------------------------------------------------ hotels in Madinah and Miqat overview
+const hotelsMadinah: { name: string; brand: string; lat: number; lng: number; tier: "large" | "medium" }[] = [
+  { name: "Madinah Hilton", brand: "Hilton", lat: 24.4720818, lng: 39.6107978, tier: "large" },
+  { name: "Anwar Al Madinah Mövenpick", brand: "Mövenpick", lat: 24.4713757, lng: 39.6078202, tier: "large" },
+  { name: "Dar Al Iman InterContinental", brand: "InterContinental", lat: 24.4713518, lng: 39.6087731, tier: "large" },
+  { name: "Dar Al Taqwa", brand: "Dar Al Taqwa", lat: 24.4712004, lng: 39.6118525, tier: "large" },
+  { name: "Pullman Zamzam Madinah", brand: "Pullman", lat: 24.4644758, lng: 39.6117903, tier: "large" },
+  { name: "Golden Tulip Al Ansar", brand: "Golden Tulip", lat: 24.4729791, lng: 39.6083568, tier: "medium" },
+];
+const km2 = (d: number) => (d < 1 ? `${Math.round(d * 100) * 10} m` : `${d.toFixed(1)} km`);
+
+const hotelPageMadinah = page({
+  slug: "madinah-hotels-near-prophets-mosque-taxi",
+  name: "Hotels Near the Prophet's Mosque",
+  title: "Taxi to Hotels Near the Prophet's Mosque, Madinah",
+  description: "Taxi to and from hotels near Al-Masjid an-Nabawi in Madinah: Hilton, Mövenpick, InterContinental, Pullman and more. Fare confirmed before you commit.",
+  h1: "Taxi to Hotels Near the Prophet's Mosque",
+  lead: "Most visitors to Madinah stay within walking distance of the mosque. The ride is about reaching the right road.",
+  direct: `Gulf Elite Transport arranges taxi rides to and from hotels around Al-Masjid an-Nabawi in Madinah, including Madinah Hilton, Anwar Al Madinah Mövenpick, Dar Al Iman InterContinental, Dar Al Taqwa and Pullman Zamzam Madinah. Tell us your hotel and your flight or train, and the vehicle, driver and fare are confirmed before you commit.`,
+  facts: [
+    { label: "Area", value: "Central Area around the Prophet's Mosque" },
+    { label: "Listed hotels", value: `${hotelsMadinah.length} (others on request)` },
+    { label: "Distances", value: "Straight line from the mosque, approximate" },
+    { label: "Rides", value: "Airport, station, Haram and between cities" },
+  ],
+  sections: [
+    {
+      id: "about",
+      h2: "Hotels in the Central Area of Madinah",
+      kind: "text",
+      paragraphs: [
+        "The streets around Al-Masjid an-Nabawi hold most of the large hotels in Madinah, so many visitors can walk to the mosque for each prayer. The rides they need are the ones to and from the airport, the railway station and the other cities, and for those the problem is the pickup: roads in the Central Area are restricted at prayer times and in busy seasons.",
+        "Tell us the name of your hotel and we agree the nearest road the vehicle can reach, and how far the walk to the hotel is. Distances below are straight-line figures from the mosque, taken from map data, and are approximate. The road distance is longer.",
+      ],
+    },
+    {
+      id: "hotels",
+      h2: "Hotels listed on this page",
+      kind: "items",
+      intro: "These are hotels we are asked about most. If yours is not listed, send us its name and we check the pickup point.",
+      items: hotelsMadinah.map((h) => ({
+        title: h.name,
+        text: `${h.brand}${h.tier === "medium" ? ", mid-range" : ""}. About ${km2(dist(h, NABAWI))} from the Prophet's Mosque in a straight line.`,
+      })),
+    },
+    {
+      id: "plan",
+      h2: "Planning a ride from your hotel",
+      kind: "items",
+      items: [
+        { title: "Say the hotel name", text: "Several hotels share the same streets, so the exact name decides the pickup road." },
+        { title: "Allow for prayer times", text: "Roads fill before and after prayers. Tell us the time you want to leave." },
+        { title: "Luggage and groups", text: "State bags and group size, since a larger vehicle may need a different meeting point." },
+        { title: "Departures", text: "For the airport or station, we plan the pickup back from your flight or train." },
+      ],
+    },
+    related([L.madinah, topic("madinah-hotel-to-prophets-mosque", "Madinah hotel to the Prophet's Mosque"), topic("madinah-airport-to-madinah-hotel", "Madinah airport to Madinah hotel"), topic("madinah-hotel-to-madinah-airport", "Madinah hotel to Madinah airport"), topic("haramain-train-station-transfers", "Haramain train station transfers"), L.hub]),
+    {
+      id: "faq",
+      h2: "Hotels near the Prophet's Mosque: questions",
+      kind: "faq",
+      items: [
+        { q: "Can the taxi stop at my hotel?", a: "Not always. Roads in the Central Area are controlled, so we agree the nearest road the vehicle can reach for your hotel." },
+        { q: "My hotel is not listed. Can you still pick me up?", a: "Yes. Send the hotel name and we confirm the pickup point for your request." },
+        { q: "Are the distances exact?", a: "No. They are approximate straight-line figures from map data. The road route is longer." },
+      ],
+    },
+  ],
+  entities: [madinahE, country, ...hotelsMadinah.map((h) => ({ type: "Place" as const, name: `${h.name}, Madinah`, lat: h.lat, lng: h.lng }))],
+  prefill: { pickup: "Madinah hotel" },
+});
+
+const miqatPage = page({
+  slug: "miqat-points-taxi",
+  name: "Miqat Points by Taxi",
+  title: "Miqat Points for Umrah and Hajj: Taxi Stops",
+  description: "The five Miqat points for Umrah and Hajj, where they are, which pilgrims use them, and how a taxi stop can be planned. Fare confirmed before you commit.",
+  h1: "The Miqat Points and How a Taxi Stop Works",
+  lead: "Where pilgrims enter ihram, and how we plan a stop on the way to Makkah.",
+  direct: `There are five Miqat points for Umrah and Hajj: Dhul Hulayfah (Abyar Ali), Al-Juhfah, Qarn al-Manazil, Yalamlam and Dhat Irq. Gulf Elite Transport can plan a stop at the Miqat on your ride to Makkah so your group can change into ihram and pray. Tell us the place and how long you need, and the vehicle, driver and fare are confirmed before you commit.`,
+  facts: [
+    { label: "Miqat points", value: "Five" },
+    { label: "Most used by road", value: "Dhul Hulayfah (Abyar Ali) and Qarn al-Manazil" },
+    { label: "Stop arranged", value: "On request, with time agreed first" },
+    { label: "Distances", value: "Approximate, from Makkah" },
+  ],
+  sections: [
+    {
+      id: "about",
+      h2: "What a Miqat is",
+      kind: "text",
+      paragraphs: [
+        "A Miqat is a point that pilgrims travelling to Makkah for Umrah or Hajj must reach in the state of ihram. Which Miqat applies depends on the direction from which the pilgrim approaches Makkah. Pilgrims who fly usually follow the guidance of their airline and group leader, while those travelling by road stop at the Miqat on their route.",
+        "We do not give religious rulings. What we do is plan the travel side: a vehicle that stops at the Miqat, time for the group to change and pray, and the onward drive to Makkah. If you are unsure which Miqat applies to you, ask your group leader or a scholar before you travel.",
+      ],
+    },
+    {
+      id: "points",
+      h2: "The five Miqat points",
+      kind: "items",
+      intro: "Distances are approximate road or straight-line figures from Makkah as given in public reference sources.",
+      items: [
+        { title: "Dhul Hulayfah (Abyar Ali)", text: "South-west of Madinah, about 7 km from the Prophet's Mosque, for pilgrims travelling from Madinah. It is roughly 420 km from Makkah and is the usual stop on the road from Madinah." },
+        { title: "Al-Juhfah", text: "Near Rabigh on the coast, roughly 180 km north-west of Makkah, for pilgrims arriving from the north and west." },
+        { title: "Qarn al-Manazil (As-Sayl al-Kabir)", text: "On the Taif road, roughly 80 km north-east of Makkah, for pilgrims arriving from the east and for those coming down from Taif." },
+        { title: "Yalamlam", text: "South of Makkah, roughly 100 km away, for pilgrims arriving from the south and from Yemen." },
+        { title: "Dhat Irq", text: "North-east of Makkah, roughly 110 km away, for pilgrims arriving from Iraq and the north-east." },
+      ],
+    },
+    {
+      id: "plan",
+      h2: "Planning a Miqat stop",
+      kind: "items",
+      items: [
+        { title: "Say which Miqat", text: "Tell us the place and whether the stop is on the way from Madinah, Taif or elsewhere." },
+        { title: "Allow time", text: "Ablution, ihram and prayer take time, and groups need more than individuals." },
+        { title: "Group size", text: "Larger groups need more room at the mosque and car park, so we plan the arrival accordingly." },
+        { title: "Onward ride", text: "After the stop the driver continues to Makkah, with the drop-off near your hotel agreed in advance." },
+      ],
+    },
+    related([topic("dhul-hulayfah-abyar-ali-taxi", "Dhul Hulayfah (Abyar Ali)"), topic("qarn-al-manazil-miqat-taxi", "Qarn al-Manazil"), topic("madinah-to-makkah-for-umrah", "Madinah to Makkah for Umrah"), topic("taif-to-makkah-for-umrah", "Taif to Makkah for Umrah"), L.makkah, L.hub]),
+    {
+      id: "faq",
+      h2: "Miqat points: questions",
+      kind: "faq",
+      items: [
+        { q: "Which Miqat should I use?", a: "That depends on the direction you approach Makkah from. Ask your group leader or a scholar. We plan the stop once you tell us the place." },
+        { q: "Do you stop at the Miqat on request?", a: "Yes. A stop can be planned and you tell us how much time your group needs." },
+        { q: "Are the distances exact?", a: "No. They are approximate figures from public reference sources, and the actual route is confirmed for each request." },
+      ],
+    },
+  ],
+  entities: [makkahE, madinahE, country],
+  prefill: { pickup: "Madinah or Taif", dropoff: "Makkah" },
+});
 // ------------------------------------------------------------------------------------------ hub
 const hub: PlacePage = {
   kind: "hub",
@@ -1837,7 +1998,7 @@ const hub: PlacePage = {
       h2: "Pilgrim journeys",
       kind: "links",
       intro: "Each page explains one part of the trip and what to tell us.",
-      items: [...topics, ...moreTopics].map((t) => ({ name: t.name, href: t.path, note: t.lead.length > 70 ? t.lead.slice(0, 68).trimEnd().replace(/[,.\s]+\S*$/, "") + "..." : t.lead })),
+      items: [...topics, ...moreTopics, miqatPage, hotelPageMadinah].map((t) => ({ name: t.name, href: t.path, note: t.lead.length > 70 ? t.lead.slice(0, 68).trimEnd().replace(/[,.\s]+\S*$/, "") + "..." : t.lead })),
     },
     {
       id: "cities",
@@ -1891,7 +2052,7 @@ const hub: PlacePage = {
   ],
   layout: { hero: "centered", body: "cards", form: "bottom" },
   entities: [makkahE, madinahE, jeddahE, country],
-  children: [...topics, ...moreTopics, ...spotPages, ...vehiclePages].map((t) => ({ name: t.name, path: t.path })),
+  children: [...topics, ...moreTopics, miqatPage, hotelPageMadinah, ...spotPages, ...vehiclePages].map((t) => ({ name: t.name, path: t.path })),
   prefill: { pickup: "Jeddah airport or hotel" },
 };
 
@@ -1903,4 +2064,4 @@ for (const t of topics) {
   if (links && links.kind === "links") links.items.unshift(...spots.filter((x) => x.city === city).map((x) => ({ name: x.name, href: `${UMRAH_BASE}/${x.slug}`, note: "Place guide" })));
 }
 
-export const umrahPages: PlacePage[] = [hub, ...topics, ...moreTopics, ...spotPages, ...vehiclePages];
+export const umrahPages: PlacePage[] = [hub, ...topics, ...moreTopics, miqatPage, hotelPageMadinah, ...spotPages, ...vehiclePages];
