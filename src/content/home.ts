@@ -156,6 +156,10 @@ export const faqs: Faq[] = [
     a: "No standard fares are published. We confirm the fare for your taxi or cab ride, or a quotation for freight and other services, before you commit to anything.",
   },
   {
+    q: "Who provides the rides?",
+    a: "Rides are arranged with licensed local drivers and transport providers in Saudi Arabia. Gulf Elite Transport Group takes your request, passes it to a suitable provider and confirms the vehicle, driver and fare with you before you commit.",
+  },
+  {
     q: "Can I book an airport transfer?",
     a: "Yes. Send your flight details, terminal if you know it, your destination and the number of passengers and bags. Each airport guide explains what to include.",
   },

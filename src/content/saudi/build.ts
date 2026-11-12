@@ -609,7 +609,7 @@ function assignLayouts(pages: PlacePage[]) {
   const key = (l: PlaceLayout) => `${l.hero}/${l.body}/${l.form}`;
   const used = new Set<string>();
   for (const p of pages) if (p.kind === "hub") used.add(key(p.layout));
-  for (const kind of ["route", "airport", "region", "area", "city", "topic"] as PageKind[]) {
+  for (const kind of ["route", "airport", "region", "area", "city"] as PageKind[]) {
     const h = HEROES[kind];
     pages
       .filter((p) => p.kind === kind)
@@ -630,6 +630,27 @@ function assignLayouts(pages: PlacePage[]) {
         throw new Error(`No unused layout left for ${p.path}`);
       });
   }
+  // Umrah and Hajj pages also have their own pool, so they are unique among themselves.
+  const usedTopic = new Set<string>();
+  pages
+    .filter((p) => p.kind === "topic")
+    .forEach((p, i) => {
+      const h = HEROES.topic;
+      for (let k = 0; k < h.length * BODIES.length * FORMS.length; k++) {
+        const n = i + k;
+        const cand: PlaceLayout = {
+          hero: h[n % h.length],
+          body: BODIES[Math.floor(n / h.length) % BODIES.length],
+          form: FORMS[Math.floor(n / (h.length * BODIES.length)) % FORMS.length],
+        };
+        if (!usedTopic.has(key(cand))) {
+          usedTopic.add(key(cand));
+          p.layout = cand;
+          return;
+        }
+      }
+      throw new Error(`No unused layout left for ${p.path}`);
+    });
   // Area-to-area pages have their own pool: each gets a different hero/body/form combination from the others.
   const usedPair = new Set<string>();
   pages

@@ -963,6 +963,413 @@ const topics: PlacePage[] = [
   }),
 ];
 
+// ------------------------------------------------------------------------------------------ places (one page per place)
+type Spot = {
+  slug: string;
+  name: string;
+  ar: string;
+  city: "makkah" | "madinah";
+  lat: number;
+  lng: number;
+  kind: "holy-site" | "district";
+  tagline: string;
+  about: string;
+  know: { title: string; text: string }[];
+  taxi: { title: string; text: string }[];
+  faq: { q: string; a: string }[];
+};
+
+const HARAM = { name: "Al-Masjid al-Haram", lat: 21.4225, lng: 39.8262 };
+const NABAWI = { name: "Al-Masjid an-Nabawi", lat: 24.4672, lng: 39.6111 };
+const rad = (x: number) => (x * Math.PI) / 180;
+const dist = (a: { lat: number; lng: number }, b: { lat: number; lng: number }) => {
+  const h = Math.sin(rad(b.lat - a.lat) / 2) ** 2 + Math.cos(rad(a.lat)) * Math.cos(rad(b.lat)) * Math.sin(rad(b.lng - a.lng) / 2) ** 2;
+  return 2 * 6371 * Math.asin(Math.sqrt(h));
+};
+
+const spots: Spot[] = [
+  {
+    slug: "jabal-al-noor-taxi", name: "Jabal al-Noor (Cave of Hira)", ar: "جبل النور", city: "makkah", lat: 21.4573, lng: 39.8586, kind: "holy-site",
+    tagline: "The Mountain of Light, with the cave where the first revelation is said to have come to the Prophet.",
+    about: "Jabal al-Noor rises north-east of the Haram, and near its summit is the Cave of Hira, where the first verses of the Quran are traditionally said to have been revealed. It is one of the most visited places outside the Haram, and many people go to see it and the view over Makkah rather than to climb all the way.",
+    know: [
+      { title: "The climb is steep", text: "A path of stairs and rough steps leads up the mountain. It takes real effort and is not suitable for everyone, so many visitors stop at the lower levels." },
+      { title: "Heat and timing", text: "Early morning and the hours after sunset are far more comfortable than midday, particularly in summer." },
+      { title: "Crowds", text: "Weekends, school holidays and Ramadan bring large crowds around the base and on the path." },
+    ],
+    taxi: [
+      { title: "Where the car stops", text: "The car stops at the base of the mountain, where stalls and a small car park serve visitors. The climb itself is on foot." },
+      { title: "Waiting", text: "Most visitors ask the driver to wait, since a taxi back from the base can be hard to find. Tell us how long you expect to be." },
+      { title: "Combine with other places", text: "Jabal al-Noor is often combined with Jabal Thawr and Masjid A'isha in one half-day of rides. Give us the order you want." },
+    ],
+    faq: [
+      { q: "Can the taxi take me up the mountain?", a: "No. The vehicle stops at the base and the climb is on foot." },
+      { q: "How long should the driver wait?", a: "It depends on how far you climb. Tell us your plan and we agree the waiting arrangement before you commit." },
+    ],
+  },
+  {
+    slug: "jabal-thawr-taxi", name: "Jabal Thawr", ar: "جبل ثور", city: "makkah", lat: 21.3774, lng: 39.8483, kind: "holy-site",
+    tagline: "The mountain south of Makkah where the Prophet and Abu Bakr are said to have sheltered at the start of the Hijra.",
+    about: "Jabal Thawr stands south of the city, and a cave near its top is associated with the days the Prophet and Abu Bakr spent hiding before their journey to Madinah. It is quieter than Jabal al-Noor, and visitors usually go for the history and for the walk rather than the crowds.",
+    know: [
+      { title: "A longer, harder climb", text: "The path is longer and steeper than many people expect, and shade is limited. Sensible shoes and water matter." },
+      { title: "Quieter side of the city", text: "It lies away from the Haram on the southern side, so the ride is through a different part of Makkah from the usual pilgrim routes." },
+      { title: "Best time to go", text: "Early morning, before the heat builds, is the most practical time." },
+    ],
+    taxi: [
+      { title: "Where the car stops", text: "The car stops at the foot of the mountain. From there it is a walk and then a climb." },
+      { title: "Waiting", text: "A wait is usual, since a taxi back from the foot of the mountain is not easy to find. Agree the waiting time with us first." },
+      { title: "Planning the round trip", text: "From a hotel near the Haram it is a ride out and back. Tell us your pickup point and the time you want to start." },
+    ],
+    faq: [
+      { q: "Is Jabal Thawr suitable for elderly visitors?", a: "The climb is demanding. Many visitors view the mountain from the base, and the driver can wait while others go up." },
+      { q: "Can we combine it with Jabal al-Noor?", a: "Yes. Tell us the order and we plan the route and the waiting with you." },
+    ],
+  },
+  {
+    slug: "mina-taxi", name: "Mina", ar: "منى", city: "makkah", lat: 21.4133, lng: 39.8933, kind: "holy-site",
+    tagline: "The valley east of Makkah, known for the tent city where pilgrims stay during Hajj.",
+    about: "Mina is a valley east of the Haram, a few kilometres from Makkah, known for its vast tent city where pilgrims stay during the days of Hajj and for the Jamarat, where the stoning rite is performed. For most of the year it is quiet. Around Hajj it becomes one of the most crowded places on earth, and movement there is controlled by the authorities.",
+    know: [
+      { title: "Outside the Hajj days", text: "The valley is open and quiet for much of the year, and visitors may ask for a ride to see it or to pass through on the way to Arafat." },
+      { title: "During Hajj", text: "Roads, tents and the Jamarat area are managed by the authorities, and vehicle access is tightly controlled. We do not assume that a ride to Mina will be allowed on a Hajj date." },
+      { title: "Between the sacred sites", text: "Mina, Muzdalifah and Arafat run along one corridor east of Makkah, so a ride to one often passes the others." },
+    ],
+    taxi: [
+      { title: "Short ride from the Haram", text: "Mina is a short ride in distance from central Makkah, though traffic can make it long on busy days." },
+      { title: "Say your purpose", text: "Tell us whether you want to see the area, visit the Jamarat or continue to Arafat, so the right route and stops are planned." },
+      { title: "Hajj dates", text: "For Hajj dates, we tell you plainly what can be arranged under the rules in force." },
+    ],
+    faq: [
+      { q: "Can I visit Mina outside Hajj?", a: "Yes, the area is open for much of the year. Tell us the date and the places you want to see." },
+      { q: "Can you take us to Mina during Hajj?", a: "Access then is controlled by the authorities. We confirm what can be arranged for your dates." },
+    ],
+  },
+  {
+    slug: "muzdalifah-taxi", name: "Muzdalifah", ar: "مزدلفة", city: "makkah", lat: 21.385, lng: 39.936, kind: "holy-site",
+    tagline: "The open plain between Mina and Arafat where pilgrims spend the night after Arafat.",
+    about: "Muzdalifah is a wide open plain between Mina and Arafat. During Hajj, pilgrims arrive here after sunset on the day of Arafat, pray and spend part of the night in the open before moving on to Mina. For the rest of the year it is empty ground beside the road and has little to see.",
+    know: [
+      { title: "A place for a few hours of the year", text: "Outside the Hajj days there are no crowds and no facilities. Visitors who stop here usually do so on the way between the other sacred sites." },
+      { title: "Controlled movement", text: "During Hajj the movement of vehicles and people here is organised by the authorities. We do not assume access on those dates." },
+      { title: "The route", text: "It lies between Mina and Arafat, so most visitors see it as part of a longer ride along the corridor." },
+    ],
+    taxi: [
+      { title: "As part of a route", text: "Muzdalifah is normally one stop on a ride that includes Mina and Arafat. Tell us the places and the order." },
+      { title: "Short stops", text: "A stop to pray and look is typically brief. Agree the time with the driver." },
+      { title: "Hajj dates", text: "On Hajj dates, we confirm what can be arranged under the rules in force." },
+    ],
+    faq: [
+      { q: "Is there anything to see outside Hajj?", a: "Very little. It is an open plain and most visitors stop briefly as part of a longer route." },
+      { q: "Can a taxi stop here?", a: "Outside Hajj, a short stop can be planned. On Hajj dates, access is controlled by the authorities." },
+    ],
+  },
+  {
+    slug: "arafat-taxi", name: "Arafat", ar: "عرفات", city: "makkah", lat: 21.3549, lng: 39.9841, kind: "holy-site",
+    tagline: "The plain and hill where the central rite of Hajj, the standing at Arafat, takes place.",
+    about: "Arafat is a broad plain east of Makkah with a low granite hill known as Jabal al-Rahmah. The standing at Arafat on the ninth of Dhul Hijjah is the central rite of Hajj. The area is empty and quiet for most of the year, and visitors who come outside Hajj are usually there to see the plain and the hill, to pray and to take in the place.",
+    know: [
+      { title: "Further than Mina and Muzdalifah", text: "It is the furthest of the three sacred sites from the Haram, so the ride is longer, with the road passing Mina and Muzdalifah on the way." },
+      { title: "Little shade", text: "The plain is open and hot for much of the year. Water and sun protection matter." },
+      { title: "During Hajj", text: "Entry and movement are managed by the authorities, and we do not assume access on those dates." },
+    ],
+    taxi: [
+      { title: "A longer half-day ride", text: "Allow time for the ride out, the visit and the way back. Tell us the time you want to start." },
+      { title: "Waiting", text: "A taxi back from the plain is hard to find, so most visitors ask the driver to wait." },
+      { title: "Combine the sites", text: "Arafat is often visited with Muzdalifah and Mina in one trip. Give us the order you prefer." },
+    ],
+    faq: [
+      { q: "Can I visit Arafat outside Hajj?", a: "Yes, the area is generally accessible outside the Hajj days. We confirm the arrangement for your date." },
+      { q: "How long does the visit take?", a: "It depends on how long you stay, and traffic on the road. We agree the waiting time with you first." },
+    ],
+  },
+  {
+    slug: "masjid-aisha-tanim-taxi", name: "Masjid A'isha (Tan'eem)", ar: "مسجد عائشة (التنعيم)", city: "makkah", lat: 21.4627, lng: 39.7817, kind: "holy-site",
+    tagline: "The mosque at Tan'eem, the usual starting point for a further Umrah for pilgrims already in Makkah.",
+    about: "Masjid A'isha lies at Tan'eem, on the north-western edge of Makkah, just outside the boundary of the Haram. It is the place where pilgrims who are already in Makkah commonly enter ihram to perform another Umrah, and it is among the busiest of the Miqat stops because of the number of people who use it.",
+    know: [
+      { title: "A short, busy ride", text: "The ride from the Haram area is short, but the road and the car park can be very busy, especially on weekends and in Ramadan." },
+      { title: "Ihram and prayer", text: "Pilgrims enter ihram and pray here before returning to the Haram. Allow time for this, particularly with a group." },
+      { title: "Women and families", text: "Facilities are large, but queues form at busy times, so allow extra time for families and groups." },
+    ],
+    taxi: [
+      { title: "Out and back", text: "The usual plan is a ride from the hotel to Tan'eem and then on to the Haram. Tell us the sequence you want." },
+      { title: "Waiting", text: "Many pilgrims ask the driver to wait while they enter ihram, then take them on to the Haram." },
+      { title: "Timing", text: "Early morning and late evening are quieter than the afternoon." },
+    ],
+    faq: [
+      { q: "Can you take us from Tan'eem to the Haram?", a: "Yes. The ride on to the Haram can be planned in the same arrangement, with the drop-off point agreed first." },
+      { q: "Is the driver able to wait?", a: "Yes, if you ask. The waiting arrangement is confirmed before you commit." },
+    ],
+  },
+  {
+    slug: "jannat-al-mualla-taxi", name: "Jannat al-Mu'alla", ar: "جنة المعلاة", city: "makkah", lat: 21.431, lng: 39.83, kind: "holy-site",
+    tagline: "The historic cemetery north of the Haram, also known as al-Hajun.",
+    about: "Jannat al-Mu'alla is a historic cemetery on the northern side of the Haram, where several members of the Prophet's family and Companions are traditionally said to be buried. It is close enough to the Haram that many visitors walk, but a short ride helps those who cannot walk far or are in a group.",
+    know: [
+      { title: "Very close to the Haram", text: "It lies on the north side of the Haram, so it is a short ride or a walk." },
+      { title: "Visiting arrangements", text: "Access and visiting times are set by the authorities and can change. Ask on the day or ask us when you request the ride." },
+      { title: "Respect and dress", text: "Visitors are expected to behave with reverence, and signs on site set out what is allowed." },
+    ],
+    taxi: [
+      { title: "A short ride", text: "From hotels near the Haram, it is a short ride. The drop-off is on a nearby road rather than at the gate." },
+      { title: "Timed return", text: "Because the visit is brief, agree a pickup time instead of a long wait." },
+      { title: "With other places", text: "It is often combined with Jabal al-Noor, since both are on the northern side of the city." },
+    ],
+    faq: [
+      { q: "Can the car wait outside?", a: "A short wait or a timed pickup can be agreed. The point where the car can stop depends on road controls." },
+      { q: "Are there visiting times?", a: "Visiting arrangements are set by the authorities and can change, so check on the day." },
+    ],
+  },
+  {
+    slug: "aziziyah-to-haram-taxi", name: "Aziziyah", ar: "العزيزية", city: "makkah", lat: 21.4, lng: 39.868, kind: "district",
+    tagline: "A large residential district east of the Haram, popular with visitors who stay a few kilometres out.",
+    about: "Aziziyah is a large residential and hotel district to the south-east of the Haram, with apartment buildings, family hotels and shops. Many visitors choose it for lower prices and larger rooms, and travel to the Haram by road for each prayer, which makes a ride the practical choice.",
+    know: [
+      { title: "Far enough to need a ride", text: "It is several kilometres from the Haram, so walking is not realistic for most visitors, especially elders and families." },
+      { title: "Pickup points", text: "Streets are crowded with parked cars and shops. Give a landmark such as the hotel name or a nearby mosque for a precise pickup." },
+      { title: "Peak times", text: "The roads towards the Haram fill before the main prayers, particularly Friday, and in Ramadan." },
+    ],
+    taxi: [
+      { title: "To the Haram", text: "Rides from Aziziyah stop at the nearest permitted point to the Haram, and the last stretch is on foot. Agree it before you go." },
+      { title: "Return pickup", text: "Plan the return ride with a landmark and a time window, since the roads near the Haram are controlled." },
+      { title: "Several rides per day", text: "A regular pattern of rides for each prayer or visit can be arranged together, confirmed for each request." },
+    ],
+    faq: [
+      { q: "Is Aziziyah a good area to stay in?", a: "It suits visitors who want more space and lower prices and accept that every visit to the Haram needs a ride." },
+      { q: "Can you arrange daily rides from Aziziyah?", a: "Yes. Tell us your dates and times, and we confirm the arrangement before you commit." },
+    ],
+  },
+  {
+    slug: "abraj-al-bait-jabal-omar-taxi", name: "Abraj Al Bait and Jabal Omar", ar: "أبراج البيت وجبل عمر", city: "makkah", lat: 21.417, lng: 39.825, kind: "district",
+    tagline: "The towers and hotel complexes right beside the Haram, where the main challenge is the pickup point.",
+    about: "Abraj Al Bait, known for its Clock Tower, and the Jabal Omar development stand beside the Haram and hold some of the largest hotels in Makkah. They are within walking distance of the Haram, so rides here are less about reaching the mosque and more about arriving, leaving and getting to the places beyond it.",
+    know: [
+      { title: "Controlled roads", text: "Roads around the complexes are controlled, and a car may not be able to stop at the hotel entrance. The pickup is on a road the driver can reach." },
+      { title: "Large buildings", text: "The complexes have many entrances and floors. Tell us the hotel and tower name and where you will wait." },
+      { title: "Busy at prayer times", text: "Thousands of people leave the Haram at the same moment. Plan the pickup away from the busiest few minutes." },
+    ],
+    taxi: [
+      { title: "Airport and station transfers", text: "The most common rides from here are to Jeddah airport and the Haramain station. Send the flight or train time so the pickup is planned back from it." },
+      { title: "Luggage", text: "Large groups with luggage should say so, since a bigger vehicle may need a different pickup point." },
+      { title: "Rides to other places", text: "Rides to Jabal al-Noor, Tan'eem and other places can be planned from here, with a timed return." },
+    ],
+    faq: [
+      { q: "Do I need a taxi if my hotel is next to the Haram?", a: "Not to reach the Haram. You need one for the airport, the station, and the places beyond the Haram." },
+      { q: "Where will the car meet us?", a: "At a point the driver can reach, which may be a short walk from the hotel. We agree it before the day." },
+    ],
+  },
+  {
+    slug: "quba-mosque-taxi", name: "Quba Mosque", ar: "مسجد قباء", city: "madinah", lat: 24.4393, lng: 39.6173, kind: "holy-site",
+    tagline: "The first mosque built in Islam, on the southern side of Madinah.",
+    about: "Quba Mosque is generally regarded as the first mosque built in Islam, started by the Prophet on his arrival near Madinah. It lies on the southern side of the city, and many visitors go there during their stay, often as an early morning visit, since there is a tradition of praying there.",
+    know: [
+      { title: "A popular half-hour visit", text: "Most visitors spend a short time at the mosque and the area around it, which has shops and cafes." },
+      { title: "Early morning is quieter", text: "The mosque is busiest at weekends and in the afternoon. Early morning is calmer." },
+      { title: "Visiting times", text: "Prayer times affect when you can go in. Plan around them." },
+    ],
+    taxi: [
+      { title: "Short ride from the Central Area", text: "From hotels near the Prophet's Mosque it is a short ride south." },
+      { title: "Drop-off and pickup", text: "A car park serves the mosque. Agree a pickup point and time before you go in." },
+      { title: "With other places", text: "Quba is often combined with Masjid al-Qiblatayn and Uhud in one morning's rides." },
+    ],
+    faq: [
+      { q: "How long should the driver wait?", a: "Most visits are short. Tell us how long you expect to stay and we agree the arrangement first." },
+      { q: "Can we visit several places in one ride?", a: "Yes. Give us the places and the order, and we plan the route and the timing with you." },
+    ],
+  },
+  {
+    slug: "masjid-al-qiblatayn-taxi", name: "Masjid al-Qiblatayn", ar: "مسجد القبلتين", city: "madinah", lat: 24.4849, lng: 39.5806, kind: "holy-site",
+    tagline: "The Mosque of the Two Qiblas, where the direction of prayer is said to have changed.",
+    about: "Masjid al-Qiblatayn, the Mosque of the Two Qiblas, is on the north-western side of Madinah. It is named for the tradition that the direction of prayer was changed here from Jerusalem to Makkah during a prayer. It is a regular stop on visits to the places of Madinah.",
+    know: [
+      { title: "A short stop", text: "Most people stop for a short visit and to pray." },
+      { title: "On the western side", text: "It lies north-west of the Prophet's Mosque, on the way towards Uhud and the Seven Mosques." },
+      { title: "Prayer times", text: "Go outside the main prayer times to avoid queues at the entrance." },
+    ],
+    taxi: [
+      { title: "A short ride", text: "From hotels near the Prophet's Mosque it is a short ride north-west." },
+      { title: "Meeting point", text: "A car park and a road beside the mosque serve visitors. We agree a meeting point with you." },
+      { title: "Part of a route", text: "It is usually visited with the Seven Mosques and Uhud." },
+    ],
+    faq: [
+      { q: "Can we combine it with other places?", a: "Yes. A ride to the Seven Mosques and Uhud can be planned in the same arrangement." },
+      { q: "Can the driver wait?", a: "Yes, if you ask. We confirm the waiting arrangement first." },
+    ],
+  },
+  {
+    slug: "uhud-taxi", name: "Mount Uhud", ar: "جبل أحد", city: "madinah", lat: 24.5, lng: 39.61, kind: "holy-site",
+    tagline: "The mountain and battlefield north of Madinah, linked to the Battle of Uhud.",
+    about: "Mount Uhud rises north of Madinah, and the plain at its foot is the site of the Battle of Uhud. The cemetery where martyrs of the battle are buried is nearby. Visitors usually stop at the foot of the mountain and the cemetery area, which has a car park and a small set of shops.",
+    know: [
+      { title: "A short visit", text: "Most people stop for a short time to see the mountain and the plain and to reflect." },
+      { title: "Heat", text: "The area is open and the sun is strong most of the year. Visit early or late in the day." },
+      { title: "Respectful dress and conduct", text: "Visitors are expected to behave with reverence, and signs on site set out what is allowed." },
+    ],
+    taxi: [
+      { title: "Short ride from the city", text: "It is a short ride north from the Prophet's Mosque." },
+      { title: "Where the car stops", text: "The car stops at a car park near the foot of the mountain and the cemetery." },
+      { title: "With other places", text: "Often combined with the Seven Mosques and Masjid al-Qiblatayn." },
+    ],
+    faq: [
+      { q: "Can the taxi go up the mountain?", a: "Visitors stop at the base. We agree the stop and the return with you." },
+      { q: "How long is the visit?", a: "Most visits are brief. Tell us your plan and we agree the waiting time first." },
+    ],
+  },
+  {
+    slug: "seven-mosques-madinah-taxi", name: "The Seven Mosques", ar: "المساجد السبعة", city: "madinah", lat: 24.4833, lng: 39.5942, kind: "holy-site",
+    tagline: "A group of small mosques near the site of the Battle of the Trench.",
+    about: "The Seven Mosques, known locally as al-Masajid as-Sab'ah, are a group of small mosques at the foot of Mount Sala' on the north-western side of Madinah, associated with the Battle of the Trench. Visitors come to see the group and to pray, and it is a regular stop on a morning of visits to the places of Madinah.",
+    know: [
+      { title: "Small, busy stop", text: "The mosques are small and can be crowded at busy times, so most visits are brief." },
+      { title: "Near other places", text: "It is close to Masjid al-Qiblatayn, so the two are often visited together." },
+      { title: "Information on site", text: "Signs explain the mosques. A guide, if you want one, is a separate arrangement." },
+    ],
+    taxi: [
+      { title: "A short ride", text: "From the Central Area it is a short ride to the north-west." },
+      { title: "Parking", text: "Parking is limited near the mosques. We agree a meeting point with you." },
+      { title: "Planning the morning", text: "Many visitors do Quba, Qiblatayn, the Seven Mosques and Uhud in one morning. Tell us your order." },
+    ],
+    faq: [
+      { q: "Is it far from the Prophet's Mosque?", a: "It is a short ride to the north-west. Traffic around prayer times affects the time." },
+      { q: "Can you take us to all four places in one morning?", a: "Yes, a route covering them can be planned and confirmed with you." },
+    ],
+  },
+  {
+    slug: "dhul-hulayfah-abyar-ali-taxi", name: "Dhul Hulayfah (Abyar Ali)", ar: "ذو الحليفة (أبيار علي)", city: "madinah", lat: 24.4139, lng: 39.5436, kind: "holy-site",
+    tagline: "The Miqat for pilgrims travelling from Madinah to Makkah, a short drive south-west of the city.",
+    about: "Dhul Hulayfah, commonly known as Abyar Ali, is the Miqat for pilgrims travelling from Madinah to Makkah to perform Umrah or Hajj. Here, pilgrims change into ihram, pray and make their intention before continuing. It lies south-west of Madinah, on the road to Makkah, and has a large mosque and washing facilities.",
+    know: [
+      { title: "A planned stop on the way to Makkah", text: "Most visitors come here as part of the journey from Madinah to Makkah, not as a separate trip." },
+      { title: "Time to change and pray", text: "Allow time for ablution, ihram and prayer. Groups usually need longer than individuals." },
+      { title: "Busy in Ramadan and Hajj", text: "The car park and facilities fill up in the busy seasons. Plan extra time." },
+    ],
+    taxi: [
+      { title: "On the way to Makkah", text: "The simplest plan is the Madinah to Makkah ride with a stop at the Miqat built in. Tell us how long you will need." },
+      { title: "A separate ride from Madinah", text: "If you want to go from your hotel to the Miqat first, perhaps for a group to change together, that can be arranged." },
+      { title: "Departure", text: "After the stop, the driver continues straight on to Makkah." },
+    ],
+    faq: [
+      { q: "Do you stop at the Miqat on request?", a: "Yes. A stop at Abyar Ali can be planned, and you tell us how much time your group needs." },
+      { q: "Is it far from Madinah?", a: "It is a short drive south-west of the city, on the road to Makkah." },
+    ],
+  },
+];
+
+function spotPage(s: Spot): PlacePage {
+  const from = s.city === "makkah" ? HARAM : NABAWI;
+  const d = dist(s, from);
+  const lo = Math.max(1, Math.round(d * 1.25));
+  const hi = Math.max(lo + 1, Math.round(d * 1.6));
+  const km1 = d < 10 ? d.toFixed(1) : String(Math.round(d));
+  const cityName = s.city === "makkah" ? "Makkah" : "Madinah";
+  const cityLink = s.city === "makkah" ? L.makkah : L.madinah;
+  const sameCity = spots.filter((x) => x.city === s.city && x.slug !== s.slug);
+  const isDistrict = s.kind === "district";
+  const entity = { type: "Place" as const, name: `${s.name}, ${cityName}`, ar: s.ar, lat: s.lat, lng: s.lng };
+  const title = isDistrict ? `Taxi in ${s.name}, ${cityName}: Rides to the ${s.city === "makkah" ? "Haram" : "Mosque"}` : `Taxi to ${s.name}, ${cityName}`;
+  return page({
+    slug: s.slug,
+    name: s.name,
+    title,
+    description: `${isDistrict ? `Taxi rides from ${s.name} in ${cityName}` : `Taxi to ${s.name} in ${cityName}`}: ${s.tagline.replace(/\.$/, "")}. Fare confirmed before you commit.`,
+    h1: isDistrict ? `Taxi in ${s.name}, ${cityName}` : `Taxi to ${s.name}, ${cityName}`,
+    lead: s.tagline,
+    direct: `Gulf Elite Transport arranges taxi rides ${isDistrict ? `from ${s.name} in ${cityName} to the Haram, the airport and other places` : `to ${s.name} in ${cityName}`}, with waiting arranged if you ask. It is about ${km1} km from ${from.name} in a straight line, roughly ${lo} to ${hi} km by road. The vehicle, driver and fare are confirmed with you before you commit.`,
+    facts: [
+      { label: "Place", value: `${s.name} (${s.ar})` },
+      { label: "City", value: cityName },
+      { label: `From ${from.name}`, value: `about ${km1} km in a straight line` },
+      { label: "By road", value: `roughly ${lo} to ${hi} km (approximate)` },
+    ],
+    sections: [
+      { id: "about", h2: `About ${s.name}`, kind: "text", paragraphs: [s.about, `${s.name} is about ${km1} km from ${from.name} in a straight line, and roughly ${lo} to ${hi} km by road depending on the route. These are approximate figures; the actual route and the time it takes depend on traffic and road controls at the time you travel.`] },
+      { id: "know", h2: `What to know before you go to ${s.name}`, kind: "items", items: s.know },
+      { id: "taxi", h2: `Getting to ${s.name} by taxi`, kind: "items", items: s.taxi },
+      related([cityLink, ...sameCity.slice(0, 3).map((x) => ({ name: x.name, href: `${UMRAH_BASE}/${x.slug}`, note: "Place guide" })), topic(s.city === "makkah" ? "makkah-ziyarat-rides" : "madinah-ziyarat-rides", s.city === "makkah" ? "Rides to places in Makkah" : "Rides to places in Madinah"), L.hub]),
+      { id: "faq", h2: `${s.name}: questions`, kind: "faq", items: [...s.faq, { q: "Do you publish fares?", a: "No. The fare is confirmed with you before you commit." }] },
+    ],
+    entities: [entity, s.city === "makkah" ? makkahE : madinahE, country],
+    prefill: { pickup: `${cityName} hotel`, dropoff: s.name },
+  });
+}
+
+// ------------------------------------------------------------------------------------------ vehicle pages
+type Veh = { slug: string; name: string; pax: string; bags: string; title: string; lead: string; about: string; fits: { title: string; text: string }[]; tips: { title: string; text: string }[]; faq: { q: string; a: string }[] };
+const vehicleTopics: Veh[] = [
+  {
+    slug: "sedan-taxi-for-umrah", name: "Sedan", pax: "1-4", bags: "2 large bags", title: "Sedan Taxi for Umrah: Makkah, Madinah, Jeddah", lead: "The simplest choice for one to four travellers with light luggage.",
+    about: "A sedan is the standard car for a single traveller, a couple or a small family. It suits airport transfers, rides to the Haram and journeys between the holy cities when the group is small and luggage is light. A sedan boot takes about two large suitcases, so a party of four with a bag each will be full.",
+    fits: [{ title: "One or two travellers", text: "Comfortable for a couple, with room for luggage and for the elderly to get in and out." }, { title: "Short city rides", text: "Hotel to the Haram, hotel to the Prophet's Mosque and rides to nearby places." }, { title: "Airport transfers", text: "Suitable when the group is small and bags are few." }],
+    tips: [{ title: "Count the bags first", text: "Four passengers with four large bags will not fit in one sedan. Ask for the next size up." }, { title: "Ihram and comfort", text: "Tell us if you are in ihram or travelling with someone unwell, so the journey is planned around them." }, { title: "Long journeys", text: "For Makkah to Madinah, many travellers prefer an SUV or van for the extra space." }],
+    faq: [{ q: "How many people fit in a sedan?", a: "Typically up to four passengers, but the exact vehicle and its seats are confirmed for each request." }, { q: "Is a sedan enough for Makkah to Madinah?", a: "For one or two people with light bags, yes. For more people or luggage, an SUV or van is more comfortable." }],
+  },
+  {
+    slug: "suv-taxi-for-umrah", name: "SUV", pax: "4-6", bags: "3-4 large bags", title: "SUV Taxi for Umrah: Family Comfort in Makkah", lead: "More space and comfort for families, and a good fit for long journeys between the holy cities.",
+    about: "An SUV seats a family of four to six and carries more luggage than a sedan. It sits higher, which makes getting in and out easier for older travellers, and it is a popular choice for the long drive between Makkah and Madinah.",
+    fits: [{ title: "Families", text: "Parents, children and grandparents travelling together with a few bags." }, { title: "Long journeys", text: "Makkah to Madinah or the airport transfer from Jeddah, where space and comfort matter." }, { title: "Elders", text: "The higher seat makes entry and exit easier for those who find a low car difficult." }],
+    tips: [{ title: "Ask about the luggage space", text: "Space varies with the model. Tell us your bag count and we confirm what fits." }, { title: "Third row", text: "If six people are travelling, tell us, since the third row reduces luggage space." }, { title: "Stops", text: "Rest and prayer stops on long journeys can be built into the plan." }],
+    faq: [{ q: "Is an SUV better for elderly parents?", a: "Many find it easier to get into and out of. Tell us about anyone with mobility needs and we plan the vehicle around them." }, { q: "Can an SUV take six people with luggage?", a: "It depends on the model and the bags. Tell us the numbers and we confirm what fits." }],
+  },
+  {
+    slug: "family-van-taxi-for-umrah", name: "Family van", pax: "6-8", bags: "5-7 large bags", title: "Family Van for Umrah: 6 to 8 Passengers", lead: "A van for extended families who want to travel together with their bags.",
+    about: "A family van is the practical choice for six to eight travellers with the luggage a pilgrimage involves. Sliding doors, wide seats and a large luggage area make loading easier than in a car, and the group stays in one vehicle for the whole transfer.",
+    fits: [{ title: "Extended families", text: "Several generations travelling together with a bag each." }, { title: "Airport to hotel", text: "One van from the arrivals hall to the hotel, instead of splitting the group." }, { title: "Between the holy cities", text: "A long ride is easier when everyone has space and the bags are in the same vehicle." }],
+    tips: [{ title: "Agree the pickup point", text: "Vans are larger, so the pickup point near the Haram or the mosque needs to suit them." }, { title: "Mobility", text: "Tell us if anyone uses a wheelchair, so we confirm the vehicle and the loading." }, { title: "Children", text: "Say how many and their ages so we plan seats and space." }],
+    faq: [{ q: "Can a van take eight people with bags?", a: "Typically six to eight passengers with luggage, depending on the model. We confirm what fits for your numbers." }, { q: "Is a van better than two cars?", a: "For many families, yes: the group stays together and arrives at the same time." }],
+  },
+  {
+    slug: "group-van-taxi-for-umrah", name: "Group van", pax: "8-12", bags: "8-10 large bags", title: "Group Van for Umrah: 8 to 12 Passengers", lead: "Larger groups travelling together, with space for the luggage of the whole party.",
+    about: "A group van, in the class of a Hiace-type minibus van, carries eight to twelve passengers with luggage space for the whole party. It suits small organised groups, large families and friends travelling together, and keeps them in one vehicle from the airport to the hotel and between the holy cities.",
+    fits: [{ title: "Organised small groups", text: "A mosque or community group of ten with one group leader." }, { title: "Very large families", text: "Two or three generations travelling as one party." }, { title: "Airport and city transfers", text: "A single vehicle for arrivals, departures and moves between hotels." }],
+    tips: [{ title: "Give a group leader", text: "One contact who can speak for the group helps with changes on the day." }, { title: "Count luggage carefully", text: "Large groups usually bring more than they expect. Send the bag count." }, { title: "Pickup points", text: "Large vans cannot stop everywhere. We agree a pickup point that suits the vehicle." }],
+    faq: [{ q: "What is the largest group a van can take?", a: "Typically up to about twelve passengers, depending on the model. Larger parties use a minibus or coach." }, { q: "Can we hire two vans for a bigger group?", a: "Yes. Several vehicles can travel together, confirmed for your request." }],
+  },
+  {
+    slug: "minibus-for-umrah-groups", name: "Minibus", pax: "13-29", bags: "ample luggage space", title: "Minibus for Umrah Groups: 13 to 29 Seats", lead: "A single vehicle for organised groups, tours and large family parties.",
+    about: "A minibus carries a group of roughly thirteen to twenty-nine travellers and a matching amount of luggage. It is the usual choice for organised parties, such as a mosque group or travel agency's pilgrims, who want to travel together, with one driver and one meeting point.",
+    fits: [{ title: "Organised groups", text: "Pilgrims travelling with a group leader, a mosque or an agency." }, { title: "Airport and hotel runs", text: "One vehicle collects the whole party from the airport and delivers them to the hotel." }, { title: "Holy-city journeys", text: "Makkah to Madinah and back, with stops, for a party that wants to stay together." }],
+    tips: [{ title: "Confirm access", text: "Minibuses may be restricted near the Haram and the Prophet's Mosque. We agree a drop-off point that suits the vehicle." }, { title: "One contact", text: "A group leader who gives us numbers and changes keeps things simple." }, { title: "Luggage", text: "State large bags and any special items so the luggage space is right." }],
+    faq: [{ q: "Can a minibus enter the area around the Haram?", a: "Large vehicles face stricter controls. We agree the drop-off point in advance and confirm what is possible." }, { q: "What if my group is over 29?", a: "Use a coach, or several vehicles that travel together." }],
+  },
+  {
+    slug: "coach-for-umrah-groups", name: "Coach", pax: "30+", bags: "under-coach storage", title: "Coach for Umrah Groups: 30+ Passengers", lead: "Coach travel for large parties, with storage under the floor for the whole group's luggage.",
+    about: "A coach carries thirty or more passengers, with luggage stored under the floor. It is used for large organised parties travelling together between the airport, the hotels and the two holy cities, and for corporate or community groups who want a single, coordinated arrival.",
+    fits: [{ title: "Large organised parties", text: "Travel agencies, mosques and communities moving thirty or more people." }, { title: "Between the holy cities", text: "Makkah to Madinah, with a stop at the Miqat if requested." }, { title: "Airport arrivals", text: "A group arriving on one flight and moving together to the hotel." }],
+    tips: [{ title: "Drop-off planning", text: "Coaches are among the most restricted vehicles near the Haram. We agree a drop-off point well in advance." }, { title: "Timing", text: "Allow longer for loading and unloading a large group." }, { title: "Number of vehicles", text: "For very large parties, several coaches can travel together." }],
+    faq: [{ q: "Can a coach go near the Haram?", a: "Access near the Haram is tightly controlled for large vehicles. We agree the nearest permitted drop-off and tell you plainly what is possible." }, { q: "Can you provide a coach during Hajj?", a: "Movement during Hajj is controlled by the authorities. We confirm what can be arranged for your dates." }],
+  },
+];
+
+function vehiclePage(v: Veh): PlacePage {
+  return page({
+    slug: v.slug,
+    name: `${v.name} for Umrah`,
+    title: v.title,
+    description: `${v.name} for Umrah in Makkah, Madinah and Jeddah: ${v.pax} passengers, ${v.bags}. Airport, hotel and Haram rides. Fare confirmed first.`,
+    h1: `${v.name} for Umrah and Hajj Visitors`,
+    lead: v.lead,
+    direct: `Gulf Elite Transport arranges a ${v.name.toLowerCase()} for Umrah and Hajj visitors in Makkah, Madinah and Jeddah, typically for ${v.pax} passengers with ${v.bags}. It can be used for airport transfers, hotel rides and journeys between the holy cities. The exact vehicle, driver and fare are confirmed before you commit.`,
+    facts: [
+      { label: "Vehicle", value: v.name },
+      { label: "Typical passengers", value: v.pax },
+      { label: "Typical luggage", value: v.bags },
+      { label: "Used for", value: "Airport, hotel, Haram, between cities" },
+    ],
+    sections: [
+      { id: "about", h2: `${v.name}: who it suits`, kind: "text", paragraphs: [v.about] },
+      { id: "fits", h2: `When a ${v.name.toLowerCase()} is the right choice`, kind: "items", items: v.fits },
+      { id: "tips", h2: "Planning tips", kind: "items", items: v.tips },
+      related([topic("group-transport-for-umrah", "Group transport for Umrah"), topic("family-and-elderly-pilgrims", "Family and elderly pilgrims"), topic("jeddah-airport-to-makkah", "Jeddah airport to Makkah"), ...vehicleTopics.filter((x) => x.slug !== v.slug).slice(0, 2).map((x) => topic(x.slug, `${x.name} for Umrah`, "Vehicle guide")), L.hub]),
+      { id: "faq", h2: `${v.name} for Umrah: questions`, kind: "faq", items: [...v.faq, { q: "Are your fares fixed?", a: "No standard fares are published. The fare is confirmed with you before you commit." }] },
+    ],
+    prefill: { pickup: "Jeddah airport or hotel" },
+  });
+}
+
+const spotPages = spots.map(spotPage);
+const vehiclePages = vehicleTopics.map(vehiclePage);
+
 // ------------------------------------------------------------------------------------------ hub
 const hub: PlacePage = {
   kind: "hub",
@@ -1008,6 +1415,20 @@ const hub: PlacePage = {
       kind: "links",
       items: [L.makkah, L.madinah, L.jeddah, { name: "Taxi & Cab Service in Taif", href: TAIF, note: "City guide" }, L.jed, L.med, L.jedMakkah, L.makkahMadinah, L.taif],
     },
+    {
+      id: "places",
+      h2: "Places in Makkah and Madinah",
+      kind: "links",
+      intro: "Rides to the places visitors go, and to the districts they stay in.",
+      items: spotPages.map((p) => ({ name: p.name, href: p.path, note: p.lead.length > 70 ? p.lead.slice(0, 68).trimEnd().replace(/[,.\s]+\S*$/, "") + "..." : p.lead })),
+    },
+    {
+      id: "vehicle-guides",
+      h2: "Choose a vehicle for your group",
+      kind: "links",
+      intro: "Typical capacities and when each size is the right choice.",
+      items: vehiclePages.map((p) => ({ name: p.name, href: p.path, note: p.lead })),
+    },
     vehicles,
     {
       id: "seasons",
@@ -1033,14 +1454,23 @@ const hub: PlacePage = {
         { q: "Are your fares fixed?", a: "No standard fares are published. We confirm the fare for your request before you commit." },
         { q: "Can I book an airport transfer in Jeddah or Madinah?", a: "Yes. Send your flight details, hotel and group size. See the Jeddah airport and Madinah airport pages." },
         { q: "What about the Hajj season?", a: "Movement during Hajj is controlled by the authorities, so we confirm what can be arranged for your dates and tell you plainly if something cannot." },
+        { q: "Who provides the rides?", a: "Rides are arranged with licensed local drivers and transport providers in Saudi Arabia. Gulf Elite Transport Group takes your request, passes it to a suitable provider and confirms the vehicle, driver and fare with you before you commit." },
         { q: "Can non-Muslims enter Makkah?", a: "Entry to Makkah is restricted to Muslims. Visitors should carry the documents their trip requires." },
       ],
     },
   ],
   layout: { hero: "centered", body: "cards", form: "bottom" },
   entities: [makkahE, madinahE, jeddahE, country],
-  children: topics.map((t) => ({ name: t.name, path: t.path })),
+  children: [...topics, ...spotPages, ...vehiclePages].map((t) => ({ name: t.name, path: t.path })),
   prefill: { pickup: "Jeddah airport or hotel" },
 };
 
-export const umrahPages: PlacePage[] = [hub, ...topics];
+// Ziyarat pages link to the single-place pages.
+for (const t of topics) {
+  const city = t.path.endsWith("/makkah-ziyarat-rides") ? "makkah" : t.path.endsWith("/madinah-ziyarat-rides") ? "madinah" : "";
+  if (!city) continue;
+  const links = t.sections.find((x) => x.id === "links");
+  if (links && links.kind === "links") links.items.unshift(...spots.filter((x) => x.city === city).map((x) => ({ name: x.name, href: `${UMRAH_BASE}/${x.slug}`, note: "Place guide" })));
+}
+
+export const umrahPages: PlacePage[] = [hub, ...topics, ...spotPages, ...vehiclePages];
