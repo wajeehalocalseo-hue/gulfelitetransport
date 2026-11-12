@@ -14,6 +14,7 @@ export const cityGeo: Record<string, { ar: string; lat: number; lng: number }> =
   "al-qatif": { ar: "القطيف", lat: 26.5565, lng: 49.996 },
   taif: { ar: "الطائف", lat: 21.2703, lng: 40.4158 },
   yanbu: { ar: "ينبع", lat: 24.0895, lng: 38.0618 },
+  alula: { ar: "العلا", lat: 26.6085, lng: 37.9232 },
   abha: { ar: "أبها", lat: 18.2164, lng: 42.5053 },
   "khamis-mushait": { ar: "خميس مشيط", lat: 18.3, lng: 42.7333 },
   tabuk: { ar: "تبوك", lat: 28.3835, lng: 36.5662 },

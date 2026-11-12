@@ -280,7 +280,7 @@ export const cities: City[] = [
       { name: "Yanbu Corniche", note: "Waterfront promenade" },
       { name: "Yanbu Commercial Port", note: "Red Sea port" },
     ],
-    airport: "yanbu-airport",
+    airport: "prince-abdulmohsen-bin-abdulaziz-international-airport",
     nearby: ["madinah", "jeddah"],
     faq: {
       q: "Do you take contractors to Yanbu Industrial City?",
@@ -288,6 +288,28 @@ export const cities: City[] = [
     },
   },
   {
+    id: "alula",
+    name: "AlUla",
+    region: "madinah-region",
+    wiki: "AlUla",
+    tagline: "AlUla is an oasis town in the desert of north-west Saudi Arabia, known for the ancient site of Hegra.",
+    about:
+      "AlUla lies in Madinah Region and is known for its sandstone canyons and rock formations and for Hegra, the pre-Islamic tomb site also called Madain Salih. Visitors come for the heritage sites, the old town, desert resorts and seasonal events, and most travel is between the airport, a resort and the places they have booked.",
+    getting:
+      "Distances between the town, the heritage sites and desert resorts can be long, and some sites are visited only by booked tour. AlUla International Airport is the main way in, and Madinah is the main city to the south. Tell us the resort or site rather than a street address, and we confirm the vehicle, driver and fare for your request.",
+    places: [
+      { name: "Hegra (Madain Salih)", note: "Pre-Islamic tomb site; visits are by booking" },
+      { name: "Elephant Rock", note: "A well-known sandstone formation outside the town" },
+      { name: "AlUla Old Town", note: "Historic mud-brick town in the oasis" },
+      { name: "AlUla International Airport", note: "The airport serving the area" },
+    ],
+    airport: "alula-international-airport",
+    nearby: ["madinah", "tabuk", "yanbu"],
+    faq: {
+      q: "Can you take me to Hegra?",
+      a: "Rides to the Hegra area can be requested. Entry to the site is by booked visit, so make that booking yourself and tell us the time, and we confirm the ride to match it.",
+    },
+  },  {
     id: "abha",
     name: "Abha",
     region: "asir-region",

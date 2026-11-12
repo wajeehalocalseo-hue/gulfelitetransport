@@ -27,7 +27,7 @@ export const regions: Region[] = [
     tagline: "The north-western region around Madinah, with the Red Sea port of Yanbu and the heritage landscapes of AlUla.",
     about:
       "Madinah Region is centred on the city that holds Al-Masjid an-Nabawi. Alongside pilgrim and visitor travel it includes the industrial and port city of Yanbu on the Red Sea and the desert heritage area of AlUla, so ride requests range from short city trips to long desert roads.",
-    other: ["Yanbu", "AlUla", "Badr", "Khaybar", "Al Hinakiyah"],
+    other: ["Badr", "Khaybar", "Al Hinakiyah"],
   },
   {
     id: "eastern-province",

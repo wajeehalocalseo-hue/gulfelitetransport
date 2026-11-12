@@ -73,6 +73,33 @@ export const airports: Airport[] = [
     ],
   },
   {
+    id: "prince-abdulmohsen-bin-abdulaziz-international-airport",
+    name: "Prince Abdulmohsen Bin Abdulaziz International Airport",
+    code: "YNB",
+    city: "yanbu",
+    tagline: "The airport of Yanbu, the Red Sea port and industrial city in Madinah Region.",
+    about:
+      "Prince Abdulmohsen Bin Abdulaziz International Airport, usually called Yanbu Airport, serves Yanbu and the surrounding governorate in Madinah Region. A new passenger terminal opened in 2007 and the airport received its first international flight in 2009. Passengers include industrial contractors heading for Yanbu Industrial City, visitors to the coast and old town, and travellers who continue by road to Madinah.",
+    tips: [
+      "Say where you are going: Yanbu Industrial City, the old town or the Corniche, or on to Madinah by road.",
+      "Industrial City sites have controlled gates. Bring the pass or authorisation the site requires and tell us the gate.",
+      "For a ride on to Madinah, send your hotel name and group size so the vehicle and the drop-off near the Prophet's Mosque can be planned.",
+    ],
+  },
+  {
+    id: "alula-international-airport",
+    name: "AlUla International Airport",
+    code: "ULH",
+    city: "alula",
+    tagline: "The airport for AlUla and the heritage sites of Hegra, in the desert of Madinah Region.",
+    about:
+      "AlUla International Airport serves AlUla in Madinah Region and is described as the closest airport to the archaeological site of Hegra and to AlUla Heritage Village. It opened in 2011 as a domestic airport and was renamed after its 2021 expansion. Most arrivals are visitors to the heritage sites, desert resorts and events, so rides usually go to a named resort or site rather than to a street address.",
+    tips: [
+      "Name your resort or the site you are visiting, since many places are in the desert and are not on ordinary street addresses.",
+      "Roads outside AlUla town are long and open. Tell us your plans for the day so the right vehicle and timing are confirmed.",
+      "Entry to some heritage sites is by booked visit. Make that booking yourself and tell us the time so the ride matches it.",
+    ],
+  },  {
     id: "abha-international-airport",
     name: "Abha International Airport",
     code: "AHB",
