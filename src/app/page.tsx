@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import type { ReactNode } from "react";
 import FaqList from "@/components/Faq";
 import Icon from "@/components/Icon";
 import JsonLd from "@/components/JsonLd";
@@ -14,21 +15,26 @@ import { regions } from "@/content/saudi/regions";
 import { BASE } from "@/content/saudi/build";
 import { priceColumns, priceRows } from "@/content/prices";
 import { groups, services } from "@/content/services";
-import { pageGraph } from "@/lib/schema";
-import { site, telUrl, whatsappUrl } from "@/lib/site";
+import { homeDescription, homeGraph, homeTitle } from "@/lib/home-schema";
+import { abs, site, telUrl, whatsappUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
+  title: { absolute: homeTitle },
+  description: homeDescription,
   alternates: { canonical: "/" },
+  openGraph: { title: homeTitle, description: homeDescription, url: abs("/"), siteName: site.name, type: "website", locale: "en" },
+  twitter: { card: "summary_large_image", title: homeTitle, description: homeDescription },
 };
 
-const eyebrow = "text-sm font-bold uppercase tracking-[0.18em] text-accent";
-const h2 = "mt-3 text-3xl font-extrabold tracking-tight text-navy sm:text-4xl";
-const lead = "mt-4 max-w-3xl text-lg leading-8 text-muted";
 const wrap = "mx-auto max-w-7xl px-5";
-const btn = "inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-center font-bold transition";
+const btn = "inline-flex items-center justify-center gap-2 rounded-md px-7 py-3.5 text-center font-bold transition";
 const btnPrimary = `${btn} bg-accent text-navy hover:brightness-95`;
 const btnGhost = `${btn} border border-white/30 text-white hover:border-accent hover:text-accent`;
-const chip = "rounded-full border border-navy/15 bg-white px-3.5 py-1.5 text-sm font-semibold text-navy transition hover:border-accent hover:bg-accent/15";
+const btnDark = `${btn} bg-navy text-white hover:bg-navy-2`;
+const btnOutline = `${btn} border border-navy/25 text-navy hover:border-accent hover:bg-accent/10`;
+const chip = "rounded-md border border-navy/15 bg-white px-3.5 py-1.5 text-sm font-semibold text-navy transition hover:border-accent hover:bg-accent/15";
+const card = "rounded-lg border border-navy/10 bg-white";
+const textLink = "font-bold text-navy underline decoration-accent decoration-2 underline-offset-4 hover:text-gold";
 
 const cityName = (id: string) => cities.find((x) => x.id === id)?.name ?? id;
 const cityPath = (id: string) => {
@@ -36,54 +42,67 @@ const cityPath = (id: string) => {
   return ct ? `${BASE}/${ct.region}/${ct.id}` : BASE;
 };
 
+/** Consistent section heading: gold rule + small caps label, serif title, optional lead. */
+function Head({ id, eyebrow, title, lead, dark = false, center = false }: { id: string; eyebrow: string; title: string; lead?: ReactNode; dark?: boolean; center?: boolean }) {
+  return (
+    <header className={center ? "mx-auto max-w-3xl text-center" : "max-w-3xl"}>
+      <p className={`flex items-center gap-3 text-xs font-bold uppercase tracking-[0.22em] ${dark ? "text-accent" : "text-gold"} ${center ? "justify-center" : ""}`}>
+        <span aria-hidden="true" className="h-px w-8 bg-accent" />
+        {eyebrow}
+      </p>
+      <h2 id={id} className={`font-display mt-3 text-3xl leading-tight sm:text-4xl ${dark ? "text-white" : "text-navy"}`}>{title}</h2>
+      {lead && <p className={`mt-4 text-lg leading-8 ${dark ? "text-white/75" : "text-muted"}`}>{lead}</p>}
+    </header>
+  );
+}
+
 export default function Home() {
   const wa = whatsappUrl(`Hello ${site.name}, I would like to request a ride or a transport quote.`);
   const topCities = cities.slice(0, 8);
   const topRoutes = routes.slice(0, 6);
   const topAirports = airports.slice(0, 4);
   const counts = [
-    { n: services.length, label: "transport services", sub: "each with its own guide" },
-    { n: regions.length, label: "regions", sub: "of Saudi Arabia" },
-    { n: cities.length, label: "city guides", sub: "with real places" },
-    { n: airports.length, label: "airport guides", sub: "for transfers" },
-    { n: routes.length, label: "intercity routes", sub: "with road distances" },
+    { n: services.length, label: "transport services" },
+    { n: regions.length, label: "regions covered" },
+    { n: cities.length, label: "city guides" },
+    { n: airports.length, label: "airport guides" },
+    { n: routes.length, label: "intercity routes" },
+  ];
+  const contactRows: { label: string; value: string; href?: string }[] = [
+    ...(site.phone && telUrl ? [{ label: "Phone", value: site.phone, href: telUrl }] : []),
+    ...(wa ? [{ label: "WhatsApp", value: "Message us on WhatsApp", href: wa }] : []),
+    ...(site.email ? [{ label: "Email", value: site.email, href: `mailto:${site.email}` }] : []),
+    ...(site.address ? [{ label: "Address", value: site.address }] : []),
+    ...(site.hours ? [{ label: "Hours", value: site.hours }] : []),
   ];
 
   return (
     <main id="main" className="flex-1">
-      <JsonLd
-        data={pageGraph({
-          path: "/",
-          name: "Gulf Elite Transport | Taxi, Freight & Passenger Transport in Saudi Arabia",
-          description:
-            "Taxi and cab rides by Saudi city and route, plus freight, cargo, passenger transport, equipment moving and contract fleet services.",
-        })}
-      />
+      <JsonLd data={homeGraph()} />
 
       {/* 1. Hero */}
-      <section aria-labelledby="hero-title" className="relative overflow-hidden bg-navy text-white">
-        <div aria-hidden="true" className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
-        <div className={`${wrap} relative grid items-center gap-12 pb-28 pt-14 lg:grid-cols-[1.05fr_0.95fr] lg:pb-32 lg:pt-20`}>
+      <section aria-labelledby="hero-title" className="relative overflow-hidden border-b-4 border-accent bg-navy text-white">
+        <div aria-hidden="true" className="absolute inset-0 opacity-[0.07] [background-image:radial-gradient(circle_at_1px_1px,#fff_1px,transparent_0)] [background-size:22px_22px]" />
+        <div className={`${wrap} relative grid items-center gap-12 py-16 lg:grid-cols-[1.05fr_0.95fr] lg:py-24`}>
           <div>
-            <p className={eyebrow}>{c.hero.eyebrow}</p>
-            <h1 id="hero-title" className="mt-4 text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.4rem]">
+            <p className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.22em] text-accent">
+              <span aria-hidden="true" className="h-px w-8 bg-accent" />
+              {c.hero.eyebrow}
+            </p>
+            <h1 id="hero-title" className="font-display mt-5 text-4xl leading-[1.1] sm:text-5xl lg:text-[3.3rem]">
               {c.hero.h1}
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-8 text-white/80"><RichText text={c.hero.text} tone="dark" /></p>
-            <ul className="mt-6 flex flex-wrap gap-2" aria-label="What we arrange">
+            <ul className="mt-7 grid gap-2.5 sm:grid-cols-2" aria-label="What we arrange">
               {c.hero.chips.map((x) => (
-                <li key={x} className="rounded-full bg-white/10 px-3.5 py-1.5 text-sm font-semibold text-white/90 ring-1 ring-white/15">
-                  {x}
+                <li key={x} className="flex items-center gap-2.5 text-sm font-semibold text-white/90">
+                  <Icon name="check" className="h-4 w-4 shrink-0 text-accent" /> {x}
                 </li>
               ))}
             </ul>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <Link href="#quote" className={btnPrimary}>
-                Request a Ride or Quote
-              </Link>
-              <Link href={BASE} className={btnGhost}>
-                Find Your City
-              </Link>
+              <Link href="#hero-quote" className={btnPrimary}>Request a Ride or Quote</Link>
+              <Link href={BASE} className={btnGhost}>Find Your City</Link>
               {telUrl && (
                 <a href={telUrl} className={btnGhost}>
                   <Icon name="phone" className="h-4 w-4" /> Call Now
@@ -95,68 +114,81 @@ export default function Home() {
                 </a>
               )}
             </div>
+            <p className="mt-6 flex items-center gap-2 text-sm text-white/70">
+              <Icon name="shield" className="h-4 w-4 text-accent" /> {c.hero.fareChip}
+            </p>
           </div>
-
           <BookingCard className="w-full max-w-xl justify-self-end lg:max-w-none" />
         </div>
       </section>
 
-      {/* 2. Two paths (overlaps the hero) */}
-      <section aria-label="Choose a service type" className={`${wrap} relative z-10 -mt-16`}>
-        <div className="grid gap-5 md:grid-cols-2">
+      {/* 2. Coverage ledger (entity facts, taken from the real page data) */}
+      <section aria-label="Coverage at a glance" className="border-b border-navy/10 bg-ivory">
+        <div className={`${wrap} py-8`}>
+          <dl className="grid grid-cols-2 gap-y-6 text-center sm:grid-cols-3 lg:grid-cols-5 lg:divide-x lg:divide-navy/15">
+            {counts.map((s) => (
+              <div key={s.label} className="px-4">
+                <dd className="font-display text-4xl text-navy">{s.n}</dd>
+                <dt className="mt-1 text-xs font-bold uppercase tracking-[0.15em] text-muted">{s.label}</dt>
+              </div>
+            ))}
+          </dl>
+          <p className="mt-5 text-center text-xs text-muted">{c.stats.note}</p>
+        </div>
+      </section>
+
+      {/* 3. Direct answer (AEO / GEO: a self-contained definition) */}
+      <section aria-labelledby="answer-title" className={`${wrap} py-16`}>
+        <div className="mx-auto max-w-4xl border-l-4 border-accent bg-white p-7 shadow-sm sm:p-9">
+          <p className="text-xs font-bold uppercase tracking-[0.22em] text-gold">{c.answer.eyebrow}</p>
+          <h2 id="answer-title" className="font-display mt-2 text-2xl text-navy sm:text-3xl">{c.answer.h2}</h2>
+          <p id="answer-text" className="mt-4 text-lg leading-8 text-muted"><RichText text={c.answer.text} /></p>
+        </div>
+      </section>
+
+      {/* 4. Two paths */}
+      <section aria-label="Choose a service type" className={`${wrap} pb-20`}>
+        <div className="grid gap-6 md:grid-cols-2">
           {c.paths.map((p) => (
-            <article key={p.title} className="group flex flex-col overflow-hidden rounded-3xl border border-navy/10 bg-white shadow-xl transition hover:-translate-y-1">
+            <article key={p.title} className={`group flex flex-col overflow-hidden ${card} shadow-sm transition hover:shadow-lg`}>
               <div className="relative aspect-[2/1] overflow-hidden bg-navy">
                 <ServiceImage slug={p.scene} title={p.title} className="h-full w-full transition duration-500 group-hover:scale-[1.03]" />
               </div>
-              <div className="flex flex-1 flex-col p-7">
-              <div className="flex items-start gap-4">
-                <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-navy text-accent">
-                  <Icon name={p.icon} className="h-7 w-7" />
-                </span>
-                <div>
-                  <h2 className="text-2xl font-extrabold text-navy">{p.title}</h2>
-                  <p className="mt-2 leading-7 text-muted"><RichText text={p.text} /></p>
+              <div className="flex flex-1 flex-col border-t-4 border-accent p-7">
+                <div className="flex items-start gap-4">
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-navy text-accent">
+                    <Icon name={p.icon} className="h-6 w-6" />
+                  </span>
+                  <div>
+                    <h2 className="font-display text-2xl text-navy">{p.title}</h2>
+                    <p className="mt-2 leading-7 text-muted"><RichText text={p.text} /></p>
+                  </div>
                 </div>
-              </div>
-              <ul className="mt-5 grid gap-2 sm:grid-cols-1">
-                {p.points.map((x) => (
-                  <li key={x} className="flex gap-2 text-sm font-medium text-navy">
-                    <Icon name="check" className="mt-0.5 h-4 w-4 shrink-0 text-accent" /> {x}
-                  </li>
-                ))}
-              </ul>
-              <Link href={p.href} className="mt-6 inline-flex items-center gap-2 font-bold text-navy underline decoration-accent decoration-2 underline-offset-4">
-                {p.cta} <Icon name="arrow" className="h-4 w-4 transition group-hover:translate-x-1" />
-              </Link>
+                <ul className="mt-5 grid gap-2">
+                  {p.points.map((x) => (
+                    <li key={x} className="flex gap-2 text-sm font-medium text-navy">
+                      <Icon name="check" className="mt-0.5 h-4 w-4 shrink-0 text-gold" /> {x}
+                    </li>
+                  ))}
+                </ul>
+                <Link href={p.href} className={`${textLink} mt-6 inline-flex items-center gap-2`}>
+                  {p.cta} <Icon name="arrow" className="h-4 w-4" />
+                </Link>
               </div>
             </article>
           ))}
         </div>
       </section>
 
-      {/* 3. Direct answer (AEO) */}
-      <section aria-labelledby="answer-title" className={`${wrap} py-16`}>
-        <div className="mx-auto max-w-4xl rounded-3xl border-l-4 border-accent bg-white p-7 shadow-sm sm:p-9">
-          <p className={eyebrow}>{c.answer.eyebrow}</p>
-          <h2 id="answer-title" className="mt-2 text-2xl font-extrabold text-navy sm:text-3xl">
-            {c.answer.h2}
-          </h2>
-          <p className="mt-4 text-lg leading-8 text-muted"><RichText text={c.answer.text} /></p>
-        </div>
-      </section>
-
-      {/* 4. Finder */}
+      {/* 5. Finder */}
       <section aria-labelledby="finder-title" className="bg-white py-20">
         <div className={wrap}>
-          <p className={eyebrow}>{c.finder.eyebrow}</p>
-          <h2 id="finder-title" className={h2}>{c.finder.h2}</h2>
-          <p className={lead}>{c.finder.text}</p>
+          <Head id="finder-title" eyebrow={c.finder.eyebrow} title={c.finder.h2} lead={c.finder.text} />
           <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {c.finder.items.map((i) => (
               <li key={i.title}>
-                <Link href={i.href} className="group flex h-full flex-col rounded-2xl border border-navy/10 bg-surface p-5 transition hover:-translate-y-0.5 hover:border-accent hover:shadow-lg">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-navy text-accent">
+                <Link href={i.href} className="group flex h-full flex-col rounded-lg border border-navy/10 bg-ivory p-5 transition hover:border-accent hover:shadow-md">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-md bg-navy text-accent">
                     <Icon name={i.icon} />
                   </span>
                   <span className="mt-4 text-lg font-bold text-navy">{i.title}</span>
@@ -171,26 +203,24 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5. Taxi coverage */}
+      {/* 6. Taxi coverage (local SEO: places, airports, routes as entities) */}
       <section id="coverage" aria-labelledby="taxi-title" className={`${wrap} py-20`}>
         <div className="grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="relative aspect-[16/11] overflow-hidden rounded-3xl ring-1 ring-navy/10 shadow-xl">
+          <div className="relative aspect-[16/11] overflow-hidden rounded-lg ring-1 ring-navy/10 shadow-lg">
             <ServiceImage slug="taxi-cab-services" title="Taxi and cab rides in Saudi Arabia" className="h-full w-full" />
           </div>
           <div>
-            <p className={eyebrow}>{c.taxi.eyebrow}</p>
-            <h2 id="taxi-title" className={h2}>{c.taxi.h2}</h2>
-            <p className={lead}><RichText text={c.taxi.text} /></p>
+            <Head id="taxi-title" eyebrow={c.taxi.eyebrow} title={c.taxi.h2} lead={<RichText text={c.taxi.text} />} />
             <div className="mt-6 flex flex-wrap gap-3">
-              <Link href={BASE} className={`${btn} bg-navy text-white hover:bg-navy-2`}>Browse all of Saudi Arabia</Link>
-              <Link href={`${BASE}/routes`} className={`${btn} border border-navy/25 text-navy hover:border-accent hover:bg-accent/10`}>Intercity routes</Link>
+              <Link href={BASE} className={btnDark}>Browse all of Saudi Arabia</Link>
+              <Link href={`${BASE}/routes`} className={btnOutline}>Intercity routes</Link>
             </div>
           </div>
         </div>
 
         <div className="mt-14 grid gap-10 lg:grid-cols-2">
           <div>
-            <h3 className="text-xl font-extrabold text-navy">{c.taxi.regionsHeading}</h3>
+            <h3 className="font-display text-xl text-navy">{c.taxi.regionsHeading}</h3>
             <ul className="mt-4 flex flex-wrap gap-2">
               {regions.map((r) => (
                 <li key={r.id}>
@@ -198,7 +228,7 @@ export default function Home() {
                 </li>
               ))}
             </ul>
-            <h3 className="mt-8 text-xl font-extrabold text-navy">{c.taxi.citiesHeading}</h3>
+            <h3 className="font-display mt-8 text-xl text-navy">{c.taxi.citiesHeading}</h3>
             <ul className="mt-4 flex flex-wrap gap-2">
               {topCities.map((ct) => (
                 <li key={ct.id}>
@@ -209,11 +239,11 @@ export default function Home() {
           </div>
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
             <div>
-              <h3 className="text-xl font-extrabold text-navy">{c.taxi.routesHeading}</h3>
+              <h3 className="font-display text-xl text-navy">{c.taxi.routesHeading}</h3>
               <ul className="mt-4 space-y-2">
                 {topRoutes.map((r) => (
                   <li key={r.id}>
-                    <Link href={`${BASE}/routes/${r.id}`} className="flex items-center justify-between gap-3 rounded-xl border border-navy/10 bg-white px-4 py-3 text-sm font-semibold text-navy transition hover:border-accent">
+                    <Link href={`${BASE}/routes/${r.id}`} className="flex items-center justify-between gap-3 rounded-md border border-navy/10 bg-white px-4 py-3 text-sm font-semibold text-navy transition hover:border-accent">
                       <span>{cityName(r.from)} to {cityName(r.to)}</span>
                       <span className="text-xs font-medium text-muted">~{r.km} km</span>
                     </Link>
@@ -222,13 +252,13 @@ export default function Home() {
               </ul>
             </div>
             <div>
-              <h3 className="text-xl font-extrabold text-navy">{c.taxi.airportsHeading}</h3>
+              <h3 className="font-display text-xl text-navy">{c.taxi.airportsHeading}</h3>
               <ul className="mt-4 space-y-2">
                 {topAirports.map((a) => (
                   <li key={a.id}>
-                    <Link href={`${BASE}/airports/${a.id}`} className="flex items-center justify-between gap-3 rounded-xl border border-navy/10 bg-white px-4 py-3 text-sm font-semibold text-navy transition hover:border-accent">
+                    <Link href={`${BASE}/airports/${a.id}`} className="flex items-center justify-between gap-3 rounded-md border border-navy/10 bg-white px-4 py-3 text-sm font-semibold text-navy transition hover:border-accent">
                       <span>{a.name}</span>
-                      <span className="rounded-md bg-navy px-2 py-0.5 text-xs font-bold text-accent">{a.code}</span>
+                      <span className="rounded bg-navy px-2 py-0.5 text-xs font-bold text-accent">{a.code}</span>
                     </Link>
                   </li>
                 ))}
@@ -236,25 +266,23 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <p className="mt-10 rounded-xl border border-accent/50 bg-accent/10 p-5 text-sm font-semibold leading-6 text-navy">{c.taxi.note}</p>
+        <p className="mt-10 border-l-4 border-accent bg-accent/10 p-5 text-sm font-semibold leading-6 text-navy">{c.taxi.note}</p>
       </section>
 
-      {/* 5b. Vehicles */}
-      <section aria-labelledby="fleet-title" className="bg-surface py-20">
+      {/* 7. Vehicles */}
+      <section aria-labelledby="fleet-title" className="bg-ivory py-20">
         <div className={wrap}>
-          <p className={eyebrow}>{c.fleet.eyebrow}</p>
-          <h2 id="fleet-title" className={h2}>{c.fleet.h2}</h2>
-          <p className={lead}>{c.fleet.text}</p>
+          <Head id="fleet-title" eyebrow={c.fleet.eyebrow} title={c.fleet.h2} lead={c.fleet.text} />
           <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {c.fleet.items.map((v) => (
-              <li key={v.name} className="flex flex-col rounded-2xl border border-navy/10 bg-white p-6 shadow-sm">
+              <li key={v.name} className={`flex flex-col ${card} border-t-4 border-t-accent p-6 shadow-sm`}>
                 <div className="flex items-baseline justify-between gap-3">
-                  <h3 className="text-xl font-extrabold text-navy">{v.name}</h3>
-                  <span className="rounded-full bg-accent px-3 py-1 text-sm font-extrabold text-navy">{v.pax} passengers</span>
+                  <h3 className="font-display text-xl text-navy">{v.name}</h3>
+                  <span className="text-sm font-extrabold text-gold">{v.pax} passengers</span>
                 </div>
                 <p className="mt-3 text-sm font-semibold text-navy">Luggage: <span className="font-normal text-muted">{v.bags}</span></p>
                 <p className="mt-2 flex-1 leading-7 text-muted">{v.best}</p>
-                <Link href="#hero-quote" className="mt-4 font-bold text-navy underline decoration-accent decoration-2 underline-offset-4">Book a {v.name.toLowerCase()}</Link>
+                <Link href="#hero-quote" className={`${textLink} mt-4`}>Book a {v.name.toLowerCase()}</Link>
               </li>
             ))}
           </ul>
@@ -262,23 +290,22 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5c. Pricing */}
+      {/* 8. Pricing */}
       <section aria-labelledby="pricing-title" className={`${wrap} py-20`}>
-        <p className={eyebrow}>{c.pricing.eyebrow}</p>
-        <h2 id="pricing-title" className={h2}>{c.pricing.h2}</h2>
+        <Head id="pricing-title" eyebrow={c.pricing.eyebrow} title={c.pricing.h2} />
         <ol className="mt-10 grid gap-5 md:grid-cols-3">
           {c.pricing.points.map((p, i) => (
-            <li key={p.title} className="rounded-2xl border border-navy/10 bg-white p-6 shadow-sm">
-              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-navy font-extrabold text-accent">{i + 1}</span>
-              <h3 className="mt-4 text-lg font-extrabold text-navy">{p.title}</h3>
+            <li key={p.title} className={`${card} p-6 shadow-sm`}>
+              <span className="font-display text-4xl text-accent">{String(i + 1).padStart(2, "0")}</span>
+              <h3 className="mt-2 text-lg font-extrabold text-navy">{p.title}</h3>
               <p className="mt-2 leading-7 text-muted">{p.text}</p>
             </li>
           ))}
         </ol>
         {priceRows.length > 0 && (
           <div className="mt-10">
-            <h3 className="text-xl font-extrabold text-navy">{c.pricing.tableTitle}</h3>
-            <div className="mt-4 overflow-x-auto rounded-2xl border border-navy/10 bg-white shadow-sm">
+            <h3 className="font-display text-xl text-navy">{c.pricing.tableTitle}</h3>
+            <div className={`mt-4 overflow-x-auto ${card} shadow-sm`}>
               <table className="w-full min-w-[520px] text-left text-sm">
                 <caption className="sr-only">{c.pricing.tableTitle}</caption>
                 <thead className="bg-navy text-white">
@@ -302,109 +329,98 @@ export default function Home() {
         )}
         <Link href="#hero-quote" className={`${btnPrimary} mt-8`}>{c.pricing.cta}</Link>
       </section>
-      {/* 6. Numbers */}
-      <section aria-labelledby="stats-title" className="bg-navy py-16 text-white">
+
+      {/* 9. Services by group */}
+      <section aria-labelledby="services-title" className="bg-white py-20">
         <div className={wrap}>
-          <p className={eyebrow}>{c.stats.eyebrow}</p>
-          <h2 id="stats-title" className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">{c.stats.h2}</h2>
-          <dl className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-5">
-            {counts.map((s) => (
-              <div key={s.label} className="rounded-2xl bg-navy-2 p-5 ring-1 ring-white/10">
-                <dt className="sr-only">{s.label}</dt>
-                <dd>
-                  <span className="block text-4xl font-extrabold text-accent">{s.n}</span>
-                  <span className="mt-1 block font-bold">{s.label}</span>
-                  <span className="block text-xs text-white/65">{s.sub}</span>
-                </dd>
-              </div>
-            ))}
-          </dl>
-          <p className="mt-4 text-xs text-white/60">{c.stats.note}</p>
+          <Head id="services-title" eyebrow={c.servicesIntro.eyebrow} title={c.servicesIntro.h2} lead={<RichText text={c.servicesIntro.text} />} />
+          <div className="mt-10 grid items-start gap-6 lg:grid-cols-2">
+            {groups.map((g) => {
+              const list = services.filter((s) => s.group === g.id);
+              return (
+                <article key={g.id} className="rounded-lg border border-navy/10 bg-ivory p-6 sm:p-8">
+                  <h3 className="font-display text-2xl text-navy">{g.label}</h3>
+                  <p className="mt-2 text-sm leading-6 text-muted">{g.text.split(". ")[0]}.</p>
+                  <ul className="mt-5 grid gap-2 sm:grid-cols-2">
+                    {list.map((s) => (
+                      <li key={s.slug}>
+                        <Link href={`/services/${s.slug}`} className="group flex items-center gap-3 rounded-md bg-white p-3 ring-1 ring-navy/10 transition hover:ring-accent">
+                          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded bg-navy text-accent">
+                            <Icon name={s.icon} className="h-5 w-5" />
+                          </span>
+                          <span className="flex-1 text-sm font-bold leading-snug text-navy">{s.title}</span>
+                          <Icon name="arrow" className="h-4 w-4 text-navy/40 transition group-hover:translate-x-1 group-hover:text-gold" />
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              );
+            })}
+          </div>
+          <div className="mt-10 text-center">
+            <Link href="/services" className={btnPrimary}>Compare all {services.length} services</Link>
+          </div>
         </div>
       </section>
 
-      {/* 7. Services by group */}
-      <section aria-labelledby="services-title" className={`${wrap} py-20`}>
-        <p className={eyebrow}>{c.servicesIntro.eyebrow}</p>
-        <h2 id="services-title" className={h2}>{c.servicesIntro.h2}</h2>
-        <p className={lead}><RichText text={c.servicesIntro.text} /></p>
-        <div className="mt-10 grid items-start gap-6 lg:grid-cols-2">
-          {groups.map((g) => {
-            const list = services.filter((s) => s.group === g.id);
-            return (
-              <article key={g.id} className="rounded-3xl border border-navy/10 bg-white p-6 shadow-sm sm:p-8">
-                <h3 className="text-2xl font-extrabold text-navy">{g.label}</h3>
-                <p className="mt-2 text-sm leading-6 text-muted">{g.text.split(". ")[0]}.</p>
-                <ul className="mt-5 grid gap-2 sm:grid-cols-2">
-                  {list.map((s) => (
-                    <li key={s.slug}>
-                      <Link href={`/services/${s.slug}`} className="group flex items-center gap-3 rounded-xl bg-surface p-3 ring-1 ring-navy/10 transition hover:ring-accent">
-                        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-navy text-accent">
-                          <Icon name={s.icon} className="h-5 w-5" />
-                        </span>
-                        <span className="flex-1 text-sm font-bold leading-snug text-navy">{s.title}</span>
-                        <Icon name="arrow" className="h-4 w-4 text-navy/40 transition group-hover:translate-x-1 group-hover:text-accent" />
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            );
-          })}
-        </div>
-        <div className="mt-10 text-center">
-          <Link href="/services" className={btnPrimary}>Compare all {services.length} services</Link>
-        </div>
-      </section>
-
-      {/* 8. Process */}
-      <section aria-labelledby="process-title" className="bg-white py-20">
-        <div className={wrap}>
-          <p className={eyebrow}>{c.process.eyebrow}</p>
-          <h2 id="process-title" className={h2}>{c.process.h2}</h2>
-          <p className={lead}>{c.process.text}</p>
-          <ol className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {c.process.steps.map((s, i) => (
-              <li key={s.title} className="relative rounded-2xl border border-navy/10 bg-surface p-6">
-                {i < c.process.steps.length - 1 && (
-                  <span aria-hidden="true" className="absolute -right-4 top-12 hidden h-0.5 w-8 bg-accent lg:block" />
-                )}
-                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-accent text-xl font-extrabold text-navy">{i + 1}</span>
-                <h3 className="mt-5 text-lg font-bold text-navy">{s.title}</h3>
-                <p className="mt-2 text-sm leading-7 text-muted"><RichText text={s.text} /></p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      {/* 9. Why */}
-      <section aria-labelledby="why-title" className={`${wrap} py-20`}>
-        <p className={eyebrow}>{c.why.eyebrow}</p>
-        <h2 id="why-title" className={h2}>{c.why.h2}</h2>
-        <p className={lead}>{c.why.text}</p>
-        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {c.why.items.map((w) => (
-            <article key={w.title} className="rounded-2xl border border-navy/10 bg-white p-6">
-              <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-navy text-accent">
-                <Icon name={w.icon} />
-              </span>
-              <h3 className="mt-5 text-xl font-bold text-navy">{w.title}</h3>
-              <p className="mt-2 leading-7 text-muted"><RichText text={w.text} /></p>
-            </article>
+      {/* 10. Process */}
+      <section aria-labelledby="process-title" className={`${wrap} py-20`}>
+        <Head id="process-title" eyebrow={c.process.eyebrow} title={c.process.h2} lead={c.process.text} />
+        <ol className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          {c.process.steps.map((s, i) => (
+            <li key={s.title} className="relative border-t-2 border-navy/15 pt-6">
+              <span aria-hidden="true" className="absolute -top-px left-0 h-0.5 w-12 bg-accent" />
+              <span className="font-display text-5xl text-accent">{String(i + 1).padStart(2, "0")}</span>
+              <h3 className="mt-2 text-lg font-bold text-navy">{s.title}</h3>
+              <p className="mt-2 text-sm leading-7 text-muted"><RichText text={s.text} /></p>
+            </li>
           ))}
+        </ol>
+      </section>
+
+      {/* 11. Why */}
+      <section aria-labelledby="why-title" className="bg-ivory py-20">
+        <div className={wrap}>
+          <Head id="why-title" eyebrow={c.why.eyebrow} title={c.why.h2} lead={c.why.text} />
+          <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {c.why.items.map((w) => (
+              <article key={w.title} className={`${card} p-6`}>
+                <span className="inline-flex h-11 w-11 items-center justify-center rounded-md bg-navy text-accent">
+                  <Icon name={w.icon} />
+                </span>
+                <h3 className="mt-5 text-xl font-bold text-navy">{w.title}</h3>
+                <p className="mt-2 leading-7 text-muted"><RichText text={w.text} /></p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* 10. Who we help */}
+      {/* 12. About (entity and trust) */}
+      <section aria-labelledby="about-title" className={`${wrap} py-20`}>
+        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+          <Head id="about-title" eyebrow={c.about.eyebrow} title={c.about.h2} />
+          <div className="space-y-5 text-lg leading-8 text-muted">
+            {c.about.paragraphs.slice(1).map((p) => (
+              <p key={p}>{p}</p>
+            ))}
+            <p>
+              <Link href="/about" className={textLink}>About Gulf Elite Transport Group</Link>
+              {" · "}
+              <Link href="/contact" className={textLink}>Contact the team</Link>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* 13. Who we help */}
       <section id="industries" aria-labelledby="industries-title" className="bg-navy py-20 text-white">
         <div className={wrap}>
-          <p className={eyebrow}>{c.industries.eyebrow}</p>
-          <h2 id="industries-title" className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">{c.industries.h2}</h2>
-          <p className="mt-4 max-w-3xl text-lg leading-8 text-white/75">{c.industries.text}</p>
+          <Head id="industries-title" eyebrow={c.industries.eyebrow} title={c.industries.h2} lead={c.industries.text} dark />
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {c.industries.items.map((i) => (
-              <article key={i.title} className="rounded-2xl bg-navy-2 p-5 ring-1 ring-white/10">
+              <article key={i.title} className="rounded-lg bg-navy-2 p-5 ring-1 ring-white/10">
                 <Icon name={i.icon} className="h-7 w-7 text-accent" />
                 <h3 className="mt-3 text-lg font-bold">{i.title}</h3>
                 <p className="mt-1.5 text-sm leading-6 text-white/75"><RichText text={i.text} tone="dark" /></p>
@@ -414,12 +430,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 11. Benefits */}
+      {/* 14. Benefits */}
       <section aria-labelledby="benefits-title" className={`${wrap} py-20`}>
-        <p className={eyebrow}>{c.benefits.eyebrow}</p>
-        <h2 id="benefits-title" className={h2}>{c.benefits.h2}</h2>
-        <p className={lead}>{c.benefits.text}</p>
-        <div className="mt-10 overflow-x-auto rounded-2xl border border-navy/10 bg-white">
+        <Head id="benefits-title" eyebrow={c.benefits.eyebrow} title={c.benefits.h2} lead={c.benefits.text} />
+        <div className={`mt-10 overflow-x-auto ${card}`}>
           <table className="w-full min-w-[640px] border-collapse text-left text-sm">
             <caption className="sr-only">Comparison of arranging transport yourself and using a coordinated transport service</caption>
             <thead className="bg-navy text-white">
@@ -442,26 +456,38 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 12. FAQ */}
+      {/* 15. FAQ */}
       <section aria-labelledby="faq-title" className="bg-white py-20">
         <div className="mx-auto max-w-4xl px-5">
-          <p className={eyebrow}>FAQ</p>
-          <h2 id="faq-title" className={h2}>Frequently asked questions</h2>
+          <Head id="faq-title" eyebrow="FAQ" title="Frequently asked questions" center />
           <div className="mt-10">
             <FaqList items={c.faqs} />
           </div>
         </div>
       </section>
 
-      {/* 14. Request form */}
+      {/* 16. Request form and contact details (local SEO: NAP when verified) */}
       <section id="quote" aria-labelledby="quote-title" className={`${wrap} py-20`}>
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
           <div>
-            <p className={eyebrow}>{c.formIntro.eyebrow}</p>
-            <h2 id="quote-title" className={h2}>{c.formIntro.h2}</h2>
-            <p className="mt-4 text-lg leading-8 text-muted">{c.formIntro.text}</p>
+            <Head id="quote-title" eyebrow={c.formIntro.eyebrow} title={c.formIntro.h2} lead={c.formIntro.text} />
+            <address className="mt-8 not-italic">
+              <h3 className="font-display text-xl text-navy">{site.legalName}</h3>
+              <p className="mt-1 text-sm text-muted">Transport and logistics service, {site.country}</p>
+              {contactRows.length > 0 && (
+                <dl className="mt-4 space-y-2 text-sm">
+                  {contactRows.map((r) => (
+                    <div key={r.label} className="flex gap-3">
+                      <dt className="w-20 shrink-0 font-bold text-navy">{r.label}</dt>
+                      <dd className="text-muted">{r.href ? <a href={r.href} className={textLink}>{r.value}</a> : r.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              )}
+              <p className="mt-4 text-sm text-muted">Service area: all regions of Saudi Arabia, confirmed for each request.</p>
+            </address>
           </div>
-          <div className="rounded-2xl border border-navy/10 bg-white p-6 shadow-sm sm:p-8">
+          <div className={`${card} p-6 shadow-sm sm:p-8`}>
             <QuoteForm />
           </div>
         </div>

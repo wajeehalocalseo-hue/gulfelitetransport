@@ -8,6 +8,9 @@
   --color-body: #263445;
   /* #718096 fails AA contrast for small text on white, so text uses this darker tone */
   --color-muted: #566377;
+  --color-ivory: #faf8f3;
+  /* darker gold for small text on light backgrounds (accent #f5a623 fails AA on white) */
+  --color-gold: #8a5a00;
   --font-sans: var(--font-jakarta);
 }
 
@@ -128,4 +131,11 @@ html.admin-dark input,
 html.admin-dark select,
 html.admin-dark textarea {
   color-scheme: dark;
+}
+
+/* Classic display type for headings on the home page */
+.font-display {
+  font-family: var(--font-playfair), Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
