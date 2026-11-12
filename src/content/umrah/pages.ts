@@ -963,12 +963,385 @@ const topics: PlacePage[] = [
   }),
 ];
 
+// ------------------------------------------------------------------------------------------ more journeys
+const moreTopics: PlacePage[] = [
+  page({
+    slug: "makkah-hotel-to-jeddah-airport",
+    name: "Makkah Hotel to Jeddah Airport",
+    title: "Makkah Hotel to Jeddah Airport (JED) Taxi for Departure",
+    description: "Taxi from your Makkah hotel to Jeddah airport (JED) for your flight home: pickup planned back from your flight time. Fare confirmed first.",
+    h1: "Makkah Hotel to Jeddah Airport Taxi",
+    lead: `The last ride of an Umrah trip, about ${KM_JED_MAKKAH} km. We plan the pickup back from your flight so you are not rushing.`,
+    direct: `Gulf Elite Transport arranges taxi and car transfers from hotels in Makkah to King Abdulaziz International Airport in Jeddah for departing pilgrims, for individuals and groups. Send your flight time, hotel and group size, and the pickup is planned back from your flight. The vehicle, driver and fare are confirmed before you commit.`,
+    facts: [
+      { label: "Route", value: "Makkah hotel to Jeddah airport (JED)" },
+      { label: "Road distance", value: `about ${KM_JED_MAKKAH} km (approximate)` },
+      { label: "Planned from", value: "Your flight time, not a fixed pickup time" },
+      { label: "Group size", value: "One traveller to full groups" },
+    ],
+    sections: [
+      {
+        id: "about",
+        h2: "Getting from Makkah to your flight",
+        kind: "text",
+        paragraphs: [
+          "The ride out of Makkah is the one pilgrims most often worry about, because the flight cannot wait. The distance to Jeddah airport is about " + KM_JED_MAKKAH + " km, and the road is among the busiest in the country, with traffic that varies a great deal by day and season. Heavy luggage and a group moving out of a hotel near the Haram add to the time.",
+          "The safest approach is to plan the pickup back from your flight rather than from your checkout. Tell us the flight time and the airline, and we agree a pickup time with a margin for traffic and for the airport itself. Airports ask international passengers to arrive well before departure, and your airline sets the time, so check your ticket.",
+        ],
+      },
+      {
+        id: "plan",
+        h2: "Planning the departure ride",
+        kind: "items",
+        items: [
+          { title: "Give the airline and flight time", text: "Jeddah airport has several terminals, so your airline tells us where to go." },
+          { title: "Agree the pickup point", text: "Roads near the Haram are controlled. We agree a point the vehicle can reach and tell you how far the walk is from your hotel." },
+          { title: "Allow for luggage", text: "Bags bought during the trip, such as Zamzam containers, add weight. Tell us the number of bags and any large items." },
+          { title: "Leave a margin", text: "Traffic on the Makkah to Jeddah road can change quickly. Build in extra time, especially in Ramadan and the Hajj season." },
+        ],
+      },
+      related([topic("jeddah-airport-to-makkah", "Jeddah airport to Makkah"), L.jed, L.jedMakkah, topic("night-and-early-morning-transfers", "Night and early-morning transfers"), L.makkah, L.hub]),
+      {
+        id: "faq",
+        h2: "Makkah to Jeddah airport: questions",
+        kind: "faq",
+        items: [
+          { q: "How early should the pickup be?", a: "We plan it back from your flight, with a margin for traffic and for the airport. We agree the time with you when you book." },
+          { q: "Can I book the arrival and the departure together?", a: "Yes. Both rides can be requested at the same time for the same group." },
+          { q: "What if my flight time changes?", a: "Tell us as soon as you know so the pickup can be moved. How changes are handled is confirmed with you when you book." },
+        ],
+      },
+    ],
+    entities: [makkahE, jeddahE, { type: "Airport", name: "King Abdulaziz International Airport", iata: "JED" }, country],
+    route: { from: "Makkah", to: "Jeddah Airport", km: KM_JED_MAKKAH },
+    prefill: { pickup: "Makkah hotel", dropoff: "King Abdulaziz International Airport (JED)" },
+  }),
+
+  page({
+    slug: "madinah-hotel-to-madinah-airport",
+    name: "Madinah Hotel to Madinah Airport",
+    title: "Madinah Hotel to Madinah Airport (MED) Taxi for Departure",
+    description: "Taxi from your Madinah hotel to Madinah airport (MED) for your flight, with the pickup planned back from your flight time. Fare confirmed first.",
+    h1: "Madinah Hotel to Madinah Airport Taxi",
+    lead: "A short ride that still needs planning, since hotels near the mosque have limited vehicle access.",
+    direct: `Gulf Elite Transport arranges taxi and car transfers from hotels in Madinah to Prince Mohammad bin Abdulaziz International Airport for departing visitors, in both directions. Send your flight time, hotel and group size, and the pickup is planned back from your flight. The vehicle, driver and fare are confirmed before you commit.`,
+    facts: [
+      { label: "Route", value: "Madinah hotel to Madinah airport (MED)" },
+      { label: "Distance", value: "A short city ride" },
+      { label: "Planned from", value: "Your flight time" },
+      { label: "Hotels", value: "Mostly around the Central Area" },
+    ],
+    sections: [
+      {
+        id: "about",
+        h2: "From the Prophet's Mosque to your flight",
+        kind: "text",
+        paragraphs: [
+          "Prince Mohammad bin Abdulaziz International Airport lies north-east of Madinah, so the ride from a hotel near the Prophet's Mosque is short compared with the journey from Makkah or Jeddah. The difficulty is the start of the ride. Roads around the mosque are restricted at prayer times and in busy seasons, and a large group with luggage cannot always be picked up at the hotel door.",
+          "Because the ride is short, the margin for error is small in one respect: if the pickup point is wrong, the group loses time before the car has even left the area. Giving us the hotel name and agreeing a meeting point in advance avoids that, and the flight time lets us plan a sensible departure.",
+        ],
+      },
+      {
+        id: "plan",
+        h2: "Planning the ride",
+        kind: "items",
+        items: [
+          { title: "Meeting point", text: "The nearest road the vehicle can reach for your hotel, agreed in advance." },
+          { title: "Flight and airline", text: "So the pickup is planned back from your flight and the right terminal is used." },
+          { title: "Luggage and group", text: "Bags and the number of travellers, so a vehicle of the right size comes." },
+          { title: "After the last prayer", text: "If you want to pray at the mosque before leaving, tell us the time you expect to be ready." },
+        ],
+      },
+      related([topic("madinah-airport-to-madinah-hotel", "Madinah airport to Madinah hotel"), L.med, L.madinah, topic("night-and-early-morning-transfers", "Night and early-morning transfers"), L.hub]),
+      {
+        id: "faq",
+        h2: "Madinah to the airport: questions",
+        kind: "faq",
+        items: [
+          { q: "Can the car wait at the hotel door?", a: "Access near the mosque is controlled. We agree the closest permitted point for your hotel." },
+          { q: "Can I book this with my arrival transfer?", a: "Yes. Both can be requested together for the same group." },
+          { q: "Do you handle large groups at the airport?", a: "Yes. We arrange vehicles of the right size and confirm what is possible for your request." },
+        ],
+      },
+    ],
+    entities: [{ type: "Airport", name: "Prince Mohammad bin Abdulaziz International Airport", iata: "MED" }, madinahE, country],
+    prefill: { pickup: "Madinah hotel", dropoff: "Prince Mohammad bin Abdulaziz International Airport (MED)" },
+  }),
+
+  page({
+    slug: "jeddah-hotel-to-jeddah-airport",
+    name: "Jeddah Hotel to Jeddah Airport",
+    title: "Jeddah Hotel to Jeddah Airport (JED) Taxi for Pilgrims",
+    description: "Taxi from your Jeddah hotel to Jeddah airport (JED) for pilgrims and visitors arriving early or leaving late. Pickup planned from your flight.",
+    h1: "Jeddah Hotel to Jeddah Airport Taxi",
+    lead: "For pilgrims who stay a night in Jeddah before or after Makkah and Madinah.",
+    direct: `Gulf Elite Transport arranges taxi rides from hotels in Jeddah to King Abdulaziz International Airport and back, for pilgrims and visitors who stay in Jeddah before or after their Umrah. Send your hotel, flight time and group size, and the pickup is planned back from your flight. The vehicle, driver and fare are confirmed before you commit.`,
+    facts: [
+      { label: "Route", value: "Jeddah hotel to Jeddah airport (JED)" },
+      { label: "Distance", value: "A long city ride; the airport is north of the city" },
+      { label: "Planned from", value: "Your flight time" },
+      { label: "Best for", value: "Pilgrims staying in Jeddah" },
+    ],
+    sections: [
+      {
+        id: "about",
+        h2: "Why Jeddah is more than a stopover",
+        kind: "text",
+        paragraphs: [
+          "Many pilgrims spend a night or two in Jeddah, either because their flight arrives late and the drive to Makkah can wait until morning, or because they leave from Jeddah and want a rest day after Umrah. King Abdulaziz International Airport lies in the north of the city, so a ride from a hotel in the centre or on the Corniche is a long city ride rather than a short hop.",
+          "Jeddah's traffic changes through the day, with the heaviest periods in the morning and the evening, and on Thursday and Friday afternoons. Planning the pickup back from your flight time, with a margin, matters more here than the distance suggests.",
+        ],
+      },
+      {
+        id: "plan",
+        h2: "What to tell us",
+        kind: "items",
+        items: [
+          { title: "Hotel and area", text: "The hotel name and its district, so we can plan the pickup point." },
+          { title: "Flight and terminal", text: "Airline and flight time, since the airport has more than one terminal." },
+          { title: "Luggage", text: "Number of bags, especially if you are carrying extra luggage from the trip." },
+          { title: "Time of day", text: "Early-morning and late-night flights are common. Tell us your flight time and we plan around it." },
+        ],
+      },
+      related([L.jed, L.jeddah, topic("makkah-hotel-to-jeddah-airport", "Makkah hotel to Jeddah airport"), topic("jeddah-airport-to-makkah", "Jeddah airport to Makkah"), topic("night-and-early-morning-transfers", "Night and early-morning transfers"), L.hub]),
+      {
+        id: "faq",
+        h2: "Jeddah hotel to the airport: questions",
+        kind: "faq",
+        items: [
+          { q: "Is the airport far from the city centre?", a: "It is in the north of Jeddah, so rides from the centre are long city rides. The time depends on traffic." },
+          { q: "Can I go from the airport to Jeddah and later on to Makkah?", a: "Yes. Tell us the full plan and we arrange each ride, confirmed for each request." },
+          { q: "Can you visit Al-Balad on the way?", a: "A stop at Al-Balad or another place can be discussed when you request the ride." },
+        ],
+      },
+    ],
+    entities: [jeddahE, { type: "Airport", name: "King Abdulaziz International Airport", iata: "JED" }, country],
+    prefill: { pickup: "Jeddah hotel", dropoff: "King Abdulaziz International Airport (JED)" },
+  }),
+
+  page({
+    slug: "taif-to-makkah-for-umrah",
+    name: "Taif to Makkah for Umrah",
+    title: "Taif to Makkah Taxi for Umrah, with Qarn al-Manazil Stop",
+    description: "Private taxi from Taif to Makkah for Umrah, with a stop at Qarn al-Manazil Miqat on the way. Families and groups welcome. Fare confirmed first.",
+    h1: "Taif to Makkah Taxi for Umrah",
+    lead: "Come down from the Taif plateau to Makkah, with time to enter ihram at the Miqat on the way.",
+    direct: `Gulf Elite Transport arranges private taxi and car journeys from Taif to Makkah for pilgrims travelling to perform Umrah, with an optional stop at Qarn al-Manazil, the Miqat on the Taif road. Tell us your pickup in Taif, your Makkah hotel and the group size, and the vehicle, driver and fare are confirmed before you commit.`,
+    facts: [
+      { label: "Journey", value: "Taif to Makkah" },
+      { label: "Miqat on the way", value: "Qarn al-Manazil (As-Sayl al-Kabir)" },
+      { label: "Road", value: "Mountain road with steep sections" },
+      { label: "Best for", value: "Families and groups combining Taif and Umrah" },
+    ],
+    sections: [
+      {
+        id: "about",
+        h2: "From the hills to the holy city",
+        kind: "text",
+        paragraphs: [
+          "Taif sits on a cool plateau in the mountains east of Makkah, and many families combine a stay there with Umrah, especially in summer. The journey down to Makkah follows a mountain road with several steep and winding sections, and it passes Qarn al-Manazil, also known as As-Sayl al-Kabir, one of the Miqat points for pilgrims coming from this direction.",
+          "A private ride is comfortable for this road, since the vehicle can be chosen for the group and the driver knows the climb and the descent. If you want to enter ihram at the Miqat, tell us when you request the ride so the stop is built into the plan.",
+        ],
+      },
+      {
+        id: "plan",
+        h2: "How to plan it",
+        kind: "items",
+        items: [
+          { title: "Pickup in Taif", text: "The hotel or address in Taif, and the time you want to leave." },
+          { title: "Stop at Qarn al-Manazil", text: "Tell us if you want to change into ihram and pray at the Miqat, and how much time your group needs." },
+          { title: "Makkah hotel", text: "The hotel name and area, so the drop-off near the Haram can be planned." },
+          { title: "Group and luggage", text: "Number of travellers and bags, so the vehicle suits the road and the group." },
+        ],
+      },
+      related([{ name: "Taxi & Cab Service in Taif", href: TAIF, note: "City guide" }, L.makkah, L.taif, topic("group-transport-for-umrah", "Group transport for Umrah"), topic("madinah-to-makkah-for-umrah", "Madinah to Makkah for Umrah"), L.hub]),
+      {
+        id: "faq",
+        h2: "Taif to Makkah for Umrah: questions",
+        kind: "faq",
+        items: [
+          { q: "Do you stop at the Miqat?", a: "Yes, if you ask. A stop at Qarn al-Manazil can be planned, and you tell us how long you need." },
+          { q: "Is the road difficult?", a: "It is a mountain road with steep sections, so a rested driver and a vehicle chosen for the group matter. We plan both." },
+          { q: "Can we return to Taif afterwards?", a: "Yes. A return from Makkah to Taif can be requested together with the outward ride." },
+        ],
+      },
+    ],
+    entities: [{ type: "City", name: "Taif", wiki: "Taif", ar: "الطائف", lat: 21.2703, lng: 40.4158 }, makkahE, country],
+    prefill: { pickup: "Taif", dropoff: "Makkah" },
+  }),
+
+  page({
+    slug: "umrah-transport-for-travel-agents",
+    name: "Umrah Transport for Travel Agents",
+    title: "Umrah Transport for Travel Agents and Group Leaders",
+    description: "Ground transport for Umrah travel agents, tour operators and group leaders: airport, hotel and holy-city transfers for groups of any size, planned together.",
+    h1: "Umrah Transport for Travel Agents and Group Leaders",
+    lead: "One partner for the ground transport of your groups, from the airport to the hotel and between the holy cities.",
+    direct: `Gulf Elite Transport arranges ground transport for Umrah travel agents, tour operators and group leaders: airport transfers, hotel runs and journeys between Makkah, Madinah and Jeddah, for groups of any size. Send your group's itinerary and numbers, and the vehicles, drivers and fares are confirmed with you before you commit.`,
+    facts: [
+      { label: "For", value: "Travel agents, tour operators, group leaders" },
+      { label: "Covers", value: "Airport, hotel and holy-city transfers" },
+      { label: "Group size", value: "Small parties to coach groups" },
+      { label: "Contact", value: "One coordinator for the whole itinerary" },
+    ],
+    sections: [
+      {
+        id: "about",
+        h2: "Ground transport that follows your itinerary",
+        kind: "text",
+        paragraphs: [
+          "An agent or group leader is judged on whether the group arrives on time, together and without confusion. Ground transport is where small mistakes show up: a coach waiting at the wrong terminal, a group split between two vehicles, a pickup at a hotel door that the vehicle cannot reach. Planning every stage together reduces those mistakes.",
+          "Send us the whole itinerary: arrival airport and flight, hotels in Makkah and Madinah, the dates of the move between the two cities and the departure flight. We plan each leg, recommend the vehicles, and agree the meeting points. Changes to flights or dates are handled through one contact, so you do not have to chase several drivers.",
+        ],
+      },
+      {
+        id: "send",
+        h2: "What to send us",
+        kind: "items",
+        items: [
+          { title: "Itinerary", text: "Airports and flight numbers, hotels in each city, move dates and the departure flight." },
+          { title: "Group numbers", text: "The number of travellers and the number of large bags, by arrival, so the right vehicles are planned." },
+          { title: "Special needs", text: "Elderly travellers, wheelchair users and families with young children." },
+          { title: "One contact", text: "A name and phone number on your side for changes and on-the-day coordination." },
+        ],
+      },
+      {
+        id: "how-we-work",
+        h2: "How we work with agents",
+        kind: "items",
+        items: [
+          { title: "One plan for every leg", text: "Airport, hotel, holy-city and departure transfers are planned together." },
+          { title: "Vehicles matched to numbers", text: "One coach, several minibuses or a mix of vans, depending on the group and the access at each hotel." },
+          { title: "Agreed meeting points", text: "Pickup and drop-off points near the Haram and the Prophet's Mosque are agreed in advance." },
+          { title: "Clear confirmation", text: "Vehicles, drivers and fares are confirmed in writing before you commit." },
+        ],
+      },
+      related([topic("group-transport-for-umrah", "Group transport for Umrah"), topic("umrah-itinerary-transport-plan", "A typical Umrah transport plan"), topic("coach-for-umrah-groups", "Coach for Umrah groups"), topic("minibus-for-umrah-groups", "Minibus for Umrah groups"), L.hub]),
+      {
+        id: "faq",
+        h2: "Umrah transport for agents: questions",
+        kind: "faq",
+        items: [
+          { q: "Can you handle several groups arriving on the same day?", a: "Send the details of each group and we plan the vehicles for each, confirmed for each request." },
+          { q: "Do you provide a single contact?", a: "Yes. We keep one point of contact for your itinerary so changes are communicated through one person." },
+          { q: "Are agent prices different?", a: "No standard prices are published. Fares for each request, including regular work, are confirmed with you before you commit." },
+        ],
+      },
+    ],
+    prefill: { pickup: "Jeddah airport" },
+  }),
+
+  page({
+    slug: "umrah-itinerary-transport-plan",
+    name: "A Typical Umrah Transport Plan",
+    title: "Umrah Transport Plan: Jeddah, Makkah, Madinah, Airport",
+    description: "See how the ground transport of a typical Umrah trip is planned: Jeddah airport, Makkah, Madinah and the flight home. Book each leg or the whole plan.",
+    h1: "A Typical Umrah Transport Plan",
+    lead: "Leg by leg, from landing in Jeddah to your flight home. Book each ride, or the whole plan together.",
+    direct: `A typical Umrah trip needs five or six rides: Jeddah airport to Makkah, rides to the Haram during your stay, Makkah to Madinah, rides around Madinah, and Madinah airport for your flight home. Gulf Elite Transport arranges each leg or the whole plan, and the vehicle, driver and fare for each are confirmed before you commit.`,
+    facts: [
+      { label: "Typical legs", value: "Five or six rides" },
+      { label: "Order", value: "Jeddah airport, Makkah, Madinah, airport" },
+      { label: "Book", value: "Each leg or the whole plan" },
+      { label: "Group size", value: "One traveller to full groups" },
+    ],
+    sections: [
+      {
+        id: "about",
+        h2: "How the legs fit together",
+        kind: "text",
+        paragraphs: [
+          "Many first-time visitors are unsure what transport they need. The usual pattern is simple: land at Jeddah, travel to Makkah, perform Umrah and spend some days there, travel to Madinah, visit the Prophet's Mosque and the places around it, then fly home from Madinah. Visitors who start in Madinah simply reverse the order of the two cities.",
+          "Each leg has its own considerations, from the airport pickup and the drop-off near the Haram to the Miqat on the way between the cities. Planning them together lets us match the vehicle to your group for every ride and agree meeting points in advance, so you only decide once.",
+        ],
+      },
+      {
+        id: "legs",
+        h2: "The legs of a typical trip",
+        kind: "items",
+        items: [
+          { title: "1. Jeddah airport to Makkah", text: `The first long ride, about ${KM_JED_MAKKAH} km. See Jeddah airport to Makkah.` },
+          { title: "2. In Makkah", text: "Rides between your hotel and the Haram, and to Tan'eem for a further Umrah. See Makkah hotel to the Haram and the Umrah taxi with waiting." },
+          { title: "3. Makkah to Madinah", text: `About ${KM_MAKKAH_MADINAH} km between the holy cities, with prayer stops. See Makkah to Madinah after Umrah.` },
+          { title: "4. In Madinah", text: "Rides to the Prophet's Mosque and to places such as Quba and Uhud." },
+          { title: "5. Madinah hotel to the airport", text: "The ride for your flight home, planned back from your flight time." },
+          { title: "Variation", text: "If you fly out of Jeddah, the last ride is Makkah to Jeddah airport instead." },
+        ],
+      },
+      related([topic("jeddah-airport-to-makkah", "Jeddah airport to Makkah"), topic("makkah-to-madinah-for-umrah", "Makkah to Madinah after Umrah"), topic("madinah-hotel-to-madinah-airport", "Madinah hotel to Madinah airport"), topic("makkah-hotel-to-jeddah-airport", "Makkah hotel to Jeddah airport"), topic("umrah-transport-for-travel-agents", "For travel agents"), L.hub]),
+      {
+        id: "faq",
+        h2: "Umrah transport plan: questions",
+        kind: "faq",
+        items: [
+          { q: "Do I have to book every ride at once?", a: "No. You can book each leg separately or ask us to plan the whole trip, confirmed for each request." },
+          { q: "What if my hotel dates change?", a: "Tell us as soon as you know and we adjust the rides. How changes are handled is confirmed with you when you book." },
+          { q: "Can I fly into Madinah and out of Jeddah?", a: "Yes. Tell us the airports and dates and we plan the legs in that order." },
+        ],
+      },
+    ],
+    prefill: { pickup: "Jeddah airport" },
+  }),
+
+  page({
+    slug: "night-and-early-morning-transfers",
+    name: "Night and Early-Morning Transfers",
+    title: "Night and Early-Morning Airport Transfers: Jeddah, Madinah",
+    description: "Taxi for late-night arrivals and early-morning flights at Jeddah and Madinah airports, to Makkah, Madinah and hotels. Fare confirmed before you commit.",
+    h1: "Night and Early-Morning Airport Transfers",
+    lead: "Late landings and dawn departures: plan the ride around your flight, not around business hours.",
+    direct: `Gulf Elite Transport arranges taxi transfers for late-night arrivals and early-morning departures at Jeddah and Madinah airports, to and from hotels in Makkah, Madinah and Jeddah. Send your flight number and time, and the pickup follows your flight. The vehicle, driver and fare are confirmed before you commit.`,
+    facts: [
+      { label: "For", value: "Late arrivals and early departures" },
+      { label: "Airports", value: "Jeddah (JED) and Madinah (MED)" },
+      { label: "Planned from", value: "Your flight number and time" },
+      { label: "Confirmed", value: "Vehicle, driver and fare, before you commit" },
+    ],
+    sections: [
+      {
+        id: "about",
+        h2: "When your flight is at an awkward hour",
+        kind: "text",
+        paragraphs: [
+          "Many flights to and from the holy cities land after midnight or leave before dawn, and arriving tired in the middle of the night is when pilgrims most need a driver who is expecting them. Roads are quieter at those hours, which can make the ride faster, but hotel reception, check-in and the pickup point near the Haram or mosque may work differently from during the day.",
+          "Send us your flight number so the pickup follows the actual landing time, not a fixed one. Tell us the hotel and whether it accepts late check-in, so you are not left in the car park at 3 a.m. For an early departure, plan the pickup back from your flight with a margin, and tell the hotel the night before.",
+        ],
+      },
+      {
+        id: "plan",
+        h2: "Things to confirm for a night ride",
+        kind: "items",
+        items: [
+          { title: "Flight number", text: "So the driver tracks your arrival and waits if the flight is late." },
+          { title: "Hotel check-in", text: "That the hotel will receive you at that hour, and whether a room is ready." },
+          { title: "Pickup point", text: "Where the driver will meet you in the arrivals hall, and a phone number to reach them." },
+          { title: "Departure margin", text: "For a dawn flight, a margin for check-in and traffic, and a quiet word with the hotel the night before." },
+        ],
+      },
+      related([topic("jeddah-airport-to-makkah", "Jeddah airport to Makkah"), topic("madinah-airport-to-madinah-hotel", "Madinah airport to Madinah hotel"), topic("makkah-hotel-to-jeddah-airport", "Makkah hotel to Jeddah airport"), L.jed, L.med, L.hub]),
+      {
+        id: "faq",
+        h2: "Night and early-morning transfers: questions",
+        kind: "faq",
+        items: [
+          { q: "Will the driver wait if my flight is late?", a: "Give us your flight number so the pickup follows the flight. How delays are handled is confirmed with you when you book." },
+          { q: "Do you charge extra at night?", a: "No standard fares are published. The fare for your request, including the time of day, is confirmed before you commit." },
+          { q: "Is it safe to travel at night?", a: "Roads between the airports and the holy cities are busy day and night, and a pre-arranged driver means you are not looking for a car on arrival." },
+        ],
+      },
+    ],
+    prefill: { pickup: "Jeddah airport" },
+  }),
+];
+
 // ------------------------------------------------------------------------------------------ places (one page per place)
 type Spot = {
   slug: string;
   name: string;
   ar: string;
-  city: "makkah" | "madinah";
+  city: "makkah" | "madinah" | "jeddah" | "taif";
+  /** Distance reference; defaults to the main mosque of the holy cities. */
+  from?: { name: string; lat: number; lng: number };
   lat: number;
   lng: number;
   kind: "holy-site" | "district";
@@ -1254,16 +1627,73 @@ const spots: Spot[] = [
       { q: "Is it far from Madinah?", a: "It is a short drive south-west of the city, on the road to Makkah." },
     ],
   },
+  {
+    slug: "jeddah-al-balad-taxi", name: "Al-Balad (Historic Jeddah)", ar: "البلد (جدة التاريخية)", city: "jeddah", from: { name: "King Abdulaziz International Airport", lat: 21.6796, lng: 39.1565 }, lat: 21.4858, lng: 39.1873, kind: "holy-site",
+    tagline: "The old walled town of Jeddah, with coral-stone houses and traditional markets.",
+    about: "Al-Balad is the historic centre of Jeddah, a district of coral-stone merchant houses with carved wooden balconies, narrow lanes and traditional souqs, recognised as a UNESCO World Heritage Site. Pilgrims who spend a night or an afternoon in Jeddah often visit it, usually in the evening when the heat eases.",
+    know: [
+      { title: "Narrow lanes", text: "Vehicles cannot enter the older lanes. The car stops at the edge of the district and visitors walk in." },
+      { title: "Evenings are best", text: "The district is quieter and cooler in the early morning and after sunset, and the souqs are busiest in the evening." },
+      { title: "Prayer times", text: "Some shops close for prayers, so plan your visit around them." },
+    ],
+    taxi: [
+      { title: "From the airport", text: "Al-Balad is a long ride south from the airport. Arrivals with a long wait before their onward ride sometimes stop here." },
+      { title: "Meeting point", text: "A road at the edge of the district serves as a pickup point. We agree it with you before you go in." },
+      { title: "Timed return", text: "Agree a return time, since finding a car in the old town can be difficult." },
+    ],
+    faq: [
+      { q: "Can the taxi enter the old town?", a: "Not the older lanes. The car stops at the edge of the district and visitors walk in." },
+      { q: "Can we combine it with the Corniche?", a: "Yes. A ride covering Al-Balad and other places can be planned and confirmed with you." },
+    ],
+  },
+  {
+    slug: "jeddah-floating-mosque-taxi", name: "Al-Rahma Mosque (Floating Mosque)", ar: "مسجد الرحمة", city: "jeddah", from: { name: "King Abdulaziz International Airport", lat: 21.6796, lng: 39.1565 }, lat: 21.5546, lng: 39.1132, kind: "holy-site",
+    tagline: "The white mosque on the Corniche that appears to float at high tide.",
+    about: "Al-Rahma Mosque stands on the Jeddah Corniche, built on pilings over the Red Sea so that it seems to float at high tide. It is one of the best-known sights of the city, and visitors, including pilgrims on a short stay, go to see it and the waterfront around it.",
+    know: [
+      { title: "Best at sunset", text: "The light on the white domes and the water is at its best around sunset, but that is also the busiest time." },
+      { title: "A short stop", text: "Most people spend a short time at the mosque and the Corniche around it." },
+      { title: "Weekends", text: "The Corniche is crowded on Thursday and Friday evenings, and parking is limited." },
+    ],
+    taxi: [
+      { title: "From hotels in Jeddah", text: "It is a ride along the Corniche from most central hotels." },
+      { title: "Pickup", text: "Parking is scarce on busy evenings, so agree a pickup point on a nearby road." },
+      { title: "With other places", text: "It is often combined with Al-Balad. Give us the order and we plan the route with you." },
+    ],
+    faq: [
+      { q: "Is it far from the airport?", a: "It lies in the north of the Corniche, closer to the airport than Al-Balad. The ride time depends on traffic." },
+      { q: "Can the driver wait?", a: "Yes, if you ask. The waiting arrangement is confirmed before you commit." },
+    ],
+  },
+  {
+    slug: "qarn-al-manazil-miqat-taxi", name: "Qarn al-Manazil (As-Sayl al-Kabir)", ar: "قرن المنازل (السيل الكبير)", city: "taif", from: HARAM, lat: 21.6316, lng: 40.4254, kind: "holy-site",
+    tagline: "The Miqat on the Taif road, for pilgrims arriving from the east and for those travelling up from Makkah.",
+    about: "Qarn al-Manazil, also known as As-Sayl al-Kabir, is one of the Miqat points for Umrah and Hajj. It lies on the road between Makkah and Taif, in the mountains east of the holy city, and serves pilgrims arriving from that direction. It has a mosque and facilities for changing into ihram and praying.",
+    know: [
+      { title: "A planned stop", text: "Most visitors stop here as part of a longer journey between Taif and Makkah, not as a separate trip." },
+      { title: "Time to change and pray", text: "Allow time for ablution, ihram and prayer. Groups usually need longer than individuals." },
+      { title: "Mountain road", text: "The road is steep and winding in sections. A rested driver and a suitable vehicle matter." },
+    ],
+    taxi: [
+      { title: "Between Taif and Makkah", text: "The simplest plan is a ride from Taif to Makkah with the stop at the Miqat built in." },
+      { title: "From Makkah", text: "If you want to start from Makkah and enter ihram here, the ride up and the ride back can be arranged together." },
+      { title: "Waiting", text: "Tell us how long your group will need, so the driver waits and continues to the Haram afterwards." },
+    ],
+    faq: [
+      { q: "Is it on the way from Taif to Makkah?", a: "Yes. It lies on the road between the two cities, so a stop can be built into the journey." },
+      { q: "How long does the stop take?", a: "It depends on your group. Tell us how long you expect and we plan the stop with you." },
+    ],
+  },
 ];
 
 function spotPage(s: Spot): PlacePage {
-  const from = s.city === "makkah" ? HARAM : NABAWI;
+  const from = s.from ?? (s.city === "makkah" ? HARAM : NABAWI);
   const d = dist(s, from);
   const lo = Math.max(1, Math.round(d * 1.25));
   const hi = Math.max(lo + 1, Math.round(d * 1.6));
   const km1 = d < 10 ? d.toFixed(1) : String(Math.round(d));
-  const cityName = s.city === "makkah" ? "Makkah" : "Madinah";
-  const cityLink = s.city === "makkah" ? L.makkah : L.madinah;
+  const cityName = { makkah: "Makkah", madinah: "Madinah", jeddah: "Jeddah", taif: "Taif" }[s.city];
+  const cityLink = { makkah: L.makkah, madinah: L.madinah, jeddah: L.jeddah, taif: { name: "Taxi & Cab Service in Taif", href: TAIF, note: "City guide" } }[s.city];
   const sameCity = spots.filter((x) => x.city === s.city && x.slug !== s.slug);
   const isDistrict = s.kind === "district";
   const entity = { type: "Place" as const, name: `${s.name}, ${cityName}`, ar: s.ar, lat: s.lat, lng: s.lng };
@@ -1286,10 +1716,10 @@ function spotPage(s: Spot): PlacePage {
       { id: "about", h2: `About ${s.name}`, kind: "text", paragraphs: [s.about, `${s.name} is about ${km1} km from ${from.name} in a straight line, and roughly ${lo} to ${hi} km by road depending on the route. These are approximate figures; the actual route and the time it takes depend on traffic and road controls at the time you travel.`] },
       { id: "know", h2: `What to know before you go to ${s.name}`, kind: "items", items: s.know },
       { id: "taxi", h2: `Getting to ${s.name} by taxi`, kind: "items", items: s.taxi },
-      related([cityLink, ...sameCity.slice(0, 3).map((x) => ({ name: x.name, href: `${UMRAH_BASE}/${x.slug}`, note: "Place guide" })), topic(s.city === "makkah" ? "makkah-ziyarat-rides" : "madinah-ziyarat-rides", s.city === "makkah" ? "Rides to places in Makkah" : "Rides to places in Madinah"), L.hub]),
+      related([cityLink, ...sameCity.slice(0, 3).map((x) => ({ name: x.name, href: `${UMRAH_BASE}/${x.slug}`, note: "Place guide" })), ...(s.city === "makkah" || s.city === "madinah" ? [topic(s.city === "makkah" ? "makkah-ziyarat-rides" : "madinah-ziyarat-rides", s.city === "makkah" ? "Rides to places in Makkah" : "Rides to places in Madinah")] : []), L.hub]),
       { id: "faq", h2: `${s.name}: questions`, kind: "faq", items: [...s.faq, { q: "Do you publish fares?", a: "No. The fare is confirmed with you before you commit." }] },
     ],
-    entities: [entity, s.city === "makkah" ? makkahE : madinahE, country],
+    entities: [entity, { makkah: makkahE, madinah: madinahE, jeddah: jeddahE, taif: { type: "City" as const, name: "Taif", wiki: "Taif", ar: "الطائف", lat: 21.2703, lng: 40.4158 } }[s.city], country],
     prefill: { pickup: `${cityName} hotel`, dropoff: s.name },
   });
 }
@@ -1407,7 +1837,7 @@ const hub: PlacePage = {
       h2: "Pilgrim journeys",
       kind: "links",
       intro: "Each page explains one part of the trip and what to tell us.",
-      items: topics.map((t) => ({ name: t.name, href: t.path, note: t.lead.length > 70 ? t.lead.slice(0, 68).trimEnd().replace(/[,.\s]+\S*$/, "") + "..." : t.lead })),
+      items: [...topics, ...moreTopics].map((t) => ({ name: t.name, href: t.path, note: t.lead.length > 70 ? t.lead.slice(0, 68).trimEnd().replace(/[,.\s]+\S*$/, "") + "..." : t.lead })),
     },
     {
       id: "cities",
@@ -1461,7 +1891,7 @@ const hub: PlacePage = {
   ],
   layout: { hero: "centered", body: "cards", form: "bottom" },
   entities: [makkahE, madinahE, jeddahE, country],
-  children: [...topics, ...spotPages, ...vehiclePages].map((t) => ({ name: t.name, path: t.path })),
+  children: [...topics, ...moreTopics, ...spotPages, ...vehiclePages].map((t) => ({ name: t.name, path: t.path })),
   prefill: { pickup: "Jeddah airport or hotel" },
 };
 
@@ -1473,4 +1903,4 @@ for (const t of topics) {
   if (links && links.kind === "links") links.items.unshift(...spots.filter((x) => x.city === city).map((x) => ({ name: x.name, href: `${UMRAH_BASE}/${x.slug}`, note: "Place guide" })));
 }
 
-export const umrahPages: PlacePage[] = [hub, ...topics, ...spotPages, ...vehiclePages];
+export const umrahPages: PlacePage[] = [hub, ...topics, ...moreTopics, ...spotPages, ...vehiclePages];
