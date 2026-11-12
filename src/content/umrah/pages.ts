@@ -963,6 +963,25 @@ const topics: PlacePage[] = [
   }),
 ];
 
+// Verified locations of the Haramain stations (Wikipedia "Haramain High Speed Railway"; OpenStreetMap station points; sar.hhr.sa).
+{
+  const hs = topics.find((t) => t.path.endsWith("/haramain-train-station-transfers"));
+  const at = hs?.sections.findIndex((x) => x.id === "about") ?? -1;
+  if (hs && at >= 0) {
+    hs.sections.splice(at + 1, 0, {
+      id: "stations",
+      h2: "Where the stations are",
+      kind: "items",
+      intro: "Distances are approximate straight-line figures from map data.",
+      items: [
+        { title: "Makkah", text: "In the Rusaiyfah district, near the 3rd Ring Road, with a park-and-ride for the Grand Mosque. About 4 km west of the Haram." },
+        { title: "Madinah", text: "On King Abdulaziz Street, east side of the city, in the Al-Hadra' area. About 9 km east of the Prophet's Mosque." },
+        { title: "Jeddah airport", text: "King Abdulaziz International Airport has its own station, on a short branch of about 3.75 km from the main line." },
+        { title: "Al-Sulimaniyah (Jeddah) and King Abdullah Economic City", text: "The other two stations on the line, listed on the railway's official portal." },
+      ],
+    });
+  }
+}
 // ------------------------------------------------------------------------------------------ more journeys
 const moreTopics: PlacePage[] = [
   page({
@@ -1872,6 +1891,19 @@ const hotelPageMadinah = page({
       })),
     },
     {
+      id: "areas",
+      h2: "Hotel areas of Madinah",
+      kind: "items",
+      intro: "Distances are approximate straight-line figures from the Prophet's Mosque, taken from public map and reference data. The road route is longer.",
+      items: [
+        { title: "Central Area (Markaziyah)", text: "The zone that surrounds the mosque on all four sides, out to the King Faisal Ring Road. Most large hotels are here, within walking distance of the mosque." },
+        { title: "Qurban", text: "A district about 2 km south-east of the mosque. Hotels here are a short ride from the Central Area." },
+        { title: "Al-Awali", text: "A district to the south-east of the city, roughly 2 km from the mosque, on the side towards Quba." },
+        { title: "Quba", text: "A district about 2.5 km south of the mosque, around Quba Mosque, which the Prophet founded." },
+        { title: "Al-Khalidiyah", text: "A district roughly 5 km east of the mosque, with a longer ride to the Central Area." },
+        { title: "Al-Jurf", text: "A district on the north-west side, described in reference sources as about 7 km from the mosque." },
+      ],
+    },    {
       id: "plan",
       h2: "Planning a ride from your hotel",
       kind: "items",
@@ -1961,6 +1993,70 @@ const miqatPage = page({
   entities: [makkahE, madinahE, country],
   prefill: { pickup: "Madinah or Taif", dropoff: "Makkah" },
 });
+const makkahAreasPage = page({
+  slug: "makkah-hotel-areas-taxi",
+  name: "Makkah Hotel Areas",
+  title: "Taxi to Makkah Hotel Areas: Ajyad, Misfalah, Aziziyah",
+  description: "Where Makkah hotels are and how far each area is from the Haram: Ajyad, Jarwal, Misfalah, Shisha, Rusaifah and Aziziyah. Taxi fare confirmed first.",
+  h1: "Taxi to Hotel Areas in Makkah",
+  lead: "Which area you stay in decides whether you walk to the Haram or need a ride for every prayer.",
+  direct: `Makkah's hotels are spread over several areas at different distances from Al-Masjid al-Haram, from Ajyad about 600 metres away to Aziziyah about 5 km away. Gulf Elite Transport arranges taxi rides to and from each area, for airport, station and Haram transfers. Tell us the area and hotel, and the vehicle, driver and fare are confirmed before you commit.`,
+  facts: [
+    { label: "Closest area", value: "Ajyad, about 0.6 km from the Haram" },
+    { label: "Furthest listed", value: "Aziziyah, about 5 km from the Haram" },
+    { label: "Station", value: "Rusaiyfah, about 4 km west" },
+    { label: "Distances", value: "Straight line, approximate" },
+  ],
+  sections: [
+    {
+      id: "about",
+      h2: "Choosing an area and what it means for rides",
+      kind: "text",
+      paragraphs: [
+        "The areas closest to Al-Masjid al-Haram are within walking distance, which is why they are the most expensive and the most crowded around prayer times. Further out, rooms are larger and cheaper, but every visit to the Haram needs a ride, and the final stretch is on foot because roads near the Haram are controlled.",
+        "The distances below are straight-line figures from the Haram taken from public map data, so the road distance is longer. They are meant to help you compare areas, not to predict a journey time.",
+      ],
+    },
+    {
+      id: "areas",
+      h2: "Makkah hotel areas by distance from the Haram",
+      kind: "items",
+      items: [
+        { title: "Ajyad (about 0.6 km)", text: "The district beside the Haram, recognised as one of Makkah's best-known areas. The Clock Towers complex and the hotels of Jabal Omar, on its western side, are here." },
+        { title: "Jarwal (about 1 km north-west)", text: "A district just north-west of the Haram, close enough to walk for many visitors." },
+        { title: "Misfalah (about 2 km south-south-west)", text: "A district south of the Haram, with a long-established market area and smaller hotels." },
+        { title: "Kudai (about 2 km south)", text: "An area on the south side of the Haram, on the 3rd Ring Road corridor, where some hotels serve groups." },
+        { title: "Al-Shisha (about 3 km east-north-east)", text: "A district to the north-east of the Haram, on the road towards Mina, with a large shopping mall." },
+        { title: "Al-Rusaiyfah (about 4 km west-south-west)", text: "The district of the Makkah Haramain railway station and its park-and-ride, on the 3rd Ring Road." },
+        { title: "Aziziyah (about 5 km south-east)", text: "A large residential and hotel district, where hotels such as DoubleTree by Hilton Makkah Aziziyah stand. Every visit to the Haram here needs a ride." },
+      ],
+    },
+    {
+      id: "plan",
+      h2: "Planning rides from your area",
+      kind: "items",
+      items: [
+        { title: "Say the hotel and area", text: "Hotels with similar names exist in different areas, so the area decides the pickup road." },
+        { title: "Walkers and riders", text: "In Ajyad and Jarwal many visitors walk. Elders and families often ride, even for the short distance." },
+        { title: "Daily rides from further out", text: "From Misfalah, Shisha, Rusaiyfah and Aziziyah, a regular pattern of rides for each prayer can be arranged together." },
+        { title: "Station and airport", text: "Rusaiyfah hosts the railway station. For the airport, plan the pickup back from your flight." },
+      ],
+    },
+    related([L.makkah, topic("makkah-hotel-to-haram", "Makkah hotel to the Haram"), topic("abraj-al-bait-jabal-omar-taxi", "Abraj Al Bait and Jabal Omar"), topic("aziziyah-to-haram-taxi", "Aziziyah"), topic("haramain-train-station-transfers", "Haramain train station transfers"), topic("jeddah-airport-to-makkah", "Jeddah airport to Makkah"), L.hub]),
+    {
+      id: "faq",
+      h2: "Makkah hotel areas: questions",
+      kind: "faq",
+      items: [
+        { q: "Which area is closest to the Haram?", a: "Ajyad, about 600 metres away in a straight line. Jarwal is next, at about a kilometre." },
+        { q: "Can I walk to the Haram from Aziziyah?", a: "It is about 5 km in a straight line, so most visitors ride. Elders and families almost always do." },
+        { q: "Are the distances exact?", a: "No. They are approximate straight-line figures from public map data. The road distance is longer." },
+      ],
+    },
+  ],
+  entities: [makkahE, country],
+  prefill: { pickup: "Makkah hotel" },
+});
 // ------------------------------------------------------------------------------------------ hub
 const hub: PlacePage = {
   kind: "hub",
@@ -1998,7 +2094,7 @@ const hub: PlacePage = {
       h2: "Pilgrim journeys",
       kind: "links",
       intro: "Each page explains one part of the trip and what to tell us.",
-      items: [...topics, ...moreTopics, miqatPage, hotelPageMadinah].map((t) => ({ name: t.name, href: t.path, note: t.lead.length > 70 ? t.lead.slice(0, 68).trimEnd().replace(/[,.\s]+\S*$/, "") + "..." : t.lead })),
+      items: [...topics, ...moreTopics, miqatPage, hotelPageMadinah, makkahAreasPage].map((t) => ({ name: t.name, href: t.path, note: t.lead.length > 70 ? t.lead.slice(0, 68).trimEnd().replace(/[,.\s]+\S*$/, "") + "..." : t.lead })),
     },
     {
       id: "cities",
@@ -2052,7 +2148,7 @@ const hub: PlacePage = {
   ],
   layout: { hero: "centered", body: "cards", form: "bottom" },
   entities: [makkahE, madinahE, jeddahE, country],
-  children: [...topics, ...moreTopics, miqatPage, hotelPageMadinah, ...spotPages, ...vehiclePages].map((t) => ({ name: t.name, path: t.path })),
+  children: [...topics, ...moreTopics, miqatPage, hotelPageMadinah, makkahAreasPage, ...spotPages, ...vehiclePages].map((t) => ({ name: t.name, path: t.path })),
   prefill: { pickup: "Jeddah airport or hotel" },
 };
 
@@ -2064,4 +2160,4 @@ for (const t of topics) {
   if (links && links.kind === "links") links.items.unshift(...spots.filter((x) => x.city === city).map((x) => ({ name: x.name, href: `${UMRAH_BASE}/${x.slug}`, note: "Place guide" })));
 }
 
-export const umrahPages: PlacePage[] = [hub, ...topics, ...moreTopics, miqatPage, hotelPageMadinah, ...spotPages, ...vehiclePages];
+export const umrahPages: PlacePage[] = [hub, ...topics, ...moreTopics, miqatPage, hotelPageMadinah, makkahAreasPage, ...spotPages, ...vehiclePages];
