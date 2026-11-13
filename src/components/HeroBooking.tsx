@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import QuoteForm from "./QuoteForm";
+import TripForm from "./TripForm";
 
 const TAXI = "Taxi & Cab Services";
 
@@ -21,7 +22,11 @@ export function BookingCard({ service = "", topic = "", pickup = "", dropoff = "
       <p className="mb-4 mt-1 text-sm leading-6 text-muted">
         {ride ? "Tell us where and when. We confirm the vehicle, driver and fare first." : "Tell us what you need and we will reply with a quotation."}
       </p>
-      <QuoteForm variant="booking" defaultService={service} topic={topic} pickupDefault={pickup} dropoffDefault={dropoff} />
+      {ride ? (
+        <TripForm pickupDefault={pickup} dropoffDefault={dropoff} />
+      ) : (
+        <QuoteForm variant="booking" defaultService={service} topic={topic} pickupDefault={pickup} dropoffDefault={dropoff} />
+      )}
     </div>
   );
 }
