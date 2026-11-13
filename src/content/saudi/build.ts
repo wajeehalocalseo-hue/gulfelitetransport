@@ -633,20 +633,24 @@ function assignLayouts(pages: PlacePage[]) {
   }
   // Umrah and Hajj pages also have their own pool, so they are unique among themselves.
   const usedTopic = new Set<string>();
+  const usedTaif = new Set<string>();
   pages
     .filter((p) => p.kind === "topic")
     .forEach((p, i) => {
       // Hotel transfer pages carry a route (airport to hotel), so they may also use the route-line heroes.
-      const h: PlaceLayout["hero"][] = p.name.startsWith("Jeddah Airport and ") ? [...HEROES.topic, "routeline", "routeband"] : HEROES.topic;
+      // Taif Airport hotel pages have their own pool (offset), so a hotel looks different from its Jeddah Airport page.
+      const taif = p.name.startsWith("Taif Airport and ");
+      const used = taif ? usedTaif : usedTopic;
+      const h: PlaceLayout["hero"][] = taif || p.name.startsWith("Jeddah Airport and ") ? [...HEROES.topic, "routeline", "routeband"] : HEROES.topic;
       for (let k = 0; k < h.length * BODIES.length * FORMS.length; k++) {
-        const n = i + k;
+        const n = i + k + (taif ? 37 : 0);
         const cand: PlaceLayout = {
           hero: h[n % h.length],
           body: BODIES[Math.floor(n / h.length) % BODIES.length],
           form: FORMS[Math.floor(n / (h.length * BODIES.length)) % FORMS.length],
         };
-        if (!usedTopic.has(key(cand))) {
-          usedTopic.add(key(cand));
+        if (!used.has(key(cand))) {
+          used.add(key(cand));
           p.layout = cand;
           return;
         }
