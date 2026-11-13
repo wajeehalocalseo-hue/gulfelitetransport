@@ -7,8 +7,9 @@ import { mkdirSync, writeFileSync } from "node:fs";
 
 const keyJson = process.env.GSC_SERVICE_ACCOUNT_JSON;
 const siteUrl = process.env.GSC_SITE_URL;
-if (!keyJson || !siteUrl) {
-  console.error("Set GSC_SERVICE_ACCOUNT_JSON and GSC_SITE_URL.");
+const missing = [!keyJson && "GSC_SERVICE_ACCOUNT_JSON", !siteUrl && "GSC_SITE_URL"].filter(Boolean);
+if (missing.length) {
+  console.error(`Missing or empty: ${missing.join(", ")}. Add them as repository secrets (Settings, Secrets and variables, Actions) with exactly these names.`);
   process.exit(1);
 }
 const key = JSON.parse(keyJson);
