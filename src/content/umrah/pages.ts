@@ -2183,6 +2183,56 @@ const taifPages: PlacePage[] = taifHotels.map((h) => {
   });
 });
 
+// People ask for the same ride in many ways (private transfer, private car, 7 seater, 12 seater, Haram, Clock Tower, Jabal Omar).
+// Those are answered once, on the page that already covers the route, instead of on near-identical pages.
+const insertBeforeFaq = (p: PlacePage, s: Section) => {
+  const i = p.sections.findIndex((x) => x.id === "faq");
+  p.sections.splice(i < 0 ? p.sections.length : i, 0, s);
+};
+const vehicleLinks = [
+  { name: "Family van for Umrah (6 to 8 passengers)", href: `${UMRAH_BASE}/family-van-taxi-for-umrah`, note: "Vehicle guide" },
+  { name: "Group van for Umrah (8 to 12 passengers)", href: `${UMRAH_BASE}/group-van-taxi-for-umrah`, note: "Vehicle guide" },
+  { name: "SUV for Umrah (4 to 6 passengers)", href: `${UMRAH_BASE}/suv-taxi-for-umrah`, note: "Vehicle guide" },
+];
+const jedMakkahPage = topics.find((p) => p.path === `${UMRAH_BASE}/jeddah-airport-to-makkah`);
+if (jedMakkahPage) {
+  insertBeforeFaq(jedMakkahPage, {
+    id: "vehicle-area",
+    h2: "Choose your vehicle and your drop-off area",
+    kind: "items",
+    intro: "People ask for this ride in different words. They are all the same ride on this page.",
+    items: [
+      { title: "Private transfer, private car or taxi", text: "Each ride is a private vehicle arranged for your group, not a shared seat. A private transfer, a private car and a taxi from Jeddah airport are the same request here." },
+      { title: "Seven seats or twelve seats", text: "A family of up to seven or eight fits a Family van (6 to 8 passengers). Groups of 8 to 12 fit a Group van. Bag counts decide the final size, so send them with your request." },
+      { title: "Masjid al-Haram, Clock Tower, Jabal Omar, Ajyad and Aziziyah", text: "Tell us your hotel or its area. The last stretch near the Haram is set by road controls, so the drop-off is agreed with you. Hotels by name are on the Abraj Al Bait and Jabal Omar page, the Makkah hotel areas page and the Aziziyah page." },
+      { title: "The return to Jeddah airport", text: "The ride from your Makkah hotel back to JED is covered on this page too, so there is no separate page for it." },
+    ],
+  });
+  const links = jedMakkahPage.sections.find((x) => x.id === "links");
+  if (links && links.kind === "links") {
+    links.items.push(
+      { name: "Abraj Al Bait and Jabal Omar hotels", href: `${UMRAH_BASE}/abraj-al-bait-jabal-omar-taxi`, note: "Hotel cluster" },
+      { name: "Aziziyah to the Haram taxi", href: `${UMRAH_BASE}/aziziyah-to-haram-taxi`, note: "District guide" },
+      ...vehicleLinks,
+    );
+  }
+}
+routeExtras["makkah-to-madinah"] = [
+  ...(routeExtras["makkah-to-madinah"] ?? []),
+  {
+    id: "vehicle-area",
+    h2: "Vehicle size and where you are picked up",
+    kind: "items",
+    intro: "The same ride is asked for in different ways. It is one route, in both directions, on this page.",
+    items: [
+      { title: "Private transfer, private car or taxi", text: "Each ride is a private vehicle arranged for your group. Makkah to Madinah by private transfer, private car or taxi is one request." },
+      { title: "Seven seats or twelve seats", text: "Up to seven or eight travellers fit a Family van (6 to 8 passengers); 8 to 12 fit a Group van. Send your bag count so we confirm the right size." },
+      { title: "Hotel to hotel", text: "Tell us your Makkah hotel or area (Clock Tower, Jabal Omar, Ajyad, Aziziyah) and your Madinah hotel. The pickup and the drop-off are agreed with you, and a Miqat stop at Dhul Hulayfah can be built in." },
+      { title: "Madinah back to Makkah", text: "The return from Madinah to Makkah is on this page too, so there is no separate page for it." },
+    ],
+  },
+];
+
 // Each hotel's Jeddah and Taif pages link to each other (different routes, same hotel), and the hub lists every hotel page.
 const jeddahHotelPages = [...clockHotelPages, ...otherHotelPages];
 const swap = (path: string, from: string, to: string) => path.replace(`/${from}-airport-to-`, `/${to}-airport-to-`);
