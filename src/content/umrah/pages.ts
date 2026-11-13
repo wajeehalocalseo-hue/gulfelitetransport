@@ -1417,6 +1417,16 @@ withExtra("abraj-al-bait-jabal-omar-taxi", [
       { title: "Al Marwa Rayhaan by Rotana", text: "Rotana, in the Marwah Tower." },
     ],
   },
+  {
+    id: "hotels-nearby",
+    h2: "Other hotels beside the Haram, by name",
+    kind: "items",
+    intro: "Listed by name for pickup requests. Exact entrances and distances are confirmed when you ask; send us the hotel name and we agree the pickup road.",
+    items: [
+      { title: "Jabal Omar development", text: "Hilton Suites Makkah, Hilton Makkah Convention Hotel, Conrad Makkah, Hyatt Regency Makkah, Jabal Omar Marriott and DoubleTree by Hilton Jabal Omar." },
+      { title: "Ajyad Street area", text: "Anjum Hotel Makkah, Le Méridien Towers Makkah, Makarem Ajyad Makkah and Elaf Kinda Hotel." },
+    ],
+  },
 ]);
 function spotPage(s: Spot): PlacePage {
   const from = s.from ?? (s.city === "makkah" ? HARAM : NABAWI);
@@ -1541,6 +1551,20 @@ const hotelsMadinah: { name: string; brand: string; lat: number; lng: number; ti
   { name: "Dar Al Taqwa", brand: "Dar Al Taqwa", lat: 24.4712004, lng: 39.6118525, tier: "large" },
   { name: "Pullman Zamzam Madinah", brand: "Pullman", lat: 24.4644758, lng: 39.6117903, tier: "large" },
   { name: "Golden Tulip Al Ansar", brand: "Golden Tulip", lat: 24.4729791, lng: 39.6083568, tier: "medium" },
+  { name: "InterContinental Dar Al Hijra", brand: "InterContinental", lat: 24.473559, lng: 39.6109111, tier: "large" },
+  { name: "Sofitel Shahd Al Madinah", brand: "Sofitel", lat: 24.4721055, lng: 39.6114864, tier: "large" },
+  { name: "Makarem Burj Al Madinah", brand: "Makarem", lat: 24.4721659, lng: 39.6103066, tier: "large" },
+  { name: "Grand Plaza Al Madinah", brand: "Grand Plaza", lat: 24.4721539, lng: 39.6129523, tier: "large" },
+  { name: "Maysan Al Harithia Hotel", brand: "Maysan", lat: 24.4721753, lng: 39.6089602, tier: "large" },
+  { name: "Elaf Al Taqwa Hotel", brand: "Elaf", lat: 24.4645175, lng: 39.6075017, tier: "large" },
+  { name: "Rotana Al Manakha Madinah", brand: "Rotana", lat: 24.4644494, lng: 39.6069615, tier: "large" },
+  { name: "Elaf Taiba Hotel", brand: "Elaf", lat: 24.4712903, lng: 39.6069402, tier: "medium" },
+  { name: "Nozol Royal Inn Hotel", brand: "Nozol", lat: 24.4728029, lng: 39.6104785, tier: "medium" },
+  { name: "Hotel Karam Al Madina", brand: "Karam", lat: 24.4648866, lng: 39.6058406, tier: "medium" },
+  { name: "Mias Hotel Madinah", brand: "Mias", lat: 24.4677784, lng: 39.6057474, tier: "medium" },
+  { name: "Al Mukhtara Al Gharbi Hotel", brand: "Al Mukhtara", lat: 24.4681419, lng: 39.6035666, tier: "medium" },
+  { name: "Taiba Rose Hotel", brand: "Taiba Rose", lat: 24.4636651, lng: 39.6060309, tier: "medium" },
+  { name: "Gulnar Taiba Hotel", brand: "Gulnar", lat: 24.4651576, lng: 39.6141844, tier: "medium" },
 ];
 const km2 = (d: number) => (d < 1 ? `${Math.round(d * 100) * 10} m` : `${d.toFixed(1)} km`);
 
@@ -1572,7 +1596,7 @@ const hotelPageMadinah = page({
       id: "hotels",
       h2: "Hotels listed on this page",
       kind: "items",
-      intro: "These are hotels we are asked about most. If yours is not listed, send us its name and we check the pickup point.",
+      intro: "These hotels are listed from public map data and are the ones we are asked about most. If yours is not listed, send us its name and we check the pickup point.",
       items: hotelsMadinah.map((h) => ({
         title: h.name,
         text: `${h.brand}${h.tier === "medium" ? ", mid-range" : ""}. About ${km2(dist(h, NABAWI))} from the Prophet's Mosque in a straight line.`,
