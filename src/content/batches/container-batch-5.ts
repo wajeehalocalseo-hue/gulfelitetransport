@@ -610,9 +610,9 @@ export const containerBatch5Port: ChildRecord[] = [
     order: 1,
     short: "A loaded container collected from the port and delivered to a warehouse or store.",
     audienceShort: "Importers and warehouse operators",
-    seoTitle: "Port-to-Warehouse Container Transport",
+    seoTitle: "Port to Warehouse Container Transport",
     metaDescription:
-      "Arrange port-to-warehouse container transport, planned around release timing and warehouse readiness. Quotation from Gulf Elite Transport.",
+      "Arrange container transport from port to warehouse, planned around release timing and warehouse readiness. Quotation from Gulf Elite Transport.",
     primaryKeyword: "port to warehouse transport",
     secondaryKeywords: ["port container delivery to warehouse", "import container delivery", "container to warehouse haulage"],
     semanticKeywords: ["release", "collection slot", "warehouse dock", "unloading capacity", "import", "delivery appointment"],

@@ -356,7 +356,7 @@ export const projectBatch9Sub: ChildRecord[] = [
     audienceShort: "Businesses moving a factory, workshop or warehouse",
     seoTitle: "Industrial Relocation: Factory, Workshop and Warehouse Moves",
     metaDescription:
-      "Plan an industrial relocation of a factory, workshop or warehouse with phased transport and coordination. Gulf Elite Transport quotation.",
+      "Plan an industrial relocation or industrial plant relocation of a factory, workshop or warehouse with phased transport and coordination. Gulf Elite Transport quotation.",
     primaryKeyword: "industrial relocation",
     secondaryKeywords: ["factory relocation", "warehouse relocation", "workshop relocation"],
     semanticKeywords: ["site move", "phased move", "production downtime", "equipment inventory", "stock transfer", "new premises"],

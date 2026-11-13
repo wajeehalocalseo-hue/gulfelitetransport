@@ -367,9 +367,9 @@ export const freightBatch1Micro: ChildRecord[] = [
     order: 1,
     short: "A whole vehicle for one shipper's cargo, collected and delivered point to point.",
     audienceShort: "Shippers whose cargo fills a vehicle",
-    seoTitle: "Full Truckload (FTL) Transportation",
+    seoTitle: "Full Truckload (FTL) Trucking and Transportation",
     metaDescription:
-      "Arrange full truckload (FTL) transportation, with a vehicle dedicated to your cargo from pickup to delivery. Quotation from Gulf Elite Transport.",
+      "Arrange full truckload (FTL) trucking for business cargo, with a vehicle dedicated to your load from pickup to delivery. Quotation from Gulf Elite Transport.",
     primaryKeyword: "full truckload transportation",
     secondaryKeywords: ["FTL freight", "dedicated truckload delivery", "point-to-point truckload", "long-distance full truckload"],
     semanticKeywords: ["dedicated vehicle", "single shipper", "direct delivery", "scheduled truckload", "load capacity", "no intermediate stops"],

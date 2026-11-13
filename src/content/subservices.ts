@@ -652,9 +652,9 @@ export const subServices: ChildRecord[] = [
     order: 2,
     short: "Relocating production machinery and workshop equipment as part of a facility move, in a planned sequence.",
     audienceShort: "Manufacturers, workshops and facilities teams",
-    seoTitle: "Industrial Machinery Relocation and Factory Moves",
+    seoTitle: "Industrial Machinery Relocation and Machine Moves",
     metaDescription:
-      "Plan industrial machinery relocation for factory, workshop and plant moves with sequencing and loading coordination. Quote from Gulf Elite Transport.",
+      "Plan industrial machinery and machine relocation for factory, workshop and plant moves, including lift and shift, with sequencing and loading coordination. Gulf Elite Transport quote.",
     primaryKeyword: "industrial machinery relocation",
     secondaryKeywords: ["factory machinery relocation", "manufacturing equipment moving", "plant equipment moving"],
     semanticKeywords: ["production line", "sequence of moves", "decommissioning", "re-installation", "workshop", "facility move"],

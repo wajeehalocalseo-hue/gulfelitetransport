@@ -684,9 +684,9 @@ export const expressBatch10Micro: ChildRecord[] = [
     order: 1,
     short: "Urgent transport of a spare part from a supplier to a stopped machine, line or site.",
     audienceShort: "Maintenance teams with a machine down",
-    seoTitle: "Emergency Spare Parts Delivery for Stopped Machines",
+    seoTitle: "Emergency Spare Parts Delivery for Machine Breakdowns",
     metaDescription:
-      "Request emergency spare parts delivery from supplier to a stopped machine or site. Availability confirmed per request by Gulf Elite Transport.",
+      "Request urgent delivery of heavy equipment and machine parts for breakdown emergencies, from supplier to the stopped machine or site. Availability confirmed per request.",
     primaryKeyword: "emergency spare parts delivery",
     secondaryKeywords: ["urgent spare part transport", "breakdown parts delivery", "critical part courier by road"],
     semanticKeywords: ["breakdown", "downtime", "part number", "supplier pickup", "maintenance", "line stoppage"],

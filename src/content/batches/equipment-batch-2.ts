@@ -357,9 +357,9 @@ export const equipmentBatch2Micro: ChildRecord[] = [
     order: 5,
     short: "Production machinery, manufacturing and processing equipment delivered as a single move.",
     audienceShort: "Manufacturers, processors and equipment suppliers",
-    seoTitle: "Industrial Equipment Transport and Delivery",
+    seoTitle: "Industrial Equipment Transportation and Delivery",
     metaDescription:
-      "Arrange transport of production machinery, manufacturing and processing equipment. Quotation from Gulf Elite Transport.",
+      "Arrange industrial equipment transportation of production machinery, manufacturing and processing equipment. Quotation from Gulf Elite Transport.",
     primaryKeyword: "industrial equipment transport",
     secondaryKeywords: ["production machinery transport", "manufacturing equipment delivery", "processing equipment transport"],
     semanticKeywords: ["production machine", "supplier delivery", "installation site", "crate", "skid", "lifting points"],
