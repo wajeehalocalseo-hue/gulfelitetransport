@@ -2178,4 +2178,33 @@ const taifPages: PlacePage[] = taifHotels.map((h) => {
   });
 });
 
+// Each hotel's Jeddah and Taif pages link to each other (different routes, same hotel), and the hub lists every hotel page.
+const jeddahHotelPages = [...clockHotelPages, ...otherHotelPages];
+const swap = (path: string, from: string, to: string) => path.replace(`/${from}-airport-to-`, `/${to}-airport-to-`);
+const addLink = (p: PlacePage, item: { name: string; href: string; note: string }) => {
+  const links = p.sections.find((s) => s.id === "links");
+  if (links && links.kind === "links") links.items.push(item);
+};
+jeddahHotelPages.forEach((p, i) => {
+  const t = taifPages[i];
+  addLink(p, { name: t.name, href: t.path, note: "Same hotel from Taif airport" });
+  addLink(t, { name: p.name, href: p.path, note: "Same hotel from Jeddah airport" });
+});
+const hotelSection = (id: string, h2: string, intro: string, pages: PlacePage[]): Section => ({
+  id,
+  h2,
+  kind: "links",
+  intro,
+  items: pages.map((p) => ({ name: p.name.replace(/^(Jeddah|Taif) Airport and /, ""), href: p.path, note: "Taxi both ways" })),
+});
+const hubAt = hub.sections.findIndex((s) => s.id === "places");
+hub.sections.splice(
+  hubAt + 1,
+  0,
+  hotelSection("hotel-transfers-jeddah", "Jeddah airport to your Makkah hotel", "One page per hotel, covering the ride from King Abdulaziz International Airport (JED) and the ride back.", jeddahHotelPages),
+  hotelSection("hotel-transfers-taif", "Taif airport to your Makkah hotel", "One page per hotel, covering the ride from Taif International Airport (TIF) and the ride back.", taifPages),
+);
+hub.children.push(...jeddahHotelPages, ...taifPages);
+hub.children = hub.children.map((c) => ("path" in c ? { name: c.name, path: c.path } : c));
+
 export const umrahPages: PlacePage[] = [hub, ...topics, ...moreTopics, miqatPage, hotelPageMadinah, makkahAreasPage, ...spotPages, ...vehiclePages, ...clockHotelPages, ...otherHotelPages, ...taifPages];

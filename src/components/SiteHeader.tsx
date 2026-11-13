@@ -22,7 +22,7 @@ export default function SiteHeader() {
     umrah: {
       hub: UMRAH_BASE,
       columns: [
-        { label: "Airport and train", slugs: ["jeddah-airport-to-makkah", "jeddah-airport-to-madinah", "madinah-airport-to-madinah-hotel", "madinah-airport-to-makkah", "haramain-train-station-transfers", "night-and-early-morning-transfers"] },
+        { label: "Airport and train", slugs: ["jeddah-airport-to-makkah", "jeddah-airport-to-madinah", "madinah-airport-to-madinah-hotel", "madinah-airport-to-makkah", "haramain-train-station-transfers", "night-and-early-morning-transfers"], extra: [{ name: "Jeddah airport to your Makkah hotel", href: `${UMRAH_BASE}#hotel-transfers-jeddah` }, { name: "Taif airport to your Makkah hotel", href: `${UMRAH_BASE}#hotel-transfers-taif` }] },
         { label: "In Makkah", slugs: ["makkah-hotel-to-haram", "makkah-hotel-areas-taxi", "makkah-ziyarat-rides"], extra: [{ name: "Taxi in Makkah", href: `${BASE}/makkah-region/makkah` }] },
         { label: "In Madinah", slugs: ["madinah-hotel-to-prophets-mosque", "madinah-ziyarat-rides"], extra: [{ name: "Taxi in Madinah", href: `${BASE}/madinah-region/madinah` }] },
         { label: "Between cities and groups", slugs: ["group-transport-for-umrah", "family-and-elderly-pilgrims", "umrah-itinerary-transport-plan", "umrah-transport-for-travel-agents", "ramadan-umrah-transport", "hajj-season-transport"], extra: [{ name: "Makkah to Madinah", href: `${BASE}/routes/makkah-to-madinah` }, { name: "Makkah to Taif", href: `${BASE}/routes/makkah-to-taif` }] },
