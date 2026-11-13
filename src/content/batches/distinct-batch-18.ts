@@ -253,9 +253,9 @@ export const distinctBatch18Micro: ChildRecord[] = [
     order: 1,
     short: "Moving steel bars, rods, coils, sheets and structural sections to workshops, sites and traders.",
     audienceShort: "Steel traders, fabricators and contractors",
-    seoTitle: "Steel Transportation: Bars, Coils, Sheets and Structural Steel",
+    seoTitle: "Steel Bar and Steel Transportation: Coils, Sheets, Sections",
     metaDescription:
-      "Plan steel transportation of bars, rods, coils, sheets and structural steel. Vehicle and handling confirmed per request. Gulf Elite Transport.",
+      "Plan steel bar and steel transportation: bars, rods, coils, sheets and structural steel. Vehicle and handling confirmed per request. Gulf Elite Transport.",
     primaryKeyword: "steel transportation",
     secondaryKeywords: ["steel bar transport", "steel coil transport", "structural steel delivery"],
     semanticKeywords: ["rebar", "coil", "plate", "I-beam", "bundle", "load securing"],

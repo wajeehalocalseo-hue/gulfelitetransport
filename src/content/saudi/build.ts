@@ -32,7 +32,8 @@ const HEROES: Record<PageKind, PlaceLayout["hero"][]> = {
   pair: ["schematic", "routeline", "routeband", "ledger", "light", "inset", "dark"],
   topic: ["dark", "light", "ledger", "inset", "centered"],
 };
-const BODIES: PlaceLayout["body"][] = ["cards", "columns", "tiles", "checklist", "accordion", "table"];
+const holyCity = (n: string) => n === "Makkah" || n === "Madinah";
+const BODIES: PlaceLayout["body"][] =["cards", "columns", "tiles", "checklist", "accordion", "table"];
 const FORMS: PlaceLayout["form"][] = ["aside", "bottom", "hero"];
 
 /** Placeholder; real layouts are assigned after all pages exist (see assignLayouts) so no two pages share a combination. */
@@ -510,6 +511,8 @@ function routePages(): PlacePage[] {
       ...(apTo && apTo.id !== apFrom?.id ? [{ name: apTo.name, href: `${BASE}/airports/${apTo.id}`, note: `Airport ${apTo.code}` }] : []),
       ...related.map((x) => ({ name: `${need(cityById.get(x.from), x.from).name} to ${need(cityById.get(x.to), x.to).name}`, href: `${BASE}/routes/${x.id}`, note: `about ${x.km} km` })),
     ];
+    // Alias only when one end is a holy city, so a title such as Makkah to Madinah stays short.
+    const alias = (n: string) => (holyCity(from.name) && holyCity(to.name) ? n : n === "Makkah" ? "Makkah (Mecca)" : n === "Madinah" ? "Madinah (Medina)" : n);
     const direct = [
       `Gulf Elite Transport arranges taxi and cab rides from ${from.name} to ${to.name}, about ${r.km} km by road, and the same route in the other direction. Tell us the pickup point, drop-off point, date, passengers and bags, and we confirm the vehicle, driver and fare for your request before you commit.`,
       `Planning to travel between ${from.name} and ${to.name}? The road distance is roughly ${r.km} km. Send your details to Gulf Elite Transport and we confirm the vehicle, driver, route and fare before anything is agreed; no fare or journey time is promised in advance.`,
@@ -518,9 +521,10 @@ function routePages(): PlacePage[] {
       kind: "route" as const,
       path,
       name: `${from.name} to ${to.name}`,
-      title: `Taxi from ${from.name} to ${to.name}: Intercity Cab Ride`,
-      description: `Request an intercity taxi or cab from ${from.name} to ${to.name}, about ${r.km} km by road. Fare, vehicle and timing confirmed for each request.`,
-      h1: `Taxi from ${from.name} to ${to.name}`,
+      // Search Console shows people also type Mecca and Medina, so those spellings appear once in the title, description and heading.
+      title: `Taxi from ${alias(from.name)} to ${alias(to.name)}: Intercity Cab Ride`,
+      description: `Request an intercity taxi or cab from ${alias(from.name)} to ${alias(to.name)}, about ${r.km} km by road. Fare, vehicle and timing confirmed for each request.`,
+      h1: `Taxi from ${alias(from.name)} to ${alias(to.name)}`,
       lead: `About ${r.km} km by road. Fare, vehicle and timing are confirmed for each request.`,
       directAnswer: direct,
       crumbs: [
