@@ -1927,4 +1927,62 @@ for (const t of topics) {
   if (links && links.kind === "links") links.items.unshift(...spots.filter((x) => x.city === city).map((x) => ({ name: x.name, href: `${UMRAH_BASE}/${x.slug}`, note: "Place guide" })));
 }
 
-export const umrahPages: PlacePage[] = [hub, ...topics, ...moreTopics, miqatPage, hotelPageMadinah, makkahAreasPage, ...spotPages, ...vehiclePages];
+// ------------------------------------------------------------------------------------------ Jeddah airport to Clock Towers hotels
+// One page per hotel, both directions on the page. Only hotels whose tower and brand are confirmed (theclocktowers.com, Wikipedia
+// "The Clock Towers", Raffles' own site) get a page; other hotels are listed by name on the cluster pages until verified.
+type ClockHotel = { slug: string; name: string; short: string; tower: string; brand: string; about: string; pickup: string; q: string; a: string };
+const clockHotels: ClockHotel[] = [
+  { slug: "makkah-clock-royal-tower-fairmont", name: "Makkah Clock Royal Tower, A Fairmont Hotel", short: "Makkah Clock Royal Tower", tower: "the Clock Tower itself", brand: "Fairmont", about: "This is the hotel in the Clock Tower, the tallest building of the Abraj Al Bait complex beside the Haram.", pickup: "Give the full name, Makkah Clock Royal Tower, A Fairmont Hotel, since several hotels in the complex share the same address area.", q: "Is the Fairmont in the same complex as the other Clock Towers hotels?", a: "Yes. It is in the Clock Tower, part of the complex that also holds the Mövenpick, Pullman, Swissôtel and Raffles hotels in their own towers." },
+  { slug: "movenpick-hajar-tower-makkah", name: "Mövenpick Hotel & Residences Hajar Tower Makkah", short: "Mövenpick Hajar Tower", tower: "the Hajar Tower", brand: "Mövenpick", about: "This Mövenpick hotel and residences occupy the Hajar Tower of the Abraj Al Bait complex.", pickup: "Say Hajar Tower with the hotel name, so the driver heads for the right tower in the complex.", q: "Which tower is the Mövenpick in?", a: "The Hajar Tower, one of the towers of the Clock Towers complex." },
+  { slug: "pullman-zamzam-makkah", name: "Pullman ZamZam Makkah", short: "Pullman ZamZam", tower: "the Zamzam Tower", brand: "Pullman", about: "Pullman ZamZam Makkah is in the Zamzam Tower of the Clock Towers complex.", pickup: "Do not confuse it with Pullman Zamzam Madinah, which is a different hotel in another city. Name Makkah when you book.", q: "Is this the same as Pullman Zamzam in Madinah?", a: "No. This page is for the Makkah hotel in the Zamzam Tower. The Madinah hotel is a separate property." },
+  { slug: "swissotel-al-maqam-makkah", name: "Swissôtel Al Maqam Makkah", short: "Swissôtel Al Maqam", tower: "the Al Maqam Tower", brand: "Swissôtel", about: "Swissôtel Al Maqam Makkah is in the Al Maqam Tower of the Clock Towers complex.", pickup: "Swissôtel runs two hotels in the complex. Say Al Maqam so you are not taken to the other one.", q: "How is it different from Swissôtel Makkah?", a: "They are two hotels in different towers of the same complex: this one is in the Al Maqam Tower, the other in the Qibla Tower." },
+  { slug: "swissotel-makkah", name: "Swissôtel Makkah", short: "Swissôtel Makkah", tower: "the Qibla Tower", brand: "Swissôtel", about: "Swissôtel Makkah is in the Qibla Tower of the Clock Towers complex, with an entrance on Ajyad Street.", pickup: "Mention the Qibla Tower and Ajyad Street entrance so the driver and you agree the same drop-off point.", q: "Which entrance does the driver use?", a: "The hotel has an entrance on Ajyad Street. The exact drop-off point is agreed with you, since access near the Haram is controlled." },
+  { slug: "raffles-makkah-palace", name: "Raffles Makkah Palace", short: "Raffles Makkah Palace", tower: "the Al Safa Tower", brand: "Raffles", about: "Raffles Makkah Palace is in the Al Safa Tower, and the hotel describes itself as about a five-minute walk from the Haram.", pickup: "Name the Al Safa Tower, and expect the last stretch to the Haram to be on foot.", q: "How far is it from the Haram?", a: "The hotel itself says about a five-minute walk. We do not add a distance of our own." },
+  { slug: "al-marwa-rayhaan-by-rotana", name: "Al Marwa Rayhaan by Rotana", short: "Al Marwa Rayhaan", tower: "the Marwah Tower", brand: "Rotana", about: "Al Marwa Rayhaan by Rotana is in the Marwah Tower of the Clock Towers complex.", pickup: "Say Marwah Tower with the hotel name when you send the pickup details.", q: "Which tower is Al Marwa Rayhaan in?", a: "The Marwah Tower, part of the Clock Towers complex beside the Haram." },
+];
+
+const clockHotelPages: PlacePage[] = clockHotels.map((h) => {
+  const slug = `jeddah-airport-to-${h.slug}`;
+  const others = clockHotels.filter((x) => x.slug !== h.slug);
+  return page({
+    slug,
+    name: `Jeddah Airport and ${h.short}`,
+    title: `Jeddah Airport to ${h.short}, Makkah: Taxi Both Ways`,
+    description: `Taxi from Jeddah airport (JED) to ${h.name} in Makkah, and back to the airport. Flight details first, fare confirmed before you commit.`,
+    h1: `Jeddah Airport and ${h.short} Taxi, Both Ways`,
+    lead: `${h.name} is in ${h.tower} of the Clock Towers complex. The drive from JED is about ${KM_JED_MAKKAH} km by road.`,
+    direct: `Gulf Elite Transport arranges taxi and car transfers from King Abdulaziz International Airport (JED) in Jeddah to ${h.name} in Makkah, and from the hotel back to the airport. The drive is about ${KM_JED_MAKKAH} km by road (approximate). Send your flight number, passengers and bags; the vehicle, driver and fare are confirmed before you commit.`,
+    facts: [
+      { label: "Route", value: `Jeddah airport (JED) to ${h.short}` },
+      { label: "Hotel", value: `${h.name} (${h.brand})` },
+      { label: "Location", value: `${h.tower}, Clock Towers complex, Makkah` },
+      { label: "Road distance", value: `about ${KM_JED_MAKKAH} km to Makkah (approximate)` },
+      { label: "Direction", value: "Both ways, including the return to JED" },
+    ],
+    sections: [
+      { id: "about", h2: `Arriving at ${h.short}`, kind: "text", paragraphs: [`${h.about} The complex is about 300 metres from the Haram, and the drive from King Abdulaziz International Airport is about ${KM_JED_MAKKAH} km by road, mostly on the highway between Jeddah and Makkah. The time depends on when you land and on traffic near the Haram, so no journey time is promised.`, "Immigration and baggage can take a while on busy days, so send your flight number rather than a fixed time. The driver follows your flight and meets you at the agreed point."] },
+      { id: "pickup", h2: "Pickup and drop-off at this hotel", kind: "items", items: [
+        { title: "Tell us the exact hotel", text: h.pickup },
+        { title: "Drop-off near the Haram", text: "Access around the Haram is controlled, so the final drop-off point is set by road controls and agreed with you." },
+        { title: "Going back to JED", text: "For the return, send the flight time and the hotel name. We plan the pickup time from your departure, with a margin for traffic and check-in." },
+      ] },
+      { id: "faq", h2: `${h.short}: questions`, kind: "faq", items: [
+        { q: h.q, a: h.a },
+        { q: "Can I book the ride from the hotel to the airport on this page?", a: "Yes. This page covers both directions between JED and the hotel." },
+        { q: "Do you publish fares?", a: "No. The fare is confirmed with you before you commit." },
+      ] },
+      related([
+        { name: "Jeddah airport to Makkah", href: `${UMRAH_BASE}/jeddah-airport-to-makkah`, note: "Route guide" },
+        { name: "Abraj Al Bait and Jabal Omar hotels", href: `${UMRAH_BASE}/abraj-al-bait-jabal-omar-taxi`, note: "Hotel cluster" },
+        L.jed,
+        ...others.slice(0, 3).map((x) => ({ name: `Jeddah airport and ${x.short}`, href: `${UMRAH_BASE}/jeddah-airport-to-${x.slug}`, note: "Hotel transfer" })),
+        L.hub,
+      ]),
+    ],
+    entities: [{ type: "Place" as const, name: `${h.name}, Makkah` }, makkahE, jeddahE, country],
+    route: { from: "Jeddah airport (JED)", to: h.short, km: KM_JED_MAKKAH },
+    prefill: { pickup: "Jeddah airport (JED)", dropoff: h.name },
+  });
+});
+
+export const umrahPages: PlacePage[] = [hub, ...topics, ...moreTopics, miqatPage, hotelPageMadinah, makkahAreasPage, ...spotPages, ...vehiclePages, ...clockHotelPages];
