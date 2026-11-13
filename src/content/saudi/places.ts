@@ -483,6 +483,16 @@ export const routes: Route[] = [
     tips: ["Tell us if you are going to Al Hada, as the roads are steeper.", "Fog and weather can slow the climb."],
   },
   {
+    id: "makkah-to-yanbu",
+    from: "makkah",
+    to: "yanbu",
+    km: 375,
+    about:
+      "Makkah to Yanbu joins the holy city to the Red Sea coast and is one of the longer rides we arrange, about 375 km by road according to public routing sources (they range from 347 to 376 km). Yanbu has its own airport, so the ride is also asked for by people flying into Yanbu who are going to Makkah, and by those returning.",
+    riders: ["Pilgrims flying into Yanbu airport who continue to Makkah", "Workers and contractors for Yanbu Industrial City", "Families visiting relatives on the coast"],
+    tips: ["Say whether you start at Yanbu airport, the old town or the industrial city, as they are separate places.", "Industrial sites need passes arranged in advance.", "Plan a rest stop on this long ride."],
+  },
+  {
     id: "madinah-to-yanbu",
     from: "madinah",
     to: "yanbu",

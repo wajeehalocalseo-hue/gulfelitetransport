@@ -2183,6 +2183,60 @@ const taifPages: PlacePage[] = taifHotels.map((h) => {
   });
 });
 
+// One page for the Taif airport to Makkah route itself, both directions. The 51 hotel pages above sit under it.
+const taifAirportMakkahPage = page({
+  slug: "taif-airport-to-makkah",
+  name: "Taif Airport to Makkah",
+  title: "Taif Airport to Makkah Taxi: Private Transfer for Umrah",
+  description: `Private taxi from Taif airport (TIF) to your Makkah hotel, about ${KM_TIF_MAKKAH} km, and back. Fare confirmed before you commit.`,
+  h1: "Taif Airport and Makkah Hotel Taxi, Both Ways",
+  lead: `Taif International Airport to Makkah is about ${KM_TIF_MAKKAH} km by road. We confirm the car, driver and fare before you commit.`,
+  direct: `Gulf Elite Transport arranges taxi and car transfers from Taif International Airport (TIF) to hotels in Makkah, and from Makkah back to the airport, for individuals, families and groups. The road is about ${KM_TIF_MAKKAH} km (approximate, from two public routing sources). Send your flight number, passengers, bags and your Makkah hotel; the vehicle, driver and fare are confirmed before you commit.`,
+  facts: [
+    { label: "Route", value: "Taif airport (TIF) to Makkah" },
+    { label: "Road distance", value: `about ${KM_TIF_MAKKAH} km (approximate)` },
+    { label: "Airport", value: "About 30 km east of Taif" },
+    { label: "Direction", value: "Both ways, including the return to TIF" },
+  ],
+  sections: [
+    { id: "about", h2: "From Taif airport to your Makkah hotel", kind: "text", paragraphs: [
+      `Taif International Airport serves the mountain city of Taif and lies about 30 km east of it. The road from the airport to Makkah is about ${KM_TIF_MAKKAH} km by road, longer than the roughly ${km("makkah-to-taif")} km between the two city centres, because the airport is on the far side of Taif. The road between Taif and Makkah is mountainous in sections, so we plan it with a rested driver and no promised journey time.`,
+      "Flights at Taif change often, so send your flight number rather than a fixed pickup time. The driver follows your arrival and meets you at the agreed point.",
+    ] },
+    { id: "ihram", h2: "Entering ihram on the way", kind: "text", paragraphs: ["Pilgrims coming up from the Taif side commonly enter ihram at Qarn al-Manazil, the Miqat on the Taif to Makkah road. Tell us when you book if you want the stop built into the ride."] },
+    { id: "tell", h2: "What to tell us", kind: "items", items: [
+      { title: "Flight and group", text: "Airline, flight number, arrival date, number of passengers and large bags." },
+      { title: "Your Makkah hotel", text: "The full hotel name. Fifty-one hotels have their own page below, grouped by area; for any other hotel, send the name and street." },
+      { title: "The way back", text: "For the ride from Makkah to TIF send your flight time and hotel. The pickup time allows for the long road and traffic in Makkah." },
+    ] },
+    { id: "hotels", h2: "Taif airport to your Makkah hotel", kind: "links", intro: "One page per hotel, covering the ride from TIF and the ride back.", items: taifPages.map((p) => ({ name: p.name.replace(/^Taif Airport and /, ""), href: p.path, note: "Taxi both ways" })) },
+    related([
+      { name: "Makkah to Taif route (city to city)", href: `${TAXI}/routes/makkah-to-taif`, note: "Route guide" },
+      { name: "Qarn al-Manazil Miqat", href: `${UMRAH_BASE}/qarn-al-manazil-miqat-taxi`, note: "Miqat on the Taif road" },
+      { name: "Taif International Airport (TIF)", href: TIF, note: "Airport guide" },
+      { name: "Jeddah airport to Makkah", href: `${UMRAH_BASE}/jeddah-airport-to-makkah`, note: "The other airport route" },
+      L.makkah,
+      L.hub,
+    ]),
+    { id: "faq", h2: "Taif airport to Makkah: questions", kind: "faq", items: [
+      { q: "How far is Taif airport from Makkah?", a: `About ${KM_TIF_MAKKAH} km by road. Two public routing sources give 111 and 113 km; the exact route is confirmed for your request.` },
+      { q: "Is this the same as Taif city to Makkah?", a: "No. Taif city to Makkah is a shorter ride, and has its own route page. This page starts at Taif International Airport." },
+      { q: "Does this page cover the ride back to Taif airport?", a: "Yes. One page covers both directions between TIF and Makkah." },
+      { q: "Do you publish fares?", a: "No. The fare is confirmed with you before you commit." },
+    ] },
+  ],
+  entities: [{ type: "Airport" as const, name: "Taif International Airport", iata: "TIF" }, makkahE, { type: "City" as const, name: "Taif", wiki: "Taif", ar: "الطائف", lat: 21.2703, lng: 40.4158 }, country],
+  route: { from: "Taif airport (TIF)", to: "Makkah", km: KM_TIF_MAKKAH },
+  prefill: { pickup: "Taif airport (TIF)", dropoff: "Makkah hotel" },
+});
+taifPages.forEach((p) => {
+  const links = p.sections.find((x) => x.id === "links");
+  if (links && links.kind === "links") links.items.unshift({ name: "Taif airport to Makkah (all hotels)", href: taifAirportMakkahPage.path, note: "Route guide" });
+});
+const hubPages = hub.sections.find((x) => x.id === "pages");
+if (hubPages && hubPages.kind === "links") hubPages.items.push({ name: taifAirportMakkahPage.name, href: taifAirportMakkahPage.path, note: taifAirportMakkahPage.lead.slice(0, 68).trimEnd().replace(/[,.\s]+\S*$/, "") + "..." });
+hub.children.push({ name: taifAirportMakkahPage.name, path: taifAirportMakkahPage.path });
+
 // People ask for the same ride in many ways (private transfer, private car, 7 seater, 12 seater, Haram, Clock Tower, Jabal Omar).
 // Those are answered once, on the page that already covers the route, instead of on near-identical pages.
 const insertBeforeFaq = (p: PlacePage, s: Section) => {
@@ -2262,4 +2316,4 @@ hub.sections.splice(
 hub.children.push(...jeddahHotelPages, ...taifPages);
 hub.children = hub.children.map((c) => ("path" in c ? { name: c.name, path: c.path } : c));
 
-export const umrahPages: PlacePage[] = [hub, ...topics, ...moreTopics, miqatPage, hotelPageMadinah, makkahAreasPage, ...spotPages, ...vehiclePages, ...clockHotelPages, ...otherHotelPages, ...taifPages];
+export const umrahPages: PlacePage[] = [hub, ...topics, ...moreTopics, miqatPage, hotelPageMadinah, makkahAreasPage, ...spotPages, ...vehiclePages, ...clockHotelPages, ...otherHotelPages, ...taifPages, taifAirportMakkahPage];
