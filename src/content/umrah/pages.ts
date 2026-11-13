@@ -140,8 +140,8 @@ const topics: PlacePage[] = [
   page({
     slug: "jeddah-airport-to-makkah",
     name: "Jeddah Airport to Makkah",
-    title: "Jeddah Airport (JED) and Makkah Hotel Taxi, Both Ways",
-    description: "Taxi from Jeddah airport (JED) to your Makkah hotel for Umrah or Hajj visitors: any group size, flight details first, fare confirmed before you commit.",
+    title: "Jeddah Airport to Makkah Taxi: Private Transfer for Umrah",
+    description: "Private taxi from Jeddah airport (JED) to your Makkah hotel for Umrah and Hajj visitors, and back. Any group size; fare confirmed before you commit.",
     h1: "Jeddah Airport and Makkah Hotel Taxi, Both Ways",
     lead: `The usual first leg of an Umrah trip, about ${KM_JED_MAKKAH} km by road. We confirm the car, driver and fare before you commit.`,
     direct: `Gulf Elite Transport arranges taxi and car transfers from King Abdulaziz International Airport in Jeddah to hotels in Makkah, for individuals, families and larger groups. Send your flight number, the number of passengers and bags, and the name of your Makkah hotel. The vehicle, driver and fare are confirmed with you before you commit.`,
@@ -1947,8 +1947,8 @@ const clockHotelPages: PlacePage[] = clockHotels.map((h) => {
   return page({
     slug,
     name: `Jeddah Airport and ${h.short}`,
-    title: `Jeddah Airport to ${h.short}, Makkah: Taxi Both Ways`,
-    description: `Taxi from Jeddah airport (JED) to ${h.name} in Makkah, and back to the airport. Flight details first, fare confirmed before you commit.`,
+    title: `Jeddah Airport to ${h.short}: Private Taxi`,
+    description: `Private taxi from Jeddah airport (JED) to ${h.name} in the Clock Towers, Makkah, and back to JED. Fare confirmed before you commit.`,
     h1: `Jeddah Airport and ${h.short} Taxi, Both Ways`,
     lead: `${h.name} is in ${h.tower} of the Clock Towers complex. The drive from JED is about ${KM_JED_MAKKAH} km by road.`,
     direct: `Gulf Elite Transport arranges taxi and car transfers from King Abdulaziz International Airport (JED) in Jeddah to ${h.name} in Makkah, and from the hotel back to the airport. The drive is about ${KM_JED_MAKKAH} km by road (approximate). Send your flight number, passengers and bags; the vehicle, driver and fare are confirmed before you commit.`,
@@ -1989,27 +1989,31 @@ const clockHotelPages: PlacePage[] = clockHotels.map((h) => {
 // Where listings disagree on a detail (postal code, building number) it is left out. No distances to the Haram are given.
 type Area = "jabalomar" | "ajyad" | "aziziyah" | "naseem";
 type OtherHotel = { slug: string; name: string; short: string; area: Area; where: string; extra?: { q: string; a: string } };
-const areaInfo: Record<Area, { label: string; cluster: { name: string; href: string; note: string }; ride: string; tip: string }> = {
+const areaInfo: Record<Area, { label: string; short: string; cluster: { name: string; href: string; note: string }; ride: string; tip: string }> = {
   jabalomar: {
     label: "the Jabal Omar development",
+    short: "Jabal Omar",
     cluster: { name: "Abraj Al Bait and Jabal Omar hotels", href: `${UMRAH_BASE}/abraj-al-bait-jabal-omar-taxi`, note: "Hotel cluster" },
     ride: "Jabal Omar is on the Haram side of the city, so the last stretch to your hotel is set by road controls and the drop-off is often a short walk from the entrance.",
     tip: "Give the full hotel name; several hotels in Jabal Omar have similar names and entrances on different sides.",
   },
   ajyad: {
     label: "the Ajyad area near the Haram",
+    short: "Ajyad",
     cluster: { name: "Abraj Al Bait and Jabal Omar hotels", href: `${UMRAH_BASE}/abraj-al-bait-jabal-omar-taxi`, note: "Hotel cluster" },
     ride: "Hotels around Ajyad Street are among the closest to the Haram. Roads here are crowded with pedestrians, so the driver stops at the nearest permitted point and you walk the rest.",
     tip: "Send the hotel name and, if you have it, the nearest Haram gate, so the driver and you agree one drop-off point.",
   },
   aziziyah: {
     label: "Al Aziziyah",
+    short: "Al Aziziyah",
     cluster: { name: "Aziziyah to the Haram taxi", href: `${UMRAH_BASE}/aziziyah-to-haram-taxi`, note: "District guide" },
     ride: "Al Aziziyah is a large hotel district away from the Haram, so most guests need a ride for every visit. Arranging the airport ride and the Haram rides together keeps the plan simple.",
     tip: "Aziziyah has many hotels with similar names. Send the exact hotel name and the street shown on your booking.",
   },
   naseem: {
     label: "Al Naseem and the outer ring roads",
+    short: "Al Naseem area",
     cluster: { name: "Makkah hotel areas and rides", href: `${UMRAH_BASE}/makkah-hotel-areas-taxi`, note: "Area guide" },
     ride: "These hotels are on the ring roads away from the Haram, so the drive from Jeddah is straightforward but each visit to the Haram needs a ride.",
     tip: "Send the hotel name and the road on your booking, since the same brand can have several hotels in Makkah.",
@@ -2070,8 +2074,8 @@ const otherHotelPages: PlacePage[] = otherHotels.map((h) => {
   return page({
     slug,
     name: `Jeddah Airport and ${h.short}`,
-    title: `Jeddah Airport to ${h.short}, Makkah: Taxi Both Ways`,
-    description: `Taxi from Jeddah airport (JED) to ${h.name} in Makkah, and back to the airport. Flight details first, fare confirmed before you commit.`,
+    title: `Jeddah Airport to ${h.short}: Private Taxi`,
+    description: `Private taxi from Jeddah airport (JED) to ${h.name}, ${a.short}, Makkah, and back to JED. Fare confirmed before you commit.`,
     h1: `Jeddah Airport and ${h.short} Taxi, Both Ways`,
     lead: `${h.name} is in ${a.label}. The drive from JED to Makkah is about ${KM_JED_MAKKAH} km by road.`,
     direct: `Gulf Elite Transport arranges taxi and car transfers from King Abdulaziz International Airport (JED) in Jeddah to ${h.name} in Makkah, and from the hotel back to the airport. The drive to Makkah is about ${KM_JED_MAKKAH} km by road (approximate), and the final distance depends on the hotel and the road controls. Send your flight number, passengers and bags; the vehicle, driver and fare are confirmed before you commit.`,
@@ -2116,6 +2120,7 @@ const TIF = `${TAXI}/airports/taif-international-airport`;
 type AnyHotel = { slug: string; name: string; short: string; area: Area | "tower"; where: string; tip?: string; extra?: { q: string; a: string } };
 const towerInfo = {
   label: "the Clock Towers complex beside the Haram",
+  short: "Clock Towers",
   cluster: { name: "Abraj Al Bait and Jabal Omar hotels", href: `${UMRAH_BASE}/abraj-al-bait-jabal-omar-taxi`, note: "Hotel cluster" },
   ride: "The complex is about 300 metres from the Haram, and the last stretch to it is set by road controls, so the drop-off is agreed with you.",
   tip: "Tell us the hotel name and tower so the driver heads for the right entrance.",
@@ -2133,8 +2138,8 @@ const taifPages: PlacePage[] = taifHotels.map((h) => {
   return page({
     slug,
     name: `Taif Airport and ${h.short}`,
-    title: `Taif Airport to ${h.short}, Makkah: Taxi Both Ways`,
-    description: `Taxi from Taif International Airport (TIF) to ${h.name} in Makkah, and back to the airport. Flight details first, fare confirmed before you commit.`,
+    title: `Taif Airport to ${h.short}: Private Taxi`,
+    description: `Private taxi from Taif airport (TIF) to ${h.name}, ${a.short}, Makkah, about ${KM_TIF_MAKKAH} km, and back to TIF. Fare confirmed before you commit.`,
     h1: `Taif Airport and ${h.short} Taxi, Both Ways`,
     lead: `${h.name} is in ${a.label}. The road from Taif International Airport (TIF) to Makkah is about ${KM_TIF_MAKKAH} km.`,
     direct: `Gulf Elite Transport arranges taxi and car transfers from Taif International Airport (TIF) to ${h.name} in Makkah, and from the hotel back to the airport. The road to Makkah is about ${KM_TIF_MAKKAH} km (approximate); the final distance depends on the hotel and the road controls. Send your flight number, passengers and bags; the vehicle, driver and fare are confirmed before you commit.`,
