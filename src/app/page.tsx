@@ -118,7 +118,15 @@ export default function Home() {
               <Icon name="shield" className="h-4 w-4 text-accent" /> {c.hero.fareChip}
             </p>
           </div>
-          <BookingCard className="w-full max-w-xl justify-self-end lg:max-w-none" />
+          <div className="w-full max-w-xl justify-self-end lg:max-w-none">
+            <BookingCard service="Taxi & Cab Services" className="w-full" />
+            <p className="mt-3 text-center text-sm text-white/80">
+              Moving freight, equipment or a fleet?{" "}
+              <Link href="/contact" className="font-semibold text-accent underline underline-offset-4">
+                Request a quotation
+              </Link>
+            </p>
+          </div>
         </div>
       </section>
 
