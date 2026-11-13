@@ -1,8 +1,8 @@
 name: Search Console daily export
 
 on:
-  schedule:
-    - cron: "30 5 * * *"
+  # The daily schedule is off until the Search Console secrets are added (see docs/gsc-setup.md).
+  # To turn it on again, add under "on:":  schedule:  - cron: "30 5 * * *"
   workflow_dispatch:
 
 permissions:
