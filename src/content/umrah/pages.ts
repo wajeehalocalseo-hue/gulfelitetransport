@@ -1424,7 +1424,7 @@ withExtra("abraj-al-bait-jabal-omar-taxi", [
     intro: "Listed by name for pickup requests. Exact entrances and distances are confirmed when you ask; send us the hotel name and we agree the pickup road.",
     items: [
       { title: "Jabal Omar development", text: "Hilton Suites Makkah, Hilton Makkah Convention Hotel, Conrad Makkah, Hyatt Regency Makkah, Jabal Omar Marriott and DoubleTree by Hilton Jabal Omar." },
-      { title: "Ajyad Street area", text: "Anjum Hotel Makkah, Le Méridien Towers Makkah, Makarem Ajyad Makkah and Elaf Kinda Hotel." },
+      { title: "Around Ajyad Street and the Haram", text: "Makarem Ajyad Makkah on Ajyad Street, Anjum Hotel Makkah on Umm Al Qura Street, Elaf Kinda Hotel on Al Misyal Street and Le Méridien Towers Makkah on Kudai Road." },
     ],
   },
 ]);
@@ -1985,4 +1985,127 @@ const clockHotelPages: PlacePage[] = clockHotels.map((h) => {
   });
 });
 
-export const umrahPages: PlacePage[] = [hub, ...topics, ...moreTopics, miqatPage, hotelPageMadinah, makkahAreasPage, ...spotPages, ...vehiclePages, ...clockHotelPages];
+// Other Makkah hotels: street and district are as given by the hotel's own site or by several public listings that agree.
+// Where listings disagree on a detail (postal code, building number) it is left out. No distances to the Haram are given.
+type Area = "jabalomar" | "ajyad" | "aziziyah" | "naseem";
+type OtherHotel = { slug: string; name: string; short: string; area: Area; where: string; extra?: { q: string; a: string } };
+const areaInfo: Record<Area, { label: string; cluster: { name: string; href: string; note: string }; ride: string; tip: string }> = {
+  jabalomar: {
+    label: "the Jabal Omar development",
+    cluster: { name: "Abraj Al Bait and Jabal Omar hotels", href: `${UMRAH_BASE}/abraj-al-bait-jabal-omar-taxi`, note: "Hotel cluster" },
+    ride: "Jabal Omar is on the Haram side of the city, so the last stretch to your hotel is set by road controls and the drop-off is often a short walk from the entrance.",
+    tip: "Give the full hotel name; several hotels in Jabal Omar have similar names and entrances on different sides.",
+  },
+  ajyad: {
+    label: "the Ajyad area near the Haram",
+    cluster: { name: "Abraj Al Bait and Jabal Omar hotels", href: `${UMRAH_BASE}/abraj-al-bait-jabal-omar-taxi`, note: "Hotel cluster" },
+    ride: "Hotels around Ajyad Street are among the closest to the Haram. Roads here are crowded with pedestrians, so the driver stops at the nearest permitted point and you walk the rest.",
+    tip: "Send the hotel name and, if you have it, the nearest Haram gate, so the driver and you agree one drop-off point.",
+  },
+  aziziyah: {
+    label: "Al Aziziyah",
+    cluster: { name: "Aziziyah to the Haram taxi", href: `${UMRAH_BASE}/aziziyah-to-haram-taxi`, note: "District guide" },
+    ride: "Al Aziziyah is a large hotel district away from the Haram, so most guests need a ride for every visit. Arranging the airport ride and the Haram rides together keeps the plan simple.",
+    tip: "Aziziyah has many hotels with similar names. Send the exact hotel name and the street shown on your booking.",
+  },
+  naseem: {
+    label: "Al Naseem and the outer ring roads",
+    cluster: { name: "Makkah hotel areas and rides", href: `${UMRAH_BASE}/makkah-hotel-areas-taxi`, note: "Area guide" },
+    ride: "These hotels are on the ring roads away from the Haram, so the drive from Jeddah is straightforward but each visit to the Haram needs a ride.",
+    tip: "Send the hotel name and the road on your booking, since the same brand can have several hotels in Makkah.",
+  },
+};
+const otherHotels: OtherHotel[] = [
+  { slug: "address-jabal-omar-makkah", name: "Address Jabal Omar Makkah", short: "Address Jabal Omar", area: "jabalomar", where: "Prince Mohammed Bin Salman Road, Ash Shubaikah District, per the hotel's own site", extra: { q: "Is this the same hotel as Jumeirah Jabal Omar?", a: "No. They are different hotels, with different addresses and phone numbers, in the Jabal Omar development." } },
+  { slug: "jumeirah-jabal-omar-makkah", name: "Jumeirah Jabal Omar Makkah", short: "Jumeirah Jabal Omar", area: "jabalomar", where: "Ibrahim Al Khalil Road, Ash Shubaikah District; reported open since early 2024" },
+  { slug: "conrad-makkah-jabal-omar", name: "Conrad Makkah Jabal Omar", short: "Conrad Makkah", area: "jabalomar", where: "Ibrahim Al Khalil, Jabal Omar, across from the King Fahd Gate side of the Haram, per public listings" },
+  { slug: "hyatt-regency-makkah-jabal-omar", name: "Jabal Omar Hyatt Regency Makkah", short: "Hyatt Regency Makkah", area: "jabalomar", where: "Ibrahim Al Khalil Street, Jabal Omar, on the King Fahd Gate side, per public listings" },
+  { slug: "hilton-suites-makkah-jabal-omar", name: "Hilton Suites Makkah (Jabal Omar)", short: "Hilton Suites Makkah", area: "jabalomar", where: "Ibrahim Al Khalil Road, Jabal Omar" },
+  { slug: "doubletree-by-hilton-makkah-jabal-omar", name: "DoubleTree by Hilton Makkah Jabal Omar", short: "DoubleTree Jabal Omar", area: "jabalomar", where: "Ash Shubaikah, Jabal Omar; public listings mention a shuttle to the Haram, which you should confirm with the hotel" },
+  { slug: "jabal-omar-marriott-makkah", name: "Jabal Omar Marriott Hotel Makkah", short: "Jabal Omar Marriott", area: "jabalomar", where: "Umm Al Qura Street, Makkah (Marriott property code QCAMC); the exact street number differs between listings" },
+  { slug: "intercontinental-dar-al-tawhid-makkah", name: "InterContinental Dar Al Tawhid Makkah", short: "InterContinental Dar Al Tawhid", area: "jabalomar", where: "Ibrahim Al Khalil Road, Makkah" },
+  { slug: "voco-makkah", name: "voco Makkah by IHG", short: "voco Makkah", area: "jabalomar", where: "Ibrahim Al Khalil Street, Al Mesfalah, Makkah" },
+  { slug: "palestine-hotel-makkah", name: "Palestine Hotel Makkah", short: "Palestine Hotel", area: "jabalomar", where: "Ibrahim Al Khalil Street, Makkah" },
+  { slug: "anjum-makkah-hotel", name: "Anjum Hotel Makkah", short: "Anjum Makkah", area: "ajyad", where: "Umm Al Qura Street beside the King Abdullah wing of the Haram, per the hotel's own site (some listings place it in Ajyad)" },
+  { slug: "makarem-ajyad-makkah-hotel", name: "Makarem Ajyad Makkah Hotel", short: "Makarem Ajyad", area: "ajyad", where: "Ajyad Street, towards the King Abdul Aziz Gate, per public listings" },
+  { slug: "makarem-umm-al-qura-hotel", name: "Makarem Umm Al Qura Hotel", short: "Makarem Umm Al Qura", area: "ajyad", where: "Ajyad Street, per public listings", extra: { q: "How is it different from Makarem Ajyad?", a: "They are two Makarem hotels with different names and listings. Tell us which one is on your booking." } },
+  { slug: "elaf-kinda-hotel", name: "Elaf Kinda Hotel", short: "Elaf Kinda", area: "ajyad", where: "Al Misyal Street, close to the Haram, per the hotel's own site" },
+  { slug: "le-meridien-towers-makkah", name: "Le Méridien Towers Makkah", short: "Le Méridien Towers", area: "ajyad", where: "Kudai Road, with a tunnel link to the King Abdulaziz Gate side of the Haram, per Marriott's listing; Ajyad Road is an access route", extra: { q: "Is it on Ajyad Street?", a: "No. The hotel is on Kudai Road; Ajyad Road is only one of the ways to reach it." } },
+  { slug: "al-ghufran-safwah-hotel-makkah", name: "Al Ghufran Safwah Hotel Makkah", short: "Al Ghufran Safwah", area: "ajyad", where: "Safwa Towers, Ajyad Street, in front of King Abdulaziz Gate, per public listings" },
+  { slug: "al-safwah-orchid-makkah", name: "Al Safwah Orchid (Al Safwah Royale Orchid)", short: "Al Safwah Orchid", area: "ajyad", where: "Al Safwah Towers, Ajyad Street, facing King Abdul Aziz Gate, per public listings", extra: { q: "Is it the same as Al Safwah Hotel First Tower?", a: "Listings place both in the Al Safwah Towers by King Abdul Aziz Gate and some treat the names as one property. Send us the name on your booking and we plan from that." } },
+  { slug: "al-massa-grand-hotel-makkah", name: "Al Massa Grand Hotel", short: "Al Massa Grand", area: "ajyad", where: "Ajyad Street, per public listings; the building number differs between them" },
+  { slug: "al-shohada-by-palm-rich-makkah", name: "Al Shohada by Palm Rich Makkah", short: "Al Shohada", area: "ajyad", where: "Ajyad Street, per public listings" },
+  { slug: "mira-ajyad-hotel-makkah", name: "Mira Ajyad Hotel", short: "Mira Ajyad", area: "ajyad", where: "Ajyad Street, per public listings" },
+  { slug: "nawazi-towers-hotel-makkah", name: "Nawazi Towers Hotel", short: "Nawazi Towers", area: "ajyad", where: "Ajyad Street, per public listings" },
+  { slug: "batoul-ajyad-hotel-makkah", name: "Batoul Ajyad Hotel", short: "Batoul Ajyad", area: "ajyad", where: "Ajyad Street, per public listings" },
+  { slug: "lamar-ajyad-first-hotel-tower-a", name: "Lamar Ajyad First Hotel Tower A", short: "Lamar Ajyad Tower A", area: "ajyad", where: "Ajyad Street, per public listings" },
+  { slug: "sheraton-makkah-jabal-al-kaaba", name: "Sheraton Makkah Jabal Al Kaaba", short: "Sheraton Jabal Al Kaaba", area: "ajyad", where: "Jabal Al Kaaba, Makkah; listings mention a pedestrian bridge to the Haram that has been reported closed during expansion work" },
+  { slug: "tilal-jabal-al-kabah-hotel", name: "Tilal Jabal Al Kabah Hotel", short: "Tilal Jabal Al Kabah", area: "ajyad", where: "Jabal Al Kaabah, Makkah; also listed under its former name, Shaza Makkah" },
+  { slug: "holiday-suites-al-azizia", name: "Holiday Suites Al Azizia", short: "Holiday Suites Al Azizia", area: "aziziyah", where: "Masjid Ash Shaikh Bin Baz street, Al Aziziyah, per public listings", extra: { q: "Is it the same as Holiday Inn Makkah Al Aziziah?", a: "No. They are separate hotels, although some listings group them. Tell us the name on your booking." } },
+  { slug: "makkah-al-aziziah-hotel", name: "Makkah Al Aziziah Hotel (IHG)", short: "Makkah Al Aziziah", area: "aziziyah", where: "Masjid Ash Shaikh Bin Baz street, Al Aziziyah; listings link it to the IHG Holiday Inn brand and give slightly different building numbers" },
+  { slug: "park-inn-by-radisson-makkah-aziziyah", name: "Park Inn by Radisson Makkah Aziziyah", short: "Park Inn Aziziyah", area: "aziziyah", where: "Al Masjid Al Haram Road, Aziziyah, per Radisson's listings" },
+  { slug: "doubletree-by-hilton-makkah-aziziyah", name: "DoubleTree by Hilton Makkah Aziziyah", short: "DoubleTree Aziziyah", area: "aziziyah", where: "Aziziyah, Makkah; listings give both Al Masjid Al Haram Road and King Khalid Road for the street" },
+  { slug: "midan-hotel-suites-al-aziziyah", name: "Midan Hotel & Suites Al Aziziyah", short: "Midan Hotel Aziziyah", area: "aziziyah", where: "South Aziziyah, listed on Al Sail Road or Taif Road depending on the listing" },
+  { slug: "violet-al-azizia-hotel", name: "Violet Al Azizia Hotel", short: "Violet Al Azizia", area: "aziziyah", where: "Haram Street, Al Aziziyah, per public listings" },
+  { slug: "ibis-styles-makkah", name: "ibis Styles Makkah", short: "ibis Styles Makkah", area: "aziziyah", where: "4490 King Fahd Road, Al Maabdaah, Al Azizia, per Accor's listing" },
+  { slug: "hotel-21-makkah", name: "Hotel 21 Makkah", short: "Hotel 21", area: "aziziyah", where: "Al Masjid Al Haram Road, Al Mursalat district; the building number differs between listings" },
+  { slug: "m-hotel-al-dana-makkah-by-millennium", name: "M Hotel Al Dana Makkah by Millennium", short: "M Hotel Al Dana", area: "aziziyah", where: "Prince Majed Bin Abdulaziz Road, Ar Rawdah / Al Aziziyah" },
+  { slug: "afraa-hotel-makkah", name: "Afraa Hotel", short: "Afraa Hotel", area: "aziziyah", where: "Al Aziziyah, Makkah; listings differ on the street" },
+  { slug: "elaf-bakkah-hotel", name: "Elaf Bakkah Hotel", short: "Elaf Bakkah", area: "aziziyah", where: "Al Rahmah Street, Mahbas Al Jin, Al Aziziyah, per public listings" },
+  { slug: "ramada-by-wyndham-makkah-zad-al-rawda", name: "Ramada by Wyndham Makkah Zad Al Rawda", short: "Ramada Zad Al Rawda", area: "aziziyah", where: "King Khalid Road, Ar Rawdah, per Wyndham's listing", extra: { q: "How is it different from Ramada Zad Al Tayseer?", a: "They are two Ramada hotels on different roads: this one on King Khalid Road, the other on Bir Tawa Street." } },
+  { slug: "ramada-by-wyndham-makkah-zad-al-tayseer", name: "Ramada by Wyndham Makkah Zad Al Tayseer", short: "Ramada Zad Al Tayseer", area: "aziziyah", where: "Bir Tawa Street, near Makkah Station, per Wyndham's listing" },
+  { slug: "four-points-by-sheraton-makkah-al-naseem", name: "Four Points by Sheraton Makkah Al Naseem", short: "Four Points Al Naseem", area: "naseem", where: "Third Ring Road, behind Al Rajhi Mosque, Al Naseem District" },
+  { slug: "millennium-makkah-al-naseem", name: "Millennium Makkah Al Naseem", short: "Millennium Al Naseem", area: "naseem", where: "Taif Road, Al Naseem Complex" },
+  { slug: "park-inn-by-radisson-makkah-al-naseem", name: "Park Inn by Radisson Makkah Al Naseem", short: "Park Inn Al Naseem", area: "naseem", where: "Land Plot 954/2, Al Naseem District, in the Al Rajhi complex, per Radisson's listing" },
+  { slug: "park-inn-by-radisson-makkah-thakher-alsharqi", name: "Park Inn by Radisson Makkah Thakher Alsharqi", short: "Park Inn Thakher Alsharqi", area: "naseem", where: "4615 Thakher East, Al Jummayzah District, per Radisson's listing" },
+  { slug: "novotel-makkah-thakher-city", name: "Novotel Makkah Thakher City", short: "Novotel Thakher City", area: "naseem", where: "Al Andalus District, Thakher City, Makkah" },
+];
+
+const otherHotelPages: PlacePage[] = otherHotels.map((h) => {
+  const a = areaInfo[h.area];
+  const slug = `jeddah-airport-to-${h.slug}`;
+  const sameArea = otherHotels.filter((x) => x.area === h.area && x.slug !== h.slug);
+  const idx = otherHotels.filter((x) => x.area === h.area).findIndex((x) => x.slug === h.slug);
+  const peers = [...sameArea.slice(idx), ...sameArea.slice(0, idx)].slice(0, 3);
+  return page({
+    slug,
+    name: `Jeddah Airport and ${h.short}`,
+    title: `Jeddah Airport to ${h.short}, Makkah: Taxi Both Ways`,
+    description: `Taxi from Jeddah airport (JED) to ${h.name} in Makkah, and back to the airport. Flight details first, fare confirmed before you commit.`,
+    h1: `Jeddah Airport and ${h.short} Taxi, Both Ways`,
+    lead: `${h.name} is in ${a.label}. The drive from JED to Makkah is about ${KM_JED_MAKKAH} km by road.`,
+    direct: `Gulf Elite Transport arranges taxi and car transfers from King Abdulaziz International Airport (JED) in Jeddah to ${h.name} in Makkah, and from the hotel back to the airport. The drive to Makkah is about ${KM_JED_MAKKAH} km by road (approximate), and the final distance depends on the hotel and the road controls. Send your flight number, passengers and bags; the vehicle, driver and fare are confirmed before you commit.`,
+    facts: [
+      { label: "Route", value: `Jeddah airport (JED) to ${h.short}` },
+      { label: "Hotel", value: h.name },
+      { label: "Location", value: `${a.label}, Makkah` },
+      { label: "Road distance", value: `about ${KM_JED_MAKKAH} km to Makkah (approximate)` },
+      { label: "Direction", value: "Both ways, including the return to JED" },
+    ],
+    sections: [
+      { id: "about", h2: `Arriving at ${h.short}`, kind: "text", paragraphs: [`${h.name} is listed at: ${h.where}. Hotel listings differ on some address details, so we work from the hotel name on your booking and confirm the pickup point with you.`, `The drive from King Abdulaziz International Airport is about ${KM_JED_MAKKAH} km by road to Makkah, mostly on the highway between Jeddah and Makkah. The time depends on when you land and on traffic near the hotel, so no journey time is promised.`] },
+      { id: "pickup", h2: "Pickup and drop-off at this hotel", kind: "items", items: [
+        { title: "About this area", text: a.ride },
+        { title: "Tell us the exact hotel", text: a.tip },
+        { title: "Going back to JED", text: "For the return, send the flight time and the hotel name. We plan the pickup time from your departure, with a margin for traffic." },
+      ] },
+      { id: "faq", h2: `${h.short}: questions`, kind: "faq", items: [
+        ...(h.extra ? [h.extra] : [{ q: `Where is ${h.short}?`, a: `It is in ${a.label}, Makkah: ${h.where}.` }]),
+        { q: "Can I book the ride from the hotel to the airport on this page?", a: "Yes. This page covers both directions between JED and the hotel." },
+        { q: "Do you publish fares?", a: "No. The fare is confirmed with you before you commit." },
+      ] },
+      related([
+        { name: "Jeddah airport to Makkah", href: `${UMRAH_BASE}/jeddah-airport-to-makkah`, note: "Route guide" },
+        a.cluster,
+        L.jed,
+        ...peers.map((x) => ({ name: `Jeddah airport and ${x.short}`, href: `${UMRAH_BASE}/jeddah-airport-to-${x.slug}`, note: "Hotel transfer" })),
+        L.hub,
+      ]),
+    ],
+    entities: [{ type: "Place" as const, name: `${h.name}, Makkah` }, makkahE, jeddahE, country],
+    route: { from: "Jeddah airport (JED)", to: h.short, km: KM_JED_MAKKAH },
+    prefill: { pickup: "Jeddah airport (JED)", dropoff: h.name },
+  });
+});
+
+export const umrahPages: PlacePage[] = [hub, ...topics, ...moreTopics, miqatPage, hotelPageMadinah, makkahAreasPage, ...spotPages, ...vehiclePages, ...clockHotelPages, ...otherHotelPages];

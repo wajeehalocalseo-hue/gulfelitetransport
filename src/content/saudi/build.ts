@@ -636,7 +636,8 @@ function assignLayouts(pages: PlacePage[]) {
   pages
     .filter((p) => p.kind === "topic")
     .forEach((p, i) => {
-      const h = HEROES.topic;
+      // Hotel transfer pages carry a route (airport to hotel), so they may also use the route-line heroes.
+      const h: PlaceLayout["hero"][] = p.name.startsWith("Jeddah Airport and ") ? [...HEROES.topic, "routeline", "routeband"] : HEROES.topic;
       for (let k = 0; k < h.length * BODIES.length * FORMS.length; k++) {
         const n = i + k;
         const cand: PlaceLayout = {
