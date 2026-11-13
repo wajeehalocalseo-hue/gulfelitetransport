@@ -358,10 +358,10 @@ export const extended: Service[] = [
     short: "Taxi and cab rides across Saudi Arabia, arranged by city, airport and route, with the fare confirmed before you commit.",
     audienceShort: "Residents, visitors and businesses needing a ride",
     benefits: ["City, airport and intercity rides", "Pages for regions, cities and routes", "Fare confirmed before you commit"],
-    metaTitle: "Taxi & Cab Services in Saudi Arabia",
+    metaTitle: "Taxi & Cab Service Types and How to Book a Ride",
     metaDescription:
       "Request a taxi or cab in Saudi Arabia: city rides, airport transfers and intercity routes by region and city. Fares confirmed for each request. Gulf Elite Transport.",
-    h1: "Taxi & Cab Services in Saudi Arabia",
+    h1: "Taxi & Cab Services: Ride Types and How to Book",
     lead: "City rides, airport transfers and intercity trips, organised by region, city and route.",
     directAnswer:
       "Taxi and cab service is the transport of passengers by car between a pickup point and a destination. Gulf Elite Transport arranges rides across Saudi Arabia: within cities, to and from airports, and between cities. You tell us where, when and how many people, and we confirm the vehicle, driver and fare before you commit. Fares, journey times and availability are not published.",

@@ -1,0 +1,8 @@
+# Pages merged so that each route has exactly one page (both directions)
+/umrah-hajj-taxi/makkah-to-madinah-for-umrah /taxi-saudi-arabia/routes/makkah-to-madinah 301
+/umrah-hajj-taxi/madinah-to-makkah-for-umrah /taxi-saudi-arabia/routes/makkah-to-madinah 301
+/umrah-hajj-taxi/taif-to-makkah-for-umrah /taxi-saudi-arabia/routes/makkah-to-taif 301
+/umrah-hajj-taxi/makkah-hotel-to-jeddah-airport /umrah-hajj-taxi/jeddah-airport-to-makkah 301
+/umrah-hajj-taxi/madinah-hotel-to-madinah-airport /umrah-hajj-taxi/madinah-airport-to-madinah-hotel 301
+/umrah-hajj-taxi/jeddah-hotel-to-jeddah-airport /taxi-saudi-arabia/airports/king-abdulaziz-international-airport 301
+/umrah-hajj-taxi/umrah-taxi-with-waiting /umrah-hajj-taxi/makkah-hotel-to-haram 301

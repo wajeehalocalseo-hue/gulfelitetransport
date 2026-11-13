@@ -235,7 +235,7 @@ export const umrah = {
   items: [
     { title: "Airport to hotel", text: "From [Jeddah airport to Makkah](/umrah-hajj-taxi/jeddah-airport-to-makkah), [Jeddah airport to Madinah](/umrah-hajj-taxi/jeddah-airport-to-madinah) or [Madinah airport to your hotel](/umrah-hajj-taxi/madinah-airport-to-madinah-hotel)." },
     { title: "Hotel to the Haram", text: "Rides to [Al-Masjid al-Haram](/umrah-hajj-taxi/makkah-hotel-to-haram) and the [Prophet's Mosque](/umrah-hajj-taxi/madinah-hotel-to-prophets-mosque), with a timed pickup afterwards." },
-    { title: "Between the holy cities", text: "[Madinah to Makkah for Umrah](/umrah-hajj-taxi/madinah-to-makkah-for-umrah), with a stop at the Miqat, and [Makkah to Madinah](/umrah-hajj-taxi/makkah-to-madinah-for-umrah) afterwards." },
+    { title: "Between the holy cities", text: "[Madinah to Makkah for Umrah](/taxi-saudi-arabia/routes/makkah-to-madinah), with a stop at the Miqat, and [Makkah to Madinah](/taxi-saudi-arabia/routes/makkah-to-madinah) afterwards." },
     { title: "Groups of any size", text: "Cars, vans, minibuses and coaches, arranged together for your party: [group transport for Umrah](/umrah-hajj-taxi/group-transport-for-umrah)." },
     { title: "Families and elders", text: "Pickups and stops planned around slower walkers and young children: [family and elderly pilgrims](/umrah-hajj-taxi/family-and-elderly-pilgrims)." },
     { title: "Ramadan and Hajj", text: "Plan early for the busiest weeks: [Ramadan Umrah transport](/umrah-hajj-taxi/ramadan-umrah-transport) and [Hajj season transport](/umrah-hajj-taxi/hajj-season-transport)." },

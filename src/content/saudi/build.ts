@@ -1,4 +1,4 @@
-import { umrahPages, UMRAH_BASE } from "../umrah/pages";
+import { routeExtras, umrahPages, UMRAH_BASE } from "../umrah/pages";
 import { airports, areas, routes } from "./places";
 import { buildPairs } from "./pairs";
 import { riyadhAreas } from "./riyadh-areas";
@@ -539,6 +539,7 @@ function routePages(): PlacePage[] {
         { id: "about", h2: `About the ${from.name} to ${to.name} route`, kind: "text", paragraphs: [r.about] },
         { id: "riders", h2: "Who travels this route", kind: "items", items: r.riders.map((t, k) => ({ title: `Traveller ${k + 1}`, text: t })) },
         { id: "tips", h2: "Good to know before you ask", kind: "items", items: r.tips.map((t, k) => ({ title: `Note ${k + 1}`, text: t })) },
+        ...(routeExtras[r.id] ?? []),
         bookingSteps(`in ${from.name}`),
         notAssumed,
         { id: "links", h2: "Both ends and related routes", kind: "links", items: links },
