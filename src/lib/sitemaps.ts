@@ -17,6 +17,7 @@ const staticPages: SitemapEntry[] = [
   { path: "/services", priority: 0.9, changefreq: "monthly" },
   { path: "/about", priority: 0.6, changefreq: "yearly" },
   { path: "/contact", priority: 0.7, changefreq: "yearly" },
+  { path: "/book", priority: 0.7, changefreq: "yearly" },
   { path: "/privacy-policy", priority: 0.2, changefreq: "yearly" },
   { path: "/terms-and-conditions", priority: 0.2, changefreq: "yearly" },
 ];

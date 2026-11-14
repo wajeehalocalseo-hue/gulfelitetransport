@@ -57,6 +57,7 @@ const fixed: [string, string, string][] = [
   ["Services (overview)", "/services", "src/app/services/page.tsx"],
   ["About Us", "/about", "src/app/about/page.tsx"],
   ["Contact Us", "/contact", "src/app/contact/page.tsx"],
+  ["Book a Ride", "/book", "src/app/book/page.tsx"],
   ["Privacy Policy", "/privacy-policy", "src/app/privacy-policy/page.tsx"],
   ["Terms & Conditions", "/terms-and-conditions", "src/app/terms-and-conditions/page.tsx"],
 ];
