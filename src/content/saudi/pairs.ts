@@ -57,9 +57,99 @@ const sentence = (s: string) => (/[.!?]$/.test(s) ? s : `${s}.`);
 const lower1 = (s: string) => s.charAt(0).toLowerCase() + s.slice(1);
 
 // --------------------------------------------------------------------------- selection
-type Pair = { a: CityArea; b: CityArea; km: number; type: "airport" | "hub" | "district" };
+/** Routes the owner asked for by name. They are always selected (one page per route, both directions). */
+const PRIORITY_PAIRS: [string, string][] = [
+  ["king-khalid-international-airport", "olaya"],
+  ["king-khalid-international-airport", "al-malqa"],
+  ["king-khalid-international-airport", "al-yasmin"],
+  ["king-khalid-international-airport", "al-narjis"],
+  ["king-khalid-international-airport", "king-abdullah-financial-district"],
+  ["olaya", "king-abdullah-financial-district"],
+  ["olaya", "al-malaz"],
+  ["olaya", "al-sulaimaniyah"],
+  ["olaya", "al-murabba"],
+  ["king-abdullah-financial-district", "al-malqa"],
+  ["king-abdullah-financial-district", "al-yasmin"],
+  ["al-malqa", "al-yasmin"],
+  ["al-narjis", "al-yasmin"],
+  ["al-sahafah", "al-malqa"],
+  ["al-aqiq", "king-abdullah-financial-district"],
+  ["al-hamra", "al-rawdah"],
+  ["al-hamra", "granada"],
+  ["granada", "al-yasmin"],
+  ["al-izdihar", "al-mughrizat"],
+  ["al-wurud", "olaya"],
+  ["al-nakheel", "king-abdullah-financial-district"],
+  ["al-nakheel", "al-aqiq"],
+  ["hittin", "al-malqa"],
+  ["hittin", "king-abdullah-financial-district"],
+  ["al-rabwah", "al-malaz"],
+  ["al-malaz", "al-naseem"],
+  ["al-quds", "al-hamra"],
+  ["qurtubah", "al-yasmin"],
+  ["al-shifa", "al-aziziyah"],
+  ["al-aziziyah", "al-dar-al-baida"],
+  ["al-suwaidi", "al-shifa"],
+  ["al-uraija", "al-suwaidi"],
+  ["al-badiah", "al-murabba"],
+  ["ad-dirah", "al-malaz"],
+  ["al-naseem", "al-rawdah"],
+  ["al-khaleej", "al-hamra"],
+  ["al-falah", "al-narjis"],
+];
 
-function selectPairs(areas: CityArea[]): Pair[] {
+type Pair = { a: CityArea; b: CityArea; km: number; type: "airport" | "hub" | "district"; priority?: boolean };
+
+/** Facts taken from the coordinates of the listed areas: what lies near the straight line, and what is nearest to each end. */
+function aroundSection(a: CityArea, b: CityArea, A: string, B: string, all: CityArea[]): Section {
+  const kmPerLat = 111.2;
+  const kmPerLng = 111.2 * Math.cos(rad((a.lat + b.lat) / 2));
+  const xy = (z: { lat: number; lng: number }) => ({ x: (z.lng - a.lng) * kmPerLng, y: (z.lat - a.lat) * kmPerLat });
+  const e = xy(b);
+  const len2 = e.x * e.x + e.y * e.y || 1;
+  const nm = (z: CityArea) => label(z);
+  const along = all
+    .filter((z) => z.id !== a.id && z.id !== b.id)
+    .map((z) => {
+      const q = xy(z);
+      const t = (q.x * e.x + q.y * e.y) / len2;
+      const px = t * e.x;
+      const py = t * e.y;
+      return { z, t, off: Math.hypot(q.x - px, q.y - py) };
+    })
+    .filter((r) => r.t > 0.1 && r.t < 0.9 && r.off <= 1.8)
+    .sort((m, n) => m.t - n.t);
+  const nearTo = (z: CityArea) =>
+    all
+      .filter((y) => y.id !== z.id && y.id !== a.id && y.id !== b.id)
+      .map((y) => ({ y, d: haversine(z, y) }))
+      .sort((m, n) => m.d - n.d)
+      .slice(0, 3)
+      .map((r) => `${nm(r.y)} (about ${r.d < 10 ? r.d.toFixed(1) : Math.round(r.d)} km)`)
+      .join(", ");
+  return {
+    id: "along",
+    h2: `Around the ${A} to ${B} route`,
+    kind: "items",
+    intro: `These notes come from the map positions of the areas we list, not from a fixed road route, which is confirmed for each request.`,
+    items: [
+      {
+        title: "Areas near the straight line",
+        text: along.length
+          ? `Going from ${A} toward ${B}, the line passes close to ${along.map((r) => nm(r.z)).join(", then ")}. ${along.length > 1 ? "These are" : "This is"} useful as a meeting point or a landmark when you describe the pickup.`
+          : `None of the other areas we list lie close to the line between ${A} and ${B}, so the ride runs between the two without passing a listed district.`,
+      },
+      { title: `Nearest areas to ${A}`, text: `${nearTo(a)}.` },
+      { title: `Nearest areas to ${B}`, text: `${nearTo(b)}.` },
+    ],
+  };
+}
+
+/** Areas up to this rank are paired automatically with their neighbours; later ones only through PRIORITY_PAIRS. */
+const AUTO_MAX_RANK = 20;
+
+function selectPairs(allAreas: CityArea[]): Pair[] {
+  const areas = allAreas.filter((x) => x.rank <= AUTO_MAX_RANK);
   const dist = (x: CityArea, y: CityArea) => haversine(x, y);
   const keys = new Map<string, [CityArea, CityArea]>();
   const add = (x: CityArea, y: CityArea) => {
@@ -95,9 +185,20 @@ function selectPairs(areas: CityArea[]): Pair[] {
       pairs = pairs.filter((pp) => pp !== drop);
     }
   }
-  return pairs
-    .map(([a, b]) => ({ a, b, km: dist(a, b), type: (a.kind === "airport" || b.kind === "airport" ? "airport" : a.tier === "hub" || b.tier === "hub" ? "hub" : "district") as Pair["type"] }))
-    .sort((m, n) => (m.type === "airport" ? 0 : m.type === "hub" ? 1 : 2) - (n.type === "airport" ? 0 : n.type === "hub" ? 1 : 2) || m.km - n.km);
+  // The owner's named routes are always added on top, so none is lost to the neighbour rules or the cap.
+  const have = new Set(pairs.map(([p, q]) => `${p.id}|${q.id}`));
+  const extra: [CityArea, CityArea][] = [];
+  for (const [i, j] of PRIORITY_PAIRS) {
+    const x = allAreas.find((q) => q.id === i);
+    const y = allAreas.find((q) => q.id === j);
+    if (!x || !y || dist(x, y) < 0.8) continue;
+    const [p, q] = x.rank < y.rank ? [x, y] : [y, x];
+    if (!have.has(`${p.id}|${q.id}`)) extra.push([p, q]);
+  }
+  const toPair = (priority: boolean) => ([a, b]: [CityArea, CityArea]): Pair => ({ a, b, km: dist(a, b), priority, type: (a.kind === "airport" || b.kind === "airport" ? "airport" : a.tier === "hub" || b.tier === "hub" ? "hub" : "district") as Pair["type"] });
+  const order = (m: Pair, n: Pair) => (m.type === "airport" ? 0 : m.type === "hub" ? 1 : 2) - (n.type === "airport" ? 0 : n.type === "hub" ? 1 : 2) || m.km - n.km;
+  // Pages that already exist go through the quality gate first, so adding routes never removes a live page.
+  return [...pairs.map(toPair(false)).sort(order), ...extra.map(toPair(true)).sort(order)];
 }
 
 // --------------------------------------------------------------------------- content
@@ -111,7 +212,7 @@ const bandNote = {
   far: "This is a long city ride. It is likely to use a main road or a ring road for much of the way, so peak-hour traffic can add a lot to the time.",
 };
 
-function build(p: Pair, ctx: PairContext): PlacePage {
+function build(p: Pair, ctx: PairContext, all: CityArea[]): PlacePage {
   const { a, b, km } = p;
   const A = label(a);
   const B = label(b);
@@ -206,6 +307,7 @@ function build(p: Pair, ctx: PairContext): PlacePage {
         { title: B, text: b.landmarks.join(", ") },
       ],
     },
+    ...(p.priority ? [aroundSection(a, b, A, B, all)] : []),
     ctx.bookingSteps(`in ${A}`),
     ctx.notAssumed,
   ];
@@ -261,7 +363,7 @@ function build(p: Pair, ctx: PairContext): PlacePage {
 }
 
 // --------------------------------------------------------------------------- quality gate
-const UNIQUE_SECTIONS = new Set(["about", "start", "end", "directions", "landmarks", "faq", "timing", "access", "busy"]);
+const UNIQUE_SECTIONS = new Set(["about", "start", "end", "directions", "landmarks", "faq", "timing", "access", "busy", "along"]);
 
 function shingles(page: PlacePage, n = 5): Set<string> {
   const text = [
@@ -288,6 +390,7 @@ export const similarity = (x: Set<string>, y: Set<string>) => {
 
 const MIN_UNIQUE_WORDS = 380;
 const MAX_SIMILARITY = 0.5;
+const PRIORITY_MAX_SIMILARITY = 0.62;
 
 const wordCount = (page: PlacePage) =>
   page.sections
@@ -308,13 +411,14 @@ export function buildPairs(areas: CityArea[], ctx: PairContext): PairResult {
   const kept: { page: PlacePage; sh: Set<string>; a: string; b: string }[] = [];
   const dropped: PairResult["dropped"] = [];
   for (const p of selected) {
-    const page = build(p, ctx);
+    const page = build(p, ctx, areas);
     if (wordCount(page) < MIN_UNIQUE_WORDS) {
       dropped.push({ name: page.name, reason: "not enough unique content" });
       continue;
     }
     const sh = shingles(page);
-    const clash = kept.find((k) => similarity(sh, k.sh) > MAX_SIMILARITY);
+    // A route the owner named is a different journey even when it shares one end with another page, so it gets more room.
+    const clash = kept.find((k) => similarity(sh, k.sh) > (p.priority ? PRIORITY_MAX_SIMILARITY : MAX_SIMILARITY));
     if (clash) {
       dropped.push({ name: page.name, reason: `too similar to ${clash.page.name}` });
       continue;
