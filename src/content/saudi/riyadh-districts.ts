@@ -1,6 +1,5 @@
 import journeysJson from "./riyadh-journeys.json";
 import type { CityArea } from "./riyadh-areas";
-import { districtPhoto } from "./riyadh-photos";
 import { bearing, haversine } from "./pairs";
 import type { Area, PlacePage, Section } from "./types";
 
@@ -192,8 +191,6 @@ export function districtOverrides(d: DistrictInput) {
     ],
   };
 
-  const photo = districtPhoto[info.id];
-  const gallery: Section | null = photo ? { id: "photo", h2: `${L} in pictures`, kind: "gallery", photos: [photo] } : null;
 
   const compare: Section = {
     id: "compare",
@@ -230,12 +227,12 @@ export function districtOverrides(d: DistrictInput) {
     ],
   };
 
-  const body: Record<string, Section | null> = { journeys, services: servicesSection, about, pickup, map, nearby, photo: gallery, compare, sources };
+  const body: Record<string, Section | null> = { journeys, services: servicesSection, about, pickup, map, nearby, compare, sources };
   const ORDERS = [
-    ["journeys", "services", "about", "pickup", "map", "nearby", "photo", "compare", "sources"],
-    ["services", "journeys", "map", "about", "pickup", "compare", "nearby", "photo", "sources"],
-    ["about", "journeys", "services", "nearby", "map", "pickup", "photo", "compare", "sources"],
-    ["photo", "journeys", "pickup", "services", "about", "map", "compare", "nearby", "sources"],
+    ["journeys", "services", "about", "pickup", "map", "nearby", "compare", "sources"],
+    ["services", "journeys", "map", "about", "pickup", "compare", "nearby", "sources"],
+    ["about", "journeys", "services", "nearby", "map", "pickup", "compare", "sources"],
+    ["pickup", "journeys", "compare", "services", "about", "map", "nearby", "sources"],
   ];
   const order = ORDERS[d.index % ORDERS.length];
   const sections: Section[] = [
