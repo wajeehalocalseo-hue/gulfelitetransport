@@ -2,6 +2,7 @@ import { routeExtras, umrahPages, UMRAH_BASE } from "../umrah/pages";
 import { airports, areas, routes } from "./places";
 import { buildPairs } from "./pairs";
 import { riyadhAreas } from "./riyadh-areas";
+import { intlRoutes } from "./international";
 import { cities } from "./cities";
 import { cityGeo, regionExtras } from "./geo";
 import { regions } from "./regions";
@@ -567,6 +568,121 @@ function routePages(): PlacePage[] {
   });
 }
 
+// ---------------------------------------------------------------------------- cross-border routes from Riyadh
+const INTL_PATH = `${BASE}/international`;
+
+function internationalPages(): PlacePage[] {
+  const riyadh = need(cityById.get("riyadh"), "riyadh");
+  return intlRoutes.map((r, i) => {
+    const path = `${INTL_PATH}/${r.id}`;
+    const name = `Riyadh to ${r.name}`;
+    const others = intlRoutes.filter((x) => x.id !== r.id && (x.country === r.country || x.id === "riyadh-to-dubai")).slice(0, 4);
+    return {
+      kind: "route" as const,
+      path,
+      name,
+      title: `Taxi from Riyadh to ${r.name}: Cross-Border Cab Ride`,
+      description: `Request a cross-border taxi or cab from Riyadh to ${r.name}, ${r.country}, about ${r.km} km by road. Fare, vehicle and timing confirmed for each request.`,
+      h1: `Taxi from Riyadh to ${r.name}`,
+      lead: `About ${r.km} km by road, both directions. Fare, vehicle, border plan and timing are confirmed for each request.`,
+      directAnswer: [
+        `Gulf Elite Transport takes requests for private taxi and cab rides from Riyadh to ${r.name}, ${r.country}, about ${r.km} km by road, and from ${r.name} back to Riyadh. Tell us the pickup point, drop-off point, date, passengers and bags, and we confirm the vehicle, driver, border plan and fare for your request before you commit.`,
+        `Planning a road trip between Riyadh and ${r.name}? The distance is roughly ${r.km} km. Send your details and travel documents plan to Gulf Elite Transport, and the vehicle, driver, crossing and fare are confirmed with you before anything is agreed; no fare or journey time is promised in advance.`,
+      ][i % 2],
+      crumbs: [
+        { name: "Home", path: "/" },
+        { name: "Taxi & Cab Services in Saudi Arabia", path: BASE },
+        { name: "International routes", path: INTL_PATH },
+        { name, path },
+      ],
+      facts: [
+        { label: "Road distance", value: `about ${r.km} km (approximate)` },
+        { label: "From", value: "Riyadh, Saudi Arabia" },
+        { label: "To", value: `${r.name}, ${r.country}` },
+        { label: "Direction", value: "Both directions" },
+      ],
+      sections: [
+        { id: "about", h2: `About the Riyadh to ${r.name} route`, kind: "text", paragraphs: [r.about] },
+        { id: "border", h2: "Border crossing and travel documents", kind: "items", intro: r.crossing, items: [
+          { title: "Documents are yours to prepare", text: "Passports, visas, residence or exit and entry permits and any vehicle paperwork are the traveller's responsibility. Requirements differ by nationality and can change." },
+          { title: "Tell us who is travelling", text: "Send the number of passengers and their nationalities with your request, so the plan can allow for the border checks." },
+          { title: "Allow for waiting time", text: "Queues at borders vary by day and time, so the plan allows extra time and does not promise a crossing time." },
+        ] },
+        { id: "riders", h2: "Who travels this route", kind: "items", items: r.riders.map((t, k) => ({ title: `Traveller ${k + 1}`, text: t })) },
+        { id: "tips", h2: "Good to know before you ask", kind: "items", items: r.tips.map((t, k) => ({ title: `Note ${k + 1}`, text: t })) },
+        ...(r.airports ? [{ id: "airports", h2: `Airports in ${r.name}`, kind: "text" as const, paragraphs: [`Rides can start or end at ${r.airports}. Give the terminal and flight number if you are connecting with a flight, and the plan is built around it.`] }] : []),
+        bookingSteps(`in ${riyadh.name}`),
+        notAssumed,
+        { id: "links", h2: "Both ends and related routes", kind: "links", items: [
+          { name: "Taxi & Cab Service in Riyadh", href: cityPath(riyadh), note: "City page" },
+          { name: "All international routes", href: INTL_PATH, note: `${intlRoutes.length} routes` },
+          { name: "Riyadh intercity routes", href: `${BASE}/routes`, note: "Within Saudi Arabia" },
+          ...others.map((x) => ({ name: `Riyadh to ${x.name}`, href: `${INTL_PATH}/${x.id}`, note: `about ${x.km} km` })),
+        ] },
+        {
+          id: "faq",
+          h2: `Riyadh to ${r.name}: questions`,
+          kind: "faq",
+          items: [
+            { q: `How far is ${r.name} from Riyadh?`, a: `About ${r.km} km by road. This is an approximate figure, and the exact route and crossing are confirmed for your request.` },
+            { q: "Who arranges the visas and border paperwork?", a: "The traveller is responsible for passports, visas and permits. Send us your plan and nationalities, and we allow for the border checks when we plan the ride." },
+            { q: "How long does the journey take?", a: "It depends on traffic, the border queue and any stops, so we do not promise a journey time in advance. We confirm the plan for each request." },
+            { q: `Can I book a return from ${r.name} to Riyadh?`, a: `Yes, tell us whether you travel one way or want a return, and give the date you want to travel back.` },
+          ],
+        },
+      ],
+      layout: layoutFor("route", i),
+      route: { from: "Riyadh", to: r.name, km: r.km },
+      entities: [
+        cityEntity(riyadh),
+        { type: "City" as const, name: r.name, ar: r.ar, lat: r.lat, lng: r.lng },
+        { type: "Country" as const, name: r.country },
+        country,
+      ],
+      children: [],
+      prefill: { pickup: "Riyadh", dropoff: r.name },
+    };
+  });
+}
+
+function internationalIndex(): PlacePage {
+  return {
+    kind: "hub",
+    path: INTL_PATH,
+    name: "International taxi routes from Riyadh",
+    title: "International Taxi Routes from Riyadh: UAE, Gulf, Jordan",
+    description: "Cross-border taxi and cab requests from Riyadh to the UAE, Bahrain, Qatar, Kuwait, Oman and Jordan, with approximate road distances. Fare confirmed for each request.",
+    h1: "International Taxi Routes from Riyadh",
+    lead: "Pick a destination to see the approximate road distance, the border crossing and what to tell us when you ask.",
+    directAnswer:
+      "Gulf Elite Transport takes requests for private taxi and cab rides from Riyadh to the UAE, Bahrain, Qatar, Kuwait, Oman and Jordan, in both directions. Each page gives an approximate road distance, notes on the border crossing and what to include in your request. Fares, journey times and border plans are confirmed for each request and are not published here.",
+    crumbs: [{ name: "Home", path: "/" }, { name: "Taxi & Cab Services in Saudi Arabia", path: BASE }, { name: "International routes", path: INTL_PATH }],
+    facts: [
+      { label: "Routes", value: String(intlRoutes.length) },
+      { label: "Countries", value: String(new Set(intlRoutes.map((r) => r.country)).size) },
+      { label: "Distances", value: "Approximate road distances" },
+      { label: "Directions", value: "Both ways" },
+    ],
+    sections: [
+      { id: "routes", h2: "All international routes", kind: "links", items: intlRoutes.map((r) => ({ name: `Riyadh to ${r.name}`, href: `${INTL_PATH}/${r.id}`, note: `${r.country}, about ${r.km} km` })) },
+      {
+        id: "documents",
+        h2: "Before you travel",
+        kind: "items",
+        items: [
+          { title: "Documents", text: "Passports, visas, permits and vehicle paperwork are the traveller's responsibility, and requirements differ by nationality." },
+          { title: "Border waiting time", text: "Queues vary by day and time, so no crossing time is promised." },
+          { title: "Confirmed per request", text: "The vehicle, driver, crossing and fare are confirmed with you before you commit." },
+        ],
+      },
+      notAssumed,
+    ],
+    layout: { hero: "ledger", body: "tiles", form: "aside" },
+    entities: [country],
+    children: intlRoutes.map((r) => ({ name: `Riyadh to ${r.name}`, path: `${INTL_PATH}/${r.id}` })),
+  };
+}
+
 /** Hub for /routes so the breadcrumb target is a real page. */
 function routesIndex(): PlacePage {
   return {
@@ -593,6 +709,12 @@ function routesIndex(): PlacePage {
         kind: "links",
         items: routes.map((r) => ({ name: `${need(cityById.get(r.from), r.from).name} to ${need(cityById.get(r.to), r.to).name}`, href: `${BASE}/routes/${r.id}`, note: `about ${r.km} km` })),
       },
+      {
+        id: "international",
+        h2: "Routes beyond Saudi Arabia",
+        kind: "links",
+        items: [{ name: "International taxi routes from Riyadh", href: INTL_PATH, note: `${intlRoutes.length} destinations` }],
+      },
       notAssumed,
     ],
     layout: { hero: "ledger", body: "tiles", form: "aside" },
@@ -601,7 +723,7 @@ function routesIndex(): PlacePage {
   };
 }
 
-export const placePages: PlacePage[] = [hubPage(), ...regionPages(), ...cityPages(), ...areaPages(), ...airportPages(), routesIndex(), ...routePages(), ...riyadhPairs.pages, ...umrahPages];
+export const placePages: PlacePage[] = [hubPage(), ...regionPages(), ...cityPages(), ...areaPages(), ...airportPages(), routesIndex(), ...routePages(), internationalIndex(), ...internationalPages(), ...riyadhPairs.pages, ...umrahPages];
 
 /** Pairs that the quality gate left out, for the build log. */
 export const droppedPairs = riyadhPairs.dropped;
@@ -619,7 +741,8 @@ function assignLayouts(pages: PlacePage[]) {
   const usedRiyadhArea = new Set<string>();
   const isRiyadhArea = (p: PlacePage) => p.kind === "area" && p.path.startsWith(`${RIYADH_PATH}/`);
   const groups: { name: string; h: PlaceLayout["hero"][]; pool: Set<string>; match: (p: PlacePage) => boolean }[] = [
-    { name: "route", h: HEROES.route, pool: usedRoute, match: (p) => p.kind === "route" },
+    { name: "route", h: HEROES.route, pool: usedRoute, match: (p) => p.kind === "route" && !p.path.startsWith(`${INTL_PATH}/`) },
+    { name: "international", h: HEROES.route, pool: new Set<string>(), match: (p) => p.kind === "route" && p.path.startsWith(`${INTL_PATH}/`) },
     { name: "airport", h: HEROES.airport, pool: used, match: (p) => p.kind === "airport" },
     { name: "region", h: HEROES.region, pool: used, match: (p) => p.kind === "region" },
     { name: "area", h: HEROES.area, pool: used, match: (p) => p.kind === "area" && !isRiyadhArea(p) },
