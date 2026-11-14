@@ -1,4 +1,4 @@
-import { placePages } from "@/content/saudi/build";
+import { placePages, RIYADH_CITY_PATH, RIYADH_MAIN } from "@/content/saudi/build";
 import { indexableNodes, pathOf } from "@/content/taxonomy";
 import { abs } from "./site";
 
@@ -33,15 +33,17 @@ function build(): Map<string, SitemapEntry[]> {
   );
 
   const cityPages = placePages.filter((p) => p.kind === "city");
-  const inCity = (p: { path: string }) => cityPages.find((c) => p.path === c.path || p.path.startsWith(`${c.path}/`));
+  // The Riyadh landing page has a keyword URL but still belongs to the Riyadh sitemap (taxi-riyadh).
+  const baseOf = (c: { path: string }) => (c.path === RIYADH_MAIN ? RIYADH_CITY_PATH : c.path);
+  const inCity = (p: { path: string }) => cityPages.find((c) => p.path === c.path || p.path.startsWith(`${baseOf(c)}/`));
   const taxi: SitemapEntry[] = [];
   const umrah: SitemapEntry[] = [];
-  for (const c of cityPages) groups.set(`taxi-${c.path.split("/").pop()}`, []);
+  for (const c of cityPages) groups.set(`taxi-${baseOf(c).split("/").pop()}`, []);
   for (const p of placePages) {
     const entry: SitemapEntry = { path: p.path, priority: priorityFor(p.kind), changefreq: "monthly" };
     const city = inCity(p);
     if (p.path === "/umrah-hajj-taxi" || p.path.startsWith("/umrah-hajj-taxi/")) umrah.push({ ...entry, priority: p.kind === "hub" ? 0.9 : 0.7 });
-    else if (city) groups.get(`taxi-${city.path.split("/").pop()}`)!.push(entry);
+    else if (city) groups.get(`taxi-${baseOf(city).split("/").pop()}`)!.push({ ...entry, priority: p.path === RIYADH_MAIN ? 0.9 : entry.priority });
     else taxi.push(entry);
   }
   groups.set("taxi", taxi);

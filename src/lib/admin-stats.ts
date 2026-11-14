@@ -31,6 +31,7 @@ const pretty = (slug: string) => slug.replace(/-region$/, "").split("-").map((w)
 /** City (or region) a request came from, read from the Saudi taxi page URL it was sent on. */
 export function placeOf(r: QuoteRecord): string {
   const seg = (r.page_path ?? "").split("/").filter(Boolean);
+  if (seg[0] === "riyadh-taxi-service") return "Riyadh";
   if (seg[0] === "taxi-saudi-arabia") {
     if (seg[2]) return pretty(seg[2]);
     if (seg[1]) return pretty(seg[1]);

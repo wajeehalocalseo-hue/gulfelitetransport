@@ -57,7 +57,7 @@ export const finder = {
 export const taxi = {
   eyebrow: "Taxi & cab rides",
   h2: "Taxi and cab rides across Saudi Arabia, city by city",
-  text: "Every region, city, airport and route has its own page with the real places people travel to, notes on getting there and what to tell us when you request a ride. Popular starting points are [taxi in Riyadh](/taxi-saudi-arabia/riyadh-region/riyadh), [taxi in Jeddah](/taxi-saudi-arabia/makkah-region/jeddah), [Makkah taxi rides](/taxi-saudi-arabia/makkah-region/makkah), [Madinah taxi rides](/taxi-saudi-arabia/madinah-region/madinah) and [Dammam taxi rides](/taxi-saudi-arabia/eastern-province/dammam). Choose where you are starting and we confirm the vehicle, driver and fare for your request.",
+  text: "Every region, city, airport and route has its own page with the real places people travel to, notes on getting there and what to tell us when you request a ride. Popular starting points are [taxi in Riyadh](/riyadh-taxi-service), [taxi in Jeddah](/taxi-saudi-arabia/makkah-region/jeddah), [Makkah taxi rides](/taxi-saudi-arabia/makkah-region/makkah), [Madinah taxi rides](/taxi-saudi-arabia/madinah-region/madinah) and [Dammam taxi rides](/taxi-saudi-arabia/eastern-province/dammam). Choose where you are starting and we confirm the vehicle, driver and fare for your request.",
   regionsHeading: "Browse by region",
   citiesHeading: "Popular cities",
   routesHeading: "Popular intercity routes",
@@ -149,7 +149,7 @@ export const faqs: Faq[] = [
   },
   {
     q: "Where can I request a taxi or cab?",
-    a: "Across Saudi Arabia. The taxi pages are organised by region, city, area, airport and intercity route, starting with the main cities such as [Riyadh](/taxi-saudi-arabia/riyadh-region/riyadh), [Jeddah](/taxi-saudi-arabia/makkah-region/jeddah), [Makkah](/taxi-saudi-arabia/makkah-region/makkah), [Madinah](/taxi-saudi-arabia/madinah-region/madinah) and [Dammam](/taxi-saudi-arabia/eastern-province/dammam). Requests from other towns can be discussed, and availability is confirmed for each request.",
+    a: "Across Saudi Arabia. The taxi pages are organised by region, city, area, airport and intercity route, starting with the main cities such as [Riyadh](/riyadh-taxi-service), [Jeddah](/taxi-saudi-arabia/makkah-region/jeddah), [Makkah](/taxi-saudi-arabia/makkah-region/makkah), [Madinah](/taxi-saudi-arabia/madinah-region/madinah) and [Dammam](/taxi-saudi-arabia/eastern-province/dammam). Requests from other towns can be discussed, and availability is confirmed for each request.",
   },
   {
     q: "Are your fares fixed?",

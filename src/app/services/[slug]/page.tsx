@@ -149,7 +149,7 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
                 {[
                   ["/taxi-saudi-arabia", "All of Saudi Arabia", "Regions, cities, airports and routes"],
                   ["/taxi-saudi-arabia/routes", "Intercity routes", "Riyadh to Jeddah, Dammam to Al Khobar and more"],
-                  ["/taxi-saudi-arabia/riyadh-region/riyadh", "Riyadh", "Capital city rides and airport transfers"],
+                  ["/riyadh-taxi-service", "Riyadh", "Capital city rides and airport transfers"],
                   ["/taxi-saudi-arabia/makkah-region/jeddah", "Jeddah", "City rides and Jeddah airport transfers"],
                 ].map(([href, name, note]) => (
                   <li key={href}>

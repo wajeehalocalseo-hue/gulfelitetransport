@@ -3,6 +3,7 @@ import { airports, areas, routes } from "./places";
 import { buildPairs } from "./pairs";
 import { riyadhAreas } from "./riyadh-areas";
 import { intlRoutes } from "./international";
+import { riyadhMain, riyadhSections } from "./riyadh-main";
 import { cities } from "./cities";
 import { cityGeo, regionExtras } from "./geo";
 import { regions } from "./regions";
@@ -110,6 +111,9 @@ const country = { type: "Country" as const, name: "Saudi Arabia", wiki: COUNTRY_
 // ---------------------------------------------------------------------------- Riyadh pilot: area-to-area rides
 const RIYADH = need(cityById.get("riyadh"), "riyadh");
 const RIYADH_PATH = `${BASE}/riyadh-region/riyadh`;
+/** The Riyadh landing page lives on a keyword slug; the old city URL redirects to it (see worker.js). */
+export const RIYADH_MAIN = "/riyadh-taxi-service";
+export const RIYADH_CITY_PATH = RIYADH_PATH;
 const shortName = (n: string) => n.replace(/\s*\(.*\)\s*$/, "");
 /** Riyadh areas that do not yet have a hand-written area page get one generated from the area data. */
 const riyadhExtraAreas: Area[] = riyadhAreas
@@ -357,15 +361,30 @@ function cityPages(): PlacePage[] {
         ],
       },
     ];
+    // Riyadh's main page is a landing page on a keyword slug; its area, ride and route pages stay under the city path.
+    const main = c.id === "riyadh";
+    if (main) {
+      sections.splice(
+        0,
+        sections.length,
+        ...riyadhSections({
+          bookingSteps: bookingSteps("in Riyadh"),
+          notAssumed,
+          moreLinks: links,
+          km: { dammam: kmOf("riyadh-to-dammam"), buraydah: kmOf("riyadh-to-buraydah"), hofuf: kmOf("riyadh-to-al-hofuf"), makkah: kmOf("riyadh-to-makkah"), madinah: kmOf("riyadh-to-madinah"), jeddah: kmOf("riyadh-to-jeddah"), kharj: kmOf("riyadh-to-al-kharj") },
+        }),
+      );
+    }
     return {
       kind: "city" as const,
-      path: cityPath(c),
+      path: main ? RIYADH_MAIN : cityPath(c),
+      simple: main || undefined,
       name: c.name,
-      title: `Taxi & Cab Service in ${c.name}, Saudi Arabia`,
-      description: `Request a taxi or cab in ${c.name}: rides to ${p[0].name} and ${p[1].name}${ap ? `, plus ${ap.code} airport transfers` : ""}. Fares confirmed for each request.`,
-      h1: `Taxi & Cab Service in ${c.name}`,
-      lead: c.tagline,
-      directAnswer: direct,
+      title: main ? riyadhMain.title : `Taxi & Cab Service in ${c.name}, Saudi Arabia`,
+      description: main ? riyadhMain.description : `Request a taxi or cab in ${c.name}: rides to ${p[0].name} and ${p[1].name}${ap ? `, plus ${ap.code} airport transfers` : ""}. Fares confirmed for each request.`,
+      h1: main ? riyadhMain.h1 : `Taxi & Cab Service in ${c.name}`,
+      lead: main ? riyadhMain.lead : c.tagline,
+      directAnswer: main ? riyadhMain.directAnswer : direct,
       crumbs: [
         { name: "Home", path: "/" },
         { name: "Taxi & Cab Services in Saudi Arabia", path: BASE },
@@ -386,6 +405,7 @@ function cityPages(): PlacePage[] {
     };
   });
 }
+const kmOf = (id: string) => need(routes.find((r) => r.id === id), id).km;
 
 function areaPages(): PlacePage[] {
   return allAreas.map((a, i) => {
@@ -820,6 +840,16 @@ function assignLayouts(pages: PlacePage[]) {
     });
 }
 assignLayouts(placePages);
+
+// Every link to the Riyadh city page points to its keyword URL, so nothing on the site goes through the redirect.
+const toMain = (path: string) => (path === RIYADH_PATH ? RIYADH_MAIN : path);
+for (const p of placePages) {
+  p.crumbs = p.crumbs.map((c) => ({ ...c, path: toMain(c.path) }));
+  p.children = p.children.map((c) => ({ ...c, path: toMain(c.path) }));
+  for (const s of p.sections) {
+    if (s.kind === "links") s.items = s.items.map((i) => ({ ...i, href: toMain(i.href) }));
+  }
+}
 
 const byPath = new Map<string, PlacePage>();
 for (const p of placePages) {

@@ -2,6 +2,7 @@ import Link from "next/link";
 import Icon from "./Icon";
 import Logo from "./Logo";
 import { cities } from "@/content/saudi/cities";
+import { cityHref } from "@/content/saudi/paths";
 import { groups, services } from "@/content/services";
 import { site, telUrl, whatsappUrl } from "@/lib/site";
 
@@ -72,7 +73,7 @@ export default function SiteFooter() {
             <li><Link href={BASE} className={`${link} font-semibold text-accent`}>All of Saudi Arabia</Link></li>
             <li><Link href="/umrah-hajj-taxi" className={`${link} font-semibold text-accent`}>Umrah &amp; Hajj taxi</Link></li>
             {cities.slice(0, 8).map((c) => (
-              <li key={c.id}><Link href={`${BASE}/${c.region}/${c.id}`} className={link}>{c.name}</Link></li>
+              <li key={c.id}><Link href={cityHref(BASE, c)} className={link}>{c.name}</Link></li>
             ))}
             <li><Link href={`${BASE}/routes`} className={link}>Intercity routes</Link></li>
             <li><Link href={`${BASE}#regions`} className={link}>All regions</Link></li>

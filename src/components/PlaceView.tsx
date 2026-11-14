@@ -6,6 +6,7 @@ import FaqList from "./Faq";
 import Icon from "./Icon";
 import HeroBooking from "./HeroBooking";
 import QuoteForm from "./QuoteForm";
+import WeatherWidget from "./WeatherWidget";
 import { TAXI_SERVICE } from "@/content/saudi/build";
 import type { PlacePage, Section } from "@/content/saudi/types";
 
@@ -245,6 +246,69 @@ function SectionBlock({ s, style }: { s: Section; style: PlacePage["layout"]["bo
           <FaqList items={s.items} />
         </div>
       )}
+      {s.kind === "table" && (
+        <>
+          {s.intro && <p className="mt-4 text-lg leading-8 text-muted">{s.intro}</p>}
+          <div className="mt-6 overflow-x-auto rounded-2xl border border-navy/10 bg-white">
+            <table className="w-full min-w-[34rem] border-collapse text-left text-sm sm:text-base">
+              <thead className="bg-surface text-navy">
+                <tr>
+                  {s.head.map((h) => (
+                    <th key={h} scope="col" className="px-4 py-3 font-extrabold">{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-navy/10 text-muted">
+                {s.rows.map((r) => (
+                  <tr key={r.cells[0]}>
+                    {r.cells.map((c, i) => (
+                      <td key={i} className={`px-4 py-3 ${i === 0 ? "font-semibold text-navy" : ""}`}>
+                        {i === 0 && r.href ? <Link href={r.href} className={textLink}>{c}</Link> : c}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {s.note && <p className="mt-3 text-sm text-muted">{s.note}</p>}
+        </>
+      )}
+      {s.kind === "map" && (
+        <>
+          {s.intro && <p className="mt-4 text-lg leading-8 text-muted">{s.intro}</p>}
+          <div className="mt-6 overflow-hidden rounded-2xl border border-navy/10 bg-white">
+            <iframe
+              title={`Map of ${s.query}`}
+              src={`https://maps.google.com/maps?q=${encodeURIComponent(s.query)}&z=11&output=embed`}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="h-80 w-full border-0 sm:h-96"
+            />
+          </div>
+          <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {s.places.map((p) => (
+              <li key={p.name}>
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.query)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block h-full rounded-2xl border border-navy/10 bg-white p-4 transition hover:border-accent"
+                >
+                  <span className="font-bold text-navy">{p.name}</span>
+                  <span className="mt-1 block text-sm text-muted">{p.note ?? "Open in Google Maps"}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+      {s.kind === "weather" && (
+        <>
+          {s.intro && <p className="mt-4 text-lg leading-8 text-muted">{s.intro}</p>}
+          <WeatherWidget place={s.place} lat={s.lat} lng={s.lng} />
+        </>
+      )}
     </section>
   );
 }
@@ -253,9 +317,10 @@ function SectionBlock({ s, style }: { s: Section; style: PlacePage["layout"]["bo
 export default function PlaceView({ page }: { page: PlacePage }) {
   const L0 = page.layout;
   // The booking form always sits in the hero (HeroBooking), so the old "hero" form placement falls back to the page-bottom form.
-  const L = { ...L0, form: (L0.form === "hero" ? "aside" : L0.form) as typeof L0.form };
+  const L = { ...L0, form: (page.simple ? "bottom" : L0.form === "hero" ? "aside" : L0.form) as typeof L0.form };
   const quoteHref = "#hero-quote";
-  const crumbs = page.crumbs.map((c, i, a) => (i === a.length - 1 ? { name: c.name } : { name: c.name, href: c.path }));
+  // A landing-page style page has no breadcrumb row above the heading (the breadcrumb data stays in the page's schema).
+  const crumbs = (page.simple ? [] : page.crumbs).map((c, i, a) => (i === a.length - 1 ? { name: c.name } : { name: c.name, href: c.path }));
   const pre = page.prefill ?? {};
 
   const quickForm = (

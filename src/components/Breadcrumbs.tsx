@@ -10,6 +10,7 @@ export default function Breadcrumbs({
   tone?: "dark" | "light";
   center?: boolean;
 }) {
+  if (!items.length) return null;
   const light = tone === "light";
   return (
     <nav aria-label="Breadcrumb" className={`text-sm ${light ? "text-muted" : "text-white/70"}`}>

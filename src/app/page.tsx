@@ -11,6 +11,7 @@ import { BookingCard } from "@/components/HeroBooking";
 import * as c from "@/content/home";
 import { airports, routes } from "@/content/saudi/places";
 import { cities } from "@/content/saudi/cities";
+import { cityHref } from "@/content/saudi/paths";
 import { regions } from "@/content/saudi/regions";
 import { BASE } from "@/content/saudi/build";
 import { priceColumns, priceRows } from "@/content/prices";
@@ -39,7 +40,7 @@ const textLink = "font-bold text-navy underline decoration-accent decoration-2 u
 const cityName = (id: string) => cities.find((x) => x.id === id)?.name ?? id;
 const cityPath = (id: string) => {
   const ct = cities.find((x) => x.id === id);
-  return ct ? `${BASE}/${ct.region}/${ct.id}` : BASE;
+  return ct ? cityHref(BASE, ct) : BASE;
 };
 
 /** Consistent section heading: gold rule + small caps label, serif title, optional lead. */

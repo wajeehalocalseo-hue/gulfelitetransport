@@ -11,6 +11,11 @@ export default {
       url.port = "";
       return Response.redirect(url.toString(), 301);
     }
+    // The Riyadh city page moved to a keyword URL; the old address keeps its ranking by redirecting permanently.
+    if (/^\/taxi-saudi-arabia\/riyadh-region\/riyadh\/?$/.test(url.pathname)) {
+      url.pathname = "/riyadh-taxi-service";
+      return Response.redirect(url.toString(), 301);
+    }
     return env.ASSETS.fetch(request);
   },
 };
