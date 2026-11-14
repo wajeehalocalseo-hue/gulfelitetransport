@@ -189,7 +189,7 @@ export const core: Service[] = [
     ],
     metaTitle: "Equipment & Machinery Moving Services",
     metaDescription:
-      "Explore equipment and machinery moving services with vehicle suitability and loading planning. Request a quotation from Gulf Elite Transport.",
+      "Equipment and machinery moving and logistics for industrial machines, planned around vehicle suitability and loading. Request a quotation from Gulf Elite Transport.",
     h1: "Equipment & Machinery Moving Services",
     lead: "Transportation and relocation of heavy equipment, industrial machinery and commercial equipment, planned around the load.",
     directAnswer:

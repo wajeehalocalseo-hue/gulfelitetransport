@@ -104,7 +104,7 @@ export const international: Service[] = [
     ],
     metaTitle: "Container Transportation Services",
     metaDescription:
-      "Plan container movement from port or depot to your site with container transportation coordination from Gulf Elite Transport. Request a container transport quote.",
+      "Plan container transport and container transportation services from port or depot to your site. Request a container transport quote from Gulf Elite Transport.",
     h1: "Container Transportation",
     lead: "Planning the movement of containers between ports, depots and delivery sites.",
     directAnswer:

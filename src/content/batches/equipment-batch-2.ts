@@ -442,9 +442,9 @@ export const equipmentBatch2Micro: ChildRecord[] = [
     order: 1,
     short: "Moving production lines and manufacturing machines to a new factory or hall, in sequence.",
     audienceShort: "Manufacturers moving or expanding a factory",
-    seoTitle: "Factory Machinery Relocation and Production Line Moves",
+    seoTitle: "Factory Equipment and Machinery Relocation, Production Lines",
     metaDescription:
-      "Plan factory machinery relocation: production line movement, manufacturing machine relocation and equipment shifting. Quotation from Gulf Elite Transport.",
+      "Plan factory equipment and machinery relocation: production line movement, factory moving and equipment shifting. Quotation from Gulf Elite Transport.",
     primaryKeyword: "factory machinery relocation",
     secondaryKeywords: ["production line movement", "manufacturing machine relocation", "factory equipment shifting"],
     semanticKeywords: ["production line", "line sequence", "downtime", "new hall", "commissioning", "machine list"],

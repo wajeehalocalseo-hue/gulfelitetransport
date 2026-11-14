@@ -102,9 +102,9 @@ export const storage: Service[] = [
       "Shipment preparation guidance",
       "Delivery timing coordination",
     ],
-    metaTitle: "Refrigerated Transportation Services",
+    metaTitle: "Refrigerated and Temperature-Controlled Transportation",
     metaDescription:
-      "Plan temperature-sensitive goods transport with refrigerated transportation coordination from Gulf Elite Transport. Request a quotation with your temperature requirements.",
+      "Plan climate-controlled and temperature-controlled transportation for chilled food and sensitive cargo. Request a quotation with your temperature requirements.",
     h1: "Refrigerated Transportation",
     lead: "Planning the transport of goods that must stay within a set temperature range from pickup to delivery.",
     directAnswer:

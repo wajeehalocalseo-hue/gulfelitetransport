@@ -104,7 +104,7 @@ export const delivery: Service[] = [
     ],
     metaTitle: "Express & Urgent Delivery Services",
     metaDescription:
-      "Arrange time-sensitive shipment coordination with express and urgent delivery planning from Gulf Elite Transport. Request an urgent delivery quotation.",
+      "Arrange urgent delivery and express shipment coordination, built around your deadline. Request an urgent delivery quotation from Gulf Elite Transport.",
     h1: "Express & Urgent Delivery",
     lead: "Priority planning for shipments that cannot wait, built around the deadline you need to meet.",
     directAnswer:

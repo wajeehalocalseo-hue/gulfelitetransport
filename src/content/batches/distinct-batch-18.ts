@@ -318,7 +318,7 @@ export const distinctBatch18Micro: ChildRecord[] = [
     audienceShort: "Cement suppliers, merchants and contractors",
     seoTitle: "Cement Transportation: Bagged Cement to Sites and Merchants",
     metaDescription:
-      "Plan cement transportation of bagged cement to sites and merchants, with protection from moisture. Gulf Elite Transport quotation.",
+      "Plan cement transport and haulage of bagged cement to sites and merchants, with protection from moisture. Gulf Elite Transport quotation.",
     primaryKeyword: "cement transportation",
     secondaryKeywords: ["bagged cement delivery", "cement bags to site", "cement supply transport"],
     semanticKeywords: ["50kg bag", "pallet", "moisture", "tarpaulin", "site delivery", "merchant"],

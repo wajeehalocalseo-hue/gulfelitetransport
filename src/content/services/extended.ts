@@ -15,7 +15,7 @@ export const extended: Service[] = [
     benefits: ["Vehicle details reviewed first", "Collection and delivery coordination", "Quotation before commitment"],
     metaTitle: "Vehicle Transportation Services",
     metaDescription:
-      "Plan vehicle transportation for cars, vans, buses, trucks and company fleets. Request a quotation from Gulf Elite Transport with your vehicle details.",
+      "Plan vehicle transport services for cars, vans, buses, trucks and company fleets. Request a quotation from Gulf Elite Transport with your vehicle details.",
     h1: "Vehicle Transportation",
     lead: "Moving a vehicle from one place to another without driving it there, planned around its type, size and condition.",
     directAnswer:
@@ -291,7 +291,7 @@ export const extended: Service[] = [
     benefits: ["Scheduled and urgent parts runs", "Workshop and dealer supply", "Quotation before commitment"],
     metaTitle: "Spare Parts and Automotive Logistics",
     metaDescription:
-      "Plan spare parts and automotive logistics: parts delivery to workshops, dealers and factories. Request a quotation from Gulf Elite Transport.",
+      "Plan spare parts and auto parts logistics: parts delivery to workshops, dealers and factories. Request a quotation from Gulf Elite Transport.",
     h1: "Spare Parts & Automotive Logistics",
     lead: "A workshop with a vehicle on the lift and no part is losing money. Spare parts logistics keeps parts flowing to where they are needed.",
     directAnswer:
