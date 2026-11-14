@@ -412,6 +412,147 @@ export const routes: Route[] = [
     riders: ["Commuters between Al Kharj and Riyadh", "Contractors working in Al Kharj", "Families visiting relatives"],
     tips: ["Regular commuter arrangements can be discussed.", "Access to military and industrial sites is controlled by their operators."],
   },
+  // Riyadh intercity routes. Road distances come from OpenStreetMap routing between the city centres, rounded to 5 km.
+  {
+    id: "riyadh-to-al-khobar",
+    from: "riyadh",
+    to: "al-khobar",
+    km: 420,
+    about:
+      "Riyadh to Al Khobar follows the same desert highway as the Dammam route and ends on the Gulf coast, in the commercial and residential city beside Dammam. It suits visitors going to Khobar's offices, hotels and waterfront rather than to Dammam itself.",
+    riders: ["Business travellers with meetings in Khobar", "Families visiting relatives on the Gulf coast", "Visitors going on to Dhahran or the causeway"],
+    tips: ["Give the hotel, office or district in Al Khobar, since Dammam and Dhahran are separate drop-offs.", "Weekday mornings and Thursday evenings are the busiest."],
+  },
+  {
+    id: "riyadh-to-dhahran",
+    from: "riyadh",
+    to: "dhahran",
+    km: 415,
+    about:
+      "Riyadh to Dhahran ends in the Eastern Province city that is home to Saudi Aramco's headquarters and King Fahd University of Petroleum and Minerals. Many riders on this route are employees, contractors and university visitors, and entry to company and campus areas is controlled by their operators.",
+    riders: ["Aramco employees and contractors", "University visitors and families of students", "Business travellers working in the energy sector"],
+    tips: ["Tell us the gate or building you are going to, since access to company and campus areas is controlled.", "Say whether you are going to Dhahran, Al Khobar or Dammam, as each is a separate drop-off."],
+  },
+  {
+    id: "riyadh-to-taif",
+    from: "riyadh",
+    to: "taif",
+    km: 790,
+    about:
+      "Riyadh to Taif runs west across the central plateau and climbs into the Sarawat mountains. Taif is higher and cooler than most Saudi cities, so the route is busiest in summer, when families leave Riyadh for the mountains, and it is also the way to Taif's airport for Umrah travellers.",
+    riders: ["Families escaping the Riyadh summer heat", "Umrah travellers flying in or out of Taif", "Business travellers to the Makkah region"],
+    tips: ["Plan for a long day of driving with rest stops.", "Tell us if you are connecting to Makkah or to Taif airport so the timing can be planned."],
+  },
+  {
+    id: "riyadh-to-abha",
+    from: "riyadh",
+    to: "abha",
+    km: 945,
+    about:
+      "Riyadh to Abha is a long road journey south-west to the capital of the Asir region, high in the mountains. Abha is a summer destination for its cooler weather and landscapes, so the route is busiest in the warm months and on public holidays.",
+    riders: ["Families on holiday in the Asir mountains", "Groups travelling to Abha for the summer", "Business travellers to the southern region"],
+    tips: ["Allow a full day of travel and ask us about rest stops.", "Tell us if you are going on to Khamis Mushait or the mountain resorts."],
+  },
+  {
+    id: "riyadh-to-jubail",
+    from: "riyadh",
+    to: "jubail",
+    km: 455,
+    about:
+      "Riyadh to Jubail ends on the Gulf coast at the industrial city of Jubail, which is built around large petrochemical and heavy industry zones. Most trips are for work, so the drop-off is usually a company, a contractor camp or a hotel, and entry to industrial areas is controlled.",
+    riders: ["Contractors and engineers working in the industrial city", "Corporate teams visiting plants", "Families with relatives in Jubail"],
+    tips: ["Give the exact company or site gate, since industrial areas control access.", "Tell us if your return time depends on a shift or meeting."],
+  },
+  {
+    id: "riyadh-to-yanbu",
+    from: "riyadh",
+    to: "yanbu",
+    km: 1055,
+    about:
+      "Riyadh to Yanbu is among the longest road journeys from the capital, ending on the Red Sea coast in a port and industrial city. Many trips are for work in the industrial area, while others are holiday visits to the Red Sea shore.",
+    riders: ["Contractors and engineers working in the industrial area", "Families visiting relatives on the Red Sea coast", "Groups heading to the coast on holiday"],
+    tips: ["Plan for more than a day of road travel and ask about overnight stops.", "Say whether you are going to the industrial area, the port or the old town."],
+  },
+  {
+    id: "riyadh-to-alula",
+    from: "riyadh",
+    to: "alula",
+    km: 1045,
+    about:
+      "Riyadh to AlUla heads north-west to the oasis valley that holds Hegra, Saudi Arabia's first UNESCO World Heritage Site. Most travellers are visitors to the heritage and desert sites, so the best months are the cooler ones, and tours and entry to the sites are booked through their operators.",
+    riders: ["Tourists visiting Hegra and the desert sites", "Groups attending events in AlUla", "Families on a heritage trip"],
+    tips: ["Book your site tickets and tours separately; we arrange the ride only.", "Tell us your hotel or resort in AlUla and the dates of your stay."],
+  },
+  {
+    id: "riyadh-to-tabuk",
+    from: "riyadh",
+    to: "tabuk",
+    km: 1350,
+    about:
+      "Riyadh to Tabuk is the longest road route in this list, running north-west across the country to the far north-west of Saudi Arabia. Most travellers fly, so a road ride is mainly for groups, heavy luggage or people who need a vehicle at the other end.",
+    riders: ["Groups travelling together", "Business travellers carrying equipment", "Families moving or visiting relatives"],
+    tips: ["Plan for more than a day on the road and ask us about overnight stops.", "State the number of passengers and bags so the vehicle can be chosen properly."],
+  },
+  {
+    id: "riyadh-to-jazan",
+    from: "riyadh",
+    to: "jazan",
+    km: 1140,
+    about:
+      "Riyadh to Jazan crosses the country to the far south-west, ending on the Red Sea coast near the Yemeni border. Jazan is a port city and the gateway to the Farasan Islands, and the road passes through the Asir mountains on the way down to the coast.",
+    riders: ["Families visiting relatives in Jazan", "Business travellers to the south-west", "Visitors heading for the Farasan Islands"],
+    tips: ["Allow more than a day for the road and ask about overnight stops.", "Tell us if you are connecting to a ferry or to a flight from Jazan."],
+  },
+  {
+    id: "riyadh-to-najran",
+    from: "riyadh",
+    to: "najran",
+    km: 940,
+    about:
+      "Riyadh to Najran runs south through the desert to a historic oasis city on the Yemeni border. Najran is known for its old mud-brick buildings and rock-art sites, and a long road ride suits groups and families who want a vehicle for the whole stay.",
+    riders: ["Families visiting relatives in Najran", "Visitors to the historic sites", "Business travellers to the southern region"],
+    tips: ["Plan for a long day of travel and ask us about rest stops.", "Tell us if you are going to a place near the border, as access there can be controlled."],
+  },
+  {
+    id: "riyadh-to-al-baha",
+    from: "riyadh",
+    to: "al-bahah",
+    km: 910,
+    about:
+      "Riyadh to Al Baha heads west and then south-west up into the Sarawat mountains, to a small region known for its cooler climate, forests and villages. The route is busiest in summer and on holidays, when families come for the weather.",
+    riders: ["Families on a summer holiday", "Visitors to the mountain villages", "Residents travelling for family visits"],
+    tips: ["Plan for a long day of travel with rest stops.", "Mountain roads are slower, so tell us your hotel or village in advance."],
+  },
+  {
+    id: "riyadh-to-sakaka",
+    from: "riyadh",
+    to: "sakaka",
+    km: 980,
+    about:
+      "Riyadh to Sakaka runs north-west to the capital of the Al Jouf region, a farming area known for olives. The route is long, and most riders are families with relatives in the region, workers on contracts and visitors to the northern oases.",
+    riders: ["Families visiting relatives in Al Jouf", "Contractors working in the northern region", "Visitors to the olive farms and oases"],
+    tips: ["Plan for a full day on the road and ask us about rest stops.", "Tell us your drop-off point in Sakaka or a nearby town."],
+  },
+  {
+    id: "riyadh-to-arar",
+    from: "riyadh",
+    to: "arar",
+    km: 1055,
+    about:
+      "Riyadh to Arar goes to the north, to the capital of the Northern Borders region near the Iraqi border. It is a very long road trip, used by families, workers on contract and travellers who prefer a vehicle to the limited flights.",
+    riders: ["Families visiting relatives in the north", "Contractors and workers on assignment", "Business travellers to the Northern Borders region"],
+    tips: ["Plan for more than a day on the road and ask us about overnight stops.", "Tell us if your drop-off is close to the border, as access there can be controlled."],
+  },
+  {
+    id: "riyadh-to-hafar-al-batin",
+    from: "riyadh",
+    to: "hafar-al-batin",
+    km: 500,
+    about:
+      "Riyadh to Hafar Al Batin runs north-east to a city close to the borders with Kuwait and Iraq. It is a route for families, workers and business travellers, and it is also used by people continuing on towards the border crossing.",
+    riders: ["Families visiting relatives in Hafar Al Batin", "Contractors working in the north-east", "Travellers heading toward the Kuwait border"],
+    tips: ["Tell us if you are continuing to a border crossing, since access and documents are the traveller's responsibility.", "Plan for a long drive with rest stops."],
+  },
   {
     id: "jeddah-to-makkah",
     from: "jeddah",

@@ -28,7 +28,7 @@ const HEROES: Record<PageKind, PlaceLayout["hero"][]> = {
   city: ["dark", "light", "ledger", "inset", "centered"],
   area: ["light", "ledger", "inset", "dark"],
   airport: ["board", "dark"],
-  route: ["routeline", "routeband"],
+  route: ["routeline", "routeband", "ledger", "light", "inset", "dark"],
   pair: ["schematic", "routeline", "routeband", "ledger", "light", "inset", "dark"],
   topic: ["dark", "light", "ledger", "inset", "centered"],
 };
@@ -614,10 +614,23 @@ function assignLayouts(pages: PlacePage[]) {
   const key = (l: PlaceLayout) => `${l.hero}/${l.body}/${l.form}`;
   const used = new Set<string>();
   for (const p of pages) if (p.kind === "hub") used.add(key(p.layout));
-  for (const kind of ["route", "airport", "region", "area", "city"] as PageKind[]) {
-    const h = HEROES[kind];
+  // Intercity routes and Riyadh's many area pages each have their own pool, so growing them does not use up the shared one.
+  const usedRoute = new Set<string>();
+  const usedRiyadhArea = new Set<string>();
+  const isRiyadhArea = (p: PlacePage) => p.kind === "area" && p.path.startsWith(`${RIYADH_PATH}/`);
+  const groups: { name: string; h: PlaceLayout["hero"][]; pool: Set<string>; match: (p: PlacePage) => boolean }[] = [
+    { name: "route", h: HEROES.route, pool: usedRoute, match: (p) => p.kind === "route" },
+    { name: "airport", h: HEROES.airport, pool: used, match: (p) => p.kind === "airport" },
+    { name: "region", h: HEROES.region, pool: used, match: (p) => p.kind === "region" },
+    { name: "area", h: HEROES.area, pool: used, match: (p) => p.kind === "area" && !isRiyadhArea(p) },
+    { name: "riyadh-area", h: [...HEROES.area, "centered"], pool: usedRiyadhArea, match: isRiyadhArea },
+    { name: "city", h: HEROES.city, pool: used, match: (p) => p.kind === "city" },
+  ];
+  for (const g of groups) {
+    const h = g.h;
+    const used = g.pool;
     pages
-      .filter((p) => p.kind === kind)
+      .filter(g.match)
       .forEach((p, i) => {
         for (let k = 0; k < h.length * BODIES.length * FORMS.length; k++) {
           const n = i + k;
