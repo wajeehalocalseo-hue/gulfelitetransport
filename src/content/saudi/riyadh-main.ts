@@ -10,13 +10,13 @@ import type { Section } from "./types";
 const R = "/taxi-saudi-arabia/riyadh-region/riyadh";
 
 export const riyadhMain = {
-  title: "Riyadh Taxi & Chauffeur Service: Book Airport Transfers",
+  title: "Riyadh Taxi Service: Private Airport, City & Intercity Rides",
   description:
-    "Book a private taxi or chauffeur in Riyadh: RUH airport transfers, KAFD, Olaya, Diriyah and intercity rides. Vehicle, driver and fare confirmed before you commit.",
-  h1: "Private Taxi & Chauffeur Service in Riyadh",
+    "Pre-book a private Riyadh taxi service: RUH airport transfers, KAFD, Olaya, Diriyah and intercity rides. Fare and vehicle confirmed before you commit.",
+  h1: "Riyadh Taxi Service: Private Taxi & Chauffeur Rides",
   lead: "Book a professional driver in Riyadh for airport transfers, business meetings, hotel rides and trips to other cities. You get the vehicle, driver and fare confirmed before you commit.",
   directAnswer:
-    "Gulf Elite Transport takes bookings for private taxi and chauffeur rides in Riyadh: transfers to and from King Khalid International Airport (RUH), rides between Olaya, KAFD, Diriyah and the old city, and longer trips to Dammam, Makkah, Jeddah and other cities. Send your pickup point, destination, date, time and number of passengers, and we confirm the vehicle, driver and fare before you commit. Fares are not published, because each ride is quoted for your request.",
+    "Gulf Elite Transport is a Riyadh taxi service for pre-booked private taxi and chauffeur rides: transfers to and from King Khalid International Airport (RUH), rides between Olaya, KAFD, Diriyah and the old city, and longer trips to Dammam, Makkah, Jeddah and other cities. Send your pickup point, destination, date, time and number of passengers, and we confirm the vehicle, driver and fare before you commit. Fares are not published, because each ride is quoted for your request.",
 };
 
 export function riyadhSections(extra: {
@@ -42,6 +42,7 @@ export function riyadhSections(extra: {
         { cells: ["Olaya to KAFD", "~12 km", "~15 min"], href: `${R}/king-abdullah-financial-district-to-olaya` },
         { cells: ["Olaya to Diriyah", "~18 km", "~20 min"], href: `${R}/olaya-to-diriyah` },
         { cells: ["Olaya to Ad Dirah (old city)", "~9 km", "~10 min"], href: `${R}/olaya-to-ad-dirah` },
+        { cells: ["Olaya to Boulevard City", "~16 km", "~20 min"] },
         { cells: ["Riyadh to Al Kharj", `~${k.kharj} km`, "~1 hr 20 min"], href: "/taxi-saudi-arabia/routes/riyadh-to-al-kharj" },
         { cells: ["Riyadh to Dammam", `~${k.dammam} km`, "~4 hr"], href: "/taxi-saudi-arabia/routes/riyadh-to-dammam" },
         { cells: ["Riyadh to Buraydah", `~${k.buraydah} km`, "~3 hr 20 min"], href: "/taxi-saudi-arabia/routes/riyadh-to-buraydah" },
@@ -61,12 +62,24 @@ export function riyadhSections(extra: {
       kind: "items",
       intro: "Whatever the reason for your trip, tell us what you need and we confirm the right vehicle and driver for it.",
       items: [
-        { title: "Airport transfers", text: "Meet-on-arrival pickups and drop-offs at King Khalid International Airport (RUH). Send your flight number and terminal and the pickup is planned around your flight." },
+        { title: "Airport transfers", text: "Pickups and drop-offs at King Khalid International Airport (RUH). Send your flight number and terminal and the pickup is planned around your flight." },
         { title: "Business and corporate travel", text: "Rides to meetings in KAFD, Olaya and Riyadh Front, for a single executive or a whole team, with a professional driver and a pickup time agreed in advance." },
         { title: "Hotel and door-to-door rides", text: "A private car from your hotel, apartment or office to wherever you are going, with no sharing and no waiting for a street hail." },
         { title: "Family and group travel", text: "Larger vehicles for families and groups with luggage, with the number of seats and bags confirmed before you travel." },
         { title: "Sightseeing and day trips", text: "Rides to Diriyah, the old city and Masmak Fort, the National Museum and the city's malls, with a return pickup arranged for you." },
         { title: "Intercity and cross-border trips", text: "Long-distance rides from Riyadh to Dammam, Makkah, Jeddah and other Saudi cities, and cross-border requests to the Gulf." },
+      ],
+    },
+    {
+      id: "why",
+      h2: "Why book your Riyadh taxi with Gulf Elite Transport",
+      kind: "items",
+      items: [
+        { title: "Fare confirmed before you commit", text: "You see the vehicle, driver and fare for your request before you agree to anything, so there is no haggling at the kerb." },
+        { title: "Private, point-to-point rides", text: "A car for you and your group from your pickup point to your drop-off point, not a shared ride." },
+        { title: "Planned around your flight or meeting", text: "Give us the flight number or the meeting time and the pickup is planned back from it." },
+        { title: "One request for both ways", text: "Ask for a return in the same request. Every route page covers both directions." },
+        { title: "Riyadh, other cities and beyond", text: "City rides, airport transfers, intercity trips and cross-border requests, all arranged through one booking." },
       ],
     },
     {
@@ -88,6 +101,19 @@ export function riyadhSections(extra: {
         { title: "SUV", text: "More space for families and for passengers with more luggage, and a good choice for longer rides." },
         { title: "Van or minibus", text: "For groups, with room for passengers and their bags in one vehicle." },
         { title: "Premium or executive car", text: "A chauffeur-driven executive car for business guests and special occasions." },
+      ],
+    },
+    {
+      id: "fares",
+      h2: "How Riyadh taxi fares work",
+      kind: "items",
+      intro: "We do not publish a price list, because the right fare depends on your ride. This is what shapes it.",
+      items: [
+        { title: "Distance and route", text: "A short ride between Olaya and KAFD is a different job from the airport run or a trip to another city." },
+        { title: "Vehicle type", text: "A sedan, an SUV, a van and an executive car are priced differently." },
+        { title: "Time and waiting", text: "Early mornings, late nights, busy event periods and any waiting time can change the fare." },
+        { title: "Return or several stops", text: "A return ride or a series of stops is quoted together, so you see the whole price." },
+        { title: "Confirmed first", text: "You see the fare for your request before you commit, and it is not changed at the end of the ride." },
       ],
     },
     {
@@ -117,6 +143,30 @@ export function riyadhSections(extra: {
         { title: "Olaya business corridor", text: "Offices, hotels and malls along Olaya Street. A side-street pickup beside the tower is often quicker than the main road." },
         { title: "Riyadh Front and exhibition venues", text: "Events and exhibitions bring crowds at set times, so we plan the pickup and the return with the event schedule in mind." },
         { title: "Regular and account travel", text: "If your company needs rides on a regular basis, tell us what you need and we agree how it is arranged." },
+      ],
+    },
+    {
+      id: "daytrips",
+      h2: "Sightseeing and day trips from Riyadh",
+      kind: "items",
+      items: [
+        { title: "Diriyah and At-Turaif", text: "The birthplace of the first Saudi state and a UNESCO World Heritage Site, on the north-west edge of the city. Evenings are busiest, so we arrange the return pickup in advance." },
+        { title: "Old city and Masmak Fort", text: "Masmak Fort, Souq Al Zal and Qasr Al Hukm sit close together in Ad Dirah. Streets are narrow, so the drop-off is usually at the edge of the market." },
+        { title: "Boulevard City and Riyadh Season", text: "Boulevard City is about 16 km from Olaya. Entertainment zones draw crowds at night, so we plan the pickup and the way home with that in mind." },
+        { title: "Edge of the World (Jebel Fihrayn)", text: "A cliff-edge viewpoint reached by a long drive out of the city. Many visitors use a 4WD for the final stretch of track, so tell us you want this trip and we confirm which vehicle is suitable." },
+        { title: "National Museum and Al Murabba", text: "The National Museum of Saudi Arabia and the King Abdulaziz Historical Centre are close to each other in central Riyadh." },
+      ],
+    },
+    {
+      id: "compare",
+      h2: "Pre-booked Riyadh taxi or a ride app?",
+      kind: "items",
+      intro: "Ride apps such as Uber and Careem work in Riyadh and are handy for a quick short trip. A pre-booked private ride suits other jobs better.",
+      items: [
+        { title: "Airport arrivals and early flights", text: "A booked driver is arranged for your flight, so you are not searching for a car after a long journey or at an early hour." },
+        { title: "Groups and luggage", text: "You tell us the passengers and bags and we confirm a vehicle that fits, instead of hoping an app car is big enough." },
+        { title: "Intercity and cross-border trips", text: "Long rides to Dammam, Makkah or the Gulf are planned with you in advance, with the fare confirmed first." },
+        { title: "A plan you can show others", text: "The vehicle, driver and fare are confirmed in writing before you travel, which helps when a company or a family is paying." },
       ],
     },
     {
@@ -158,6 +208,7 @@ export function riyadhSections(extra: {
         { title: "Traffic and events", text: "Weekday mornings, late afternoons and big events bring heavy traffic. Booking ahead and giving your time early helps us plan." },
         { title: "A spread-out city", text: "Districts can be tens of kilometres apart, so give the exact address or a pin location and a nearby landmark." },
         { title: "Prayer times", text: "Roads and entrances near mosques are busier around prayer times, which can affect pickups." },
+        { title: "Metro and buses", text: "Riyadh has a public metro and bus network, which suits some city trips. A private ride suits door-to-door travel, luggage, the airport and trips between cities." },
       ],
     },
     extra.bookingSteps,
@@ -172,6 +223,9 @@ export function riyadhSections(extra: {
         { q: "Can I book an airport transfer to or from King Khalid International Airport?", a: "Yes. Send your flight number, terminal and time. We plan the pickup around your flight and confirm the driver and fare before you commit." },
         { q: "How far is Riyadh airport from the city centre?", a: "King Khalid International Airport is in the north of the city. It is about 41 km by road from Olaya and about 31 km from KAFD, and the driving time depends on traffic." },
         { q: "Do you publish fares for Riyadh rides?", a: "No standard fares are published. Each ride is quoted for your request, and you confirm the fare before you commit." },
+        { q: "How much does a taxi cost in Riyadh?", a: "It depends on the distance, the vehicle, the time of day and any waiting or return. Send your pickup and destination and we confirm the fare for your ride before you commit." },
+        { q: "Is a pre-booked taxi better than a ride app in Riyadh?", a: "Apps are handy for quick short trips. A pre-booked private ride suits airport arrivals, early flights, groups with luggage and long trips, because the vehicle, driver and fare are confirmed in advance." },
+        { q: "Can you take me to the Edge of the World?", a: "Yes, a trip to Jebel Fihrayn can be requested. Many visitors use a 4WD for the last stretch, so tell us your plan and we confirm a suitable vehicle." },
         { q: "Can I hire a car with a driver for a day or for several stops?", a: "Yes, a car for a series of stops or for a longer period can be arranged. Tell us what you plan and for how long, and we confirm what is possible." },
         { q: "Can you take me to KAFD or Olaya for a business meeting?", a: "Yes. Tell us the tower or hotel and the time of your meeting, and we plan the pickup around it. KAFD has controlled entrances, so name the entrance you will use." },
         { q: "Can I book a ride from Riyadh to another city?", a: "Yes. Riyadh to Dammam, Makkah, Madinah, Jeddah and many other cities can be requested, and the distance and plan are confirmed with you." },
