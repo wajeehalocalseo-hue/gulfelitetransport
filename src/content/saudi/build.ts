@@ -841,13 +841,24 @@ function assignLayouts(pages: PlacePage[]) {
 }
 assignLayouts(placePages);
 
-// Every link to the Riyadh city page points to its keyword URL, so nothing on the site goes through the redirect.
-const toMain = (path: string) => (path === RIYADH_PATH ? RIYADH_MAIN : path);
+/**
+ * Riyadh's keyword URLs: the city page is /riyadh-taxi-service, a district is /riyadh-taxi-service/<district>-taxi-service
+ * and a ride between two districts is /riyadh-taxi-service/<a>-to-<b>-taxi. The old addresses redirect (see worker.js).
+ */
+export const riyadhUrl = (path: string) => {
+  if (path === RIYADH_PATH) return RIYADH_MAIN;
+  if (!path.startsWith(`${RIYADH_PATH}/`)) return path;
+  const slug = path.slice(RIYADH_PATH.length + 1);
+  return `${RIYADH_MAIN}/${slug}${slug.includes("-to-") ? "-taxi" : "-taxi-service"}`;
+};
+// Every page and every link uses the keyword URL, so nothing on the site goes through the redirect.
 for (const p of placePages) {
-  p.crumbs = p.crumbs.map((c) => ({ ...c, path: toMain(c.path) }));
-  p.children = p.children.map((c) => ({ ...c, path: toMain(c.path) }));
+  p.path = riyadhUrl(p.path);
+  p.crumbs = p.crumbs.map((c) => ({ ...c, path: riyadhUrl(c.path) }));
+  p.children = p.children.map((c) => ({ ...c, path: riyadhUrl(c.path) }));
   for (const s of p.sections) {
-    if (s.kind === "links") s.items = s.items.map((i) => ({ ...i, href: toMain(i.href) }));
+    if (s.kind === "links") s.items = s.items.map((i) => ({ ...i, href: riyadhUrl(i.href) }));
+    if (s.kind === "table") s.rows = s.rows.map((r) => ({ ...r, href: r.href ? riyadhUrl(r.href) : r.href }));
   }
 }
 

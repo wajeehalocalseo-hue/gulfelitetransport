@@ -16,6 +16,12 @@ export default {
       url.pathname = "/riyadh-taxi-service";
       return Response.redirect(url.toString(), 301);
     }
+    // Riyadh districts and district-to-district rides moved under the keyword page too.
+    const sub = url.pathname.match(/^\/taxi-saudi-arabia\/riyadh-region\/riyadh\/([a-z0-9-]+)\/?$/);
+    if (sub) {
+      url.pathname = `/riyadh-taxi-service/${sub[1]}${sub[1].includes("-to-") ? "-taxi" : "-taxi-service"}`;
+      return Response.redirect(url.toString(), 301);
+    }
     return env.ASSETS.fetch(request);
   },
 };

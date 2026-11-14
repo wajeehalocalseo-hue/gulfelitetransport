@@ -35,7 +35,7 @@ function build(): Map<string, SitemapEntry[]> {
   const cityPages = placePages.filter((p) => p.kind === "city");
   // The Riyadh landing page has a keyword URL but still belongs to the Riyadh sitemap (taxi-riyadh).
   const baseOf = (c: { path: string }) => (c.path === RIYADH_MAIN ? RIYADH_CITY_PATH : c.path);
-  const inCity = (p: { path: string }) => cityPages.find((c) => p.path === c.path || p.path.startsWith(`${baseOf(c)}/`));
+  const inCity = (p: { path: string }) => cityPages.find((c) => p.path === c.path || p.path.startsWith(`${c.path}/`));
   const taxi: SitemapEntry[] = [];
   const umrah: SitemapEntry[] = [];
   for (const c of cityPages) groups.set(`taxi-${baseOf(c).split("/").pop()}`, []);
