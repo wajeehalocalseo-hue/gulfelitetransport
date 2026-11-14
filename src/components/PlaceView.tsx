@@ -303,6 +303,25 @@ function SectionBlock({ s, style }: { s: Section; style: PlacePage["layout"]["bo
           </ul>
         </>
       )}
+      {s.kind === "gallery" && (
+        <>
+          {s.intro && <p className="mt-4 text-lg leading-8 text-muted">{s.intro}</p>}
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {s.photos.map((p, i) => (
+              <figure key={p.src} className={`overflow-hidden rounded-2xl border border-navy/10 bg-white ${i === 0 ? "sm:col-span-2 lg:col-span-2" : ""}`}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={p.src} alt={p.alt} width={p.w} height={p.h} loading={i === 0 ? "eager" : "lazy"} decoding="async" className={`w-full object-cover ${i === 0 ? "h-64 sm:h-80" : "h-56"}`} />
+                <figcaption className="p-4 text-sm leading-6 text-muted">
+                  <span className="block font-bold text-navy">{p.caption}</span>
+                  Photo: {p.author},{" "}
+                  <a href={p.licenseUrl} target="_blank" rel="noopener noreferrer license" className={textLink}>{p.license}</a>,{" "}
+                  <a href={p.source} target="_blank" rel="noopener noreferrer" className={textLink}>Wikimedia Commons</a>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </>
+      )}
       {s.kind === "weather" && (
         <>
           {s.intro && <p className="mt-4 text-lg leading-8 text-muted">{s.intro}</p>}

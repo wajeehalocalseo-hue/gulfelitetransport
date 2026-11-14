@@ -69,6 +69,8 @@ export type Section =
   | { id: string; h2: string; kind: "table"; intro?: string; head: string[]; rows: { cells: string[]; href?: string }[]; note?: string }
   /** Embedded map of a place, with links that open each named place in Google Maps. */
   | { id: string; h2: string; kind: "map"; intro?: string; query: string; places: { name: string; query: string; note?: string }[] }
+  /** Photos with their attribution. Each photo is a licensed image, credited to its author. */
+  | { id: string; h2: string; kind: "gallery"; intro?: string; photos: { src: string; w: number; h: number; alt: string; caption: string; author: string; license: string; licenseUrl: string; source: string }[] }
   /** Live weather for a place (client-side). */
   | { id: string; h2: string; kind: "weather"; intro?: string; place: string; lat: number; lng: number };
 
