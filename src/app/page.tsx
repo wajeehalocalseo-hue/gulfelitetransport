@@ -61,13 +61,6 @@ export default function Home() {
   const topCities = cities.slice(0, 8);
   const topRoutes = routes.slice(0, 6);
   const topAirports = airports.slice(0, 4);
-  const counts = [
-    { n: services.length, label: "transport services" },
-    { n: regions.length, label: "regions covered" },
-    { n: cities.length, label: "city guides" },
-    { n: airports.length, label: "airport guides" },
-    { n: routes.length, label: "intercity routes" },
-  ];
   const contactRows: { label: string; value: string; href?: string }[] = [
     ...(site.phone && telUrl ? [{ label: "Phone", value: site.phone, href: telUrl }] : []),
     ...(wa ? [{ label: "WhatsApp", value: "Message us on WhatsApp", href: wa }] : []),
@@ -92,17 +85,16 @@ export default function Home() {
             <h1 id="hero-title" className="font-display mt-5 text-4xl leading-[1.1] sm:text-5xl lg:text-[3.3rem]">
               {c.hero.h1}
             </h1>
-            <p className="mt-6 max-w-xl text-lg leading-8 text-white/80"><RichText text={c.hero.text} tone="dark" /></p>
+            <p className="mt-6 max-w-xl text-lg leading-8 text-white/80">Book a taxi, an airport transfer or an Umrah ride, or ask for a freight quotation. We confirm the vehicle, driver and fare with you before you commit.</p>
             <ul className="mt-7 grid gap-2.5 sm:grid-cols-2" aria-label="What we arrange">
-              {c.hero.chips.map((x) => (
+              {c.hero.chips.slice(0, 3).map((x) => (
                 <li key={x} className="flex items-center gap-2.5 text-sm font-semibold text-white/90">
                   <Icon name="check" className="h-4 w-4 shrink-0 text-accent" /> {x}
                 </li>
               ))}
             </ul>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <Link href="#hero-quote" className={btnPrimary}>Request a Ride or Quote</Link>
-              <Link href={BASE} className={btnGhost}>Find Your City</Link>
+              <Link href="#hero-quote" className={btnPrimary}>Book a Ride</Link>
               {telUrl && (
                 <a href={telUrl} className={btnGhost}>
                   <Icon name="phone" className="h-4 w-4" /> Call Now
@@ -130,85 +122,54 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 2. Coverage ledger (entity facts, taken from the real page data) */}
-      <section aria-label="Coverage at a glance" className="border-b border-navy/10 bg-ivory">
-        <div className={`${wrap} py-8`}>
-          <dl className="grid grid-cols-2 gap-y-6 text-center sm:grid-cols-3 lg:grid-cols-5 lg:divide-x lg:divide-navy/15">
-            {counts.map((s) => (
-              <div key={s.label} className="px-4">
-                <dd className="font-display text-4xl text-navy">{s.n}</dd>
-                <dt className="mt-1 text-xs font-bold uppercase tracking-[0.15em] text-muted">{s.label}</dt>
-              </div>
-            ))}
-          </dl>
-          <p className="mt-5 text-center text-xs text-muted">{c.stats.note}</p>
-        </div>
-      </section>
-
-      {/* 3. Direct answer (AEO / GEO: a self-contained definition) */}
-      <section aria-labelledby="answer-title" className={`${wrap} py-16`}>
-        <div className="mx-auto max-w-4xl border-l-4 border-accent bg-white p-7 shadow-sm sm:p-9">
-          <p className="text-xs font-bold uppercase tracking-[0.22em] text-gold">{c.answer.eyebrow}</p>
-          <h2 id="answer-title" className="font-display mt-2 text-2xl text-navy sm:text-3xl">{c.answer.h2}</h2>
-          <p id="answer-text" className="mt-4 text-lg leading-8 text-muted"><RichText text={c.answer.text} /></p>
-        </div>
-      </section>
-
-      {/* 4. Two paths */}
-      <section aria-label="Choose a service type" className={`${wrap} pb-20`}>
-        <div className="grid gap-6 md:grid-cols-2">
-          {c.paths.map((p) => (
-            <article key={p.title} className={`group flex flex-col overflow-hidden ${card} shadow-sm transition hover:shadow-lg`}>
-              <div className="relative aspect-[2/1] overflow-hidden bg-navy">
-                <ServiceImage slug={p.scene} title={p.title} className="h-full w-full transition duration-500 group-hover:scale-[1.03]" />
-              </div>
-              <div className="flex flex-1 flex-col border-t-4 border-accent p-7">
-                <div className="flex items-start gap-4">
-                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-navy text-accent">
-                    <Icon name={p.icon} className="h-6 w-6" />
-                  </span>
-                  <div>
-                    <h2 className="font-display text-2xl text-navy">{p.title}</h2>
-                    <p className="mt-2 leading-7 text-muted"><RichText text={p.text} /></p>
-                  </div>
-                </div>
-                <ul className="mt-5 grid gap-2">
-                  {p.points.map((x) => (
-                    <li key={x} className="flex gap-2 text-sm font-medium text-navy">
-                      <Icon name="check" className="mt-0.5 h-4 w-4 shrink-0 text-gold" /> {x}
-                    </li>
-                  ))}
-                </ul>
-                <Link href={p.href} className={`${textLink} mt-6 inline-flex items-center gap-2`}>
-                  {p.cta} <Icon name="arrow" className="h-4 w-4" />
-                </Link>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      {/* 5. Finder */}
-      <section aria-labelledby="finder-title" className="bg-white py-20">
+      {/* 2. What do you need? The first thing a new visitor sees under the hero */}
+      <section id="choose" aria-labelledby="choose-title" className="border-b border-navy/10 bg-ivory py-16">
         <div className={wrap}>
-          <Head id="finder-title" eyebrow={c.finder.eyebrow} title={c.finder.h2} lead={c.finder.text} />
-          <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {c.finder.items.map((i) => (
-              <li key={i.title}>
-                <Link href={i.href} className="group flex h-full flex-col rounded-lg border border-navy/10 bg-ivory p-5 transition hover:border-accent hover:shadow-md">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-md bg-navy text-accent">
-                    <Icon name={i.icon} />
-                  </span>
-                  <span className="mt-4 text-lg font-bold text-navy">{i.title}</span>
-                  <span className="mt-1 text-sm leading-6 text-muted">{i.text}</span>
-                  <span className="mt-auto flex items-center gap-1.5 pt-4 text-sm font-bold text-navy">
-                    Open <Icon name="arrow" className="h-4 w-4 transition group-hover:translate-x-1" />
-                  </span>
-                </Link>
+          <Head id="choose-title" eyebrow="Start here" title="What do you need?" lead="Pick one. Each opens a page with the details and a booking form." center />
+          <ul className="mt-10 grid gap-5 md:grid-cols-3">
+            {[
+              { icon: "bus", title: "Taxi & cab rides", text: "A car with a driver in a Saudi city, to or from an airport, or between cities.", href: BASE, cta: "Find your city", href2: `${BASE}/routes`, cta2: "Intercity routes" },
+              { icon: "building", title: "Umrah & Hajj transport", text: "Rides between Jeddah, Makkah, Madinah and Taif: airport, hotel, the Haram and between the holy cities.", href: "/umrah-hajj-taxi", cta: "Umrah & Hajj rides", href2: "/umrah-hajj-taxi/jeddah-airport-to-makkah", cta2: "Jeddah airport to Makkah" },
+              { icon: "truck", title: "Freight, cargo & equipment", text: "Trucks, containers, equipment moving, contract fleets and delivery for businesses.", href: "/services", cta: "See all services", href2: "/contact", cta2: "Request a quotation" },
+            ].map((x) => (
+              <li key={x.title} className={`flex flex-col ${card} border-t-4 border-t-accent p-7 shadow-sm`}>
+                <span className="flex h-12 w-12 items-center justify-center rounded-md bg-navy text-accent">
+                  <Icon name={x.icon} className="h-6 w-6" />
+                </span>
+                <h3 className="font-display mt-5 text-2xl text-navy">{x.title}</h3>
+                <p className="mt-2 flex-1 leading-7 text-muted">{x.text}</p>
+                <Link href={x.href} className={`${btnDark} mt-6`}>{x.cta}</Link>
+                <Link href={x.href2} className={`${textLink} mt-4 text-center`}>{x.cta2}</Link>
               </li>
             ))}
           </ul>
+          <nav aria-label="Jump to a section" className="mt-10 flex flex-wrap items-center justify-center gap-2 text-sm">
+            <span className="font-semibold text-muted">Or jump to:</span>
+            {[
+              ["How it works", "#process"],
+              ["Vehicles", "#fleet"],
+              ["Prices", "#pricing"],
+              ["Questions", "#faq"],
+              ["Contact", "#quote"],
+            ].map(([t, h]) => (
+              <Link key={h} href={h} className={chip}>{t}</Link>
+            ))}
+          </nav>
         </div>
+      </section>
+      {/* 10. Process */}
+      <section id="process" aria-labelledby="process-title" className={`${wrap} py-20`}>
+        <Head id="process-title" eyebrow={c.process.eyebrow} title={c.process.h2} lead={c.process.text} />
+        <ol className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          {c.process.steps.map((s, i) => (
+            <li key={s.title} className="relative border-t-2 border-navy/15 pt-6">
+              <span aria-hidden="true" className="absolute -top-px left-0 h-0.5 w-12 bg-accent" />
+              <span className="font-display text-5xl text-accent">{String(i + 1).padStart(2, "0")}</span>
+              <h3 className="mt-2 text-lg font-bold text-navy">{s.title}</h3>
+              <p className="mt-2 text-sm leading-7 text-muted"><RichText text={s.text} /></p>
+            </li>
+          ))}
+        </ol>
       </section>
 
       {/* 6. Taxi coverage (local SEO: places, airports, routes as entities) */}
@@ -294,7 +255,7 @@ export default function Home() {
       </section>
 
       {/* 7. Vehicles */}
-      <section aria-labelledby="fleet-title" className="bg-ivory py-20">
+      <section id="fleet" aria-labelledby="fleet-title" className="bg-ivory py-20">
         <div className={wrap}>
           <Head id="fleet-title" eyebrow={c.fleet.eyebrow} title={c.fleet.h2} lead={c.fleet.text} />
           <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -315,7 +276,7 @@ export default function Home() {
       </section>
 
       {/* 8. Pricing */}
-      <section aria-labelledby="pricing-title" className={`${wrap} py-20`}>
+      <section id="pricing" aria-labelledby="pricing-title" className={`${wrap} py-20`}>
         <Head id="pricing-title" eyebrow={c.pricing.eyebrow} title={c.pricing.h2} />
         <ol className="mt-10 grid gap-5 md:grid-cols-3">
           {c.pricing.points.map((p, i) => (
@@ -388,21 +349,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 10. Process */}
-      <section aria-labelledby="process-title" className={`${wrap} py-20`}>
-        <Head id="process-title" eyebrow={c.process.eyebrow} title={c.process.h2} lead={c.process.text} />
-        <ol className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {c.process.steps.map((s, i) => (
-            <li key={s.title} className="relative border-t-2 border-navy/15 pt-6">
-              <span aria-hidden="true" className="absolute -top-px left-0 h-0.5 w-12 bg-accent" />
-              <span className="font-display text-5xl text-accent">{String(i + 1).padStart(2, "0")}</span>
-              <h3 className="mt-2 text-lg font-bold text-navy">{s.title}</h3>
-              <p className="mt-2 text-sm leading-7 text-muted"><RichText text={s.text} /></p>
-            </li>
-          ))}
-        </ol>
-      </section>
-
       {/* 11. Why */}
       <section aria-labelledby="why-title" className="bg-ivory py-20">
         <div className={wrap}>
@@ -418,6 +364,15 @@ export default function Home() {
               </article>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* 3. Direct answer (AEO / GEO: a self-contained definition) */}
+      <section aria-labelledby="answer-title" className={`${wrap} py-16`}>
+        <div className="mx-auto max-w-4xl border-l-4 border-accent bg-white p-7 shadow-sm sm:p-9">
+          <p className="text-xs font-bold uppercase tracking-[0.22em] text-gold">{c.answer.eyebrow}</p>
+          <h2 id="answer-title" className="font-display mt-2 text-2xl text-navy sm:text-3xl">{c.answer.h2}</h2>
+          <p id="answer-text" className="mt-4 text-lg leading-8 text-muted"><RichText text={c.answer.text} /></p>
         </div>
       </section>
 
@@ -481,7 +436,7 @@ export default function Home() {
       </section>
 
       {/* 15. FAQ */}
-      <section aria-labelledby="faq-title" className="bg-white py-20">
+      <section id="faq" aria-labelledby="faq-title" className="bg-white py-20">
         <div className="mx-auto max-w-4xl px-5">
           <Head id="faq-title" eyebrow="FAQ" title="Frequently asked questions" center />
           <div className="mt-10">
