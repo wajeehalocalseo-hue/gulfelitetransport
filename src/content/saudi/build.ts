@@ -1,7 +1,8 @@
 import { routeExtras, umrahPages, UMRAH_BASE } from "../umrah/pages";
 import { airports, areas, routes } from "./places";
 import { buildPairs } from "./pairs";
-import { riyadhAreas } from "./riyadh-areas";
+import { riyadhAreas, riyadhAreaById } from "./riyadh-areas";
+import { districtOverrides } from "./riyadh-districts";
 import { intlRoutes } from "./international";
 import { riyadhMain, riyadhSections } from "./riyadh-main";
 import { cities } from "./cities";
@@ -408,6 +409,7 @@ function cityPages(): PlacePage[] {
 const kmOf = (id: string) => need(routes.find((r) => r.id === id), id).km;
 
 function areaPages(): PlacePage[] {
+  let rIndex = 0;
   return allAreas.map((a, i) => {
     const c = need(cityById.get(a.city), a.city);
     const region = need(regionById.get(c.region), c.region);
@@ -419,15 +421,31 @@ function areaPages(): PlacePage[] {
       ...(ap ? [{ name: ap.name, href: `${BASE}/airports/${ap.id}`, note: `Airport ${ap.code}` }] : []),
       ...siblings.map((x) => ({ name: x.name, href: `${cityPath(c)}/${x.id}`, note: `Other area in ${c.name}` })),
     ];
+    // Riyadh districts are landing pages: commercial copy, driving distances, map and sources (see riyadh-districts.ts).
+    const info = a.city === "riyadh" ? riyadhAreaById.get(a.id) : undefined;
+    const rd = info
+      ? districtOverrides({
+          area: a,
+          info,
+          all: riyadhAreas,
+          index: rIndex++,
+          pairs: riyadhPairs.index[a.id] ?? [],
+          districtHref: (id) => `${RIYADH_PATH}/${id}`,
+          bookingSteps: bookingSteps(`in ${a.name}`),
+          notAssumed,
+          moreLinks: [{ name: "Riyadh Taxi Service", href: RIYADH_MAIN, note: "Main Riyadh page" }, ...links.filter((l) => !l.note?.startsWith("Other area")).slice(1)],
+        })
+      : undefined;
     return {
       kind: "area" as const,
       path,
+      simple: rd ? true : undefined,
       name: a.name,
-      title: `Taxi & Cab Rides in ${a.name}, ${c.name}`,
-      description: `Request a taxi or cab in ${a.name}, ${c.name}: ${a.places[0].name} and nearby places. Fares and availability confirmed for each request.`,
-      h1: `Taxi & Cab Service in ${a.name}, ${c.name}`,
-      lead: a.tagline,
-      directAnswer: `Gulf Elite Transport arranges taxi and cab rides to and from ${a.name} in ${c.name}. Tell us the exact building, gate or street for the pickup, plus your destination and the number of passengers, and we confirm the vehicle, driver and fare for your request before you commit.`,
+      title: rd?.title ?? `Taxi & Cab Rides in ${a.name}, ${c.name}`,
+      description: rd?.description ?? `Request a taxi or cab in ${a.name}, ${c.name}: ${a.places[0].name} and nearby places. Fares and availability confirmed for each request.`,
+      h1: rd?.h1 ?? `Taxi & Cab Service in ${a.name}, ${c.name}`,
+      lead: rd?.lead ?? a.tagline,
+      directAnswer: rd?.directAnswer ?? `Gulf Elite Transport arranges taxi and cab rides to and from ${a.name} in ${c.name}. Tell us the exact building, gate or street for the pickup, plus your destination and the number of passengers, and we confirm the vehicle, driver and fare for your request before you commit.`,
       crumbs: [
         { name: "Home", path: "/" },
         { name: "Taxi & Cab Services in Saudi Arabia", path: BASE },
@@ -435,13 +453,13 @@ function areaPages(): PlacePage[] {
         { name: c.name, path: cityPath(c) },
         { name: a.name, path },
       ],
-      facts: [
+      facts: rd?.facts ?? [
         { label: "City", value: c.name },
         { label: "Region", value: region.name },
         { label: "Known for", value: a.places[0].name },
         { label: "Airport", value: ap ? ap.code : "See city page" },
       ],
-      sections: [
+      sections: rd?.sections ?? [
         { id: "about", h2: `About ${a.name}`, kind: "text", paragraphs: [a.about, areaGetting[a.id] ?? (a.city === "riyadh" ? riyadhAccess[a.id] : undefined) ?? ""].filter(Boolean) },
         { id: "places", h2: `Places in and around ${a.name}`, kind: "items", items: a.places.map((x) => ({ title: x.name, text: x.note })) },
         ...(a.city === "riyadh" && riyadhPairs.index[a.id]
@@ -452,7 +470,12 @@ function areaPages(): PlacePage[] {
         { id: "faq", h2: `${a.name}: questions`, kind: "faq", items: [a.faq, { q: "Do you publish fares?", a: "No. The fare is confirmed with you before you commit." }] },
       ],
       layout: layoutFor("area", i),
-      entities: [{ type: "Place", name: `${a.name}, ${c.name}` }, cityEntity(c), country],
+      entities: [
+        info ? { type: "Place" as const, name: `${a.name}, ${c.name}`, ar: info.ar, lat: info.lat, lng: info.lng } : { type: "Place" as const, name: `${a.name}, ${c.name}` },
+        cityEntity(c),
+        country,
+        ...(info && ap ? [{ type: "Airport" as const, name: ap.name, iata: ap.code }] : []),
+      ],
       children: [],
       prefill: { pickup: `${a.name}, ${c.name}` },
     };
@@ -775,6 +798,11 @@ function assignLayouts(pages: PlacePage[]) {
     pages
       .filter(g.match)
       .forEach((p, i) => {
+        // Landing-page style pages have no side form, so only the hero and body vary; the section order varies too.
+        if (p.simple) {
+          p.layout = { hero: h[i % h.length], body: BODIES[Math.floor(i / h.length) % BODIES.length], form: "bottom" };
+          return;
+        }
         for (let k = 0; k < h.length * BODIES.length * FORMS.length; k++) {
           const n = i + k;
           const cand: PlaceLayout = {

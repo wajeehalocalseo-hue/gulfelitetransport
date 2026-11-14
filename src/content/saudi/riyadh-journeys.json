@@ -1,0 +1,998 @@
+{
+ "king-abdullah-financial-district": {
+  "king-khalid-international-airport": {
+   "km": 33.6,
+   "min": 26
+  },
+  "olaya": {
+   "km": 12.7,
+   "min": 14
+  },
+  "ad-dirah": {
+   "km": 20.2,
+   "min": 19
+  },
+  "diriyah": {
+   "km": 11.4,
+   "min": 14
+  }
+ },
+ "olaya": {
+  "king-khalid-international-airport": {
+   "km": 39.5,
+   "min": 29
+  },
+  "king-abdullah-financial-district": {
+   "km": 12.7,
+   "min": 14
+  },
+  "ad-dirah": {
+   "km": 8.8,
+   "min": 9
+  },
+  "diriyah": {
+   "km": 18.8,
+   "min": 19
+  }
+ },
+ "diplomatic-quarter": {
+  "king-khalid-international-airport": {
+   "km": 46.5,
+   "min": 36
+  },
+  "olaya": {
+   "km": 11.1,
+   "min": 15
+  },
+  "king-abdullah-financial-district": {
+   "km": 17.3,
+   "min": 20
+  },
+  "ad-dirah": {
+   "km": 15.7,
+   "min": 18
+  },
+  "diriyah": {
+   "km": 14.1,
+   "min": 19
+  }
+ },
+ "diriyah": {
+  "king-khalid-international-airport": {
+   "km": 36.8,
+   "min": 28
+  },
+  "olaya": {
+   "km": 18.8,
+   "min": 19
+  },
+  "king-abdullah-financial-district": {
+   "km": 11.4,
+   "min": 14
+  },
+  "ad-dirah": {
+   "km": 24,
+   "min": 22
+  }
+ },
+ "ad-dirah": {
+  "king-khalid-international-airport": {
+   "km": 44.1,
+   "min": 33
+  },
+  "olaya": {
+   "km": 8.8,
+   "min": 9
+  },
+  "king-abdullah-financial-district": {
+   "km": 20.2,
+   "min": 19
+  },
+  "diriyah": {
+   "km": 24,
+   "min": 22
+  }
+ },
+ "al-murabba": {
+  "king-khalid-international-airport": {
+   "km": 41.7,
+   "min": 31
+  },
+  "olaya": {
+   "km": 6.2,
+   "min": 7
+  },
+  "king-abdullah-financial-district": {
+   "km": 18,
+   "min": 18
+  },
+  "ad-dirah": {
+   "km": 3.2,
+   "min": 5
+  },
+  "diriyah": {
+   "km": 21.7,
+   "min": 21
+  }
+ },
+ "al-malaz": {
+  "king-khalid-international-airport": {
+   "km": 38.9,
+   "min": 28
+  },
+  "olaya": {
+   "km": 7.5,
+   "min": 9
+  },
+  "king-abdullah-financial-district": {
+   "km": 20.1,
+   "min": 19
+  },
+  "ad-dirah": {
+   "km": 5.4,
+   "min": 7
+  },
+  "diriyah": {
+   "km": 23.8,
+   "min": 22
+  }
+ },
+ "al-sulaimaniyah": {
+  "king-khalid-international-airport": {
+   "km": 38.5,
+   "min": 29
+  },
+  "olaya": {
+   "km": 2.7,
+   "min": 4
+  },
+  "king-abdullah-financial-district": {
+   "km": 13.1,
+   "min": 14
+  },
+  "ad-dirah": {
+   "km": 10.4,
+   "min": 11
+  },
+  "diriyah": {
+   "km": 18.9,
+   "min": 20
+  }
+ },
+ "al-wurud": {
+  "king-khalid-international-airport": {
+   "km": 36.3,
+   "min": 26
+  },
+  "olaya": {
+   "km": 3,
+   "min": 5
+  },
+  "king-abdullah-financial-district": {
+   "km": 10.1,
+   "min": 12
+  },
+  "ad-dirah": {
+   "km": 11.1,
+   "min": 10
+  },
+  "diriyah": {
+   "km": 15.9,
+   "min": 17
+  }
+ },
+ "al-mohammadiyah": {
+  "king-khalid-international-airport": {
+   "km": 33.1,
+   "min": 24
+  },
+  "olaya": {
+   "km": 8.6,
+   "min": 9
+  },
+  "king-abdullah-financial-district": {
+   "km": 5.1,
+   "min": 7
+  },
+  "ad-dirah": {
+   "km": 16.1,
+   "min": 14
+  },
+  "diriyah": {
+   "km": 11.3,
+   "min": 14
+  }
+ },
+ "al-nakheel": {
+  "king-khalid-international-airport": {
+   "km": 33.2,
+   "min": 26
+  },
+  "olaya": {
+   "km": 12.2,
+   "min": 14
+  },
+  "king-abdullah-financial-district": {
+   "km": 6.2,
+   "min": 10
+  },
+  "ad-dirah": {
+   "km": 19.6,
+   "min": 19
+  },
+  "diriyah": {
+   "km": 9.1,
+   "min": 15
+  }
+ },
+ "hittin": {
+  "king-khalid-international-airport": {
+   "km": 34.3,
+   "min": 25
+  },
+  "olaya": {
+   "km": 20.3,
+   "min": 18
+  },
+  "king-abdullah-financial-district": {
+   "km": 13.1,
+   "min": 14
+  },
+  "ad-dirah": {
+   "km": 25.7,
+   "min": 22
+  },
+  "diriyah": {
+   "km": 5.7,
+   "min": 10
+  }
+ },
+ "al-malqa": {
+  "king-khalid-international-airport": {
+   "km": 27.1,
+   "min": 22
+  },
+  "olaya": {
+   "km": 20.1,
+   "min": 20
+  },
+  "king-abdullah-financial-district": {
+   "km": 15.8,
+   "min": 14
+  },
+  "ad-dirah": {
+   "km": 29.7,
+   "min": 24
+  },
+  "diriyah": {
+   "km": 14.7,
+   "min": 15
+  }
+ },
+ "al-yasmin": {
+  "king-khalid-international-airport": {
+   "km": 21,
+   "min": 16
+  },
+  "olaya": {
+   "km": 18.6,
+   "min": 18
+  },
+  "king-abdullah-financial-district": {
+   "km": 12,
+   "min": 14
+  },
+  "ad-dirah": {
+   "km": 26.2,
+   "min": 23
+  },
+  "diriyah": {
+   "km": 19.8,
+   "min": 18
+  }
+ },
+ "al-narjis": {
+  "king-khalid-international-airport": {
+   "km": 20.7,
+   "min": 19
+  },
+  "olaya": {
+   "km": 22.7,
+   "min": 25
+  },
+  "king-abdullah-financial-district": {
+   "km": 16.1,
+   "min": 22
+  },
+  "ad-dirah": {
+   "km": 30.2,
+   "min": 30
+  },
+  "diriyah": {
+   "km": 20.3,
+   "min": 22
+  }
+ },
+ "al-sahafah": {
+  "king-khalid-international-airport": {
+   "km": 26.1,
+   "min": 20
+  },
+  "olaya": {
+   "km": 14.4,
+   "min": 14
+  },
+  "king-abdullah-financial-district": {
+   "km": 8.6,
+   "min": 10
+  },
+  "ad-dirah": {
+   "km": 22,
+   "min": 19
+  },
+  "diriyah": {
+   "km": 14.6,
+   "min": 16
+  }
+ },
+ "qurtubah": {
+  "king-khalid-international-airport": {
+   "km": 25.1,
+   "min": 20
+  },
+  "olaya": {
+   "km": 22.6,
+   "min": 21
+  },
+  "king-abdullah-financial-district": {
+   "km": 19,
+   "min": 19
+  },
+  "ad-dirah": {
+   "km": 28.5,
+   "min": 26
+  },
+  "diriyah": {
+   "km": 22.1,
+   "min": 22
+  }
+ },
+ "al-rawdah": {
+  "king-khalid-international-airport": {
+   "km": 29.9,
+   "min": 23
+  },
+  "olaya": {
+   "km": 13.3,
+   "min": 16
+  },
+  "king-abdullah-financial-district": {
+   "km": 15.8,
+   "min": 18
+  },
+  "ad-dirah": {
+   "km": 22,
+   "min": 21
+  },
+  "diriyah": {
+   "km": 22.4,
+   "min": 22
+  }
+ },
+ "al-suwaidi": {
+  "king-khalid-international-airport": {
+   "km": 53.2,
+   "min": 41
+  },
+  "olaya": {
+   "km": 17,
+   "min": 17
+  },
+  "king-abdullah-financial-district": {
+   "km": 29.7,
+   "min": 26
+  },
+  "ad-dirah": {
+   "km": 10,
+   "min": 11
+  },
+  "diriyah": {
+   "km": 28.4,
+   "min": 27
+  }
+ },
+ "al-aqiq": {
+  "king-khalid-international-airport": {
+   "km": 30.8,
+   "min": 24
+  },
+  "olaya": {
+   "km": 14.4,
+   "min": 15
+  },
+  "king-abdullah-financial-district": {
+   "km": 6.5,
+   "min": 8
+  },
+  "ad-dirah": {
+   "km": 21.9,
+   "min": 20
+  },
+  "diriyah": {
+   "km": 13.6,
+   "min": 15
+  }
+ },
+ "al-hamra": {
+  "king-khalid-international-airport": {
+   "km": 27.4,
+   "min": 21
+  },
+  "olaya": {
+   "km": 16.9,
+   "min": 17
+  },
+  "king-abdullah-financial-district": {
+   "km": 18.2,
+   "min": 19
+  },
+  "ad-dirah": {
+   "km": 23,
+   "min": 21
+  },
+  "diriyah": {
+   "km": 23.8,
+   "min": 23
+  }
+ },
+ "granada": {
+  "king-khalid-international-airport": {
+   "km": 24.6,
+   "min": 18
+  },
+  "olaya": {
+   "km": 21.6,
+   "min": 19
+  },
+  "king-abdullah-financial-district": {
+   "km": 17.9,
+   "min": 16
+  },
+  "ad-dirah": {
+   "km": 27.5,
+   "min": 23
+  },
+  "diriyah": {
+   "km": 21,
+   "min": 19
+  }
+ },
+ "al-izdihar": {
+  "king-khalid-international-airport": {
+   "km": 25.4,
+   "min": 18
+  },
+  "olaya": {
+   "km": 17.7,
+   "min": 17
+  },
+  "king-abdullah-financial-district": {
+   "km": 14.6,
+   "min": 15
+  },
+  "ad-dirah": {
+   "km": 23.7,
+   "min": 22
+  },
+  "diriyah": {
+   "km": 19.4,
+   "min": 19
+  }
+ },
+ "al-mughrizat": {
+  "king-khalid-international-airport": {
+   "km": 26.3,
+   "min": 20
+  },
+  "olaya": {
+   "km": 15.3,
+   "min": 16
+  },
+  "king-abdullah-financial-district": {
+   "km": 14.1,
+   "min": 15
+  },
+  "ad-dirah": {
+   "km": 21.2,
+   "min": 20
+  },
+  "diriyah": {
+   "km": 20.4,
+   "min": 20
+  }
+ },
+ "al-quds": {
+  "king-khalid-international-airport": {
+   "km": 29.9,
+   "min": 22
+  },
+  "olaya": {
+   "km": 15,
+   "min": 16
+  },
+  "king-abdullah-financial-district": {
+   "km": 20.6,
+   "min": 21
+  },
+  "ad-dirah": {
+   "km": 19.3,
+   "min": 20
+  },
+  "diriyah": {
+   "km": 26.3,
+   "min": 24
+  }
+ },
+ "al-rabwah": {
+  "king-khalid-international-airport": {
+   "km": 35.2,
+   "min": 26
+  },
+  "olaya": {
+   "km": 11.2,
+   "min": 13
+  },
+  "king-abdullah-financial-district": {
+   "km": 26.1,
+   "min": 23
+  },
+  "ad-dirah": {
+   "km": 11.3,
+   "min": 13
+  },
+  "diriyah": {
+   "km": 26.8,
+   "min": 26
+  }
+ },
+ "al-naseem": {
+  "king-khalid-international-airport": {
+   "km": 40.3,
+   "min": 29
+  },
+  "olaya": {
+   "km": 19.5,
+   "min": 18
+  },
+  "king-abdullah-financial-district": {
+   "km": 33.7,
+   "min": 28
+  },
+  "ad-dirah": {
+   "km": 20.6,
+   "min": 20
+  },
+  "diriyah": {
+   "km": 35.1,
+   "min": 31
+  }
+ },
+ "al-shifa": {
+  "king-khalid-international-airport": {
+   "km": 54.4,
+   "min": 40
+  },
+  "olaya": {
+   "km": 16.5,
+   "min": 16
+  },
+  "king-abdullah-financial-district": {
+   "km": 27.9,
+   "min": 26
+  },
+  "ad-dirah": {
+   "km": 10.2,
+   "min": 11
+  },
+  "diriyah": {
+   "km": 31.7,
+   "min": 29
+  }
+ },
+ "al-aziziyah": {
+  "king-khalid-international-airport": {
+   "km": 50.1,
+   "min": 38
+  },
+  "olaya": {
+   "km": 19.5,
+   "min": 21
+  },
+  "king-abdullah-financial-district": {
+   "km": 32.7,
+   "min": 31
+  },
+  "ad-dirah": {
+   "km": 11.3,
+   "min": 14
+  },
+  "diriyah": {
+   "km": 36.4,
+   "min": 34
+  }
+ },
+ "al-dar-al-baida": {
+  "king-khalid-international-airport": {
+   "km": 52.3,
+   "min": 41
+  },
+  "olaya": {
+   "km": 21.7,
+   "min": 25
+  },
+  "king-abdullah-financial-district": {
+   "km": 33.8,
+   "min": 36
+  },
+  "ad-dirah": {
+   "km": 14.7,
+   "min": 18
+  },
+  "diriyah": {
+   "km": 38.3,
+   "min": 39
+  }
+ },
+ "al-uraija": {
+  "king-khalid-international-airport": {
+   "km": 48.2,
+   "min": 39
+  },
+  "olaya": {
+   "km": 12,
+   "min": 15
+  },
+  "king-abdullah-financial-district": {
+   "km": 22.4,
+   "min": 25
+  },
+  "ad-dirah": {
+   "km": 7.6,
+   "min": 11
+  },
+  "diriyah": {
+   "km": 23.1,
+   "min": 26
+  }
+ },
+ "al-badiah": {
+  "king-khalid-international-airport": {
+   "km": 48.1,
+   "min": 36
+  },
+  "olaya": {
+   "km": 11.8,
+   "min": 13
+  },
+  "king-abdullah-financial-district": {
+   "km": 23.1,
+   "min": 22
+  },
+  "ad-dirah": {
+   "km": 4.9,
+   "min": 6
+  },
+  "diriyah": {
+   "km": 24.9,
+   "min": 25
+  }
+ },
+ "al-khaleej": {
+  "king-khalid-international-airport": {
+   "km": 34.4,
+   "min": 28
+  },
+  "olaya": {
+   "km": 21.5,
+   "min": 21
+  },
+  "king-abdullah-financial-district": {
+   "km": 24.4,
+   "min": 26
+  },
+  "ad-dirah": {
+   "km": 24.7,
+   "min": 25
+  },
+  "diriyah": {
+   "km": 31.8,
+   "min": 29
+  }
+ },
+ "al-falah": {
+  "king-khalid-international-airport": {
+   "km": 21.9,
+   "min": 16
+  },
+  "olaya": {
+   "km": 18.6,
+   "min": 18
+  },
+  "king-abdullah-financial-district": {
+   "km": 15.7,
+   "min": 15
+  },
+  "ad-dirah": {
+   "km": 26.2,
+   "min": 23
+  },
+  "diriyah": {
+   "km": 18.8,
+   "min": 18
+  }
+ },
+ "al-arid": {
+  "king-khalid-international-airport": {
+   "km": 27.6,
+   "min": 21
+  },
+  "olaya": {
+   "km": 27.7,
+   "min": 25
+  },
+  "king-abdullah-financial-district": {
+   "km": 21,
+   "min": 21
+  },
+  "ad-dirah": {
+   "km": 35.3,
+   "min": 30
+  },
+  "diriyah": {
+   "km": 25.2,
+   "min": 23
+  }
+ },
+ "banban": {
+  "king-khalid-international-airport": {
+   "km": 50.1,
+   "min": 43
+  },
+  "olaya": {
+   "km": 43.8,
+   "min": 40
+  },
+  "king-abdullah-financial-district": {
+   "km": 38.3,
+   "min": 37
+  },
+  "ad-dirah": {
+   "km": 51.3,
+   "min": 45
+  },
+  "diriyah": {
+   "km": 41.4,
+   "min": 39
+  }
+ },
+ "al-qirawan": {
+  "king-khalid-international-airport": {
+   "km": 35.2,
+   "min": 31
+  },
+  "olaya": {
+   "km": 30.1,
+   "min": 30
+  },
+  "king-abdullah-financial-district": {
+   "km": 22.6,
+   "min": 23
+  },
+  "ad-dirah": {
+   "km": 36.6,
+   "min": 33
+  },
+  "diriyah": {
+   "km": 19.7,
+   "min": 23
+  }
+ },
+ "al-wadi": {
+  "king-khalid-international-airport": {
+   "km": 25,
+   "min": 18
+  },
+  "olaya": {
+   "km": 16.9,
+   "min": 17
+  },
+  "king-abdullah-financial-district": {
+   "km": 11.5,
+   "min": 13
+  },
+  "ad-dirah": {
+   "km": 22.4,
+   "min": 21
+  },
+  "diriyah": {
+   "km": 17.1,
+   "min": 17
+  }
+ },
+ "al-ghadir": {
+  "king-khalid-international-airport": {
+   "km": 30,
+   "min": 22
+  },
+  "olaya": {
+   "km": 11.7,
+   "min": 12
+  },
+  "king-abdullah-financial-district": {
+   "km": 6.8,
+   "min": 8
+  },
+  "ad-dirah": {
+   "km": 19.2,
+   "min": 17
+  },
+  "diriyah": {
+   "km": 12.9,
+   "min": 14
+  }
+ },
+ "al-nadhim": {
+  "king-khalid-international-airport": {
+   "km": 43.8,
+   "min": 36
+  },
+  "olaya": {
+   "km": 29.4,
+   "min": 27
+  },
+  "king-abdullah-financial-district": {
+   "km": 40,
+   "min": 35
+  },
+  "ad-dirah": {
+   "km": 32.6,
+   "min": 30
+  },
+  "diriyah": {
+   "km": 43.4,
+   "min": 38
+  }
+ },
+ "al-janadriyah": {
+  "king-khalid-international-airport": {
+   "km": 34.3,
+   "min": 26
+  },
+  "olaya": {
+   "km": 27.9,
+   "min": 23
+  },
+  "king-abdullah-financial-district": {
+   "km": 31.6,
+   "min": 25
+  },
+  "ad-dirah": {
+   "km": 31.1,
+   "min": 26
+  },
+  "diriyah": {
+   "km": 34.7,
+   "min": 28
+  }
+ },
+ "al-yarmuk": {
+  "king-khalid-international-airport": {
+   "km": 31.2,
+   "min": 23
+  },
+  "olaya": {
+   "km": 26.4,
+   "min": 24
+  },
+  "king-abdullah-financial-district": {
+   "km": 24.5,
+   "min": 21
+  },
+  "ad-dirah": {
+   "km": 32.4,
+   "min": 28
+  },
+  "diriyah": {
+   "km": 27.6,
+   "min": 24
+  }
+ },
+ "ishbiliyah": {
+  "king-khalid-international-airport": {
+   "km": 33.5,
+   "min": 26
+  },
+  "olaya": {
+   "km": 21.5,
+   "min": 23
+  },
+  "king-abdullah-financial-district": {
+   "km": 25.8,
+   "min": 24
+  },
+  "ad-dirah": {
+   "km": 26.8,
+   "min": 26
+  },
+  "diriyah": {
+   "km": 29.8,
+   "min": 28
+  }
+ },
+ "dhahrat-laban": {
+  "king-khalid-international-airport": {
+   "km": 50.8,
+   "min": 37
+  },
+  "olaya": {
+   "km": 19.7,
+   "min": 19
+  },
+  "king-abdullah-financial-district": {
+   "km": 23.5,
+   "min": 22
+  },
+  "ad-dirah": {
+   "km": 24.4,
+   "min": 22
+  },
+  "diriyah": {
+   "km": 18.6,
+   "min": 20
+  }
+ },
+ "al-irqah": {
+  "king-khalid-international-airport": {
+   "km": 44.8,
+   "min": 33
+  },
+  "olaya": {
+   "km": 16,
+   "min": 17
+  },
+  "king-abdullah-financial-district": {
+   "km": 16.8,
+   "min": 18
+  },
+  "ad-dirah": {
+   "km": 21.3,
+   "min": 21
+  },
+  "diriyah": {
+   "km": 13.6,
+   "min": 17
+  }
+ },
+ "al-mansourah": {
+  "king-khalid-international-airport": {
+   "km": 62,
+   "min": 53
+  },
+  "olaya": {
+   "km": 27.9,
+   "min": 34
+  },
+  "king-abdullah-financial-district": {
+   "km": 41,
+   "min": 44
+  },
+  "ad-dirah": {
+   "km": 20.4,
+   "min": 27
+  },
+  "diriyah": {
+   "km": 44.7,
+   "min": 48
+  }
+ }
+}

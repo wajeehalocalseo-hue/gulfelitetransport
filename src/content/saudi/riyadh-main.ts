@@ -1,4 +1,13 @@
+import journeysJson from "./riyadh-journeys.json";
+import { fmtKm, fmtMin } from "./riyadh-districts";
 import type { Section } from "./types";
+
+const J = journeysJson as Record<string, Record<string, { km: number; min: number }>>;
+const AP = "king-khalid-international-airport";
+const KAFD = "king-abdullah-financial-district";
+/** Distance and time from a district to a hub, from the same routing data the district pages use. */
+const jr = (district: string, hub: string): [string, string] => [`~${fmtKm(J[district][hub].km)} km`, `~${fmtMin(J[district][hub].min)}`];
+const km = (district: string, hub: string) => fmtKm(J[district][hub].km);
 
 /**
  * Landing-page content for the main Riyadh page (/taxi-saudi-arabia/riyadh-region/riyadh).
@@ -35,13 +44,13 @@ export function riyadhSections(extra: {
         "Distances and driving times for the rides people ask about most. Pick a row to see the full ride page. A driver meets you at your pickup point and handles the route, so you can sit back.",
       head: ["Route", "Approx. distance", "Typical driving time"],
       rows: [
-        { cells: ["Airport (RUH) to Olaya", "~41 km", "~30 min"], href: `${R}/king-khalid-international-airport-to-olaya` },
-        { cells: ["Airport (RUH) to KAFD", "~31 km", "~25 min"], href: `${R}/king-khalid-international-airport-to-king-abdullah-financial-district` },
-        { cells: ["Airport (RUH) to Diriyah", "~38 km", "~30 min"], href: `${R}/king-khalid-international-airport-to-diriyah` },
-        { cells: ["Airport (RUH) to Ad Dirah (old city)", "~45 km", "~35 min"], href: `${R}/king-khalid-international-airport-to-ad-dirah` },
-        { cells: ["Olaya to KAFD", "~12 km", "~15 min"], href: `${R}/king-abdullah-financial-district-to-olaya` },
-        { cells: ["Olaya to Diriyah", "~18 km", "~20 min"], href: `${R}/olaya-to-diriyah` },
-        { cells: ["Olaya to Ad Dirah (old city)", "~9 km", "~10 min"], href: `${R}/olaya-to-ad-dirah` },
+        { cells: ["Airport (RUH) to Olaya", ...jr("olaya", AP)], href: `${R}/king-khalid-international-airport-to-olaya` },
+        { cells: ["Airport (RUH) to KAFD", ...jr(KAFD, AP)], href: `${R}/king-khalid-international-airport-to-king-abdullah-financial-district` },
+        { cells: ["Airport (RUH) to Diriyah", ...jr("diriyah", AP)], href: `${R}/king-khalid-international-airport-to-diriyah` },
+        { cells: ["Airport (RUH) to Ad Dirah (old city)", ...jr("ad-dirah", AP)], href: `${R}/king-khalid-international-airport-to-ad-dirah` },
+        { cells: ["Olaya to KAFD", ...jr(KAFD, "olaya")], href: `${R}/king-abdullah-financial-district-to-olaya` },
+        { cells: ["Olaya to Diriyah", ...jr("diriyah", "olaya")], href: `${R}/olaya-to-diriyah` },
+        { cells: ["Olaya to Ad Dirah (old city)", ...jr("ad-dirah", "olaya")], href: `${R}/olaya-to-ad-dirah` },
         { cells: ["Olaya to Boulevard City", "~16 km", "~20 min"] },
         { cells: ["Riyadh to Al Kharj", `~${k.kharj} km`, "~1 hr 20 min"], href: "/taxi-saudi-arabia/routes/riyadh-to-al-kharj" },
         { cells: ["Riyadh to Dammam", `~${k.dammam} km`, "~4 hr"], href: "/taxi-saudi-arabia/routes/riyadh-to-dammam" },
@@ -104,7 +113,7 @@ export function riyadhSections(extra: {
       h2: "Riyadh airport transfers (RUH)",
       kind: "text",
       paragraphs: [
-        "King Khalid International Airport lies in the north of Riyadh, about 41 km by road from Olaya and about 31 km from KAFD, so almost every airport ride is a long city ride rather than a short hop. Booking in advance means a driver is arranged for your flight instead of you hunting for a car after landing.",
+        `King Khalid International Airport lies in the north of Riyadh, about ${km("olaya", AP)} km by road from Olaya and about ${km(KAFD, AP)} km from KAFD, so almost every airport ride is a long city ride rather than a short hop. Booking in advance means a driver is arranged for your flight instead of you hunting for a car after landing.`,
         "For an arrival, give us your flight number and terminal and the car is planned around the flight. For a departure, tell us your flight time and where you are leaving from, and the pickup time is planned back from it, allowing for traffic on the roads to the north.",
       ],
     },
@@ -238,7 +247,7 @@ export function riyadhSections(extra: {
       items: [
         { q: "How do I book a taxi or chauffeur in Riyadh?", a: "Use the request form at the top of this page, or contact us, and send your pickup point, destination, date, time and number of passengers. We confirm the vehicle, driver and fare for your request before you commit." },
         { q: "Can I book an airport transfer to or from King Khalid International Airport?", a: "Yes. Send your flight number, terminal and time. We plan the pickup around your flight and confirm the driver and fare before you commit." },
-        { q: "How far is Riyadh airport from the city centre?", a: "King Khalid International Airport is in the north of the city. It is about 41 km by road from Olaya and about 31 km from KAFD, and the driving time depends on traffic." },
+        { q: "How far is Riyadh airport from the city centre?", a: `King Khalid International Airport is in the north of the city. It is about ${km("olaya", AP)} km by road from Olaya and about ${km(KAFD, AP)} km from KAFD, and the driving time depends on traffic.` },
         { q: "Do you publish fares for Riyadh rides?", a: "No standard fares are published. Each ride is quoted for your request, and you confirm the fare before you commit." },
         { q: "How much does a taxi cost in Riyadh?", a: "It depends on the distance, the vehicle, the time of day and any waiting or return. Send your pickup and destination and we confirm the fare for your ride before you commit." },
         { q: "Is a pre-booked taxi better than a ride app in Riyadh?", a: "Apps are handy for quick short trips. A pre-booked private ride suits airport arrivals, early flights, groups with luggage and long trips, because the vehicle, driver and fare are confirmed in advance." },
