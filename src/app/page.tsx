@@ -105,8 +105,8 @@ export default function Home() {
 
       {/* 1. Hero */}
       <section aria-labelledby="hero-title" className="relative overflow-hidden bg-gradient-to-br from-navy via-navy to-navy-2 text-white">
-        <HomePhoto name="hero-car" fill priority alt="Private taxi and chauffeur car in Riyadh at sunset with the city skyline" width={1600} height={900} sizes="100vw" className="object-cover object-[60%_bottom]" />
-        <div aria-hidden="true" className="absolute inset-0 bg-navy/65 lg:bg-gradient-to-b lg:from-navy/80 lg:via-navy/55 lg:to-navy/35" />
+        <HomePhoto name="hero-car" fill priority alt="Private taxi and chauffeur car in Riyadh at sunset with the city skyline" width={1600} height={900} sizes="100vw" className="object-cover object-[88%_bottom]" />
+        <div aria-hidden="true" className="absolute inset-0 bg-navy/65 lg:bg-gradient-to-b lg:from-navy/85 lg:via-navy/40 lg:to-navy/20" />
         <ul aria-label="What you get" className="relative border-b border-white/10 bg-black/25">
           <li className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-6 gap-y-2 px-5 py-3 text-[11px] font-extrabold uppercase tracking-[0.16em] text-white/85">
             <span className="inline-flex items-center gap-2"><Icon name="calendar" className="h-3.5 w-3.5 text-accent" /> Available 24/7</span>
@@ -115,7 +115,7 @@ export default function Home() {
             <span className="inline-flex items-center gap-2"><Icon name="bus" className="h-3.5 w-3.5 text-accent" /> Private rides</span>
           </li>
         </ul>
-        <div className={`${wrap} relative flex flex-col items-center py-14 text-center lg:py-20`}>
+        <div className={`${wrap} relative flex flex-col items-center py-14 text-center lg:min-h-[940px] lg:pb-24 lg:pt-20`}>
           <p className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.22em] text-accent">
             <span aria-hidden="true" className="h-px w-8 bg-accent" />
             {c.hero.eyebrow}
@@ -139,20 +139,20 @@ export default function Home() {
               </a>
             )}
           </div>
-          <div className="mt-10 w-full">
+          <div className="mt-10 w-full lg:mt-auto">
             <TripBar />
             <p className="mt-4 text-sm text-white/85">
               Moving freight, equipment or a fleet?{" "}
               <Link href="/contact" className="font-semibold text-accent underline underline-offset-4">Request a quotation</Link>
             </p>
-          </div>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
             <span className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-white/60">Popular routes</span>
             {heroRoutes.map((r) => (
               <Link key={r.id} href={`${BASE}/routes/${r.id}`} className="rounded-full border border-white/25 bg-black/20 px-4 py-1.5 text-xs font-bold text-white/90 backdrop-blur transition hover:border-accent hover:text-accent">
                 {cityName(r.from)} to {cityName(r.to)}
               </Link>
             ))}
+            </div>
           </div>
         </div>
       </section>
