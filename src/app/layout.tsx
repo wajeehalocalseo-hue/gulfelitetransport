@@ -26,7 +26,7 @@ const playfair = Playfair_Display({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#101c2c",
+  themeColor: "#0e3b2c",
 };
 
 const defaultTitle = "Gulf Elite Transport | Taxi, Cab & Freight in Saudi Arabia";

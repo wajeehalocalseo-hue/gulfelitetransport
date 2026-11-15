@@ -1,13 +1,13 @@
 import type { ReactNode } from "react";
 
 const C = {
-  navy: "#101c2c",
-  navy2: "#172b43",
+  navy: "#0e3b2c",
+  navy2: "#14513c",
   navy3: "#22405f",
-  accent: "#f5a623",
+  accent: "#d4af6a",
   light: "#e8eef6",
   slate: "#8aa0b8",
-  dark: "#0b1320",
+  dark: "#0a2018",
   ice: "#cfe9f7",
 };
 
@@ -524,7 +524,7 @@ export function HeroPanorama({ className = "" }: { className?: string }) {
     <svg viewBox="0 0 800 560" role="img" aria-label="Illustration of a taxi, a delivery van and a freight truck on a highway in front of a city skyline" preserveAspectRatio="xMidYMid slice" className={className}>
       <defs>
         <linearGradient id="hp-sky" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#172b43" />
+          <stop offset="0" stopColor="#14513c" />
           <stop offset="1" stopColor="#22405f" />
         </linearGradient>
       </defs>

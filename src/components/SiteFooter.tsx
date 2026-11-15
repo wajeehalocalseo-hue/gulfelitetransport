@@ -27,7 +27,7 @@ export default function SiteFooter() {
   ].filter(Boolean) as { icon: string; label: string; value: string; href?: string }[];
 
   return (
-    <footer className="bg-[#0b1320] pb-24 text-white/70 md:pb-0">
+    <footer className="bg-[#0a2018] pb-24 text-white/70 md:pb-0">
       {/* Call-to-action band */}
       <div className="border-b border-white/10 bg-gradient-to-r from-navy to-navy-2">
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-5 px-5 py-10 md:flex-row md:items-center">

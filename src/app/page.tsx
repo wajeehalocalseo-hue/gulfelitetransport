@@ -6,6 +6,7 @@ import Icon from "@/components/Icon";
 import JsonLd from "@/components/JsonLd";
 import QuoteForm from "@/components/QuoteForm";
 import RichText from "@/components/RichText";
+import HomePhoto from "@/components/HomePhoto";
 import ServiceImage from "@/components/ServiceImage";
 import { BookingCard } from "@/components/HeroBooking";
 import * as c from "@/content/home";
@@ -28,13 +29,13 @@ export const metadata: Metadata = {
 };
 
 const wrap = "mx-auto max-w-7xl px-5";
-const btn = "inline-flex items-center justify-center gap-2 rounded-md px-7 py-3.5 text-center font-bold transition";
+const btn = "inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-center font-bold transition";
 const btnPrimary = `${btn} bg-accent text-navy hover:brightness-95`;
 const btnGhost = `${btn} border border-white/30 text-white hover:border-accent hover:text-accent`;
 const btnDark = `${btn} bg-navy text-white hover:bg-navy-2`;
 const btnOutline = `${btn} border border-navy/25 text-navy hover:border-accent hover:bg-accent/10`;
-const chip = "rounded-md border border-navy/15 bg-white px-3.5 py-1.5 text-sm font-semibold text-navy transition hover:border-accent hover:bg-accent/15";
-const card = "rounded-lg border border-navy/10 bg-white";
+const chip = "rounded-full border border-navy/15 bg-white px-3.5 py-1.5 text-sm font-semibold text-navy transition hover:border-accent hover:bg-accent/15";
+const card = "rounded-2xl border border-accent/25 bg-white";
 const textLink = "font-bold text-navy underline decoration-accent decoration-2 underline-offset-4 hover:text-gold";
 
 const cityName = (id: string) => cities.find((x) => x.id === id)?.name ?? id;
@@ -75,7 +76,7 @@ export default function Home() {
       <JsonLd data={homeGraph()} />
 
       {/* 1. Hero */}
-      <section aria-labelledby="hero-title" className="relative overflow-hidden border-b-4 border-accent bg-navy text-white">
+      <section aria-labelledby="hero-title" className="relative overflow-hidden border-b-4 border-accent bg-gradient-to-br from-navy via-navy to-navy-2 text-white">
         <div aria-hidden="true" className="absolute inset-0 opacity-[0.07] [background-image:radial-gradient(circle_at_1px_1px,#fff_1px,transparent_0)] [background-size:22px_22px]" />
         <div className={`${wrap} relative grid items-center gap-12 py-16 lg:grid-cols-[1.05fr_0.95fr] lg:py-24`}>
           <div>
@@ -107,6 +108,7 @@ export default function Home() {
                 </a>
               )}
             </div>
+            <HomePhoto name="hero-car" alt="A Gulf Elite Transport private car ready for a ride in Saudi Arabia" width={1200} height={675} priority sizes="(min-width: 1024px) 52vw, 100vw" className="mt-8 hidden h-auto w-full rounded-3xl object-cover shadow-2xl ring-1 ring-white/10 lg:block" />
             <p className="mt-6 flex items-center gap-2 text-sm text-white/70">
               <Icon name="shield" className="h-4 w-4 text-accent" /> {c.hero.fareChip}
             </p>
@@ -261,7 +263,8 @@ export default function Home() {
           <Head id="fleet-title" eyebrow={c.fleet.eyebrow} title={c.fleet.h2} lead={c.fleet.text} />
           <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {c.fleet.items.map((v) => (
-              <li key={v.name} className={`flex flex-col ${card} border-t-4 border-t-accent p-6 shadow-sm`}>
+              <li key={v.name} className={`flex flex-col overflow-hidden ${card} border-t-4 border-t-accent p-6 shadow-sm`}>
+                <HomePhoto name={v.name.toLowerCase().replace(/\s+/g, "-")} alt={`${v.name} for private rides in Saudi Arabia`} width={900} height={560} className="-mx-6 -mt-6 mb-5 h-auto w-[calc(100%+3rem)] max-w-none object-cover" sizes="(min-width: 1024px) 33vw, 100vw" />
                 <div className="flex items-baseline justify-between gap-3">
                   <h3 className="font-display text-xl text-navy">{v.name}</h3>
                   <span className="text-sm font-extrabold text-gold">{v.pax} passengers</span>
@@ -380,7 +383,10 @@ export default function Home() {
       {/* 12. About (entity and trust) */}
       <section aria-labelledby="about-title" className={`${wrap} py-20`}>
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-          <Head id="about-title" eyebrow={c.about.eyebrow} title={c.about.h2} />
+          <div>
+            <Head id="about-title" eyebrow={c.about.eyebrow} title={c.about.h2} />
+            <HomePhoto name="journey-driver" alt="A professional Gulf Elite Transport driver" width={800} height={900} className="mt-8 hidden h-auto w-full max-w-sm rounded-3xl object-cover shadow-xl ring-1 ring-accent/30 lg:block" sizes="400px" />
+          </div>
           <div className="space-y-5 text-lg leading-8 text-muted">
             {c.about.paragraphs.slice(1).map((p) => (
               <p key={p}>{p}</p>

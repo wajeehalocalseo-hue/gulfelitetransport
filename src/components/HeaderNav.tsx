@@ -114,7 +114,7 @@ export default function HeaderNav({ menu }: { menu: MenuData }) {
   return (
     <header ref={root} className={`sticky top-0 z-40 text-white transition-shadow ${scrolled ? "shadow-lg shadow-black/25" : ""}`} onMouseLeave={leave}>
       {/* Top bar */}
-      <div className="hidden bg-[#0b1320] text-xs text-white/70 md:block">
+      <div className="hidden bg-[#0a2018] text-xs text-white/70 md:block">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 py-2">
           <p className="flex items-center gap-2">
             <Icon name="globe" className="h-3.5 w-3.5 text-accent" />

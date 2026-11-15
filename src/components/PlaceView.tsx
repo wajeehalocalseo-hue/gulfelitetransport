@@ -53,24 +53,24 @@ function Schematic({ pair }: { pair: NonNullable<PlacePage["pair"]> }) {
     <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`Relative positions of ${a.name} and ${b.name}, about ${km < 10 ? km.toFixed(1) : Math.round(km)} kilometres apart`} className="w-full rounded-3xl bg-surface ring-1 ring-navy/10">
       <defs>
         <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
-          <path d="M32 0H0V32" fill="none" stroke="#101c2c" strokeOpacity="0.07" />
+          <path d="M32 0H0V32" fill="none" stroke="#0e3b2c" strokeOpacity="0.07" />
         </pattern>
       </defs>
       <rect width={W} height={H} rx="24" fill="url(#grid)" />
-      <path d={`M${ax} ${ay} Q ${mx + (ay - by) * 0.12} ${my + (bx - ax) * 0.12} ${bx} ${by}`} fill="none" stroke="#f5a623" strokeWidth="4" strokeDasharray="10 10" strokeLinecap="round" />
-      <circle cx={ax} cy={ay} r="11" fill="#101c2c" />
-      <circle cx={ax} cy={ay} r="4.5" fill="#f5a623" />
-      <circle cx={bx} cy={by} r="11" fill="#f5a623" />
-      <circle cx={bx} cy={by} r="4.5" fill="#101c2c" />
+      <path d={`M${ax} ${ay} Q ${mx + (ay - by) * 0.12} ${my + (bx - ax) * 0.12} ${bx} ${by}`} fill="none" stroke="#d4af6a" strokeWidth="4" strokeDasharray="10 10" strokeLinecap="round" />
+      <circle cx={ax} cy={ay} r="11" fill="#0e3b2c" />
+      <circle cx={ax} cy={ay} r="4.5" fill="#d4af6a" />
+      <circle cx={bx} cy={by} r="11" fill="#d4af6a" />
+      <circle cx={bx} cy={by} r="4.5" fill="#0e3b2c" />
       {label(ax, ay, a.name, ay >= by)}
       {label(bx, by, b.name, by > ay)}
       <g transform={`translate(${mx} ${my})`}>
-        <rect x="-44" y="-15" width="88" height="30" rx="15" fill="#101c2c" />
+        <rect x="-44" y="-15" width="88" height="30" rx="15" fill="#0e3b2c" />
         <text textAnchor="middle" y="5" className="fill-white text-[13px] font-bold">about {km < 10 ? km.toFixed(1) : Math.round(km)} km</text>
       </g>
       <g transform={`translate(${W - 34} 36)`}>
-        <circle r="17" fill="#fff" stroke="#101c2c" strokeOpacity="0.2" />
-        <path d="M0 -10L5 6L0 3L-5 6Z" fill="#101c2c" />
+        <circle r="17" fill="#fff" stroke="#0e3b2c" strokeOpacity="0.2" />
+        <path d="M0 -10L5 6L0 3L-5 6Z" fill="#0e3b2c" />
         <text y="-19" textAnchor="middle" className="fill-navy text-[11px] font-bold">N</text>
       </g>
     </svg>
@@ -510,7 +510,7 @@ export default function PlaceView({ page }: { page: PlacePage }) {
                   <Icon name="arrow" className="h-8 w-8" />
                   <span className="rounded-full bg-accent px-4 py-1.5 text-sm font-extrabold text-navy">about {page.route?.km} km</span>
                 </p>
-                <p className="text-3xl font-extrabold sm:text-right sm:text-4xl">{page.route?.to}</p>
+                <p className="text-3xl font-extrabold sm:pl-4 sm:text-4xl">{page.route?.to}</p>
               </div>
               <h1 className="sr-only">{page.h1}</h1>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-white/80">{page.lead}</p>
