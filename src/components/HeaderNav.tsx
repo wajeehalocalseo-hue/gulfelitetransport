@@ -133,7 +133,7 @@ export default function HeaderNav({ menu }: { menu: MenuData }) {
               </li>
             ))}
             <li className="inline-flex items-center gap-1.5">
-              <Icon name="check" className="h-3.5 w-3.5 text-accent" /> Fares confirmed before you commit
+              <Icon name="check" className="h-3.5 w-3.5 text-accent" /> Available 24/7 · Licensed and insured · Fares confirmed before you commit
             </li>
           </ul>
         </div>
@@ -148,8 +148,11 @@ export default function HeaderNav({ menu }: { menu: MenuData }) {
 
           <nav aria-label="Main" className="hidden items-center gap-1 lg:flex">
             {trigger("taxi", "Taxi & Cab", taxiActive)}
+            {plain("/riyadh-taxi-service", "Riyadh", pathname.startsWith("/riyadh-taxi-service"))}
             {trigger("umrah", "Makkah & Madinah", umrahActive)}
             {trigger("services", "Services", servicesActive)}
+            {plain("/fleet", "Fleet", pathname === "/fleet")}
+            {plain("/blog", "Blog", pathname.startsWith("/blog"))}
             {plain("/about", "About", pathname === "/about")}
             {plain("/#industries", "Industries", false)}
             {plain("/contact", "Contact", pathname === "/contact")}
@@ -392,6 +395,9 @@ export default function HeaderNav({ menu }: { menu: MenuData }) {
             </li>
             {[
               ["/about", "About"],
+              ["/riyadh-taxi-service", "Riyadh Taxi Service"],
+              ["/fleet", "Fleet"],
+              ["/blog", "Blog"],
               ["/#industries", "Industries"],
               ["/contact", "Contact"],
             ].map(([href, label]) => (

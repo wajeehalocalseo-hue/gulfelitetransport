@@ -1,4 +1,5 @@
 import { placePages, RIYADH_CITY_PATH, RIYADH_MAIN } from "@/content/saudi/build";
+import { blogPosts } from "@/content/extra-pages";
 import { indexableNodes, pathOf } from "@/content/taxonomy";
 import { abs } from "./site";
 
@@ -18,6 +19,9 @@ const staticPages: SitemapEntry[] = [
   { path: "/about", priority: 0.6, changefreq: "yearly" },
   { path: "/contact", priority: 0.7, changefreq: "yearly" },
   { path: "/book", priority: 0.7, changefreq: "yearly" },
+  { path: "/fleet", priority: 0.7, changefreq: "monthly" },
+  { path: "/blog", priority: 0.7, changefreq: "monthly" },
+  ...blogPosts.map((p) => ({ path: p.page.path, priority: 0.6, changefreq: "monthly" as const })),
   { path: "/privacy-policy", priority: 0.2, changefreq: "yearly" },
   { path: "/terms-and-conditions", priority: 0.2, changefreq: "yearly" },
 ];

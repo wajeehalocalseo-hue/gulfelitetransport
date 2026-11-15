@@ -19,12 +19,12 @@ export const site = {
   email: "", // e.g. "info@yourdomain.com"
   address: "", // full verified street address, if you want it shown
   country: "Saudi Arabia", // business country
-  hours: "", // verified opening hours, if any
+  hours: "Open 24 hours, 7 days a week", // confirmed by the owner
 
   // --- Verified facts (leave empty until confirmed) ---
   serviceAreas: ["Saudi Arabia"] as string[], // only confirmed areas
   socialProfiles: [] as string[], // full URLs of real profiles
-  certifications: [] as string[], // verified certifications only
+  certifications: ["Licensed and insured"] as string[], // confirmed by the owner
 };
 
 export const contactConfigured = {
