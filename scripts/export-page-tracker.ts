@@ -12,6 +12,7 @@ import path from "node:path";
 import { site } from "../src/lib/site";
 import { isIndexable, serviceNodes, type ServiceNode } from "../src/content/taxonomy";
 import { placePages } from "../src/content/saudi/build";
+import { extraPages } from "../src/content/extra-pages";
 
 const root = path.resolve(__dirname, "..");
 
@@ -123,6 +124,23 @@ for (const p of placePages) {
   });
 }
 
+// Fleet page and the blog (index and guides).
+for (const p of extraPages) {
+  const id = p.path.split("/").pop() ?? p.path;
+  const [date, commit] = firstCommitFor(`"${id}"`);
+  rows.push({
+    level: p.path === "/fleet" ? "Fleet" : p.path === "/blog" ? "Blog index" : "Blog guide",
+    name: p.name,
+    urlPath: p.path,
+    main: "",
+    parent: p.crumbs.length > 1 ? (p.crumbs[p.crumbs.length - 2]?.name ?? "") : "",
+    built: "Yes",
+    status: "Built and published",
+    date,
+    commit,
+    notes: "",
+  });
+}
 const esc = (v: string) => (/[",\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v);
 const header = ["No", "Level", "Page name", "URL path", "Full URL", "Main service", "Parent", "Built?", "Status", "Date pushed", "Commit", "Notes"];
 const lines = [
