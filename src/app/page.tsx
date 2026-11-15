@@ -38,6 +38,14 @@ const chip = "rounded-full border border-navy/15 bg-white px-3.5 py-1.5 text-sm 
 const card = "rounded-2xl border border-accent/25 bg-white";
 const textLink = "font-bold text-navy underline decoration-accent decoration-2 underline-offset-4 hover:text-gold";
 
+/** Descriptive alt text for the vehicle photos on the home page. The photos are illustrations of each class. */
+const VEHICLE_ALT: Record<string, string> = {
+  Sedan: "Private sedan for city and airport rides in Riyadh",
+  SUV: "Private SUV for family and long-distance rides in Saudi Arabia",
+  "Family van": "Family van for groups travelling together in Saudi Arabia",
+  "Group van": "Group van for airport transfers and intercity trips in Saudi Arabia",
+  Coach: "Coach for large groups and event travel in Saudi Arabia",
+};
 const cityName = (id: string) => cities.find((x) => x.id === id)?.name ?? id;
 const cityPath = (id: string) => {
   const ct = cities.find((x) => x.id === id);
@@ -108,7 +116,7 @@ export default function Home() {
                 </a>
               )}
             </div>
-            <HomePhoto name="hero-car" alt="A Gulf Elite Transport private car ready for a ride in Saudi Arabia" width={1200} height={675} priority sizes="(min-width: 1024px) 52vw, 100vw" className="mt-8 hidden h-auto w-full rounded-3xl object-cover shadow-2xl ring-1 ring-white/10 lg:block" />
+            <HomePhoto name="hero-car" alt="Private taxi and chauffeur car in Riyadh at sunset with the city skyline" width={1200} height={675} priority sizes="(min-width: 1024px) 52vw, 100vw" className="mt-8 block h-auto w-full rounded-3xl object-cover shadow-2xl ring-1 ring-accent/30" />
             <p className="mt-6 flex items-center gap-2 text-sm text-white/70">
               <Icon name="shield" className="h-4 w-4 text-accent" /> {c.hero.fareChip}
             </p>
@@ -264,7 +272,7 @@ export default function Home() {
           <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {c.fleet.items.map((v) => (
               <li key={v.name} className={`flex flex-col overflow-hidden ${card} border-t-4 border-t-accent p-6 shadow-sm`}>
-                <HomePhoto name={v.name.toLowerCase().replace(/\s+/g, "-")} alt={`${v.name} for private rides in Saudi Arabia`} width={900} height={560} className="-mx-6 -mt-6 mb-5 h-auto w-[calc(100%+3rem)] max-w-none object-cover" sizes="(min-width: 1024px) 33vw, 100vw" />
+                <HomePhoto name={v.name.toLowerCase().replace(/\s+/g, "-")} alt={VEHICLE_ALT[v.name] ?? `${v.name} for private rides in Saudi Arabia`} width={900} height={506} className="-mx-6 -mt-6 mb-5 aspect-video h-auto w-[calc(100%+3rem)] max-w-none object-cover" sizes="(min-width: 1024px) 33vw, 100vw" fallback={<div aria-hidden="true" className="-mx-6 -mt-6 mb-5 flex aspect-video w-[calc(100%+3rem)] items-center justify-center bg-gradient-to-br from-navy to-navy-2 text-accent"><Icon name="bus" className="h-14 w-14" /></div>} />
                 <div className="flex items-baseline justify-between gap-3">
                   <h3 className="font-display text-xl text-navy">{v.name}</h3>
                   <span className="text-sm font-extrabold text-gold">{v.pax} passengers</span>
@@ -275,7 +283,7 @@ export default function Home() {
               </li>
             ))}
           </ul>
-          <p className="mt-6 text-sm text-muted">{c.fleet.note}</p>
+          <p className="mt-6 text-sm text-muted">{c.fleet.note} Vehicle images are illustrations of each class; the exact vehicle is confirmed for every booking.</p>
         </div>
       </section>
 

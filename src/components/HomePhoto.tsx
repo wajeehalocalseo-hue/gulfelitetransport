@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import Image from "next/image";
+import type { ReactNode } from "react";
 
 const EXTS = ["webp", "avif", "jpg", "jpeg", "png"];
 
@@ -24,6 +25,7 @@ export default function HomePhoto({
   className = "",
   priority = false,
   sizes = "(min-width: 1024px) 50vw, 100vw",
+  fallback = null,
 }: {
   name: string;
   alt: string;
@@ -32,8 +34,10 @@ export default function HomePhoto({
   className?: string;
   priority?: boolean;
   sizes?: string;
+  /** Shown while no photo has been added for this slot. */
+  fallback?: ReactNode;
 }) {
   const src = homePhotoSrc(name);
-  if (!src) return null;
+  if (!src) return <>{fallback}</>;
   return <Image src={src} alt={alt} width={width} height={height} sizes={sizes} priority={priority} className={className} />;
 }
