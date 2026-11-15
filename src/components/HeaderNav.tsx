@@ -148,10 +148,8 @@ export default function HeaderNav({ menu }: { menu: MenuData }) {
 
           <nav aria-label="Main" className="hidden items-center gap-1 lg:flex">
             {trigger("taxi", "Taxi & Cab", taxiActive)}
-            {plain("/riyadh-taxi-service", "Riyadh", pathname.startsWith("/riyadh-taxi-service"))}
             {trigger("umrah", "Makkah & Madinah", umrahActive)}
             {trigger("services", "Services", servicesActive)}
-            {plain("/fleet", "Fleet", pathname === "/fleet")}
             {plain("/blog", "Blog", pathname.startsWith("/blog"))}
             {plain("/about", "About", pathname === "/about")}
             {plain("/#industries", "Industries", false)}
@@ -395,8 +393,6 @@ export default function HeaderNav({ menu }: { menu: MenuData }) {
             </li>
             {[
               ["/about", "About"],
-              ["/riyadh-taxi-service", "Riyadh Taxi Service"],
-              ["/fleet", "Fleet"],
               ["/blog", "Blog"],
               ["/#industries", "Industries"],
               ["/contact", "Contact"],

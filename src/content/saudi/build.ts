@@ -581,6 +581,16 @@ function riyadhRouteLanding(r: (typeof routes)[number], from: City, to: City, ap
     const dest = x ? cityById.get(x.to) : undefined;
     return x && dest ? { name: `Riyadh to ${dest.name}`, href: `${BASE}/routes/${x.id}`, note: `about ${x.km} km` } : undefined;
   }).filter((x): x is { name: string; href: string; note: string } => Boolean(x));
+  const words = (z: string) => new Set(z.toLowerCase().replace(/[^a-z0-9\s]/g, " ").split(/\s+/).filter((w) => w.length > 3));
+  const similar = (a: string, b: string) => {
+    const x = words(a);
+    const y = words(b);
+    let both = 0;
+    for (const w of x) if (y.has(w)) both++;
+    return both / (x.size + y.size - both || 1) >= 0.4;
+  };
+  const factPara = `${name} lies ${dir ? `${dir} of Riyadh` : "from Riyadh"}, about ${r.km} km away and roughly ${time} by road in light traffic, in ${region.name}. ${ap ? `Its airport is ${ap.name} (${ap.code}), and a ride can start or end there. ` : ""}Both directions are covered on this page, so the ride back from ${name} to Riyadh is arranged in the same request.`;
+  const tipItems = r.tips.filter((t) => !similar(t, prof.plan) && !similar(t, prof.intro));
   const sections: Section[] = [
     {
       id: "glance",
@@ -598,7 +608,7 @@ function riyadhRouteLanding(r: (typeof routes)[number], from: City, to: City, ap
       ],
       note: `Distance and time are estimates from OpenStreetMap routing between the city centres, reviewed ${"November 2026"}. Rest stops, traffic and the border or checkpoint queues add time.`,
     },
-    { id: "about", h2: `About the Riyadh to ${name} route`, kind: "text", paragraphs: [prof.intro, r.about] },
+    { id: "about", h2: `About the Riyadh to ${name} route`, kind: "text", paragraphs: [prof.intro, factPara] },
     { id: "why", h2: `Why book a private taxi from Riyadh to ${name}`, kind: "items", items: prof.why },
     {
       id: "places",
@@ -625,7 +635,7 @@ function riyadhRouteLanding(r: (typeof routes)[number], from: City, to: City, ap
       kind: "items",
       items: [
         { title: "Timing", text: prof.plan },
-        ...r.tips.map((t) => ({ title: "Good to know", text: t })),
+        ...tipItems.map((t) => ({ title: "Good to know", text: t })),
         { title: "Passengers and bags", text: "Tell us how many people are travelling and how many bags, and we confirm a vehicle that fits." },
       ],
     },
@@ -676,7 +686,7 @@ function riyadhRouteLanding(r: (typeof routes)[number], from: City, to: City, ap
       { label: "Direction", value: dir ? `${cap(dir)} of Riyadh` : region.name, icon: "globe" },
       ap ? { label: "Airport", value: `${ap.name} (${ap.code})`, icon: "bus" } : { label: "Return", value: "Same page, both ways", icon: "bus" },
     ],
-    about: [prof.intro, r.about],
+    about: [prof.intro, factPara],
     why: prof.why,
     placesIntro: placesSec && "intro" in placesSec && placesSec.intro ? placesSec.intro : "",
     places: toItems("places"),

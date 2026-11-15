@@ -438,7 +438,7 @@ function Closing({ l }: { l: L }) {
       <div className={`${wrap} flex flex-col items-start justify-between gap-6 py-10 md:flex-row md:items-center`}>
         <div>
           <h2 className="text-2xl font-extrabold sm:text-3xl">Ready to book {l.from} to {l.to}?</h2>
-          <p className="mt-1 max-w-2xl font-medium text-navy/80">Send your details and we confirm the vehicle, driver and fare before you commit.</p>
+          <p className="mt-1 max-w-2xl font-medium text-navy/80">Send your route details and we come back with the plan.</p>
         </div>
         <div className="flex flex-wrap gap-3">
           <Link href="#quote" className={`${btn} bg-navy text-white hover:bg-navy-2`}>Request this ride</Link>

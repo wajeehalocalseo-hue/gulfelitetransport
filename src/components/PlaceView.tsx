@@ -607,7 +607,7 @@ export default function PlaceView({ page }: { page: PlacePage }) {
             <div className="mx-auto grid max-w-5xl items-center gap-8 px-5 py-14 lg:grid-cols-[1fr_420px]">
               <div>
                 <h2 id="quote-title" className="text-3xl font-extrabold tracking-tight sm:text-4xl">Book {page.name}</h2>
-                <p className="mt-4 text-lg leading-8 text-white/75">Tell us where and when. We confirm the vehicle, driver and fare before you commit.</p>
+                <p className="mt-4 text-lg leading-8 text-white/75">Enter your pickup, drop-off and time. The next step takes your contact details.</p>
               </div>
               <div className="rounded-2xl border-t-4 border-accent bg-white p-5 text-navy shadow-2xl">
                 <TripForm pickupDefault={pre.pickup} dropoffDefault={pre.dropoff} />
