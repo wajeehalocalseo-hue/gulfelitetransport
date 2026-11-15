@@ -6,6 +6,8 @@ import FaqList from "./Faq";
 import Icon from "./Icon";
 import HeroBooking from "./HeroBooking";
 import QuoteForm from "./QuoteForm";
+import RouteLanding from "./RouteLanding";
+import SectionBands from "./SectionBands";
 import TripForm from "./TripForm";
 import WeatherWidget from "./WeatherWidget";
 import { TAXI_SERVICE } from "@/content/saudi/build";
@@ -503,12 +505,12 @@ export default function PlaceView({ page }: { page: PlacePage }) {
             <div className="mx-auto max-w-7xl px-5 py-12 sm:py-16">
               <Breadcrumbs items={crumbs} />
               <div aria-hidden="true" className="mt-8 grid items-center gap-4 sm:grid-cols-[1fr_auto_1fr]">
-                <p className="text-3xl font-extrabold sm:text-5xl">{page.route?.from}</p>
+                <p className="text-3xl font-extrabold sm:text-4xl">{page.route?.from}</p>
                 <p className="flex items-center gap-3 text-accent">
                   <Icon name="arrow" className="h-8 w-8" />
                   <span className="rounded-full bg-accent px-4 py-1.5 text-sm font-extrabold text-navy">about {page.route?.km} km</span>
                 </p>
-                <p className="text-3xl font-extrabold sm:text-right sm:text-5xl">{page.route?.to}</p>
+                <p className="text-3xl font-extrabold sm:text-right sm:text-4xl">{page.route?.to}</p>
               </div>
               <h1 className="sr-only">{page.h1}</h1>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-white/80">{page.lead}</p>
@@ -533,10 +535,21 @@ export default function PlaceView({ page }: { page: PlacePage }) {
     }
   })();
 
-  const chips = [
-    ...page.sections.filter((s) => s.id !== "limits").slice(0, 6).map((s) => ({ href: `#${s.id}`, label: s.h2.length > 28 ? s.h2.slice(0, 26).trimEnd() + "..." : s.h2 })),
-    { href: "#quote", label: "Request a ride" },
-  ];
+  const chips = page.landing
+    ? [
+        { href: "#about", label: "The route" },
+        { href: "#why", label: "Why this ride" },
+        { href: "#vehicles", label: "Vehicles" },
+        { href: "#places", label: "Destination" },
+        { href: "#plan", label: "Plan your trip" },
+        { href: "#how", label: "How it works" },
+        { href: "#faq", label: "Questions" },
+        { href: "#quote", label: "Request a ride" },
+      ]
+    : [
+        ...page.sections.filter((s) => s.id !== "limits").slice(0, 6).map((s) => ({ href: `#${s.id}`, label: s.h2.length > 28 ? s.h2.slice(0, 26).trimEnd() + "..." : s.h2 })),
+        { href: "#quote", label: "Request a ride" },
+      ];
 
   const body = (
     <div className="min-w-0 space-y-14">
@@ -587,9 +600,9 @@ export default function PlaceView({ page }: { page: PlacePage }) {
             <div className="mt-5">{fullForm}</div>
           </aside>
         </div>
-      ) : page.compactForm ? (
+      ) : page.compactForm || page.simple ? (
         <>
-          <div className="mx-auto max-w-4xl px-5 py-16">{body}</div>
+          {page.landing ? <RouteLanding page={page} /> : page.simple ? <SectionBands page={page} /> : <div className="mx-auto max-w-4xl px-5 py-16">{body}</div>}
           <section id="quote" aria-labelledby="quote-title" className="bg-navy text-white">
             <div className="mx-auto grid max-w-5xl items-center gap-8 px-5 py-14 lg:grid-cols-[1fr_420px]">
               <div>
@@ -604,7 +617,7 @@ export default function PlaceView({ page }: { page: PlacePage }) {
         </>
       ) : (
         <>
-          <div className="mx-auto max-w-4xl px-5 py-16">{body}</div>
+          {page.simple ? <SectionBands page={page} /> : <div className="mx-auto max-w-4xl px-5 py-16">{body}</div>}
           <section id="quote" aria-labelledby="quote-title" className="bg-navy text-white">
             <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 lg:grid-cols-[0.8fr_1.2fr]">
               <div>

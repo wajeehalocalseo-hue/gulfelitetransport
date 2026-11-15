@@ -510,6 +510,7 @@ function airportPages(): PlacePage[] {
     return {
       kind: "airport" as const,
       path,
+      simple: ruh ? true : undefined,
       name: a.name,
       title: ruh ? "King Khalid International Airport Transfer: Private Taxi" : `Taxi & Cab Transfers at ${a.name} (${a.code})`,
       description: ruh
@@ -624,7 +625,7 @@ function riyadhRouteLanding(r: (typeof routes)[number], from: City, to: City, ap
       kind: "items",
       items: [
         { title: "Timing", text: prof.plan },
-        ...r.tips.map((t, k) => ({ title: `Note ${k + 1}`, text: t })),
+        ...r.tips.map((t) => ({ title: "Good to know", text: t })),
         { title: "Passengers and bags", text: "Tell us how many people are travelling and how many bags, and we confirm a vehicle that fits." },
       ],
     },
@@ -654,6 +655,45 @@ function riyadhRouteLanding(r: (typeof routes)[number], from: City, to: City, ap
       ],
     },
   ];
+  const itemsOf = (id: string) => {
+    const sec = sections.find((x) => x.id === id);
+    return sec && "items" in sec ? (sec.items as { title?: string; text?: string; name?: string; href?: string; note?: string; q?: string; a?: string; cells?: string[] }[]) : [];
+  };
+  const toItems = (id: string) => itemsOf(id).map((x) => ({ title: x.title ?? "", text: x.text ?? "" }));
+  const toLinks = (id: string) => itemsOf(id).map((x) => ({ name: x.name ?? "", href: x.href ?? "", note: x.note }));
+  const placesSec = sections.find((x) => x.id === "places");
+  const faqSec = sections.find((x) => x.id === "faq");
+  const variant = (Math.max(0, Object.keys(routeProfiles).indexOf(r.id)) % 4) as 0 | 1 | 2 | 3;
+  const cap = (z: string) => z.charAt(0).toUpperCase() + z.slice(1);
+  const landing: NonNullable<PlacePage["landing"]> = {
+    variant,
+    from: "Riyadh",
+    to: name,
+    km: r.km,
+    stats: [
+      { label: "Road distance", value: `about ${r.km} km`, icon: "arrow" },
+      { label: "Driving time", value: `about ${time}`, icon: "bolt" },
+      { label: "Direction", value: dir ? `${cap(dir)} of Riyadh` : region.name, icon: "globe" },
+      ap ? { label: "Airport", value: `${ap.name} (${ap.code})`, icon: "bus" } : { label: "Return", value: "Same page, both ways", icon: "bus" },
+    ],
+    about: [prof.intro, r.about],
+    why: prof.why,
+    placesIntro: placesSec && "intro" in placesSec && placesSec.intro ? placesSec.intro : "",
+    places: toItems("places"),
+    pickups: toLinks("pickup"),
+    plan: toItems("plan").filter((x, i, all) => all.findIndex((y) => y.text === x.text) === i),
+    riders: toItems("riders"),
+    steps: [
+      { title: "Send the details", text: "Tell us the pickup point in Riyadh, the drop-off, the date and time, and the number of passengers and bags." },
+      { title: "We check availability", text: "We look at whether a suitable car and driver can be arranged for that request." },
+      { title: "You get the confirmation", text: "The vehicle, driver details and fare are confirmed with you before you commit to anything." },
+      { title: "Take the ride", text: "Your driver collects you at the agreed point and takes you to your destination." },
+    ],
+    related: toLinks("links"),
+    limits: toItems("limits"),
+    faq: faqSec && faqSec.kind === "faq" ? faqSec.items : [],
+    note: `Distance and time are estimates from OpenStreetMap routing between the city centres, reviewed November 2026. Rest stops, traffic and any checkpoint queues add time.`,
+  };
   return {
     title: prof.title,
     description: `Book a private taxi from Riyadh to ${name}: about ${r.km} km, roughly ${time} by road. ${prof.tail} Fare confirmed before you commit.`,
@@ -661,6 +701,7 @@ function riyadhRouteLanding(r: (typeof routes)[number], from: City, to: City, ap
     lead: `About ${r.km} km and roughly ${time} by road. We confirm the vehicle, driver and fare before you commit.`,
     directAnswer: `Gulf Elite Transport takes bookings for private taxi rides from Riyadh to ${name}, about ${r.km} km by road (roughly ${time} of driving), and from ${name} back to Riyadh. ${ap ? `The airport at the destination is ${ap.name} (${ap.code}). ` : ""}Send your pickup, drop-off, date, and the number of passengers and bags, and we confirm the vehicle, driver and fare before you commit. Fares are not published, because each ride is quoted for your request.`,
     sections,
+    landing,
   };
 }
 
@@ -700,6 +741,7 @@ function routePages(): PlacePage[] {
       h1: lp?.h1 ?? `Taxi from ${alias(from.name)} to ${alias(to.name)}`,
       lead: lp?.lead ?? `About ${r.km} km by road. Fare, vehicle and timing are confirmed for each request.`,
       directAnswer: lp?.directAnswer ?? direct,
+      landing: lp?.landing,
       crumbs: [
         { name: "Home", path: "/" },
         { name: "Taxi & Cab Services in Saudi Arabia", path: BASE },

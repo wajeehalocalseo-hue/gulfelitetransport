@@ -39,7 +39,7 @@ export function BookingCard({ service = "", topic = "", pickup = "", dropoff = "
 export default function HeroBooking({ children, ...form }: FormProps & { children: ReactNode }) {
   return (
     <div className="relative">
-      <div className="min-[1100px]:[&>section]:min-h-[720px] min-[1100px]:[&>section>div:last-child]:max-w-7xl min-[1100px]:[&>section>div:last-child]:pr-[450px]">
+      <div className="min-[1100px]:[&>section]:min-h-[640px] min-[1100px]:[&>section>div:last-child]:max-w-7xl min-[1100px]:[&>section>div:last-child]:pr-[450px]">
         {children}
       </div>
       <div className="bg-navy px-5 pb-10 pt-6 min-[1100px]:pointer-events-none min-[1100px]:absolute min-[1100px]:inset-x-0 min-[1100px]:top-0 min-[1100px]:bg-transparent min-[1100px]:p-0">

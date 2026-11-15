@@ -98,6 +98,26 @@ export type PlacePage = {
   route?: { from: string; to: string; km: number };
   /** Two points inside one city, used for the schematic hero and structured data. */
   pair?: { a: { name: string; lat: number; lng: number }; b: { name: string; lat: number; lng: number }; km: number; type: "airport" | "hub" | "district" };
+  /** Structured content for the wide route landing layout (RouteLanding). `variant` picks one of four designs. */
+  landing?: {
+    variant: 0 | 1 | 2 | 3;
+    from: string;
+    to: string;
+    km: number;
+    stats: { label: string; value: string; icon: string }[];
+    about: string[];
+    why: { title: string; text: string }[];
+    placesIntro: string;
+    places: { title: string; text: string }[];
+    pickups: { name: string; href: string; note?: string }[];
+    plan: { title: string; text: string }[];
+    riders: { title: string; text: string }[];
+    steps: { title: string; text: string }[];
+    related: { name: string; href: string; note?: string }[];
+    limits: { title: string; text: string }[];
+    faq: Faq[];
+    note: string;
+  };
   /** The bottom booking form is the short trip form used in the hero, with a route heading, instead of the long quote form. */
   compactForm?: boolean;
   /** Landing-page style: no breadcrumb row above the heading and no side form (the hero form and the final form remain). */
