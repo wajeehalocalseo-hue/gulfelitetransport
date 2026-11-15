@@ -8,6 +8,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import SiteChrome from "@/components/SiteChrome";
 import StickyCta from "@/components/StickyCta";
+import AnalyticsEvents from "@/components/AnalyticsEvents";
 import "./globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -80,6 +81,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Script id="gtm" strategy="afterInteractive">
           {`window.dataLayer=window.dataLayer||[];window.dataLayer.push({"gtm.start":new Date().getTime(),event:"gtm.js"});(function(){var s=document.createElement("script");s.async=true;s.src="https://www.googletagmanager.com/gtm.js?id=GTM-M6NX327S";document.head.appendChild(s);})();`}
         </Script>
+        <AnalyticsEvents />
         <Script src="https://analytics.ahrefs.com/analytics.js" data-key="o2Jqnxe9R1hrIxQNqUHPSQ" strategy="afterInteractive" />
         <noscript>
           <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M6NX327S" height="0" width="0" style={{ display: "none", visibility: "hidden" }} title="Google Tag Manager" />

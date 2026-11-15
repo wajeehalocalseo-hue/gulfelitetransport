@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { mailtoUrl, site, whatsappUrl } from "@/lib/site";
 import { saveQuoteRequest, supabaseConfigured } from "@/lib/supabase";
+import { track } from "@/lib/track";
 
 type Errors = Partial<Record<string, string>>;
 type Status = "idle" | "sending" | "sent" | "error";
@@ -110,6 +111,7 @@ export default function BookForm() {
               page_path: window.location.pathname,
             });
             setChannel("saved");
+            track("generate_lead", { lead_source: "book_form", lead_channel: "saved", service: "Taxi & Cab Services" });
             setStatus("sent");
             return;
           } catch {
@@ -127,6 +129,7 @@ export default function BookForm() {
         } else {
           throw new Error("No contact channel configured");
         }
+        track("generate_lead", { lead_source: "book_form", lead_channel: wa ? "whatsapp" : "email", service: "Taxi & Cab Services" });
         setStatus("sent");
       } catch {
         setStatus("error");

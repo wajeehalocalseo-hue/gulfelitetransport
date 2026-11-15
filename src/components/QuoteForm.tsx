@@ -4,6 +4,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import { services } from "@/content/services";
 import { mailtoUrl, site, whatsappUrl } from "@/lib/site";
 import { saveQuoteRequest, supabaseConfigured } from "@/lib/supabase";
+import { track } from "@/lib/track";
 
 type Errors = Partial<Record<string, string>>;
 type Status = "idle" | "sending" | "sent" | "error";
@@ -126,6 +127,7 @@ export default function QuoteForm({
             page_path: window.location.pathname,
           });
           setChannel("saved");
+          track("generate_lead", { lead_source: "quote_form", lead_channel: "saved", service: v.service });
           setStatus("sent");
           return;
         } catch {
@@ -143,6 +145,7 @@ export default function QuoteForm({
       } else {
         throw new Error("No contact channel configured");
       }
+      track("generate_lead", { lead_source: "quote_form", lead_channel: wa ? "whatsapp" : "email", service: v.service });
       setStatus("sent");
     } catch {
       setStatus("error");
