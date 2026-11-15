@@ -16,9 +16,9 @@ export const delivery: Service[] = [
       "Address and access planning",
       "Support for recurring delivery runs",
     ],
-    metaTitle: "Last-Mile Delivery Services",
+    metaTitle: "Last-Mile Delivery Services for Businesses",
     metaDescription:
-      "Plan final-stage business deliveries with last-mile delivery coordination from Gulf Elite Transport. Request a quotation for your delivery requirements.",
+      "Last mile delivery for businesses: plan final-stage deliveries around addresses, time windows and recipients. Request a quotation from Gulf Elite Transport.",
     h1: "Last-Mile Delivery",
     lead: "Planning the final stage of the journey, when goods reach the customer, branch or site that is waiting for them.",
     directAnswer:

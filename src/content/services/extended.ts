@@ -220,9 +220,9 @@ export const extended: Service[] = [
     short: "Planning the transport of booth materials, display items and event equipment to and from exhibitions and events.",
     audienceShort: "Exhibitors, event organisers and stand builders",
     benefits: ["Delivery timed to set-up", "Return transport planned", "Quotation before commitment"],
-    metaTitle: "Trade Show and Exhibition Logistics",
+    metaTitle: "Exhibition Transport and Trade Show Logistics",
     metaDescription:
-      "Plan transport for trade shows and exhibitions: booth materials, event equipment and return movements. Request a quotation from Gulf Elite Transport.",
+      "Exhibition transport for trade shows: booth materials, display items and event equipment delivered for set-up and returned after. Request a quotation.",
     h1: "Trade Show & Exhibition Logistics",
     lead: "At an exhibition the delivery window is fixed. Everything has to be at the venue before the doors open, and out again after they close.",
     directAnswer:

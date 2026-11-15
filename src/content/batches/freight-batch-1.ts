@@ -107,9 +107,9 @@ export const freightBatch1Sub: ChildRecord[] = [
     order: 4,
     short: "Delivery of construction materials such as cement, steel, timber, blocks, tiles and roofing to a building site.",
     audienceShort: "Contractors, builders, suppliers and site managers",
-    seoTitle: "Building Materials Transportation to Site",
+    seoTitle: "Building Material Shipping and Transport to Site",
     metaDescription:
-      "Arrange building materials transportation for cement, steel, timber, blocks, tiles and roofing. Request a quotation from Gulf Elite Transport.",
+      "Building material shipping and transportation for cement, steel, timber, blocks, tiles and roofing. Request a quotation from Gulf Elite Transport.",
     primaryKeyword: "building materials transportation",
     secondaryKeywords: ["construction materials delivery", "steel transportation", "cement delivery", "timber transport"],
     semanticKeywords: ["bagged cement", "steel bars", "steel coils", "lumber", "bricks and blocks", "tiles", "aggregates", "pipes", "roofing sheets", "site offloading"],
@@ -703,9 +703,9 @@ export const freightBatch1CommercialMicro: ChildRecord[] = [
     order: 2,
     short: "Goods on pallets, from a single pallet to multiple pallets of mixed cargo, planned for safe loading.",
     audienceShort: "Suppliers, wholesalers and manufacturers shipping on pallets",
-    seoTitle: "Palletized Cargo Transport and Pallet Delivery",
+    seoTitle: "Palletized Cargo Shipping and Pallet Delivery",
     metaDescription:
-      "Arrange palletized cargo transport for single and multiple pallets, planned for safe loading and delivery. Quotation from Gulf Elite Transport.",
+      "Palletised and palletized cargo shipping for single or multiple pallets, planned for safe loading and delivery. Quotation from Gulf Elite Transport.",
     primaryKeyword: "palletized cargo transport",
     secondaryKeywords: ["pallet delivery", "multiple pallet transportation", "mixed pallet cargo"],
     semanticKeywords: ["pallet count", "pallet size", "stackable", "shrink wrap", "forklift", "loading dock"],
