@@ -1,6 +1,8 @@
 import { routeExtras, umrahPages, UMRAH_BASE } from "../umrah/pages";
 import { airports, areas, routes } from "./places";
-import { buildPairs } from "./pairs";
+import { buildPairs, bearing } from "./pairs";
+import { routeProfiles, type RouteProfile } from "./route-profiles";
+import routeTimes from "./route-times.json";
 import { riyadhAreas, riyadhAreaById } from "./riyadh-areas";
 import { districtOverrides, fmtKm, fmtMin } from "./riyadh-districts";
 import journeysJson from "./riyadh-journeys.json";
@@ -558,6 +560,110 @@ function airportPages(): PlacePage[] {
   });
 }
 
+const COMPASS8 = ["north", "north-east", "east", "south-east", "south", "south-west", "west", "north-west"];
+const compassOf = (deg: number) => COMPASS8[Math.round(deg / 45) % 8];
+
+/** Landing-page content for one Riyadh intercity route. */
+function riyadhRouteLanding(r: (typeof routes)[number], from: City, to: City, ap: Airport | undefined, prof: RouteProfile, rt: { km: number; min: number }) {
+  const name = to.name === "Al Bahah" ? "Al Baha" : to.name;
+  const time = fmtMin(rt.min);
+  const g0 = cityGeo[from.id];
+  const g1 = cityGeo[to.id];
+  const dir = g0 && g1 ? compassOf(bearing(g0, g1)) : "";
+  const region = need(regionById.get(to.region), to.region);
+  const relatedLinks = prof.related.map((id) => {
+    if (id.startsWith("intl:")) {
+      const x = intlRoutes.find((q) => q.id === id.slice(5));
+      return x ? { name: `Riyadh to ${x.name}`, href: `${BASE}/international/${x.id}`, note: `${x.country}, about ${x.km} km` } : undefined;
+    }
+    const x = routes.find((q) => q.id === id);
+    const dest = x ? cityById.get(x.to) : undefined;
+    return x && dest ? { name: `Riyadh to ${dest.name}`, href: `${BASE}/routes/${x.id}`, note: `about ${x.km} km` } : undefined;
+  }).filter((x): x is { name: string; href: string; note: string } => Boolean(x));
+  const sections: Section[] = [
+    {
+      id: "glance",
+      h2: `Riyadh to ${name} at a glance`,
+      kind: "table",
+      intro: `The facts that matter when you plan the ride. Both directions are covered on this page.`,
+      head: ["Detail", `Riyadh to ${name}`],
+      rows: [
+        { cells: ["Road distance", `about ${r.km} km`] },
+        { cells: ["Typical driving time", `about ${time} without stops`] },
+        ...(dir ? [{ cells: ["Direction from Riyadh", `${name} lies ${dir} of Riyadh`] }] : []),
+        { cells: ["Region", region.name], href: `${BASE}/${region.id}` },
+        ...(ap ? [{ cells: ["Airport at the destination", `${ap.name} (${ap.code})`], href: `${BASE}/airports/${ap.id}` }] : []),
+        { cells: ["Return", `${name} to Riyadh is on the same page`] },
+      ],
+      note: `Distance and time are estimates from OpenStreetMap routing between the city centres, reviewed ${"November 2026"}. Rest stops, traffic and the border or checkpoint queues add time.`,
+    },
+    { id: "about", h2: `About the Riyadh to ${name} route`, kind: "text", paragraphs: [prof.intro, r.about] },
+    { id: "why", h2: `Why book a private taxi from Riyadh to ${name}`, kind: "items", items: prof.why },
+    {
+      id: "places",
+      h2: `Where rides in ${name} go`,
+      kind: "items",
+      intro: `Drop-offs and pickups in ${name} are given as a hotel, a district or a named place.`,
+      items: [...to.places.map((x) => ({ title: x.name, text: x.note })), ...(ap ? [{ title: `${ap.name} (${ap.code})`, text: "Send the flight number and terminal and the ride is planned around the flight." }] : [])],
+    },
+    {
+      id: "pickup",
+      h2: "Pickup points in Riyadh",
+      kind: "links",
+      intro: "Rides start from your door, hotel or office in Riyadh. These are the starting points people ask for most.",
+      items: [
+        { name: "King Khalid International Airport (RUH)", href: `${BASE}/airports/king-khalid-international-airport`, note: "Airport pickups" },
+        { name: "Olaya", href: `${RIYADH_MAIN}/olaya-taxi-service`, note: "Hotels, towers and malls" },
+        { name: "King Abdullah Financial District (KAFD)", href: `${RIYADH_MAIN}/king-abdullah-financial-district-taxi-service`, note: "Office towers and metro" },
+        { name: "Riyadh Taxi Service", href: RIYADH_MAIN, note: "All Riyadh pickups and areas" },
+      ],
+    },
+    {
+      id: "plan",
+      h2: "Planning your journey",
+      kind: "items",
+      items: [
+        { title: "Timing", text: prof.plan },
+        ...r.tips.map((t, k) => ({ title: `Note ${k + 1}`, text: t })),
+        { title: "Passengers and bags", text: "Tell us how many people are travelling and how many bags, and we confirm a vehicle that fits." },
+      ],
+    },
+    { id: "riders", h2: "Who travels this route", kind: "items", items: r.riders.map((t, k) => ({ title: `Traveller ${k + 1}`, text: t })) },
+    bookingSteps("in Riyadh"),
+    notAssumed,
+    {
+      id: "links",
+      h2: "Related routes and pages",
+      kind: "links",
+      items: [
+        ...relatedLinks,
+        { name: `Taxi & Cab Service in ${name}`, href: cityPath(to), note: "Destination city page" },
+        { name: "Riyadh Taxi Service", href: RIYADH_MAIN, note: "Main Riyadh page" },
+        { name: "All intercity routes", href: `${BASE}/routes`, note: "Routes within Saudi Arabia" },
+      ],
+    },
+    {
+      id: "faq",
+      h2: `Riyadh to ${name} taxi: questions`,
+      kind: "faq",
+      items: [
+        { q: `How far is ${name} from Riyadh?`, a: `About ${r.km} km by road, which is roughly ${time} of driving without stops. These are estimates, and the exact route and plan are confirmed for your request.` },
+        { q: `How do I book a taxi from Riyadh to ${name}?`, a: `Use the request form at the top or the bottom of this page, or contact us, and send your pickup in Riyadh, your drop-off in ${name}, the date, the time and the number of passengers and bags. We confirm the vehicle, driver and fare before you commit.` },
+        ...prof.faq,
+        { q: "Do you publish fares for this route?", a: "No standard fares are published. Each ride is quoted for your request, and you confirm the fare before you commit." },
+      ],
+    },
+  ];
+  return {
+    title: prof.title,
+    description: `Book a private taxi from Riyadh to ${name}: about ${r.km} km, roughly ${time} by road. ${prof.tail} Fare confirmed before you commit.`,
+    h1: `Private Taxi from Riyadh to ${name === "Makkah" ? "Makkah (Mecca)" : name === "Madinah" ? "Madinah (Medina)" : name}`,
+    lead: `About ${r.km} km and roughly ${time} by road. We confirm the vehicle, driver and fare before you commit.`,
+    directAnswer: `Gulf Elite Transport takes bookings for private taxi rides from Riyadh to ${name}, about ${r.km} km by road (roughly ${time} of driving), and from ${name} back to Riyadh. ${ap ? `The airport at the destination is ${ap.name} (${ap.code}). ` : ""}Send your pickup, drop-off, date, and the number of passengers and bags, and we confirm the vehicle, driver and fare before you commit. Fares are not published, because each ride is quoted for your request.`,
+    sections,
+  };
+}
+
 function routePages(): PlacePage[] {
   return routes.map((r, i) => {
     const from = need(cityById.get(r.from), r.from);
@@ -579,16 +685,21 @@ function routePages(): PlacePage[] {
       `Gulf Elite Transport arranges taxi and cab rides from ${from.name} to ${to.name}, about ${r.km} km by road, and the same route in the other direction. Tell us the pickup point, drop-off point, date, passengers and bags, and we confirm the vehicle, driver and fare for your request before you commit.`,
       `Planning to travel between ${from.name} and ${to.name}? The road distance is roughly ${r.km} km. Send your details to Gulf Elite Transport and we confirm the vehicle, driver, route and fare before anything is agreed; no fare or journey time is promised in advance.`,
     ][i % 2];
+    // The 22 Riyadh routes are landing pages with their own content (route-profiles.ts) and a compact booking form.
+    const prof = routeProfiles[r.id];
+    const rt = routeTimes[r.id as keyof typeof routeTimes];
+    const lp = prof && rt ? riyadhRouteLanding(r, from, to, apTo, prof, rt) : undefined;
     return {
       kind: "route" as const,
       path,
+      compactForm: lp ? true : undefined,
       name: `${from.name} to ${to.name}`,
       // Search Console shows people also type Mecca and Medina, so those spellings appear once in the title, description and heading.
-      title: `Taxi from ${alias(from.name)} to ${alias(to.name)}: Intercity Cab Ride`,
-      description: `Request an intercity taxi or cab from ${alias(from.name)} to ${alias(to.name)}, about ${r.km} km by road. Fare, vehicle and timing confirmed for each request.`,
-      h1: `Taxi from ${alias(from.name)} to ${alias(to.name)}`,
-      lead: `About ${r.km} km by road. Fare, vehicle and timing are confirmed for each request.`,
-      directAnswer: direct,
+      title: lp?.title ?? `Taxi from ${alias(from.name)} to ${alias(to.name)}: Intercity Cab Ride`,
+      description: lp?.description ?? `Request an intercity taxi or cab from ${alias(from.name)} to ${alias(to.name)}, about ${r.km} km by road. Fare, vehicle and timing confirmed for each request.`,
+      h1: lp?.h1 ?? `Taxi from ${alias(from.name)} to ${alias(to.name)}`,
+      lead: lp?.lead ?? `About ${r.km} km by road. Fare, vehicle and timing are confirmed for each request.`,
+      directAnswer: lp?.directAnswer ?? direct,
       crumbs: [
         { name: "Home", path: "/" },
         { name: "Taxi & Cab Services in Saudi Arabia", path: BASE },
@@ -601,7 +712,7 @@ function routePages(): PlacePage[] {
         { label: "To", value: to.name },
         { label: "Direction", value: "Both directions" },
       ],
-      sections: [
+      sections: lp?.sections ?? [
         { id: "about", h2: `About the ${from.name} to ${to.name} route`, kind: "text", paragraphs: [r.about] },
         { id: "riders", h2: "Who travels this route", kind: "items", items: r.riders.map((t, k) => ({ title: `Traveller ${k + 1}`, text: t })) },
         { id: "tips", h2: "Good to know before you ask", kind: "items", items: r.tips.map((t, k) => ({ title: `Note ${k + 1}`, text: t })) },

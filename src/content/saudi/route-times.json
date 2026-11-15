@@ -1,0 +1,90 @@
+{
+ "riyadh-to-jeddah": {
+  "km": 946.5,
+  "min": 625
+ },
+ "riyadh-to-dammam": {
+  "km": 410.7,
+  "min": 235
+ },
+ "riyadh-to-makkah": {
+  "km": 867.9,
+  "min": 573
+ },
+ "riyadh-to-madinah": {
+  "km": 837,
+  "min": 467
+ },
+ "riyadh-to-buraydah": {
+  "km": 346.8,
+  "min": 196
+ },
+ "riyadh-to-al-hofuf": {
+  "km": 324.8,
+  "min": 222
+ },
+ "riyadh-to-hail": {
+  "km": 624.4,
+  "min": 356
+ },
+ "riyadh-to-al-kharj": {
+  "km": 95.1,
+  "min": 82
+ },
+ "riyadh-to-al-khobar": {
+  "km": 424.1,
+  "min": 244
+ },
+ "riyadh-to-dhahran": {
+  "km": 413.1,
+  "min": 242
+ },
+ "riyadh-to-taif": {
+  "km": 787.8,
+  "min": 518
+ },
+ "riyadh-to-abha": {
+  "km": 945.3,
+  "min": 684
+ },
+ "riyadh-to-jubail": {
+  "km": 457.9,
+  "min": 277
+ },
+ "riyadh-to-yanbu": {
+  "km": 1056.8,
+  "min": 619
+ },
+ "riyadh-to-alula": {
+  "km": 1034,
+  "min": 657
+ },
+ "riyadh-to-tabuk": {
+  "km": 1350.2,
+  "min": 828
+ },
+ "riyadh-to-jazan": {
+  "km": 1140.2,
+  "min": 820
+ },
+ "riyadh-to-najran": {
+  "km": 950.7,
+  "min": 683
+ },
+ "riyadh-to-al-baha": {
+  "km": 909.3,
+  "min": 656
+ },
+ "riyadh-to-sakaka": {
+  "km": 981.4,
+  "min": 585
+ },
+ "riyadh-to-arar": {
+  "km": 1053.6,
+  "min": 679
+ },
+ "riyadh-to-hafar-al-batin": {
+  "km": 499.5,
+  "min": 330
+ }
+}

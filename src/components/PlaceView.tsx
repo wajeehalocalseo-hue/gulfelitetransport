@@ -6,6 +6,7 @@ import FaqList from "./Faq";
 import Icon from "./Icon";
 import HeroBooking from "./HeroBooking";
 import QuoteForm from "./QuoteForm";
+import TripForm from "./TripForm";
 import WeatherWidget from "./WeatherWidget";
 import { TAXI_SERVICE } from "@/content/saudi/build";
 import type { PlacePage, Section } from "@/content/saudi/types";
@@ -317,7 +318,7 @@ function SectionBlock({ s, style }: { s: Section; style: PlacePage["layout"]["bo
 export default function PlaceView({ page }: { page: PlacePage }) {
   const L0 = page.layout;
   // The booking form always sits in the hero (HeroBooking), so the old "hero" form placement falls back to the page-bottom form.
-  const L = { ...L0, form: (page.simple ? "bottom" : L0.form === "hero" ? "aside" : L0.form) as typeof L0.form };
+  const L = { ...L0, form: (page.simple || page.compactForm ? "bottom" : L0.form === "hero" ? "aside" : L0.form) as typeof L0.form };
   const quoteHref = "#hero-quote";
   // A landing-page style page has no breadcrumb row above the heading (the breadcrumb data stays in the page's schema).
   const crumbs = (page.simple ? [] : page.crumbs).map((c, i, a) => (i === a.length - 1 ? { name: c.name } : { name: c.name, href: c.path }));
@@ -586,6 +587,21 @@ export default function PlaceView({ page }: { page: PlacePage }) {
             <div className="mt-5">{fullForm}</div>
           </aside>
         </div>
+      ) : page.compactForm ? (
+        <>
+          <div className="mx-auto max-w-4xl px-5 py-16">{body}</div>
+          <section id="quote" aria-labelledby="quote-title" className="bg-navy text-white">
+            <div className="mx-auto grid max-w-5xl items-center gap-8 px-5 py-14 lg:grid-cols-[1fr_420px]">
+              <div>
+                <h2 id="quote-title" className="text-3xl font-extrabold tracking-tight sm:text-4xl">Book {page.name}</h2>
+                <p className="mt-4 text-lg leading-8 text-white/75">Tell us where and when. We confirm the vehicle, driver and fare before you commit.</p>
+              </div>
+              <div className="rounded-2xl border-t-4 border-accent bg-white p-5 text-navy shadow-2xl">
+                <TripForm pickupDefault={pre.pickup} dropoffDefault={pre.dropoff} />
+              </div>
+            </div>
+          </section>
+        </>
       ) : (
         <>
           <div className="mx-auto max-w-4xl px-5 py-16">{body}</div>
