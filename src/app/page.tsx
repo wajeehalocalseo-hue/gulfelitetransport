@@ -8,9 +8,14 @@ import QuoteForm from "@/components/QuoteForm";
 import RichText from "@/components/RichText";
 import HomePhoto from "@/components/HomePhoto";
 import ServiceImage from "@/components/ServiceImage";
-import { BookingCard } from "@/components/HeroBooking";
+import TripBar from "@/components/TripBar";
 import * as c from "@/content/home";
+import { blogPosts } from "@/content/extra-pages";
 import { airports, routes } from "@/content/saudi/places";
+import { routeProfiles } from "@/content/saudi/route-profiles";
+import routeTimes from "@/content/saudi/route-times.json";
+import { riyadhAreas } from "@/content/saudi/riyadh-areas";
+import { fmtMin } from "@/content/saudi/riyadh-districts";
 import { cities } from "@/content/saudi/cities";
 import { cityHref } from "@/content/saudi/paths";
 import { regions } from "@/content/saudi/regions";
@@ -68,7 +73,22 @@ function Head({ id, eyebrow, title, lead, dark = false, center = false }: { id: 
 
 export default function Home() {
   const wa = whatsappUrl(`Hello ${site.name}, I would like to request a ride or a transport quote.`);
-  const topCities = cities.slice(0, 8);
+  const heroRoutes = ["riyadh-to-jeddah", "riyadh-to-makkah", "riyadh-to-madinah", "riyadh-to-dammam"].flatMap((id) => routes.filter((r) => r.id === id));
+  const routeCount = Object.keys(routeProfiles).length;
+  const districtCount = riyadhAreas.filter((a) => a.kind !== "airport").length;
+  const statCards = [
+    { icon: "calendar", big: "24/7", label: "Requests every day", sub: "Open 24 hours" },
+    { icon: "shield", big: "Licensed", label: "and fully insured", sub: "Private transport" },
+    { icon: "network", big: String(routeCount), label: "Routes from Riyadh", sub: "Both directions" },
+    { icon: "building", big: String(districtCount), label: "Riyadh districts", sub: "Pickups across the city" },
+  ];
+  const times = routeTimes as Record<string, { km: number; min: number }>;
+  const routeCards = ["riyadh-to-jeddah", "riyadh-to-dammam", "riyadh-to-makkah"].flatMap((id) => {
+    const r = routes.find((x) => x.id === id);
+    const prof = routeProfiles[id];
+    if (!r || !prof || !times[id]) return [];
+    return [{ id, to: cityName(r.to), km: r.km, time: fmtMin(times[id].min), text: prof.why[0].text }];
+  });  const topCities = cities.slice(0, 8);
   const topRoutes = routes.slice(0, 6);
   const topAirports = airports.slice(0, 4);
   const contactRows: { label: string; value: string; href?: string }[] = [
@@ -84,57 +104,74 @@ export default function Home() {
       <JsonLd data={homeGraph()} />
 
       {/* 1. Hero */}
-      <section aria-labelledby="hero-title" className="relative overflow-hidden border-b-4 border-accent bg-gradient-to-br from-navy via-navy to-navy-2 text-white">
+      <section aria-labelledby="hero-title" className="relative overflow-hidden bg-gradient-to-br from-navy via-navy to-navy-2 text-white">
         <HomePhoto name="hero-car" fill priority alt="Private taxi and chauffeur car in Riyadh at sunset with the city skyline" width={1600} height={900} sizes="100vw" className="object-cover object-[60%_bottom]" />
-        <div aria-hidden="true" className="absolute inset-0 bg-navy/60 lg:bg-gradient-to-r lg:from-navy/85 lg:via-navy/45 lg:to-navy/10" />
-        <div aria-hidden="true" className="absolute inset-x-0 top-0 hidden h-1/3 bg-gradient-to-b from-navy/55 to-transparent lg:block" />
-        <div aria-hidden="true" className="absolute inset-0 opacity-[0.07] [background-image:radial-gradient(circle_at_1px_1px,#fff_1px,transparent_0)] [background-size:22px_22px]" />
-        <div className={`${wrap} relative grid items-start gap-12 py-16 lg:min-h-[760px] lg:grid-cols-[1.05fr_0.95fr] lg:pb-56 lg:pt-20`}>
-          <div>
-            <p className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.22em] text-accent">
-              <span aria-hidden="true" className="h-px w-8 bg-accent" />
-              {c.hero.eyebrow}
-            </p>
-            <h1 id="hero-title" className="font-display mt-5 text-4xl leading-[1.1] sm:text-5xl lg:text-[3.3rem]">
-              {c.hero.h1}
-            </h1>
-            <p className="mt-6 max-w-xl text-lg leading-8 text-white/80">Book a taxi, an airport transfer or an Umrah ride, or ask for a freight quotation. We confirm the vehicle, driver and fare with you before you commit.</p>
-            <ul className="mt-7 grid gap-2.5 sm:grid-cols-2" aria-label="What we arrange">
-              {c.hero.chips.slice(0, 3).map((x) => (
-                <li key={x} className="flex items-center gap-2.5 text-sm font-semibold text-white/90">
-                  <Icon name="check" className="h-4 w-4 shrink-0 text-accent" /> {x}
-                </li>
-              ))}
-            </ul>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <Link href="#hero-quote" className={btnPrimary}>Book a Ride</Link>
-              {telUrl && (
-                <a href={telUrl} className={btnGhost}>
-                  <Icon name="phone" className="h-4 w-4" /> Call Now
-                </a>
-              )}
-              {wa && (
-                <a href={wa} target="_blank" rel="noopener noreferrer" className={btnGhost}>
-                  <Icon name="chat" className="h-4 w-4" /> WhatsApp Us
-                </a>
-              )}
-            </div>
-            <p className="mt-6 flex items-center gap-2 text-sm text-white/70">
-              <Icon name="shield" className="h-4 w-4 text-accent" /> {c.hero.fareChip}
+        <div aria-hidden="true" className="absolute inset-0 bg-navy/65 lg:bg-gradient-to-b lg:from-navy/80 lg:via-navy/55 lg:to-navy/35" />
+        <ul aria-label="What you get" className="relative border-b border-white/10 bg-black/25">
+          <li className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-6 gap-y-2 px-5 py-3 text-[11px] font-extrabold uppercase tracking-[0.16em] text-white/85">
+            <span className="inline-flex items-center gap-2"><Icon name="calendar" className="h-3.5 w-3.5 text-accent" /> Available 24/7</span>
+            <span className="inline-flex items-center gap-2"><Icon name="shield" className="h-3.5 w-3.5 text-accent" /> Licensed and insured</span>
+            <span className="inline-flex items-center gap-2"><Icon name="check" className="h-3.5 w-3.5 text-accent" /> {c.hero.fareChip}</span>
+            <span className="inline-flex items-center gap-2"><Icon name="bus" className="h-3.5 w-3.5 text-accent" /> Private rides</span>
+          </li>
+        </ul>
+        <div className={`${wrap} relative flex flex-col items-center py-14 text-center lg:py-20`}>
+          <p className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.22em] text-accent">
+            <span aria-hidden="true" className="h-px w-8 bg-accent" />
+            {c.hero.eyebrow}
+            <span aria-hidden="true" className="h-px w-8 bg-accent" />
+          </p>
+          <h1 id="hero-title" className="font-display mt-5 max-w-4xl text-4xl leading-[1.1] sm:text-5xl lg:text-6xl">
+            {c.hero.h1.split(" Across ")[0]}{" "}
+            <span className="block text-accent">Across {c.hero.h1.split(" Across ")[1]}</span>
+          </h1>
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-white/85">Book a taxi, an airport transfer or an Umrah ride, or ask for a freight quotation. We confirm the vehicle, driver and fare with you before you commit.</p>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-center">
+            <Link href="#hero-quote" className={btnPrimary}>Get Instant Quote <Icon name="arrow" className="h-4 w-4" /></Link>
+            {telUrl && (
+              <a href={telUrl} className={btnGhost}>
+                <Icon name="phone" className="h-4 w-4" /> Call Now
+              </a>
+            )}
+            {wa && (
+              <a href={wa} target="_blank" rel="noopener noreferrer" className={btnGhost}>
+                <Icon name="chat" className="h-4 w-4" /> WhatsApp Us
+              </a>
+            )}
+          </div>
+          <div className="mt-10 w-full">
+            <TripBar />
+            <p className="mt-4 text-sm text-white/85">
+              Moving freight, equipment or a fleet?{" "}
+              <Link href="/contact" className="font-semibold text-accent underline underline-offset-4">Request a quotation</Link>
             </p>
           </div>
-          <div className="w-full max-w-xl justify-self-end lg:max-w-none">
-            <BookingCard service="Taxi & Cab Services" className="w-full" />
-            <p className="mt-3 text-center text-sm text-white/80">
-              Moving freight, equipment or a fleet?{" "}
-              <Link href="/contact" className="font-semibold text-accent underline underline-offset-4">
-                Request a quotation
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
+            <span className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-white/60">Popular routes</span>
+            {heroRoutes.map((r) => (
+              <Link key={r.id} href={`${BASE}/routes/${r.id}`} className="rounded-full border border-white/25 bg-black/20 px-4 py-1.5 text-xs font-bold text-white/90 backdrop-blur transition hover:border-accent hover:text-accent">
+                {cityName(r.from)} to {cityName(r.to)}
               </Link>
-            </p>
+            ))}
           </div>
         </div>
       </section>
 
+      {/* 1b. The coverage in numbers (counts come from the pages the site actually has) */}
+      <section aria-label="Coverage in numbers" className="relative z-10 -mt-10 pb-2">
+        <div className={wrap}>
+          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {statCards.map((s) => (
+              <li key={s.label} className="rounded-3xl bg-white p-6 text-center shadow-xl ring-1 ring-accent/25">
+                <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-navy text-accent"><Icon name={s.icon} className="h-5 w-5" /></span>
+                <p className="font-display mt-3 text-4xl text-navy">{s.big}</p>
+                <p className="mt-1 text-xs font-extrabold uppercase tracking-wider text-muted">{s.label}</p>
+                <p className="mt-1 text-xs font-bold text-gold">{s.sub}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
       {/* 2. What do you need? The first thing a new visitor sees under the hero */}
       <section id="choose" aria-labelledby="choose-title" className="border-b border-navy/10 bg-ivory py-16">
         <div className={wrap}>
@@ -170,19 +207,181 @@ export default function Home() {
           </nav>
         </div>
       </section>
-      {/* 10. Process */}
-      <section id="process" aria-labelledby="process-title" className={`${wrap} py-20`}>
-        <Head id="process-title" eyebrow={c.process.eyebrow} title={c.process.h2} lead={c.process.text} />
-        <ol className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {c.process.steps.map((s, i) => (
-            <li key={s.title} className="relative border-t-2 border-navy/15 pt-6">
-              <span aria-hidden="true" className="absolute -top-px left-0 h-0.5 w-12 bg-accent" />
-              <span className="font-display text-5xl text-accent">{String(i + 1).padStart(2, "0")}</span>
-              <h3 className="mt-2 text-lg font-bold text-navy">{s.title}</h3>
-              <p className="mt-2 text-sm leading-7 text-muted"><RichText text={s.text} /></p>
+
+      {/* 12. About (entity and trust), laid out as photo and text */}
+      <section aria-labelledby="about-title" className="bg-white py-20">
+        <div className={`${wrap} grid items-center gap-14 lg:grid-cols-2`}>
+          <div className="relative pb-8 pr-4 lg:pb-10">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] bg-gradient-to-br from-navy to-navy-2 shadow-2xl ring-1 ring-accent/30">
+              <HomePhoto name="suv" fill alt="Private SUV for family and long-distance rides in Saudi Arabia" width={900} height={506} sizes="(min-width: 1024px) 45vw, 100vw" className="object-cover" fallback={<span aria-hidden="true" className="absolute inset-0 flex items-center justify-center text-accent"><Icon name="bus" className="h-20 w-20" /></span>} />
+            </div>
+            <div className="absolute bottom-0 right-0 flex max-w-[16rem] items-start gap-3 rounded-3xl bg-white p-5 shadow-2xl ring-1 ring-accent/30">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-navy text-accent"><Icon name="shield" className="h-6 w-6" /></span>
+              <div>
+                <p className="text-lg font-extrabold leading-tight text-navy">Licensed</p>
+                <p className="text-[11px] font-extrabold uppercase tracking-wider text-muted">and fully insured</p>
+                <p className="mt-2 text-xs leading-5 text-muted">Private transport across Saudi Arabia for individuals, families and organisations.</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <p className="inline-flex items-center gap-2 rounded-full bg-navy px-4 py-1.5 text-[11px] font-extrabold uppercase tracking-[0.2em] text-accent">{c.about.eyebrow}</p>
+            <h2 id="about-title" className="font-display mt-4 text-3xl leading-tight text-navy sm:text-4xl">{c.about.h2}</h2>
+            <div className="mt-5 space-y-4 text-lg leading-8 text-muted">
+              {c.about.paragraphs.slice(1).map((pp) => (
+                <p key={pp}>{pp}</p>
+              ))}
+              <p>
+                <Link href="/about" className={textLink}>About Gulf Elite Transport Group</Link>
+                {" Â· "}
+                <Link href="/contact" className={textLink}>Contact the team</Link>
+              </p>
+            </div>
+            <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+              {[
+                { icon: "bus", title: "Four vehicle classes", text: "Sedan, SUV, van and executive" },
+                { icon: "calendar", title: "24/7 requests", text: "Every day, at any hour" },
+                { icon: "check", title: "Fare confirmed first", text: "Before you commit" },
+                { icon: "briefcase", title: "Driver details confirmed", text: "Sent before you travel" },
+              ].map((f) => (
+                <li key={f.title} className="flex items-center gap-3 rounded-2xl border border-accent/25 bg-surface p-4">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white text-gold ring-1 ring-accent/30"><Icon name={f.icon} className="h-5 w-5" /></span>
+                  <span>
+                    <span className="block font-extrabold text-navy">{f.title}</span>
+                    <span className="block text-[11px] font-bold uppercase tracking-wider text-muted">{f.text}</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+      {/* 11. Why, in a dark panel with a short statement of how a request works */}
+      <section aria-labelledby="why-title" className="bg-navy-2/40 py-16">
+        <div className={wrap}>
+          <div className="grid gap-10 rounded-[2rem] bg-navy p-8 text-white shadow-2xl ring-1 ring-accent/20 sm:p-12 lg:grid-cols-[1.1fr_0.9fr]">
+            <div>
+              <p className="inline-flex rounded-full bg-accent/15 px-4 py-1.5 text-[11px] font-extrabold uppercase tracking-[0.2em] text-accent">{c.why.eyebrow}</p>
+              <h2 id="why-title" className="font-display mt-4 text-3xl leading-tight sm:text-4xl">{c.why.h2}</h2>
+              <p className="mt-4 text-lg leading-8 text-white/75">{c.why.text}</p>
+              <ul className="mt-8 space-y-5">
+                {c.why.items.map((w) => (
+                  <li key={w.title} className="flex gap-4">
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent/15 text-accent ring-1 ring-accent/30"><Icon name={w.icon} className="h-5 w-5" /></span>
+                    <div>
+                      <h3 className="font-extrabold">{w.title}</h3>
+                      <p className="mt-1 text-sm leading-7 text-white/70"><RichText text={w.text} tone="dark" /></p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="self-center rounded-3xl bg-black/35 p-6 ring-1 ring-accent/25 sm:p-8">
+              <p className="flex items-center gap-2 text-[11px] font-extrabold uppercase tracking-[0.2em] text-accent"><Icon name="bolt" className="h-4 w-4" /> How we work</p>
+              <p className="mt-4 border-l-4 border-accent pl-5 text-lg font-medium italic leading-8 text-white/90">&ldquo;You tell us where and when. We confirm the vehicle, driver and fare. Nothing is agreed until you say yes.&rdquo;</p>
+              <div className="mt-6 grid grid-cols-2 gap-3 text-center">
+                <div className="rounded-2xl bg-white/5 p-4 ring-1 ring-white/10">
+                  <p className="font-display text-2xl text-accent">Fare first</p>
+                  <p className="mt-1 text-[11px] font-extrabold uppercase tracking-wider text-white/60">Confirmed before you commit</p>
+                </div>
+                <div className="rounded-2xl bg-white/5 p-4 ring-1 ring-white/10">
+                  <p className="font-display text-2xl text-accent">Private</p>
+                  <p className="mt-1 text-[11px] font-extrabold uppercase tracking-wider text-white/60">A car for your group</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 11b. Popular routes from Riyadh */}
+      <section id="routes" aria-labelledby="routes-title" className="bg-black py-20 text-white">
+        <div className={wrap}>
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <div>
+              <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-accent">Routes</p>
+              <h2 id="routes-title" className="font-display mt-3 text-3xl leading-tight sm:text-4xl">Popular routes from Riyadh</h2>
+              <p className="mt-3 max-w-2xl text-white/65">Each route page covers both directions, with the distance, the driving time and what to tell us when you ask for a ride.</p>
+            </div>
+            <Link href={`${BASE}/routes`} className="inline-flex items-center gap-2 text-sm font-extrabold text-accent underline decoration-accent/50 underline-offset-4">All {routeCount} routes from Riyadh <Icon name="arrow" className="h-4 w-4" /></Link>
+          </div>
+          <ul className="mt-10 grid gap-5 md:grid-cols-3">
+            {routeCards.map((r) => (
+              <li key={r.id} className="flex flex-col rounded-3xl bg-white/5 p-6 ring-1 ring-white/10 transition hover:ring-accent/60">
+                <h3 className="text-xl font-extrabold">Taxi from Riyadh to {r.to}</h3>
+                <p className="mt-2 text-sm font-bold italic text-accent">about {r.km} km &middot; roughly {r.time}</p>
+                <p className="mt-3 flex-1 text-sm leading-7 text-white/65">{r.text}</p>
+                <ul className="mt-4 flex flex-wrap gap-2">
+                  {["Door to door", "Both directions", "Fare confirmed first"].map((t) => (
+                    <li key={t} className="rounded-full bg-white/10 px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider text-white/75">{t}</li>
+                  ))}
+                </ul>
+                <Link href={`${BASE}/routes/${r.id}`} className="mt-6 inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.18em] text-white hover:text-accent">Book this route <Icon name="arrow" className="h-4 w-4" /></Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+      {/* 7. Vehicles */}
+      <section id="fleet" aria-labelledby="fleet-title" className="bg-ivory py-20">
+        <div className={wrap}>
+          <Head id="fleet-title" eyebrow={c.fleet.eyebrow} title={c.fleet.h2} lead={c.fleet.text} />
+          <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {c.fleet.items.map((v) => (
+              <li key={v.name} className={`flex flex-col overflow-hidden ${card} border-t-4 border-t-accent p-6 shadow-sm`}>
+                <HomePhoto name={v.name.toLowerCase().replace(/\s+/g, "-")} alt={VEHICLE_ALT[v.name] ?? `${v.name} for private rides in Saudi Arabia`} width={900} height={506} className="-mx-6 -mt-6 mb-5 aspect-video h-auto w-[calc(100%+3rem)] max-w-none object-cover" sizes="(min-width: 1024px) 33vw, 100vw" fallback={<div aria-hidden="true" className="-mx-6 -mt-6 mb-5 flex aspect-video w-[calc(100%+3rem)] items-center justify-center bg-gradient-to-br from-navy to-navy-2 text-accent"><Icon name="bus" className="h-14 w-14" /></div>} />
+                <div className="flex items-baseline justify-between gap-3">
+                  <h3 className="font-display text-xl text-navy">{v.name}</h3>
+                  <span className="text-sm font-extrabold text-gold">{v.pax} passengers</span>
+                </div>
+                <p className="mt-3 text-sm font-semibold text-navy">Luggage: <span className="font-normal text-muted">{v.bags}</span></p>
+                <p className="mt-2 flex-1 leading-7 text-muted">{v.best}</p>
+                <Link href="#hero-quote" className={`${textLink} mt-4`}>Book a {v.name.toLowerCase()}</Link>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-6 text-sm text-muted">{c.fleet.note}</p>
+        </div>
+      </section>
+
+      {/* 8. Pricing */}
+      <section id="pricing" aria-labelledby="pricing-title" className={`${wrap} py-20`}>
+        <Head id="pricing-title" eyebrow={c.pricing.eyebrow} title={c.pricing.h2} />
+        <ol className="mt-10 grid gap-5 md:grid-cols-3">
+          {c.pricing.points.map((p, i) => (
+            <li key={p.title} className={`${card} p-6 shadow-sm`}>
+              <span className="font-display text-4xl text-accent">{String(i + 1).padStart(2, "0")}</span>
+              <h3 className="mt-2 text-lg font-extrabold text-navy">{p.title}</h3>
+              <p className="mt-2 leading-7 text-muted">{p.text}</p>
             </li>
           ))}
         </ol>
+        {priceRows.length > 0 && (
+          <div className="mt-10">
+            <h3 className="font-display text-xl text-navy">{c.pricing.tableTitle}</h3>
+            <div className={`mt-4 overflow-x-auto ${card} shadow-sm`}>
+              <table className="w-full min-w-[520px] text-left text-sm">
+                <caption className="sr-only">{c.pricing.tableTitle}</caption>
+                <thead className="bg-navy text-white">
+                  <tr>
+                    <th scope="col" className="px-4 py-3">Route</th>
+                    {priceColumns.map((col) => <th key={col} scope="col" className="px-4 py-3">{col}</th>)}
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-navy/10">
+                  {priceRows.map((r) => (
+                    <tr key={r.route}>
+                      <th scope="row" className="px-4 py-3 font-semibold text-navy">{r.route}</th>
+                      {priceColumns.map((col, i) => <td key={col} className="px-4 py-3 tabular-nums text-navy">{r.prices[i] != null ? `SAR ${r.prices[i]}` : "-"}</td>)}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="mt-3 text-sm text-muted">{c.pricing.tableNote}</p>
+          </div>
+        )}
+        <Link href="#hero-quote" className={`${btnPrimary} mt-8`}>{c.pricing.cta}</Link>
       </section>
 
       {/* 6. Taxi coverage (local SEO: places, airports, routes as entities) */}
@@ -267,66 +466,19 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 7. Vehicles */}
-      <section id="fleet" aria-labelledby="fleet-title" className="bg-ivory py-20">
-        <div className={wrap}>
-          <Head id="fleet-title" eyebrow={c.fleet.eyebrow} title={c.fleet.h2} lead={c.fleet.text} />
-          <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {c.fleet.items.map((v) => (
-              <li key={v.name} className={`flex flex-col overflow-hidden ${card} border-t-4 border-t-accent p-6 shadow-sm`}>
-                <HomePhoto name={v.name.toLowerCase().replace(/\s+/g, "-")} alt={VEHICLE_ALT[v.name] ?? `${v.name} for private rides in Saudi Arabia`} width={900} height={506} className="-mx-6 -mt-6 mb-5 aspect-video h-auto w-[calc(100%+3rem)] max-w-none object-cover" sizes="(min-width: 1024px) 33vw, 100vw" fallback={<div aria-hidden="true" className="-mx-6 -mt-6 mb-5 flex aspect-video w-[calc(100%+3rem)] items-center justify-center bg-gradient-to-br from-navy to-navy-2 text-accent"><Icon name="bus" className="h-14 w-14" /></div>} />
-                <div className="flex items-baseline justify-between gap-3">
-                  <h3 className="font-display text-xl text-navy">{v.name}</h3>
-                  <span className="text-sm font-extrabold text-gold">{v.pax} passengers</span>
-                </div>
-                <p className="mt-3 text-sm font-semibold text-navy">Luggage: <span className="font-normal text-muted">{v.bags}</span></p>
-                <p className="mt-2 flex-1 leading-7 text-muted">{v.best}</p>
-                <Link href="#hero-quote" className={`${textLink} mt-4`}>Book a {v.name.toLowerCase()}</Link>
-              </li>
-            ))}
-          </ul>
-          <p className="mt-6 text-sm text-muted">{c.fleet.note}</p>
-        </div>
-      </section>
-
-      {/* 8. Pricing */}
-      <section id="pricing" aria-labelledby="pricing-title" className={`${wrap} py-20`}>
-        <Head id="pricing-title" eyebrow={c.pricing.eyebrow} title={c.pricing.h2} />
-        <ol className="mt-10 grid gap-5 md:grid-cols-3">
-          {c.pricing.points.map((p, i) => (
-            <li key={p.title} className={`${card} p-6 shadow-sm`}>
-              <span className="font-display text-4xl text-accent">{String(i + 1).padStart(2, "0")}</span>
-              <h3 className="mt-2 text-lg font-extrabold text-navy">{p.title}</h3>
-              <p className="mt-2 leading-7 text-muted">{p.text}</p>
+      {/* 10. Process */}
+      <section id="process" aria-labelledby="process-title" className={`${wrap} py-20`}>
+        <Head id="process-title" eyebrow={c.process.eyebrow} title={c.process.h2} lead={c.process.text} />
+        <ol className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          {c.process.steps.map((s, i) => (
+            <li key={s.title} className="relative border-t-2 border-navy/15 pt-6">
+              <span aria-hidden="true" className="absolute -top-px left-0 h-0.5 w-12 bg-accent" />
+              <span className="font-display text-5xl text-accent">{String(i + 1).padStart(2, "0")}</span>
+              <h3 className="mt-2 text-lg font-bold text-navy">{s.title}</h3>
+              <p className="mt-2 text-sm leading-7 text-muted"><RichText text={s.text} /></p>
             </li>
           ))}
         </ol>
-        {priceRows.length > 0 && (
-          <div className="mt-10">
-            <h3 className="font-display text-xl text-navy">{c.pricing.tableTitle}</h3>
-            <div className={`mt-4 overflow-x-auto ${card} shadow-sm`}>
-              <table className="w-full min-w-[520px] text-left text-sm">
-                <caption className="sr-only">{c.pricing.tableTitle}</caption>
-                <thead className="bg-navy text-white">
-                  <tr>
-                    <th scope="col" className="px-4 py-3">Route</th>
-                    {priceColumns.map((col) => <th key={col} scope="col" className="px-4 py-3">{col}</th>)}
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-navy/10">
-                  {priceRows.map((r) => (
-                    <tr key={r.route}>
-                      <th scope="row" className="px-4 py-3 font-semibold text-navy">{r.route}</th>
-                      {priceColumns.map((col, i) => <td key={col} className="px-4 py-3 tabular-nums text-navy">{r.prices[i] != null ? `SAR ${r.prices[i]}` : "-"}</td>)}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <p className="mt-3 text-sm text-muted">{c.pricing.tableNote}</p>
-          </div>
-        )}
-        <Link href="#hero-quote" className={`${btnPrimary} mt-8`}>{c.pricing.cta}</Link>
       </section>
 
       {/* 9. Services by group */}
@@ -363,50 +515,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 11. Why */}
-      <section aria-labelledby="why-title" className="bg-ivory py-20">
-        <div className={wrap}>
-          <Head id="why-title" eyebrow={c.why.eyebrow} title={c.why.h2} lead={c.why.text} />
-          <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {c.why.items.map((w) => (
-              <article key={w.title} className={`${card} p-6`}>
-                <span className="inline-flex h-11 w-11 items-center justify-center rounded-md bg-navy text-accent">
-                  <Icon name={w.icon} />
-                </span>
-                <h3 className="mt-5 text-xl font-bold text-navy">{w.title}</h3>
-                <p className="mt-2 leading-7 text-muted"><RichText text={w.text} /></p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* 3. Direct answer (AEO / GEO: a self-contained definition) */}
       <section aria-labelledby="answer-title" className={`${wrap} py-16`}>
         <div className="mx-auto max-w-4xl border-l-4 border-accent bg-white p-7 shadow-sm sm:p-9">
           <p className="text-xs font-bold uppercase tracking-[0.22em] text-gold">{c.answer.eyebrow}</p>
           <h2 id="answer-title" className="font-display mt-2 text-2xl text-navy sm:text-3xl">{c.answer.h2}</h2>
           <p id="answer-text" className="mt-4 text-lg leading-8 text-muted"><RichText text={c.answer.text} /></p>
-        </div>
-      </section>
-
-      {/* 12. About (entity and trust) */}
-      <section aria-labelledby="about-title" className={`${wrap} py-20`}>
-        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-          <div>
-            <Head id="about-title" eyebrow={c.about.eyebrow} title={c.about.h2} />
-            <HomePhoto name="journey-driver" alt="A professional Gulf Elite Transport driver" width={800} height={900} className="mt-8 hidden h-auto w-full max-w-sm rounded-3xl object-cover shadow-xl ring-1 ring-accent/30 lg:block" sizes="400px" />
-          </div>
-          <div className="space-y-5 text-lg leading-8 text-muted">
-            {c.about.paragraphs.slice(1).map((p) => (
-              <p key={p}>{p}</p>
-            ))}
-            <p>
-              <Link href="/about" className={textLink}>About Gulf Elite Transport Group</Link>
-              {" · "}
-              <Link href="/contact" className={textLink}>Contact the team</Link>
-            </p>
-          </div>
         </div>
       </section>
 
@@ -452,16 +566,53 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 15. FAQ */}
-      <section id="faq" aria-labelledby="faq-title" className="bg-white py-20">
-        <div className="mx-auto max-w-4xl px-5">
-          <Head id="faq-title" eyebrow="FAQ" title="Frequently asked questions" center />
-          <div className="mt-10">
-            <FaqList items={c.faqs} />
+      {/* 14b. Travel guides */}
+      <section id="guides" aria-labelledby="guides-title" className="bg-surface py-20">
+        <div className={wrap}>
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <h2 id="guides-title" className="font-display text-3xl text-navy sm:text-4xl">Taxi travel guides</h2>
+              <p className="mt-2 text-lg text-muted">Distances, driving times, border crossings and checklists for travel from Riyadh.</p>
+            </div>
+            <Link href="/blog" className="inline-flex items-center gap-2 text-sm font-extrabold text-navy underline decoration-accent decoration-2 underline-offset-4">View all guides <Icon name="arrow" className="h-4 w-4" /></Link>
           </div>
+          <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {blogPosts.map((g) => (
+              <li key={g.slug} className="flex flex-col overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-accent/25 transition hover:shadow-lg">
+                <div className="relative flex h-32 items-end bg-gradient-to-br from-navy to-navy-2 p-4">
+                  <span className="rounded-full bg-white px-3 py-1 text-[11px] font-extrabold text-navy">16 Nov 2026</span>
+                  <Icon name="globe" className="absolute right-4 top-4 h-8 w-8 text-accent/60" />
+                </div>
+                <div className="flex flex-1 flex-col p-5">
+                  <h3 className="font-display text-lg leading-snug text-navy">{g.page.name}</h3>
+                  <p className="mt-2 flex-1 text-sm leading-6 text-muted">{g.page.description}</p>
+                  <Link href={g.page.path} className="mt-4 inline-flex items-center gap-2 text-sm font-extrabold text-navy hover:text-gold">Read guide <Icon name="arrow" className="h-4 w-4" /></Link>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
-
+      {/* 15. FAQ */}
+      <section id="faq" aria-labelledby="faq-title" className="bg-white py-20">
+        <div className={`${wrap} grid items-start gap-10 lg:grid-cols-[1.4fr_0.8fr]`}>
+          <div>
+            <Head id="faq-title" eyebrow="FAQ" title="Frequently asked questions" />
+            <div className="mt-8">
+              <FaqList items={c.faqs} />
+            </div>
+          </div>
+          <aside className="rounded-3xl bg-navy p-7 text-white shadow-xl ring-1 ring-accent/25 lg:sticky lg:top-28">
+            <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-accent/15 text-accent"><Icon name="chat" className="h-6 w-6" /></span>
+            <h3 className="font-display mt-4 text-2xl">Still have a question?</h3>
+            <p className="mt-2 leading-7 text-white/70">Send us your route and your group and we confirm the vehicle, driver and fare before you commit.</p>
+            <div className="mt-6 flex flex-col gap-3">
+              <Link href="#hero-quote" className={btnPrimary}>Book a Ride</Link>
+              <Link href="/contact" className={btnGhost}>Contact us</Link>
+            </div>
+          </aside>
+        </div>
+      </section>
       {/* 16. Request form and contact details (local SEO: NAP when verified) */}
       <section id="quote" aria-labelledby="quote-title" className={`${wrap} py-20`}>
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
@@ -488,6 +639,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+
     </main>
   );
 }
