@@ -85,8 +85,11 @@ export default function Home() {
 
       {/* 1. Hero */}
       <section aria-labelledby="hero-title" className="relative overflow-hidden border-b-4 border-accent bg-gradient-to-br from-navy via-navy to-navy-2 text-white">
+        <HomePhoto name="hero-car" fill priority alt="Private taxi and chauffeur car in Riyadh at sunset with the city skyline" width={1600} height={900} sizes="100vw" className="object-cover object-[60%_bottom]" />
+        <div aria-hidden="true" className="absolute inset-0 bg-navy/60 lg:bg-gradient-to-r lg:from-navy/85 lg:via-navy/45 lg:to-navy/10" />
+        <div aria-hidden="true" className="absolute inset-x-0 top-0 hidden h-1/3 bg-gradient-to-b from-navy/55 to-transparent lg:block" />
         <div aria-hidden="true" className="absolute inset-0 opacity-[0.07] [background-image:radial-gradient(circle_at_1px_1px,#fff_1px,transparent_0)] [background-size:22px_22px]" />
-        <div className={`${wrap} relative grid items-center gap-12 py-16 lg:grid-cols-[1.05fr_0.95fr] lg:py-24`}>
+        <div className={`${wrap} relative grid items-start gap-12 py-16 lg:min-h-[760px] lg:grid-cols-[1.05fr_0.95fr] lg:pb-56 lg:pt-20`}>
           <div>
             <p className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.22em] text-accent">
               <span aria-hidden="true" className="h-px w-8 bg-accent" />
@@ -116,7 +119,6 @@ export default function Home() {
                 </a>
               )}
             </div>
-            <HomePhoto name="hero-car" alt="Private taxi and chauffeur car in Riyadh at sunset with the city skyline" width={1200} height={675} priority sizes="(min-width: 1024px) 52vw, 100vw" className="mt-8 block h-auto w-full rounded-3xl object-cover shadow-2xl ring-1 ring-accent/30" />
             <p className="mt-6 flex items-center gap-2 text-sm text-white/70">
               <Icon name="shield" className="h-4 w-4 text-accent" /> {c.hero.fareChip}
             </p>
@@ -283,7 +285,7 @@ export default function Home() {
               </li>
             ))}
           </ul>
-          <p className="mt-6 text-sm text-muted">{c.fleet.note} Vehicle images are illustrations of each class; the exact vehicle is confirmed for every booking.</p>
+          <p className="mt-6 text-sm text-muted">{c.fleet.note}</p>
         </div>
       </section>
 

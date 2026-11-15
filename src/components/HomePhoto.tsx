@@ -26,6 +26,7 @@ export default function HomePhoto({
   priority = false,
   sizes = "(min-width: 1024px) 50vw, 100vw",
   fallback = null,
+  fill = false,
 }: {
   name: string;
   alt: string;
@@ -36,8 +37,11 @@ export default function HomePhoto({
   sizes?: string;
   /** Shown while no photo has been added for this slot. */
   fallback?: ReactNode;
+  /** Fill the parent box (for a background photo). The parent must be positioned. */
+  fill?: boolean;
 }) {
   const src = homePhotoSrc(name);
   if (!src) return <>{fallback}</>;
+  if (fill) return <Image src={src} alt={alt} fill sizes={sizes} priority={priority} className={className} />;
   return <Image src={src} alt={alt} width={width} height={height} sizes={sizes} priority={priority} className={className} />;
 }
