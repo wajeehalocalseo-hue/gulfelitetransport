@@ -57,6 +57,8 @@ export type Route = {
   tips: string[];
 };
 
+import type { RichRoute } from "./rich-types";
+
 export type PageKind = "hub" | "region" | "city" | "area" | "airport" | "route" | "pair" | "topic";
 
 export type Section =
@@ -100,6 +102,8 @@ export type PlacePage = {
   pair?: { a: { name: string; lat: number; lng: number }; b: { name: string; lat: number; lng: number }; km: number; type: "airport" | "hub" | "district" };
   /** Structured content for the wide route landing layout (RouteLanding). `variant` picks one of four designs. */
   landing?: {
+    /** A fully designed page for this route (see RichRoute). */
+    rich?: RichRoute;
     variant: 0 | 1 | 2 | 3;
     from: string;
     to: string;

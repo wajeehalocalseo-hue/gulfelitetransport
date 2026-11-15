@@ -25,6 +25,9 @@ export const site = {
   serviceAreas: ["Saudi Arabia"] as string[], // only confirmed areas
   socialProfiles: [] as string[], // full URLs of real profiles
   certifications: ["Licensed and insured"] as string[], // confirmed by the owner
+  // How the "Get a quote" buttons reach you. "form" sends visitors to the quote form on the page.
+  // When the WhatsApp number above is verified, change this to "whatsapp" and every quote button switches at once.
+  contactMethod: "form" as "form" | "whatsapp",
   // --- Real figures for the home page (leave "" until you have the real number; nothing shows while empty) ---
   proof: {
     passengersServed: "10,000+", // owner-provided figure
@@ -48,6 +51,9 @@ export const whatsappUrl = (text?: string) =>
     ? `https://wa.me/${site.whatsapp}${text ? `?text=${encodeURIComponent(text)}` : ""}`
     : null;
 
+/** Where a "Get a quote" button goes: the quote form now, or WhatsApp once contactMethod is "whatsapp" and a number is set. */
+export const ctaHref = (message?: string, formHref = "#quote") =>
+  site.contactMethod === "whatsapp" ? (whatsappUrl(message) ?? formHref) : formHref;
 export const mailtoUrl = (subject: string, body: string) =>
   site.email
     ? `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`

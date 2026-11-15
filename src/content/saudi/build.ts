@@ -2,6 +2,7 @@ import { routeExtras, umrahPages, UMRAH_BASE } from "../umrah/pages";
 import { airports, areas, routes } from "./places";
 import { buildPairs, bearing } from "./pairs";
 import { routeProfiles, type RouteProfile } from "./route-profiles";
+import { jeddahRich, jeddahSeo } from "./route-rich/riyadh-to-jeddah";
 import routeTimes from "./route-times.json";
 import { riyadhAreas, riyadhAreaById } from "./riyadh-areas";
 import { districtOverrides, fmtKm, fmtMin } from "./riyadh-districts";
@@ -704,14 +705,15 @@ function riyadhRouteLanding(r: (typeof routes)[number], from: City, to: City, ap
     faq: faqSec && faqSec.kind === "faq" ? faqSec.items : [],
     note: `Distance and time are estimates from OpenStreetMap routing between the city centres, reviewed November 2026. Rest stops, traffic and any checkpoint queues add time.`,
   };
+  const isJeddah = r.id === "riyadh-to-jeddah";
   return {
-    title: prof.title,
-    description: `Book a private taxi from Riyadh to ${name}: about ${r.km} km, roughly ${time} by road. ${prof.tail} Fare confirmed before you commit.`,
-    h1: `Private Taxi from Riyadh to ${name === "Makkah" ? "Makkah (Mecca)" : name === "Madinah" ? "Madinah (Medina)" : name}`,
-    lead: `About ${r.km} km and roughly ${time} by road. We confirm the vehicle, driver and fare before you commit.`,
-    directAnswer: `Gulf Elite Transport takes bookings for private taxi rides from Riyadh to ${name}, about ${r.km} km by road (roughly ${time} of driving), and from ${name} back to Riyadh. ${ap ? `The airport at the destination is ${ap.name} (${ap.code}). ` : ""}Send your pickup, drop-off, date, and the number of passengers and bags, and we confirm the vehicle, driver and fare before you commit. Fares are not published, because each ride is quoted for your request.`,
+    title: isJeddah ? jeddahSeo.title : prof.title,
+    description: isJeddah ? jeddahSeo.description : `Book a private taxi from Riyadh to ${name}: about ${r.km} km, roughly ${time} by road. ${prof.tail} Fare confirmed before you commit.`,
+    h1: isJeddah ? jeddahSeo.h1 : `Private Taxi from Riyadh to ${name === "Makkah" ? "Makkah (Mecca)" : name === "Madinah" ? "Madinah (Medina)" : name}`,
+    lead: isJeddah ? jeddahSeo.lead : `About ${r.km} km and roughly ${time} by road. We confirm the vehicle, driver and fare before you commit.`,
+    directAnswer: isJeddah ? jeddahSeo.directAnswer : `Gulf Elite Transport takes bookings for private taxi rides from Riyadh to ${name}, about ${r.km} km by road (roughly ${time} of driving), and from ${name} back to Riyadh. ${ap ? `The airport at the destination is ${ap.name} (${ap.code}). ` : ""}Send your pickup, drop-off, date, and the number of passengers and bags, and we confirm the vehicle, driver and fare before you commit. Fares are not published, because each ride is quoted for your request.`,
     sections,
-    landing,
+    landing: isJeddah ? { ...landing, rich: jeddahRich } : landing,
   };
 }
 

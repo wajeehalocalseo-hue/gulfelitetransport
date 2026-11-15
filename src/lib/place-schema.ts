@@ -41,5 +41,14 @@ export function placeGraph(page: PlacePage) {
   if (webpage && primary && page.kind !== "hub") {
     webpage.about = [webpage.about, entityNode(primary)];
   }
+  const rich = page.landing?.rich;
+  if (rich) {
+    nodes.push({
+      "@type": "FAQPage",
+      "@id": `${nodes[0]["@id"]}-faq`,
+      isPartOf: { "@id": nodes[0]["@id"] },
+      mainEntity: rich.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+    });
+  }
   return graph;
 }

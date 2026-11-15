@@ -7,6 +7,7 @@ import Icon from "./Icon";
 import HeroBooking from "./HeroBooking";
 import QuoteForm from "./QuoteForm";
 import RouteLanding from "./RouteLanding";
+import { RichRouteBody, RichRouteHero } from "./RichRoute";
 import SectionBands from "./SectionBands";
 import TripForm from "./TripForm";
 import WeatherWidget from "./WeatherWidget";
@@ -535,7 +536,17 @@ export default function PlaceView({ page }: { page: PlacePage }) {
     }
   })();
 
-  const chips = page.landing
+  const chips = page.landing?.rich
+    ? [
+        { href: "#about", label: "The route" },
+        { href: "#vehicles", label: "Vehicles" },
+        { href: "#pickup", label: "Pickup in Riyadh" },
+        { href: "#drop", label: "Drop-off in Jeddah" },
+        { href: "#plan", label: "Plan your journey" },
+        { href: "#faq", label: "Questions" },
+        { href: "#quote", label: "Request a ride" },
+      ]
+    : page.landing
     ? [
         { href: "#about", label: "The route" },
         { href: "#why", label: "Why this ride" },
@@ -569,7 +580,7 @@ export default function PlaceView({ page }: { page: PlacePage }) {
   return (
     <main id="main" data-layout={`${L.hero}/${L.body}/${L.form}`} className="flex-1">
       <HeroBooking service={TAXI_SERVICE} topic={page.name} pickup={pre.pickup} dropoff={pre.dropoff}>
-        {hero}
+        {page.landing?.rich ? <RichRouteHero page={page} rich={page.landing.rich} /> : hero}
       </HeroBooking>
       <nav aria-label="On this page" className="border-b border-navy/10 bg-white">
         <ul className="mx-auto flex max-w-7xl gap-2 overflow-x-auto px-5 py-3">
@@ -602,7 +613,7 @@ export default function PlaceView({ page }: { page: PlacePage }) {
         </div>
       ) : page.compactForm || page.simple ? (
         <>
-          {page.landing ? <RouteLanding page={page} /> : page.simple ? <SectionBands page={page} /> : <div className="mx-auto max-w-4xl px-5 py-16">{body}</div>}
+          {page.landing?.rich ? <RichRouteBody page={page} rich={page.landing.rich} /> : page.landing ? <RouteLanding page={page} /> : page.simple ? <SectionBands page={page} /> : <div className="mx-auto max-w-4xl px-5 py-16">{body}</div>}
           <section id="quote" aria-labelledby="quote-title" className="bg-navy text-white">
             <div className="mx-auto grid max-w-5xl items-center gap-8 px-5 py-14 lg:grid-cols-[1fr_420px]">
               <div>
