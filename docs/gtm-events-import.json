@@ -1,96 +1,219 @@
 {
-  "exportFormatVersion": 2,
-  "exportTime": "2026-11-15 12:00:00",
-  "containerVersion": {
-    "path": "accounts/0/containers/0/versions/0",
-    "accountId": "0",
-    "containerId": "0",
-    "containerVersionId": "0",
-    "container": {
-      "path": "accounts/0/containers/0",
-      "accountId": "0",
-      "containerId": "0",
-      "name": "gulfelitetransportgroup.com",
-      "publicId": "GTM-M6NX327S",
-      "usageContext": ["WEB"],
-      "fingerprint": "0",
-      "tagManagerUrl": "https://tagmanager.google.com/#/container/accounts/0/containers/0/workspaces?apiLink=container"
-    },
-    "tag": [
-      {
-        "accountId": "0", "containerId": "0", "tagId": "9101", "name": "GA4 Event - generate_lead", "type": "gaawe",
-        "parameter": [
-          { "type": "BOOLEAN", "key": "sendEcommerceData", "value": "false" },
-          { "type": "TEMPLATE", "key": "eventName", "value": "generate_lead" },
-          { "type": "TEMPLATE", "key": "measurementIdOverride", "value": "G-VP5VLL0T5S" },
-          {
-            "type": "LIST", "key": "eventSettingsTable",
-            "list": [
-              { "type": "MAP", "map": [ { "type": "TEMPLATE", "key": "parameter", "value": "lead_source" }, { "type": "TEMPLATE", "key": "parameterValue", "value": "{{DLV - lead_source}}" } ] },
-              { "type": "MAP", "map": [ { "type": "TEMPLATE", "key": "parameter", "value": "lead_channel" }, { "type": "TEMPLATE", "key": "parameterValue", "value": "{{DLV - lead_channel}}" } ] },
-              { "type": "MAP", "map": [ { "type": "TEMPLATE", "key": "parameter", "value": "service" }, { "type": "TEMPLATE", "key": "parameterValue", "value": "{{DLV - service}}" } ] }
-            ]
-          }
-        ],
-        "firingTriggerId": ["9001"], "tagFiringOption": "ONCE_PER_EVENT",
-        "monitoringMetadata": { "type": "MAP" }, "consentSettings": { "consentStatus": "NOT_SET" }
-      },
-      {
-        "accountId": "0", "containerId": "0", "tagId": "9102", "name": "GA4 Event - whatsapp_click", "type": "gaawe",
-        "parameter": [
-          { "type": "BOOLEAN", "key": "sendEcommerceData", "value": "false" },
-          { "type": "TEMPLATE", "key": "eventName", "value": "whatsapp_click" },
-          { "type": "TEMPLATE", "key": "measurementIdOverride", "value": "G-VP5VLL0T5S" }
-        ],
-        "firingTriggerId": ["9002"], "tagFiringOption": "ONCE_PER_EVENT",
-        "monitoringMetadata": { "type": "MAP" }, "consentSettings": { "consentStatus": "NOT_SET" }
-      },
-      {
-        "accountId": "0", "containerId": "0", "tagId": "9103", "name": "GA4 Event - phone_click", "type": "gaawe",
-        "parameter": [
-          { "type": "BOOLEAN", "key": "sendEcommerceData", "value": "false" },
-          { "type": "TEMPLATE", "key": "eventName", "value": "phone_click" },
-          { "type": "TEMPLATE", "key": "measurementIdOverride", "value": "G-VP5VLL0T5S" }
-        ],
-        "firingTriggerId": ["9003"], "tagFiringOption": "ONCE_PER_EVENT",
-        "monitoringMetadata": { "type": "MAP" }, "consentSettings": { "consentStatus": "NOT_SET" }
-      },
-      {
-        "accountId": "0", "containerId": "0", "tagId": "9104", "name": "GA4 Event - email_click", "type": "gaawe",
-        "parameter": [
-          { "type": "BOOLEAN", "key": "sendEcommerceData", "value": "false" },
-          { "type": "TEMPLATE", "key": "eventName", "value": "email_click" },
-          { "type": "TEMPLATE", "key": "measurementIdOverride", "value": "G-VP5VLL0T5S" }
-        ],
-        "firingTriggerId": ["9004"], "tagFiringOption": "ONCE_PER_EVENT",
-        "monitoringMetadata": { "type": "MAP" }, "consentSettings": { "consentStatus": "NOT_SET" }
-      }
-    ],
-    "trigger": [
-      {
-        "accountId": "0", "containerId": "0", "triggerId": "9001", "name": "Custom Event - generate_lead", "type": "CUSTOM_EVENT",
-        "customEventFilter": [ { "type": "EQUALS", "parameter": [ { "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" }, { "type": "TEMPLATE", "key": "arg1", "value": "generate_lead" } ] } ]
-      },
-      {
-        "accountId": "0", "containerId": "0", "triggerId": "9002", "name": "Custom Event - whatsapp_click", "type": "CUSTOM_EVENT",
-        "customEventFilter": [ { "type": "EQUALS", "parameter": [ { "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" }, { "type": "TEMPLATE", "key": "arg1", "value": "whatsapp_click" } ] } ]
-      },
-      {
-        "accountId": "0", "containerId": "0", "triggerId": "9003", "name": "Custom Event - phone_click", "type": "CUSTOM_EVENT",
-        "customEventFilter": [ { "type": "EQUALS", "parameter": [ { "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" }, { "type": "TEMPLATE", "key": "arg1", "value": "phone_click" } ] } ]
-      },
-      {
-        "accountId": "0", "containerId": "0", "triggerId": "9004", "name": "Custom Event - email_click", "type": "CUSTOM_EVENT",
-        "customEventFilter": [ { "type": "EQUALS", "parameter": [ { "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" }, { "type": "TEMPLATE", "key": "arg1", "value": "email_click" } ] } ]
-      }
-    ],
-    "variable": [
-      { "accountId": "0", "containerId": "0", "variableId": "9201", "name": "DLV - lead_source", "type": "v", "parameter": [ { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" }, { "type": "TEMPLATE", "key": "name", "value": "lead_source" } ] },
-      { "accountId": "0", "containerId": "0", "variableId": "9202", "name": "DLV - lead_channel", "type": "v", "parameter": [ { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" }, { "type": "TEMPLATE", "key": "name", "value": "lead_channel" } ] },
-      { "accountId": "0", "containerId": "0", "variableId": "9203", "name": "DLV - service", "type": "v", "parameter": [ { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" }, { "type": "TEMPLATE", "key": "name", "value": "service" } ] }
-    ],
-    "builtInVariable": [ { "accountId": "0", "containerId": "0", "type": "EVENT", "name": "Event" } ],
-    "fingerprint": "0",
-    "tagManagerUrl": "https://tagmanager.google.com/#/versions/accounts/0/containers/0/versions/0?apiLink=version"
-  }
+    "exportFormatVersion":  2,
+    "exportTime":  "2026-11-15 12:00:00",
+    "containerVersion":  {
+                             "path":  "accounts/0/containers/0/versions/0",
+                             "accountId":  "0",
+                             "containerId":  "0",
+                             "containerVersionId":  "0",
+                             "container":  {
+                                               "path":  "accounts/0/containers/0",
+                                               "accountId":  "0",
+                                               "containerId":  "0",
+                                               "name":  "gulfelitetransportgroup.com",
+                                               "publicId":  "GTM-M6NX327S",
+                                               "usageContext":  [
+                                                                    "WEB"
+                                                                ],
+                                               "fingerprint":  "0",
+                                               "tagManagerUrl":  "https://tagmanager.google.com/#/container/accounts/0/containers/0/workspaces?apiLink=container"
+                                           },
+                             "tag":  [
+                                         {
+                                             "accountId":  "0",
+                                             "containerId":  "0",
+                                             "tagId":  "9101",
+                                             "name":  "GA4 Event - generate_lead",
+                                             "type":  "gaawe",
+                                             "parameter":  [
+                                                               {
+                                                                   "type":  "BOOLEAN",
+                                                                   "key":  "sendEcommerceData",
+                                                                   "value":  "false"
+                                                               },
+                                                               {
+                                                                   "type":  "TEMPLATE",
+                                                                   "key":  "eventName",
+                                                                   "value":  "generate_lead"
+                                                               },
+                                                               {
+                                                                   "type":  "TEMPLATE",
+                                                                   "key":  "measurementIdOverride",
+                                                                   "value":  "G-VP5VLL0T5S"
+                                                               },
+                                                               {
+                                                                   "type":  "LIST",
+                                                                   "key":  "eventSettingsTable",
+                                                                   "list":  [
+                                                                                {
+                                                                                    "type":  "MAP",
+                                                                                    "map":  [
+                                                                                                {
+                                                                                                    "type":  "TEMPLATE",
+                                                                                                    "key":  "parameter",
+                                                                                                    "value":  "lead_source"
+                                                                                                },
+                                                                                                {
+                                                                                                    "type":  "TEMPLATE",
+                                                                                                    "key":  "parameterValue",
+                                                                                                    "value":  "{{DLV - lead_source}}"
+                                                                                                }
+                                                                                            ]
+                                                                                },
+                                                                                {
+                                                                                    "type":  "MAP",
+                                                                                    "map":  [
+                                                                                                {
+                                                                                                    "type":  "TEMPLATE",
+                                                                                                    "key":  "parameter",
+                                                                                                    "value":  "lead_channel"
+                                                                                                },
+                                                                                                {
+                                                                                                    "type":  "TEMPLATE",
+                                                                                                    "key":  "parameterValue",
+                                                                                                    "value":  "{{DLV - lead_channel}}"
+                                                                                                }
+                                                                                            ]
+                                                                                },
+                                                                                {
+                                                                                    "type":  "MAP",
+                                                                                    "map":  [
+                                                                                                {
+                                                                                                    "type":  "TEMPLATE",
+                                                                                                    "key":  "parameter",
+                                                                                                    "value":  "service"
+                                                                                                },
+                                                                                                {
+                                                                                                    "type":  "TEMPLATE",
+                                                                                                    "key":  "parameterValue",
+                                                                                                    "value":  "{{DLV - service}}"
+                                                                                                }
+                                                                                            ]
+                                                                                }
+                                                                            ]
+                                                               }
+                                                           ],
+                                             "firingTriggerId":  [
+                                                                     "9001"
+                                                                 ],
+                                             "tagFiringOption":  "ONCE_PER_EVENT",
+                                             "monitoringMetadata":  {
+                                                                        "type":  "MAP"
+                                                                    },
+                                             "consentSettings":  {
+                                                                     "consentStatus":  "NOT_SET"
+                                                                 }
+                                         }
+                                     ],
+                             "trigger":  [
+                                             {
+                                                 "accountId":  "0",
+                                                 "containerId":  "0",
+                                                 "triggerId":  "9001",
+                                                 "name":  "Custom Event - generate_lead",
+                                                 "type":  "CUSTOM_EVENT",
+                                                 "customEventFilter":  [
+                                                                           {
+                                                                               "type":  "EQUALS",
+                                                                               "parameter":  [
+                                                                                                 {
+                                                                                                     "type":  "TEMPLATE",
+                                                                                                     "key":  "arg0",
+                                                                                                     "value":  "{{_event}}"
+                                                                                                 },
+                                                                                                 {
+                                                                                                     "type":  "TEMPLATE",
+                                                                                                     "key":  "arg1",
+                                                                                                     "value":  "generate_lead"
+                                                                                                 }
+                                                                                             ]
+                                                                           }
+                                                                       ]
+                                             }
+                                         ],
+                             "variable":  [
+                                              {
+                                                  "accountId":  "0",
+                                                  "containerId":  "0",
+                                                  "variableId":  "9201",
+                                                  "name":  "DLV - lead_source",
+                                                  "type":  "v",
+                                                  "parameter":  [
+                                                                    {
+                                                                        "type":  "INTEGER",
+                                                                        "key":  "dataLayerVersion",
+                                                                        "value":  "2"
+                                                                    },
+                                                                    {
+                                                                        "type":  "BOOLEAN",
+                                                                        "key":  "setDefaultValue",
+                                                                        "value":  "false"
+                                                                    },
+                                                                    {
+                                                                        "type":  "TEMPLATE",
+                                                                        "key":  "name",
+                                                                        "value":  "lead_source"
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "accountId":  "0",
+                                                  "containerId":  "0",
+                                                  "variableId":  "9202",
+                                                  "name":  "DLV - lead_channel",
+                                                  "type":  "v",
+                                                  "parameter":  [
+                                                                    {
+                                                                        "type":  "INTEGER",
+                                                                        "key":  "dataLayerVersion",
+                                                                        "value":  "2"
+                                                                    },
+                                                                    {
+                                                                        "type":  "BOOLEAN",
+                                                                        "key":  "setDefaultValue",
+                                                                        "value":  "false"
+                                                                    },
+                                                                    {
+                                                                        "type":  "TEMPLATE",
+                                                                        "key":  "name",
+                                                                        "value":  "lead_channel"
+                                                                    }
+                                                                ]
+                                              },
+                                              {
+                                                  "accountId":  "0",
+                                                  "containerId":  "0",
+                                                  "variableId":  "9203",
+                                                  "name":  "DLV - service",
+                                                  "type":  "v",
+                                                  "parameter":  [
+                                                                    {
+                                                                        "type":  "INTEGER",
+                                                                        "key":  "dataLayerVersion",
+                                                                        "value":  "2"
+                                                                    },
+                                                                    {
+                                                                        "type":  "BOOLEAN",
+                                                                        "key":  "setDefaultValue",
+                                                                        "value":  "false"
+                                                                    },
+                                                                    {
+                                                                        "type":  "TEMPLATE",
+                                                                        "key":  "name",
+                                                                        "value":  "service"
+                                                                    }
+                                                                ]
+                                              }
+                                          ],
+                             "builtInVariable":  [
+                                                     {
+                                                         "accountId":  "0",
+                                                         "containerId":  "0",
+                                                         "type":  "EVENT",
+                                                         "name":  "Event"
+                                                     }
+                                                 ],
+                             "fingerprint":  "0",
+                             "tagManagerUrl":  "https://tagmanager.google.com/#/versions/accounts/0/containers/0/versions/0?apiLink=version"
+                         }
 }
