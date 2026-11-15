@@ -1,5 +1,14 @@
 /** Content for one fully designed route page (used by RichRoute). Everything here is plain data, so the page layout stays the same for any route that gets this treatment. */
 export type RichRoute = {
+  fromName: string;
+  /** Link to the destination city page, shown under related routes. */
+  toHref?: string;
+  toName: string;
+  /** "road" is the standard long-journey design; "business" is a darker, work-focused design with extra sections. */
+  variant?: "road" | "business";
+  business?: { heading: string; intro: string; items: { title: string; text: string }[]; note: string };
+  eastern?: { heading: string; intro: string; items: { name: string; detail: string; text: string; href?: string }[]; note: string };
+  airport?: { heading: string; intro: string; items: { title: string; text: string }[]; note: string; href: string; slot: string; alt: string };
   /** Folder under public/images/routes/ for this route's photos, for example "riyadh-to-jeddah". */
   imageFolder: string;
   eyebrow: string;

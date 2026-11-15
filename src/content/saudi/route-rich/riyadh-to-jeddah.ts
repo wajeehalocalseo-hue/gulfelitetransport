@@ -15,6 +15,8 @@ export const jeddahSeo = {
 };
 
 export const jeddahRich: RichRoute = {
+  fromName: "Riyadh",
+  toName: "Jeddah",
   imageFolder: "riyadh-to-jeddah",
   eyebrow: "Private intercity taxi service",
   heroPoints: ["Private door-to-door travel", "Vehicle options for your group and bags", "Planned pickup and drop-off", "Fare confirmed before you book"],

@@ -540,8 +540,8 @@ export default function PlaceView({ page }: { page: PlacePage }) {
     ? [
         { href: "#about", label: "The route" },
         { href: "#vehicles", label: "Vehicles" },
-        { href: "#pickup", label: "Pickup in Riyadh" },
-        { href: "#drop", label: "Drop-off in Jeddah" },
+        { href: "#pickup", label: `Pickup in ${page.landing.rich.fromName}` },
+        { href: "#drop", label: `Drop-off in ${page.landing.rich.toName}` },
         { href: "#plan", label: "Plan your journey" },
         { href: "#faq", label: "Questions" },
         { href: "#quote", label: "Request a ride" },

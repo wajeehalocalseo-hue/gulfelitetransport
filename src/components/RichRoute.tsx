@@ -44,12 +44,20 @@ function Title({ id, children, eyebrow, center = false, dark = false, lead }: { 
 
 /** The hero text on the left; the booking form is placed on the right by HeroBooking. */
 export function RichRouteHero({ page, rich }: { page: PlacePage; rich: RichRoute }) {
+  const biz = rich.variant === "business";
   const crumbs = page.crumbs.map((c, i, a) => (i === a.length - 1 ? { name: c.name } : { name: c.name, href: c.path }));
   return (
     <section className="relative overflow-hidden bg-navy text-white">
-      <ImageSlot folder={rich.imageFolder} slot="hero" alt={rich.heroAlt} label="Hero image: Riyadh to Jeddah private taxi" width={1600} height={900} fill priority sizes="100vw" className="opacity-60" />
-      <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-navy via-navy/90 to-navy/50" />
-      <div className={`${wrap} relative py-14 sm:py-20`}>
+      {biz ? (
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-br from-navy via-navy to-navy-2" />
+      ) : (
+        <>
+          <ImageSlot folder={rich.imageFolder} slot="hero" alt={rich.heroAlt} label={`Hero image: ${rich.fromName} to ${rich.toName} private taxi`} width={1600} height={900} fill priority sizes="100vw" className="opacity-60" />
+          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-navy via-navy/90 to-navy/50" />
+        </>
+      )}
+      <div className={`${wrap} relative py-14 sm:py-20 ${biz ? "grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]" : ""}`}>
+        <div>
         <Breadcrumbs items={crumbs} />
         <p className="mt-8 text-xs font-extrabold uppercase tracking-[0.22em] text-accent">{rich.eyebrow}</p>
         <h1 className="font-display mt-4 max-w-3xl text-4xl leading-[1.1] sm:text-5xl lg:text-[3.4rem]">{page.h1}</h1>
@@ -62,31 +70,38 @@ export function RichRouteHero({ page, rich }: { page: PlacePage; rich: RichRoute
           ))}
         </ul>
         <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-          <Cta message="Hello, I would like a free quote for a taxi from Riyadh to Jeddah." className={`${btn} bg-accent text-navy hover:brightness-95`}>Get a Free Quote</Cta>
+          <Cta message={`Hello, I would like a free quote for a taxi from ${rich.fromName} to ${rich.toName}.`} className={`${btn} bg-accent text-navy hover:brightness-95`}>Get a Free Quote</Cta>
           <Link href="#plan" className={`${btn} border border-white/35 text-white hover:border-accent hover:text-accent`}>Plan Your Journey</Link>
         </div>
+        </div>
+        {biz && (
+          <div className="hidden overflow-hidden rounded-3xl shadow-2xl ring-1 ring-white/15 lg:block">
+            <ImageSlot folder={rich.imageFolder} slot="hero" alt={rich.heroAlt} label={`Hero image: ${rich.fromName} to ${rich.toName} private taxi`} width={800} height={600} priority sizes="40vw" />
+          </div>
+        )}
       </div>
     </section>
   );
 }
 
 export function RichRouteBody({ page, rich }: { page: PlacePage; rich: RichRoute }) {
+  const biz = rich.variant === "business";
   const f = rich.imageFolder;
-  const quote = "Hello, I would like a quote for a taxi from Riyadh to Jeddah.";
+  const quote = `Hello, I would like a quote for a taxi from ${rich.fromName} to ${rich.toName}.`;
   return (
     <div>
       {/* Quick route information */}
-      <section aria-label="Route information" className="border-b border-navy/10 bg-white">
+      <section aria-label="Route information" className={biz ? "bg-navy-2 text-white" : "border-b border-navy/10 bg-white"}>
         <div className={`${wrap} py-8`}>
           <dl className="grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-3 lg:grid-cols-6">
             {rich.facts.map((x) => (
               <div key={x.label} className="border-l-2 border-accent pl-4">
-                <dt className="text-[11px] font-extrabold uppercase tracking-wider text-muted">{x.label}</dt>
-                <dd className="mt-1 font-bold leading-snug text-navy">{x.value}</dd>
+                <dt className={`text-[11px] font-extrabold uppercase tracking-wider ${biz ? "text-accent" : "text-muted"}`}>{x.label}</dt>
+                <dd className={`mt-1 font-bold leading-snug ${biz ? "text-white" : "text-navy"}`}>{x.value}</dd>
               </div>
             ))}
           </dl>
-          <p className="mt-5 text-xs leading-5 text-muted">{rich.factsNote}</p>
+          <p className={`mt-5 text-xs leading-5 ${biz ? "text-white/70" : "text-muted"}`}>{rich.factsNote}</p>
         </div>
       </section>
 
@@ -120,18 +135,37 @@ export function RichRouteBody({ page, rich }: { page: PlacePage; rich: RichRoute
         </ul>
       </Band>
 
+      {rich.business && (
+        <Band id="business" tone="navy">
+          <Title id="business" eyebrow="For work trips" dark lead={rich.business.intro}>{rich.business.heading}</Title>
+          <ul className="grid gap-5 md:grid-cols-2">
+            {rich.business.items.map((b, i) => (
+              <li key={b.title} className="flex gap-5 rounded-2xl bg-white/5 p-6 ring-1 ring-white/10">
+                <span className="font-display text-4xl leading-none text-accent">{String(i + 1).padStart(2, "0")}</span>
+                <div>
+                  <h3 className="text-lg font-extrabold text-white">{b.title}</h3>
+                  <p className="mt-1 leading-7 text-white/75">{b.text}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-8 max-w-3xl text-white/75">{rich.business.note}</p>
+          <Cta message={quote} className={`${btn} mt-6 bg-accent text-navy hover:brightness-95`}>Request a Business Quote</Cta>
+        </Band>
+      )}
+
       {/* Vehicles */}
       <Band id="vehicles">
         <Title id="vehicles" eyebrow="Vehicles" lead={rich.vehiclesIntro}>{rich.vehiclesHeading}</Title>
-        <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className={biz ? "grid gap-5" : "grid gap-6 sm:grid-cols-2 lg:grid-cols-4"}>
           {rich.vehicles.map((v) => (
-            <li key={v.name} className="flex flex-col overflow-hidden rounded-3xl bg-white shadow-md ring-1 ring-navy/10">
-              <ImageSlot folder={f} slot={v.slot} homePhoto={v.homePhoto} alt={v.alt} label={`Vehicle image: ${v.name}`} width={800} height={500} sizes="(min-width: 1024px) 25vw, 100vw" />
-              <div className="flex flex-1 flex-col p-6">
+            <li key={v.name} className={biz ? "grid overflow-hidden rounded-3xl bg-white shadow-md ring-1 ring-navy/10 sm:grid-cols-[18rem_1fr]" : "flex flex-col overflow-hidden rounded-3xl bg-white shadow-md ring-1 ring-navy/10"}>
+              <ImageSlot folder={f} slot={v.slot} homePhoto={v.homePhoto} alt={v.alt} label={`Vehicle image: ${v.name}`} width={800} height={500} sizes={biz ? "(min-width: 640px) 18rem, 100vw" : "(min-width: 1024px) 25vw, 100vw"} className={biz ? "h-full object-cover" : ""} />
+              <div className="flex flex-1 flex-col justify-center p-6">
                 <p className="text-[11px] font-extrabold uppercase tracking-wider text-gold">{v.best}</p>
                 <h3 className="mt-1 text-xl font-extrabold text-navy">{v.name}</h3>
                 <p className="mt-2 flex-1 leading-7 text-muted">{v.text}</p>
-                <Cta message={`Hello, I would like to ask about a ${v.name} from Riyadh to Jeddah.`} className={`${arrowLink} mt-5`}>Ask about this vehicle <Icon name="arrow" className="h-4 w-4" /></Cta>
+                <Cta message={`Hello, I would like to ask about a ${v.name} from ${rich.fromName} to ${rich.toName}.`} className={`${arrowLink} mt-5`}>Ask about this vehicle <Icon name="arrow" className="h-4 w-4" /></Cta>
               </div>
             </li>
           ))}
@@ -139,10 +173,10 @@ export function RichRouteBody({ page, rich }: { page: PlacePage; rich: RichRoute
       </Band>
 
       {/* Riyadh pickups */}
-      <Band id="pickup" tone="surface">
+      <Band id="pickup" tone={biz ? "white" : "surface"}>
         <div className="grid items-start gap-12 lg:grid-cols-[0.8fr_1.2fr]">
           <div className="lg:sticky lg:top-28">
-            <Title id="pickup" eyebrow="Starting in Riyadh" lead={rich.pickupIntro}>{rich.pickupHeading}</Title>
+            <Title id="pickup" eyebrow={`Starting in ${rich.fromName}`} lead={rich.pickupIntro}>{rich.pickupHeading}</Title>
             <div className="overflow-hidden rounded-3xl shadow-xl ring-1 ring-navy/10">
               <ImageSlot folder={f} slot="riyadh" alt={rich.pickupAlt} label="Riyadh city image" width={800} height={600} />
             </div>
@@ -158,11 +192,11 @@ export function RichRouteBody({ page, rich }: { page: PlacePage; rich: RichRoute
         </div>
       </Band>
 
-      {/* Jeddah drop-offs */}
+      {/* Drop-offs */}
       <Band id="drop">
         <div className="grid items-start gap-12 lg:grid-cols-[1.2fr_0.8fr]">
           <div>
-            <Title id="drop" eyebrow="Arriving in Jeddah" lead={rich.dropIntro}>{rich.dropHeading}</Title>
+            <Title id="drop" eyebrow={`Arriving in ${rich.toName}`} lead={rich.dropIntro}>{rich.dropHeading}</Title>
             <ul className="grid gap-4 sm:grid-cols-2">
               {rich.drops.map((x) => (
                 <li key={x.name} className="rounded-2xl border border-navy/10 bg-surface p-5">
@@ -173,13 +207,52 @@ export function RichRouteBody({ page, rich }: { page: PlacePage; rich: RichRoute
             </ul>
           </div>
           <div className="overflow-hidden rounded-3xl shadow-xl ring-1 ring-navy/10 lg:sticky lg:top-28">
-            <ImageSlot folder={f} slot="jeddah" alt={rich.dropAlt} label="Jeddah destination image" width={800} height={720} />
+            <ImageSlot folder={f} slot="destination" alt={rich.dropAlt} label={`${rich.toName} destination image`} width={800} height={720} />
           </div>
         </div>
       </Band>
 
+      {rich.eastern && (
+        <Band id="eastern" tone="surface">
+          <Title id="eastern" eyebrow="Eastern Province" lead={rich.eastern.intro}>{rich.eastern.heading}</Title>
+          <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {rich.eastern.items.map((e) => (
+              <li key={e.name} className="flex flex-col rounded-2xl border-t-4 border-accent bg-white p-6 shadow-sm ring-1 ring-navy/10">
+                <h3 className="text-xl font-extrabold text-navy">{e.href ? <Link href={e.href} className={arrowLink}>{e.name}</Link> : e.name}</h3>
+                <p className="mt-1 text-xs font-extrabold uppercase tracking-wider text-gold">{e.detail}</p>
+                <p className="mt-3 leading-7 text-muted">{e.text}</p>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-6 max-w-3xl text-sm leading-6 text-muted">{rich.eastern.note}</p>
+        </Band>
+      )}
+
+      {rich.airport && (
+        <Band id="airport" tone="navy">
+          <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
+            <div>
+              <Title id="airport" eyebrow="Airport transfers" dark lead={rich.airport.intro}>{rich.airport.heading}</Title>
+              <ul className="space-y-5">
+                {rich.airport.items.map((a) => (
+                  <li key={a.title} className="border-l-2 border-accent pl-5">
+                    <h3 className="text-lg font-extrabold text-accent">{a.title}</h3>
+                    <p className="mt-1 leading-7 text-white/80">{a.text}</p>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-6 text-white/75">{rich.airport.note}</p>
+              <Link href={rich.airport.href} className="mt-5 inline-flex items-center gap-2 font-bold text-accent underline underline-offset-4">Airport taxi page <Icon name="arrow" className="h-4 w-4" /></Link>
+            </div>
+            <div className="overflow-hidden rounded-3xl shadow-2xl ring-1 ring-white/15">
+              <ImageSlot folder={f} slot={rich.airport.slot} alt={rich.airport.alt} label={`${rich.toName} airport image`} width={800} height={640} />
+            </div>
+          </div>
+        </Band>
+      )}
+
       {/* Journey planning with the route map */}
-      <Band id="plan" tone="surface">
+      <Band id="plan" tone={rich.airport ? "white" : "surface"}>
         <Title id="plan" eyebrow="Journey planning">{rich.planHeading}</Title>
         <div className="grid items-start gap-10 lg:grid-cols-[1fr_1fr]">
           <ol className="space-y-6">
@@ -196,14 +269,14 @@ export function RichRouteBody({ page, rich }: { page: PlacePage; rich: RichRoute
           <figure>
             <div className="overflow-hidden rounded-3xl bg-white shadow-xl ring-1 ring-navy/10">
               <iframe
-                title="Route map from Riyadh to Jeddah"
+                title={`Route map from ${rich.fromName} to ${rich.toName}`}
                 src={`https://maps.google.com/maps?saddr=${encodeURIComponent(rich.mapQuery.from)}&daddr=${encodeURIComponent(rich.mapQuery.to)}&output=embed`}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 className="aspect-[4/3] w-full border-0"
               />
             </div>
-            <figcaption className="mt-3 text-sm text-muted">Map of the route from Riyadh to Jeddah. The driver chooses the best road on the day.</figcaption>
+            <figcaption className="mt-3 text-sm text-muted">Map of the route from {rich.fromName} to {rich.toName}. The driver chooses the best road on the day.</figcaption>
           </figure>
         </div>
       </Band>
@@ -272,7 +345,7 @@ export function RichRouteBody({ page, rich }: { page: PlacePage; rich: RichRoute
         </ul>
         <p className="mt-8 text-sm text-muted">
           More pages: <Link href="/riyadh-taxi-service" className={arrowLink}>Riyadh taxi service</Link>{" · "}
-          <Link href="/taxi-saudi-arabia/makkah-region/jeddah" className={arrowLink}>Taxi in Jeddah</Link>{" · "}
+          {rich.toHref && <><Link href={rich.toHref} className={arrowLink}>Taxi in {rich.toName}</Link>{" · "}</>}
           <Link href="/taxi-saudi-arabia/routes" className={arrowLink}>All routes in Saudi Arabia</Link>{" · "}
           <Link href="/services/taxi-cab-services" className={arrowLink}>Taxi and cab services</Link>{" · "}
           <Link href="/contact" className={arrowLink}>Contact us</Link>
