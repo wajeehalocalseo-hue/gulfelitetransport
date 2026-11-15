@@ -25,6 +25,14 @@ export const site = {
   serviceAreas: ["Saudi Arabia"] as string[], // only confirmed areas
   socialProfiles: [] as string[], // full URLs of real profiles
   certifications: ["Licensed and insured"] as string[], // confirmed by the owner
+  // --- Real figures for the home page (leave "" until you have the real number; nothing shows while empty) ---
+  proof: {
+    passengersServed: "10,000+", // owner-provided figure
+    drivers: "60+", // owner-provided figure
+    googleRating: "", // e.g. "4.8" (your real Google Business Profile rating)
+    googleReviews: "400+", // owner-provided figure
+    googleReviewsUrl: "", // the link to your Google reviews
+  },
 };
 
 export const contactConfigured = {

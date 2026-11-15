@@ -76,13 +76,19 @@ export default function Home() {
   const heroRoutes = ["riyadh-to-jeddah", "riyadh-to-makkah", "riyadh-to-madinah", "riyadh-to-dammam"].flatMap((id) => routes.filter((r) => r.id === id));
   const routeCount = Object.keys(routeProfiles).length;
   const districtCount = riyadhAreas.filter((a) => a.kind !== "airport").length;
-  const statCards = [
+  const baseStats = [
     { icon: "calendar", big: "24/7", label: "Requests every day", sub: "Open 24 hours" },
     { icon: "shield", big: "Licensed", label: "and fully insured", sub: "Private transport" },
     { icon: "network", big: String(routeCount), label: "Routes from Riyadh", sub: "Both directions" },
     { icon: "building", big: String(districtCount), label: "Riyadh districts", sub: "Pickups across the city" },
   ];
-  const times = routeTimes as Record<string, { km: number; min: number }>;
+  const proofStats = [
+    ...(site.proof.passengersServed ? [{ icon: "bus", big: site.proof.passengersServed, label: "Passengers served", sub: "Completed rides" }] : []),
+    ...(site.proof.drivers ? [{ icon: "briefcase", big: site.proof.drivers, label: "Drivers", sub: "Professional drivers" }] : []),
+    ...(site.proof.googleReviews ? [{ icon: "check", big: site.proof.googleReviews, label: "Customer reviews", sub: "From our customers" }] : []),
+  ];
+  // With real figures set in site.ts the row leads with them; otherwise it shows the four coverage cards.
+  const statCards = proofStats.length ? [...proofStats, ...baseStats.slice(0, 3)] : baseStats;  const times = routeTimes as Record<string, { km: number; min: number }>;
   const routeCards = ["riyadh-to-jeddah", "riyadh-to-dammam", "riyadh-to-makkah"].flatMap((id) => {
     const r = routes.find((x) => x.id === id);
     const prof = routeProfiles[id];
@@ -160,7 +166,7 @@ export default function Home() {
       {/* 1b. The coverage in numbers (counts come from the pages the site actually has) */}
       <section aria-label="Coverage in numbers" className="relative z-10 -mt-10 pb-2">
         <div className={wrap}>
-          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className={`grid gap-4 sm:grid-cols-2 ${statCards.length > 4 ? "lg:grid-cols-3 xl:grid-cols-6" : "lg:grid-cols-4"}`}>
             {statCards.map((s) => (
               <li key={s.label} className="rounded-3xl bg-white p-6 text-center shadow-xl ring-1 ring-accent/25">
                 <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-navy text-accent"><Icon name={s.icon} className="h-5 w-5" /></span>
@@ -294,6 +300,20 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 11a. Google reviews, shown only when the real rating, count and link are set in site.ts */}
+      {site.proof.googleRating && site.proof.googleReviews && site.proof.googleReviewsUrl && (
+        <section aria-label="Google reviews" className="bg-navy py-12 text-white">
+          <div className={`${wrap} flex flex-col items-center gap-5 text-center`}>
+            <p className="inline-flex items-center gap-2 rounded-full bg-white/10 px-5 py-2 text-sm font-extrabold ring-1 ring-accent/30">
+              <span aria-hidden="true" className="text-accent">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              {site.proof.googleRating} on Google &middot; {site.proof.googleReviews} reviews
+            </p>
+            <h2 className="font-display text-3xl sm:text-4xl">What our customers say</h2>
+            <p className="max-w-2xl text-white/70">Read the reviews exactly as customers left them on our Google Business Profile.</p>
+            <a href={site.proof.googleReviewsUrl} target="_blank" rel="noopener noreferrer" className={btnPrimary}>Read our reviews on Google <Icon name="arrow" className="h-4 w-4" /></a>
+          </div>
+        </section>
+      )}
       {/* 11b. Popular routes from Riyadh */}
       <section id="routes" aria-labelledby="routes-title" className="bg-black py-20 text-white">
         <div className={wrap}>
