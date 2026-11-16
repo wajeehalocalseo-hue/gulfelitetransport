@@ -15,7 +15,7 @@ import type { PlacePage, Section } from "../types";
  * flight tracking are stated.
  */
 
-type Ctx = {
+export type DistrictRichCtx = {
   all: CityArea[];
   districtHref: (id: string) => string;
   pairs: { name: string; href: string; km: number }[];
@@ -30,7 +30,7 @@ const short = (a: { id: string; name: string }) => (a.id === "king-abdullah-fina
 export const OLAYA_WHATSAPP_MESSAGE =
   "Hello Gulf Elite Transport Group, I would like to arrange a taxi in Olaya, Riyadh. My pickup location is [pickup location], my destination is [destination], and my preferred date and time are [date and time]. Please confirm availability and the fare.";
 
-export function olayaRich(ctx: Ctx): Pick<PlacePage, "title" | "description" | "h1" | "lead" | "directAnswer" | "facts" | "sections"> & { whatsappMessage: string } {
+export function olayaRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "description" | "h1" | "lead" | "directAnswer" | "facts" | "sections"> & { whatsappMessage: string } {
   const me = ctx.all.find((x) => x.id === "olaya");
   if (!me) throw new Error("Olaya is missing from riyadh-areas.ts");
   const pairHref = (needle: string) => ctx.pairs.find((p) => p.href.includes(needle))?.href;

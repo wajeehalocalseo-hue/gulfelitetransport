@@ -27,7 +27,7 @@ import { hafarRich, hafarSeo } from "./route-rich/riyadh-to-hafar-al-batin";
 import routeTimes from "./route-times.json";
 import { riyadhAreas, riyadhAreaById } from "./riyadh-areas";
 import { districtOverrides, fmtKm, fmtMin } from "./riyadh-districts";
-import { olayaRich } from "./district-rich/olaya";
+import { districtRich } from "./district-rich";
 import journeysJson from "./riyadh-journeys.json";
 import { intlRoutes } from "./international";
 import { riyadhMain, riyadhSections } from "./riyadh-main";
@@ -464,8 +464,8 @@ function areaPages(): PlacePage[] {
       : undefined;
     // Districts with a hand-written page (district-rich/) use it instead of the generic template.
     const rich =
-      baseRd && info?.id === "olaya"
-        ? olayaRich({
+      baseRd && info
+        ? districtRich(info.id, {
             all: riyadhAreas,
             districtHref: (id) => `${RIYADH_PATH}/${id}`,
             pairs: riyadhPairs.index[a.id] ?? [],
