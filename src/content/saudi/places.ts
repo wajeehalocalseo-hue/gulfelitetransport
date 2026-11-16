@@ -386,7 +386,7 @@ export const routes: Route[] = [
     id: "riyadh-to-al-hofuf",
     from: "riyadh",
     to: "al-hofuf",
-    km: 330,
+    km: 325,
     about:
       "Riyadh to Hofuf runs east across the desert toward the Al-Ahsa oasis. It is a route for visitors to the oasis's heritage sites, for family travel, and for people heading toward the Eastern Province.",
     riders: ["Visitors going to the Al-Ahsa Oasis", "Families with relatives in Hofuf", "Business travellers heading to the Eastern Province"],
