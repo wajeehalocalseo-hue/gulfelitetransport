@@ -507,7 +507,7 @@ export const routes: Route[] = [
     id: "riyadh-to-najran",
     from: "riyadh",
     to: "najran",
-    km: 940,
+    km: 950,
     about:
       "Riyadh to Najran runs south through the desert to a historic oasis city on the Yemeni border. Najran is known for its old mud-brick buildings and rock-art sites, and a long road ride suits groups and families who want a vehicle for the whole stay.",
     riders: ["Families visiting relatives in Najran", "Visitors to the historic sites", "Business travellers to the southern region"],
