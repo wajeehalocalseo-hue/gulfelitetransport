@@ -1,4 +1,5 @@
 import Link from "next/link";
+import LazyMap from "./LazyMap";
 import type { ReactNode } from "react";
 import Breadcrumbs from "./Breadcrumbs";
 import FaqList from "./Faq";
@@ -116,13 +117,9 @@ export function RichAbhaBody({ page, rich }: { page: PlacePage; rich: RichRoute 
           <p className="mt-5 max-w-3xl text-sm leading-7 text-muted">{route.note}</p>
           <div className="mt-8 grid items-start gap-8 lg:grid-cols-[1.2fr_0.8fr]">
             <figure className="overflow-hidden rounded-3xl bg-white shadow-xl ring-1 ring-[#e4d9bd]">
-              <iframe
-                title="Route map from Riyadh to Abha"
+              <LazyMap title="Route map from Riyadh to Abha"
                 src={`https://maps.google.com/maps?saddr=${encodeURIComponent(rich.mapQuery.from)}&daddr=${encodeURIComponent(rich.mapQuery.to)}&output=embed`}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="aspect-[4/3] w-full border-0"
-              />
+                className="aspect-[4/3] w-full" />
               <figcaption className="px-5 py-3 text-sm text-muted">Map of the route from Riyadh to Abha. The driver chooses the best road on the day.</figcaption>
             </figure>
             <ul className="space-y-3">

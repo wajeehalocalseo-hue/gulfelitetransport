@@ -1,4 +1,5 @@
 import Link from "next/link";
+import LazyMap from "./LazyMap";
 import type { ReactNode } from "react";
 import Breadcrumbs from "./Breadcrumbs";
 import FaqList from "./Faq";
@@ -161,13 +162,9 @@ export function RichAlulaBody({ page, rich }: { page: PlacePage; rich: RichRoute
         <Head id="route" eyebrow="The corridor" lead={route?.intro}>{route?.heading ?? rich.planHeading}</Head>
         <div className="grid items-start gap-8 lg:grid-cols-[1.2fr_0.8fr]">
           <figure className="overflow-hidden rounded-2xl bg-white shadow-xl ring-1 ring-navy/10">
-            <iframe
-              title="Route map from Riyadh to AlUla"
+            <LazyMap title="Route map from Riyadh to AlUla"
               src={`https://maps.google.com/maps?saddr=${encodeURIComponent(rich.mapQuery.from)}&daddr=${encodeURIComponent(rich.mapQuery.to)}&output=embed`}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="aspect-[4/3] w-full border-0"
-            />
+              className="aspect-[4/3] w-full" />
             <figcaption className="px-5 py-3 text-sm text-muted">Map of the route from Riyadh to AlUla. The driver chooses the best road on the day.</figcaption>
           </figure>
           <div>

@@ -1,4 +1,5 @@
 import { useId } from "react";
+import LazyMap from "./LazyMap";
 import Link from "next/link";
 import Breadcrumbs from "./Breadcrumbs";
 import FaqList from "./Faq";
@@ -213,13 +214,9 @@ export function RichUmrahBody({ page, rich }: { page: PlacePage; rich: RichRoute
       <Section id="plan" className="bg-ivory">
         <Heading id="plan" eyebrow="Journey planning">{rich.planHeading}</Heading>
         <figure className="overflow-hidden rounded-3xl bg-white shadow-xl ring-1 ring-navy/10">
-          <iframe
-            title="Route map from Riyadh to Makkah"
+          <LazyMap title="Route map from Riyadh to Makkah"
             src={`https://maps.google.com/maps?saddr=${encodeURIComponent(rich.mapQuery.from)}&daddr=${encodeURIComponent(rich.mapQuery.to)}&output=embed`}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            className="aspect-[16/8] w-full border-0 max-sm:aspect-[4/3]"
-          />
+            className="aspect-[16/8] w-full border-0 max-sm:aspect-[4/3]"/>
           <figcaption className="px-5 py-3 text-sm text-muted">Map of the route from Riyadh to Makkah. The driver chooses the best road on the day.</figcaption>
         </figure>
         <ol className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-5">

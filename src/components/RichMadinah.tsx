@@ -1,4 +1,5 @@
 import Link from "next/link";
+import LazyMap from "./LazyMap";
 import Breadcrumbs from "./Breadcrumbs";
 import FaqList from "./Faq";
 import Icon from "./Icon";
@@ -225,13 +226,9 @@ export function RichMadinahBody({ page, rich }: { page: PlacePage; rich: RichRou
               </li>
             </ul>
             <figure className="overflow-hidden rounded-3xl bg-white shadow-xl ring-1 ring-navy/10">
-              <iframe
-                title="Route map from Riyadh to Madinah"
+              <LazyMap title="Route map from Riyadh to Madinah"
                 src={`https://maps.google.com/maps?saddr=${encodeURIComponent(rich.mapQuery.from)}&daddr=${encodeURIComponent(rich.mapQuery.to)}&output=embed`}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="aspect-[4/3] w-full border-0"
-              />
+                className="aspect-[4/3] w-full" />
               <figcaption className="px-5 py-3 text-sm text-muted">Map of the route from Riyadh to Madinah. The driver chooses the best road on the day.</figcaption>
             </figure>
           </div>

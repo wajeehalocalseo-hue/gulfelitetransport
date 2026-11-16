@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
-import Script from "next/script";
+import ThirdPartyScripts from "@/components/ThirdPartyScripts";
 import { site } from "@/lib/site";
 import { baseGraph } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
@@ -80,17 +80,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <FloatingWhatsApp />
         </SiteChrome>
         <SiteChrome>
-        <Script id="gtm" strategy="afterInteractive">
-          {`window.dataLayer=window.dataLayer||[];window.dataLayer.push({"gtm.start":new Date().getTime(),event:"gtm.js"});(function(){var s=document.createElement("script");s.async=true;s.src="https://www.googletagmanager.com/gtm.js?id=GTM-M6NX327S";document.head.appendChild(s);})();`}
-        </Script>
         <AnalyticsEvents />
-        <Script src="https://analytics.ahrefs.com/analytics.js" data-key="o2Jqnxe9R1hrIxQNqUHPSQ" strategy="afterInteractive" />
+        <ThirdPartyScripts />
         <noscript>
           <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M6NX327S" height="0" width="0" style={{ display: "none", visibility: "hidden" }} title="Google Tag Manager" />
         </noscript>
-        <Script id="clarity" strategy="afterInteractive">
-          {`(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","zbv8e0hevw");`}
-        </Script>
         </SiteChrome>
       </body>
     </html>

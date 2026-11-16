@@ -1,4 +1,5 @@
 import Link from "next/link";
+import LazyMap from "./LazyMap";
 import type { ReactNode } from "react";
 import Breadcrumbs from "./Breadcrumbs";
 import FaqList from "./Faq";
@@ -158,13 +159,9 @@ export function RichArarBody({ page, rich }: { page: PlacePage; rich: RichRoute 
         )}
         {route && <p className="mt-4 text-sm leading-7 text-muted">{route.note}</p>}
         <figure className="mt-6 overflow-hidden rounded-2xl bg-white shadow-xl ring-1 ring-navy/10">
-          <iframe
-            title="Route map from Riyadh to Arar"
+          <LazyMap title="Route map from Riyadh to Arar"
             src={`https://maps.google.com/maps?saddr=${encodeURIComponent(rich.mapQuery.from)}&daddr=${encodeURIComponent(rich.mapQuery.to)}&output=embed`}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            className="aspect-[16/10] w-full border-0"
-          />
+            className="aspect-[16/10] w-full" />
           <figcaption className="px-5 py-3 text-sm text-muted">Map of the route from Riyadh to Arar. The driver chooses the best road on the day.</figcaption>
         </figure>
         <ul className="mt-6 grid gap-4 md:grid-cols-3">

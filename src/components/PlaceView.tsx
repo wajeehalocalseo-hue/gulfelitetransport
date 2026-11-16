@@ -1,4 +1,5 @@
 import Link from "next/link";
+import LazyMap from "./LazyMap";
 import type { ReactNode } from "react";
 import Breadcrumbs from "./Breadcrumbs";
 import ContactButtons from "./ContactButtons";
@@ -302,13 +303,9 @@ function SectionBlock({ s, style }: { s: Section; style: PlacePage["layout"]["bo
         <>
           {s.intro && <p className="mt-4 text-lg leading-8 text-muted">{s.intro}</p>}
           <div className="mt-6 overflow-hidden rounded-2xl border border-navy/10 bg-white">
-            <iframe
-              title={`Map of ${s.label ?? s.query}`}
+            <LazyMap title={`Map of ${s.label ?? s.query}`}
               src={`https://maps.google.com/maps?q=${encodeURIComponent(s.query)}&z=${s.label ? 14 : 11}&output=embed`}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="h-80 w-full border-0 sm:h-96"
-            />
+              className="h-80 w-full border-0 sm:h-96"/>
           </div>
           <ul className={`mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 ${s.places.length ? "" : "hidden"}`}>
             {s.places.map((p) => (

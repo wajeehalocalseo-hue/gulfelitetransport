@@ -1,4 +1,5 @@
 import Link from "next/link";
+import LazyMap from "./LazyMap";
 import type { ReactNode } from "react";
 import Breadcrumbs from "./Breadcrumbs";
 import FaqList from "./Faq";
@@ -187,13 +188,9 @@ export function RichHafarBody({ page, rich }: { page: PlacePage; rich: RichRoute
             {route && <p className="mt-5 text-sm leading-7 text-muted">{route.note}</p>}
           </div>
           <figure className="overflow-hidden rounded-2xl bg-white shadow-xl ring-1 ring-navy/10">
-            <iframe
-              title="Route map from Riyadh to Hafar Al Batin"
+            <LazyMap title="Route map from Riyadh to Hafar Al Batin"
               src={`https://maps.google.com/maps?saddr=${encodeURIComponent(rich.mapQuery.from)}&daddr=${encodeURIComponent(rich.mapQuery.to)}&output=embed`}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="aspect-[4/3] w-full border-0"
-            />
+              className="aspect-[4/3] w-full" />
             <figcaption className="px-5 py-3 text-sm text-muted">Map of the route from Riyadh to Hafar Al Batin. The driver chooses the best road on the day.</figcaption>
           </figure>
         </div>

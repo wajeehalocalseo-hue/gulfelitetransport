@@ -114,12 +114,12 @@ export default function Home() {
       <section aria-labelledby="hero-title" className="relative overflow-hidden bg-gradient-to-br from-navy via-navy to-navy-2 text-white">
         <HomePhoto name="hero-car" fill priority alt="Private taxi and chauffeur car in Riyadh at sunset with the city skyline" width={1600} height={900} sizes="100vw" className="object-cover object-[88%_bottom]" />
         <div aria-hidden="true" className="absolute inset-0 bg-navy/65 lg:bg-gradient-to-b lg:from-navy/85 lg:via-navy/40 lg:to-navy/20" />
-        <ul aria-label="What you get" className="relative border-b border-white/10 bg-black/25">
-          <li className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-6 gap-y-2 px-5 py-3 text-[11px] font-extrabold uppercase tracking-[0.16em] text-white/85">
-            <span className="inline-flex items-center gap-2"><Icon name="calendar" className="h-3.5 w-3.5 text-accent" /> Available 24/7</span>
-            <span className="inline-flex items-center gap-2"><Icon name="shield" className="h-3.5 w-3.5 text-accent" /> Licensed and insured</span>
-            <span className="inline-flex items-center gap-2"><Icon name="check" className="h-3.5 w-3.5 text-accent" /> {c.hero.fareChip}</span>
-            <span className="inline-flex items-center gap-2"><Icon name="bus" className="h-3.5 w-3.5 text-accent" /> Private rides</span>
+        <ul aria-label="What you get" className="relative border-b border-navy/15 bg-accent">
+          <li className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-6 gap-y-2 px-5 py-3 text-[11px] font-extrabold uppercase tracking-[0.16em] text-navy">
+            <span className="inline-flex items-center gap-2"><Icon name="calendar" className="h-3.5 w-3.5 text-navy" /> Available 24/7</span>
+            <span className="inline-flex items-center gap-2"><Icon name="shield" className="h-3.5 w-3.5 text-navy" /> Licensed and insured</span>
+            <span className="inline-flex items-center gap-2"><Icon name="check" className="h-3.5 w-3.5 text-navy" /> {c.hero.fareChip}</span>
+            <span className="inline-flex items-center gap-2"><Icon name="bus" className="h-3.5 w-3.5 text-navy" /> Private rides</span>
           </li>
         </ul>
         <div className={`${wrap} relative flex flex-col items-center py-14 text-center lg:min-h-[940px] lg:pb-24 lg:pt-20`}>

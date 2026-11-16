@@ -1,4 +1,5 @@
 import Link from "next/link";
+import LazyMap from "./LazyMap";
 import type { ReactNode } from "react";
 import FaqList from "./Faq";
 import Icon from "./Icon";
@@ -154,13 +155,9 @@ function MapBlock({ s }: { s: Extract<Section, { kind: "map" }> }) {
   return (
     <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
       <div className="overflow-hidden rounded-3xl border border-navy/10 bg-white shadow-sm">
-        <iframe
-          title={`Map of ${s.label ?? s.query}`}
+        <LazyMap title={`Map of ${s.label ?? s.query}`}
           src={`https://maps.google.com/maps?q=${encodeURIComponent(s.query)}&z=${s.label ? 14 : 11}&output=embed`}
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          className="h-80 w-full border-0 sm:h-[26rem]"
-        />
+          className="h-80 w-full border-0 sm:h-[26rem]"/>
       </div>
       <ul className="grid content-start gap-3">
         {s.places.length === 0 && <li className="rounded-2xl bg-surface p-5 text-muted">Open the map to see the district and the roads around it.</li>}

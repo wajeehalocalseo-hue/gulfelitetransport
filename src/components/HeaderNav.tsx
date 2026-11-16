@@ -17,10 +17,9 @@ export type MenuData = {
     airports: { name: string; href: string; code: string }[];
   };
   services: { label: string; items: { title: string; href: string; icon: string }[] }[];
-  umrah: { hub: string; columns: { label: string; items: { name: string; href: string }[] }[] };
 };
 
-type MenuId = "taxi" | "umrah" | "services";
+type MenuId = "taxi" | "services";
 
 const linkBase = "rounded-md px-1.5 py-1 text-sm text-navy/80 transition hover:bg-accent/15 hover:text-navy";
 const heading = "text-xs font-bold uppercase tracking-[0.16em] text-navy/50";
@@ -76,7 +75,6 @@ export default function HeaderNav({ menu }: { menu: MenuData }) {
   const section = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
   const taxiActive = section(menu.taxi.base);
   const servicesActive = section("/services");
-  const umrahActive = section(menu.umrah.hub);
   const wa = whatsappUrl(`Hello ${site.name}, I would like to request a ride or a transport quote.`);
 
   const topItems = [
@@ -148,12 +146,11 @@ export default function HeaderNav({ menu }: { menu: MenuData }) {
           </Link>
 
           <nav aria-label="Main" className="hidden items-center gap-1 lg:flex">
-            {trigger("taxi", "Taxi & Cab", taxiActive)}
-            {trigger("umrah", "Makkah & Madinah", umrahActive)}
+            {plain("/", "Home", pathname === "/")}
             {trigger("services", "Services", servicesActive)}
+            {trigger("taxi", "Locations", taxiActive)}
             {plain("/blog", "Blog", pathname.startsWith("/blog"))}
             {plain("/about", "About", pathname === "/about")}
-            {plain("/#industries", "Industries", false)}
             {plain("/contact", "Contact", pathname === "/contact")}
           </nav>
 
@@ -257,35 +254,6 @@ export default function HeaderNav({ menu }: { menu: MenuData }) {
         </div>
       )}
 
-      {/* Makkah & Madinah (Umrah and Hajj) mega menu */}
-      {open === "umrah" && (
-        <div id="menu-umrah" onMouseEnter={() => enter("umrah")} className="absolute inset-x-0 top-full hidden border-t-4 border-accent bg-white text-navy shadow-2xl lg:block">
-          <div className="mx-auto grid max-w-7xl gap-8 px-5 py-8 lg:grid-cols-[1fr_1fr_1fr_1fr_1.05fr]">
-            {menu.umrah.columns.map((col) => (
-              <div key={col.label}>
-                <p className={heading}>{col.label}</p>
-                <ul className="mt-3 space-y-1">
-                  {col.items.map((i) => (
-                    <li key={i.href}>
-                      <Link href={i.href} onClick={closeAll} className={`block ${linkBase}`}>
-                        {i.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-            <div className="rounded-2xl bg-navy p-6 text-white">
-              <p className="text-lg font-extrabold">Umrah &amp; Hajj taxi</p>
-              <p className="mt-2 text-sm leading-6 text-white/75">Airport, hotel, Haram and between the holy cities, for any size of group.</p>
-              <Link href={menu.umrah.hub} onClick={closeAll} className="mt-5 inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-bold text-navy hover:brightness-95">
-                See all pilgrim rides <Icon name="arrow" className="h-4 w-4" />
-              </Link>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* Services mega menu */}
       {open === "services" && (
         <div id="menu-services" onMouseEnter={() => enter("services")} className="absolute inset-x-0 top-full hidden border-t-4 border-accent bg-white text-navy shadow-2xl lg:block">
@@ -329,9 +297,33 @@ export default function HeaderNav({ menu }: { menu: MenuData }) {
         <nav id="mobile-nav" aria-label="Mobile" className="max-h-[calc(100vh-4.5rem)] overflow-y-auto border-t border-white/10 bg-navy px-5 pb-6 lg:hidden">
           <ul className="grid gap-1 pt-3">
             <li>
+              <Link href="/" className="block rounded-lg px-3 py-3 font-semibold text-white/95">Home</Link>
+            </li>
+            <li>
+              <details className="group rounded-lg" open={servicesActive}>
+                <summary className="flex cursor-pointer list-none items-center justify-between rounded-lg px-3 py-3 font-semibold text-white/95">
+                  Services
+                  <Icon name="chevron" className="h-4 w-4 transition-transform group-open:rotate-180" />
+                </summary>
+                <div className="space-y-4 px-3 pb-3 text-sm">
+                  {menu.services.map((g) => (
+                    <div key={g.label}>
+                      <p className="text-xs font-bold uppercase tracking-wider text-white/50">{g.label}</p>
+                      <ul className="mt-2 space-y-0.5">
+                        {g.items.map((s) => (
+                          <li key={s.href}><Link href={s.href} className="block rounded px-1 py-1.5 text-white/85">{s.title}</Link></li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                  <Link href="/services" className="block font-bold text-accent">Compare all services</Link>
+                </div>
+              </details>
+            </li>
+            <li>
               <details className="group rounded-lg" open={taxiActive}>
                 <summary className="flex cursor-pointer list-none items-center justify-between rounded-lg px-3 py-3 font-semibold text-white/95">
-                  Taxi &amp; Cab
+                  Locations
                   <Icon name="chevron" className="h-4 w-4 transition-transform group-open:rotate-180" />
                 </summary>
                 <div className="space-y-4 px-3 pb-3 text-sm">
@@ -356,52 +348,9 @@ export default function HeaderNav({ menu }: { menu: MenuData }) {
                 </div>
               </details>
             </li>
-            <li>
-              <details className="group rounded-lg" open={umrahActive}>
-                <summary className="flex cursor-pointer list-none items-center justify-between rounded-lg px-3 py-3 font-semibold text-white/95">
-                  Makkah &amp; Madinah
-                  <Icon name="chevron" className="h-4 w-4 transition-transform group-open:rotate-180" />
-                </summary>
-                <div className="space-y-4 px-3 pb-3 text-sm">
-                  <Link href={menu.umrah.hub} className="block font-bold text-accent">Umrah &amp; Hajj taxi: all pages</Link>
-                  {menu.umrah.columns.map((col) => (
-                    <div key={col.label}>
-                      <p className="text-xs font-bold uppercase tracking-wider text-white/50">{col.label}</p>
-                      <ul className="mt-2 space-y-0.5">
-                        {col.items.map((i) => (
-                          <li key={i.href}><Link href={i.href} className="block rounded px-1 py-1.5 text-white/85">{i.name}</Link></li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-              </details>
-            </li>
-            <li>
-              <details className="group rounded-lg" open={servicesActive}>
-                <summary className="flex cursor-pointer list-none items-center justify-between rounded-lg px-3 py-3 font-semibold text-white/95">
-                  Services
-                  <Icon name="chevron" className="h-4 w-4 transition-transform group-open:rotate-180" />
-                </summary>
-                <div className="space-y-4 px-3 pb-3 text-sm">
-                  {menu.services.map((g) => (
-                    <div key={g.label}>
-                      <p className="text-xs font-bold uppercase tracking-wider text-white/50">{g.label}</p>
-                      <ul className="mt-2 space-y-0.5">
-                        {g.items.map((s) => (
-                          <li key={s.href}><Link href={s.href} className="block rounded px-1 py-1.5 text-white/85">{s.title}</Link></li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                  <Link href="/services" className="block font-bold text-accent">Compare all services</Link>
-                </div>
-              </details>
-            </li>
             {[
-              ["/about", "About"],
               ["/blog", "Blog"],
-              ["/#industries", "Industries"],
+              ["/about", "About"],
               ["/contact", "Contact"],
             ].map(([href, label]) => (
               <li key={href}>
