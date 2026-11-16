@@ -457,7 +457,7 @@ export const routes: Route[] = [
     id: "riyadh-to-jubail",
     from: "riyadh",
     to: "jubail",
-    km: 455,
+    km: 460,
     about:
       "Riyadh to Jubail ends on the Gulf coast at the industrial city of Jubail, which is built around large petrochemical and heavy industry zones. Most trips are for work, so the drop-off is usually a company, a contractor camp or a hotel, and entry to industrial areas is controlled.",
     riders: ["Contractors and engineers working in the industrial city", "Corporate teams visiting plants", "Families with relatives in Jubail"],

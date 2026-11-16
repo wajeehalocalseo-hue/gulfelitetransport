@@ -5,7 +5,7 @@ export type RichRoute = {
   toHref?: string;
   toName: string;
   /** "road" is the standard long-journey design; "business" is a darker, work-focused design with extra sections. */
-  variant?: "road" | "business" | "umrah" | "madinah" | "qassim" | "ahsa" | "hail" | "kharj" | "khobar" | "dhahran" | "taif" | "abha";
+  variant?: "road" | "business" | "umrah" | "madinah" | "qassim" | "ahsa" | "hail" | "kharj" | "khobar" | "dhahran" | "taif" | "abha" | "jubail";
   /** Umrah variant: family and group travel section. */
   umrah?: { heading: string; intro: string; items: { title: string; text: string }[]; note: string; slot: string; alt: string };
   /** Umrah variant: religious travel preparation (informational only), with official links. */
