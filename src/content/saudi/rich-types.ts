@@ -5,7 +5,7 @@ export type RichRoute = {
   toHref?: string;
   toName: string;
   /** "road" is the standard long-journey design; "business" is a darker, work-focused design with extra sections. */
-  variant?: "road" | "business" | "umrah" | "madinah" | "qassim" | "ahsa" | "hail" | "kharj";
+  variant?: "road" | "business" | "umrah" | "madinah" | "qassim" | "ahsa" | "hail" | "kharj" | "khobar";
   /** Umrah variant: family and group travel section. */
   umrah?: { heading: string; intro: string; items: { title: string; text: string }[]; note: string; slot: string; alt: string };
   /** Umrah variant: religious travel preparation (informational only), with official links. */
@@ -27,6 +27,8 @@ export type RichRoute = {
   terms?: { heading: string; intro: string; items: { title: string; text: string }[]; note: string };
   /** Al Kharj variant: farm, factory and site transfers. */
   sites?: { heading: string; intro: string; items: { title: string; text: string }[]; note: string; slot: string; alt: string };
+  /** Al Khobar variant: the King Fahd Causeway and Bahrain, with official links (internal links start with "/"). */
+  causeway?: { heading: string; intro: string; items: { title: string; text: string }[]; note: string; links: { name: string; href: string }[] };
   business?: { heading: string; intro: string; items: { title: string; text: string }[]; note: string };
   eastern?: { heading: string; intro: string; items: { name: string; detail: string; text: string; href?: string }[]; note: string };
   airport?: { heading: string; intro: string; items: { title: string; text: string }[]; note: string; href: string; slot: string; alt: string };

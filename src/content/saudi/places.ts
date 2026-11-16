@@ -417,7 +417,7 @@ export const routes: Route[] = [
     id: "riyadh-to-al-khobar",
     from: "riyadh",
     to: "al-khobar",
-    km: 420,
+    km: 425,
     about:
       "Riyadh to Al Khobar follows the same desert highway as the Dammam route and ends on the Gulf coast, in the commercial and residential city beside Dammam. It suits visitors going to Khobar's offices, hotels and waterfront rather than to Dammam itself.",
     riders: ["Business travellers with meetings in Khobar", "Families visiting relatives on the Gulf coast", "Visitors going on to Dhahran or the causeway"],
