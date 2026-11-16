@@ -541,7 +541,7 @@ export const routes: Route[] = [
     about:
       "Riyadh to Arar goes to the north, to the capital of the Northern Borders region near the Iraqi border. It is a very long road trip, used by families, workers on contract and travellers who prefer a vehicle to the limited flights.",
     riders: ["Families visiting relatives in the north", "Contractors and workers on assignment", "Business travellers to the Northern Borders region"],
-    tips: ["Plan for more than a day on the road and ask us about overnight stops.", "Tell us if your drop-off is close to the border, as access there can be controlled."],
+    tips: ["Plan for a full day on the road and ask us about breaks or an optional overnight stop.", "Tell us if your drop-off is close to the border, as access there can be controlled."],
   },
   {
     id: "riyadh-to-hafar-al-batin",
