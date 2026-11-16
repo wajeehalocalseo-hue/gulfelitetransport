@@ -5,7 +5,7 @@ export type RichRoute = {
   toHref?: string;
   toName: string;
   /** "road" is the standard long-journey design; "business" is a darker, work-focused design with extra sections. */
-  variant?: "road" | "business" | "umrah";
+  variant?: "road" | "business" | "umrah" | "madinah";
   /** Umrah variant: family and group travel section. */
   umrah?: { heading: string; intro: string; items: { title: string; text: string }[]; note: string; slot: string; alt: string };
   /** Umrah variant: religious travel preparation (informational only), with official links. */
@@ -13,6 +13,12 @@ export type RichRoute = {
   /** Drop-off planning: what to send, and a short access warning. */
   dropChecklist?: string[];
   dropNote?: string;
+  /** Madinah variant: the road via Qassim, as a short list of stops with a note. */
+  route?: { heading: string; intro: string; stops: { name: string; detail: string; text: string }[]; note: string };
+  /** Madinah variant: railway connection, with a link to the existing transfers page. */
+  railway?: { heading: string; intro: string; items: { title: string; text: string }[]; note: string; href: string; linkLabel: string };
+  /** Madinah variant: visit planning for destinations in and around the city, with official links. */
+  ziyarat?: { heading: string; intro: string; items: { name: string; text: string; href?: string }[]; note: string; links: { name: string; href: string }[] };
   business?: { heading: string; intro: string; items: { title: string; text: string }[]; note: string };
   eastern?: { heading: string; intro: string; items: { name: string; detail: string; text: string; href?: string }[]; note: string };
   airport?: { heading: string; intro: string; items: { title: string; text: string }[]; note: string; href: string; slot: string; alt: string };

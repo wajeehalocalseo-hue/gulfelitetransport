@@ -9,7 +9,7 @@ import type { PlacePage } from "@/content/saudi/types";
 import type { RichRoute } from "@/content/saudi/rich-types";
 
 /** Subtle geometric lattice (eight-point stars) used as a quiet background detail. */
-function Lattice({ tone = "light" }: { tone?: "light" | "dark" }) {
+export function Lattice({ tone = "light" }: { tone?: "light" | "dark" }) {
   const stroke = tone === "dark" ? "#d4af6a" : "#0e3b2c";
   const pid = `lat-${useId().replace(/:/g, "")}`;
   return (
@@ -28,7 +28,7 @@ function Lattice({ tone = "light" }: { tone?: "light" | "dark" }) {
   );
 }
 
-function Heading({ id, eyebrow, children, lead, dark = false, center = false }: { id: string; eyebrow: string; children: React.ReactNode; lead?: string; dark?: boolean; center?: boolean }) {
+export function Heading({ id, eyebrow, children, lead, dark = false, center = false }: { id: string; eyebrow: string; children: React.ReactNode; lead?: string; dark?: boolean; center?: boolean }) {
   return (
     <div className={`mb-10 max-w-3xl ${center ? "mx-auto text-center" : ""}`}>
       <p className={`flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.2em] ${dark ? "text-accent" : "text-gold"} ${center ? "justify-center" : ""}`}>
@@ -40,7 +40,7 @@ function Heading({ id, eyebrow, children, lead, dark = false, center = false }: 
   );
 }
 
-function Section({ id, className = "", children, pattern }: { id: string; className?: string; children: React.ReactNode; pattern?: "light" | "dark" }) {
+export function Section({ id, className = "", children, pattern }: { id: string; className?: string; children: React.ReactNode; pattern?: "light" | "dark" }) {
   return (
     <section id={id} aria-labelledby={`${id}-title`} className={`relative overflow-hidden ${className}`}>
       {pattern && <Lattice tone={pattern} />}
