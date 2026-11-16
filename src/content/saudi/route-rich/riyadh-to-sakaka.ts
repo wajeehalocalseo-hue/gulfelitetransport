@@ -1,0 +1,250 @@
+import type { RichRoute } from "../rich-types";
+
+/**
+ * Riyadh to Sakaka: the fully designed route page (Al Jouf heritage and northern oasis variant, in the site's green and gold palette).
+ * Distance and driving time are estimates from OpenStreetMap routing between the Riyadh centre and the Sakaka city centre
+ * (reviewed November 2026: 980.5 km / 584 min Riyadh to Sakaka, 982.4 km / 586 min Sakaka to Riyadh, about 9 hr 45 min). The existing page figures,
+ * about 980 km and about 9 hr 45 min, are retained because they match. Rome2Rio (1,036 km, 10 hr 48 min) and the 988 km / 8 hr 51 min reference use other
+ * endpoints and speed models, so they are not averaged in.
+ * Corridor from the routing steps: Highway 65 for the whole journey (King Fahd Road, the Qassim Expressway past Buraydah, the Qassim to Hail expressway, then the
+ * Hail to Al Jawf expressway). Riyadh to Hail is about 614 km and Riyadh to Buraydah about 355 km. Al Majma'ah and other small towns were not confirmed on this
+ * alignment, so they are not named.
+ * From the Sakaka city centre (road distance, estimates): Zaabal Castle about 5 km, Tuwair about 9 km, Al Rajajil about 21 km, Jouf University about 35 km,
+ * Al Jouf International Airport (AJF) about 47 km by routing (so the page says it is outside the city and to confirm the drop-off), Dumat Al Jandal (Marid Castle) about
+ * 55 km, Tabarjal about 247 km, Al Qurayyat about 373 km. Sisera Well and the Cave of Hadra could not be located, so no distances are given for them.
+ * The site has no Al Jouf airport page, so the page does not link one. Landmark descriptions are general public knowledge; hours, fees and access are not stated.
+ * No fares, ratings, reviews, vehicle specifications, flight tracking, farm partnerships or site-access guarantees. Photos are optional: see ImageSlot.
+ */
+export const sakakaSeo = {
+  title: "Riyadh to Sakaka Taxi | Private Al Jouf Transfer",
+  description: "Book a private taxi from Riyadh to Sakaka. See road distance and driving time, and request a one-way or return Al Jouf transfer. Fare confirmed first.",
+  h1: "Private Taxi from Riyadh to Sakaka",
+  lead: "A private long-distance transfer from Riyadh to Sakaka, the capital of Al Jouf in the north, for families, contract and business travel, and visitors to its heritage sites. Share your pickup, exact Sakaka destination and group size, and we confirm the vehicle, driver and fare before you commit.",
+  directAnswer:
+    "Gulf Elite Transport Group accepts private transport requests between Riyadh and Sakaka (also written Sakakah), the capital of Al Jouf Region in northern Saudi Arabia, about 980 km by road. The drive takes about 9 hours 45 minutes without stops, so it needs a planned departure and rest breaks. The road runs north-west on Highway 65 through Qassim and Hail. The service is used for family visits, contract and business travel, visits to Sakaka's heritage sites and connections with Al Jouf International Airport (AJF), one way or with a return. Send your pickup address, exact destination in Sakaka, the date, time, and the number of passengers and bags. Our team checks vehicle and driver availability and confirms the vehicle, driver and fare with you before you book. Fares are not listed here, because each journey is quoted for your request.",
+};
+
+export const sakakaRich: RichRoute = {
+  fromName: "Riyadh",
+  toName: "Sakaka",
+  toHref: "/taxi-saudi-arabia/al-jawf-region/sakaka",
+  variant: "sakaka",
+  imageFolder: "riyadh-to-sakaka",
+  eyebrow: "Private intercity transfer · Riyadh to Al Jouf",
+  heroPoints: ["Private vehicle for family, contract or visitor travel", "City, airport or regional destination: tell us which", "One-way and return requests", "Vehicle, driver and fare confirmed before you commit"],
+  heroAlt: "A private car on the long north-west road from Riyadh towards Sakaka in Al Jouf",
+  facts: [
+    { label: "Origin", value: "Riyadh" },
+    { label: "Destination", value: "Sakaka, Al Jouf Region" },
+    { label: "Approximate road distance", value: "About 980 km" },
+    { label: "Approximate driving time", value: "About 9 hr 45 min, without stops" },
+    { label: "Direction", value: "North-west, via Qassim and Hail" },
+    { label: "Airport", value: "Al Jouf International Airport (AJF)" },
+  ],
+  factsNote: "Approximate road distance between the Riyadh centre and the Sakaka city centre, from OpenStreetMap routing, in light traffic and without stops. Other routing sources give figures from about 980 to 1,040 km and from about 8 hr 50 min to 10 hr 50 min, depending on the start and end points and the speed assumed. Driving time is not door-to-door time: rest, meals, prayer, fuel, traffic and weather add to it. They are not a promised arrival time.",
+  introHeading: "Riyadh to Sakaka Taxi: A Private Transfer to the Northern Oasis",
+  intro: [
+    "Sakaka lies in the north of Saudi Arabia, in a wide depression of farmland and olive groves, and is the capital of Al Jouf Region. From Riyadh the road runs north-west for about 980 km on Highway 65, through Qassim and Hail, before it reaches Al Jouf.",
+    "A private transfer lets you agree the pickup address, the vehicle and the departure time in advance, and be taken to an exact home, hotel, the airport or a heritage site. On a drive this long, a vehicle that fits the group and a plan for breaks make the journey easier.",
+  ],
+  terms: {
+    heading: "Sakaka, Al Jouf and the Places Around Them",
+    intro: "Sakaka is a city, and Al Jouf is the wider region. Several places people ask about are in the region but not in the city, and each needs its own journey.",
+    items: [
+      { title: "Sakaka", text: "The capital and main city of Al Jouf Region. Zaabal Castle, the old Tuwair quarter and most hotels are in or near it." },
+      { title: "Al Jouf Region", text: "The wider northern region, with several governorates and large farming areas. It is not another name for Sakaka city." },
+      { title: "Dumat Al Jandal", text: "A separate governorate with its own ancient sites, including Marid Castle, about 55 km from Sakaka by road (an estimate)." },
+      { title: "Al Rajajil standing stones", text: "An archaeological site outside the city, about 21 km from the centre by road (an estimate)." },
+      { title: "Al Qurayyat and Tabarjal", text: "Separate towns far to the north-west of Sakaka. Each is a long journey of its own." },
+      { title: "Arar, Hail and Tabuk", text: "Separate cities. Arar is in the Northern Borders Region, not in Al Jouf." },
+    ],
+    note: "A standard Sakaka city booking does not include sightseeing or onward travel. Each extra destination is a separate request.",
+  },
+  whyHeading: "Why Take a Private Taxi from Riyadh to Sakaka?",
+  why: [
+    { title: "A private ride", text: "The car is for you and your group only, not shared with other passengers." },
+    { title: "Direct intercity travel", text: "One vehicle from your Riyadh address to your Sakaka destination." },
+    { title: "Built for families and luggage", text: "Passengers and bags planned together, with breaks agreed in advance." },
+    { title: "The right vehicle for the load", text: "A sedan, SUV, van or executive car, chosen for passengers and luggage." },
+    { title: "One-way and return requests", text: "Ask for the ride back from Sakaka to Riyadh in the same request." },
+    { title: "Fare confirmed before you commit", text: "You see the vehicle, driver and fare for your request, and you decide whether to go ahead." },
+  ],
+  route: {
+    heading: "The North-West Road from Riyadh to Sakaka",
+    intro: "Mapping shows the whole journey on Highway 65: out of Riyadh on King Fahd Road, along the Qassim Expressway past Buraydah, on to Hail, and then north on the Hail to Al Jouf expressway into Sakaka. The driver chooses the best road on the day.",
+    stops: [
+      { name: "Riyadh", detail: "Start · 0 km", text: "Departure from your agreed pickup address." },
+      { name: "Buraydah, Qassim", detail: "About 355 km", text: "The main city of Qassim, on the first long stage. A useful point for a break." },
+      { name: "Hail", detail: "About 614 km", text: "A large northern city, past the middle of the journey." },
+      { name: "Hail to Al Jouf expressway", detail: "Final stage", text: "The last 370 km or so run north to Al Jouf." },
+      { name: "Sakaka", detail: "About 980 km", text: "Arrival at your home, hotel, the airport or an agreed place." },
+    ],
+    note: "A stop is not included unless you request it and we confirm it. We do not name rest stops or promise facilities.",
+  },
+  heritage: {
+    heading: "Arriving in Sakaka: City Landmarks",
+    intro: "Sakaka has a few well-known heritage places close to the centre. Each is a different drop-off, so give us a hotel, street or map pin.",
+    items: [
+      { name: "Zaabal Castle", detail: "About 5 km from the centre", text: "A fort on a rocky hilltop in the city, with views over the oasis. Check its current visiting arrangements." },
+      { name: "Sisera Well", detail: "Historic well", text: "An old well in the city, part of the area's long history of settlement around water. Ask us for the exact location." },
+      { name: "Cave of Hadra", detail: "Local heritage", text: "A local heritage reference. We have not verified its location or access, so check before you plan." },
+      { name: "Tuwair district", detail: "About 9 km from the centre", text: "An older historic quarter of the city, with traditional houses." },
+      { name: "Jouf University", detail: "About 35 km from the centre", text: "A large campus outside the city, about 35 km by road (an estimate)." },
+    ],
+    note: "A landmark is not the same as a drop-off address. We do not list opening hours or fees, and a taxi booking does not include a guide.",
+    slot: "zaabal",
+    alt: "Zaabal Castle on its rocky hilltop in Sakaka",
+  },
+  eastern: {
+    heading: "Beyond Sakaka: Dumat Al Jandal and the Wider Al Jouf Region",
+    intro: "The region has some of the oldest sites in the north. These are separate destinations, each with its own route, availability and fare.",
+    items: [
+      { name: "Al Rajajil Standing Stones", detail: "About 21 km from Sakaka", text: "A field of ancient standing stones in the desert outside the city. A site visit, not a city drop-off." },
+      { name: "Dumat Al Jandal", detail: "About 55 km from Sakaka", text: "A separate governorate with an ancient settlement, Marid Castle, the Omar ibn Al-Khattab Mosque and a lake. It is not in Sakaka." },
+      { name: "Marid Castle", detail: "In Dumat Al Jandal", text: "A historic fortress in Dumat Al Jandal, not in Sakaka. Check its current visiting arrangements." },
+      { name: "Tabarjal", detail: "About 247 km from Sakaka", text: "A separate town to the north-west, near the road to Jordan." },
+      { name: "Al Qurayyat", detail: "About 373 km from Sakaka", text: "A separate town in the far north-west. It is a long journey of its own." },
+    ],
+    note: "A regional drop-off is not included in the Sakaka city fare. We do not include sightseeing, waiting time or several stops in a standard transfer. Distances are estimates by road from the Sakaka city centre.",
+  },
+  sites: {
+    heading: "Al Jouf's Olive Groves and Farming Landscape",
+    intro: "Al Jouf is known across Saudi Arabia for its olive groves, and its oases have been farmed for a very long time. The farms are spread over the whole region.",
+    items: [
+      { title: "Across the region", text: "Olive farms are not all near the city. They are spread over the wider region." },
+      { title: "Mostly private land", text: "Many farms are private. We do not have farm partnerships and cannot promise access." },
+      { title: "No tours included", text: "Harvest visits, tastings and tours are not part of a taxi booking." },
+      { title: "Tell us the address", text: "If you are visiting a farm or a host, send the exact address or a map pin." },
+    ],
+    note: "We do not list harvest dates or farm tour schedules. Ask your host, or the relevant local authority, for current information.",
+    slot: "olive-groves",
+    alt: "Olive groves in the Al Jouf farming landscape near Sakaka",
+  },
+  airport: {
+    heading: "Al Jouf Airport Transfers: Al Jouf International Airport (AJF)",
+    intro: "Al Jouf International Airport (AJF) serves Sakaka and the region. It is outside the city centre, about 47 km by road according to our routing (an estimate), so confirm the exact pickup point when you book.",
+    items: [
+      { title: "A separate location", text: "The airport is not in the city centre. A ride to or from it has its own timing, and depends on your destination." },
+      { title: "Not Riyadh's airport", text: "King Khalid International Airport (RUH) is in Riyadh. AJF is the airport for Al Jouf. Check which one your ticket uses." },
+      { title: "What to send us", text: "Give your flight number, date, time and terminal, the number of passengers and bags, and your Sakaka destination." },
+    ],
+    note: "The time depends on the terminal, your destination and traffic. Pickup arrangements are confirmed with you for each request. We do not promise flight tracking, delay monitoring or a fixed waiting time.",
+    href: "/taxi-saudi-arabia/al-jawf-region/sakaka",
+    slot: "airport",
+    alt: "Al Jouf International Airport (AJF), the airport serving Sakaka",
+  },
+  cities: {
+    heading: "Neighbouring Northern Cities",
+    intro: "Other northern cities are separate destinations, each with its own distance and fare.",
+    items: [
+      { name: "Hail", detail: "About 614 km from Riyadh", text: "A large northern city on the road to Sakaka. A break there is a request we plan with you.", href: "/taxi-saudi-arabia/routes/riyadh-to-hail" },
+      { name: "Arar", detail: "Northern Borders Region", text: "A separate city, in the Northern Borders Region and not in Al Jouf.", href: "/taxi-saudi-arabia/routes/riyadh-to-arar" },
+      { name: "Tabuk", detail: "To the west", text: "A separate city in the north-west, on a different road.", href: "/taxi-saudi-arabia/routes/riyadh-to-tabuk" },
+      { name: "AlUla", detail: "To the south-west", text: "A heritage destination in Madinah Region, on a different road.", href: "/taxi-saudi-arabia/routes/riyadh-to-alula" },
+    ],
+    note: "A drop-off in another city is not included in the Sakaka fare.",
+  },
+  umrah: {
+    heading: "Families and Long-Distance Comfort",
+    intro: "Many passengers on this road are families visiting relatives. A long drive goes better when it is planned for.",
+    items: [
+      { title: "Departure time", text: "Plan an early start, so most of the driving is in daylight." },
+      { title: "Breaks", text: "Tell us if you need regular breaks, or have children or older passengers." },
+      { title: "Luggage", text: "Count every bag, so the vehicle fits the group." },
+      { title: "Overnight stop", text: "An overnight stop is optional and not required. If you want one, it is arranged and confirmed separately." },
+    ],
+    note: "We do not promise child seats or specific luggage space unless we confirm them with you for your request.",
+    slot: "family",
+    alt: "A family travelling together by private car from Riyadh to Sakaka",
+  },
+  vehiclesHeading: "Choose a Vehicle for a Long Journey",
+  vehiclesIntro: "The vehicle depends on the number of passengers, the amount of luggage, the date, your requested category and availability. On a trip this long, comfort matters. We confirm the vehicle with you before you book.",
+  vehicles: [
+    { slot: "sedan", homePhoto: "sedan", name: "Sedan", best: "One or two travellers with light luggage", text: "A private car for a small group. Suitable when you travel light.", alt: "Private sedan for a Riyadh to Sakaka trip" },
+    { slot: "suv", homePhoto: "suv", name: "SUV", best: "Families and extra luggage", text: "More room for passengers and bags. Suitable for a family on a long road journey.", alt: "Private SUV for a family travelling from Riyadh to Sakaka" },
+    { slot: "van", homePhoto: "family-van", name: "Van or minibus", best: "Larger groups", text: "For groups who want to travel together with their luggage. Give us the group size and we confirm what fits.", alt: "Private van for a group travelling from Riyadh to Sakaka" },
+    { slot: "executive", name: "Executive car", best: "Formal arrivals", text: "A chauffeur-driven premium car for guests who want extra comfort. Subject to availability.", alt: "Executive car for a Riyadh to Sakaka transfer" },
+  ],
+  dropHeading: "Where in Sakaka Are You Going?",
+  dropIntro: "Send the exact address, hotel or site, and a map pin, and we confirm the best drop-off point with you.",
+  drops: [
+    { name: "Homes and hotels", text: "Name the district and send a pin." },
+    { name: "Landmarks", text: "Name the site. Zaabal Castle and the Tuwair district are each a separate drop-off." },
+    { name: "Airport or region", text: "Say which. AJF, Dumat Al Jandal and Al Rajajil are each a separate journey." },
+  ],
+  dropAlt: "Sakaka and the Al Jouf oasis, the destination of a private taxi from Riyadh",
+  pickupHeading: "Common Pickup Areas in Riyadh",
+  pickupIntro: "Journeys start from your own address. Send the exact address or a map pin when you request a quote.",
+  pickups: [
+    { name: "Olaya", text: "Hotels, offices and apartments in central Riyadh.", href: "/riyadh-taxi-service/olaya-taxi-service" },
+    { name: "Al Malaz", text: "An established district in the east of central Riyadh.", href: "/riyadh-taxi-service/al-malaz-taxi-service" },
+    { name: "Al Nakheel", text: "A residential district in the north-west of the city.", href: "/riyadh-taxi-service/al-nakheel-taxi-service" },
+    { name: "King Khalid International Airport (RUH)", text: "The main airport, in the north. Send your flight number and terminal.", href: "/taxi-saudi-arabia/airports/king-khalid-international-airport" },
+    { name: "Hotels and homes", text: "Any hotel, apartment or house in Riyadh." },
+  ],
+  pickupAlt: "Riyadh skyline where private transfers to Sakaka begin",
+  planHeading: "Planning Your Riyadh to Sakaka Journey",
+  plan: [
+    { title: "Distance and time", text: "The road is about 980 km, about 9 hours 45 minutes of driving without stops. These are estimates. With rest, meals and prayer breaks, plan for roughly 11 to 12 hours door to door." },
+    { title: "Departure and breaks", text: "Start early and tell us when you want to stop. We do not name rest stops or promise facilities." },
+    { title: "Passengers and luggage", text: "Count every passenger and every bag, so the vehicle has room for the group." },
+  ],
+  mapQuery: { from: "Riyadh, Saudi Arabia", to: "Sakaka, Saudi Arabia" },
+  highwayAlt: "The highway from Riyadh to Sakaka across Qassim and Hail",
+  whoHeading: "Who Travels This Route?",
+  who: [
+    { title: "Families visiting relatives", text: "Families travelling to Al Jouf for a stay." },
+    { title: "Business and contract travellers", text: "Professionals travelling to the northern region." },
+    { title: "Visitors to Sakaka", text: "People visiting the city and its landmarks." },
+    { title: "Heritage visitors", text: "People visiting Zaabal Castle, Dumat Al Jandal and Al Rajajil." },
+    { title: "Travellers with luggage", text: "Groups with several bags." },
+    { title: "Airport passengers", text: "Passengers connecting with AJF." },
+    { title: "Onward regional travel", text: "Passengers heading to a town in the region." },
+  ],
+  stepsHeading: "How Booking Works",
+  steps: [
+    { title: "Enter your locations", text: "Pickup and drop-off addresses." },
+    { title: "Select date and time", text: "The day and time you want to travel." },
+    { title: "Add passengers and luggage", text: "How many people and bags are travelling." },
+    { title: "Continue with your details", text: "Choose the vehicle and add your contact details in the next steps of the form." },
+    { title: "Check and confirm", text: "Our team checks availability and confirms the vehicle, driver and fare before you commit." },
+  ],
+  infoHeading: "Before You Travel",
+  infoIntro: "A few points that make a long journey easier.",
+  info: [
+    { title: "Fare", text: "Fares are not published, because each journey is quoted for your request." },
+    { title: "Exact addresses", text: "Send a map pin or landmark for the pickup and drop-off." },
+    { title: "Regional trips", text: "Regional drop-offs are separate requests." },
+  ],
+  relatedHeading: "Related Routes and Pages",
+  related: [
+    { name: "Riyadh to Hail", href: "/taxi-saudi-arabia/routes/riyadh-to-hail", text: "The northern city on the way to Sakaka." },
+    { name: "Riyadh to Buraydah", href: "/taxi-saudi-arabia/routes/riyadh-to-buraydah", text: "The main city of Qassim, on the first stage." },
+    { name: "Riyadh to Arar", href: "/taxi-saudi-arabia/routes/riyadh-to-arar", text: "A long ride to the northern border region." },
+    { name: "Riyadh to Tabuk", href: "/taxi-saudi-arabia/routes/riyadh-to-tabuk", text: "A long ride to the north-west." },
+    { name: "Riyadh to AlUla", href: "/taxi-saudi-arabia/routes/riyadh-to-alula", text: "A long ride to the north-west heritage destination." },
+    { name: "Sakaka taxi service", href: "/taxi-saudi-arabia/al-jawf-region/sakaka", text: "Rides within and around Sakaka." },
+    { name: "Riyadh taxi service", href: "/riyadh-taxi-service", text: "Pickups and rides in Riyadh." },
+  ],
+  faqHeading: "Frequently Asked Questions: Riyadh to Sakaka Taxi",
+  faq: [
+    { q: "How far is Sakaka from Riyadh by road?", a: "About 980 km between the two city centres. The exact distance depends on your pickup and your Sakaka destination." },
+    { q: "How long does a taxi from Riyadh to Sakaka take?", a: "Driving takes about 9 hours 45 minutes without stops, in light traffic. Breaks, meals, prayer and traffic add time. We do not promise an arrival time." },
+    { q: "Can I book a private taxi from Riyadh to Sakaka?", a: "Yes. Send your pickup, exact destination, date, time and group size, and we confirm the vehicle, driver and fare before you commit." },
+    { q: "Can I arrange a return taxi from Sakaka to Riyadh?", a: "Yes. Ask for the return in the same request and give us the day and time you want to leave Sakaka." },
+    { q: "Is Sakaka the same as Al Jouf?", a: "No. Sakaka is the capital city of Al Jouf Region. Al Jouf is the wider region, with other towns such as Dumat Al Jandal, Al Qurayyat and Tabarjal." },
+    { q: "Does Sakaka have an airport?", a: "Yes. Al Jouf International Airport serves Sakaka and the region. It is outside the city centre, so confirm the exact pickup point when you book." },
+    { q: "What is the airport code for Al Jouf International Airport?", a: "AJF." },
+    { q: "Can I request a taxi to Dumat Al Jandal?", a: "Yes, as a separate request. It is a separate governorate, about 55 km from Sakaka by road (an estimate), with its own route, availability and fare." },
+    { q: "Is Marid Castle in Sakaka?", a: "No. Marid Castle is in Dumat Al Jandal, a separate governorate. Zaabal Castle is the castle in Sakaka." },
+    { q: "Can I visit Zaabal Castle by taxi?", a: "Yes, as a drop-off request. It is about 5 km from the city centre (an estimate). Check the current visiting arrangements first. A taxi booking does not include tickets or a guide." },
+    { q: "Can I request a stop during the journey?", a: "Yes. Tell us when you request the quote. We do not name rest stops or promise facilities, and a stop is confirmed with you." },
+    { q: "Can I travel with family and luggage?", a: "Yes. Tell us how many passengers and bags, and we confirm a vehicle that fits. An SUV or a van suits most families." },
+    { q: "Which vehicle should I choose for a long-distance trip?", a: "Choose by passengers and luggage. A sedan suits one or two people, an SUV suits families, and a van suits groups. We confirm what fits." },
+    { q: "Is the fare fixed or quoted for each request?", a: "Fares are quoted for each request, because they depend on the vehicle, the addresses and the date. We confirm the fare before you commit." },
+    { q: "How do I book a Riyadh to Sakaka taxi?", a: "Enter the pickup and drop-off, the date and time, then add passengers and luggage in the form. We check availability and confirm the vehicle, driver and fare before you commit." },
+  ],
+  ctaHeading: "Plan Your Private Riyadh to Sakaka Journey",
+  ctaText: "Share your Riyadh pickup address, exact Sakaka destination, date and time, number of passengers, luggage, and any airport or regional details. Our team confirms the vehicle, driver and fare before you commit.",
+  ctaButton: "Request Your Free Quote",
+};

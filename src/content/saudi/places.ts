@@ -531,7 +531,7 @@ export const routes: Route[] = [
     about:
       "Riyadh to Sakaka runs north-west to the capital of the Al Jouf region, a farming area known for olives. The route is long, and most riders are families with relatives in the region, workers on contracts and visitors to the northern oases.",
     riders: ["Families visiting relatives in Al Jouf", "Contractors working in the northern region", "Visitors to the olive farms and oases"],
-    tips: ["Plan for a full day on the road and ask us about rest stops.", "Tell us your drop-off point in Sakaka or a nearby town."],
+    tips: ["Plan for a full day on the road and ask us about breaks or an optional overnight stop.", "Tell us your drop-off point in Sakaka or a nearby town."],
   },
   {
     id: "riyadh-to-arar",
