@@ -376,7 +376,7 @@ export const routes: Route[] = [
     id: "riyadh-to-buraydah",
     from: "riyadh",
     to: "buraydah",
-    km: 330,
+    km: 355,
     about:
       "Riyadh to Buraydah heads north on a straight highway to the date-farming heartland of Qassim. The route is used by traders, families and workers, and is busiest in the date harvest season when the Buraydah market is active.",
     riders: ["Traders going to the dates market", "Families visiting relatives", "Business travellers heading to Qassim"],

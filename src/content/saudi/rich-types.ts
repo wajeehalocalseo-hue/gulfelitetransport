@@ -5,7 +5,7 @@ export type RichRoute = {
   toHref?: string;
   toName: string;
   /** "road" is the standard long-journey design; "business" is a darker, work-focused design with extra sections. */
-  variant?: "road" | "business" | "umrah" | "madinah";
+  variant?: "road" | "business" | "umrah" | "madinah" | "qassim";
   /** Umrah variant: family and group travel section. */
   umrah?: { heading: string; intro: string; items: { title: string; text: string }[]; note: string; slot: string; alt: string };
   /** Umrah variant: religious travel preparation (informational only), with official links. */
@@ -19,6 +19,10 @@ export type RichRoute = {
   railway?: { heading: string; intro: string; items: { title: string; text: string }[]; note: string; href: string; linkLabel: string };
   /** Madinah variant: visit planning for destinations in and around the city, with official links. */
   ziyarat?: { heading: string; intro: string; items: { name: string; text: string; href?: string }[]; note: string; links: { name: string; href: string }[] };
+  /** Qassim variant: the date market and seasonal travel. */
+  market?: { heading: string; intro: string; items: { title: string; text: string }[]; note: string };
+  /** Qassim variant: nearby cities that are separate destinations, with estimated distances from the Buraydah centre. */
+  cities?: { heading: string; intro: string; items: { name: string; detail: string; text: string; href?: string }[]; note: string };
   business?: { heading: string; intro: string; items: { title: string; text: string }[]; note: string };
   eastern?: { heading: string; intro: string; items: { name: string; detail: string; text: string; href?: string }[]; note: string };
   airport?: { heading: string; intro: string; items: { title: string; text: string }[]; note: string; href: string; slot: string; alt: string };

@@ -9,6 +9,7 @@ import QuoteForm from "./QuoteForm";
 import RouteLanding from "./RouteLanding";
 import { RichRouteBody, RichRouteHero } from "./RichRoute";
 import { RichMadinahBody, RichMadinahHero } from "./RichMadinah";
+import { RichQassimBody, RichQassimHero } from "./RichQassim";
 import { RichUmrahBody, RichUmrahHero } from "./RichUmrah";
 import SectionBands from "./SectionBands";
 import TripForm from "./TripForm";
@@ -542,8 +543,8 @@ export default function PlaceView({ page }: { page: PlacePage }) {
     ? [
         { href: "#about", label: "The route" },
         { href: "#vehicles", label: "Vehicles" },
-        ...(page.landing.rich.variant === "umrah" ? [{ href: "#umrah", label: "Umrah and family" }] : page.landing.rich.variant === "madinah" ? [{ href: "#visit", label: "Visiting Madinah" }] : [{ href: "#pickup", label: `Pickup in ${page.landing.rich.fromName}` }]),
-        { href: "#drop", label: `Drop-off in ${page.landing.rich.toName}` },
+        ...(page.landing.rich.variant === "umrah" ? [{ href: "#umrah", label: "Umrah and family" }] : page.landing.rich.variant === "madinah" ? [{ href: "#visit", label: "Visiting Madinah" }] : page.landing.rich.variant === "qassim" ? [{ href: "#market", label: "Dates market" }] : [{ href: "#pickup", label: `Pickup in ${page.landing.rich.fromName}` }]),
+        { href: page.landing.rich.variant === "qassim" ? "#destinations" : "#drop", label: `Drop-off in ${page.landing.rich.toName}` },
         { href: "#plan", label: "Plan your journey" },
         { href: "#faq", label: "Questions" },
         { href: "#quote", label: "Request a ride" },
@@ -582,7 +583,7 @@ export default function PlaceView({ page }: { page: PlacePage }) {
   return (
     <main id="main" data-layout={`${L.hero}/${L.body}/${L.form}`} className="flex-1">
       <HeroBooking service={TAXI_SERVICE} topic={page.name} pickup={pre.pickup} dropoff={pre.dropoff}>
-        {page.landing?.rich ? (page.landing.rich.variant === "umrah" ? <RichUmrahHero page={page} rich={page.landing.rich} /> : page.landing.rich.variant === "madinah" ? <RichMadinahHero page={page} rich={page.landing.rich} /> : <RichRouteHero page={page} rich={page.landing.rich} />) : hero}
+        {page.landing?.rich ? (page.landing.rich.variant === "umrah" ? <RichUmrahHero page={page} rich={page.landing.rich} /> : page.landing.rich.variant === "madinah" ? <RichMadinahHero page={page} rich={page.landing.rich} /> : page.landing.rich.variant === "qassim" ? <RichQassimHero page={page} rich={page.landing.rich} /> : <RichRouteHero page={page} rich={page.landing.rich} />) : hero}
       </HeroBooking>
       <nav aria-label="On this page" className="border-b border-navy/10 bg-white">
         <ul className="mx-auto flex max-w-7xl gap-2 overflow-x-auto px-5 py-3">
@@ -615,7 +616,7 @@ export default function PlaceView({ page }: { page: PlacePage }) {
         </div>
       ) : page.compactForm || page.simple ? (
         <>
-          {page.landing?.rich ? (page.landing.rich.variant === "umrah" ? <RichUmrahBody page={page} rich={page.landing.rich} /> : page.landing.rich.variant === "madinah" ? <RichMadinahBody page={page} rich={page.landing.rich} /> : <RichRouteBody page={page} rich={page.landing.rich} />) : page.landing ? <RouteLanding page={page} /> : page.simple ? <SectionBands page={page} /> : <div className="mx-auto max-w-4xl px-5 py-16">{body}</div>}
+          {page.landing?.rich ? (page.landing.rich.variant === "umrah" ? <RichUmrahBody page={page} rich={page.landing.rich} /> : page.landing.rich.variant === "madinah" ? <RichMadinahBody page={page} rich={page.landing.rich} /> : page.landing.rich.variant === "qassim" ? <RichQassimBody page={page} rich={page.landing.rich} /> : <RichRouteBody page={page} rich={page.landing.rich} />) : page.landing ? <RouteLanding page={page} /> : page.simple ? <SectionBands page={page} /> : <div className="mx-auto max-w-4xl px-5 py-16">{body}</div>}
           <section id="quote" aria-labelledby="quote-title" className="bg-navy text-white">
             <div className="mx-auto grid max-w-5xl items-center gap-8 px-5 py-14 lg:grid-cols-[1fr_420px]">
               <div>
