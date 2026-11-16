@@ -16,7 +16,7 @@ export default function SiteHeader() {
       regions: regions.map((r) => ({ name: r.name, href: `${BASE}/${r.id}` })),
       cities: cities.slice(0, 8).map((c) => ({ name: c.name, href: cityHref(BASE, c) })),
       routes: routes.slice(0, 6).map((r) => ({ name: `${cityName(r.from)} to ${cityName(r.to)}`, href: `${BASE}/routes/${r.id}`, km: r.km })),
-      airports: airports.slice(0, 5).map((a) => ({ name: a.name, href: `${BASE}/airports/${a.id}`, code: a.code })),
+      airports: ["RUH", "JED", "MED", "DMM", "TIF", "AHB"].flatMap((code) => airports.filter((a) => a.code === code)).map((a) => ({ name: a.name, href: `${BASE}/airports/${a.id}`, code: a.code })),
     },
     // Transport services (passenger and taxi) come first, then the other services.
     services: [...groups].sort((a, b) => (a.id === "passenger" ? -1 : 0) - (b.id === "passenger" ? -1 : 0)).map((g) => ({

@@ -189,25 +189,13 @@ export default function HeaderNav({ menu }: { menu: MenuData }) {
         </div>
       </div>
 
-      {/* Taxi mega menu */}
+      {/* Locations mega menu: popular cities and popular airports */}
       {open === "taxi" && (
         <div id="menu-taxi" onMouseEnter={() => enter("taxi")} className="absolute inset-x-0 top-full hidden border-t-4 border-accent bg-white text-navy shadow-2xl lg:block">
-          <div className="mx-auto grid max-w-7xl gap-8 px-5 py-8 lg:grid-cols-[1.25fr_0.8fr_1fr_0.95fr]">
-            <div>
-              <p className={heading}>Browse by region</p>
-              <ul className="mt-3 grid grid-cols-2 gap-x-4 gap-y-1">
-                {menu.taxi.regions.map((r) => (
-                  <li key={r.href}>
-                    <Link href={r.href} onClick={closeAll} className={`block ${linkBase}`}>
-                      {r.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div className="mx-auto grid max-w-7xl gap-8 px-5 py-8 lg:grid-cols-[1fr_1fr_0.9fr]">
             <div>
               <p className={heading}>Popular cities</p>
-              <ul className="mt-3 space-y-1">
+              <ul className="mt-3 grid grid-cols-2 gap-x-4 gap-y-1">
                 {menu.taxi.cities.map((c) => (
                   <li key={c.href}>
                     <Link href={c.href} onClick={closeAll} className={`block ${linkBase}`}>
@@ -218,23 +206,13 @@ export default function HeaderNav({ menu }: { menu: MenuData }) {
               </ul>
             </div>
             <div>
-              <p className={heading}>Popular routes</p>
+              <p className={heading}>Popular airports</p>
               <ul className="mt-3 space-y-1">
-                {menu.taxi.routes.map((r) => (
-                  <li key={r.href}>
-                    <Link href={r.href} onClick={closeAll} className={`flex items-center justify-between gap-3 ${linkBase}`}>
-                      <span>{r.name}</span>
-                      <span className="text-xs text-navy/50">~{r.km} km</span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-              <p className={`${heading} mt-5`}>Airports</p>
-              <ul className="mt-3 flex flex-wrap gap-2">
                 {menu.taxi.airports.map((a) => (
                   <li key={a.href}>
-                    <Link href={a.href} onClick={closeAll} title={a.name} className="rounded-md bg-navy px-2.5 py-1 text-xs font-bold text-accent hover:brightness-110">
-                      {a.code}
+                    <Link href={a.href} onClick={closeAll} className={`flex items-center justify-between gap-3 ${linkBase}`}>
+                      <span>{a.name}</span>
+                      <span className="rounded bg-navy px-1.5 py-0.5 text-[11px] font-bold text-accent">{a.code}</span>
                     </Link>
                   </li>
                 ))}
@@ -242,9 +220,9 @@ export default function HeaderNav({ menu }: { menu: MenuData }) {
             </div>
             <div className="rounded-2xl bg-navy p-6 text-white">
               <p className="text-lg font-extrabold">Taxi &amp; cab rides across Saudi Arabia</p>
-              <p className="mt-2 text-sm leading-6 text-white/75">Regions, cities, airports and routes, each with real places and what to include in your request.</p>
+              <p className="mt-2 text-sm leading-6 text-white/75">Every region, city, airport and intercity route, each with real places and what to include in your request.</p>
               <Link href={menu.taxi.base} onClick={closeAll} className="mt-5 inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-bold text-navy hover:brightness-95">
-                Browse all <Icon name="arrow" className="h-4 w-4" />
+                Browse all locations <Icon name="arrow" className="h-4 w-4" />
               </Link>
               <Link href={`${menu.taxi.base}/routes`} onClick={closeAll} className="mt-3 block text-sm font-semibold text-accent hover:underline">
                 See all intercity routes
@@ -253,7 +231,6 @@ export default function HeaderNav({ menu }: { menu: MenuData }) {
           </div>
         </div>
       )}
-
       {/* Services mega menu */}
       {open === "services" && (
         <div id="menu-services" onMouseEnter={() => enter("services")} className="absolute inset-x-0 top-full hidden border-t-4 border-accent bg-white text-navy shadow-2xl lg:block">
@@ -329,18 +306,18 @@ export default function HeaderNav({ menu }: { menu: MenuData }) {
                 <div className="space-y-4 px-3 pb-3 text-sm">
                   <Link href={menu.taxi.base} className="block font-bold text-accent">All of Saudi Arabia</Link>
                   <div>
-                    <p className="text-xs font-bold uppercase tracking-wider text-white/50">Regions</p>
-                    <ul className="mt-2 grid grid-cols-2 gap-1">
-                      {menu.taxi.regions.map((r) => (
-                        <li key={r.href}><Link href={r.href} className="block rounded px-1 py-1.5 text-white/85">{r.name}</Link></li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
                     <p className="text-xs font-bold uppercase tracking-wider text-white/50">Popular cities</p>
                     <ul className="mt-2 grid grid-cols-2 gap-1">
                       {menu.taxi.cities.map((c) => (
                         <li key={c.href}><Link href={c.href} className="block rounded px-1 py-1.5 text-white/85">{c.name}</Link></li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-wider text-white/50">Popular airports</p>
+                    <ul className="mt-2 space-y-0.5">
+                      {menu.taxi.airports.map((a) => (
+                        <li key={a.href}><Link href={a.href} className="block rounded px-1 py-1.5 text-white/85">{a.name} ({a.code})</Link></li>
                       ))}
                     </ul>
                   </div>
