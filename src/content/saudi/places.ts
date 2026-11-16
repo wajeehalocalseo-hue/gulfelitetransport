@@ -477,7 +477,7 @@ export const routes: Route[] = [
     id: "riyadh-to-alula",
     from: "riyadh",
     to: "alula",
-    km: 1045,
+    km: 1040,
     about:
       "Riyadh to AlUla heads north-west to the oasis valley that holds Hegra, Saudi Arabia's first UNESCO World Heritage Site. Most travellers are visitors to the heritage and desert sites, so the best months are the cooler ones, and tours and entry to the sites are booked through their operators.",
     riders: ["Tourists visiting Hegra and the desert sites", "Groups attending events in AlUla", "Families on a heritage trip"],
