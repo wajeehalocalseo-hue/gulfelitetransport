@@ -1,5 +1,6 @@
 import type { PlacePage } from "../types";
 import { diplomaticQuarterRich } from "./diplomatic-quarter";
+import { diriyahRich } from "./diriyah";
 import { kafdRich } from "./kafd";
 import { olayaRich, type DistrictRichCtx } from "./olaya";
 
@@ -10,6 +11,7 @@ const registry: Record<string, (ctx: DistrictRichCtx) => DistrictRich> = {
   olaya: olayaRich,
   "king-abdullah-financial-district": kafdRich,
   "diplomatic-quarter": diplomaticQuarterRich,
+  diriyah: diriyahRich,
 };
 
 export const districtRich = (id: string, ctx: DistrictRichCtx): DistrictRich | undefined => registry[id]?.(ctx);
