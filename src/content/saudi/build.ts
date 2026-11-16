@@ -27,6 +27,7 @@ import { hafarRich, hafarSeo } from "./route-rich/riyadh-to-hafar-al-batin";
 import routeTimes from "./route-times.json";
 import { riyadhAreas, riyadhAreaById } from "./riyadh-areas";
 import { districtOverrides, fmtKm, fmtMin } from "./riyadh-districts";
+import { olayaRich } from "./district-rich/olaya";
 import journeysJson from "./riyadh-journeys.json";
 import { intlRoutes } from "./international";
 import { riyadhMain, riyadhSections } from "./riyadh-main";
@@ -448,7 +449,7 @@ function areaPages(): PlacePage[] {
     ];
     // Riyadh districts are landing pages: commercial copy, driving distances, map and sources (see riyadh-districts.ts).
     const info = a.city === "riyadh" ? riyadhAreaById.get(a.id) : undefined;
-    const rd = info
+    const baseRd = info
       ? districtOverrides({
           area: a,
           info,
@@ -461,10 +462,23 @@ function areaPages(): PlacePage[] {
           moreLinks: [{ name: "Riyadh Taxi Service", href: RIYADH_MAIN, note: "Main Riyadh page" }, ...links.filter((l) => !l.note?.startsWith("Other area")).slice(1)],
         })
       : undefined;
+    // Districts with a hand-written page (district-rich/) use it instead of the generic template.
+    const rich =
+      baseRd && info?.id === "olaya"
+        ? olayaRich({
+            all: riyadhAreas,
+            districtHref: (id) => `${RIYADH_PATH}/${id}`,
+            pairs: riyadhPairs.index[a.id] ?? [],
+            bookingSteps: bookingSteps(`in ${a.name}`),
+            notAssumed,
+          })
+        : undefined;
+    const rd = baseRd ? { ...baseRd, ...(rich ?? {}) } : undefined;
     return {
       kind: "area" as const,
       path,
       simple: rd ? true : undefined,
+      whatsappMessage: rich?.whatsappMessage,
       name: a.name,
       title: rd?.title ?? `Taxi & Cab Rides in ${a.name}, ${c.name}`,
       description: rd?.description ?? `Request a taxi or cab in ${a.name}, ${c.name}: ${a.places[0].name} and nearby places. Fares and availability confirmed for each request.`,

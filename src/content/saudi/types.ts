@@ -82,6 +82,8 @@ export type PlaceLayout = {
 
 export type PlacePage = {
   kind: PageKind;
+  /** A WhatsApp message written for this page. Used by the WhatsApp buttons in the hero. */
+  whatsappMessage?: string;
   /** Full path, e.g. /taxi-saudi-arabia/riyadh-region/riyadh */
   path: string;
   /** Short name of the place or route. */

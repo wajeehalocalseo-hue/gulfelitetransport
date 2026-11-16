@@ -10,18 +10,19 @@ const btn =
 export default function ContactButtons({
   quoteHref = "#quote",
   service,
+  message,
   className = "",
   tone = "dark",
 }: {
   quoteHref?: string;
   service?: string;
+  /** A ready-written WhatsApp message. When set it replaces the default text. */
+  message?: string;
   className?: string;
   /** "dark" for use on a navy background, "light" on a light one. */
   tone?: "dark" | "light";
 }) {
-  const wa = whatsappUrl(
-    `Hello ${site.name}, I would like information about ${service ?? "your transport services"}.`,
-  );
+  const wa = whatsappUrl(message ?? `Hello ${site.name}, I would like information about ${service ?? "your transport services"}.`);
   const secondary =
     tone === "light"
       ? "border border-navy/30 text-navy hover:border-accent hover:bg-accent/10"

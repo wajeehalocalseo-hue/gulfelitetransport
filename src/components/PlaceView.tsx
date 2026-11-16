@@ -364,7 +364,7 @@ export default function PlaceView({ page }: { page: PlacePage }) {
     </dl>
   );
 
-  const btns = (tone: "dark" | "light", cls = "mt-8") => <ContactButtons quoteHref={quoteHref} service={`a taxi or cab in ${page.name}`} tone={tone} className={cls} />;
+  const btns = (tone: "dark" | "light", cls = "mt-8") => <ContactButtons quoteHref={quoteHref} service={`a taxi or cab in ${page.name}`} message={page.whatsappMessage} tone={tone} className={cls} />;
 
   const hero: ReactNode = (() => {
     switch (L.hero) {
