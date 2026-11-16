@@ -15,7 +15,7 @@ export const site = {
 
   // --- Contact (REQUIRED before launch) ---
   phone: "", // e.g. "+971 50 000 0000"
-  whatsapp: "", // digits only with country code, e.g. "971500000000"
+  whatsapp: "966579858464", // digits only with country code, e.g. "971500000000"
   email: "", // e.g. "info@yourdomain.com"
   address: "", // full verified street address, if you want it shown
   country: "Saudi Arabia", // business country
@@ -27,7 +27,7 @@ export const site = {
   certifications: ["Licensed and insured"] as string[], // confirmed by the owner
   // How the "Get a quote" buttons reach you. "form" sends visitors to the quote form on the page.
   // When the WhatsApp number above is verified, change this to "whatsapp" and every quote button switches at once.
-  contactMethod: "form" as "form" | "whatsapp",
+  contactMethod: "whatsapp" as "form" | "whatsapp",
   // --- Real figures for the home page (leave "" until you have the real number; nothing shows while empty) ---
   proof: {
     passengersServed: "10,000+", // owner-provided figure
