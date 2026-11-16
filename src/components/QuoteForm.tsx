@@ -3,6 +3,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { services } from "@/content/services";
 import { mailtoUrl, site, whatsappUrl } from "@/lib/site";
+import { WhatsAppBanner } from "./WhatsApp";
 import { saveQuoteRequest, supabaseConfigured } from "@/lib/supabase";
 import { track } from "@/lib/track";
 
@@ -209,6 +210,8 @@ export default function QuoteForm({
     const lbl = "grid gap-1 text-xs font-bold uppercase tracking-wide text-navy/80";
     const full = "col-span-2";
     return (
+      <>
+      <WhatsAppBanner className="mb-3" />
       <form onSubmit={onSubmit} noValidate className="grid grid-cols-2 gap-x-3 gap-y-3" aria-describedby={`${uid}-note`}>
         {ride ? (
           <input type="hidden" name="service" value={defaultService} />
@@ -324,6 +327,7 @@ export default function QuoteForm({
           No payment now. We confirm the vehicle, driver and price before you commit.
         </p>
       </form>
+      </>
     );
   }
 

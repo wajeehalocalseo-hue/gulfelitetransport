@@ -4,6 +4,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { mailtoUrl, site, whatsappUrl } from "@/lib/site";
+import { WhatsAppBanner } from "./WhatsApp";
 import { saveQuoteRequest, supabaseConfigured } from "@/lib/supabase";
 import { track } from "@/lib/track";
 
@@ -173,6 +174,8 @@ export default function BookForm() {
   }
 
   return (
+    <>
+    <WhatsAppBanner className="mb-4" />
     <form onSubmit={submit} noValidate className="rounded-2xl bg-white p-6 shadow-xl ring-1 ring-navy/10 sm:p-8">
       <h2 className="text-2xl font-extrabold text-navy">Journey details</h2>
       <div className="mt-5 grid gap-4 sm:grid-cols-2">
@@ -242,5 +245,6 @@ export default function BookForm() {
         {supabaseConfigured ? "Your details are saved securely and used only to reply to your request. See our privacy policy." : "This opens WhatsApp or your email app with your request filled in."} No payment now.
       </p>
     </form>
+    </>
   );
 }

@@ -9,6 +9,7 @@ import RichText from "@/components/RichText";
 import HomePhoto from "@/components/HomePhoto";
 import ServiceImage from "@/components/ServiceImage";
 import TripBar from "@/components/TripBar";
+import { WhatsAppIcon } from "@/components/WhatsApp";
 import * as c from "@/content/home";
 import { blogPosts } from "@/content/extra-pages";
 import { airports, routes } from "@/content/saudi/places";
@@ -133,17 +134,18 @@ export default function Home() {
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-white/85">Book a taxi, an airport transfer or an Umrah ride, or ask for a freight quotation. We confirm the vehicle, driver and fare with you before you commit.</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-center">
-            <Link href="#hero-quote" className={btnPrimary}>Get Instant Quote <Icon name="arrow" className="h-4 w-4" /></Link>
+            {wa && (
+              <a href={wa} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-7 py-3.5 text-center font-extrabold text-[#06391f] shadow-sm transition hover:brightness-95">
+                <WhatsAppIcon className="h-5 w-5" /> Book on WhatsApp
+              </a>
+            )}
+            <Link href="#hero-quote" className={wa ? btnGhost : btnPrimary}>{wa ? "Use the Booking Form" : "Get Instant Quote"} <Icon name="arrow" className="h-4 w-4" /></Link>
             {telUrl && (
               <a href={telUrl} className={btnGhost}>
                 <Icon name="phone" className="h-4 w-4" /> Call Now
               </a>
             )}
-            {wa && (
-              <a href={wa} target="_blank" rel="noopener noreferrer" className={btnGhost}>
-                <Icon name="chat" className="h-4 w-4" /> WhatsApp Us
-              </a>
-            )}
+
           </div>
           <div className="mt-10 w-full lg:mt-auto">
             <TripBar />

@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useId, useState } from "react";
 import Icon from "./Icon";
+import { WhatsAppBanner } from "./WhatsApp";
 
 const field =
   "w-full rounded-xl border border-navy/10 bg-surface px-3.5 py-3 text-sm text-navy placeholder:text-muted/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/40 aria-[invalid=true]:border-red-600";
@@ -59,6 +60,7 @@ export default function TripBar() {
         </button>
       </form>
       <p id={`${uid}-note`} className="mt-3 text-center text-xs text-muted">Next you choose the vehicle and add your contact details. No payment now.</p>
+      <WhatsAppBanner className="mt-3" message="Hello, I would like to book a ride." />
     </div>
   );
 }

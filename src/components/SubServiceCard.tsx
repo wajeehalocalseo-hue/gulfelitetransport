@@ -1,5 +1,7 @@
 import Link from "next/link";
 import Icon from "./Icon";
+import { WhatsAppIcon } from "./WhatsApp";
+import { site, whatsappUrl } from "@/lib/site";
 import ServiceImage from "./ServiceImage";
 import type { ServiceNode } from "@/content/taxonomy";
 
@@ -37,12 +39,23 @@ export default function SubServiceCard({
           <span className="inline-flex items-center gap-1.5 text-sm font-bold text-navy">
             View details <Icon name="arrow" className="h-4 w-4 transition group-hover:translate-x-1" />
           </span>
-          <Link
-            href={`${node.fullUrl}#quote`}
-            className="relative z-10 rounded-full bg-accent px-4 py-2 text-sm font-bold text-navy hover:brightness-95"
-          >
-            Get a Quote
-          </Link>
+          {whatsappUrl(`Hello ${site.name}, I would like a quote for ${node.name}.`) ? (
+            <a
+              href={whatsappUrl(`Hello ${site.name}, I would like a quote for ${node.name}.`) ?? "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative z-10 inline-flex items-center gap-1.5 rounded-full bg-[#25D366] px-4 py-2 text-sm font-extrabold text-[#06391f] hover:brightness-95"
+            >
+              <WhatsAppIcon className="h-4 w-4" /> WhatsApp
+            </a>
+          ) : (
+            <Link
+              href={`${node.fullUrl}#quote`}
+              className="relative z-10 rounded-full bg-accent px-4 py-2 text-sm font-bold text-navy hover:brightness-95"
+            >
+              Get a Quote
+            </Link>
+          )}
         </div>
       </div>
     </article>

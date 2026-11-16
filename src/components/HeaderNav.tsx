@@ -6,6 +6,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Icon from "./Icon";
 import Logo from "./Logo";
 import { site, telUrl, whatsappUrl } from "@/lib/site";
+import { WhatsAppIcon, waPillSm } from "./WhatsApp";
 
 export type MenuData = {
   taxi: {
@@ -165,12 +166,18 @@ export default function HeaderNav({ menu }: { menu: MenuData }) {
                 <Icon name="phone" className="h-4 w-4" /> {site.phone}
               </a>
             )}
-            <Link
-              href="/#quote"
-              className="hidden rounded-full bg-accent px-5 py-2.5 text-sm font-bold text-navy shadow-sm transition hover:brightness-95 sm:inline-block"
-            >
-              Request a Ride or Quote
-            </Link>
+            {wa ? (
+              <a href={wa} target="_blank" rel="noopener noreferrer" className={`${waPillSm} hidden sm:inline-flex`}>
+                <WhatsAppIcon className="h-5 w-5" /> Book on WhatsApp
+              </a>
+            ) : (
+              <Link
+                href="/#quote"
+                className="hidden rounded-full bg-accent px-5 py-2.5 text-sm font-bold text-navy shadow-sm transition hover:brightness-95 sm:inline-block"
+              >
+                Request a Ride or Quote
+              </Link>
+            )}
             <button
               type="button"
               aria-label={mobile ? "Close menu" : "Open menu"}
@@ -402,9 +409,15 @@ export default function HeaderNav({ menu }: { menu: MenuData }) {
               </li>
             ))}
             <li>
-              <Link href="/#quote" className="mt-2 block rounded-full bg-accent px-3 py-3.5 text-center font-bold text-navy">
-                Request a Ride or Quote
-              </Link>
+              {wa ? (
+                <a href={wa} target="_blank" rel="noopener noreferrer" className="mt-2 flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-3 py-3.5 text-center font-extrabold text-[#06391f]">
+                  <WhatsAppIcon className="h-5 w-5" /> Book on WhatsApp
+                </a>
+              ) : (
+                <Link href="/#quote" className="mt-2 block rounded-full bg-accent px-3 py-3.5 text-center font-bold text-navy">
+                  Request a Ride or Quote
+                </Link>
+              )}
             </li>
             {topItems.length > 0 && (
               <li className="mt-2 grid gap-2">

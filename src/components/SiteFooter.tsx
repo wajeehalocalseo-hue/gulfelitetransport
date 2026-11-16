@@ -6,6 +6,7 @@ import { cityHref } from "@/content/saudi/paths";
 import { routes } from "@/content/saudi/places";
 import { groups, services } from "@/content/services";
 import { site, telUrl, whatsappUrl } from "@/lib/site";
+import { WhatsAppIcon } from "./WhatsApp";
 
 const BASE = "/taxi-saudi-arabia";
 const head = "text-sm font-extrabold uppercase tracking-[0.14em] text-white";
@@ -36,14 +37,14 @@ export default function SiteFooter() {
             <p className="mt-1 max-w-2xl text-white/70">Tell us where and what. We confirm the vehicle, driver and fare before you commit.</p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <Link href="/#quote" className="rounded-full bg-accent px-7 py-3.5 font-extrabold text-navy transition hover:brightness-95">
-              Request a Ride or Quote
-            </Link>
             {wa && (
-              <a href={wa} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/30 px-7 py-3.5 font-bold text-white transition hover:border-accent hover:text-accent">
-                <Icon name="chat" className="h-4 w-4" /> WhatsApp
+              <a href={wa} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-7 py-3.5 font-extrabold text-[#06391f] transition hover:brightness-95">
+                <WhatsAppIcon className="h-5 w-5" /> Book on WhatsApp
               </a>
             )}
+            <Link href="/#quote" className={wa ? "rounded-full border border-white/30 px-7 py-3.5 font-bold text-white transition hover:border-accent hover:text-accent" : "rounded-full bg-accent px-7 py-3.5 font-extrabold text-navy transition hover:brightness-95"}>
+              {wa ? "Booking Form" : "Request a Ride or Quote"}
+            </Link>
             <Link href={BASE} className="rounded-full border border-white/30 px-7 py-3.5 font-bold text-white transition hover:border-accent hover:text-accent">
               Find Your City
             </Link>

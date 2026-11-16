@@ -4,6 +4,7 @@ import FaqList from "./Faq";
 import Icon from "./Icon";
 import type { PlacePage } from "@/content/saudi/types";
 import { mailtoUrl, site, telUrl, whatsappUrl } from "@/lib/site";
+import { WhatsAppIcon } from "./WhatsApp";
 
 type L = NonNullable<PlacePage["landing"]>;
 type Tone = "white" | "surface" | "navy";
@@ -441,8 +442,8 @@ function Closing({ l }: { l: L }) {
           <p className="mt-1 max-w-2xl font-medium text-navy/80">Send your route details and we come back with the plan.</p>
         </div>
         <div className="flex flex-wrap gap-3">
-          <Link href="#quote" className={`${btn} bg-navy text-white hover:bg-navy-2`}>Request this ride</Link>
-          {wa && <a href={wa} target="_blank" rel="noopener noreferrer" className={`${btn} border-2 border-navy/40 hover:bg-white/30`}><Icon name="chat" className="h-4 w-4" /> WhatsApp</a>}
+          {wa && <a href={wa} target="_blank" rel="noopener noreferrer" className={`${btn} bg-[#25D366] text-[#06391f] hover:brightness-95`}><WhatsAppIcon className="h-5 w-5" /> Book on WhatsApp</a>}
+          <Link href="#quote" className={wa ? `${btn} border-2 border-navy/40 hover:bg-white/30` : `${btn} bg-navy text-white hover:bg-navy-2`}>{wa ? "Use the booking form" : "Request this ride"}</Link>
           {telUrl && <a href={telUrl} className={`${btn} border-2 border-navy/40 hover:bg-white/30`}><Icon name="phone" className="h-4 w-4" /> Call</a>}
           {mail && <a href={mail} className={`${btn} border-2 border-navy/40 hover:bg-white/30`}><Icon name="mail" className="h-4 w-4" /> Email</a>}
         </div>

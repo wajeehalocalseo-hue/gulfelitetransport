@@ -1,5 +1,7 @@
 import Link from "next/link";
 import Icon from "./Icon";
+import { WhatsAppIcon } from "./WhatsApp";
+import { site, whatsappUrl } from "@/lib/site";
 import ServiceImage from "./ServiceImage";
 import { groups, type Service } from "@/content/services";
 
@@ -43,12 +45,23 @@ export default function ServiceCard({ s, headingLevel = 3 }: { s: Service; headi
           <span className="inline-flex items-center gap-1.5 text-sm font-bold text-navy">
             View details <Icon name="arrow" className="h-4 w-4 transition group-hover:translate-x-1" />
           </span>
-          <Link
-            href={`/services/${s.slug}#quote`}
-            className="relative z-10 rounded-full bg-accent px-4 py-2 text-sm font-bold text-navy hover:brightness-95"
-          >
-            Get a Quote
-          </Link>
+          {whatsappUrl(`Hello ${site.name}, I would like a quote for ${s.title}.`) ? (
+            <a
+              href={whatsappUrl(`Hello ${site.name}, I would like a quote for ${s.title}.`) ?? "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative z-10 inline-flex items-center gap-1.5 rounded-full bg-[#25D366] px-4 py-2 text-sm font-extrabold text-[#06391f] hover:brightness-95"
+            >
+              <WhatsAppIcon className="h-4 w-4" /> WhatsApp
+            </a>
+          ) : (
+            <Link
+              href={`/services/${s.slug}#quote`}
+              className="relative z-10 rounded-full bg-accent px-4 py-2 text-sm font-bold text-navy hover:brightness-95"
+            >
+              Get a Quote
+            </Link>
+          )}
         </div>
       </div>
     </article>

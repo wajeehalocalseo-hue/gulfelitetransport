@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useId, useState } from "react";
+import { WhatsAppBanner } from "./WhatsApp";
 
 const field =
   "w-full rounded-lg border border-navy/20 bg-white px-3 py-2.5 text-sm text-navy placeholder:text-muted/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/40 aria-[invalid=true]:border-red-600";
@@ -62,6 +63,7 @@ export default function TripForm({ pickupDefault = "", dropoffDefault = "" }: { 
       <p id={`${uid}-note`} className="col-span-2 text-center text-xs leading-5 text-muted">
         Next you choose the vehicle and add your contact details. No payment now.
       </p>
+      <div className="col-span-2"><WhatsAppBanner message="Hello, I would like to book a ride." /></div>
     </form>
   );
 }

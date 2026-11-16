@@ -7,6 +7,7 @@ import ImageSlot from "./ImageSlot";
 import type { PlacePage } from "@/content/saudi/types";
 import type { RichRoute } from "@/content/saudi/rich-types";
 import { ctaHref } from "@/lib/site";
+import { WhatsAppIcon, waPill } from "./WhatsApp";
 
 export const wrap = "mx-auto max-w-7xl px-5";
 export const btn = "inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-center font-extrabold transition";
@@ -16,6 +17,15 @@ export const arrowLink = "inline-flex items-center gap-2 font-bold text-navy und
 export function Cta({ children, message, className }: { children: ReactNode; message: string; className: string }) {
   const href = ctaHref(message);
   const external = href.startsWith("http");
+  // Pill buttons become the green WhatsApp button. Text links keep their own style.
+  if (external && className.includes("rounded-full")) {
+    const extra = className.split(/\s+/).filter((c) => /^(mt|mb|ml|mr|mx|my|w|min-w|max-w|self|sm:w|sm:mt|lg:mt)-/.test(c)).join(" ");
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer" className={`${waPill} ${extra}`}>
+        <WhatsAppIcon className="h-5 w-5" /> Book on WhatsApp
+      </a>
+    );
+  }
   return external ? (
     <a href={href} target="_blank" rel="noopener noreferrer" className={className}>{children}</a>
   ) : (
