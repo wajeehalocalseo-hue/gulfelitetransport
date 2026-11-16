@@ -4,6 +4,7 @@ import { buildPairs, bearing } from "./pairs";
 import { routeProfiles, type RouteProfile } from "./route-profiles";
 import { jeddahRich, jeddahSeo } from "./route-rich/riyadh-to-jeddah";
 import { dammamRich, dammamSeo } from "./route-rich/riyadh-to-dammam";
+import { makkahRich, makkahSeo } from "./route-rich/riyadh-to-makkah";
 import routeTimes from "./route-times.json";
 import { riyadhAreas, riyadhAreaById } from "./riyadh-areas";
 import { districtOverrides, fmtKm, fmtMin } from "./riyadh-districts";
@@ -706,8 +707,8 @@ function riyadhRouteLanding(r: (typeof routes)[number], from: City, to: City, ap
     faq: faqSec && faqSec.kind === "faq" ? faqSec.items : [],
     note: `Distance and time are estimates from OpenStreetMap routing between the city centres, reviewed November 2026. Rest stops, traffic and any checkpoint queues add time.`,
   };
-  const seo = r.id === "riyadh-to-jeddah" ? jeddahSeo : r.id === "riyadh-to-dammam" ? dammamSeo : null;
-  const rich = r.id === "riyadh-to-jeddah" ? jeddahRich : r.id === "riyadh-to-dammam" ? dammamRich : null;
+  const seo = r.id === "riyadh-to-jeddah" ? jeddahSeo : r.id === "riyadh-to-dammam" ? dammamSeo : r.id === "riyadh-to-makkah" ? makkahSeo : null;
+  const rich = r.id === "riyadh-to-jeddah" ? jeddahRich : r.id === "riyadh-to-dammam" ? dammamRich : r.id === "riyadh-to-makkah" ? makkahRich : null;
   return {
     title: seo ? seo.title : prof.title,
     description: seo ? seo.description : `Book a private taxi from Riyadh to ${name}: about ${r.km} km, roughly ${time} by road. ${prof.tail} Fare confirmed before you commit.`,

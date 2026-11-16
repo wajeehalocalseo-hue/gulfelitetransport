@@ -5,7 +5,14 @@ export type RichRoute = {
   toHref?: string;
   toName: string;
   /** "road" is the standard long-journey design; "business" is a darker, work-focused design with extra sections. */
-  variant?: "road" | "business";
+  variant?: "road" | "business" | "umrah";
+  /** Umrah variant: family and group travel section. */
+  umrah?: { heading: string; intro: string; items: { title: string; text: string }[]; note: string; slot: string; alt: string };
+  /** Umrah variant: religious travel preparation (informational only), with official links. */
+  miqat?: { heading: string; intro: string; items: { title: string; text: string }[]; note: string; links: { name: string; href: string }[] };
+  /** Drop-off planning: what to send, and a short access warning. */
+  dropChecklist?: string[];
+  dropNote?: string;
   business?: { heading: string; intro: string; items: { title: string; text: string }[]; note: string };
   eastern?: { heading: string; intro: string; items: { name: string; detail: string; text: string; href?: string }[]; note: string };
   airport?: { heading: string; intro: string; items: { title: string; text: string }[]; note: string; href: string; slot: string; alt: string };

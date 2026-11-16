@@ -8,12 +8,12 @@ import type { PlacePage } from "@/content/saudi/types";
 import type { RichRoute } from "@/content/saudi/rich-types";
 import { ctaHref } from "@/lib/site";
 
-const wrap = "mx-auto max-w-7xl px-5";
-const btn = "inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-center font-extrabold transition";
-const arrowLink = "inline-flex items-center gap-2 font-bold text-navy underline decoration-accent decoration-2 underline-offset-4 hover:text-gold";
+export const wrap = "mx-auto max-w-7xl px-5";
+export const btn = "inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-center font-extrabold transition";
+export const arrowLink = "inline-flex items-center gap-2 font-bold text-navy underline decoration-accent decoration-2 underline-offset-4 hover:text-gold";
 
 /** A button or link to the quote form, or to WhatsApp once site.contactMethod is switched. */
-function Cta({ children, message, className }: { children: ReactNode; message: string; className: string }) {
+export function Cta({ children, message, className }: { children: ReactNode; message: string; className: string }) {
   const href = ctaHref(message);
   const external = href.startsWith("http");
   return external ? (
@@ -23,7 +23,7 @@ function Cta({ children, message, className }: { children: ReactNode; message: s
   );
 }
 
-function Band({ id, tone = "white", children }: { id?: string; tone?: "white" | "surface" | "navy"; children: ReactNode }) {
+export function Band({ id, tone = "white", children }: { id?: string; tone?: "white" | "surface" | "navy"; children: ReactNode }) {
   const bg = tone === "surface" ? "bg-surface" : tone === "navy" ? "bg-navy text-white" : "bg-white";
   return (
     <section id={id} aria-labelledby={id ? `${id}-title` : undefined} className={bg}>
@@ -32,7 +32,7 @@ function Band({ id, tone = "white", children }: { id?: string; tone?: "white" | 
   );
 }
 
-function Title({ id, children, eyebrow, center = false, dark = false, lead }: { id: string; children: ReactNode; eyebrow?: string; center?: boolean; dark?: boolean; lead?: string }) {
+export function Title({ id, children, eyebrow, center = false, dark = false, lead }: { id: string; children: ReactNode; eyebrow?: string; center?: boolean; dark?: boolean; lead?: string }) {
   return (
     <div className={`mb-10 max-w-3xl ${center ? "mx-auto text-center" : ""}`}>
       {eyebrow && <p className={`text-xs font-extrabold uppercase tracking-[0.2em] ${dark ? "text-accent" : "text-gold"}`}>{eyebrow}</p>}
