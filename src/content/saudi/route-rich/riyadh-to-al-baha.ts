@@ -1,0 +1,251 @@
+import type { RichRoute } from "../rich-types";
+
+/**
+ * Riyadh to Al Baha: the fully designed route page (southern highlands variant, in the site's green and gold palette).
+ * Distance and driving time are estimates from OpenStreetMap routing between the Riyadh centre and the Al Baha city centre
+ * (reviewed November 2026: 910 km / 652 min Riyadh to Al Baha, 909 km / 660 min Al Baha to Riyadh, about 10 hr 55 min). The existing page figures,
+ * about 910 km and about 10 hr 55 min, are retained because they match. Forced through the Bisha area the route is about 919 km / 668 min,
+ * so the Bisha option is about the same length. Forced through Taif it is about 1,006 km / 665 min, which agrees with the reported Taif figure of about
+ * 1,010 km / 10 hr. The reported 877 km / 9 hr for the Bisha route could not be reproduced for the city-to-city trip (it may use other endpoints or
+ * speed assumptions), and Rome2Rio's 870 km / 11 hr 57 min uses another speed model, so none of them is averaged in.
+ * Corridor from the routing steps: Highway 30 south-west for about 620 km, the Sabt Al-Alaya to Bisha road for about 80 km, then Route 15 (King Abdulaziz Road)
+ * for about 83 km up into Al Baha. Intermediate towns beyond those road names were not confirmed, so none is named except Bisha as the road name and the
+ * published route description.
+ * From the Al Baha city centre (road distance, estimates): Dhee Ayn about 30 km, Baljurashi about 33 km, King Saud bin Abdulaziz Airport (ABT, in Al-Aqiq) about 43 km,
+ * Al-Makhwah about 47 km, Qilwah about 56 km, Al Mandaq about 57 km, Shada Al-A'la reserve about 66 km. Raghadan Forest Park, Prince Hussam Park and the
+ * viewpoints could not be located reliably, so no distances are given for them. The site has no Al Baha airport page, so the page does not link one.
+ * Landmark descriptions are general public knowledge; hours, fees and access are not stated. No fares, ratings, reviews, vehicle specifications,
+ * flight tracking or site-access guarantees. Photos are optional: see ImageSlot.
+ */
+export const albahaSeo = {
+  title: "Riyadh to Al Baha Taxi | Private Intercity Transfer",
+  description: "Book a private taxi from Riyadh to Al Baha. Check road distance and driving time, then request a one-way or return transfer and confirm your fare first.",
+  h1: "Private Taxi from Riyadh to Al Baha",
+  lead: "A private long-distance transfer from Riyadh to Al Baha, in the Sarawat highlands, for families, visitors to the mountain forests and villages, and business travel. Share your pickup, exact Al Baha destination and group size, and we confirm the vehicle, driver and fare before you commit.",
+  directAnswer:
+    "Gulf Elite Transport Group accepts private transport requests between Riyadh and Al Baha (also written Al Bahah), the capital of Al Baha Region in the Sarawat Mountains, about 910 km by road. The drive takes about 10 hours 55 minutes without stops, so it needs a planned departure and rest breaks. Two main road routes exist, one via Bisha and one via Taif, and the Taif route is longer, at about 1,000 km. The service is used for family trips, visits to the forests and heritage villages, business travel and connections with King Saud bin Abdulaziz Airport (ABT), one way or with a return. Send your pickup address, exact destination in Al Baha, the date, time, and the number of passengers and bags. Our team checks vehicle and driver availability and confirms the vehicle, driver and fare with you before you book. Fares are not listed here, because each journey is quoted for your request.",
+};
+
+export const albahaRich: RichRoute = {
+  fromName: "Riyadh",
+  toName: "Al Baha",
+  toHref: "/taxi-saudi-arabia/al-bahah-region/al-bahah",
+  variant: "albaha",
+  imageFolder: "riyadh-to-al-baha",
+  eyebrow: "Private intercity transfer · Riyadh to the Sarawat highlands",
+  heroPoints: ["Private vehicle for family, visitor or business travel", "City, airport, village or forest: tell us which", "One-way and return requests", "Vehicle, driver and fare confirmed before you commit"],
+  heroAlt: "A private car on the long road from Riyadh up into the Sarawat highlands of Al Baha",
+  facts: [
+    { label: "Origin", value: "Riyadh" },
+    { label: "Destination", value: "Al Baha, Al Baha Region" },
+    { label: "Approximate road distance", value: "About 910 km" },
+    { label: "Approximate driving time", value: "About 10 hr 55 min, without stops" },
+    { label: "Direction", value: "South-west, up into the Sarawat Mountains" },
+    { label: "Airport", value: "King Saud bin Abdulaziz Airport (ABT)" },
+  ],
+  factsNote: "Approximate road distance between the Riyadh centre and the Al Baha city centre, from OpenStreetMap routing, in light traffic and without stops. Published figures for the two main routes differ, from about 870 km to about 1,010 km, because they use different routes and start and end points. Driving time is not door-to-door time: rest, meals, prayer, fuel, traffic, mountain roads and weather add to it. They are not a promised arrival time.",
+  introHeading: "Riyadh to Al Baha Taxi: A Private Transfer up into the Highlands",
+  intro: [
+    "Al Baha lies in the Sarawat Mountains in the south-west, in the smallest region of the kingdom by area. It is known for its cooler air, juniper forests, stone villages and views over the Tihama plains below. From Riyadh the road runs south-west across the plateau for about 910 km, before the final climb into the mountains.",
+    "A private transfer lets you agree the pickup address, the vehicle and the departure time in advance, and be taken to an exact hotel, home, village or the airport. Because the last part of the road is steep and winding, a plan for breaks and a suitable vehicle make the journey easier.",
+  ],
+  terms: {
+    heading: "Al Baha City, Al Baha Region and the Highlands Around It",
+    intro: "Al Baha is a city, and also a region made of several governorates. Many places visitors ask about are not in the city centre.",
+    items: [
+      { title: "Al Baha city", text: "The administrative centre of Al Baha Region, in the mountains. Raghadan Forest Park, Prince Hussam Park, the main markets and hotels are in and around it." },
+      { title: "Al Baha Region", text: "A region of separate governorates, including Baljurashi, Al-Mikhwat (Al-Makhwah), Al Mandaq, Qilwah and Al-Aqiq. It is larger than the city." },
+      { title: "Sarawat Mountains and Tihama", text: "The mountain escarpment, with forests and villages, rising above the Tihama coastal plains to the west." },
+      { title: "Dhee Ayn Heritage Village", text: "A historic village in Al-Mikhwat Governorate, about 30 km from the city centre by road (an estimate). It is not in the city." },
+      { title: "King Saud bin Abdulaziz Airport (ABT)", text: "The airport serving Al Baha, in the Al-Aqiq area, about 43 km from the city centre by road (an estimate). It is not in the city." },
+      { title: "Shada Mountains", text: "A mountain area with a nature reserve in the region. A separate trip, and some places there need an official arrangement." },
+    ],
+    note: "A standard Al Baha city booking does not include regional excursions. Each extra destination is a separate request.",
+  },
+  whyHeading: "Why Take a Private Taxi from Riyadh to Al Baha?",
+  why: [
+    { title: "A private ride", text: "The car is for you and your group only, not shared with other passengers." },
+    { title: "Direct intercity travel", text: "One vehicle from your Riyadh address to your Al Baha destination." },
+    { title: "Built for families and luggage", text: "Passengers and bags planned together, with breaks agreed in advance." },
+    { title: "The right vehicle for the road", text: "A sedan, SUV, van or executive car, chosen for passengers, luggage and the mountain road." },
+    { title: "One-way and return requests", text: "Ask for the ride back from Al Baha to Riyadh in the same request." },
+    { title: "Fare confirmed before you commit", text: "You see the vehicle, driver and fare for your request, and you decide whether to go ahead." },
+  ],
+  route: {
+    heading: "The Road from Riyadh up to Al Baha",
+    intro: "Mapping shows the main road leaving Riyadh on Highway 30 south-west for a very long stage, joining the road from Sabt Al-Alaya towards Bisha, and then climbing Route 15 into Al Baha. The driver chooses the best road on the day, and your plan is confirmed with you.",
+    stops: [
+      { name: "Riyadh", detail: "Start", text: "Departure from your agreed pickup address." },
+      { name: "Highway 30 south-west", detail: "Longest stage, about 620 km", text: "A long road across the plateau. Rest and fuel stops can be requested in advance." },
+      { name: "The Bisha road", detail: "About 80 km", text: "The road from Sabt Al-Alaya towards Bisha, as the route turns west towards the mountains." },
+      { name: "Route 15, the climb", detail: "Final 83 km", text: "The road climbs into the Sarawat Mountains. It is steep and winding, and fog or rain can slow it." },
+      { name: "Al Baha", detail: "Drop-off", text: "Arrival at your hotel, home, village or the airport." },
+    ],
+    note: "A stop is not included unless you request it and we confirm it. We do not name rest stops or promise facilities.",
+  },
+  cities: {
+    heading: "Two Main Routes: Via Bisha or Via Taif",
+    intro: "Published guidance describes two main road routes. They are different roads, and neither is a detour of the other.",
+    items: [
+      { name: "Via Bisha", detail: "About 910 to 920 km · about 11 hours", text: "The standard route. It runs south-west across the plateau, past the Bisha road, and climbs to Al Baha from the east. Published guidance reports shorter figures for it, which we could not reproduce for the city-to-city trip.", href: "" },
+      { name: "Via Taif", detail: "About 1,000 km · about 11 hours", text: "A route through Taif Governorate and over the mountains from the north. It is longer in distance, and similar in driving time. Choose it if you also need to stop in Taif.", href: "/taxi-saudi-arabia/routes/riyadh-to-taif" },
+    ],
+    note: "Do not assume every journey follows the same corridor. The standard transfer takes the Bisha route, and a route via Taif is a request, with its own distance and fare.",
+  },
+  heritage: {
+    heading: "Al Baha City: Forests, Parks and Viewpoints",
+    intro: "The city sits on the mountain ridge, with forests and parks close by. Each place is a different drop-off, so give us a hotel, street or map pin.",
+    items: [
+      { name: "Raghadan Forest Park", detail: "Near the city", text: "A mountain park in juniper forest, with viewpoints over the Tihama slopes. A popular spot for families. We do not list activities, opening hours or fees." },
+      { name: "Prince Hussam Park", detail: "In the city", text: "A public park for family time in the city. Check the current facilities before you go." },
+      { name: "Al Baha city centre", detail: "Markets and hotels", text: "The main shopping and administrative area, with hotels and restaurants." },
+      { name: "Viewpoints", detail: "On the ridge", text: "Several overlooks look down towards the plains. Roads can be narrow, so tell us the exact one." },
+    ],
+    note: "A precise address works better than a broad name like \"Al Baha\". We do not promise access to any park or viewpoint, and a taxi booking does not include a guide.",
+    slot: "raghadan",
+    alt: "Juniper forest and viewpoints at Raghadan Forest Park near Al Baha",
+  },
+  sites: {
+    heading: "Dhee Ayn Heritage Village: A Separate Trip from the City",
+    intro: "Dhee Ayn (also written Thee Ain) is a historic stone village in Al-Mikhwat Governorate, set on a white marble rock. It is one of the best-known heritage sites in the region.",
+    items: [
+      { title: "Not in the city centre", text: "The village is about 30 km from the Al Baha city centre by road (an estimate), so it is its own journey." },
+      { title: "Stone architecture", text: "Traditional stone houses and towers, stacked up the rock face." },
+      { title: "Plan the approach", text: "The last stretch is steep, and parking can be limited. Tell us your visit time." },
+      { title: "Check before you go", text: "We do not list opening hours or fees. Ask the local authority for the current visiting rules." },
+    ],
+    note: "A ride to Dhee Ayn is a separate request, and is not included in a city transfer.",
+    slot: "dhee-ayn",
+    alt: "The historic stone village of Dhee Ayn on a white marble rock in Al Baha Region",
+  },
+  eastern: {
+    heading: "The Wider Al Baha Region",
+    intro: "The region has forests, caves, towns and villages. These are separate destinations, each with its own route, availability and fare. The list is ordered by road distance from the city centre.",
+    items: [
+      { name: "Baljurashi", detail: "About 33 km from Al Baha", text: "A separate town in the region, known for its farmland and old villages." },
+      { name: "Al-Makhwah (Al-Mikhwat)", detail: "About 47 km from Al Baha", text: "The governorate that includes Dhee Ayn, on the way down to the plains." },
+      { name: "Qilwah", detail: "About 56 km from Al Baha", text: "A governorate on the western slopes of the region." },
+      { name: "Al Mandaq", detail: "About 57 km from Al Baha", text: "A governorate with mountain views and farmland, north of the city." },
+      { name: "Shada Al-A'la reserve", detail: "About 66 km from Al Baha", text: "A mountain nature reserve in the Shada range, with forest and caves. Access can need an official arrangement, and the road can be rough." },
+    ],
+    note: "A regional drop-off is not included in the Al Baha city fare. We do not promise access to caves, trails or protected areas. Distances are estimates by road from the Al Baha city centre.",
+  },
+  airport: {
+    heading: "Al Baha Airport Transfers: King Saud bin Abdulaziz Airport (ABT)",
+    intro: "King Saud bin Abdulaziz Airport (ABT) is the airport of Al Baha. It is in the Al-Aqiq area, about 43 km from the city centre by road (an estimate), so it is a separate drop-off from the city.",
+    items: [
+      { title: "Not in the city", text: "The airport is in Al-Aqiq, not in central Al Baha. Allow time for the drive between the two." },
+      { title: "Not Riyadh's airport", text: "King Khalid International Airport (RUH) is in Riyadh. ABT is the airport for Al Baha. Check which one your ticket uses." },
+      { title: "What to send us", text: "Give your flight number, date, time and terminal, the number of passengers and bags, and your Al Baha destination." },
+    ],
+    note: "The time depends on the terminal, your destination and traffic. Pickup arrangements are confirmed with you for each request. We do not promise flight tracking, delay monitoring or a fixed waiting time.",
+    href: "/taxi-saudi-arabia/al-bahah-region/al-bahah",
+    slot: "airport",
+    alt: "King Saud bin Abdulaziz Airport (ABT), the airport serving Al Baha, in the Al-Aqiq area",
+  },
+  umrah: {
+    heading: "Families and the Mountain Road",
+    intro: "Many passengers are families coming to the cooler highlands. A long drive with a steep final climb goes better when it is planned for.",
+    items: [
+      { title: "Departure time", text: "Plan an early start, so you reach the mountains in daylight." },
+      { title: "Breaks", text: "Tell us if you need regular breaks, or have children or older passengers." },
+      { title: "Weather", text: "Fog and rain can slow the mountain road. Allow extra time." },
+      { title: "Luggage", text: "Count every bag, so the vehicle fits the group." },
+    ],
+    note: "An overnight stop is optional and not required. If you want one, it is arranged and confirmed separately. We do not promise child seats or specific luggage space unless we confirm them.",
+    slot: "family",
+    alt: "A family travelling together by private car from Riyadh to Al Baha",
+  },
+  vehiclesHeading: "Choose a Vehicle for a Long Mountain Journey",
+  vehiclesIntro: "The vehicle depends on the number of passengers, the amount of luggage, the date, your requested category and availability. On a trip this long, with a steep last stretch, comfort matters. We confirm the vehicle with you before you book.",
+  vehicles: [
+    { slot: "sedan", homePhoto: "sedan", name: "Sedan", best: "One or two travellers with light luggage", text: "A private car for a small group. Suitable when you travel light.", alt: "Private sedan for a Riyadh to Al Baha trip" },
+    { slot: "suv", homePhoto: "suv", name: "SUV", best: "Families and extra luggage", text: "More room for passengers and bags. Suitable for a family on a long road journey.", alt: "Private SUV for a family travelling from Riyadh to Al Baha" },
+    { slot: "van", homePhoto: "family-van", name: "Van or minibus", best: "Larger groups", text: "For groups who want to travel together with their luggage. Give us the group size and we confirm what fits.", alt: "Private van for a group travelling from Riyadh to Al Baha" },
+    { slot: "executive", name: "Executive car", best: "Formal arrivals", text: "A chauffeur-driven premium car for guests who want extra comfort. Subject to availability.", alt: "Executive car for a Riyadh to Al Baha transfer" },
+  ],
+  dropHeading: "Where in Al Baha Are You Going?",
+  dropIntro: "Send the exact address, hotel or village, and a map pin, and we confirm the best drop-off point with you.",
+  drops: [
+    { name: "Hotels and homes", text: "Name the district and send a pin." },
+    { name: "Forests and parks", text: "Name the park or viewpoint. Raghadan and Prince Hussam Park are each a separate drop-off." },
+    { name: "Villages, airport or towns", text: "Say which. Dhee Ayn, ABT and Baljurashi are each a separate journey." },
+  ],
+  dropAlt: "Al Baha in the Sarawat highlands, the destination of a private taxi from Riyadh",
+  pickupHeading: "Common Pickup Areas in Riyadh",
+  pickupIntro: "Journeys start from your own address. Send the exact address or a map pin when you request a quote.",
+  pickups: [
+    { name: "Olaya", text: "Hotels, offices and apartments in central Riyadh.", href: "/riyadh-taxi-service/olaya-taxi-service" },
+    { name: "Al Malaz", text: "An established district in the east of central Riyadh.", href: "/riyadh-taxi-service/al-malaz-taxi-service" },
+    { name: "Al Nakheel", text: "A residential district in the north-west of the city.", href: "/riyadh-taxi-service/al-nakheel-taxi-service" },
+    { name: "King Khalid International Airport (RUH)", text: "The main airport, in the north. Send your flight number and terminal.", href: "/taxi-saudi-arabia/airports/king-khalid-international-airport" },
+    { name: "Hotels and homes", text: "Any hotel, apartment or house in Riyadh." },
+  ],
+  pickupAlt: "Riyadh skyline where private transfers to Al Baha begin",
+  planHeading: "Planning Your Riyadh to Al Baha Journey",
+  plan: [
+    { title: "Distance and time", text: "The road is about 910 km, about 10 hours 55 minutes of driving without stops. These are estimates. With rest, meals and prayer breaks, plan for roughly 12 to 13 hours door to door." },
+    { title: "Mountain road", text: "The last 83 km climb steeply. Rain and fog can slow it, and some drivers prefer daylight." },
+    { title: "Passengers and luggage", text: "Count every passenger and every bag, so the vehicle has room for the group." },
+  ],
+  mapQuery: { from: "Riyadh, Saudi Arabia", to: "Al Baha, Saudi Arabia" },
+  highwayAlt: "The highway from Riyadh to Al Baha across the plateau",
+  whoHeading: "Who Travels This Route?",
+  who: [
+    { title: "Families", text: "Families travelling to Al Baha for the cooler air and the forests." },
+    { title: "Mountain visitors", text: "People exploring Raghadan and the Shada Mountains." },
+    { title: "Heritage visitors", text: "People visiting Dhee Ayn." },
+    { title: "Relatives", text: "Passengers visiting family in Al Baha Region." },
+    { title: "Business travellers", text: "Professionals travelling to the south-west." },
+    { title: "Airport passengers", text: "Passengers connecting with ABT." },
+    { title: "People arranging a return", text: "Travellers who also need the ride back to Riyadh." },
+  ],
+  stepsHeading: "How Booking Works",
+  steps: [
+    { title: "Enter your locations", text: "Pickup and drop-off addresses." },
+    { title: "Select date and time", text: "The day and time you want to travel." },
+    { title: "Add passengers and luggage", text: "How many people and bags are travelling." },
+    { title: "Continue with your details", text: "Choose the vehicle and add your contact details in the next steps of the form." },
+    { title: "Check and confirm", text: "Our team checks availability and confirms the vehicle, driver and fare before you commit." },
+  ],
+  infoHeading: "Before You Travel",
+  infoIntro: "A few points that make a long journey easier.",
+  info: [
+    { title: "Fare", text: "Fares are not published, because each journey is quoted for your request." },
+    { title: "Exact addresses", text: "Send a map pin or landmark for the pickup and drop-off." },
+    { title: "Regional trips", text: "Village and mountain drop-offs are separate requests." },
+  ],
+  relatedHeading: "Related Routes and Pages",
+  related: [
+    { name: "Riyadh to Taif", href: "/taxi-saudi-arabia/routes/riyadh-to-taif", text: "The mountain city on the second route to Al Baha." },
+    { name: "Riyadh to Abha", href: "/taxi-saudi-arabia/routes/riyadh-to-abha", text: "The Asir highlands, to the south." },
+    { name: "Riyadh to Najran", href: "/taxi-saudi-arabia/routes/riyadh-to-najran", text: "A long ride to the far south." },
+    { name: "Riyadh to Jazan", href: "/taxi-saudi-arabia/routes/riyadh-to-jazan", text: "A long ride to the Red Sea coast." },
+    { name: "Riyadh to Makkah", href: "/taxi-saudi-arabia/routes/riyadh-to-makkah", text: "The holy city, on the Hejaz road." },
+    { name: "Riyadh to Jeddah", href: "/taxi-saudi-arabia/routes/riyadh-to-jeddah", text: "The Red Sea port city." },
+    { name: "Al Baha taxi service", href: "/taxi-saudi-arabia/al-bahah-region/al-bahah", text: "Rides within and around Al Baha." },
+    { name: "Riyadh taxi service", href: "/riyadh-taxi-service", text: "Pickups and rides in Riyadh." },
+  ],
+  faqHeading: "Frequently Asked Questions: Riyadh to Al Baha Taxi",
+  faq: [
+    { q: "How far is Al Baha from Riyadh by road?", a: "About 910 km between the two city centres on the standard route. A route via Taif is longer, at about 1,000 km. The exact distance depends on your pickup and destination." },
+    { q: "How long does a private taxi from Riyadh to Al Baha take?", a: "Driving takes about 10 hours 55 minutes without stops, in light traffic. Breaks, meals, prayer, weather and the mountain road add time. We do not promise an arrival time." },
+    { q: "Which route is faster, via Bisha or Taif?", a: "The route via Bisha is shorter, at about 910 km, and is the standard route. The route via Taif is about 1,000 km, with a similar driving time. Published figures differ because they use other start and end points." },
+    { q: "Can I book a private taxi from Riyadh to Al Baha?", a: "Yes. Send your pickup, exact destination, date, time and group size, and we confirm the vehicle, driver and fare before you commit." },
+    { q: "Can I arrange a return taxi from Al Baha to Riyadh?", a: "Yes. Ask for the return in the same request and give us the day and time you want to leave Al Baha." },
+    { q: "Does Al Baha have an airport?", a: "Yes. King Saud bin Abdulaziz Airport serves Al Baha, in the Al-Aqiq area, not in the city centre." },
+    { q: "What is the airport code for Al Baha?", a: "ABT." },
+    { q: "Can I book a taxi to King Saud bin Abdulaziz Airport?", a: "Yes, as a request. Send your flight number, time and destination, and we confirm the arrangement with you. We do not promise flight tracking." },
+    { q: "Is Dhee Ayn Village inside Al Baha city?", a: "No. It is in Al-Mikhwat Governorate, about 30 km from the city centre by road (an estimate)." },
+    { q: "Can I request a separate ride to Dhee Ayn?", a: "Yes, as a separate request. Tell us your visit time, and we confirm the route and fare. Check the village's current visiting rules yourself." },
+    { q: "Can I book a transfer to Raghadan Forest?", a: "Yes, as a drop-off request near the city. Tell us the exact entrance or viewpoint. We do not list activities or opening hours." },
+    { q: "Can I travel with family and luggage?", a: "Yes. Tell us how many passengers and bags, and we confirm a vehicle that fits. An SUV or a van suits most families." },
+    { q: "Can I request a stop during the journey?", a: "Yes. Tell us when you request the quote. We do not name rest stops or promise facilities. A stop in Taif or Bisha is a request and changes the time and fare." },
+    { q: "Which vehicle should I choose for a long-distance trip?", a: "Choose by passengers and luggage. A sedan suits one or two people, an SUV suits families, and a van suits groups. We confirm what fits." },
+    { q: "Is the fare fixed or quoted for each request?", a: "Fares are quoted for each request, because they depend on the vehicle, the addresses and the date. We confirm the fare before you commit." },
+    { q: "How do I book a Riyadh to Al Baha taxi?", a: "Enter the pickup and drop-off, the date and time, then add passengers and luggage in the form. We check availability and confirm the vehicle, driver and fare before you commit." },
+  ],
+  ctaHeading: "Plan Your Private Riyadh to Al Baha Journey",
+  ctaText: "Share your Riyadh pickup address, exact Al Baha destination, date and time, number of passengers, luggage, and any airport or village details. Our team confirms the vehicle, driver and fare before you commit.",
+  ctaButton: "Request Your Free Quote",
+};

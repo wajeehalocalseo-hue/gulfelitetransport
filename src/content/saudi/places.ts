@@ -521,7 +521,7 @@ export const routes: Route[] = [
     about:
       "Riyadh to Al Baha heads west and then south-west up into the Sarawat mountains, to a small region known for its cooler climate, forests and villages. The route is busiest in summer and on holidays, when families come for the weather.",
     riders: ["Families on a summer holiday", "Visitors to the mountain villages", "Residents travelling for family visits"],
-    tips: ["Plan for a long day of travel with rest stops.", "Mountain roads are slower, so tell us your hotel or village in advance."],
+    tips: ["Plan for a full day of travel with breaks, and an optional overnight stop.", "Mountain roads are slower, so tell us your hotel or village in advance."],
   },
   {
     id: "riyadh-to-sakaka",
