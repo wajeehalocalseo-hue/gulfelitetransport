@@ -427,7 +427,7 @@ export const routes: Route[] = [
     id: "riyadh-to-dhahran",
     from: "riyadh",
     to: "dhahran",
-    km: 415,
+    km: 420,
     about:
       "Riyadh to Dhahran ends in the Eastern Province city that is home to Saudi Aramco's headquarters and King Fahd University of Petroleum and Minerals. Many riders on this route are employees, contractors and university visitors, and entry to company and campus areas is controlled by their operators.",
     riders: ["Aramco employees and contractors", "University visitors and families of students", "Business travellers working in the energy sector"],

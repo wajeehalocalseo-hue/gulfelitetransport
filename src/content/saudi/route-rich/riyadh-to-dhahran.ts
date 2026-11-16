@@ -1,0 +1,220 @@
+import type { RichRoute } from "../rich-types";
+
+/**
+ * Riyadh to Dhahran: the fully designed route page (energy, university and business corridor variant).
+ * Distance and driving time are estimates from OpenStreetMap routing between the Riyadh centre and the Dhahran centre
+ * (reviewed November 2026: about 419 km and 253 min, about 420 km and 254 min back; the old page figure of 415 km / about 4 hr
+ * is shown as about 420 km and about 4 hr 15 min). Other routing sources give slightly different figures for other endpoints.
+ * From the Dhahran centre (road distance, estimates): Ithra about 6 km, KFUPM about 7 km, Al Khobar about 12 km, Dammam about 21 km,
+ * King Fahd International Airport about 50 km. Dhahran Expo, Saudi Aramco's headquarters gates and a Dhahran railway station could not be
+ * verified, so they are not described with locations or distances here.
+ * No fares, ratings, reviews, vehicle specifications, flight tracking, or Aramco/KFUPM relationships. Photos are optional: see ImageSlot.
+ */
+export const dhahranSeo = {
+  title: "Riyadh to Dhahran Taxi | Private Business Transfers",
+  description: "Book a private Riyadh to Dhahran taxi for business, KFUPM visits, Ithra and family travel. Request a vehicle and confirm your fare before you commit.",
+  h1: "Riyadh to Dhahran Taxi – Private Business & City Transfers",
+  lead: "A private road transfer from Riyadh to Dhahran for business trips, university visits and family journeys. Share your pickup, exact destination and group size, and we confirm the vehicle, driver and fare before you commit.",
+  directAnswer:
+    "Gulf Elite Transport Group accepts private transport requests between Riyadh and Dhahran in the Eastern Province of Saudi Arabia, about 420 km by road. The drive takes about 4 hours 15 minutes without stops. The service is used for business and energy-sector travel, visits to King Fahd University of Petroleum and Minerals (KFUPM) and the Ithra cultural centre, family journeys and airport connections, one way or with a return. Send your pickup address, exact Dhahran destination, date, time, and the number of passengers and bags. Our team checks vehicle and driver availability and confirms the vehicle, driver and fare with you before you book. Fares are not listed here, because each journey is quoted for your request.",
+};
+
+export const dhahranRich: RichRoute = {
+  fromName: "Riyadh",
+  toName: "Dhahran",
+  toHref: "/taxi-saudi-arabia/eastern-province/dhahran",
+  variant: "dhahran",
+  imageFolder: "riyadh-to-dhahran",
+  eyebrow: "Private intercity transfer · Riyadh to Dhahran",
+  heroPoints: ["Private vehicle for business, university or family travel", "Gate and building details planned before you leave", "One-way and return requests", "Vehicle, driver and fare confirmed before you commit"],
+  heroAlt: "A private car on the highway from Riyadh towards Dhahran in the Eastern Province",
+  facts: [
+    { label: "Origin", value: "Riyadh" },
+    { label: "Destination", value: "Dhahran, Eastern Province" },
+    { label: "Approximate road distance", value: "About 420 km" },
+    { label: "Approximate driving time", value: "About 4 hr 15 min, without stops" },
+    { label: "Main road", value: "The Riyadh to Dammam highway" },
+    { label: "Service", value: "Private intercity transport, both directions" },
+  ],
+  factsNote: "Approximate road distance between the Riyadh centre and the Dhahran centre, from OpenStreetMap routing, for light traffic and without stops. This is road distance, not straight-line distance. Other routing sources give slightly different figures for other start and end points. The actual distance and time depend on your exact addresses, the road, traffic, entry checks and stops. They are not a promised arrival time.",
+  introHeading: "Riyadh to Dhahran Taxi: A Private Transfer for Business and Study",
+  intro: [
+    "Dhahran is a city in the Eastern Province, next to Dammam and Al Khobar. It is known for Saudi Aramco's presence, King Fahd University of Petroleum and Minerals (KFUPM) and the Ithra cultural centre, so many journeys from Riyadh are for work, study and culture.",
+    "A private transfer lets you agree the pickup address, the vehicle and the departure time in advance, and be taken to an exact building or gate in Dhahran. It suits business visits, families visiting students and passengers with luggage.",
+  ],
+  whyHeading: "Why Take a Private Taxi from Riyadh to Dhahran?",
+  why: [
+    { title: "A private ride", text: "The car is for you and your group only, not shared with other passengers." },
+    { title: "Pickup and drop-off at your address", text: "From a home, hotel or office in Riyadh to the Dhahran building or gate you name." },
+    { title: "The right vehicle for your group", text: "A sedan, SUV, van or executive car, chosen for passengers and luggage." },
+    { title: "Planned around your appointment", text: "Tell us when you must arrive, and we plan the departure around it." },
+    { title: "Return journey requests", text: "Ask for the ride back from Dhahran to Riyadh in the same request." },
+    { title: "Fare confirmed before you commit", text: "You see the vehicle, driver and fare for your request, and you decide whether to go ahead." },
+  ],
+  business: {
+    heading: "Business and Energy-Sector Travel to Dhahran",
+    intro: "Dhahran is a working city of company campuses, offices and research sites. Many journeys on this road are business trips, and the access arrangements matter as much as the road.",
+    items: [
+      { title: "Energy-sector professionals", text: "Engineers, contractors and consultants visiting company sites or offices in Dhahran." },
+      { title: "Corporate meetings", text: "Give the company, the building and the meeting time, and we plan the departure to arrive before it." },
+      { title: "Visits to company campuses", text: "Saudi Aramco and other companies control their own gates and visitors. Send the exact gate and the host's name if you have them." },
+      { title: "Teams travelling together", text: "Several colleagues can travel in one vehicle from the same Riyadh address." },
+    ],
+    note: "We are not an Aramco-approved or contracted provider, and we cannot promise that a vehicle may enter a company area. Entry is decided by the facility operator, and we confirm what is possible for each request.",
+  },
+  sites: {
+    heading: "KFUPM: University Visits and Student Families",
+    intro: "King Fahd University of Petroleum and Minerals is in Dhahran, and many passengers travel there to visit students, attend meetings or take part in academic events.",
+    items: [
+      { title: "Family visits", text: "Parents and relatives visiting students can be taken from Riyadh to the entrance they name." },
+      { title: "Academic and professional visits", text: "Name the faculty, office or building, and the time of your appointment." },
+      { title: "Send the gate", text: "Give the campus gate or building and a map pin, so the driver goes to the right place." },
+      { title: "Plan the return", text: "Tell us when you finish, so the ride back can be arranged with the outward journey." },
+    ],
+    note: "Campus entry and visitor access follow the university's own rules. We are not affiliated with KFUPM and we do not promise entry for a vehicle.",
+    slot: "kfupm",
+    alt: "KFUPM campus architecture in Dhahran",
+  },
+  eastern: {
+    heading: "Ithra and Places in Dhahran",
+    intro: "Dhahran is also a destination for culture. Each extra stop is a separate request, confirmed with you.",
+    items: [
+      { name: "King Abdulaziz Center for World Culture (Ithra)", detail: "In Dhahran, about 6 km from the centre", text: "A cultural and architectural landmark with a library, a museum, a theatre and exhibitions. Check the official Ithra website for current programmes and visiting details." },
+      { name: "KFUPM", detail: "In Dhahran, about 7 km from the centre", text: "The university campus described above." },
+    ],
+    note: "Distances are estimates by road from the Dhahran centre. We do not publish event schedules, prices or opening hours, and we do not offer tours or guides.",
+  },
+  cities: {
+    heading: "Dhahran, Dammam and Al Khobar: Choose the Right Destination",
+    intro: "The three cities are neighbours on the Gulf coast, but each is a separate destination. Please enter the exact city, district, hotel or building, so the booking goes to the right place.",
+    items: [
+      { name: "Dhahran", detail: "This page", text: "A distinct city of company campuses, the university and Ithra." },
+      { name: "Dammam", detail: "About 21 km from Dhahran", text: "The regional capital, with the main railway station. See the Riyadh to Dammam page.", href: "/taxi-saudi-arabia/routes/riyadh-to-dammam" },
+      { name: "Al Khobar", detail: "About 12 km from Dhahran", text: "A coastal city with hotels, offices and the Corniche. See the Riyadh to Al Khobar page.", href: "/taxi-saudi-arabia/routes/riyadh-to-al-khobar" },
+    ],
+    note: "Distances are estimates by road between the city centres. A drop-off in Dammam or Al Khobar is a different destination and is quoted for your request.",
+  },
+  airport: {
+    heading: "Airport Transfers: King Fahd International Airport (DMM)",
+    intro: "King Fahd International Airport serves the wider Eastern Province, including Dhahran, Dammam and Al Khobar. It is not in the centre of Dhahran.",
+    items: [
+      { title: "A separate pickup point", text: "The airport is about 50 km from Dhahran by road (an estimate), so a ride to or from it is its own request." },
+      { title: "Not King Khalid Airport", text: "King Khalid International Airport (RUH) is in Riyadh. King Fahd International Airport (DMM) is in the Dammam area. Check which one your ticket uses." },
+      { title: "What to send us", text: "Give your flight number, date and time, the number of passengers and bags, and your Dhahran destination." },
+    ],
+    note: "Pickup arrangements are confirmed with you for each request. We do not promise flight tracking, meet-and-greet or a fixed waiting time.",
+    href: "/taxi-saudi-arabia/airports/king-fahd-international-airport",
+    slot: "airport",
+    alt: "King Fahd International Airport, which serves the whole Eastern Province",
+  },
+  vehiclesHeading: "Choose a Vehicle for Your Journey",
+  vehiclesIntro: "The vehicle depends on the number of passengers, the amount of luggage, whether the trip is for business or family, your requested category and availability. We confirm it with you before you book.",
+  vehicles: [
+    { slot: "sedan", homePhoto: "sedan", name: "Sedan", best: "Business travellers and small groups", text: "A private car for one to a few passengers with light luggage.", alt: "Private sedan for a Riyadh to Dhahran trip" },
+    { slot: "suv", homePhoto: "suv", name: "SUV", best: "Families and extra luggage", text: "More room for passengers and bags. Suitable for a family on a long road journey.", alt: "Private SUV for a family travelling from Riyadh to Dhahran" },
+    { slot: "van", homePhoto: "family-van", name: "Van or minibus", best: "Teams and groups", text: "For teams and groups who want to travel together with their luggage. Give us the group size and we confirm what fits.", alt: "Private van for a team travelling from Riyadh to Dhahran" },
+    { slot: "executive", name: "Executive car", best: "Formal arrivals", text: "A chauffeur-driven premium car for guests who want extra comfort. Subject to availability.", alt: "Executive car for a Riyadh to Dhahran transfer" },
+  ],
+  terms: {
+    heading: "Before You Travel: What to Send Us",
+    intro: "The more exactly you describe the place, the better we can plan the journey. Some Dhahran destinations are gated.",
+    items: [
+      { title: "Pickup address in Riyadh", text: "A full address or a map pin." },
+      { title: "Exact Dhahran destination", text: "The company, university, hotel or building, not only the city." },
+      { title: "Gate or building", text: "The entrance you will use, and a map pin if you can send one." },
+      { title: "Passengers and luggage", text: "How many people and how many bags." },
+      { title: "Date and time", text: "The day, and the time you must arrive or leave." },
+      { title: "A host or contact", text: "For controlled sites, the name and phone number of the person expecting you." },
+    ],
+    note: "Sending a host's name does not guarantee entry. Gates and campuses follow the operator's rules, and we confirm what is possible for your request.",
+  },
+  dropHeading: "Where in Dhahran Are You Going?",
+  dropIntro: "Send the exact address and a map pin, and we confirm the best drop-off point with you.",
+  drops: [
+    { name: "Company campuses and offices", text: "Name the company, the building and the gate." },
+    { name: "University", text: "Name the faculty or gate." },
+    { name: "Hotels and homes", text: "Share the address and a nearby landmark." },
+  ],
+  dropAlt: "Dhahran, the destination of a private taxi from Riyadh",
+  pickupHeading: "Common Pickup Areas in Riyadh",
+  pickupIntro: "Journeys start from your own address. Send the exact address or a map pin when you request a quote.",
+  pickups: [
+    { name: "Olaya", text: "Hotels, offices and apartments in central Riyadh.", href: "/riyadh-taxi-service/olaya-taxi-service" },
+    { name: "Al Malaz", text: "An established district in the east of central Riyadh.", href: "/riyadh-taxi-service/al-malaz-taxi-service" },
+    { name: "Al Nakheel", text: "A residential district in the north-west of the city.", href: "/riyadh-taxi-service/al-nakheel-taxi-service" },
+    { name: "King Khalid International Airport (RUH)", text: "The main airport, in the north. Send your flight number and terminal.", href: "/taxi-saudi-arabia/airports/king-khalid-international-airport" },
+    { name: "Hotels and homes", text: "Any hotel, apartment or house in Riyadh." },
+  ],
+  pickupAlt: "Riyadh skyline where private transfers to Dhahran begin",
+  planHeading: "Planning the Journey from Riyadh to Dhahran",
+  plan: [
+    { title: "Distance and time", text: "The road is about 420 km, about 4 hours 15 minutes of driving without stops. These are estimates. With rest and prayer breaks, plan for about five hours." },
+    { title: "Entry checks", text: "Gate checks at company and campus entrances take time and are outside our control, so allow extra time before an appointment." },
+    { title: "Traffic and weather", text: "Traffic varies by day and season. Summer afternoons are very hot, and dust or fog can slow the road." },
+  ],
+  route: {
+    heading: "The Road from Riyadh to Dhahran",
+    intro: "The journey leaves Riyadh to the east and follows the Riyadh to Dammam highway across the desert plateau to the Gulf coast. The driver chooses the best road on the day, and your plan is confirmed with you.",
+    stops: [
+      { name: "Riyadh", detail: "Start", text: "Departure from your agreed pickup address." },
+      { name: "The Riyadh to Dammam highway", detail: "On the road", text: "A long, mostly straight road east. Rest and fuel stops can be requested in advance." },
+      { name: "The Dammam area", detail: "Arrival area", text: "Dammam, Dhahran and Al Khobar lie close together, so the exact address matters." },
+      { name: "Dhahran", detail: "Drop-off", text: "Arrival at your building, gate or hotel." },
+    ],
+    note: "A stop is not included unless you request it and we confirm it. We do not promise a particular stop or journey time in advance.",
+  },
+  mapQuery: { from: "Riyadh, Saudi Arabia", to: "Dhahran, Saudi Arabia" },
+  highwayAlt: "The Riyadh to Dammam highway on the way to Dhahran",
+  whoHeading: "Who Uses This Route?",
+  who: [
+    { title: "Energy-sector business travellers", text: "Professionals with meetings and site visits in Dhahran." },
+    { title: "Contractors and engineers", text: "Teams working with companies in the Eastern Province." },
+    { title: "KFUPM visitors and student families", text: "People visiting students, faculty or the campus." },
+    { title: "Ithra visitors", text: "Visitors going to the cultural centre." },
+    { title: "Families", text: "Families travelling to Dhahran with luggage." },
+    { title: "Airport and area travellers", text: "Passengers connecting with the airport or continuing to Dammam or Al Khobar." },
+  ],
+  stepsHeading: "How Booking Works",
+  steps: [
+    { title: "Enter your locations", text: "Pickup and destination." },
+    { title: "Select date and time", text: "The day and time you want to travel." },
+    { title: "Add passengers and luggage", text: "How many people and bags are travelling." },
+    { title: "Continue with your details", text: "Choose the vehicle and add your contact details in the next steps of the form." },
+    { title: "Check and confirm", text: "Our team checks availability and confirms the vehicle, driver and fare before you commit." },
+  ],
+  infoHeading: "Before You Travel",
+  infoIntro: "A few points that make the journey easier.",
+  info: [
+    { title: "Fare", text: "Fares are not published, because each journey is quoted for your request." },
+    { title: "Exact addresses", text: "Send a map pin or landmark for the pickup and drop-off." },
+  ],
+  relatedHeading: "Related Routes and Pages",
+  related: [
+    { name: "Riyadh to Al Khobar", href: "/taxi-saudi-arabia/routes/riyadh-to-al-khobar", text: "A ride to the Gulf coast, next to Dhahran." },
+    { name: "Riyadh to Dammam", href: "/taxi-saudi-arabia/routes/riyadh-to-dammam", text: "The business route to the regional capital." },
+    { name: "Riyadh to Jubail", href: "/taxi-saudi-arabia/routes/riyadh-to-jubail", text: "The industrial city to the north." },
+    { name: "Riyadh to Al Hofuf", href: "/taxi-saudi-arabia/routes/riyadh-to-al-hofuf", text: "A ride east to the Al-Ahsa oasis." },
+    { name: "Riyadh to Hafar Al Batin", href: "/taxi-saudi-arabia/routes/riyadh-to-hafar-al-batin", text: "A ride north-east to the border area." },
+    { name: "Dhahran taxi service", href: "/taxi-saudi-arabia/eastern-province/dhahran", text: "Rides within and around Dhahran." },
+    { name: "King Fahd Airport taxi", href: "/taxi-saudi-arabia/airports/king-fahd-international-airport", text: "Rides to and from the airport." },
+    { name: "Riyadh taxi service", href: "/riyadh-taxi-service", text: "Pickups and rides in Riyadh." },
+  ],
+  faqHeading: "Frequently Asked Questions: Riyadh to Dhahran Taxi",
+  faq: [
+    { q: "How far is Dhahran from Riyadh by road?", a: "About 420 km between the two city centres, by road. This is road distance, not straight-line distance, and it depends on your exact addresses." },
+    { q: "How long does a Riyadh to Dhahran taxi journey take?", a: "Driving takes about 4 hours 15 minutes without stops, in light traffic. Stops, traffic and entry checks add time. We do not promise an arrival time." },
+    { q: "Can I book a private taxi from Riyadh to Dhahran?", a: "Yes. Send your pickup, exact destination, date, time and group size, and we confirm the vehicle, driver and fare before you commit." },
+    { q: "Can I arrange a return taxi from Dhahran to Riyadh?", a: "Yes. Ask for the return in the same request and give us the day and time you want to leave Dhahran." },
+    { q: "Can I request transport to Saudi Aramco?", a: "You can ask for a ride to a named gate or building. Aramco controls its own entry, so we cannot promise access, and we are not an Aramco-approved provider." },
+    { q: "Can a private taxi take me to KFUPM?", a: "Yes, to the campus gate or building you name. Campus entry follows the university's rules, and we are not affiliated with KFUPM." },
+    { q: "Can I book a taxi to Ithra?", a: "Yes. Ithra is in Dhahran. Check the official Ithra website for current programmes and visiting details, since we do not publish schedules or prices." },
+    { q: "Is King Fahd International Airport located in Dhahran?", a: "No. It serves the whole Eastern Province and is in the Dammam area, about 50 km from Dhahran by road (an estimate). It is a separate pickup point." },
+    { q: "Are Dhahran, Dammam and Al Khobar the same city?", a: "No. They are neighbouring cities, each a separate destination. Tell us the exact city, district and building." },
+    { q: "Can I request a suitable vehicle for business travel?", a: "Yes. A sedan, SUV, van or executive car can be requested, depending on your group and luggage. Availability is confirmed for each request." },
+    { q: "Can a driver enter a restricted company or university facility?", a: "Only if the facility allows it. Entry is the operator's decision, so send the gate and your host's details, and we confirm what is possible." },
+    { q: "How do I get a quote for a Riyadh to Dhahran taxi?", a: "Fill in the form on this page with your route, date, time and group size. Our team replies with the vehicle, driver and fare, and you decide whether to go ahead." },
+  ],
+  ctaHeading: "Arrange Your Private Journey from Riyadh to Dhahran",
+  ctaText: "Share your pickup address, exact Dhahran destination, travel date, number of passengers and luggage, and any gate details we need. Our team confirms the vehicle, driver and fare before you commit.",
+  ctaButton: "Request Your Free Quote",
+};
