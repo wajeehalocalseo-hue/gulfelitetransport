@@ -16,7 +16,7 @@ export function RichMadinahHero({ page, rich }: { page: PlacePage; rich: RichRou
       <Lattice tone="light" />
       <div aria-hidden="true" className="absolute -left-24 top-10 h-72 w-72 rounded-full bg-accent/20 blur-3xl" />
       <div className={`${wrap} relative py-14 sm:py-20`}>
-        <div className="[&_a]:text-navy/70 [&_li]:text-navy/70 [&_nav]:text-navy/70"><Breadcrumbs items={crumbs} /></div>
+        <div className="[&_a]:text-navy/70 [&_li]:text-navy/70 [&_nav]:text-navy/70 [&_span]:text-navy"><Breadcrumbs items={crumbs} /></div>
         <p className="mt-8 inline-flex items-center gap-2 rounded-full bg-navy px-4 py-1.5 text-xs font-extrabold uppercase tracking-[0.18em] text-accent">{rich.eyebrow}</p>
         <h1 className="font-display mt-5 max-w-3xl text-4xl leading-[1.1] sm:text-5xl lg:text-[3.3rem]">{page.h1}</h1>
         <div className="mt-6 flex max-w-3xl gap-4">

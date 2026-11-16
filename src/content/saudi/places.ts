@@ -406,7 +406,7 @@ export const routes: Route[] = [
     id: "riyadh-to-al-kharj",
     from: "riyadh",
     to: "al-kharj",
-    km: 95,
+    km: 85,
     about:
       "Riyadh to Al Kharj is a short commuter route south-east of the capital. It is used daily by workers and by visitors going to the farms and industrial areas around Al Kharj.",
     riders: ["Commuters between Al Kharj and Riyadh", "Contractors working in Al Kharj", "Families visiting relatives"],
