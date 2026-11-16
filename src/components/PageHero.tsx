@@ -1,6 +1,8 @@
 import type { ReactNode } from "react";
 import Breadcrumbs from "./Breadcrumbs";
 import { BookingCard } from "./HeroBooking";
+import { WhatsAppIcon, waPill } from "./WhatsApp";
+import { site, whatsappUrl } from "@/lib/site";
 
 export default function PageHero({
   crumbs,
@@ -19,6 +21,7 @@ export default function PageHero({
   /** Booking form on the right of the hero. Pass `false` where the page itself is the form. */
   booking?: false | { service?: string; topic?: string };
 }) {
+  const wa = whatsappUrl(`Hello ${site.name}, I would like to book a ride.`);
   const right = aside ?? (booking === false ? null : <BookingCard service={booking.service} topic={booking.topic} className="w-full max-w-xl justify-self-end lg:max-w-none" />);
   return (
     <section className="bg-navy text-white">
@@ -31,7 +34,13 @@ export default function PageHero({
             {h1}
           </h1>
           {lead && <p className="mt-5 max-w-2xl text-lg leading-8 text-white/80">{lead}</p>}
-          {children && <div className="mt-8">{children}</div>}
+          {children ? (
+            <div className="mt-8">{children}</div>
+          ) : wa ? (
+            <a href={wa} target="_blank" rel="noopener noreferrer" className={`${waPill} mt-8`}>
+              <WhatsAppIcon className="h-5 w-5" /> Book on WhatsApp
+            </a>
+          ) : null}
         </div>
         {right}
       </div>

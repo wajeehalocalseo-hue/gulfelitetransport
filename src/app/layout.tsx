@@ -8,6 +8,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import SiteChrome from "@/components/SiteChrome";
 import StickyCta from "@/components/StickyCta";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import AnalyticsEvents from "@/components/AnalyticsEvents";
 import "./globals.css";
 
@@ -76,6 +77,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SiteChrome>
           <SiteFooter />
           <StickyCta />
+          <FloatingWhatsApp />
         </SiteChrome>
         <SiteChrome>
         <Script id="gtm" strategy="afterInteractive">

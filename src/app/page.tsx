@@ -147,7 +147,7 @@ export default function Home() {
             )}
 
           </div>
-          <div className="mt-10 w-full lg:mt-auto">
+          <div className="mt-12 w-full lg:mt-auto lg:pt-12">
             <TripBar />
             <p className="mt-4 text-sm text-white/85">
               Moving freight, equipment or a fleet?{" "}

@@ -5,6 +5,16 @@
  * buttons, schema fields and page sections are hidden automatically instead of
  * showing made-up information.
  */
+/** Social profile links. Leave a link empty until the real account exists: its icon stays hidden until then. */
+const social = {
+  facebook: "", // e.g. "https://www.facebook.com/yourpage"
+  instagram: "", // e.g. "https://www.instagram.com/yourhandle"
+  tiktok: "", // e.g. "https://www.tiktok.com/@yourhandle"
+  x: "", // e.g. "https://x.com/yourhandle"
+  youtube: "", // e.g. "https://www.youtube.com/@yourchannel"
+  linkedin: "", // e.g. "https://www.linkedin.com/company/yourcompany"
+};
+
 export const site = {
   name: "Gulf Elite Transport",
   // Registered company name, used in the footer and in structured data.
@@ -23,7 +33,8 @@ export const site = {
 
   // --- Verified facts (leave empty until confirmed) ---
   serviceAreas: ["Saudi Arabia"] as string[], // only confirmed areas
-  socialProfiles: [] as string[], // full URLs of real profiles
+  social,
+  socialProfiles: Object.values(social).filter((u) => u !== "") as string[], // full URLs of real profiles, built from `social` above
   certifications: ["Licensed and insured"] as string[], // confirmed by the owner
   // How the "Get a quote" buttons reach you. "form" sends visitors to the quote form on the page.
   // When the WhatsApp number above is verified, change this to "whatsapp" and every quote button switches at once.
@@ -43,6 +54,14 @@ export const contactConfigured = {
   whatsapp: site.whatsapp !== "",
   email: site.email !== "",
 };
+
+/** The WhatsApp number written for people, for example +966 57 985 8464. */
+export const whatsappDisplay = (() => {
+  const d = site.whatsapp;
+  if (!d) return "";
+  const m = d.match(/^966(\d{2})(\d{3})(\d{4})$/);
+  return m ? `+966 ${m[1]} ${m[2]} ${m[3]}` : `+${d}`;
+})();
 
 export const telUrl = site.phone ? `tel:${site.phone.replace(/[^+\d]/g, "")}` : null;
 

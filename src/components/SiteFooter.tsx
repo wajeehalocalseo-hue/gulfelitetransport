@@ -5,8 +5,9 @@ import { cities } from "@/content/saudi/cities";
 import { cityHref } from "@/content/saudi/paths";
 import { routes } from "@/content/saudi/places";
 import { groups, services } from "@/content/services";
-import { site, telUrl, whatsappUrl } from "@/lib/site";
+import { site, telUrl, whatsappDisplay, whatsappUrl } from "@/lib/site";
 import { WhatsAppIcon } from "./WhatsApp";
+import SocialLinks from "./SocialLinks";
 
 const BASE = "/taxi-saudi-arabia";
 const head = "text-sm font-extrabold uppercase tracking-[0.14em] text-white";
@@ -18,15 +19,14 @@ const POPULAR = ["riyadh-to-jeddah", "riyadh-to-makkah", "riyadh-to-madinah", "r
 
 export default function SiteFooter() {
   const wa = whatsappUrl("Hello, I would like to request a ride.");
-  // Contact tiles show only the details that exist in site.ts, so nothing in the footer is a dead end.
-  const tiles = [
-    site.address && { icon: "building", label: "Address", value: site.address, href: undefined as string | undefined },
+  // Contact rows show only the details that exist in site.ts, so nothing in the footer is a dead end.
+  const contacts = [
+    site.address && { icon: "building", label: "Headquarters", value: site.address, href: undefined as string | undefined },
+    wa && { icon: "whatsapp", label: telUrl ? "WhatsApp" : "WhatsApp / Phone", value: whatsappDisplay, href: wa },
     telUrl && { icon: "phone", label: "Phone", value: site.phone, href: telUrl },
-    wa && { icon: "chat", label: "WhatsApp", value: "Message us", href: wa },
-    site.email && { icon: "mail", label: "Email", value: site.email, href: `mailto:${site.email}` },
+    site.email && { icon: "mail", label: "Email bookings", value: site.email, href: `mailto:${site.email}` },
     site.hours && { icon: "calendar", label: "Hours", value: site.hours, href: undefined as string | undefined },
   ].filter(Boolean) as { icon: string; label: string; value: string; href?: string }[];
-
   return (
     <footer className="bg-[#0a2018] pb-24 text-white/70 md:pb-0">
       {/* Call-to-action band */}
@@ -52,77 +52,41 @@ export default function SiteFooter() {
         </div>
       </div>
 
-      {/* Brand and contact */}
-      <div className="mx-auto max-w-7xl px-5 pt-14">
-        <div className="grid gap-10 lg:grid-cols-[1.1fr_1.4fr] lg:items-start">
-          <div>
-            <Link href="/" aria-label="Gulf Elite Transport, home" className="inline-block rounded-lg">
-              <Logo tone="dark" />
-            </Link>
-            <p className="mt-5 max-w-md text-sm leading-7">
-              Taxi and cab rides, freight and cargo, passenger transport, equipment moving, contract fleet, delivery,
-              distribution and storage in Saudi Arabia, for individuals and businesses.
-            </p>
-            {site.socialProfiles.length > 0 && (
-              <ul className="mt-5 flex gap-3" aria-label="Social profiles">
-                {site.socialProfiles.map((u) => (
-                  <li key={u}>
-                    <a href={u} target="_blank" rel="noopener noreferrer me" aria-label={new URL(u).hostname.replace("www.", "")} className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-accent hover:text-navy">
-                      <Icon name="globe" className="h-4 w-4" />
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-          <ul className="grid gap-3 sm:grid-cols-2">
-            {site.certifications.map((c) => (
-              <li key={c} className="flex items-center gap-4 rounded-2xl bg-white/5 p-4 ring-1 ring-white/10">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent text-navy"><Icon name="shield" className="h-5 w-5" /></span>
-                <span>
-                  <span className="block text-xs font-bold uppercase tracking-wider text-white/50">Compliance</span>
-                  <span className="block font-bold text-white">{c}</span>
-                </span>
-              </li>
-            ))}
-            {tiles.length === 0 && (
-              <li className="sm:col-span-2">
-                <Link href="/contact" className="flex items-center gap-4 rounded-2xl bg-white/5 p-4 ring-1 ring-white/10 transition hover:ring-accent">
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent text-navy"><Icon name="mail" className="h-5 w-5" /></span>
-                  <span>
-                    <span className="block text-xs font-bold uppercase tracking-wider text-white/50">Get in touch</span>
-                    <span className="block font-bold text-white">Contact us or send a ride request</span>
-                  </span>
-                </Link>
-              </li>
-            )}
-            {tiles.map((t) => {
+      {/* Brand, contact, link lists and compliance */}
+      <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 sm:grid-cols-2 lg:grid-cols-[1.25fr_0.85fr_0.95fr_1.35fr_1fr]">
+        <div className="sm:col-span-2 lg:col-span-1">
+          <Link href="/" aria-label="Gulf Elite Transport, home" className="inline-block rounded-lg">
+            <Logo tone="dark" />
+          </Link>
+          <p className="mt-5 max-w-sm text-sm leading-7">
+            Taxi and cab rides, freight and cargo, passenger transport, equipment moving, contract fleet, delivery,
+            distribution and storage in Saudi Arabia, for individuals and businesses.
+          </p>
+          <ul className="mt-6 space-y-3">
+            {contacts.map((t) => {
               const inner = (
                 <>
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent text-navy"><Icon name={t.icon} className="h-5 w-5" /></span>
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/5 text-accent ring-1 ring-white/15">{t.icon === "whatsapp" ? <WhatsAppIcon className="h-5 w-5 text-[#25D366]" /> : <Icon name={t.icon} className="h-5 w-5" />}</span>
                   <span className="min-w-0">
-                    <span className="block text-xs font-bold uppercase tracking-wider text-white/50">{t.label}</span>
+                    <span className="block text-[11px] font-extrabold uppercase tracking-[0.14em] text-white/55">{t.label}</span>
                     <span className="block break-words font-bold text-white">{t.value}</span>
                   </span>
                 </>
               );
-              const cls = "flex items-center gap-4 rounded-2xl bg-white/5 p-4 ring-1 ring-white/10";
               return (
                 <li key={t.label}>
                   {t.href ? (
-                    <a href={t.href} {...(t.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})} className={`${cls} transition hover:ring-accent`}>{inner}</a>
+                    <a href={t.href} {...(t.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})} className="flex items-center gap-4 transition hover:text-accent">{inner}</a>
                   ) : (
-                    <div className={cls}>{inner}</div>
+                    <div className="flex items-center gap-4">{inner}</div>
                   )}
                 </li>
               );
             })}
           </ul>
+          <SocialLinks className="mt-6" />
         </div>
-      </div>
 
-      {/* Link lists */}
-      <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_1.7fr_0.8fr]">
         <nav aria-label="Service areas">
           <p className={head}>Service Areas</p>
           <ul className="mt-5 space-y-2.5 text-sm">
@@ -163,7 +127,7 @@ export default function SiteFooter() {
           </div>
         </nav>
 
-        <nav aria-label="Company">
+        <div>
           <p className={head}>Company</p>
           <ul className="mt-5 space-y-2.5 text-sm">
             <li><Link href="/about" className={link}>About Us</Link></li>
@@ -172,11 +136,21 @@ export default function SiteFooter() {
             <li><Link href="/services" className={link}>All Services</Link></li>
             <li><Link href="/contact" className={link}>Contact Us</Link></li>
             <li><Link href="/book" className={link}>Book a ride</Link></li>
-            <li><Link href="/#quote" className={link}>Request a quote</Link></li>
           </ul>
-        </nav>
+          <ul className="mt-6 space-y-3">
+            {site.certifications.map((c) => (
+              <li key={c} className="rounded-2xl bg-white/5 p-4 ring-1 ring-white/10">
+                <span className="block text-[11px] font-extrabold uppercase tracking-[0.14em] text-white">{c.replace(/ and /i, " & ")}</span>
+                <span className="mt-1 block text-xs leading-5 text-white/55">Gulf Elite Transport Group operates as a licensed and insured transport service.</span>
+              </li>
+            ))}
+            <li className="rounded-2xl bg-white/5 p-4 ring-1 ring-white/10">
+              <span className="block text-[11px] font-extrabold uppercase tracking-[0.14em] text-white">Fare confirmed first</span>
+              <span className="mt-1 block text-xs leading-5 text-white/55">The vehicle, driver and fare are confirmed with you before you commit.</span>
+            </li>
+          </ul>
+        </div>
       </div>
-
       {/* Bottom bar */}
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-6 text-xs text-white/55 md:flex-row md:items-center md:justify-between">
@@ -186,15 +160,6 @@ export default function SiteFooter() {
             <li><Link href="/terms-and-conditions" className="hover:text-accent">Terms &amp; Conditions</Link></li>
             <li>Fares, journey times and availability are confirmed for each request.</li>
           </ul>
-          {wa ? (
-            <a href={wa} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-extrabold text-navy hover:brightness-95">
-              <Icon name="chat" className="h-4 w-4" /> Book via WhatsApp
-            </a>
-          ) : (
-            <Link href="/book" className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-extrabold text-navy hover:brightness-95">
-              Book a ride
-            </Link>
-          )}
         </div>
       </div>
     </footer>
