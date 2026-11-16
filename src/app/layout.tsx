@@ -9,6 +9,7 @@ import SiteFooter from "@/components/SiteFooter";
 import SiteChrome from "@/components/SiteChrome";
 import StickyCta from "@/components/StickyCta";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
+import PromoBar from "@/components/PromoBar";
 import AnalyticsEvents from "@/components/AnalyticsEvents";
 import "./globals.css";
 
@@ -71,6 +72,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Skip to content
         </a>
         <SiteChrome>
+          <PromoBar />
           <SiteHeader />
         </SiteChrome>
         {children}
