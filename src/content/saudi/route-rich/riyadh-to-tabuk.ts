@@ -1,0 +1,250 @@
+import type { RichRoute } from "../rich-types";
+
+/**
+ * Riyadh to Tabuk: the fully designed route page (northern frontier variant, in the site's green and gold palette).
+ * Distance and driving time are estimates from OpenStreetMap routing between the Riyadh centre and the Tabuk city centre
+ * (reviewed November 2026: 1,349 km / 826 min Riyadh to Tabuk, 1,351 km / 830 min Tabuk to Riyadh, about 13 hr 50 min). The existing page
+ * figures, about 1,350 km and about 13 hr 50 min, are retained because they match. Other routing references (about 1,356 km, 12 hr 53 min to
+ * 13 hr 54 min) use other endpoints and speed models and are not averaged in.
+ * Corridor from the routing steps: Highway 65 (King Fahd Road, the Qassim Expressway past Buraydah, then to Hail, about 600 km together), the Hail to
+ * Al Jawf expressway section of Highway 65 (about 300 km), Highway 80 west (about 240 km) and Route 15 into Tabuk. Al Majma'ah and other small
+ * towns were not confirmed on this alignment, so they are not named. AlUla, NEOM and Red Sea towns are separate destinations.
+ * From the Tabuk city centre (road distance, estimates): Tabuk Castle about 2 km, Prince Sultan bin Abdulaziz International Airport (TUU) about 12 km,
+ * University of Tabuk about 13 km, Jabal Al-Lawz area about 163 km, Sharma about 175 km, Duba about 193 km, Haql about 231 km, Tayma about 263 km.
+ * Wadi Disah, the Hisma Desert, Umluj and NEOM sites were not located reliably, so no distances are given for them. Landmark descriptions are
+ * general public knowledge; tickets, hours and access are not stated. No fares, ratings, reviews, vehicle specifications, flight tracking,
+ * NEOM or project partnerships or site-access guarantees. Photos are optional: see ImageSlot.
+ */
+export const tabukSeo = {
+  title: "Riyadh to Tabuk Taxi | Private Long-Distance Transfer",
+  description: "Book a private taxi from Riyadh to Tabuk. Check the road distance and travel time, then request a one-way or return transfer and confirm your fare first.",
+  h1: "Private Taxi from Riyadh to Tabuk",
+  lead: "A private long-distance transfer from Riyadh to Tabuk, in the far north-west, for families, business and project travel, and visitors to the region. Share your pickup, exact Tabuk destination and group size, and we confirm the vehicle, driver and fare before you commit.",
+  directAnswer:
+    "Gulf Elite Transport Group accepts private transport requests between Riyadh and Tabuk, the main city of the north-west, about 1,350 km by road. The drive takes about 13 hours 50 minutes without stops, so it needs a planned departure and rest breaks, and an overnight stop is an option if you prefer to split the journey. The road runs north-west through Qassim and Hail, then west to Tabuk. The service is used for family visits, business and project travel, airport connections and regional journeys, one way or with a return. Send your pickup address, exact destination in Tabuk, the date, time, and the number of passengers and bags. Our team checks vehicle and driver availability and confirms the vehicle, driver and fare with you before you book. Fares are not listed here, because each journey is quoted for your request.",
+};
+
+export const tabukRich: RichRoute = {
+  fromName: "Riyadh",
+  toName: "Tabuk",
+  toHref: "/taxi-saudi-arabia/tabuk-region/tabuk",
+  variant: "tabuk",
+  imageFolder: "riyadh-to-tabuk",
+  eyebrow: "Private intercity transfer · Riyadh to the northern frontier",
+  heroPoints: ["Private vehicle for family, business or project travel", "City, airport or regional destination: tell us which", "One-way and return requests", "Vehicle, driver and fare confirmed before you commit"],
+  heroAlt: "A private car on the long north-west road from Riyadh towards Tabuk",
+  facts: [
+    { label: "Origin", value: "Riyadh" },
+    { label: "Destination", value: "Tabuk, Tabuk Region" },
+    { label: "Approximate road distance", value: "About 1,350 km" },
+    { label: "Approximate driving time", value: "About 13 hr 50 min, without stops" },
+    { label: "Direction", value: "North-west, via Qassim and Hail" },
+    { label: "Service", value: "Private intercity transport, both directions" },
+  ],
+  factsNote: "Approximate road distance between the Riyadh centre and the Tabuk city centre, from OpenStreetMap routing, in light traffic and without stops. Other routing sources give slightly different figures, from about 1,350 to 1,356 km and from about 12 hr 55 min to 13 hr 55 min, depending on the start and end points. Driving time is not door-to-door time: rest, meals, prayer, fuel, traffic and weather add to it. They are not a promised arrival time.",
+  introHeading: "Riyadh to Tabuk Taxi: A Private Transfer Across the Kingdom",
+  intro: [
+    "Tabuk lies in the far north-west of Saudi Arabia, in the north-west corner of the country, on the way to the Red Sea coast and the Jordanian border. It is the main city of Tabuk Region. From Riyadh the road runs north-west for about 1,350 km, through Qassim and Hail, and then west across the northern desert.",
+    "Most travellers fly, so a road transfer is mainly for families, groups, people with heavy luggage and passengers who need a vehicle at the other end. A private transfer lets you agree the pickup address, the vehicle and the departure time in advance, and be taken to an exact hotel, home or the airport.",
+  ],
+  terms: {
+    heading: "Tabuk City and Tabuk Region: What Is What",
+    intro: "Tabuk is a city, and also the name of a very large region. The region's best-known places are far from the city, so each one is a separate journey.",
+    items: [
+      { title: "Tabuk city", text: "The main destination for this route. The old town, the castle, the railway station, hotels, the university and the airport are in or near it." },
+      { title: "Tabuk Region", text: "A huge area of the north-west that includes the Red Sea coast, mountains, desert valleys and oases. It is much larger than the city." },
+      { title: "Wadi Disah, Hisma and Jabal Al-Lawz", text: "Natural destinations in the region. They are not in the city, and each needs its own onward plan." },
+      { title: "Duba, Haql, Sharma and Umluj", text: "Coastal towns and areas on the Red Sea and the Gulf of Aqaba. Separate destinations, not other names for Tabuk." },
+      { title: "NEOM", text: "A very large development area in the wider north-west. A Tabuk city booking does not include it, and access to project sites is controlled." },
+      { title: "Prince Sultan bin Abdulaziz International Airport (TUU)", text: "The airport serving Tabuk, about 12 km from the city centre by road (an estimate). It is a separate drop-off." },
+    ],
+    note: "A standard Tabuk city booking does not include regional excursions. Each extra destination is a separate request.",
+  },
+  whyHeading: "Why Take a Private Taxi from Riyadh to Tabuk?",
+  why: [
+    { title: "A private ride", text: "The car is for you and your group only, not shared with other passengers." },
+    { title: "Direct intercity travel", text: "One vehicle from your Riyadh address to your Tabuk destination." },
+    { title: "Built for groups and luggage", text: "Passengers and bags planned together, with breaks agreed in advance." },
+    { title: "The right vehicle for the load", text: "A sedan, SUV, van or executive car, chosen for passengers and luggage." },
+    { title: "One-way and return requests", text: "Ask for the ride back from Tabuk to Riyadh in the same request." },
+    { title: "Fare confirmed before you commit", text: "You see the vehicle, driver and fare for your request, and you decide whether to go ahead." },
+  ],
+  route: {
+    heading: "The North-West Road from Riyadh to Tabuk",
+    intro: "Routing maps show the journey leaving Riyadh on Highway 65, passing Buraydah in Qassim and continuing to Hail. The road then runs north on the Hail to Al Jawf expressway, turns west on Highway 80 and joins Route 15 into Tabuk. The driver chooses the best road on the day.",
+    stops: [
+      { name: "Riyadh", detail: "Start · 0 km", text: "Departure from your agreed pickup address." },
+      { name: "Buraydah, Qassim", detail: "About 355 km", text: "The main city of Qassim, on the first long stage. A useful point for a break." },
+      { name: "Hail", detail: "About 614 km", text: "A large northern city, around the middle of the journey." },
+      { name: "Highway 80 west", detail: "Final long stage", text: "A long road west across the northern desert, towards Tabuk." },
+      { name: "Tabuk", detail: "About 1,350 km", text: "Arrival at your hotel, home or the airport." },
+    ],
+    note: "A stop is not included unless you request it and we confirm it. We do not name rest stops or promise facilities. This route is to Tabuk city. AlUla, Duba and NEOM are on other roads.",
+  },
+  heritage: {
+    heading: "Arriving in Tabuk: City Landmarks",
+    intro: "Tabuk's old town holds its best-known heritage, close to the city centre. Each is a different drop-off, so give us a street, hotel or map pin.",
+    items: [
+      { name: "Tabuk Castle", detail: "About 2 km from the centre", text: "A historic fort in the old town, from the Ottoman period. Check its current visiting arrangements before you go." },
+      { name: "Al-Tawbah Mosque", detail: "Old town", text: "A historic mosque in the old town, associated with the Prophet's expedition to Tabuk. It is a place of worship, so dress and behave accordingly." },
+      { name: "Hejaz Railway Station", detail: "A restored station", text: "The station of the historic Hejaz Railway, restored for visitors. Check opening details." },
+      { name: "Ain Al-Sukkar", detail: "A historic spring", text: "An old water source in the city. Ask us for the exact entrance." },
+      { name: "University of Tabuk", detail: "About 13 km from the centre", text: "A major campus on the edge of the city, about 13 km from the centre by road (an estimate)." },
+    ],
+    note: "A precise address works better than a broad name like \"Tabuk\". We do not list opening hours or tickets, and a taxi booking does not include a guide.",
+    slot: "old-town",
+    alt: "The historic fort in the old town of Tabuk",
+  },
+  eastern: {
+    heading: "Beyond Tabuk City: Regional Journeys",
+    intro: "Some travellers use Tabuk as a base for journeys across the region. These are separate destinations, each with its own route, availability and fare. The bars show road distance from the city centre, as estimates.",
+    items: [
+      { name: "Jabal Al-Lawz area", detail: "About 163 km", text: "A high mountain near the Jordanian border, in the north-west. A separate journey, and access can be controlled." },
+      { name: "Sharma", detail: "About 175 km", text: "A coastal area on the Red Sea coast, in the north-west." },
+      { name: "Duba", detail: "About 193 km", text: "A coastal town on the Red Sea, a separate destination from Tabuk city." },
+      { name: "Haql", detail: "About 231 km", text: "A town on the Gulf of Aqaba, near the border, in the far north-west. Access near the border is controlled." },
+      { name: "Tayma", detail: "About 263 km", text: "An ancient oasis town in the east of the region, with archaeological heritage." },
+      { name: "Wadi Disah", detail: "In the region", text: "A sandstone canyon valley. We have not verified its distance. It is a separate trip and often needs a suitable vehicle." },
+      { name: "Hisma Desert", detail: "In the region", text: "A desert of sandstone mountains. A separate trip that can involve rough ground." },
+      { name: "NEOM-related destinations", detail: "Wider north-west", text: "A large development area. We do not promise access, and entry to project sites is controlled by the operators." },
+    ],
+    note: "A regional drop-off is not included in the Tabuk city fare. We confirm the route, availability and fare for each. We do not offer off-road driving as standard.",
+  },
+  business: {
+    heading: "Project, Border and Controlled Areas",
+    intro: "Parts of the north-west are controlled, including project sites and areas near the border. Access is decided by the operators and the authorities.",
+    items: [
+      { title: "Say where you are going", text: "Name the site, the village or the address, and send a map pin." },
+      { title: "Confirm access yourself", text: "Check with the host or the relevant authority that you may enter, before the day." },
+      { title: "Carry your documents", text: "Bring the identification and any permission the site or checkpoint needs." },
+      { title: "Expect checkpoints", text: "Routine checks add time on roads in the north-west." },
+      { title: "Plan the return separately", text: "Confirm the return pickup point and time with us." },
+      { title: "Ask before you plan", text: "If a place is a project or border area, ask us early so we confirm what is possible." },
+    ],
+    note: "A taxi booking does not give permission to enter restricted, private or project-controlled sites. We have no special partnership or access with any project, and we cannot promise entry.",
+  },
+  airport: {
+    heading: "Tabuk Airport Transfers: Prince Sultan bin Abdulaziz International Airport (TUU)",
+    intro: "Prince Sultan bin Abdulaziz International Airport (TUU) serves Tabuk. This website also lists it as Tabuk Regional Airport. It is about 12 km from the city centre by road (an estimate), so it is a separate drop-off from the city.",
+    items: [
+      { title: "A separate location", text: "The airport is not in the city centre. A ride to or from it has its own timing, and depends on your destination." },
+      { title: "Not Riyadh's airport", text: "King Khalid International Airport (RUH) is in Riyadh. TUU is the airport for Tabuk. Check which one your ticket uses." },
+      { title: "What to send us", text: "Give your flight number, date, time and terminal, the number of passengers and bags, and your Tabuk destination." },
+    ],
+    note: "The time depends on the terminal, your destination and traffic. Pickup arrangements are confirmed with you for each request. We do not promise flight tracking, delay monitoring or a fixed waiting time.",
+    href: "/taxi-saudi-arabia/airports/tabuk-regional-airport",
+    slot: "airport",
+    alt: "Prince Sultan bin Abdulaziz International Airport (TUU), the airport serving Tabuk",
+  },
+  cities: {
+    heading: "On the Road: Qassim and Hail",
+    intro: "The road passes two large cities. A break there is a request we plan with you. They are separate destinations, each with its own fare.",
+    items: [
+      { name: "Buraydah, Qassim", detail: "About 355 km from Riyadh", text: "The main city of Qassim. See the Riyadh to Buraydah ride.", href: "/taxi-saudi-arabia/routes/riyadh-to-buraydah" },
+      { name: "Hail", detail: "About 614 km from Riyadh", text: "A large northern city. See the Riyadh to Hail ride.", href: "/taxi-saudi-arabia/routes/riyadh-to-hail" },
+      { name: "AlUla", detail: "A separate destination", text: "A heritage destination in Madinah Region, on a different road. See the Riyadh to AlUla ride.", href: "/taxi-saudi-arabia/routes/riyadh-to-alula" },
+      { name: "Sakaka and Arar", detail: "Further north", text: "Separate northern cities. See the Riyadh to Sakaka ride.", href: "/taxi-saudi-arabia/routes/riyadh-to-sakaka" },
+    ],
+    note: "A drop-off in another city is not included in the Tabuk fare.",
+  },
+  umrah: {
+    heading: "Families and Long-Distance Comfort",
+    intro: "Many passengers on this road are families visiting relatives, or groups with heavy luggage. A very long drive goes better when it is planned for.",
+    items: [
+      { title: "Departure time", text: "Plan an early start, so most of the driving is in daylight." },
+      { title: "Breaks", text: "Tell us if you need regular breaks, or have children or older passengers." },
+      { title: "Luggage and equipment", text: "Count every bag and item, so the vehicle fits the group." },
+      { title: "Overnight stop", text: "An overnight stop is optional and not required. If you want one, it is arranged and confirmed separately." },
+    ],
+    note: "We do not promise child seats or specific luggage space unless we confirm them with you for your request.",
+    slot: "family",
+    alt: "A family travelling together by private car from Riyadh to Tabuk",
+  },
+  vehiclesHeading: "Choose a Vehicle for a Very Long Journey",
+  vehiclesIntro: "The vehicle depends on the number of passengers, the amount of luggage, the date, your requested category and availability. On a trip this long, comfort matters. We confirm the vehicle with you before you book.",
+  vehicles: [
+    { slot: "sedan", homePhoto: "sedan", name: "Sedan", best: "One or two travellers with light luggage", text: "A private car for a small group. Suitable when you travel light.", alt: "Private sedan for a Riyadh to Tabuk trip" },
+    { slot: "suv", homePhoto: "suv", name: "SUV", best: "Families and extra luggage", text: "More room for passengers and bags. Suitable for a family on a long road journey.", alt: "Private SUV for a family travelling from Riyadh to Tabuk" },
+    { slot: "van", homePhoto: "family-van", name: "Van or minibus", best: "Groups and equipment", text: "For groups who want to travel together with their luggage or equipment. Give us the group size and we confirm what fits.", alt: "Private van for a group travelling from Riyadh to Tabuk" },
+    { slot: "executive", name: "Executive car", best: "Formal arrivals", text: "A chauffeur-driven premium car for guests who want extra comfort. Subject to availability.", alt: "Executive car for a Riyadh to Tabuk transfer" },
+  ],
+  dropHeading: "Where in Tabuk Are You Going?",
+  dropIntro: "Send the exact address, hotel or site, and a map pin, and we confirm the best drop-off point with you.",
+  drops: [
+    { name: "Hotels and homes", text: "Name the district and send a pin." },
+    { name: "Old town landmarks", text: "Name the castle, the mosque, the station or the street." },
+    { name: "Airport or region", text: "Say which. TUU, Duba, Tayma and Wadi Disah are each a separate journey." },
+  ],
+  dropAlt: "Tabuk and the northern desert, the destination of a private taxi from Riyadh",
+  pickupHeading: "Common Pickup Areas in Riyadh",
+  pickupIntro: "Journeys start from your own address. Send the exact address or a map pin when you request a quote.",
+  pickups: [
+    { name: "Olaya", text: "Hotels, offices and apartments in central Riyadh.", href: "/riyadh-taxi-service/olaya-taxi-service" },
+    { name: "Al Malaz", text: "An established district in the east of central Riyadh.", href: "/riyadh-taxi-service/al-malaz-taxi-service" },
+    { name: "Al Nakheel", text: "A residential district in the north-west of the city.", href: "/riyadh-taxi-service/al-nakheel-taxi-service" },
+    { name: "King Khalid International Airport (RUH)", text: "The main airport, in the north. Send your flight number and terminal.", href: "/taxi-saudi-arabia/airports/king-khalid-international-airport" },
+    { name: "Hotels and homes", text: "Any hotel, apartment or house in Riyadh." },
+  ],
+  pickupAlt: "Riyadh skyline where private transfers to Tabuk begin",
+  planHeading: "Planning Your Riyadh to Tabuk Journey",
+  plan: [
+    { title: "Distance and time", text: "The road is about 1,350 km, about 13 hours 50 minutes of driving without stops. These are estimates. With rest, meals and prayer breaks, plan for roughly 15 to 16 hours door to door." },
+    { title: "Departure and breaks", text: "Start early and tell us when you want to stop. We do not name rest stops or promise facilities." },
+    { title: "Passengers and luggage", text: "Count every passenger and every bag, so the vehicle has room for the group." },
+  ],
+  mapQuery: { from: "Riyadh, Saudi Arabia", to: "Tabuk, Saudi Arabia" },
+  highwayAlt: "The highway from Riyadh to Tabuk across Qassim and Hail",
+  whoHeading: "Who Travels This Route?",
+  who: [
+    { title: "Families visiting relatives", text: "Families travelling to Tabuk for a stay." },
+    { title: "Travellers with heavy luggage", text: "Groups moving or carrying a lot of bags." },
+    { title: "Business and project travellers", text: "Professionals travelling to the north-west." },
+    { title: "Travellers needing a vehicle at the end", text: "People who want a private car for the whole trip." },
+    { title: "Airport passengers", text: "Passengers connecting with TUU." },
+    { title: "People arranging a return", text: "Travellers who also need the ride back to Riyadh." },
+  ],
+  stepsHeading: "How Booking Works",
+  steps: [
+    { title: "Enter your locations", text: "Pickup and drop-off addresses." },
+    { title: "Select date and time", text: "The day and time you want to travel." },
+    { title: "Add passengers and luggage", text: "How many people and bags are travelling." },
+    { title: "Continue with your details", text: "Choose the vehicle and add your contact details in the next steps of the form." },
+    { title: "Check and confirm", text: "Our team checks availability and confirms the vehicle, driver and fare before you commit." },
+  ],
+  infoHeading: "Before You Travel",
+  infoIntro: "A few points that make a long journey easier.",
+  info: [
+    { title: "Fare", text: "Fares are not published, because each journey is quoted for your request." },
+    { title: "Exact addresses", text: "Send a map pin or landmark for the pickup and drop-off." },
+    { title: "Regional trips", text: "Regional drop-offs are separate requests." },
+  ],
+  relatedHeading: "Related Routes and Pages",
+  related: [
+    { name: "Riyadh to Hail", href: "/taxi-saudi-arabia/routes/riyadh-to-hail", text: "The northern city on the way to Tabuk." },
+    { name: "Riyadh to Buraydah", href: "/taxi-saudi-arabia/routes/riyadh-to-buraydah", text: "The main city of Qassim, on the first stage." },
+    { name: "Riyadh to AlUla", href: "/taxi-saudi-arabia/routes/riyadh-to-alula", text: "A long ride to the north-west heritage destination." },
+    { name: "Riyadh to Sakaka", href: "/taxi-saudi-arabia/routes/riyadh-to-sakaka", text: "A long ride to the far north." },
+    { name: "Riyadh to Arar", href: "/taxi-saudi-arabia/routes/riyadh-to-arar", text: "A long ride to the northern border region." },
+    { name: "Tabuk taxi service", href: "/taxi-saudi-arabia/tabuk-region/tabuk", text: "Rides within and around Tabuk." },
+    { name: "Tabuk airport taxi", href: "/taxi-saudi-arabia/airports/tabuk-regional-airport", text: "Transfers to and from TUU." },
+    { name: "Riyadh taxi service", href: "/riyadh-taxi-service", text: "Pickups and rides in Riyadh." },
+  ],
+  faqHeading: "Frequently Asked Questions: Riyadh to Tabuk Taxi",
+  faq: [
+    { q: "How far is Tabuk from Riyadh by road?", a: "About 1,350 km between the two city centres. The exact distance depends on your pickup and your Tabuk destination." },
+    { q: "How long does a private taxi from Riyadh to Tabuk take?", a: "Driving takes about 13 hours 50 minutes without stops, in light traffic. Breaks, meals, prayer and traffic add time. We do not promise an arrival time." },
+    { q: "Can I book a private car from Riyadh to Tabuk?", a: "Yes. Send your pickup, exact destination, date, time and group size, and we confirm the vehicle, driver and fare before you commit." },
+    { q: "Can I arrange a return taxi from Tabuk to Riyadh?", a: "Yes. Ask for the return in the same request and give us the day and time you want to leave Tabuk." },
+    { q: "Can I book a transfer to Prince Sultan bin Abdulaziz International Airport?", a: "Yes, as a request. The airport code is TUU, and it is about 12 km from the city centre (an estimate). Send your flight number and time. We do not promise flight tracking." },
+    { q: "Can I request pickup from a hotel or residential address?", a: "Yes. Give the exact address or a map pin, in Riyadh and in Tabuk, and we confirm the pickup with you." },
+    { q: "Can I travel with family and luggage?", a: "Yes. Tell us how many passengers and bags, and we confirm a vehicle that fits. An SUV or a van suits most families." },
+    { q: "Which vehicle should I choose for a long-distance journey?", a: "Choose by passengers and luggage. A sedan suits one or two people, an SUV suits families, and a van suits groups or equipment. We confirm what fits." },
+    { q: "Can I request a drop-off outside Tabuk city?", a: "Yes, as a separate request. Places such as Duba, Tayma, Wadi Disah or Haql need their own route, availability and fare. Access to controlled areas is not guaranteed." },
+    { q: "Can I request a stop or overnight break?", a: "Yes. Tell us when you request the quote. We do not name rest stops or promise facilities. An overnight stop is optional and confirmed separately." },
+    { q: "Is the fare fixed or confirmed after the request?", a: "Fares are quoted for each request, because they depend on the vehicle, the addresses and the date. We confirm the fare before you commit." },
+    { q: "How do I book a Riyadh to Tabuk taxi?", a: "Enter the pickup and drop-off, the date and time, then add passengers and luggage in the form. We check availability and confirm the vehicle, driver and fare before you commit." },
+  ],
+  ctaHeading: "Plan Your Private Riyadh to Tabuk Journey",
+  ctaText: "Share your Riyadh pickup address, exact Tabuk destination, date and time, number of passengers, luggage, and any airport or site details. Our team confirms the vehicle, driver and fare before you commit.",
+  ctaButton: "Request Your Free Quote",
+};

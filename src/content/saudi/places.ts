@@ -491,7 +491,7 @@ export const routes: Route[] = [
     about:
       "Riyadh to Tabuk is the longest road route in this list, running north-west across the country to the far north-west of Saudi Arabia. Most travellers fly, so a road ride is mainly for groups, heavy luggage or people who need a vehicle at the other end.",
     riders: ["Groups travelling together", "Business travellers carrying equipment", "Families moving or visiting relatives"],
-    tips: ["Plan for more than a day on the road and ask us about overnight stops.", "State the number of passengers and bags so the vehicle can be chosen properly."],
+    tips: ["Plan for a full day on the road and ask us about breaks or an optional overnight stop.", "State the number of passengers and bags so the vehicle can be chosen properly."],
   },
   {
     id: "riyadh-to-jazan",
