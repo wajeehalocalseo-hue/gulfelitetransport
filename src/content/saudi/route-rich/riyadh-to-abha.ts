@@ -1,0 +1,215 @@
+import type { RichRoute } from "../rich-types";
+
+/**
+ * Riyadh to Abha: the fully designed route page (Asir highlands and southern heritage variant).
+ * Distance and driving time are estimates from OpenStreetMap routing between the two city centres (reviewed November 2026:
+ * about 948 km and 681 min, about 951 km and 690 min back). The page figures of about 945 km and 11 hr 25 min are kept, since they agree.
+ * The routed road follows Route 65 and then Route 10 and passes within a few km of Ar Rayn, Bisha and Khamis Mushait.
+ * A published 882 km figure could not be matched to a routed road with the same endpoints, so it is not used on the page.
+ * From the Abha centre (road distance, estimates): Al Muftaha Art Village about 2 km, Green Mountain about 2 km, Abha International Airport about 20 km,
+ * Khamis Mushait about 33 km, Rijal Almaa about 52 km, Habala about 58 km. Al Soudah, Asir National Park, Abha Dam Lake and
+ * Al Dabbab Walkway could not be located reliably, so no distances are given for them.
+ * No fares, ratings, reviews, vehicle specifications, flight tracking or access guarantees. Photos are optional: see ImageSlot.
+ */
+export const abhaSeo = {
+  title: "Riyadh to Abha Taxi | Private Intercity Transfer",
+  description: "Book a private Riyadh to Abha taxi for family trips, Asir visits and airport transfers. Request a vehicle and confirm your fare before you commit.",
+  h1: "Private Taxi from Riyadh to Abha",
+  lead: "A private road transfer from Riyadh to Abha, the mountain capital of Asir, for family holidays, business trips and onward travel to Khamis Mushait. Share your pickup, destination and group size, and we confirm the vehicle, driver and fare before you commit.",
+  directAnswer:
+    "Gulf Elite Transport Group accepts private transport requests between Riyadh and Abha in the Asir Region of Saudi Arabia, about 945 km by road. The drive takes about 11 hours 25 minutes without stops, so passengers plan it as a full day or more. The main road runs south-west through Ar Rayn, Bisha and Khamis Mushait. The service is used for family holidays, visits to the Asir highlands, business trips and airport transfers, one way or with a return. Send your pickup address, destination, date, time, and the number of passengers and bags. Our team checks vehicle and driver availability and confirms the vehicle, driver and fare with you before you book. Fares are not listed here, because each journey is quoted for your request.",
+};
+
+export const abhaRich: RichRoute = {
+  fromName: "Riyadh",
+  toName: "Abha",
+  toHref: "/taxi-saudi-arabia/asir-region/abha",
+  variant: "abha",
+  imageFolder: "riyadh-to-abha",
+  eyebrow: "Private intercity transfer · Riyadh to the Asir highlands",
+  heroPoints: ["Private vehicle for family and group travel", "Pickup and drop-off at your named address", "One-way and return requests", "Vehicle, driver and fare confirmed before you commit"],
+  heroAlt: "A private car on the road from Riyadh towards the Asir highlands and Abha",
+  facts: [
+    { label: "Origin", value: "Riyadh" },
+    { label: "Destination", value: "Abha, Asir Region" },
+    { label: "Approximate road distance", value: "About 945 km" },
+    { label: "Approximate driving time", value: "About 11 hr 25 min, without stops" },
+    { label: "Direction", value: "South-west of Riyadh" },
+    { label: "Main road", value: "Through Ar Rayn, Bisha and Khamis Mushait" },
+  ],
+  factsNote: "Approximate road distance between the two city centres, from OpenStreetMap routing, for light traffic and without rest stops. This is the main inland road. Other roads to Abha exist and are longer, and the distance changes with your exact addresses. The actual time depends on the road taken, traffic, weather, mountain conditions and stops. It is not a promised arrival time.",
+  introHeading: "Riyadh to Abha Taxi: A Private Road Transfer to the Asir Highlands",
+  intro: [
+    "Abha is the capital of the Asir Region, high in the Sarawat mountains in the south-west. It is much cooler than Riyadh in summer, and families, groups and business travellers make the long journey from the capital.",
+    "A private transfer lets you agree the pickup address, the vehicle and the departure time in advance, and be taken to an exact hotel, home or place in Abha. Because the journey is long, most passengers plan it as a full day and ask for planned breaks.",
+  ],
+  terms: {
+    heading: "Abha, Khamis Mushait and the Wider Asir Region",
+    intro: "These names are often mixed up. Please tell us the exact place you want to reach, since the distance and fare change.",
+    items: [
+      { title: "Abha city", text: "The capital of Asir and the main destination on this page." },
+      { title: "Khamis Mushait", text: "A separate city, about 33 km from Abha by road (an estimate). The main road from Riyadh passes close to it." },
+      { title: "The Asir Region", text: "The whole mountain and coastal region. Abha is one city within it." },
+      { title: "Mountain and village destinations", text: "Al Soudah, Rijal Almaa and Habala are outside central Abha. Each is a separate destination." },
+    ],
+    note: "A drop-off outside Abha city is quoted for your request, and is not included in the Abha fare.",
+  },
+  whyHeading: "Why Take a Private Taxi from Riyadh to Abha?",
+  why: [
+    { title: "A private ride", text: "The car is for you and your group only, not shared with other passengers." },
+    { title: "One booking, door to door", text: "From your address in Riyadh to your hotel, home or place in Abha." },
+    { title: "The right vehicle for your group", text: "A sedan, SUV, van or executive car, chosen for passengers and luggage." },
+    { title: "A long journey, planned in advance", text: "Departure time and breaks are discussed with you before you book." },
+    { title: "Return journey requests", text: "Ask for the ride back from Abha to Riyadh in the same request." },
+    { title: "Fare confirmed before you commit", text: "You see the vehicle, driver and fare for your request, and you decide whether to go ahead." },
+  ],
+  route: {
+    heading: "The Road from Riyadh to Abha",
+    intro: "The main inland road leaves Riyadh to the south-west, crosses the desert plateau, and passes close to Ar Rayn, Bisha and Khamis Mushait before the climb to Abha. Other roads, through Wadi Ad-Dawasir or through Taif and Al Bahah, are longer. The driver chooses the road on the day, and your plan is confirmed with you.",
+    stops: [
+      { name: "Riyadh", detail: "Start", text: "Departure from your agreed pickup address." },
+      { name: "Ar Rayn", detail: "On the road", text: "A town on the long southern stretch of the road." },
+      { name: "Bisha", detail: "On the road", text: "A town in the south, about 255 km from Abha by road (an estimate)." },
+      { name: "Khamis Mushait", detail: "Near the end", text: "A large city just before Abha. The road passes close to it." },
+      { name: "Abha", detail: "Arrival", text: "Arrival in the city, or on to your hotel or place in the mountains." },
+    ],
+    note: "A stop is not included unless you request it and we confirm it. We do not promise a particular road or stop in advance, and not every Asir attraction is on the way.",
+  },
+  planHeading: "Planning Your Riyadh to Abha Journey",
+  plan: [
+    { title: "Distance and time", text: "The road is about 945 km, about 11 hours 25 minutes of driving without stops. These are estimates. With rest and prayer breaks, plan for a full day or an overnight stop." },
+    { title: "Breaks by agreement", text: "Tell us how often you want to stop. Breaks are arranged with you before you travel, and we do not promise any particular facility." },
+    { title: "Weather and visibility", text: "Fog, rain and low cloud are common in the mountains. Check current road and weather conditions before you travel, and allow extra time for the climb." },
+    { title: "Passengers and luggage", text: "Count every passenger and every bag, so the vehicle has room for the group." },
+  ],
+  mapQuery: { from: "Riyadh, Saudi Arabia", to: "Abha, Saudi Arabia" },
+  highwayAlt: "The road from Riyadh climbing towards the Asir highlands near Abha",
+  eastern: {
+    heading: "Abha City: Places Passengers Ask About",
+    intro: "These places are in Abha itself, close to the centre. Each extra stop is a separate request, confirmed with you.",
+    items: [
+      { name: "Abha city", detail: "The capital of Asir", text: "Hotels, offices, shops and homes in the main city. Send the exact address or hotel." },
+      { name: "Al Muftaha Art Village", detail: "In Abha, about 2 km from the centre", text: "An arts and cultural area in the city, known for local art and heritage." },
+      { name: "Green Mountain (Jabal Thera)", detail: "In Abha, about 2 km from the centre", text: "A hill above the city, known for its views over Abha. Check current visiting details." },
+      { name: "Abha Dam Lake", detail: "In the city area", text: "A lake and leisure area near the city. Check current visiting details." },
+      { name: "Al Dabbab Walkway", detail: "A viewpoint and walkway", text: "A walkway with views over the city. Check current visiting details before you go." },
+    ],
+    note: "Distances are estimates by road from the Abha city centre. We do not offer tours or guides, and we do not promise waiting time or access to any place unless we confirm it with you.",
+  },
+  cities: {
+    heading: "Beyond Abha: Separate Asir Destinations",
+    intro: "Asir's best-known mountains and villages are outside central Abha. Each is a separate destination with its own road, time and fare, so tell us exactly where you are going.",
+    items: [
+      { name: "Al Soudah", detail: "A mountain destination north-west of Abha", text: "One of the highest points in the country, with cool weather and viewpoints. Weather and fog affect the road, so we confirm the plan with you." },
+      { name: "Asir National Park", detail: "A protected highland area", text: "A national park in the Asir highlands. Access and road conditions vary, so we confirm whether a ride can be arranged." },
+      { name: "Rijal Almaa", detail: "About 52 km from Abha", text: "A historic stone-village heritage destination west of Abha, on a mountain road. It is a separate governorate, not part of Abha city." },
+      { name: "Habala", detail: "About 58 km from Abha", text: "A terraced hillside village. It is a separate destination from central Abha." },
+      { name: "Khamis Mushait", detail: "About 33 km from Abha", text: "A separate city east of Abha. See the Abha to Khamis Mushait ride.", href: "/taxi-saudi-arabia/routes/abha-to-khamis-mushait" },
+    ],
+    note: "Distances are estimates by road from the Abha centre. Not every place can be reached by every vehicle, and we confirm whether a suitable ride can be arranged. A sightseeing stop is not included in the base transfer.",
+  },
+  umrah: {
+    heading: "Family and Holiday Travel to Abha",
+    intro: "Many passengers on this road are families spending the summer or a holiday in the highlands. A direct pickup and drop-off makes a very long journey simpler.",
+    items: [
+      { title: "Families from Riyadh", text: "One vehicle for the family and its luggage, from your door to your hotel or rental." },
+      { title: "Summer and holiday visitors", text: "Summer and public holidays are busy. Ask early for those dates." },
+      { title: "Visiting relatives", text: "Send the exact address, so the driver can go to the right door." },
+      { title: "Groups with luggage", text: "Count every bag, including large ones, and tell us the group size." },
+    ],
+    note: "We do not promise child seats or specific luggage space unless we confirm them with you for your request.",
+    slot: "family",
+    alt: "A family travelling together by private car from Riyadh to Abha",
+  },
+  airport: {
+    heading: "Airport Transfers: Abha International Airport (AHB)",
+    intro: "Abha International Airport (AHB) serves Abha, Khamis Mushait and the Asir highlands. An airport ride is a separate request from the long-distance journey from Riyadh.",
+    items: [
+      { title: "Airport pickup or drop-off", text: "You can ask for a ride between the airport and your address in Abha. The airport is about 20 km from the city centre by road (an estimate)." },
+      { title: "To the mountains", text: "A ride from the airport on to Al Soudah, Rijal Almaa or Habala can be requested. The mountain roads take longer, so the timing is planned with you." },
+      { title: "Share your flight details", text: "Send your flight number, date and time, and the number of passengers and bags. We use them to plan the ride." },
+    ],
+    note: "Pickup arrangements are confirmed with you for each request. We do not promise flight tracking, meet-and-greet or a fixed waiting time.",
+    href: "/taxi-saudi-arabia/airports/abha-international-airport",
+    slot: "airport",
+    alt: "Abha International Airport, which serves Abha and the Asir highlands",
+  },
+  vehiclesHeading: "Choose a Vehicle for Your Journey",
+  vehiclesIntro: "The vehicle depends on the number of passengers, the amount of luggage, your requested category, the destination and availability. For a mountain village, tell us where it is. We confirm the vehicle with you before you book.",
+  vehicles: [
+    { slot: "sedan", homePhoto: "sedan", name: "Sedan", best: "Couples and small groups", text: "A private car for one to a few passengers with light luggage.", alt: "Private sedan for a Riyadh to Abha trip" },
+    { slot: "suv", homePhoto: "suv", name: "SUV", best: "Families and mountain roads", text: "More room for passengers and bags. A good choice for a family trip that includes the mountain roads.", alt: "Private SUV for a family travelling from Riyadh to Abha" },
+    { slot: "van", homePhoto: "family-van", name: "Van or minibus", best: "Larger families and groups", text: "For groups who want to travel together with their luggage. Give us the group size and we confirm what fits.", alt: "Private van for a group travelling from Riyadh to Abha" },
+    { slot: "executive", name: "Executive car", best: "Formal arrivals", text: "A chauffeur-driven premium car for guests who want extra comfort. Subject to availability.", alt: "Executive car for a Riyadh to Abha transfer" },
+  ],
+  dropHeading: "Where in Asir Are You Going?",
+  dropIntro: "Send the hotel or home address and a map pin, and tell us whether it is in Abha, Khamis Mushait or a mountain village.",
+  drops: [
+    { name: "Abha city", text: "Hotels, apartments and homes in the city." },
+    { name: "Khamis Mushait", text: "A separate city east of Abha." },
+    { name: "Mountain resorts and villages", text: "Al Soudah, Rijal Almaa, Habala and others. Send the place and a map pin." },
+  ],
+  dropAlt: "Abha and the Sarawat mountains, the destination of a private taxi from Riyadh",
+  pickupHeading: "Common Pickup Areas in Riyadh",
+  pickupIntro: "Journeys start from your own address. Send the exact address or a map pin when you request a quote.",
+  pickups: [
+    { name: "Olaya", text: "Hotels, offices and apartments in central Riyadh.", href: "/riyadh-taxi-service/olaya-taxi-service" },
+    { name: "Al Malaz", text: "An established district in the east of central Riyadh.", href: "/riyadh-taxi-service/al-malaz-taxi-service" },
+    { name: "Al Nakheel", text: "A residential district in the north-west of the city.", href: "/riyadh-taxi-service/al-nakheel-taxi-service" },
+    { name: "King Khalid International Airport (RUH)", text: "The main airport, in the north. Send your flight number and terminal.", href: "/taxi-saudi-arabia/airports/king-khalid-international-airport" },
+    { name: "Hotels and homes", text: "Any hotel, apartment or house in Riyadh." },
+  ],
+  pickupAlt: "Riyadh skyline where private transfers to Abha begin",
+  whoHeading: "Who Uses This Route?",
+  who: [
+    { title: "Families visiting Abha", text: "Families on holiday in the highlands." },
+    { title: "Summer and holiday travellers", text: "Visitors escaping the heat of the rest of the country." },
+    { title: "Asir visitors", text: "People exploring the mountains and villages of Asir." },
+    { title: "Business and professional travellers", text: "People with work in the southern region." },
+    { title: "Khamis Mushait passengers", text: "Passengers whose journey continues to Khamis Mushait." },
+    { title: "Groups with luggage", text: "Groups who want to travel together, with a return if they need one." },
+  ],
+  stepsHeading: "How Booking Works",
+  steps: [
+    { title: "Enter your locations", text: "Pickup and drop-off locations." },
+    { title: "Select date and time", text: "The day and time you want to travel." },
+    { title: "Add passengers and luggage", text: "How many people and bags are travelling." },
+    { title: "Continue with your details", text: "Choose the vehicle and add your contact details in the next steps of the form." },
+    { title: "Check and confirm", text: "Our team checks availability and confirms the vehicle, driver and fare before you commit." },
+  ],
+  infoHeading: "Before You Travel",
+  infoIntro: "A few points that make the journey easier.",
+  info: [
+    { title: "Fare", text: "Fares are not published, because each journey is quoted for your request." },
+    { title: "Exact addresses", text: "Send a map pin or landmark for the pickup and drop-off." },
+  ],
+  relatedHeading: "Related Routes and Pages",
+  related: [
+    { name: "Riyadh to Jazan", href: "/taxi-saudi-arabia/routes/riyadh-to-jazan", text: "A long ride to the south-west coast." },
+    { name: "Riyadh to Najran", href: "/taxi-saudi-arabia/routes/riyadh-to-najran", text: "A long ride to the far south." },
+    { name: "Riyadh to Al Bahah", href: "/taxi-saudi-arabia/routes/riyadh-to-al-baha", text: "Another highland destination in the south-west." },
+    { name: "Riyadh to Taif", href: "/taxi-saudi-arabia/routes/riyadh-to-taif", text: "A mountain ride to Taif." },
+    { name: "Abha to Khamis Mushait", href: "/taxi-saudi-arabia/routes/abha-to-khamis-mushait", text: "The short ride between the two cities." },
+    { name: "Abha taxi service", href: "/taxi-saudi-arabia/asir-region/abha", text: "Rides within and around Abha." },
+    { name: "Abha airport taxi", href: "/taxi-saudi-arabia/airports/abha-international-airport", text: "Rides to and from Abha airport." },
+    { name: "Riyadh taxi service", href: "/riyadh-taxi-service", text: "Pickups and rides in Riyadh." },
+  ],
+  faqHeading: "Frequently Asked Questions: Riyadh to Abha Taxi",
+  faq: [
+    { q: "How far is Abha from Riyadh by road?", a: "About 945 km between the two city centres, by the main inland road. Other roads are longer, and the exact distance depends on your addresses." },
+    { q: "How long does a taxi from Riyadh to Abha take?", a: "Driving takes about 11 hours 25 minutes without stops, in light traffic. With rest and prayer breaks, plan for a full day or an overnight stop. We do not promise an arrival time." },
+    { q: "Which road route is used from Riyadh to Abha?", a: "The main road runs south-west and passes close to Ar Rayn, Bisha and Khamis Mushait. The driver chooses the road on the day, based on conditions." },
+    { q: "Can I book a private taxi from Riyadh to Abha?", a: "Yes. Send your pickup, destination, date, time and group size, and we confirm the vehicle, driver and fare before you commit." },
+    { q: "Can the taxi drop me in Khamis Mushait?", a: "Yes. Khamis Mushait is a separate city before Abha. Tell us the exact address, and the fare is confirmed for it." },
+    { q: "Can I book a transfer to Al Soudah?", a: "Yes, as a request. Al Soudah is a mountain destination north-west of Abha, and weather and fog affect the road, so we confirm the plan with you." },
+    { q: "Can I travel from Riyadh directly to Rijal Almaa?", a: "You can ask for it as a request. Rijal Almaa is a separate heritage destination west of Abha on a mountain road, and we confirm the route and fare." },
+    { q: "Is Abha Airport available for pickup and drop-off?", a: "Yes, as a request. Send your flight number, time and destination, and we confirm the arrangement with you." },
+    { q: "Can I arrange a return taxi from Abha to Riyadh?", a: "Yes. Ask for the return in the same request and give us the day and time you want to leave Abha." },
+    { q: "Which vehicle should I choose for my family and luggage?", a: "It depends on how many people and bags you have. Tell us, and we confirm a suitable vehicle, such as an SUV or a van." },
+    { q: "Are fares fixed or quoted for each booking?", a: "Fares are quoted for each booking, because they depend on the vehicle, the addresses and the date. We confirm the fare before you commit." },
+    { q: "Do journey times include rest stops?", a: "No. The 11 hours 25 minutes is driving time without stops. Rest and prayer breaks are agreed with you and add time." },
+  ],
+  ctaHeading: "Plan Your Private Journey from Riyadh to Abha",
+  ctaText: "Share your pickup address, destination in Asir, travel date, number of passengers and luggage, and any extra stop you need. Our team confirms the vehicle, driver and fare before you commit.",
+  ctaButton: "Request Your Free Quote",
+};
