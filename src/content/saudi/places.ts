@@ -396,7 +396,7 @@ export const routes: Route[] = [
     id: "riyadh-to-hail",
     from: "riyadh",
     to: "hail",
-    km: 640,
+    km: 625,
     about:
       "Riyadh to Hail travels north-west through Qassim and then on to the mountain city of Hail. The route is used by residents, visitors to Hail's events and desert landscapes, and families. It is a long drive, and Qassim is a natural stopping point.",
     riders: ["Visitors to Hail's festivals and desert areas", "Families visiting relatives", "Business travellers to the northern region"],

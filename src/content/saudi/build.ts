@@ -8,6 +8,7 @@ import { makkahRich, makkahSeo } from "./route-rich/riyadh-to-makkah";
 import { madinahRich, madinahSeo } from "./route-rich/riyadh-to-madinah";
 import { buraydahRich, buraydahSeo } from "./route-rich/riyadh-to-buraydah";
 import { hofufRich, hofufSeo } from "./route-rich/riyadh-to-al-hofuf";
+import { hailRich, hailSeo } from "./route-rich/riyadh-to-hail";
 import routeTimes from "./route-times.json";
 import { riyadhAreas, riyadhAreaById } from "./riyadh-areas";
 import { districtOverrides, fmtKm, fmtMin } from "./riyadh-districts";
@@ -710,8 +711,8 @@ function riyadhRouteLanding(r: (typeof routes)[number], from: City, to: City, ap
     faq: faqSec && faqSec.kind === "faq" ? faqSec.items : [],
     note: `Distance and time are estimates from OpenStreetMap routing between the city centres, reviewed November 2026. Rest stops, traffic and any checkpoint queues add time.`,
   };
-  const seo = r.id === "riyadh-to-jeddah" ? jeddahSeo : r.id === "riyadh-to-dammam" ? dammamSeo : r.id === "riyadh-to-makkah" ? makkahSeo : r.id === "riyadh-to-madinah" ? madinahSeo : r.id === "riyadh-to-buraydah" ? buraydahSeo : r.id === "riyadh-to-al-hofuf" ? hofufSeo : null;
-  const rich = r.id === "riyadh-to-jeddah" ? jeddahRich : r.id === "riyadh-to-dammam" ? dammamRich : r.id === "riyadh-to-makkah" ? makkahRich : r.id === "riyadh-to-madinah" ? madinahRich : r.id === "riyadh-to-buraydah" ? buraydahRich : r.id === "riyadh-to-al-hofuf" ? hofufRich : null;
+  const seo = r.id === "riyadh-to-jeddah" ? jeddahSeo : r.id === "riyadh-to-dammam" ? dammamSeo : r.id === "riyadh-to-makkah" ? makkahSeo : r.id === "riyadh-to-madinah" ? madinahSeo : r.id === "riyadh-to-buraydah" ? buraydahSeo : r.id === "riyadh-to-al-hofuf" ? hofufSeo : r.id === "riyadh-to-hail" ? hailSeo : null;
+  const rich = r.id === "riyadh-to-jeddah" ? jeddahRich : r.id === "riyadh-to-dammam" ? dammamRich : r.id === "riyadh-to-makkah" ? makkahRich : r.id === "riyadh-to-madinah" ? madinahRich : r.id === "riyadh-to-buraydah" ? buraydahRich : r.id === "riyadh-to-al-hofuf" ? hofufRich : r.id === "riyadh-to-hail" ? hailRich : null;
   return {
     title: seo ? seo.title : prof.title,
     description: seo ? seo.description : `Book a private taxi from Riyadh to ${name}: about ${r.km} km, roughly ${time} by road. ${prof.tail} Fare confirmed before you commit.`,

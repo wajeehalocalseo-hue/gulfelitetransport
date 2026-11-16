@@ -1,0 +1,195 @@
+import type { RichRoute } from "../rich-types";
+
+/**
+ * Riyadh to Hail: the fully designed route page (northern mountain heritage variant).
+ * Distance and driving time are estimates from OpenStreetMap routing between the two city centres (reviewed November 2026:
+ * about 624 km and 363 min via Buraydah; the return routes to about 636 km, so the page says about 625 km and about 6 hours).
+ * From the Hail centre (road distance, estimates): Qishlah Palace about 1 km, Barzan Market about 1 km, A'arif Fort about 2 km,
+ * Hail Regional Airport about 11 km, Hail railway station about 21 km, Jubbah about 117 km, Jabal Umm Sinman about 128 km, Buraydah about 267 km.
+ * Shuwaymis and the alternative road through Shaqra could not be verified with routing, so no figures are published for them.
+ * No fares, ratings, reviews, vehicle specifications, flight tracking, train times or access guarantees. Photos are optional: see ImageSlot.
+ */
+export const hailSeo = {
+  title: "Riyadh to Hail Taxi | Private Hail Transfer",
+  description: "Book a private Riyadh to Hail taxi for family, business and personal travel. Request airport, railway and return transfers. Fare confirmed before you commit.",
+  h1: "Riyadh to Hail Taxi – Private Long-Distance Transfers",
+  lead: "A private road transfer from Riyadh to Hail, for family trips, business travel and visits to Hail's heritage sites. Share your pickup, destination and group size, and we confirm the vehicle, driver and fare before you commit.",
+  directAnswer:
+    "Gulf Elite Transport Group accepts private transport requests between Riyadh and Hail, in the north of Saudi Arabia, about 625 km by road. The main road runs through Al-Zulfi and Buraydah, and takes about 6 hours of driving without stops. The service is used for family trips, business travel, visits to Hail's heritage sites and connections with Hail airport and railway station, one way or with a return. Send your pickup address, destination, date, time, and the number of passengers and bags. Our team checks vehicle and driver availability and confirms the vehicle, driver and fare with you before you book. Fares are not listed here, because each journey is quoted for your request.",
+};
+
+export const hailRich: RichRoute = {
+  fromName: "Riyadh",
+  toName: "Hail",
+  toHref: "/taxi-saudi-arabia/hail-region/hail",
+  variant: "hail",
+  imageFolder: "riyadh-to-hail",
+  eyebrow: "Private intercity transfer · Riyadh to northern Saudi Arabia",
+  heroPoints: ["Private vehicle for family, business or group travel", "Airport and railway arrival requests", "One-way and return requests", "Vehicle, driver and fare confirmed before you commit"],
+  heroAlt: "A private car on the highway from Riyadh towards the Aja and Salma mountains near Hail",
+  facts: [
+    { label: "Origin", value: "Riyadh" },
+    { label: "Destination", value: "Hail, Hail Region" },
+    { label: "Approximate road distance", value: "About 625 km" },
+    { label: "Approximate driving time", value: "About 6 hr, without stops" },
+    { label: "Main corridor", value: "Through Al-Zulfi and Buraydah" },
+    { label: "Service", value: "Private intercity transport, both directions" },
+  ],
+  factsNote: "Approximate road distance between the two city centres, from OpenStreetMap routing, for light traffic and without rest stops. The actual distance and time depend on the road taken, traffic, weather, stops and your exact pickup and drop-off points. They are not a promised arrival time.",
+  introHeading: "Riyadh to Hail Taxi: A Private Road Transfer to the North",
+  intro: [
+    "Hail is the capital of the Hail Region and sits between the Aja and Salma mountain ranges. It lies on old caravan and pilgrimage routes, and today it is known for its forts, its desert and mountain scenery and the rock art sites in the region.",
+    "The road from Riyadh is long, so most passengers plan it in advance. A private transfer lets you agree the pickup address, the vehicle and the departure time, and be taken to an exact address in Hail. It suits family trips, business visits and visitors with luggage.",
+  ],
+  whyHeading: "Why Travel from Riyadh to Hail by Private Taxi?",
+  why: [
+    { title: "A direct road journey", text: "One vehicle takes you from your address in Riyadh to your address in Hail, without changing between services." },
+    { title: "A private ride", text: "The car is for you and your group only, not shared with other passengers." },
+    { title: "Luggage handled together", text: "Bags travel with you. Tell us how many, so the vehicle has room." },
+    { title: "Pickup planned around you", text: "Departure time and pickup address are agreed in advance." },
+    { title: "Family and group travel", text: "Families and groups can travel together in a vehicle that fits them." },
+    { title: "Business and personal trips", text: "The same service suits meetings, site visits and visits to relatives." },
+  ],
+  route: {
+    heading: "The Road from Riyadh to Hail",
+    intro: "The fastest road runs north-west out of Riyadh, passes the Al-Zulfi area and Buraydah in Qassim, and then continues towards Hail. A longer alternative road through Shaqra and Al-Nabhaniyah also exists. The driver chooses the road on the day, and your plan is confirmed with you.",
+    stops: [
+      { name: "Riyadh", detail: "Start", text: "Departure from your agreed pickup address." },
+      { name: "Al-Zulfi area", detail: "On the road", text: "The road passes close to Al-Zulfi, on the way into the Qassim region." },
+      { name: "Buraydah, Qassim", detail: "Optional stop", text: "The main city of Qassim, about 355 km from Riyadh (an estimate). A rest, fuel or meal stop can be requested and confirmed in advance." },
+      { name: "Towards Hail", detail: "On the road", text: "The road continues north-west across the desert, past towns such as Al-Shanan, to the Aja and Salma mountains." },
+      { name: "Hail", detail: "Arrival", text: "Arrival at your hotel, home or office address." },
+    ],
+    note: "A stop is not included unless you request it and we confirm it. We do not promise a particular road or stop in advance.",
+  },
+  planHeading: "Planning the Journey from Riyadh to Hail",
+  plan: [
+    { title: "Distance and time", text: "The road is about 625 km, about 6 hours of driving without stops. These are estimates. With rest and prayer breaks, plan for most of a day." },
+    { title: "Weather and season", text: "Summer afternoons are very hot, and winter nights in the north can be cold. Dust and winds can slow the road." },
+    { title: "Passengers and luggage", text: "Count every passenger and every bag, so the vehicle has room for the group." },
+  ],
+  mapQuery: { from: "Riyadh, Saudi Arabia", to: "Hail, Saudi Arabia" },
+  highwayAlt: "The highway between Riyadh and Hail crossing the desert towards the Aja and Salma mountains",
+  eastern: {
+    heading: "Heritage Inside Hail City",
+    intro: "These sites are in the city itself, a short ride from most hotels. Opening times change, so check before you go.",
+    items: [
+      { name: "A'arif Fort", detail: "About 2 km from the Hail centre", text: "A historic fort on a hill above the city, with views over Hail. It is one of the city's best-known heritage sites." },
+      { name: "Al-Qishlah Palace", detail: "About 1 km from the Hail centre", text: "A historic mud-brick fortress in the city centre, important for Hail's architecture and history." },
+      { name: "Barzan Market", detail: "About 1 km from the Hail centre", text: "A traditional market area in the city. Shops and hours vary, and we do not promise that any shop is open." },
+    ],
+    note: "Distances are estimates by road from the Hail city centre. We do not offer tours or guides, and we do not promise driver waiting time or access to any site unless we confirm it with you.",
+  },
+  cities: {
+    heading: "Beyond Hail City: Separate Journeys",
+    intro: "Hail's best-known landscapes and archaeological sites are outside the city. Each one is a separate journey with its own distance, time and fare, so tell us exactly where you want to go.",
+    items: [
+      { name: "Jubbah and Jabal Umm Sinman", detail: "About 117 km and 128 km from Hail", text: "A rock-art area north-west of the city. Jubbah and Shuwaymis are two separate sites of the UNESCO-listed Rock Art in the Hail Region." },
+      { name: "Shuwaymis", detail: "A separate, more distant site", text: "A different archaeological site in the same UNESCO property. It is not the same place as Jubbah and not a quick stop from the city, so we confirm the distance and plan with you." },
+      { name: "Aja and Salma mountains", detail: "Around the city", text: "The two mountain ranges that frame Hail. They are a regional landscape, not a single stop, so name the place you want to reach." },
+    ],
+    note: "Access to desert and mountain areas depends on the road, the weather and the vehicle. We confirm whether a suitable ride can be arranged, and we do not promise access to off-road locations.",
+  },
+  vehiclesHeading: "Choose a Vehicle for Your Journey",
+  vehiclesIntro: "The vehicle depends on the number of passengers, the amount of luggage, the purpose of the trip, your requested category and availability. We confirm it with you before you book.",
+  vehicles: [
+    { slot: "sedan", homePhoto: "sedan", name: "Sedan", best: "Business travellers and small groups", text: "A private car for one to a few passengers with light luggage.", alt: "Private sedan for a Riyadh to Hail trip" },
+    { slot: "suv", homePhoto: "suv", name: "SUV", best: "Families and extra luggage", text: "More room for passengers and bags. Suitable for a family on a long road journey.", alt: "Private SUV for a family travelling from Riyadh to Hail" },
+    { slot: "van", homePhoto: "family-van", name: "Van or minibus", best: "Groups and teams", text: "For groups who want to travel together with their luggage. Give us the group size and we confirm what fits.", alt: "Private van for a group travelling from Riyadh to Hail" },
+    { slot: "executive", name: "Executive car", best: "Formal arrivals", text: "A chauffeur-driven premium car for guests who want extra comfort. Subject to availability.", alt: "Executive car for a Riyadh to Hail transfer" },
+  ],
+  dropHeading: "Where in Hail Are You Going?",
+  dropIntro: "Send the hotel, office or home address and a map pin, and we confirm the best drop-off point with you.",
+  drops: [
+    { name: "Hail city centre", text: "Hotels, offices and shops in central Hail." },
+    { name: "Hotels and homes", text: "Any hotel, apartment or house in Hail. Share the address and a nearby landmark." },
+    { name: "Hail Regional Airport (HAS)", text: "About 11 km from the city centre (an estimate).", href: "/taxi-saudi-arabia/airports/hail-regional-airport" },
+  ],
+  dropAlt: "Hail city, the destination of a private taxi from Riyadh",
+  pickupHeading: "Common Pickup Areas in Riyadh",
+  pickupIntro: "Journeys start from your own address. Send the exact address or a map pin when you request a quote.",
+  pickups: [
+    { name: "Olaya", text: "Hotels, offices and apartments in central Riyadh.", href: "/riyadh-taxi-service/olaya-taxi-service" },
+    { name: "Al Malaz", text: "An established district in the east of central Riyadh.", href: "/riyadh-taxi-service/al-malaz-taxi-service" },
+    { name: "Al Nakheel", text: "A residential district in the north-west of the city.", href: "/riyadh-taxi-service/al-nakheel-taxi-service" },
+    { name: "King Khalid International Airport (RUH)", text: "The main airport, in the north. Send your flight number and terminal.", href: "/taxi-saudi-arabia/airports/king-khalid-international-airport" },
+    { name: "Hotels and homes", text: "Any hotel, apartment or house in Riyadh." },
+  ],
+  pickupAlt: "Riyadh skyline where private transfers to Hail begin",
+  airport: {
+    heading: "Airport Transfers: Hail International Airport (HAS)",
+    intro: "Hail's airport is also listed as Hail Regional Airport. An airport ride is a separate request from the long-distance journey from Riyadh.",
+    items: [
+      { title: "Airport to Hail, and back", text: "You can ask for a ride from the airport to your address in Hail, or from Hail to the airport. The airport is about 11 km from the city centre (an estimate)." },
+      { title: "Share your flight details", text: "Send your flight number, arrival or departure date and time, and terminal if you know it." },
+      { title: "Tell us where you are going", text: "Give the hotel, office or home address, the number of passengers and bags." },
+    ],
+    note: "Pickup arrangements are confirmed with you for each request. We do not promise flight tracking, meet-and-greet or a fixed waiting time.",
+    href: "/taxi-saudi-arabia/airports/hail-regional-airport",
+    slot: "airport",
+    alt: "Hail airport, a separate transfer from the Riyadh to Hail journey",
+  },
+  railway: {
+    heading: "SAR North Train and Hail Railway Station",
+    intro: "Saudi Arabia Railways (SAR) runs a North Train network that links Riyadh with Qassim, Hail and further north. SAR is a separate service, and Gulf Elite does not operate trains.",
+    items: [
+      { title: "Where the station is", text: "Hail railway station is on the outskirts, about 21 km by road from the city centre (an estimate), so most passengers need a ride on." },
+      { title: "A ride on to your destination", text: "You can ask for a private transfer from the station to a hotel, home, office or other address." },
+      { title: "What to send us", text: "Give your train arrival time, the number of passengers and bags, and your destination." },
+    ],
+    note: "Railway tickets, timetables and fares are handled by SAR. Check the official SAR website for current services. Station pickup arrangements are confirmed with you for each request.",
+    href: "https://www.sar.com.sa",
+    linkLabel: "SAR official website",
+  },
+  whoHeading: "Who Uses This Route?",
+  who: [
+    { title: "Families", text: "Families travelling to Hail with luggage." },
+    { title: "Business and professional travellers", text: "People with meetings, site visits and work in the northern region." },
+    { title: "Heritage visitors", text: "Visitors exploring Hail's forts, mountains and rock-art sites." },
+    { title: "Residents visiting relatives", text: "People visiting family in Hail." },
+    { title: "Train and plane arrivals", text: "Passengers who need a ride on from the station or the airport." },
+    { title: "Groups", text: "Relatives, friends or colleagues travelling together." },
+  ],
+  stepsHeading: "How Booking Works",
+  steps: [
+    { title: "Enter your locations", text: "Pickup and destination details." },
+    { title: "Add date and passengers", text: "The day and time you want to travel, and how many people and bags." },
+    { title: "Submit your request", text: "Send the booking enquiry through the form on this page." },
+    { title: "Receive the confirmation", text: "Our team checks vehicle and driver availability and sends the vehicle, driver details and fare before you commit." },
+  ],
+  infoHeading: "Before You Travel",
+  infoIntro: "A few points that make the journey easier.",
+  info: [
+    { title: "Fare", text: "Fares are not published, because each journey is quoted for your request." },
+    { title: "Exact addresses", text: "Send a map pin or landmark for the pickup and drop-off." },
+  ],
+  relatedHeading: "Related Routes and Pages",
+  related: [
+    { name: "Riyadh to Buraydah", href: "/taxi-saudi-arabia/routes/riyadh-to-buraydah", text: "The Qassim city on the way to Hail." },
+    { name: "Hail to Buraydah", href: "/taxi-saudi-arabia/routes/hail-to-buraydah", text: "A ride between Hail and Buraydah." },
+    { name: "Riyadh to Madinah", href: "/taxi-saudi-arabia/routes/riyadh-to-madinah", text: "A long road trip to Madinah." },
+    { name: "Riyadh to Al Hofuf", href: "/taxi-saudi-arabia/routes/riyadh-to-al-hofuf", text: "A ride east to the Al-Ahsa oasis." },
+    { name: "Riyadh to Tabuk", href: "/taxi-saudi-arabia/routes/riyadh-to-tabuk", text: "A very long ride to the north-west." },
+    { name: "Hail taxi service", href: "/taxi-saudi-arabia/hail-region/hail", text: "Rides within and around Hail." },
+    { name: "Hail airport taxi", href: "/taxi-saudi-arabia/airports/hail-regional-airport", text: "Rides to and from Hail airport." },
+    { name: "Riyadh taxi service", href: "/riyadh-taxi-service", text: "Pickups and rides in Riyadh." },
+  ],
+  faqHeading: "Frequently Asked Questions: Riyadh to Hail Taxi",
+  faq: [
+    { q: "How far is Hail from Riyadh by road?", a: "About 625 km between the two city centres, by the main road through Al-Zulfi and Buraydah. A longer alternative road exists, and the exact distance depends on your addresses." },
+    { q: "How long does a taxi from Riyadh to Hail take?", a: "Driving takes about 6 hours without stops, in light traffic. With rest and prayer breaks, plan for most of a day. We do not promise an arrival time." },
+    { q: "Can I book a private taxi from Riyadh to Hail?", a: "Yes. Send your pickup, destination, date, time and group size, and we confirm the vehicle, driver and fare before you commit." },
+    { q: "Is a one-way Riyadh to Hail transfer available?", a: "Yes. You can ask for a one-way journey or a return. Availability is confirmed for each request." },
+    { q: "Can I arrange a return taxi from Hail to Riyadh?", a: "Yes. Ask for the return in the same request and give us the day and time you want to leave Hail." },
+    { q: "Can families travel from Riyadh to Hail by private car?", a: "Yes. Tell us how many people and bags you have, and we confirm a suitable vehicle, such as an SUV or a van." },
+    { q: "Can I request a transfer to Hail International Airport?", a: "Yes, as a separate request. Send your flight number, time and terminal, and we confirm the arrangement with you." },
+    { q: "Can I arrange transport from Hail Railway Station?", a: "Yes. Send your train arrival time, destination and the number of passengers and bags. Train tickets and times are handled by SAR, not by us." },
+    { q: "Can I travel from Hail to Jubbah for the rock art sites?", a: "You can ask for it as a separate journey. Jubbah is about 117 km from Hail, an estimate, and the plan depends on the road and the vehicle." },
+    { q: "Can a private transfer be arranged for business travel?", a: "Yes. Give us the office or site address and the time you must arrive, and we plan the departure around it." },
+    { q: "Can I request a vehicle suitable for extra luggage?", a: "Yes. Count every bag, including large items, and we confirm a vehicle that has room." },
+    { q: "How do I enquire about a Riyadh to Hail taxi?", a: "Fill in the form on this page with your route, date, time and group size. Our team replies with the vehicle, driver and fare, and you decide whether to go ahead." },
+  ],
+  ctaHeading: "Plan Your Private Journey from Riyadh to Hail",
+  ctaText: "Share your pickup location, destination, travel date, number of passengers and luggage with Gulf Elite Transport Group. Our team confirms the vehicle, driver and fare before you commit.",
+  ctaButton: "Request Your Free Quote",
+};
