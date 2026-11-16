@@ -501,7 +501,7 @@ export const routes: Route[] = [
     about:
       "Riyadh to Jazan crosses the country to the far south-west, ending on the Red Sea coast near the Yemeni border. Jazan is a port city and the gateway to the Farasan Islands, and the road passes through the Asir mountains on the way down to the coast.",
     riders: ["Families visiting relatives in Jazan", "Business travellers to the south-west", "Visitors heading for the Farasan Islands"],
-    tips: ["Allow more than a day for the road and ask about overnight stops.", "Tell us if you are connecting to a ferry or to a flight from Jazan."],
+    tips: ["Plan for a full day on the road and ask about breaks or an optional overnight stop.", "Tell us if you are connecting to a ferry or to a flight from Jazan."],
   },
   {
     id: "riyadh-to-najran",

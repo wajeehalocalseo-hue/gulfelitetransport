@@ -5,7 +5,7 @@ export type RichRoute = {
   toHref?: string;
   toName: string;
   /** "road" is the standard long-journey design; "business" is a darker, work-focused design with extra sections. */
-  variant?: "road" | "business" | "umrah" | "madinah" | "qassim" | "ahsa" | "hail" | "kharj" | "khobar" | "dhahran" | "taif" | "abha" | "jubail" | "yanbu" | "alula" | "najran" | "tabuk";
+  variant?: "road" | "business" | "umrah" | "madinah" | "qassim" | "ahsa" | "hail" | "kharj" | "khobar" | "dhahran" | "taif" | "abha" | "jubail" | "yanbu" | "alula" | "najran" | "tabuk" | "jazan";
   /** Yanbu variant: the historic old town (Yanbu Al-Bahr). */
   heritage?: { heading: string; intro: string; items: { name: string; detail: string; text: string }[]; note: string; slot: string; alt: string };
   /** Umrah variant: family and group travel section. */
