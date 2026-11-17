@@ -1,6 +1,7 @@
 import type { PlacePage } from "../types";
 import { adDirahRich } from "./ad-dirah";
 import { alMalazRich } from "./al-malaz";
+import { alMalqaRich } from "./al-malqa";
 import { alMohammadiyahRich } from "./al-mohammadiyah";
 import { alMurabbaRich } from "./al-murabba";
 import { alNakheelRich } from "./al-nakheel";
@@ -28,6 +29,7 @@ const registry: Record<string, (ctx: DistrictRichCtx) => DistrictRich> = {
   "al-wurud": alWurudRich,
   "al-mohammadiyah": alMohammadiyahRich,
   "al-nakheel": alNakheelRich,
+  "al-malqa": alMalqaRich,
 };
 
 export const districtRich = (id: string, ctx: DistrictRichCtx): DistrictRich | undefined => registry[id]?.(ctx);
