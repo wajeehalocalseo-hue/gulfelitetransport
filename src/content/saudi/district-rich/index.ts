@@ -3,6 +3,7 @@ import { adDirahRich } from "./ad-dirah";
 import { alMalazRich } from "./al-malaz";
 import { alMohammadiyahRich } from "./al-mohammadiyah";
 import { alMurabbaRich } from "./al-murabba";
+import { alNakheelRich } from "./al-nakheel";
 import { alSulaimaniyahRich } from "./al-sulaimaniyah";
 import { alWurudRich } from "./al-wurud";
 import { diplomaticQuarterRich } from "./diplomatic-quarter";
@@ -26,6 +27,7 @@ const registry: Record<string, (ctx: DistrictRichCtx) => DistrictRich> = {
   "al-sulaimaniyah": alSulaimaniyahRich,
   "al-wurud": alWurudRich,
   "al-mohammadiyah": alMohammadiyahRich,
+  "al-nakheel": alNakheelRich,
 };
 
 export const districtRich = (id: string, ctx: DistrictRichCtx): DistrictRich | undefined => registry[id]?.(ctx);
