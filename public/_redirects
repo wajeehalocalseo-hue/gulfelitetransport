@@ -6,3 +6,6 @@
 /umrah-hajj-taxi/madinah-hotel-to-madinah-airport /umrah-hajj-taxi/madinah-airport-to-madinah-hotel 301
 /umrah-hajj-taxi/jeddah-hotel-to-jeddah-airport /taxi-saudi-arabia/airports/king-abdulaziz-international-airport 301
 /umrah-hajj-taxi/umrah-taxi-with-waiting /umrah-hajj-taxi/makkah-hotel-to-haram 301
+# Pair pages dropped when the Al Rawdah and Al Suwaidi centre points were corrected
+/riyadh-taxi-service/olaya-to-al-suwaidi-taxi /riyadh-taxi-service/al-suwaidi-taxi-service 301
+/riyadh-taxi-service/qurtubah-to-al-rawdah-taxi /riyadh-taxi-service/al-rawdah-taxi-service 301
