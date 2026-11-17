@@ -77,7 +77,22 @@ type SectionBody =
   /** Embedded map of a place, with links that open each named place in Google Maps. */
   | { id: string; h2: string; kind: "map"; intro?: string; query: string; label?: string; places: { name: string; query: string; note?: string }[] }
   /** Live weather for a place (client-side). */
-  | { id: string; h2: string; kind: "weather"; intro?: string; place: string; lat: number; lng: number };
+  | { id: string; h2: string; kind: "weather"; intro?: string; place: string; lat: number; lng: number }
+  /** The closing local-information area: a map on the left, a driving-directions paragraph and a box of Google Maps links on the right, then a full-width live weather strip. */
+  | {
+      id: string;
+      h2: string;
+      kind: "local";
+      intro?: string;
+      mapQuery: string;
+      mapLabel: string;
+      directionsTitle: string;
+      directions: string;
+      linksTitle: string;
+      linkGroups: { title: string; links: { name: string; query: string }[] }[];
+      weatherTitle: string;
+      weather: { place: string; lat: number; lng: number };
+    };
 
 export type PlaceLayout = {
   hero: "dark" | "light" | "ledger" | "inset" | "centered" | "board" | "routeline" | "routeband" | "schematic";

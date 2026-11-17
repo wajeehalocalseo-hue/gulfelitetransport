@@ -655,7 +655,7 @@ export default function PlaceView({ page }: { page: PlacePage }) {
                   <Link href="/contact" className="font-bold text-accent underline underline-offset-4">contact us</Link>.
                 </p>
               </div>
-              <div className="rounded-2xl bg-white p-6 text-navy sm:p-8">{fullForm}</div>
+              <div className="rounded-2xl bg-white p-5 text-navy sm:p-6">{page.whatsappMessage ? <QuoteForm variant="quick" defaultService={TAXI_SERVICE} topic={page.name} pickupDefault={pre.pickup} dropoffDefault={pre.dropoff} /> : fullForm}</div>
             </div>
           </section>
         </>

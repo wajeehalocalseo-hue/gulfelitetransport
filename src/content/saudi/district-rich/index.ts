@@ -15,6 +15,7 @@ import { diriyahRich } from "./diriyah";
 import { hittinRich } from "./hittin";
 import { kafdRich } from "./kafd";
 import { olayaRich, type DistrictRichCtx } from "./olaya";
+import { qurtubahRich } from "./qurtubah";
 
 export type DistrictRich = Pick<PlacePage, "title" | "description" | "h1" | "lead" | "directAnswer" | "facts" | "sections"> & { whatsappMessage: string };
 
@@ -36,6 +37,7 @@ const registry: Record<string, (ctx: DistrictRichCtx) => DistrictRich> = {
   "al-yasmin": alYasminRich,
   "al-narjis": alNarjisRich,
   "al-sahafah": alSahafahRich,
+  qurtubah: qurtubahRich,
 };
 
 export const districtRich = (id: string, ctx: DistrictRichCtx): DistrictRich | undefined => registry[id]?.(ctx);
