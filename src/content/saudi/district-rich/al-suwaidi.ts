@@ -3,6 +3,7 @@ import { fmtKm } from "../riyadh-districts";
 import { bearing, haversine } from "../pairs";
 import type { PlacePage, Section } from "../types";
 import { addImages } from "./images";
+import { addLinks } from "./linking";
 import type { DistrictRichCtx } from "./olaya";
 
 /**
@@ -212,7 +213,7 @@ export function alSuwaidiRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "
       { label: "Ad Dirah", value: "about 8 km by road" },
       { label: "Area type", value: "residential, south-west Riyadh" },
     ],
-    sections: addImages(
+    sections: addLinks(addImages(
       [about, journeys, airport, residential, community, business, metro, prebook, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq, local],
       me.name,
       {
@@ -220,7 +221,7 @@ export function alSuwaidiRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "
         airport: { slot: "al-suwaidi-airport-transfer", alt: "A private airport transfer for passengers travelling between Al Suwaidi and Riyadh Airport", label: "Photo: al-suwaidi-airport-transfer.webp" },
         community: { slot: "al-suwaidi-local-destinations", alt: "A local street and market area near Al Suwaidi, Riyadh", label: "Photo: al-suwaidi-local-destinations.webp" },
       },
-    ),
+    ), ctx, "al-suwaidi"),
     whatsappMessage: ALSUWAIDI_WHATSAPP_MESSAGE,
   };
 }

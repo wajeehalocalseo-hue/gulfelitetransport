@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import FaqList from "./Faq";
 import Icon from "./Icon";
 import ImageSlot from "./ImageSlot";
+import RichText from "./RichText";
 import WeatherWidget from "./WeatherWidget";
 import type { PlacePage, Section } from "@/content/saudi/types";
 
@@ -32,7 +33,7 @@ function Head({ id, title, tone, lead }: { id: string; title: string; tone: Tone
     <div className="mb-8 max-w-3xl">
       <span aria-hidden="true" className="mb-3 block h-1.5 w-14 rounded-full bg-accent" />
       <h2 id={`${id}-title`} className="text-2xl font-extrabold tracking-tight sm:text-3xl">{title}</h2>
-      {lead && <p className={`mt-3 text-lg leading-8 ${tone === "navy" ? "text-white/75" : "text-muted"}`}>{lead}</p>}
+      {lead && <p className={`mt-3 text-lg leading-8 ${tone === "navy" ? "text-white/75" : "text-muted"}`}><RichText text={lead} tone={tone === "navy" ? "dark" : "light"} /></p>}
     </div>
   );
 }
@@ -47,7 +48,7 @@ function Items({ items, body, tone }: { items: { title: string; text: string }[]
             <span className="mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent text-navy"><Icon name="check" className="h-4 w-4" /></span>
             <div>
               <h3 className="font-extrabold text-navy">{it.title}</h3>
-              <p className="mt-1 leading-7 text-muted">{it.text}</p>
+              <p className="mt-1 leading-7 text-muted"><RichText text={it.text} tone={dark ? "dark" : "light"} /></p>
             </div>
           </li>
         ))}
@@ -63,7 +64,7 @@ function Items({ items, body, tone }: { items: { title: string; text: string }[]
               <h3 className="text-lg">{it.title}</h3>
               <Icon name="chevron" className="h-5 w-5 shrink-0 text-accent transition-transform group-open:rotate-180" />
             </summary>
-            <p className="mt-3 leading-7 text-muted">{it.text}</p>
+            <p className="mt-3 leading-7 text-muted"><RichText text={it.text} tone={dark ? "dark" : "light"} /></p>
           </details>
         ))}
       </div>
@@ -75,7 +76,7 @@ function Items({ items, body, tone }: { items: { title: string; text: string }[]
         {items.map((it) => (
           <div key={it.title + it.text.slice(0, 10)} className="grid gap-1 p-5 sm:grid-cols-[260px_1fr] sm:gap-8 sm:p-6">
             <dt className="font-extrabold text-navy">{it.title}</dt>
-            <dd className="leading-7 text-muted">{it.text}</dd>
+            <dd className="leading-7 text-muted"><RichText text={it.text} tone={dark ? "dark" : "light"} /></dd>
           </div>
         ))}
       </dl>
@@ -89,7 +90,7 @@ function Items({ items, body, tone }: { items: { title: string; text: string }[]
             <span className={`text-3xl font-extrabold ${dark ? "text-accent" : "text-navy/25"}`}>{String(i + 1).padStart(2, "0")}</span>
             <div>
               <h3 className="text-lg font-extrabold">{it.title}</h3>
-              <p className={`mt-1 leading-7 ${dark ? "text-white/75" : "text-muted"}`}>{it.text}</p>
+              <p className={`mt-1 leading-7 ${dark ? "text-white/75" : "text-muted"}`}><RichText text={it.text} tone={dark ? "dark" : "light"} /></p>
             </div>
           </div>
         ))}
@@ -103,7 +104,7 @@ function Items({ items, body, tone }: { items: { title: string; text: string }[]
         <article key={it.title + it.text.slice(0, 10)} className={`rounded-3xl bg-white p-6 text-navy shadow-sm ring-1 ring-navy/10 ${tiles ? "" : "border-t-4 border-accent"}`}>
           <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-navy text-accent"><Icon name={ICONS[i % ICONS.length]} className="h-5 w-5" /></span>
           <h3 className="mt-4 text-lg font-extrabold">{it.title}</h3>
-          <p className="mt-2 leading-7 text-muted">{it.text}</p>
+          <p className="mt-2 leading-7 text-muted"><RichText text={it.text} tone={dark ? "dark" : "light"} /></p>
         </article>
       ))}
     </div>
@@ -185,7 +186,7 @@ function Steps({ s }: { s: Extract<Section, { kind: "steps" }> }) {
         <li key={it.title} className="rounded-3xl bg-navy-2 p-6 ring-1 ring-white/10">
           <span className="text-5xl font-extrabold text-accent">{i + 1}</span>
           <h3 className="mt-3 text-lg font-extrabold">{it.title}</h3>
-          <p className="mt-2 text-sm leading-6 text-white/75">{it.text}</p>
+          <p className="mt-2 text-sm leading-6 text-white/75"><RichText text={it.text} tone="dark" /></p>
         </li>
       ))}
     </ol>
@@ -266,7 +267,7 @@ export default function SectionBands({ page }: { page: PlacePage }) {
                   // A section with a photo puts it beside the writing, in a slot of fixed size (like the route pages), alternating sides.
                   const content =
                     s.kind === "text" ? (
-                      <div className={`grid gap-6 text-lg leading-8 text-muted ${s.image ? "" : "md:grid-cols-2"}`}>{s.paragraphs.map((p) => <p key={p.slice(0, 24)}>{p}</p>)}</div>
+                      <div className={`grid gap-6 text-lg leading-8 text-muted ${s.image ? "" : "md:grid-cols-2"}`}>{s.paragraphs.map((p) => <p key={p.slice(0, 24)}><RichText text={p} /></p>)}</div>
                     ) : s.kind === "items" ? (
                       <Items items={s.items} body={body} tone={tone} />
                     ) : null;

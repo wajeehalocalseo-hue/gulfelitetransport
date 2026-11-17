@@ -3,6 +3,7 @@ import { fmtKm } from "../riyadh-districts";
 import { bearing, haversine } from "../pairs";
 import type { PlacePage, Section } from "../types";
 import { addImages } from "./images";
+import { addLinks } from "./linking";
 import type { DistrictRichCtx } from "./olaya";
 
 /**
@@ -253,7 +254,7 @@ export function alWurudRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "de
       { label: "KAFD", value: "about 10 km by road" },
       { label: "Metro", value: "two separate stations: Al Wurud (Red) and Al Wurud 2 (Blue)" },
     ],
-    sections: addImages([about, journeys, residential, office, errands, metro, metroRides, airport, pickup, prebook, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name),
+    sections: addLinks(addImages([about, journeys, residential, office, errands, metro, metroRides, airport, pickup, prebook, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name), ctx, "al-wurud"),
     whatsappMessage: ALWURUD_WHATSAPP_MESSAGE,
   };
 }

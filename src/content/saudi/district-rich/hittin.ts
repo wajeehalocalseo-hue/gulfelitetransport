@@ -3,6 +3,7 @@ import { fmtKm } from "../riyadh-districts";
 import { bearing, haversine } from "../pairs";
 import type { PlacePage, Section } from "../types";
 import { addImages } from "./images";
+import { addLinks } from "./linking";
 import type { DistrictRichCtx } from "./olaya";
 
 /**
@@ -230,7 +231,7 @@ export function hittinRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "des
       { label: "Diriyah", value: "about 6 km by road" },
       { label: "Area type", value: "residential and entertainment district" },
     ],
-    sections: addImages([about, journeys, boulevard, fromBoulevard, eventNight, residential, airport, business, map, getting, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name),
+    sections: addLinks(addImages([about, journeys, boulevard, fromBoulevard, eventNight, residential, airport, business, map, getting, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name), ctx, "hittin"),
     whatsappMessage: HITTIN_WHATSAPP_MESSAGE,
   };
 }

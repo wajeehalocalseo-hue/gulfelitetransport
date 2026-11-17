@@ -3,6 +3,7 @@ import { fmtKm } from "../riyadh-districts";
 import { bearing, haversine } from "../pairs";
 import type { PlacePage, Section } from "../types";
 import { addImages } from "./images";
+import { addLinks } from "./linking";
 import type { DistrictRichCtx } from "./olaya";
 
 /**
@@ -209,7 +210,7 @@ export function alAqiqRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "des
       { label: "Olaya", value: "about 14 km by road" },
       { label: "Area type", value: "residential, beside KAFD" },
     ],
-    sections: addImages(
+    sections: addLinks(addImages(
       [about, journeys, airport, business, residential, community, metro, prebook, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq, local],
       me.name,
       {
@@ -217,7 +218,7 @@ export function alAqiqRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "des
         airport: { slot: "al-aqiq-airport-transfer", alt: "A private airport transfer for passengers travelling between Al Aqiq and Riyadh Airport", label: "Photo: al-aqiq-airport-transfer.webp" },
         community: { slot: "al-aqiq-local-destinations", alt: "A business and shopping area near Al Aqiq, Riyadh", label: "Photo: al-aqiq-local-destinations.webp" },
       },
-    ),
+    ), ctx, "al-aqiq"),
     whatsappMessage: ALAQIQ_WHATSAPP_MESSAGE,
   };
 }

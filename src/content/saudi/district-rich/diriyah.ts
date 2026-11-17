@@ -3,6 +3,7 @@ import { fmtKm } from "../riyadh-districts";
 import { bearing, haversine } from "../pairs";
 import type { PlacePage, Section } from "../types";
 import { addImages } from "./images";
+import { addLinks } from "./linking";
 import type { DistrictRichCtx } from "./olaya";
 
 /**
@@ -216,7 +217,7 @@ export function diriyahRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "de
       { label: "KAFD", value: "about 12 km by road" },
       { label: "Area type", value: "heritage and visitor destination" },
     ],
-    sections: addImages([about, journeys, turaif, bujairi, access, airport, groups, map, getting, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name),
+    sections: addLinks(addImages([about, journeys, turaif, bujairi, access, airport, groups, map, getting, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name), ctx, "diriyah"),
     whatsappMessage: DIRIYAH_WHATSAPP_MESSAGE,
   };
 }

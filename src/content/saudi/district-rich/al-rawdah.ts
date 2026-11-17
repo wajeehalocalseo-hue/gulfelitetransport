@@ -3,6 +3,7 @@ import { fmtKm } from "../riyadh-districts";
 import { bearing, haversine } from "../pairs";
 import type { PlacePage, Section } from "../types";
 import { addImages } from "./images";
+import { addLinks } from "./linking";
 import type { DistrictRichCtx } from "./olaya";
 
 /**
@@ -196,7 +197,7 @@ export function alRawdahRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "d
       { label: "KAFD", value: "about 24 km by road" },
       { label: "Area type", value: "residential, east Riyadh" },
     ],
-    sections: addImages(
+    sections: addLinks(addImages(
       [about, journeys, airport, residential, community, business, metro, prebook, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq, local],
       me.name,
       {
@@ -204,7 +205,7 @@ export function alRawdahRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "d
         airport: { slot: "al-rawdah-airport-transfer", alt: "A private airport transfer for passengers travelling between Al Rawdah and Riyadh Airport", label: "Photo: al-rawdah-airport-transfer.webp" },
         community: { slot: "al-rawdah-local-destinations", alt: "A park and local streets in Al Rawdah, Riyadh", label: "Photo: al-rawdah-local-destinations.webp" },
       },
-    ),
+    ), ctx, "al-rawdah"),
     whatsappMessage: ALRAWDAH_WHATSAPP_MESSAGE,
   };
 }

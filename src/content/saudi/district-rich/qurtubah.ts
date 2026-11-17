@@ -3,6 +3,7 @@ import { fmtKm } from "../riyadh-districts";
 import { bearing, haversine } from "../pairs";
 import type { PlacePage, Section } from "../types";
 import { addImages } from "./images";
+import { addLinks } from "./linking";
 import type { DistrictRichCtx } from "./olaya";
 
 /**
@@ -196,7 +197,7 @@ export function qurtubahRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "d
       { label: "Olaya", value: "about 24 km by road" },
       { label: "Area type", value: "residential, north-east Riyadh" },
     ],
-    sections: addImages(
+    sections: addLinks(addImages(
       [about, journeys, airport, residential, destinations, business, metro, prebook, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq, local],
       me.name,
       {
@@ -204,7 +205,7 @@ export function qurtubahRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "d
         airport: { slot: "qurtubah-airport-transfer", alt: "A private airport transfer for passengers travelling between Qurtubah and Riyadh Airport", label: "Photo: qurtubah-airport-transfer.webp" },
         destinations: { slot: "qurtubah-local-destinations", alt: "A shopping and business area near Qurtubah, Riyadh", label: "Photo: qurtubah-local-destinations.webp" },
       },
-    ),
+    ), ctx, "qurtubah"),
     whatsappMessage: QURTUBAH_WHATSAPP_MESSAGE,
   };
 }

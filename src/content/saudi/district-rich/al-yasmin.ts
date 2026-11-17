@@ -3,6 +3,7 @@ import { fmtKm } from "../riyadh-districts";
 import { bearing, haversine } from "../pairs";
 import type { PlacePage, Section } from "../types";
 import { addImages } from "./images";
+import { addLinks } from "./linking";
 import type { DistrictRichCtx } from "./olaya";
 
 /**
@@ -168,7 +169,7 @@ export function alYasminRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "d
       { label: "Olaya", value: "about 19 km by road" },
       { label: "Area type", value: "residential, north Riyadh" },
     ],
-    sections: addImages([about, journeys, residential, airport, family, business, metro, pickup, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name),
+    sections: addLinks(addImages([about, journeys, residential, airport, family, business, metro, pickup, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name), ctx, "al-yasmin"),
     whatsappMessage: ALYASMIN_WHATSAPP_MESSAGE,
   };
 }

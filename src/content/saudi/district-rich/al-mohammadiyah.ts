@@ -3,6 +3,7 @@ import { fmtKm } from "../riyadh-districts";
 import { bearing, haversine } from "../pairs";
 import type { PlacePage, Section } from "../types";
 import { addImages } from "./images";
+import { addLinks } from "./linking";
 import type { DistrictRichCtx } from "./olaya";
 
 /**
@@ -256,7 +257,7 @@ export function alMohammadiyahRich(ctx: DistrictRichCtx): Pick<PlacePage, "title
       { label: "Olaya", value: "about 9 km by road" },
       { label: "Area type", value: "villas, apartments and compounds" },
     ],
-    sections: addImages([about, journeys, villas, family, office, olaya, metro, airport, pickup, prebook, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name),
+    sections: addLinks(addImages([about, journeys, villas, family, office, olaya, metro, airport, pickup, prebook, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name), ctx, "al-mohammadiyah"),
     whatsappMessage: ALMOHAMMADIYAH_WHATSAPP_MESSAGE,
   };
 }

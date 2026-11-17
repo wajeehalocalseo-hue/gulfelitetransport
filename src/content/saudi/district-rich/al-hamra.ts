@@ -3,6 +3,7 @@ import { fmtKm } from "../riyadh-districts";
 import { bearing, haversine } from "../pairs";
 import type { PlacePage, Section } from "../types";
 import { addImages } from "./images";
+import { addLinks } from "./linking";
 import type { DistrictRichCtx } from "./olaya";
 
 /**
@@ -204,7 +205,7 @@ export function alHamraRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "de
       { label: "KAFD", value: "about 20 km by road" },
       { label: "Metro", value: "Line 2 and Line 6 interchange" },
     ],
-    sections: addImages(
+    sections: addLinks(addImages(
       [about, journeys, metro, airport, residential, community, business, prebook, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq, local],
       me.name,
       {
@@ -212,7 +213,7 @@ export function alHamraRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "de
         metro: { slot: "al-hamra-metro-interchange", alt: "A metro and local transport setting in Al Hamra, east Riyadh", label: "Photo: al-hamra-metro-interchange.webp" },
         community: { slot: "al-hamra-local-destinations", alt: "A shopping street and local places in Al Hamra, Riyadh", label: "Photo: al-hamra-local-destinations.webp" },
       },
-    ),
+    ), ctx, "al-hamra"),
     whatsappMessage: ALHAMRA_WHATSAPP_MESSAGE,
   };
 }

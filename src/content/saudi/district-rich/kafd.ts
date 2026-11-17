@@ -3,6 +3,7 @@ import { fmtKm } from "../riyadh-districts";
 import { bearing, haversine } from "../pairs";
 import type { PlacePage, Section } from "../types";
 import { addImages } from "./images";
+import { addLinks } from "./linking";
 import type { DistrictRichCtx } from "./olaya";
 
 /**
@@ -213,7 +214,7 @@ export function kafdRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "descr
       { label: "Ad Dirah (old city)", value: "about 20 km by road" },
       { label: "Area type", value: "financial and business district" },
     ],
-    sections: addImages([journeys, business, access, hotels, airport, metro, about, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name),
+    sections: addLinks(addImages([journeys, business, access, hotels, airport, metro, about, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name), ctx, "king-abdullah-financial-district"),
     whatsappMessage: KAFD_WHATSAPP_MESSAGE,
   };
 }

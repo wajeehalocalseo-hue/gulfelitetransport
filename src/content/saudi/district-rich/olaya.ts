@@ -3,6 +3,7 @@ import { fmtKm } from "../riyadh-districts";
 import { bearing, haversine } from "../pairs";
 import type { PlacePage, Section } from "../types";
 import { addImages } from "./images";
+import { addLinks } from "./linking";
 
 /**
  * Olaya Taxi Service: the hand-written landing page for the Olaya district (see build.ts, which uses this instead of the generic district template).
@@ -218,7 +219,7 @@ export function olayaRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "desc
       { label: "Ad Dirah (old city)", value: "about 9 km by road" },
       { label: "Area type", value: "business, hotel and shopping district" },
     ],
-    sections: addImages([journeys, business, hotels, airport, landmarks, map, metro, pickup, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name),
+    sections: addLinks(addImages([journeys, business, hotels, airport, landmarks, map, metro, pickup, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name), ctx, "olaya"),
     whatsappMessage: OLAYA_WHATSAPP_MESSAGE,
   };
 }

@@ -3,6 +3,7 @@ import { fmtKm } from "../riyadh-districts";
 import { bearing, haversine } from "../pairs";
 import type { PlacePage, Section } from "../types";
 import { addImages } from "./images";
+import { addLinks } from "./linking";
 import type { DistrictRichCtx } from "./olaya";
 
 /**
@@ -204,7 +205,7 @@ export function granadaRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "de
       { label: "Olaya", value: "about 22 km by road" },
       { label: "Metro", value: "Granada station on Line 6" },
     ],
-    sections: addImages(
+    sections: addLinks(addImages(
       [about, journeys, community, hotel, metro, airport, business, residential, prebook, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq, local],
       me.name,
       {
@@ -212,7 +213,7 @@ export function granadaRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "de
         community: { slot: "granada-mall-business-park", alt: "Granada Mall and Granada Business Park area in Riyadh", label: "Photo: granada-mall-business-park.webp" },
         metro: { slot: "granada-local-transport", alt: "A local transport setting near Granada Metro Station in Riyadh", label: "Photo: granada-local-transport.webp" },
       },
-    ),
+    ), ctx, "granada"),
     whatsappMessage: GRANADA_WHATSAPP_MESSAGE,
   };
 }
