@@ -262,13 +262,25 @@ export default function SectionBands({ page }: { page: PlacePage }) {
             ) : (
               <>
                 <Head id={s.id} title={s.h2} tone={tone} lead={"intro" in s ? s.intro : undefined} />
-                {s.image && (
-                  <figure className="mb-8 overflow-hidden rounded-2xl shadow-sm ring-1 ring-navy/10">
-                    <ImageSlot folder={`riyadh-districts/${page.path.split("/").pop()}`} slot={s.image.slot} alt={s.image.alt} label={s.image.label} width={1200} height={500} sizes="(min-width: 1280px) 80rem, 100vw" />
-                  </figure>
-                )}
-                {s.kind === "text" && <div className="grid gap-6 text-lg leading-8 text-muted md:grid-cols-2">{s.paragraphs.map((p) => <p key={p.slice(0, 24)}>{p}</p>)}</div>}
-                {s.kind === "items" && <Items items={s.items} body={body} tone={tone} />}
+                {(() => {
+                  // A section with a photo puts it beside the writing, in a slot of fixed size (like the route pages), alternating sides.
+                  const content =
+                    s.kind === "text" ? (
+                      <div className={`grid gap-6 text-lg leading-8 text-muted ${s.image ? "" : "md:grid-cols-2"}`}>{s.paragraphs.map((p) => <p key={p.slice(0, 24)}>{p}</p>)}</div>
+                    ) : s.kind === "items" ? (
+                      <Items items={s.items} body={body} tone={tone} />
+                    ) : null;
+                  if (!s.image || !content) return content;
+                  const left = n % 2 === 0;
+                  return (
+                    <div className={`grid gap-8 lg:items-start ${left ? "lg:grid-cols-[0.7fr_1.3fr]" : "lg:grid-cols-[1.3fr_0.7fr]"}`}>
+                      <div className={left ? "lg:order-2" : ""}>{content}</div>
+                      <figure className={`overflow-hidden rounded-2xl shadow-sm ring-1 ring-navy/10 ${left ? "lg:order-1" : ""}`}>
+                        <ImageSlot folder={`riyadh-districts/${page.path.split("/").pop()}`} slot={s.image.slot} alt={s.image.alt} label={s.image.label} width={640} height={520} sizes="(min-width: 1024px) 26rem, 100vw" />
+                      </figure>
+                    </div>
+                  );
+                })()}
                 {s.kind === "links" && <Links items={s.items} />}
                 {s.kind === "table" && <Table s={s} />}
                 {s.kind === "map" && <MapBlock s={s} />}
