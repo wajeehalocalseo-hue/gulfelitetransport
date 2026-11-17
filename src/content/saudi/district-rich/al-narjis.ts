@@ -2,6 +2,7 @@ import type { CityArea } from "../riyadh-areas";
 import { fmtKm } from "../riyadh-districts";
 import { bearing, haversine } from "../pairs";
 import type { PlacePage, Section } from "../types";
+import { addImages } from "./images";
 import type { DistrictRichCtx } from "./olaya";
 
 /**
@@ -191,7 +192,7 @@ export function alNarjisRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "d
       { label: "Olaya", value: "about 22 km by road" },
       { label: "Area type", value: "large residential, north Riyadh" },
     ],
-    sections: [about, journeys, pinsIntro, pins, airport, university, health, family, business, metro, pickup, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq],
+    sections: addImages([about, journeys, pinsIntro, pins, airport, university, health, family, business, metro, pickup, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name),
     whatsappMessage: ALNARJIS_WHATSAPP_MESSAGE,
   };
 }

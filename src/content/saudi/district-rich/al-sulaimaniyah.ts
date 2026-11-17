@@ -2,6 +2,7 @@ import type { CityArea } from "../riyadh-areas";
 import { fmtKm } from "../riyadh-districts";
 import { bearing, haversine } from "../pairs";
 import type { PlacePage, Section } from "../types";
+import { addImages } from "./images";
 import type { DistrictRichCtx } from "./olaya";
 
 /**
@@ -240,7 +241,7 @@ export function alSulaimaniyahRich(ctx: DistrictRichCtx): Pick<PlacePage, "title
       { label: "KAFD", value: "about 13 km by road" },
       { label: "Area type", value: "homes, offices and clinics" },
     ],
-    sections: [about, journeys, office, clinics, errands, metro, airport, pickup, prebook, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq],
+    sections: addImages([about, journeys, office, clinics, errands, metro, airport, pickup, prebook, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name),
     whatsappMessage: ALSULAIMANIYAH_WHATSAPP_MESSAGE,
   };
 }

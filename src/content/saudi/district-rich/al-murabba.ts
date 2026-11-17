@@ -2,6 +2,7 @@ import type { CityArea } from "../riyadh-areas";
 import { fmtKm } from "../riyadh-districts";
 import { bearing, haversine } from "../pairs";
 import type { PlacePage, Section } from "../types";
+import { addImages } from "./images";
 import type { DistrictRichCtx } from "./olaya";
 
 /**
@@ -222,7 +223,7 @@ export function alMurabbaRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "
       { label: "Ad Dirah", value: "about 3 km by road" },
       { label: "Area type", value: "museums and heritage" },
     ],
-    sections: [about, journeys, heritage, uses, pickup, returnRide, airport, metro, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq],
+    sections: addImages([about, journeys, heritage, uses, pickup, returnRide, airport, metro, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name),
     whatsappMessage: ALMURABBA_WHATSAPP_MESSAGE,
   };
 }

@@ -2,6 +2,7 @@ import type { CityArea } from "../riyadh-areas";
 import { fmtKm } from "../riyadh-districts";
 import { bearing, haversine } from "../pairs";
 import type { PlacePage, Section } from "../types";
+import { addImages } from "./images";
 import type { DistrictRichCtx } from "./olaya";
 
 /**
@@ -256,7 +257,7 @@ export function alNakheelRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "
       { label: "Olaya", value: "about 13 km by road" },
       { label: "Al Nakheel Mall", value: "north-east Riyadh, not in the district" },
     ],
-    sections: [about, journeys, residential, mall, university, airport, business, family, metro, pickup, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq],
+    sections: addImages([about, journeys, residential, mall, university, airport, business, family, metro, pickup, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name),
     whatsappMessage: ALNAKHEEL_WHATSAPP_MESSAGE,
   };
 }

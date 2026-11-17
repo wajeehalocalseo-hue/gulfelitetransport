@@ -2,6 +2,7 @@ import type { CityArea } from "../riyadh-areas";
 import { fmtKm } from "../riyadh-districts";
 import { bearing, haversine } from "../pairs";
 import type { PlacePage, Section } from "../types";
+import { addImages } from "./images";
 import type { DistrictRichCtx } from "./olaya";
 
 /**
@@ -218,7 +219,7 @@ export function adDirahRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "de
       { label: "KAFD", value: "about 20 km by road" },
       { label: "Area type", value: "historic centre and markets" },
     ],
-    sections: [about, journeys, heritage, markets, pickup, returnRide, airport, metro, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq],
+    sections: addImages([about, journeys, heritage, markets, pickup, returnRide, airport, metro, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name),
     whatsappMessage: ADDIRAH_WHATSAPP_MESSAGE,
   };
 }

@@ -2,6 +2,7 @@ import type { CityArea } from "../riyadh-areas";
 import { fmtKm } from "../riyadh-districts";
 import { bearing, haversine } from "../pairs";
 import type { PlacePage, Section } from "../types";
+import { addImages } from "./images";
 import type { DistrictRichCtx } from "./olaya";
 
 /**
@@ -192,7 +193,7 @@ export function diplomaticQuarterRich(ctx: DistrictRichCtx): Pick<PlacePage, "ti
       { label: "KAFD", value: "about 17 km by road" },
       { label: "Area type", value: "planned embassy district, controlled access" },
     ],
-    sections: [about, journeys, appointments, access, airport, getting, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq],
+    sections: addImages([about, journeys, appointments, access, airport, getting, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name),
     whatsappMessage: DQ_WHATSAPP_MESSAGE,
   };
 }

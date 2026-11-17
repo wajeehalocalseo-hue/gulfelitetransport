@@ -2,6 +2,7 @@ import type { CityArea } from "../riyadh-areas";
 import { fmtKm } from "../riyadh-districts";
 import { bearing, haversine } from "../pairs";
 import type { PlacePage, Section } from "../types";
+import { addImages } from "./images";
 import type { DistrictRichCtx } from "./olaya";
 
 /**
@@ -227,7 +228,7 @@ export function alMalazRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "de
       { label: "Ad Dirah", value: "about 5.5 km by road" },
       { label: "Area type", value: "residential, parks and sport" },
     ],
-    sections: [about, journeys, park, sports, everyday, pickup, airport, metro, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq],
+    sections: addImages([about, journeys, park, sports, everyday, pickup, airport, metro, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name),
     whatsappMessage: ALMALAZ_WHATSAPP_MESSAGE,
   };
 }

@@ -61,7 +61,12 @@ import type { RichRoute } from "./rich-types";
 
 export type PageKind = "hub" | "region" | "city" | "area" | "airport" | "route" | "pair" | "topic";
 
-export type Section =
+/** An optional photo for a section. Until public/images/routes/riyadh-districts/<page>/<slot>.webp exists a labelled placeholder of the same size is shown. */
+export type SectionImage = { slot: string; alt: string; label: string };
+
+export type Section = SectionBody & { image?: SectionImage };
+
+type SectionBody =
   | { id: string; h2: string; kind: "text"; paragraphs: string[] }
   | { id: string; h2: string; kind: "items"; intro?: string; items: { title: string; text: string }[] }
   | { id: string; h2: string; kind: "steps"; items: { title: string; text: string }[] }

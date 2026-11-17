@@ -3,6 +3,7 @@ import LazyMap from "./LazyMap";
 import type { ReactNode } from "react";
 import FaqList from "./Faq";
 import Icon from "./Icon";
+import ImageSlot from "./ImageSlot";
 import WeatherWidget from "./WeatherWidget";
 import type { PlacePage, Section } from "@/content/saudi/types";
 
@@ -221,6 +222,11 @@ export default function SectionBands({ page }: { page: PlacePage }) {
             ) : (
               <>
                 <Head id={s.id} title={s.h2} tone={tone} lead={"intro" in s ? s.intro : undefined} />
+                {s.image && (
+                  <figure className="mb-8 overflow-hidden rounded-2xl shadow-sm ring-1 ring-navy/10">
+                    <ImageSlot folder={`riyadh-districts/${page.path.split("/").pop()}`} slot={s.image.slot} alt={s.image.alt} label={s.image.label} width={1200} height={500} sizes="(min-width: 1280px) 80rem, 100vw" />
+                  </figure>
+                )}
                 {s.kind === "text" && <div className="grid gap-6 text-lg leading-8 text-muted md:grid-cols-2">{s.paragraphs.map((p) => <p key={p.slice(0, 24)}>{p}</p>)}</div>}
                 {s.kind === "items" && <Items items={s.items} body={body} tone={tone} />}
                 {s.kind === "links" && <Links items={s.items} />}
