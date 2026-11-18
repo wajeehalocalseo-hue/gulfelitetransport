@@ -115,7 +115,7 @@ export function RichUmrahBody({ page, rich }: { page: PlacePage; rich: RichRoute
             </div>
           </div>
           <div className="overflow-hidden rounded-[2rem] shadow-xl ring-1 ring-navy/10">
-            <ImageSlot folder={f} slot="highway" alt={rich.highwayAlt} label="Highway journey image" width={800} height={700} />
+            <ImageSlot folder={f} slot="highway" alt={rich.highwayAlt} label="Highway journey image" width={rich.imageAspect?.highway?.[0] ?? 800} height={rich.imageAspect?.highway?.[1] ?? 700} />
           </div>
         </div>
       </Section>
@@ -143,7 +143,7 @@ export function RichUmrahBody({ page, rich }: { page: PlacePage; rich: RichRoute
             <div className="lg:sticky lg:top-28">
               <Heading id="umrah" eyebrow="Umrah and family travel" dark lead={umrah.intro}>{umrah.heading}</Heading>
               <div className="overflow-hidden rounded-[2rem] ring-1 ring-white/15">
-                <ImageSlot folder={f} slot={umrah.slot} alt={umrah.alt} label="Family travel image" width={800} height={600} />
+                <ImageSlot folder={f} slot={umrah.slot} alt={umrah.alt} label="Family travel image" width={rich.imageAspect?.family?.[0] ?? 800} height={rich.imageAspect?.family?.[1] ?? 600} />
               </div>
             </div>
             <div>
@@ -284,7 +284,7 @@ export function RichUmrahBody({ page, rich }: { page: PlacePage; rich: RichRoute
               <Link href={airport.href} className="mt-4 inline-flex items-center gap-2 font-bold text-accent underline underline-offset-4">Jeddah airport taxi page <Icon name="arrow" className="h-4 w-4" /></Link>
             </div>
             <div className="overflow-hidden rounded-2xl ring-1 ring-white/15">
-              <ImageSlot folder={f} slot={airport.slot} alt={airport.alt} label="Jeddah airport image" width={600} height={600} />
+              <ImageSlot folder={f} slot={airport.slot} alt={airport.alt} label="Jeddah airport image" width={rich.imageAspect?.airport?.[0] ?? 600} height={rich.imageAspect?.airport?.[1] ?? 600} />
             </div>
           </div>
         </Section>

@@ -21,6 +21,8 @@ export const makkahRich: RichRoute = {
   toHref: "/taxi-saudi-arabia/makkah-region/makkah",
   variant: "umrah",
   imageFolder: "riyadh-to-makkah",
+  // The supplied photos are portrait (Haram at night, Kaaba) and a 3:2 station photo, so these slots are shaped to show each photo whole.
+  imageAspect: { highway: [750, 1000], family: [750, 1000], airport: [600, 400] },
   eyebrow: "Private intercity transfer · Umrah and family travel",
   heroPoints: ["Private vehicle for your family or group", "Planned pickup and hotel drop-off area", "One-way and return requests", "Vehicle, driver and fare confirmed before you commit"],
   heroAlt: "A private family car travelling the highway from Riyadh towards Makkah",
@@ -127,7 +129,7 @@ export const makkahRich: RichRoute = {
     note: "The distance from Jeddah to Makkah is an approximate estimate and is confirmed with your quote.",
     href: "/taxi-saudi-arabia/airports/king-abdulaziz-international-airport",
     slot: "airport",
-    alt: "King Abdulaziz International Airport in Jeddah, a separate transfer from the Riyadh to Makkah journey",
+    alt: "A modern station building with a white mosque and minaret beside it, near King Abdulaziz International Airport in Jeddah, a separate transfer from the Riyadh to Makkah journey",
   },
   planHeading: "Planning the Journey from Riyadh to Makkah",
   plan: [

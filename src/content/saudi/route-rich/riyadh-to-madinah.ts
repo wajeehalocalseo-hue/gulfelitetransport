@@ -22,6 +22,8 @@ export const madinahRich: RichRoute = {
   toHref: "/taxi-saudi-arabia/madinah-region/madinah",
   variant: "madinah",
   imageFolder: "riyadh-to-madinah",
+  // The supplied photos are portrait (two mosque views, a hotel) and one 3:2 airport photo, so these slots are shaped to show each photo whole.
+  imageAspect: { highway: [600, 800], family: [600, 800], madinah: [640, 640], airport: [900, 600] },
   eyebrow: "Private intercity transfer · Visits to Madinah",
   heroPoints: ["Private vehicle for your family or group", "Planned pickup and hotel drop-off area", "One-way and return requests", "Vehicle, driver and fare confirmed before you commit"],
   heroAlt: "A private family car on the road from Riyadh towards Madinah",
@@ -63,7 +65,7 @@ export const madinahRich: RichRoute = {
     ],
     note: "Gulf Elite Transport Group provides private road transport only. We are not a pilgrimage organiser and do not issue permits or religious advice.",
     slot: "family",
-    alt: "A family planning a private road journey from Riyadh to Madinah",
+    alt: "Large shade umbrellas and a minaret in the courtyard of the Prophet's Mosque in Madinah, with visitors walking across the marble floor",
   },
   dropHeading: "Planning Your Arrival in Madinah",
   dropIntro: "Vehicle access around Al-Masjid an-Nabawi can be controlled. The nearest permitted drop-off point depends on your hotel, the date and the access arrangements in force, so we confirm it with you before you travel.",
@@ -82,7 +84,7 @@ export const madinahRich: RichRoute = {
     { name: "Madinah hotel arrival from the airport", text: "Arriving by air instead? The airport to hotel ride is a separate request.", href: "/umrah-hajj-taxi/madinah-airport-to-madinah-hotel" },
   ],
   dropNote: "Vehicle access in Madinah may be controlled and can change by date. We do not guarantee a drop-off at a hotel entrance or at the gates of Al-Masjid an-Nabawi. Confirm current access arrangements before you travel.",
-  dropAlt: "A Madinah hotel street where a private transfer from Riyadh can end",
+  dropAlt: "A hotel building on a paved square in central Madinah, where a private transfer from Riyadh can end",
   vehiclesHeading: "Choose a Vehicle for Your Group",
   vehiclesIntro: "The vehicle for your journey depends on the number of passengers, the amount of luggage, your requested category and availability. We confirm it with you before you book.",
   vehicles: [
@@ -119,7 +121,7 @@ export const madinahRich: RichRoute = {
     { title: "Passengers and luggage", text: "Count every passenger and every bag, so the vehicle has room for the group." },
   ],
   mapQuery: { from: "Riyadh, Saudi Arabia", to: "Madinah, Saudi Arabia" },
-  highwayAlt: "A Saudi highway on the long road from Riyadh to Madinah",
+  highwayAlt: "The Prophet's Mosque in Madinah with its green dome and a tall minaret under a clear blue sky",
   airport: {
     heading: "Airport Transfers: Prince Mohammad bin Abdulaziz International Airport (MED)",
     intro: "Many visitors fly into Madinah instead of driving from Riyadh. An airport pickup is a separate request from the long-distance Riyadh to Madinah journey.",
@@ -131,7 +133,7 @@ export const madinahRich: RichRoute = {
     note: "The airport is about 17 km from the centre of Madinah by road (an estimate).",
     href: "/taxi-saudi-arabia/airports/prince-mohammad-bin-abdulaziz-international-airport",
     slot: "airport",
-    alt: "Prince Mohammad bin Abdulaziz International Airport in Madinah, a separate transfer from the Riyadh to Madinah journey",
+    alt: "The terminal front of Prince Mohammad bin Abdulaziz International Airport in Madinah, with buses at the forecourt, a separate transfer from the Riyadh to Madinah journey",
   },
   railway: {
     heading: "Madinah and the Haramain High Speed Railway",

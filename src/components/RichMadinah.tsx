@@ -91,7 +91,7 @@ export function RichMadinahBody({ page, rich }: { page: PlacePage; rich: RichRou
             </div>
           </div>
           <div className="mx-auto w-full max-w-md overflow-hidden rounded-t-[12rem] rounded-b-3xl shadow-xl ring-1 ring-navy/10">
-            <ImageSlot folder={f} slot="highway" alt={rich.highwayAlt} label="Highway journey image" width={640} height={800} />
+            <ImageSlot folder={f} slot="highway" alt={rich.highwayAlt} label="Highway journey image" width={rich.imageAspect?.highway?.[0] ?? 640} height={rich.imageAspect?.highway?.[1] ?? 800} />
           </div>
         </div>
       </Section>
@@ -117,7 +117,7 @@ export function RichMadinahBody({ page, rich }: { page: PlacePage; rich: RichRou
             <div>
               <Heading id="visit" eyebrow="Visiting Madinah" lead={umrah.intro}>{umrah.heading}</Heading>
               <div className="mx-auto w-full max-w-md overflow-hidden rounded-t-[12rem] rounded-b-3xl shadow-xl ring-1 ring-navy/10">
-                <ImageSlot folder={f} slot={umrah.slot} alt={umrah.alt} label="Family travel image" width={640} height={720} />
+                <ImageSlot folder={f} slot={umrah.slot} alt={umrah.alt} label="Family travel image" width={rich.imageAspect?.family?.[0] ?? 640} height={rich.imageAspect?.family?.[1] ?? 720} />
               </div>
             </div>
             <div>
@@ -151,7 +151,7 @@ export function RichMadinahBody({ page, rich }: { page: PlacePage; rich: RichRou
             </ul>
             {rich.dropNote && <p role="note" className="mt-5 rounded-2xl bg-accent/25 p-5 text-sm font-semibold leading-7 text-navy">{rich.dropNote}</p>}
             <div className="mt-6 overflow-hidden rounded-3xl">
-              <ImageSlot folder={f} slot="madinah" alt={rich.dropAlt} label="Madinah hotel arrival image" width={900} height={420} />
+              <ImageSlot folder={f} slot="madinah" alt={rich.dropAlt} label="Madinah hotel arrival image" width={rich.imageAspect?.madinah?.[0] ?? 900} height={rich.imageAspect?.madinah?.[1] ?? 420} />
             </div>
           </div>
           <div className="rounded-3xl bg-navy p-7 text-white shadow-xl">
@@ -243,7 +243,7 @@ export function RichMadinahBody({ page, rich }: { page: PlacePage; rich: RichRou
               <div className="rounded-3xl bg-white/5 p-7 ring-1 ring-white/15">
                 <Heading id="airport" eyebrow="Airport transfers" dark lead={airport.intro}>{airport.heading}</Heading>
                 <div className="mb-6 overflow-hidden rounded-2xl">
-                  <ImageSlot folder={f} slot={airport.slot} alt={airport.alt} label="Madinah airport image" width={800} height={400} />
+                  <ImageSlot folder={f} slot={airport.slot} alt={airport.alt} label="Madinah airport image" width={rich.imageAspect?.airport?.[0] ?? 800} height={rich.imageAspect?.airport?.[1] ?? 400} />
                 </div>
                 <ul className="space-y-4">
                   {airport.items.map((a) => (

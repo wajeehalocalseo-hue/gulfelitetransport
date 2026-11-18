@@ -36,6 +36,8 @@ export type RichRoute = {
   airport?: { heading: string; intro: string; items: { title: string; text: string }[]; note: string; href: string; slot: string; alt: string };
   /** Folder under public/images/routes/ for this route's photos, for example "riyadh-to-jeddah". */
   imageFolder: string;
+  /** Optional [width, height] for a photo slot, when the supplied photo is not the default shape (the Umrah layout reads highway, family, makkah and airport). */
+  imageAspect?: Partial<Record<"highway" | "family" | "makkah" | "madinah" | "airport", [number, number]>>;
   eyebrow: string;
   heroPoints: string[];
   heroAlt: string;
