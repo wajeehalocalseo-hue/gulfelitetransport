@@ -9,6 +9,7 @@ import { alSahafahRich } from "./al-sahafah";
 import { alYasminRich } from "./al-yasmin";
 import { alMohammadiyahRich } from "./al-mohammadiyah";
 import { alMurabbaRich } from "./al-murabba";
+import { alNaseemRich } from "./al-naseem";
 import { alNakheelRich } from "./al-nakheel";
 import { alSulaimaniyahRich } from "./al-sulaimaniyah";
 import { alWurudRich } from "./al-wurud";
@@ -51,6 +52,7 @@ const registry: Record<string, (ctx: DistrictRichCtx) => DistrictRich> = {
   "al-hamra": alHamraRich,
   "al-quds": alQudsRich,
   "al-rabwah": alRabwahRich,
+  "al-naseem": alNaseemRich,
   granada: granadaRich,
 };
 
