@@ -1,6 +1,8 @@
 import type { PlacePage } from "../types";
 import { adDirahRich } from "./ad-dirah";
 import { alAqiqRich } from "./al-aqiq";
+import { alAziziyahRich } from "./al-aziziyah";
+import { alDarAlBaidaRich } from "./al-dar-al-baida";
 import { alHamraRich } from "./al-hamra";
 import { alMalazRich } from "./al-malaz";
 import { alMalqaRich } from "./al-malqa";
@@ -11,7 +13,9 @@ import { alMohammadiyahRich } from "./al-mohammadiyah";
 import { alMurabbaRich } from "./al-murabba";
 import { alNaseemRich } from "./al-naseem";
 import { alNakheelRich } from "./al-nakheel";
+import { alShifaRich } from "./al-shifa";
 import { alSulaimaniyahRich } from "./al-sulaimaniyah";
+import { alUraijaRich } from "./al-uraija";
 import { alWurudRich } from "./al-wurud";
 import { diplomaticQuarterRich } from "./diplomatic-quarter";
 import { diriyahRich } from "./diriyah";
@@ -53,6 +57,10 @@ const registry: Record<string, (ctx: DistrictRichCtx) => DistrictRich> = {
   "al-quds": alQudsRich,
   "al-rabwah": alRabwahRich,
   "al-naseem": alNaseemRich,
+  "al-shifa": alShifaRich,
+  "al-aziziyah": alAziziyahRich,
+  "al-dar-al-baida": alDarAlBaidaRich,
+  "al-uraija": alUraijaRich,
   granada: granadaRich,
 };
 
