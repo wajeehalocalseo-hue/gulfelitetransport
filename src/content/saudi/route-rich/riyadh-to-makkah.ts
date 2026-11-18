@@ -36,7 +36,7 @@ export const makkahRich: RichRoute = {
   introHeading: "Riyadh to Makkah Taxi: A Private Road Transfer",
   intro: [
     "The road from Riyadh to Makkah crosses the central plateau of Saudi Arabia and runs west along the Riyadh to Makkah highway corridor, which mostly follows Route 40. Many passengers choose a private vehicle because the journey is long and they travel with family, luggage or a group.",
-    "A private transfer lets you agree the pickup address, the vehicle and the departure time in advance. It is a road service, not an official Umrah package: it does not include permits, accommodation or religious guidance.",
+    "A private transfer lets you agree the pickup address, the vehicle and the departure time in advance. It is a road service, not an official Umrah package: it does not include permits, accommodation or religious guidance. For rides inside the city once you arrive, see our [Makkah taxi service](/taxi-saudi-arabia/makkah-region/makkah) and [Umrah and Hajj taxi](/umrah-hajj-taxi) pages.",
   ],
   whyHeading: "Why Choose a Private Transfer to Makkah?",
   why: [
@@ -54,14 +54,14 @@ export const makkahRich: RichRoute = {
     items: [
       { title: "Travelling together", text: "Where the vehicle's capacity allows, the whole family or group can travel in one vehicle rather than several." },
       { title: "Luggage kept together", text: "Umrah luggage, cabin bags and any larger items travel with you. Count every bag when you request a quote." },
-      { title: "Hotel arrival", text: "Share the hotel name and district so the drop-off area can be planned before you leave Riyadh." },
+      { title: "Hotel arrival", text: "Share the hotel name and district so the drop-off area can be planned before you leave Riyadh. Hotel guides cover [Abraj Al Bait and Jabal Omar](/umrah-hajj-taxi/abraj-al-bait-jabal-omar-taxi) and [Aziziyah](/umrah-hajj-taxi/aziziyah-to-haram-taxi)." },
       { title: "Planned breaks", text: "Rest, prayer and meal stops can be requested ahead of time, so the family is not rushed." },
       { title: "The return journey", text: "A ride back to Riyadh can be arranged in the same request, with the day and time you want to leave Makkah." },
       { title: "Special requirements", text: "Tell us about children's seats, older relatives or mobility needs, so the vehicle and plan suit them." },
     ],
     note: "Gulf Elite Transport Group provides private road transport only. We are not an Umrah operator and do not issue permits or religious advice.",
     slot: "family",
-    alt: "A family planning luggage for a private road transfer to Makkah",
+    alt: "Pilgrims in white and yellow gathered beside the Kaaba at the Grand Mosque in Makkah",
   },
   vehiclesHeading: "Choose a Vehicle for Your Group",
   vehiclesIntro: "The vehicle for your journey depends on the number of passengers, the amount of luggage, your requested category and availability. We confirm it with you before you book.",
@@ -99,7 +99,7 @@ export const makkahRich: RichRoute = {
     { name: "Other confirmed hotel locations", text: "Tell us where you are staying, and we check the best drop-off point with you." },
   ],
   dropNote: "Vehicle access in Makkah may be controlled and can change by date. We do not guarantee a drop-off at a hotel entrance or at Al-Masjid al-Haram. Confirm current access rules before you travel.",
-  dropAlt: "A Makkah hotel district where a private transfer from Riyadh can end",
+  dropAlt: "Aerial view of Makkah at sunrise with the Abraj Al Bait Clock Tower beside the Grand Mosque, where a private transfer from Riyadh can end",
   miqat: {
     heading: "Miqat and Travel Preparation",
     intro: "If you are travelling for Umrah, preparing for Ihram is your responsibility. This section is general information for planning your road journey. It is not religious guidance.",
@@ -120,7 +120,7 @@ export const makkahRich: RichRoute = {
     heading: "King Abdulaziz International Airport (JED) Is in Jeddah, Not Makkah",
     intro: "Many passengers fly into Jeddah and travel on to Makkah. JED is a separate journey from Riyadh and from Makkah.",
     items: [
-      { title: "Where JED is", text: "King Abdulaziz International Airport serves Jeddah. Makkah is a separate city, about 100 km away by road (an estimate)." },
+      { title: "Where JED is", text: "[King Abdulaziz International Airport](/taxi-saudi-arabia/airports/king-abdulaziz-international-airport) serves Jeddah. Makkah is a separate city, about 100 km away by road (an estimate)." },
       { title: "Jeddah to Makkah is its own transfer", text: "A transfer from JED to Makkah is a separate request. It is not automatically included in a Riyadh to Makkah booking." },
       { title: "What to send", text: "Give us your flight details, terminal, arrival time, number of passengers and bags, and your hotel in Makkah." },
     ],
@@ -132,13 +132,13 @@ export const makkahRich: RichRoute = {
   planHeading: "Planning the Journey from Riyadh to Makkah",
   plan: [
     { title: "Distance and time", text: "The road is about 870 km, a journey of about 9 hours 35 minutes of driving without stops. These are estimates. With rest and prayer breaks, plan for a full day." },
-    { title: "The road", text: "The journey runs west from Riyadh along the Riyadh to Makkah highway corridor, mostly Route 40. The driver chooses the best road on the day." },
+    { title: "The road", text: "The journey runs west from Riyadh along the Riyadh to Makkah highway corridor, mostly Route 40. The driver chooses the best road on the day. Passengers who also want Jeddah or Madinah can look at the [Riyadh to Jeddah](/taxi-saudi-arabia/routes/riyadh-to-jeddah) and [Riyadh to Madinah](/taxi-saudi-arabia/routes/riyadh-to-madinah) pages." },
     { title: "Traffic and season", text: "Traffic varies by day and season. Demand rises around Ramadan, school holidays and the Hajj period, so ask early for those dates." },
     { title: "Stops", text: "Rest and prayer stops can be requested in advance. Agree how many you want before the journey." },
     { title: "Passengers and luggage", text: "Count every passenger and every bag, so the vehicle has room for the group." },
   ],
   mapQuery: { from: "Riyadh, Saudi Arabia", to: "Makkah, Saudi Arabia" },
-  highwayAlt: "A Saudi highway on the long road from Riyadh to Makkah",
+  highwayAlt: "The Grand Mosque in Makkah at night, with its minarets and the crowds around the Haram",
   whoHeading: "Who Uses This Service?",
   who: [
     { title: "Umrah families", text: "Families travelling together who want one vehicle and a planned arrival." },

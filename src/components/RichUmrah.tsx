@@ -5,6 +5,7 @@ import Breadcrumbs from "./Breadcrumbs";
 import FaqList from "./Faq";
 import Icon from "./Icon";
 import ImageSlot from "./ImageSlot";
+import RichText from "./RichText";
 import { Cta, arrowLink, btn, wrap } from "./RichRoute";
 import type { PlacePage } from "@/content/saudi/types";
 import type { RichRoute } from "@/content/saudi/rich-types";
@@ -110,7 +111,7 @@ export function RichUmrahBody({ page, rich }: { page: PlacePage; rich: RichRoute
             <Heading id="about" eyebrow="About this route">{rich.introHeading}</Heading>
             <p className="rounded-2xl border-l-4 border-accent bg-white p-5 text-lg font-medium leading-8 text-navy shadow-sm">{page.directAnswer}</p>
             <div className="mt-6 space-y-4 text-lg leading-8 text-muted">
-              {rich.intro.map((t) => <p key={t.slice(0, 24)}>{t}</p>)}
+              {rich.intro.map((t) => <p key={t.slice(0, 24)}><RichText text={t} /></p>)}
             </div>
           </div>
           <div className="overflow-hidden rounded-[2rem] shadow-xl ring-1 ring-navy/10">
@@ -150,7 +151,7 @@ export function RichUmrahBody({ page, rich }: { page: PlacePage; rich: RichRoute
                 {umrah.items.map((u) => (
                   <li key={u.title} className="rounded-2xl bg-white/5 p-5 ring-1 ring-white/10">
                     <h3 className="font-extrabold text-accent">{u.title}</h3>
-                    <p className="mt-2 text-sm leading-7 text-white/80">{u.text}</p>
+                    <p className="mt-2 text-sm leading-7 text-white/80"><RichText text={u.text} tone="dark" /></p>
                   </li>
                 ))}
               </ul>
@@ -224,7 +225,7 @@ export function RichUmrahBody({ page, rich }: { page: PlacePage; rich: RichRoute
             <li key={p.title} className="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-navy/10">
               <span className="font-display text-3xl text-gold">{String(i + 1).padStart(2, "0")}</span>
               <h3 className="mt-2 font-extrabold text-navy">{p.title}</h3>
-              <p className="mt-2 text-sm leading-7 text-muted">{p.text}</p>
+              <p className="mt-2 text-sm leading-7 text-muted"><RichText text={p.text} /></p>
             </li>
           ))}
         </ol>
@@ -275,7 +276,7 @@ export function RichUmrahBody({ page, rich }: { page: PlacePage; rich: RichRoute
                 {airport.items.map((a) => (
                   <li key={a.title} className="border-l-2 border-accent pl-5">
                     <h3 className="font-extrabold text-accent">{a.title}</h3>
-                    <p className="mt-1 leading-7 text-white/80">{a.text}</p>
+                    <p className="mt-1 leading-7 text-white/80"><RichText text={a.text} tone="dark" /></p>
                   </li>
                 ))}
               </ul>
