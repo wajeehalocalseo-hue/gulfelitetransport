@@ -18,6 +18,7 @@ import { granadaRich } from "./granada";
 import { hittinRich } from "./hittin";
 import { kafdRich } from "./kafd";
 import { olayaRich, type DistrictRichCtx } from "./olaya";
+import { alQudsRich } from "./al-quds";
 import { alRawdahRich } from "./al-rawdah";
 import { alSuwaidiRich } from "./al-suwaidi";
 import { qurtubahRich } from "./qurtubah";
@@ -47,6 +48,7 @@ const registry: Record<string, (ctx: DistrictRichCtx) => DistrictRich> = {
   "al-suwaidi": alSuwaidiRich,
   "al-aqiq": alAqiqRich,
   "al-hamra": alHamraRich,
+  "al-quds": alQudsRich,
   granada: granadaRich,
 };
 

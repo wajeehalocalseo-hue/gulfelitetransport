@@ -277,7 +277,7 @@ export default function SectionBands({ page }: { page: PlacePage }) {
                     <div className={`grid gap-8 lg:items-start ${left ? "lg:grid-cols-[0.7fr_1.3fr]" : "lg:grid-cols-[1.3fr_0.7fr]"}`}>
                       <div className={left ? "lg:order-2" : ""}>{content}</div>
                       <figure className={`overflow-hidden rounded-2xl shadow-sm ring-1 ring-navy/10 ${left ? "lg:order-1" : ""}`}>
-                        <ImageSlot folder={`riyadh-districts/${page.path.split("/").pop()}`} slot={s.image.slot} alt={s.image.alt} label={s.image.label} width={640} height={520} sizes="(min-width: 1024px) 26rem, 100vw" />
+                        <ImageSlot folder={`riyadh-districts/${page.path.split("/").pop()}`} slot={s.image.slot} alt={s.image.alt} label={s.image.label} width={s.image.w ?? 640} height={s.image.h ?? 520} sizes="(min-width: 1024px) 26rem, 100vw" />
                       </figure>
                     </div>
                   );
