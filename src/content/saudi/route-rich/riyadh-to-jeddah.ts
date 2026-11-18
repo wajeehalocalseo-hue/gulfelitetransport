@@ -62,7 +62,7 @@ export const jeddahRich: RichRoute = {
     { name: "King Khalid International Airport (RUH)", text: "The main airport, in the north of Riyadh. Send your flight number and terminal.", href: "/taxi-saudi-arabia/airports/king-khalid-international-airport" },
     { name: "Hotels and homes", text: "Any hotel, apartment or house in Riyadh. Share the address and a nearby landmark." },
   ],
-  pickupAlt: "Riyadh city skyline where private taxi rides to Jeddah begin",
+  pickupAlt: "The Riyadh skyline at dusk with the Kingdom Centre tower, where private taxi rides to Jeddah begin",
   dropHeading: "Where Can Your Riyadh to Jeddah Taxi Drop You?",
   dropIntro: "The driver can take you to any address in Jeddah. These are places visitors often choose. The exact drop-off point is confirmed when you book.",
   drops: [
@@ -74,7 +74,7 @@ export const jeddahRich: RichRoute = {
     { name: "Red Sea Mall", text: "A large shopping mall in the north of the city." },
     { name: "Jeddah Islamic Port", text: "One of the main Red Sea ports, for business and cargo visits." },
   ],
-  dropAlt: "Jeddah Corniche on the Red Sea where the ride from Riyadh can end",
+  dropAlt: "The Al Rahma Floating Mosque on the Jeddah Corniche at dusk, where the ride from Riyadh can end",
   planHeading: "Planning Your Journey from Riyadh to Jeddah",
   plan: [
     { title: "Distance and time", text: "The road is about 950 km. Drivers usually need about 10 hours 25 minutes without stops. With rest and prayer breaks, plan for a full day." },
@@ -84,7 +84,7 @@ export const jeddahRich: RichRoute = {
     { title: "Arriving in Jeddah", text: "Jeddah is a long city. Give us the district or the hotel, and we confirm the best drop-off point." },
   ],
   mapQuery: { from: "Riyadh, Saudi Arabia", to: "Jeddah, Saudi Arabia" },
-  highwayAlt: "A Saudi highway crossing the desert between Riyadh and Jeddah",
+  highwayAlt: "A wide multi-lane highway interchange with a cable-stayed bridge on the edge of a city",
   whoHeading: "Who Is This Private Taxi Service Suitable For?",
   who: [
     { title: "Families", text: "Children and older relatives travel more comfortably in a private car that stops when the family needs a break." },
