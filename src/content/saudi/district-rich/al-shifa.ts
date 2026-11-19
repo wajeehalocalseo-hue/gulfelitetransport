@@ -10,8 +10,8 @@ import type { DistrictRichCtx } from "./olaya";
  * Al Shifa Taxi Service: the hand-written landing page for Al Shifa (Ash Shifa), a residential district in south Riyadh (see district-rich/index.ts).
  * Primary focus keyword: "Al Shifa Taxi Service" (title, H1, opening sentence, description). Written mostly as prose.
  *
- * IMAGES: three reserved slots (area, journey, pickup) from addImages' defaults. The owner's Drive folder (Al Shifa) holds five photos that are to be compressed and wired in later,
- * at the owner's request, as public/images/routes/riyadh-districts/al-shifa-taxi-service/<name>.webp with a custom map in addImages (see al-naseem.ts for the pattern).
+ * IMAGES: 5 photos from the owner's Google Drive (Al Shifa folder), resized to 1000 px wide WebP in public/images/routes/riyadh-districts/al-shifa-taxi-service/ and placed in the about, residential, family, airport, business sections.
+ * The photos show cars and drivers; the page never calls them Gulf Elite's fleet and the alt text describes only what is visible.
  *
  * CENTRE POINT: riyadh-areas.ts stores Al Shifa at 24.5631/46.6967. The brief's reference (24.5763/46.6989) is about 1.5 km north of it. OpenStreetMap labels "Ash Shifa District" streets
  * Al Tirmizi (24.5693/46.7009), Dirab Road (24.5803/46.7035) and Al Khalil Ibn Ahmed (24.5475/46.6878) within about 2 km of the stored point on every side, so the shared point is used unchanged for the
@@ -210,6 +210,13 @@ export function alShifaRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "de
       addImages(
         [about, journeys, residential, family, airport, business, community, metro, prebook, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq, local],
         me.name,
+        {
+          about: { slot: "al-shifa-private-taxi-service-riyadh", alt: "A white sedan on a paved street of apartment buildings while a man in a blue shirt stands with a woman in a black abaya and a child", label: "Photo: al-shifa-private-taxi-service-riyadh", w: 1000, h: 558 },
+          residential: { slot: "al-shifa-door-to-door-taxi-pickup", alt: "A man in a white thobe walks toward a dark green sedan while a woman in a dark uniform stands beside it on a street of walled villas", label: "Photo: al-shifa-door-to-door-taxi-pickup", w: 1000, h: 558 },
+          family: { slot: "al-shifa-family-group-taxi-service", alt: "A man in a white thobe loads shopping bags into the open boot of a tan SUV while children and a woman get in and a driver waits", label: "Photo: al-shifa-family-group-taxi-service", w: 1000, h: 558 },
+          airport: { slot: "al-shifa-to-riyadh-airport-taxi-transfer", alt: "A man with two suitcases and a woman in a black abaya beside a grey van at an airport terminal", label: "Photo: al-shifa-to-riyadh-airport-taxi-transfer", w: 1000, h: 558 },
+          business: { slot: "al-shifa-to-olaya-kafd-city-taxi", alt: "A red SUV driving along a wide road lined with palm trees, with tall city towers in the distance", label: "Photo: al-shifa-to-olaya-kafd-city-taxi", w: 1000, h: 558 },
+        },
       ),
       ctx,
       "al-shifa",

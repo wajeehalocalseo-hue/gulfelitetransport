@@ -176,7 +176,13 @@ export function alSahafahRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "
       { label: "Olaya", value: "about 15 km by road" },
       { label: "Area type", value: "homes, offices and clinics" },
     ],
-    sections: addLinks(addImages([about, journeys, residential, office, metro, health, errands, airport, family, pickup, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name), ctx, "al-sahafah"),
+    sections: addLinks(addImages([about, journeys, residential, office, metro, health, errands, airport, family, pickup, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name, {
+        about: { slot: "al-sahafah-riyadh-taxi-service", alt: "A silver SUV on a street of apartment buildings while a man with a bag, a woman and a woman in a dark uniform stand beside it", label: "Photo: al-sahafah-riyadh-taxi-service", w: 1000, h: 558 },
+        residential: { slot: "al-sahafah-apartment-compound-taxi-pickup", alt: "A man in a blue shirt shows his phone to two women in abayas beside a brown SUV at an apartment entrance", label: "Photo: al-sahafah-apartment-compound-taxi-pickup", w: 1000, h: 558 },
+        office: { slot: "al-sahafah-private-business-taxi-journey", alt: "The inside of a car where a man drives and a woman in a beige jacket looks at a tablet, with palm trees through the window", label: "Photo: al-sahafah-private-business-taxi-journey", w: 1000, h: 558 },
+        metro: { slot: "al-sahafah-riyadh-metro-taxi-transfer", alt: "A woman in grey and a man with a backpack beside a blue SUV with its door open below an elevated metro station", label: "Photo: al-sahafah-riyadh-metro-taxi-transfer", w: 1000, h: 558 },
+        health: { slot: "al-sahafah-clinic-appointment-taxi-service", alt: "A man in a dark suit holds the door of a white sedan for an older woman while a man stands beside her outside a building with a glass entrance", label: "Photo: al-sahafah-clinic-appointment-taxi-service", w: 1000, h: 558 },
+      }), ctx, "al-sahafah"),
     whatsappMessage: ALSAHAFAH_WHATSAPP_MESSAGE,
   };
 }

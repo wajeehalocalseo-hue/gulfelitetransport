@@ -169,7 +169,13 @@ export function alYasminRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "d
       { label: "Olaya", value: "about 19 km by road" },
       { label: "Area type", value: "residential, north Riyadh" },
     ],
-    sections: addLinks(addImages([about, journeys, residential, airport, family, business, metro, pickup, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name), ctx, "al-yasmin"),
+    sections: addLinks(addImages([about, journeys, residential, airport, family, business, metro, pickup, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name, {
+        about: { slot: "al-yasmin-riyadh-taxi-service", alt: "A white SUV in front of villa gates while a woman in black holds the door and a couple with a girl carrying a backpack stand beside it", label: "Photo: al-yasmin-riyadh-taxi-service", w: 1000, h: 558 },
+        airport: { slot: "al-yasmin-riyadh-airport-transfer", alt: "A man in a white shirt lifts a suitcase beside a navy SUV with its door open while an older woman and a man with a briefcase wait at an airport kerb", label: "Photo: al-yasmin-riyadh-airport-transfer", w: 1000, h: 558 },
+        family: { slot: "al-yasmin-family-school-run-taxi", alt: "A woman in a dark suit and a man stand with a boy and a girl carrying school backpacks beside an open silver van", label: "Photo: al-yasmin-family-school-run-taxi", w: 1000, h: 558 },
+        business: { slot: "al-yasmin-riyadh-private-taxi-journey", alt: "The inside of a car where a woman in the rear seat holds a phone behind a driver in a suit, with city towers through the window", label: "Photo: al-yasmin-riyadh-private-taxi-journey", w: 1000, h: 558 },
+        pickup: { slot: "al-yasmin-riyadh-taxi-pickup-point", alt: "A man in a suit, a girl with a school backpack and a woman in a headscarf beside a maroon SUV with its door open at a gate", label: "Photo: al-yasmin-riyadh-taxi-pickup-point", w: 1000, h: 558 },
+      }), ctx, "al-yasmin"),
     whatsappMessage: ALYASMIN_WHATSAPP_MESSAGE,
   };
 }

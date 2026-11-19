@@ -10,11 +10,8 @@ import type { DistrictRichCtx } from "./olaya";
  * Al Rawdah Taxi Service: the hand-written landing page for Al Rawdah (Ar Rawdah), a residential district in east Riyadh (see district-rich/index.ts).
  * Primary focus keyword: "Al Rawdah Taxi Service" (title, H1, opening sentence, description). Written mostly as prose.
  *
- * IMAGES (TODO for the owner): three slots are reserved, with these exact files in public/images/routes/riyadh-districts/al-rawdah-taxi-service/ :
- *   al-rawdah-neighbourhood.webp      a realistic Al Rawdah residential neighbourhood (villas, apartments or streets)        -> "about" section
- *   al-rawdah-airport-transfer.webp   a professional airport pickup or passenger-transfer scene suited to Saudi Arabia      -> "airport" section
- *   al-rawdah-local-destinations.webp a park, shopping street or local setting in Al Rawdah                                 -> "community" section
- * No supplied images were found in the project, so labelled placeholders of the final size are shown. Do not use fleet photographs that are not the company's own.
+ * IMAGES: 5 photos from the owner's Google Drive (Al Rawdah folder), resized to 1000 px wide WebP in public/images/routes/riyadh-districts/al-rawdah-taxi-service/ and placed in the about, airport, residential, community, business sections.
+ * The photos show cars and drivers; the page never calls them Gulf Elite's fleet and the alt text describes only what is visible.
  *
  * CENTRE POINT: OpenStreetMap places the Al Rawdah district (Riyadh) at 24.7341/46.7672, which matches the brief. riyadh-areas.ts stores Al Rawdah at 24.735/46.725, about 4 km west of that, so this page
  * uses 24.734/46.767 for every route, straight-line distance, the map and the weather, and does not change the shared file. (The generic route pages that link from the table still use the older point.)
@@ -201,9 +198,11 @@ export function alRawdahRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "d
       [about, journeys, airport, residential, community, business, metro, prebook, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq, local],
       me.name,
       {
-        about: { slot: "al-rawdah-neighbourhood", alt: "Villas and residential streets in Al Rawdah, Riyadh", label: "Photo: al-rawdah-neighbourhood.webp" },
-        airport: { slot: "al-rawdah-airport-transfer", alt: "A private airport transfer for passengers travelling between Al Rawdah and Riyadh Airport", label: "Photo: al-rawdah-airport-transfer.webp" },
-        community: { slot: "al-rawdah-local-destinations", alt: "A park and local streets in Al Rawdah, Riyadh", label: "Photo: al-rawdah-local-destinations.webp" },
+        about: { slot: "al-rawdah-neighbourhood", alt: "A dark blue SUV on a street of walled villas while a man in a dark jacket greets a family with two children walking toward it", label: "Photo: al-rawdah-neighbourhood", w: 1000, h: 558 },
+        airport: { slot: "al-rawdah-airport-transfer", alt: "A woman in a dark suit hands a suitcase to a man with a briefcase beside a dark green SUV at an airport terminal", label: "Photo: al-rawdah-airport-transfer", w: 1000, h: 558 },
+        residential: { slot: "al-rawdah-home-pickup", alt: "A woman in uniform holds the door of a white SUV for a girl, a woman and a man with a suitcase outside villas", label: "Photo: al-rawdah-home-pickup", w: 1000, h: 558 },
+        community: { slot: "al-rawdah-local-destinations", alt: "A girl with a backpack, a woman in a headscarf and a man in a grey suit beside a brown SUV with its door open near a park fence", label: "Photo: al-rawdah-local-destinations", w: 1000, h: 558 },
+        business: { slot: "al-rawdah-business-city-journeys", alt: "A man in a black suit gestures to a woman holding a folder beside a champagne sedan with its door open outside a glass building", label: "Photo: al-rawdah-business-city-journeys", w: 1000, h: 558 },
       },
     ), ctx, "al-rawdah"),
     whatsappMessage: ALRAWDAH_WHATSAPP_MESSAGE,

@@ -11,8 +11,8 @@ import type { DistrictRichCtx } from "./olaya";
  * Primary focus keyword: "Al Aziziyah Taxi Service" (title, H1, opening sentence, description). Written mostly as prose.
  * Not the Al Aziziyah of northern Riyadh Region (25.7154/45.8562); the page uses only the south Riyadh district.
  *
- * IMAGES: three reserved slots (area, journey, pickup) from addImages' defaults. The owner's Drive folder (Al Aziziyah) holds photos that are to be compressed and wired in later,
- * at the owner's request, as public/images/routes/riyadh-districts/al-aziziyah-taxi-service/<name>.webp with a custom map in addImages (see al-naseem.ts for the pattern).
+ * IMAGES: 5 photos from the owner's Google Drive (Al Aziziyah folder), resized to 1000 px wide WebP in public/images/routes/riyadh-districts/al-aziziyah-taxi-service/ and placed in the about, residential, family, airport, business sections.
+ * The photos show cars and drivers; the page never calls them Gulf Elite's fleet and the alt text describes only what is visible.
  *
  * CENTRE POINT: riyadh-areas.ts stores Al Aziziyah at 24.5877/46.7701, the same as the brief's 24.58766/46.77012. It is used unchanged for the weather and the road estimates. It is not an official centre.
  * Figures (road distance, reviewed November 2026, light traffic, OpenStreetMap routing from that point):
@@ -205,7 +205,13 @@ export function alAziziyahRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | 
       { label: "Area type", value: "residential, south-east Riyadh" },
     ],
     sections: addLinks(
-      addImages([about, journeys, residential, family, airport, business, community, metro, prebook, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq, local], me.name),
+      addImages([about, journeys, residential, family, airport, business, community, metro, prebook, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq, local], me.name, {
+        about: { slot: "al-aziziyah-private-taxi-service-riyadh", alt: "A white sedan on a street in Al Aziziyah while two men in white thobes, a woman in a black abaya and a boy walk toward it, with a tower in the distance", label: "Photo: al-aziziyah-private-taxi-service-riyadh", w: 1000, h: 558 },
+        residential: { slot: "al-aziziyah-local-taxi-pickup-service", alt: "A man in a white thobe holding a cane stands beside a brown SUV on a street of shops while another man speaks to him", label: "Photo: al-aziziyah-local-taxi-pickup-service", w: 1000, h: 558 },
+        family: { slot: "al-aziziyah-family-group-taxi-service", alt: "A family with two children loads shopping bags into a silver people carrier outside shops while a man in a blue shirt stands beside it", label: "Photo: al-aziziyah-family-group-taxi-service", w: 1000, h: 558 },
+        airport: { slot: "al-aziziyah-to-riyadh-airport-transfer", alt: "A woman and a man with two maroon suitcases beside a dark red SUV at an airport terminal kerb", label: "Photo: al-aziziyah-to-riyadh-airport-transfer", w: 1000, h: 558 },
+        business: { slot: "al-aziziyah-to-olaya-kafd-city-rides", alt: "A dark blue sedan driving along a wide road lined with palm trees, with an overpass and city towers behind", label: "Photo: al-aziziyah-to-olaya-kafd-city-rides", w: 1000, h: 558 },
+      }),
       ctx,
       "al-aziziyah",
     ),

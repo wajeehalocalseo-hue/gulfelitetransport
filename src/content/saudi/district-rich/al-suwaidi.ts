@@ -10,11 +10,8 @@ import type { DistrictRichCtx } from "./olaya";
  * Al Suwaidi Taxi Service: the hand-written landing page for Al Suwaidi, a residential district in south-west Riyadh (see district-rich/index.ts).
  * Primary focus keyword: "Al Suwaidi Taxi Service" (title, H1, opening sentence, description). Written mostly as prose.
  *
- * IMAGES (TODO for the owner): three slots are reserved, with these exact files in public/images/routes/riyadh-districts/al-suwaidi-taxi-service/ :
- *   al-suwaidi-neighbourhood.webp      a realistic Al Suwaidi residential neighbourhood (villas, apartments or streets)         -> "about" section
- *   al-suwaidi-airport-transfer.webp   a professional airport pickup or passenger-transfer scene suited to Saudi Arabia          -> "airport" section
- *   al-suwaidi-local-destinations.webp a local street, market area or park setting in or near Al Suwaidi                          -> "community" section
- * No supplied images were found in the project, so labelled placeholders of the final size are shown. Do not use fleet photographs that are not the company's own.
+ * IMAGES: 5 photos from the owner's Google Drive (Al Suwaidi folder), resized to 1000 px wide WebP in public/images/routes/riyadh-districts/al-suwaidi-taxi-service/ and placed in the about, airport, residential, community, business sections.
+ * The photos show cars and drivers; the page never calls them Gulf Elite's fleet and the alt text describes only what is visible.
  *
  * CENTRE POINT: OpenStreetMap places the Al Suwaidi district at 24.5912/46.6730 (the brief gives about 24.588/46.673). riyadh-areas.ts stores Al Suwaidi at 24.595/46.635, about 4 km west of that and
  * between Al Suwaidi and Al Suwaidi Al Gharbi, so this page uses 24.5912/46.673 for every route, straight-line distance, the map and the weather, and does not change the shared file.
@@ -217,9 +214,11 @@ export function alSuwaidiRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "
       [about, journeys, airport, residential, community, business, metro, prebook, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq, local],
       me.name,
       {
-        about: { slot: "al-suwaidi-neighbourhood", alt: "Villas and residential streets in Al Suwaidi, Riyadh", label: "Photo: al-suwaidi-neighbourhood.webp" },
-        airport: { slot: "al-suwaidi-airport-transfer", alt: "A private airport transfer for passengers travelling between Al Suwaidi and Riyadh Airport", label: "Photo: al-suwaidi-airport-transfer.webp" },
-        community: { slot: "al-suwaidi-local-destinations", alt: "A local street and market area near Al Suwaidi, Riyadh", label: "Photo: al-suwaidi-local-destinations.webp" },
+        about: { slot: "al-suwaidi-neighbourhood", alt: "A dark SUV on a sandy street of low houses while a man in a white thobe, a boy and two women in black abayas stand beside it with a suitcase", label: "Photo: al-suwaidi-neighbourhood", w: 1000, h: 558 },
+        airport: { slot: "al-suwaidi-airport-transfer", alt: "A man in a black suit puts a suitcase into the open boot of a plum-coloured SUV while a woman with a trolley case waits at an airport kerb", label: "Photo: al-suwaidi-airport-transfer", w: 1000, h: 558 },
+        residential: { slot: "al-suwaidi-home-pickup", alt: "A man in a navy uniform opens the sliding door of a white van for two women in abayas outside a villa gate", label: "Photo: al-suwaidi-home-pickup", w: 1000, h: 558 },
+        community: { slot: "al-suwaidi-local-destinations", alt: "Two women and a man carrying shopping bags beside a teal SUV with its door open on a street of shops", label: "Photo: al-suwaidi-local-destinations", w: 1000, h: 558 },
+        business: { slot: "al-suwaidi-business-city-journeys", alt: "A man in a dark suit and a woman holding a folder beside a maroon sedan outside glass office towers", label: "Photo: al-suwaidi-business-city-journeys", w: 1000, h: 558 },
       },
     ), ctx, "al-suwaidi"),
     whatsappMessage: ALSUWAIDI_WHATSAPP_MESSAGE,

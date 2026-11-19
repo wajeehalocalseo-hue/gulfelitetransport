@@ -193,7 +193,13 @@ export function alNarjisRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "d
       { label: "Olaya", value: "about 22 km by road" },
       { label: "Area type", value: "large residential, north Riyadh" },
     ],
-    sections: addLinks(addImages([about, journeys, pinsIntro, pins, airport, university, health, family, business, metro, pickup, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name), ctx, "al-narjis"),
+    sections: addLinks(addImages([about, journeys, pinsIntro, pins, airport, university, health, family, business, metro, pickup, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name, {
+        about: { slot: "al-narjis-riyadh-taxi-service", alt: "A taupe SUV on a quiet street of modern villas while a man in a white shirt walks toward a woman and a man pulling a suitcase", label: "Photo: al-narjis-riyadh-taxi-service", w: 1000, h: 558 },
+        airport: { slot: "al-narjis-to-riyadh-airport-transfer", alt: "A woman in black takes a suitcase from a man beside a champagne-coloured SUV at an airport terminal kerb", label: "Photo: al-narjis-to-riyadh-airport-transfer", w: 1000, h: 558 },
+        university: { slot: "al-narjis-northern-riyadh-university-taxi", alt: "A woman in a blue abaya gets into a purple sedan while a man in a white shirt stands beside it on a paved street near a university building", label: "Photo: al-narjis-northern-riyadh-university-taxi", w: 1000, h: 558 },
+        pickup: { slot: "al-narjis-compound-taxi-pickup", alt: "A man in a navy shirt looks at his phone with two women beside a teal sedan outside a compound gate", label: "Photo: al-narjis-compound-taxi-pickup", w: 1000, h: 558 },
+        business: { slot: "al-narjis-private-taxi-journey", alt: "The inside of a car where a woman drives and a man in a suit with a briefcase sits in the rear seat", label: "Photo: al-narjis-private-taxi-journey", w: 1000, h: 558 },
+      }), ctx, "al-narjis"),
     whatsappMessage: ALNARJIS_WHATSAPP_MESSAGE,
   };
 }

@@ -242,7 +242,13 @@ export function alMalqaRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "de
       { label: "Hittin", value: "about 8 km by road" },
       { label: "Area type", value: "homes, cafes and dining" },
     ],
-    sections: addLinks(addImages([about, journeys, residential, dining, airport, business, family, metro, pickup, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name), ctx, "al-malqa"),
+    sections: addLinks(addImages([about, journeys, residential, dining, airport, business, family, metro, pickup, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name, {
+        about: { slot: "al-malqa-riyadh-taxi-service", alt: "A dark blue SUV parked on a paved street of sand-coloured villas and cafes while a man in a thobe greets a woman and a boy with a backpack", label: "Photo: al-malqa-riyadh-taxi-service", w: 1000, h: 558 },
+        dining: { slot: "al-makan-mall-al-malqa-taxi-transfer", alt: "Two women and a man carrying shopping bags stand beside a brown sedan on a busy pavement outside a mall", label: "Photo: al-makan-mall-al-malqa-taxi-transfer", w: 1000, h: 558 },
+        airport: { slot: "al-malqa-riyadh-airport-taxi-transfer", alt: "A man in a suit and a woman with a black suitcase beside a dark SUV with its door open at an airport terminal", label: "Photo: al-malqa-riyadh-airport-taxi-transfer", w: 1000, h: 558 },
+        business: { slot: "al-malqa-riyadh-private-taxi-journey", alt: "The rear seat of a car where a man in a suit reads a tablet while a woman drives, with the Riyadh skyline through the window", label: "Photo: al-malqa-riyadh-private-taxi-journey", w: 1000, h: 558 },
+        pickup: { slot: "al-malqa-riyadh-taxi-pickup-point", alt: "An older man and a woman step out of a white van beside a gate while a woman in uniform holds a suitcase", label: "Photo: al-malqa-riyadh-taxi-pickup-point", w: 1000, h: 558 },
+      }), ctx, "al-malqa"),
     whatsappMessage: ALMALQA_WHATSAPP_MESSAGE,
   };
 }

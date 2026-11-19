@@ -28,6 +28,7 @@ import routeTimes from "./route-times.json";
 import { riyadhAreas, riyadhAreaById } from "./riyadh-areas";
 import { districtOverrides, fmtKm, fmtMin } from "./riyadh-districts";
 import { districtRich } from "./district-rich";
+import { airportRuhRich } from "./district-rich/airport-ruh";
 import journeysJson from "./riyadh-journeys.json";
 import { intlRoutes } from "./international";
 import { riyadhMain, riyadhSections } from "./riyadh-main";
@@ -543,33 +544,43 @@ function airportPages(): PlacePage[] {
       { id: "diriyah", name: "Diriyah" },
       { id: "ad-dirah", name: "Ad Dirah (old city)" },
     ].map((h) => ({ cells: [`${a.code} to ${h.name}`, `~${fmtKm(toRuh(h.id).km)} km`, `~${fmtMin(toRuh(h.id).min)}`], href: `${RIYADH_PATH}/king-khalid-international-airport-to-${h.id}` }));
+    const ruhRich = ruh
+      ? airportRuhRich({
+          all: riyadhAreas,
+          districtHref: (id) => `${RIYADH_PATH}/${id}`,
+          pairs: riyadhPairs.pages.filter((x) => x.pair?.type === "airport").map((x) => ({ name: x.name, href: x.path, km: x.pair?.km ?? 0 })),
+          bookingSteps: bookingSteps("(the terminal at RUH, if you know it)"),
+          notAssumed,
+        })
+      : undefined;
     return {
       kind: "airport" as const,
       path,
       simple: ruh ? true : undefined,
+      whatsappMessage: ruhRich?.whatsappMessage,
       name: a.name,
-      title: ruh ? "King Khalid International Airport Transfer: Private Taxi" : `Taxi & Cab Transfers at ${a.name} (${a.code})`,
-      description: ruh
+      title: ruhRich?.title ?? `Taxi & Cab Transfers at ${a.name} (${a.code})`,
+      description: ruhRich?.description ?? (ruh
         ? `Pre-book a private King Khalid International Airport (RUH) transfer to Olaya (about ${fmtKm(toRuh("olaya").km)} km), KAFD or Diriyah. Fare confirmed before you commit.`
-        : `Request a taxi or cab transfer at ${a.name} (${a.code}) for ${served.map((x) => x.name).slice(0, 3).join(", ")}. Fares and availability confirmed for each request.`,
-      h1: ruh ? "King Khalid International Airport (RUH) Transfer: Private Taxi" : `Taxi & Cab Transfers at ${a.name} (${a.code})`,
-      lead: ruh ? "Pre-book a private taxi or chauffeur transfer to and from Riyadh's main airport. Send your flight details and the vehicle, driver and fare are confirmed before you commit." : a.tagline,
-      directAnswer: ruh
+        : `Request a taxi or cab transfer at ${a.name} (${a.code}) for ${served.map((x) => x.name).slice(0, 3).join(", ")}. Fares and availability confirmed for each request.`),
+      h1: ruhRich?.h1 ?? `Taxi & Cab Transfers at ${a.name} (${a.code})`,
+      lead: ruhRich?.lead ?? a.tagline,
+      directAnswer: ruhRich?.directAnswer ?? (ruh
         ? `Gulf Elite Transport takes bookings for private King Khalid International Airport (RUH) transfers, in both directions. The airport is in the north of Riyadh, about ${fmtKm(toRuh("olaya").km)} km by road from Olaya and about ${fmtKm(toRuh("king-abdullah-financial-district").km)} km from KAFD. Send your flight number, terminal, destination and the number of passengers and bags, and we confirm the vehicle, driver and fare before you commit. Fares are not published, because each transfer is quoted for your request.`
-        : `Gulf Elite Transport arranges taxi and cab transfers to and from ${a.name} (${a.code}). Send your flight details, the terminal if you know it, your destination and the number of passengers and bags, and we confirm the vehicle, driver and fare for your request before you commit.`,
+        : `Gulf Elite Transport arranges taxi and cab transfers to and from ${a.name} (${a.code}). Send your flight details, the terminal if you know it, your destination and the number of passengers and bags, and we confirm the vehicle, driver and fare for your request before you commit.`),
       crumbs: [
         { name: "Home", path: "/" },
         { name: "Taxi & Cab Services in Saudi Arabia", path: BASE },
         { name: region.name, path: `${BASE}/${region.id}` },
         { name: a.name, path },
       ],
-      facts: [
+      facts: ruhRich?.facts ?? [
         { label: "IATA code", value: a.code },
         { label: "City", value: c.name },
         { label: "Region", value: region.name },
         { label: "Serves", value: served.map((x) => x.name).slice(0, 3).join(", ") },
       ],
-      sections: [
+      sections: ruhRich?.sections ?? [
         { id: "about", h2: `About ${a.name}`, kind: "text", paragraphs: [a.about] },
         ...(ruh
           ? [{ id: "journeys", h2: "Popular transfers from King Khalid International Airport", kind: "table" as const, intro: "Driving distance and time from the airport to the places people ask about most. Each row opens the full ride page, which covers both directions.", head: ["Route", "Approx. distance", "Typical driving time"], rows: ruhRows, note: "Estimates for light traffic from OpenStreetMap routing, reviewed November 2026. Peak hours add time." }]

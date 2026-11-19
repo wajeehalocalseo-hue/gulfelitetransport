@@ -10,11 +10,8 @@ import type { DistrictRichCtx } from "./olaya";
  * Al Aqiq Taxi Service: the hand-written landing page for Al Aqiq, a residential district in north-west Riyadh beside KAFD (see district-rich/index.ts).
  * Primary focus keyword: "Al Aqiq Taxi Service" (title, H1, opening sentence, description). Written mostly as prose.
  *
- * IMAGES (TODO for the owner): three slots are reserved, with these exact files in public/images/routes/riyadh-districts/al-aqiq-taxi-service/ :
- *   al-aqiq-neighbourhood.webp      a realistic Al Aqiq residential neighbourhood (villas, apartments or streets)          -> "about" section
- *   al-aqiq-airport-transfer.webp   a professional airport pickup or passenger-transfer scene suited to Saudi Arabia          -> "airport" section
- *   al-aqiq-local-destinations.webp a KAFD or northern Riyadh destination setting near Al Aqiq                                 -> "community" section
- * No supplied images were found in the project, so labelled placeholders are shown. Do not use fleet photographs that are not the company's own.
+ * IMAGES: five photos from the owner's Google Drive (Al Aqiq folder), resized to 1000 px wide WebP (41-77 KB) in public/images/routes/riyadh-districts/al-aqiq-taxi-service/
+ * and placed in the about, airport, residential, business and community sections. The photos show cars and drivers; the page never calls them Gulf Elite's fleet and the alt text describes only what is visible.
  *
  * CENTRE POINT: OpenStreetMap places Al Aqiq at 24.7740/46.6309, which matches riyadh-areas.ts (24.774/46.631), so the shared point is used unchanged.
  * Figures (road distance, reviewed November 2026, light traffic, OpenStreetMap routing from the Al Aqiq centre):
@@ -214,9 +211,11 @@ export function alAqiqRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "des
       [about, journeys, airport, business, residential, community, metro, prebook, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq, local],
       me.name,
       {
-        about: { slot: "al-aqiq-neighbourhood", alt: "Villas and residential streets in Al Aqiq, Riyadh", label: "Photo: al-aqiq-neighbourhood.webp" },
-        airport: { slot: "al-aqiq-airport-transfer", alt: "A private airport transfer for passengers travelling between Al Aqiq and Riyadh Airport", label: "Photo: al-aqiq-airport-transfer.webp" },
-        community: { slot: "al-aqiq-local-destinations", alt: "A business and shopping area near Al Aqiq, Riyadh", label: "Photo: al-aqiq-local-destinations.webp" },
+        about: { slot: "al-aqiq-neighbourhood", alt: "A driver and a man with a child and a woman beside a silver SUV on a quiet street of villas and shops in Riyadh with towers in the distance", label: "Photo: al-aqiq-neighbourhood", w: 1000, h: 545 },
+        airport: { slot: "al-aqiq-airport-transfer", alt: "A woman in a suit and a man with two suitcases beside a dark SUV with its door open at an airport terminal entrance", label: "Photo: al-aqiq-airport-transfer", w: 1000, h: 545 },
+        residential: { slot: "al-aqiq-home-pickup", alt: "Two men in white thobes greeting each other beside a dark green van while a woman in uniform holds the van door outside a villa", label: "Photo: al-aqiq-home-pickup", w: 1000, h: 545 },
+        business: { slot: "al-aqiq-kafd-business-journeys", alt: "A man and a woman in business clothes beside a silver car on a paved street with glass towers behind them", label: "Photo: al-aqiq-kafd-business-journeys", w: 1000, h: 545 },
+        community: { slot: "al-aqiq-local-destinations", alt: "A woman and a man holding shopping bags talk to a driver beside an orange SUV outside a lit shopping centre", label: "Photo: al-aqiq-local-destinations", w: 1000, h: 545 },
       },
     ), ctx, "al-aqiq"),
     whatsappMessage: ALAQIQ_WHATSAPP_MESSAGE,

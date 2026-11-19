@@ -257,7 +257,13 @@ export function alMohammadiyahRich(ctx: DistrictRichCtx): Pick<PlacePage, "title
       { label: "Olaya", value: "about 9 km by road" },
       { label: "Area type", value: "villas, apartments and compounds" },
     ],
-    sections: addLinks(addImages([about, journeys, villas, family, office, olaya, metro, airport, pickup, prebook, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name), ctx, "al-mohammadiyah"),
+    sections: addLinks(addImages([about, journeys, villas, family, office, olaya, metro, airport, pickup, prebook, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name, {
+        about: { slot: "al-mohammadiyah-riyadh-taxi-service", alt: "A white SUV on a street of walled villas while two men in thobes, a woman in black and a boy stand beside it", label: "Photo: al-mohammadiyah-riyadh-taxi-service", w: 1000, h: 558 },
+        villas: { slot: "al-mohammadiyah-villa-compound-taxi-pickup", alt: "A silver SUV beside a villa compound wall while a man in a white shirt and two women, one with a suitcase, stand on the road", label: "Photo: al-mohammadiyah-villa-compound-taxi-pickup", w: 1000, h: 558 },
+        family: { slot: "al-mohammadiyah-family-group-taxi", alt: "A family with three children carrying shopping bags walks toward a blue people carrier with its door open, where a man in a white shirt waits", label: "Photo: al-mohammadiyah-family-group-taxi", w: 1000, h: 558 },
+        airport: { slot: "al-mohammadiyah-riyadh-airport-transfer", alt: "A man in a white thobe loads a suitcase into a beige van at an airport terminal while a man and a woman wait nearby", label: "Photo: al-mohammadiyah-riyadh-airport-transfer", w: 1000, h: 558 },
+        office: { slot: "al-mohammadiyah-riyadh-private-taxi-journey", alt: "The inside of a car where a woman drives and a man with a laptop sits in the rear seat, with apartment blocks through the window", label: "Photo: al-mohammadiyah-riyadh-private-taxi-journey", w: 1000, h: 558 },
+      }), ctx, "al-mohammadiyah"),
     whatsappMessage: ALMOHAMMADIYAH_WHATSAPP_MESSAGE,
   };
 }

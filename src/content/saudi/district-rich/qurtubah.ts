@@ -10,11 +10,8 @@ import type { DistrictRichCtx } from "./olaya";
  * Qurtubah Taxi Service: the hand-written landing page for Qurtubah, a residential district in north-east Riyadh (see district-rich/index.ts).
  * Written mostly as prose paragraphs (the owner asked for more content and fewer boxed cards).
  *
- * IMAGES (TODO for the owner): three slots are reserved, with these exact files in public/images/routes/riyadh-districts/qurtubah-taxi-service/ :
- *   qurtubah-neighbourhood.webp      a realistic Qurtubah residential neighbourhood (villas, apartments or streets)    -> "about" section
- *   qurtubah-airport-transfer.webp   a professional airport pickup or passenger-transfer scene suited to Saudi Arabia   -> "airport" section
- *   qurtubah-local-destinations.webp a verified local destination or business setting in the Qurtubah area               -> "destinations" section
- * No supplied images were found in the project, so labelled placeholders of the final size are shown. Do not use fleet photographs that are not the company's own.
+ * IMAGES: 5 photos from the owner's Google Drive (Qurtubah folder), resized to 1000 px wide WebP in public/images/routes/riyadh-districts/qurtubah-taxi-service/ and placed in the about, airport, residential, destinations, business sections.
+ * The photos show cars and drivers; the page never calls them Gulf Elite's fleet and the alt text describes only what is visible.
  *
  * Figures (road distance, reviewed November 2026, light traffic, OpenStreetMap routing from the Qurtubah centre in riyadh-areas.ts to the other centres):
  * RUH about 25 km and about 19 to 20 min (24.7 km / 19 min; the old page said 25 km / 20 min); Olaya about 24 km and about 21 to 22 min (24.0 / 21; old 23 / 20); KAFD about 18 km and about 18 to 20 min
@@ -201,9 +198,11 @@ export function qurtubahRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "d
       [about, journeys, airport, residential, destinations, business, metro, prebook, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq, local],
       me.name,
       {
-        about: { slot: "qurtubah-neighbourhood", alt: "Villas and residential streets in Qurtubah, Riyadh", label: "Photo: qurtubah-neighbourhood.webp" },
-        airport: { slot: "qurtubah-airport-transfer", alt: "A private airport transfer for passengers travelling between Qurtubah and Riyadh Airport", label: "Photo: qurtubah-airport-transfer.webp" },
-        destinations: { slot: "qurtubah-local-destinations", alt: "A shopping and business area near Qurtubah, Riyadh", label: "Photo: qurtubah-local-destinations.webp" },
+        about: { slot: "qurtubah-neighbourhood", alt: "A white SUV on a quiet street of lit villas at sunset while a driver in a green uniform opens the door for two people", label: "Photo: qurtubah-neighbourhood", w: 1000, h: 558 },
+        airport: { slot: "qurtubah-airport-transfer", alt: "A woman in black with a suitcase, a man and a boy beside a maroon SUV with its boot open at an airport terminal", label: "Photo: qurtubah-airport-transfer", w: 1000, h: 558 },
+        residential: { slot: "qurtubah-family-private-taxi-pickup", alt: "A woman in a maroon uniform beside a beige people carrier with its door open while a family with a girl and a suitcase stand outside a villa", label: "Photo: qurtubah-family-private-taxi-pickup", w: 1000, h: 558 },
+        destinations: { slot: "qurtubah-shopping-university-taxi", alt: "A man in a grey suit, a woman in an abaya and a woman holding a shopping bag beside an orange SUV outside shops", label: "Photo: qurtubah-shopping-university-taxi", w: 1000, h: 558 },
+        business: { slot: "qurtubah-kafd-business-taxi-transfer", alt: "The inside of a car where a woman reads papers beside a laptop in the rear seat while a driver in a suit drives, with city towers at dusk outside", label: "Photo: qurtubah-kafd-business-taxi-transfer", w: 1000, h: 558 },
       },
     ), ctx, "qurtubah"),
     whatsappMessage: QURTUBAH_WHATSAPP_MESSAGE,

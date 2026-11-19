@@ -258,7 +258,13 @@ export function alNakheelRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "
       { label: "Olaya", value: "about 13 km by road" },
       { label: "Al Nakheel Mall", value: "north-east Riyadh, not in the district" },
     ],
-    sections: addLinks(addImages([about, journeys, residential, mall, university, airport, business, family, metro, pickup, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name), ctx, "al-nakheel"),
+    sections: addLinks(addImages([about, journeys, residential, mall, university, airport, business, family, metro, pickup, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name, {
+        about: { slot: "al-nakheel-riyadh-taxi-service", alt: "A silver SUV with a family inside beside a walled villa on a paved street, while a woman in a dark abaya holds the rear door", label: "Photo: al-nakheel-riyadh-taxi-service", w: 1000, h: 558 },
+        mall: { slot: "al-nakheel-mall-riyadh-taxi-transfer", alt: "A woman in a headscarf stands beside a dark green sedan with its door open while a man and a woman holding shopping bags walk toward it near a mall", label: "Photo: al-nakheel-mall-riyadh-taxi-transfer", w: 1000, h: 558 },
+        university: { slot: "king-saud-university-riyadh-taxi-service", alt: "A woman in a headscarf and abaya carrying a folder steps out of a grey van through its sliding door, with the driver in a red-checked headdress inside", label: "Photo: king-saud-university-riyadh-taxi-service", w: 1000, h: 558 },
+        pickup: { slot: "al-nakheel-riyadh-taxi-pickup-point", alt: "A woman in a dark uniform holds the door of a white SUV for two women outside a glass-fronted building", label: "Photo: al-nakheel-riyadh-taxi-pickup-point", w: 1000, h: 558 },
+        business: { slot: "al-nakheel-riyadh-private-taxi-journey", alt: "The front of a car where a driver in a white thobe and red-checked headdress drives, with a woman passenger behind and city towers through the window", label: "Photo: al-nakheel-riyadh-private-taxi-journey", w: 1000, h: 558 },
+      }), ctx, "al-nakheel"),
     whatsappMessage: ALNAKHEEL_WHATSAPP_MESSAGE,
   };
 }

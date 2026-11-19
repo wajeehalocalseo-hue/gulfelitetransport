@@ -35,7 +35,7 @@ export function addLinks(sections: Section[], ctx: DistrictRichCtx, selfId: stri
     for (const t of targets) {
       if (used.has(t.href)) continue;
       for (const name of t.names) {
-        const re = new RegExp(`(?<![\\w\\[/'-])${esc(name)}(?![\\w'-])(?!\\s+(?:${PART_OF_LONGER})\\b)`);
+        const re = new RegExp(`(?<![\\w\\[/'-])(?<!Dhahrat\\s)${esc(name)}(?![\\w'-])(?!\\s+(?:${PART_OF_LONGER})\\b)`);
         const m = re.exec(p);
         if (m) {
           found.push({ start: m.index, end: m.index + name.length, href: t.href });
