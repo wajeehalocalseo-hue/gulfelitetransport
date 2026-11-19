@@ -79,6 +79,8 @@ type PageOpts = {
     children?: { name: string; path: string }[];
   };
   items?: { name: string; path: string }[];
+  /** Questions and answers shown on the page (FAQPage). */
+  faq?: { q: string; a: string }[];
 };
 
 /** Per-page WebPage (or subtype), optional Service, ItemList and BreadcrumbList, all linked by @id. */
@@ -151,6 +153,15 @@ export function pageGraph(o: PageOpts) {
       ...(site.serviceAreas.length
         ? { areaServed: site.serviceAreas.map((a) => ({ "@type": "Place", name: a })) }
         : {}),
+    });
+  }
+  if (o.faq?.length) {
+    graph.push({
+      "@type": "FAQPage",
+      "@id": `${url}#faq`,
+      url,
+      isPartOf: { "@id": pageId },
+      mainEntity: o.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
     });
   }
   return { "@context": "https://schema.org", "@graph": graph };
