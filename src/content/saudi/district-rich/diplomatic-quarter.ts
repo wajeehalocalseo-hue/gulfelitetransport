@@ -194,7 +194,17 @@ export function diplomaticQuarterRich(ctx: DistrictRichCtx): Pick<PlacePage, "ti
       { label: "KAFD", value: "about 17 km by road" },
       { label: "Area type", value: "planned embassy district, controlled access" },
     ],
-    sections: addLinks(addImages([about, journeys, appointments, access, airport, getting, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name), ctx, "diplomatic-quarter"),
+    sections: addLinks(addImages(
+        [about, journeys, appointments, access, airport, getting, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq],
+        me.name,
+        {
+          about: { slot: "diplomatic-quarter-riyadh-taxi-service", alt: "A black SUV on a quiet palm-lined road beside sand-coloured villas and low buildings", label: "Photo: diplomatic-quarter-riyadh-taxi-service", w: 1000, h: 558 },
+          "getting-around": { slot: "diplomatic-quarter-private-taxi-journey", alt: "A black SUV seen from behind driving along a tree-lined road past sand-coloured buildings", label: "Photo: diplomatic-quarter-private-taxi-journey", w: 1000, h: 558 },
+          access: { slot: "diplomatic-quarter-chauffeur-pickup-service", alt: "A chauffeur greeting a passenger with a wheeled suitcase beside a black SUV in front of sand-coloured villas", label: "Photo: diplomatic-quarter-chauffeur-pickup-service", w: 1000, h: 558 },
+          airport: { slot: "riyadh-airport-private-taxi-transfer", alt: "A black SUV at an airport terminal with arched sand-coloured walls while a chauffeur meets a traveller with a suitcase", label: "Photo: riyadh-airport-private-taxi-transfer", w: 1000, h: 558 },
+          appointments: { slot: "riyadh-kafd-executive-business-taxi", alt: "Two men in suits, one holding a briefcase, beside a black SUV in front of angular glass towers", label: "Photo: riyadh-kafd-executive-business-taxi", w: 1000, h: 558 },
+        },
+      ), ctx, "diplomatic-quarter"),
     whatsappMessage: DQ_WHATSAPP_MESSAGE,
   };
 }

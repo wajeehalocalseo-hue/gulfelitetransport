@@ -224,7 +224,17 @@ export function alMurabbaRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "
       { label: "Ad Dirah", value: "about 3 km by road" },
       { label: "Area type", value: "museums and heritage" },
     ],
-    sections: addLinks(addImages([about, journeys, heritage, uses, pickup, returnRide, airport, metro, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name), ctx, "al-murabba"),
+    sections: addLinks(addImages(
+        [about, journeys, heritage, uses, pickup, returnRide, airport, metro, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq],
+        me.name,
+        {
+          about: { slot: "al-murabba-riyadh-taxi-service", alt: "A white SUV with a driver greeting a family with a young child on a paved street near sand-coloured heritage walls", label: "Photo: al-murabba-riyadh-taxi-service", w: 1000, h: 558 },
+          return: { slot: "al-murabba-private-taxi-journey", alt: "Inside a taxi, a woman driver at the wheel with two passengers in the back, one taking a photo, with the Kingdom Centre in the distance", label: "Photo: al-murabba-private-taxi-journey", w: 1000, h: 558 },
+          heritage: { slot: "murabba-palace-riyadh-heritage-taxi", alt: "A chauffeur helping an elderly woman with a walking stick beside a red SUV in front of the mud-brick wall and wooden doors of a historic palace", label: "Photo: murabba-palace-riyadh-heritage-taxi", w: 1000, h: 558 },
+          uses: { slot: "national-museum-riyadh-taxi-pickup", alt: "A driver greeting three visitors, one with a camera, beside a grey minivan in front of a sand-coloured museum building", label: "Photo: national-museum-riyadh-taxi-pickup", w: 1000, h: 558 },
+          airport: { slot: "al-murabba-riyadh-airport-transfer", alt: "A white minivan with its side door open as travellers with a wheeled suitcase walk along an airport arrivals kerb", label: "Photo: al-murabba-riyadh-airport-transfer", w: 1000, h: 558 },
+        },
+      ), ctx, "al-murabba"),
     whatsappMessage: ALMURABBA_WHATSAPP_MESSAGE,
   };
 }

@@ -229,7 +229,17 @@ export function alMalazRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "de
       { label: "Ad Dirah", value: "about 5.5 km by road" },
       { label: "Area type", value: "residential, parks and sport" },
     ],
-    sections: addLinks(addImages([about, journeys, park, sports, everyday, pickup, airport, metro, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name), ctx, "al-malaz"),
+    sections: addLinks(addImages(
+        [about, journeys, park, sports, everyday, pickup, airport, metro, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq],
+        me.name,
+        {
+          about: { slot: "al-malaz-riyadh-taxi-service", alt: "A woman helping a young girl and a boy with school bags out of a brown SUV on a residential street with apartment blocks", label: "Photo: al-malaz-riyadh-taxi-service", w: 1000, h: 558 },
+          everyday: { slot: "al-malaz-private-taxi-journey", alt: "Inside a taxi, a driver at the wheel with an older woman in a headscarf in the back seat and a young man using a phone in the front", label: "Photo: al-malaz-private-taxi-journey", w: 1000, h: 558 },
+          park: { slot: "king-abdullah-park-riyadh-family-taxi", alt: "A man in a white shirt greets a family with two children beside a red SUV at a park with palm trees and a fountain at sunset", label: "Photo: king-abdullah-park-riyadh-family-taxi", w: 1000, h: 558 },
+          sports: { slot: "prince-faisal-bin-fahd-stadium-taxi", alt: "A black SUV on a floodlit road at night with fans in green scarves and a driver beside it and a large lit stadium behind", label: "Photo: prince-faisal-bin-fahd-stadium-taxi", w: 1000, h: 558 },
+          airport: { slot: "al-malaz-riyadh-airport-transfer", alt: "A driver and a woman passenger beside a silver SUV with its rear door open and a man with a suitcase at a glass airport terminal", label: "Photo: al-malaz-riyadh-airport-transfer", w: 1000, h: 558 },
+        },
+      ), ctx, "al-malaz"),
     whatsappMessage: ALMALAZ_WHATSAPP_MESSAGE,
   };
 }

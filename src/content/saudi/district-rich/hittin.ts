@@ -231,7 +231,17 @@ export function hittinRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "des
       { label: "Diriyah", value: "about 6 km by road" },
       { label: "Area type", value: "residential and entertainment district" },
     ],
-    sections: addLinks(addImages([about, journeys, boulevard, fromBoulevard, eventNight, residential, airport, business, map, getting, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name), ctx, "hittin"),
+    sections: addLinks(addImages(
+        [about, journeys, boulevard, fromBoulevard, eventNight, residential, airport, business, map, getting, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq],
+        me.name,
+        {
+          about: { slot: "hittin-riyadh-taxi-service", alt: "A chauffeur helping an elderly couple into a silver SUV outside a sand-coloured house with palm trees", label: "Photo: hittin-riyadh-taxi-service", w: 1000, h: 558 },
+          "boulevard-city": { slot: "boulevard-city-riyadh-event-taxi-pickup", alt: "A man in a white thobe opening the door of a black Mercedes for a couple on a busy lit street at night", label: "Photo: boulevard-city-riyadh-event-taxi-pickup", w: 1000, h: 558 },
+          residential: { slot: "hittin-residential-family-taxi-pickup", alt: "A family with children and luggage beside a dark van with its boot open outside a villa with a decorative gate", label: "Photo: hittin-residential-family-taxi-pickup", w: 1000, h: 558 },
+          airport: { slot: "hittin-riyadh-airport-chauffeur-transfer", alt: "A chauffeur in a grey suit holding a briefcase beside a white SUV where a passenger sits at an airport terminal kerb", label: "Photo: hittin-riyadh-airport-chauffeur-transfer", w: 1000, h: 558 },
+          business: { slot: "hittin-riyadh-executive-business-taxi", alt: "A chauffeur driving while a businesswoman in the back seat works on a tablet, with the Riyadh skyline through the window", label: "Photo: hittin-riyadh-executive-business-taxi", w: 1000, h: 558 },
+        },
+      ), ctx, "hittin"),
     whatsappMessage: HITTIN_WHATSAPP_MESSAGE,
   };
 }

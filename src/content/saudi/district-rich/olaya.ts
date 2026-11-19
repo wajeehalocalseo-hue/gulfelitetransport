@@ -219,7 +219,17 @@ export function olayaRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "desc
       { label: "Ad Dirah (old city)", value: "about 9 km by road" },
       { label: "Area type", value: "business, hotel and shopping district" },
     ],
-    sections: addLinks(addImages([journeys, business, hotels, airport, landmarks, map, metro, pickup, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name), ctx, "olaya"),
+    sections: addLinks(addImages(
+        [journeys, business, hotels, airport, landmarks, map, metro, pickup, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq],
+        me.name,
+        {
+          airport: { slot: "olaya-airport-transfer-riyadh-ruh", alt: "A chauffeur loading a suitcase into a dark blue van at a modern airport terminal kerb while two travellers wait beside it", label: "Photo: olaya-airport-transfer-riyadh-ruh", w: 1000, h: 558 },
+          business: { slot: "olaya-business-meeting-chauffeur", alt: "A man in a white thobe and a man in a suit with a briefcase greet each other beside a silver sedan outside a glass office tower", label: "Photo: olaya-business-meeting-chauffeur", w: 1000, h: 558 },
+          pickup: { slot: "olaya-door-to-door-taxi-pickup", alt: "Two men meet beside a dark red sedan with its rear door open on a busy city street lined with shops and office buildings", label: "Photo: olaya-door-to-door-taxi-pickup", w: 1000, h: 558 },
+          hotels: { slot: "olaya-hotel-guest-pickup-riyadh", alt: "A driver loading a silver suitcase into a white SUV at a hotel entrance while a woman guest waits beside it", label: "Photo: olaya-hotel-guest-pickup-riyadh", w: 1000, h: 558 },
+          landmarks: { slot: "olaya-private-chauffeur-service", alt: "A chauffeur opening the door of a black Mercedes on a palm-lined street with the Kingdom Centre tower rising behind it", label: "Photo: olaya-private-chauffeur-service", w: 1000, h: 558 },
+        },
+      ), ctx, "olaya"),
     whatsappMessage: OLAYA_WHATSAPP_MESSAGE,
   };
 }

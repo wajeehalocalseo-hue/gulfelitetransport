@@ -254,7 +254,17 @@ export function alWurudRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "de
       { label: "KAFD", value: "about 10 km by road" },
       { label: "Metro", value: "two separate stations: Al Wurud (Red) and Al Wurud 2 (Blue)" },
     ],
-    sections: addLinks(addImages([about, journeys, residential, office, errands, metro, metroRides, airport, pickup, prebook, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name), ctx, "al-wurud"),
+    sections: addLinks(addImages(
+        [about, journeys, residential, office, errands, metro, metroRides, airport, pickup, prebook, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq],
+        me.name,
+        {
+          about: { slot: "al-wurud-riyadh-taxi-service", alt: "A white SUV with two passengers and a driver in a white thobe on a street of apartment blocks, shops and a pharmacy", label: "Photo: al-wurud-riyadh-taxi-service", w: 1000, h: 558 },
+          residential: { slot: "al-wurud-riyadh-private-taxi-journey", alt: "Inside a taxi, a woman driver in a black headscarf at the wheel with a male passenger in the back seat", label: "Photo: al-wurud-riyadh-private-taxi-journey", w: 1000, h: 558 },
+          office: { slot: "al-wurud-riyadh-office-taxi-transfer", alt: "A man in a white thobe shakes hands with a woman in a business suit beside a navy BMW outside an office entrance", label: "Photo: al-wurud-riyadh-office-taxi-transfer", w: 1000, h: 558 },
+          airport: { slot: "al-wurud-riyadh-airport-private-transfer", alt: "A driver loading a brown parcel into a dark green van at an airport kerb while a couple with a suitcase waits", label: "Photo: al-wurud-riyadh-airport-private-transfer", w: 1000, h: 558 },
+          pickup: { slot: "al-wurud-riyadh-taxi-pickup-point", alt: "A silver minivan with a driver in a white thobe, a woman and a girl with a wheeled suitcase outside a residential building", label: "Photo: al-wurud-riyadh-taxi-pickup-point", w: 1000, h: 558 },
+        },
+      ), ctx, "al-wurud"),
     whatsappMessage: ALWURUD_WHATSAPP_MESSAGE,
   };
 }

@@ -214,7 +214,17 @@ export function kafdRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "descr
       { label: "Ad Dirah (old city)", value: "about 20 km by road" },
       { label: "Area type", value: "financial and business district" },
     ],
-    sections: addLinks(addImages([journeys, business, access, hotels, airport, metro, about, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name), ctx, "king-abdullah-financial-district"),
+    sections: addLinks(addImages(
+        [journeys, business, access, hotels, airport, metro, about, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq],
+        me.name,
+        {
+          airport: { slot: "airport-transfers-kafd-to-ruh", alt: "A black Mercedes saloon at an airport terminal kerb with a chauffeur pushing a luggage trolley behind it", label: "Photo: airport-transfers-kafd-to-ruh", w: 1000, h: 558 },
+          business: { slot: "business-and-meeting-transfers", alt: "A man in a suit with a briefcase walks toward a black Mercedes and a chauffeur beside glass towers", label: "Photo: business-and-meeting-transfers", w: 1000, h: 558 },
+          hotels: { slot: "hotel-and-visitor-transfers", alt: "A chauffeur and a woman guest with luggage beside a black Mercedes at a stone-pillared hotel entrance with glass towers behind", label: "Photo: hotel-and-visitor-transfers", w: 1000, h: 558 },
+          about: { slot: "main-kafd-taxi-service", alt: "A black Mercedes and a chauffeur on a wide road near a white lattice-shaped canopy and tall glass towers", label: "Photo: main-kafd-taxi-service", w: 1000, h: 558 },
+          access: { slot: "tower-pickup-and-drop-off-guide", alt: "A chauffeur standing beside a black Mercedes in front of the covered entrance of a diagonal-patterned glass tower", label: "Photo: tower-pickup-and-drop-off-guide", w: 1000, h: 558 },
+        },
+      ), ctx, "king-abdullah-financial-district"),
     whatsappMessage: KAFD_WHATSAPP_MESSAGE,
   };
 }

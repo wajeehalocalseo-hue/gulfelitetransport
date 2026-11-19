@@ -217,7 +217,17 @@ export function diriyahRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "de
       { label: "KAFD", value: "about 12 km by road" },
       { label: "Area type", value: "heritage and visitor destination" },
     ],
-    sections: addLinks(addImages([about, journeys, turaif, bujairi, access, airport, groups, map, getting, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name), ctx, "diriyah"),
+    sections: addLinks(addImages(
+        [about, journeys, turaif, bujairi, access, airport, groups, map, getting, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq],
+        me.name,
+        {
+          about: { slot: "diriyah-family-private-taxi-service", alt: "A chauffeur greets a family with a child beside a black SUV in front of mud-brick Najdi buildings", label: "Photo: diriyah-family-private-taxi-service", w: 1000, h: 558 },
+          "at-turaif": { slot: "at-turaif-tourist-chauffeur-pickup", alt: "A chauffeur beside a black SUV with two visitors walking past mud-brick walls and palm trees", label: "Photo: at-turaif-tourist-chauffeur-pickup", w: 1000, h: 558 },
+          bujairi: { slot: "bujairi-terrace-evening-chauffeur-service", alt: "A black SUV, a chauffeur and two visitors on a stone-paved square at dusk with lit mud-brick buildings behind", label: "Photo: bujairi-terrace-evening-chauffeur-service", w: 1000, h: 558 },
+          groups: { slot: "diriyah-private-group-chauffeur-transport", alt: "A black SUV and a black van with a chauffeur and a group of visitors with luggage on a stone-paved area", label: "Photo: diriyah-private-group-chauffeur-transport", w: 1000, h: 558 },
+          airport: { slot: "diriyah-riyadh-airport-passenger-transfer", alt: "A chauffeur loading suitcases into a black SUV while two travellers walk past at an arched airport terminal", label: "Photo: diriyah-riyadh-airport-passenger-transfer", w: 1000, h: 558 },
+        },
+      ), ctx, "diriyah"),
     whatsappMessage: DIRIYAH_WHATSAPP_MESSAGE,
   };
 }

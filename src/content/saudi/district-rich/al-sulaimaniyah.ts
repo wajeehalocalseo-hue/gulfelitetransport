@@ -242,7 +242,17 @@ export function alSulaimaniyahRich(ctx: DistrictRichCtx): Pick<PlacePage, "title
       { label: "KAFD", value: "about 13 km by road" },
       { label: "Area type", value: "homes, offices and clinics" },
     ],
-    sections: addLinks(addImages([about, journeys, office, clinics, errands, metro, airport, pickup, prebook, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name), ctx, "al-sulaimaniyah"),
+    sections: addLinks(addImages(
+        [about, journeys, office, clinics, errands, metro, airport, pickup, prebook, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq],
+        me.name,
+        {
+          about: { slot: "al-sulaimaniyah-riyadh-taxi-service", alt: "A grey SUV and a woman with a briefcase speaking to a man in a white thobe on a street of apartment blocks and offices", label: "Photo: al-sulaimaniyah-riyadh-taxi-service", w: 1000, h: 558 },
+          errands: { slot: "al-sulaimaniyah-private-taxi-journey", alt: "Inside a car, a male passenger in a grey suit reads a tablet while a woman chauffeur drives", label: "Photo: al-sulaimaniyah-private-taxi-journey", w: 1000, h: 558 },
+          office: { slot: "al-sulaimaniyah-riyadh-executive-taxi", alt: "A woman and a man in business clothes beside a dark blue sedan in front of a glass-fronted office building", label: "Photo: al-sulaimaniyah-riyadh-executive-taxi", w: 1000, h: 558 },
+          clinics: { slot: "al-sulaimaniyah-building-taxi-pickup", alt: "A driver greeting a woman with a handbag beside a white van outside a medical clinics building", label: "Photo: al-sulaimaniyah-building-taxi-pickup", w: 1000, h: 558 },
+          prebook: { slot: "al-sulaimaniyah-clinic-appointment-taxi", alt: "Inside a taxi, a female driver in a suit with an older couple in the back seat, one holding a tablet", label: "Photo: al-sulaimaniyah-clinic-appointment-taxi", w: 1000, h: 558 },
+        },
+      ), ctx, "al-sulaimaniyah"),
     whatsappMessage: ALSULAIMANIYAH_WHATSAPP_MESSAGE,
   };
 }

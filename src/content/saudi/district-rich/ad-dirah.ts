@@ -220,7 +220,17 @@ export function adDirahRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "de
       { label: "KAFD", value: "about 20 km by road" },
       { label: "Area type", value: "historic centre and markets" },
     ],
-    sections: addLinks(addImages([about, journeys, heritage, markets, pickup, returnRide, airport, metro, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq], me.name), ctx, "ad-dirah"),
+    sections: addLinks(addImages(
+        [about, journeys, heritage, markets, pickup, returnRide, airport, metro, map, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq],
+        me.name,
+        {
+          about: { slot: "ad-dirah-old-riyadh-taxi-service", alt: "A dark green SUV with the passenger door open beside men in traditional dress and a woman in a mud-brick street of old Riyadh", label: "Photo: ad-dirah-old-riyadh-taxi-service", w: 1000, h: 558 },
+          return: { slot: "ad-dirah-private-taxi-journey-riyadh", alt: "Inside a taxi, a driver in a blue shirt at the wheel with passengers and shopping bags in the back and the Riyadh skyline outside", label: "Photo: ad-dirah-private-taxi-journey-riyadh", w: 1000, h: 558 },
+          markets: { slot: "souq-al-zal-riyadh-shopping-taxi", alt: "A dark red SUV in a traditional souq with shoppers holding a rug and shopping bags among stalls of lamps and carpets", label: "Photo: souq-al-zal-riyadh-shopping-taxi", w: 1000, h: 558 },
+          pickup: { slot: "ad-dirah-riyadh-taxi-pickup-point", alt: "A silver minivan with its sliding door open as a driver greets a family on a street of old shopfronts", label: "Photo: ad-dirah-riyadh-taxi-pickup-point", w: 1000, h: 558 },
+          airport: { slot: "ad-dirah-riyadh-airport-private-transfer", alt: "A chauffeur loading a briefcase into a navy sedan while a passenger sits in the rear seat at a glass airport terminal", label: "Photo: ad-dirah-riyadh-airport-private-transfer", w: 1000, h: 558 },
+        },
+      ), ctx, "ad-dirah"),
     whatsappMessage: ADDIRAH_WHATSAPP_MESSAGE,
   };
 }
