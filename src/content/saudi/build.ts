@@ -28,6 +28,8 @@ import routeTimes from "./route-times.json";
 import { riyadhAreas, riyadhAreaById } from "./riyadh-areas";
 import { districtOverrides, fmtKm, fmtMin } from "./riyadh-districts";
 import { districtRich } from "./district-rich";
+import { buildTownRoute } from "./town-routes/factory";
+import { townSpecs } from "./town-routes/specs";
 import { airportRuhRich } from "./district-rich/airport-ruh";
 import journeysJson from "./riyadh-journeys.json";
 import { intlRoutes } from "./international";
@@ -283,6 +285,15 @@ function regionPages(): PlacePage[] {
         items: regionRoutes.slice(0, 8).map((q) => ({ name: `${need(cityById.get(q.from), q.from).name} to ${need(cityById.get(q.to), q.to).name}`, href: `${BASE}/routes/${q.id}`, note: `about ${q.km} km` })),
       });
     }
+    if (r.id === "riyadh-region" && townSpecs.length) {
+      sections.push({
+        id: "towns",
+        h2: `Taxi routes from Riyadh to towns in ${r.name}`,
+        kind: "links",
+        intro: "Each page covers the ride in both directions, with the road distance, driving directions and places around the town.",
+        items: townSpecs.map((s) => ({ name: `Riyadh to ${s.name}`, href: `${BASE}/routes/riyadh-to-${s.id}`, note: `about ${Math.round(s.km)} km` })),
+      });
+    }
     sections.push(
       { id: "tips", h2: `Planning notes for ${r.name}`, kind: "items", items: x.tips },
       {
@@ -295,7 +306,7 @@ function regionPages(): PlacePage[] {
         id: "other",
         h2: `Other towns in ${r.name}`,
         kind: "text",
-        paragraphs: [`Requests from other towns such as ${and(r.other)} can be discussed. These towns do not have their own page yet, and availability is confirmed for each request.`],
+        paragraphs: [r.id === "riyadh-region" && townSpecs.length ? `Requests from other towns and villages in ${r.name} that are not listed above can be discussed. Availability is confirmed for each request.` : `Requests from other towns such as ${and(r.other)} can be discussed. These towns do not have their own page yet, and availability is confirmed for each request.`],
       },
       bookingSteps(`in ${r.name}`),
       notAssumed,
@@ -764,6 +775,61 @@ function riyadhRouteLanding(r: (typeof routes)[number], from: City, to: City, ap
   };
 }
 
+
+/** Riyadh Region town routes (town-routes/): one page per town, covering both directions. Existing route ids are never rebuilt here. */
+function townRoutePages(): PlacePage[] {
+  const riyadh = need(cityById.get("riyadh"), "riyadh");
+  const region = need(regionById.get("riyadh-region"), "riyadh-region");
+  const geo = need(cityGeo["riyadh"], "riyadh geo");
+  const targets: Record<string, { href: string; name: string; note: string }> = {};
+  for (const r of routes) targets[r.id] = { href: `${BASE}/routes/${r.id}`, name: `${need(cityById.get(r.from), r.from).name} to ${need(cityById.get(r.to), r.to).name}`, note: `about ${r.km} km` };
+  for (const s of townSpecs) targets[s.id] = { href: `${BASE}/routes/riyadh-to-${s.id}`, name: `Riyadh to ${s.name} Taxi Service`, note: `about ${Math.round(s.km)} km` };
+  return townSpecs.map((spec, i) => {
+    if (routes.some((r) => r.id === `riyadh-to-${spec.id}`)) throw new Error(`${spec.name}: this route already exists, do not rebuild it`);
+    const path = `${BASE}/routes/riyadh-to-${spec.id}`;
+    const b = buildTownRoute(spec, {
+      riyadh: geo,
+      index: i,
+      routeTargets: targets,
+      airportHref: `${BASE}/airports/king-khalid-international-airport`,
+      regionHref: `${BASE}/${region.id}`,
+      routesHref: `${BASE}/routes`,
+    });
+    return {
+      kind: "route" as const,
+      path,
+      simple: true,
+      compactForm: true,
+      whatsappMessage: b.whatsappMessage,
+      name: `Riyadh to ${spec.name}`,
+      title: b.title,
+      description: b.description,
+      h1: b.h1,
+      lead: b.lead,
+      directAnswer: b.directAnswer,
+      crumbs: [
+        { name: "Home", path: "/" },
+        { name: "Taxi & Cab Services in Saudi Arabia", path: BASE },
+        { name: "Routes", path: `${BASE}/routes` },
+        { name: `Riyadh to ${spec.name}`, path },
+      ],
+      facts: b.facts,
+      sections: b.sections,
+      town: b.town,
+      layout: layoutFor("route", i),
+      entities: [
+        { type: "Place" as const, name: `${spec.name}, Riyadh Region`, ar: spec.ar, lat: spec.lat, lng: spec.lng },
+        cityEntity(riyadh),
+        regionEntity(region.id, region.name),
+        country,
+      ],
+      route: { from: "Riyadh", to: spec.name, km: Math.round(spec.km) },
+      children: [],
+      prefill: { pickup: "Riyadh", dropoff: spec.name },
+    };
+  });
+}
+
 function routePages(): PlacePage[] {
   return routes.map((r, i) => {
     const from = need(cityById.get(r.from), r.from);
@@ -970,7 +1036,7 @@ function routesIndex(): PlacePage {
       "Gulf Elite Transport arranges intercity taxi and cab rides between Saudi cities. Each route page gives an approximate road distance, notes on the journey and what to include in your request. Fares, journey times and availability are confirmed for each request and are not published.",
     crumbs: [{ name: "Home", path: "/" }, { name: "Taxi & Cab Services in Saudi Arabia", path: BASE }, { name: "Routes", path: `${BASE}/routes` }],
     facts: [
-      { label: "Routes", value: String(routes.length) },
+      { label: "Routes", value: String(routes.length + townSpecs.length) },
       { label: "Longest listed", value: `${need(cityById.get("riyadh"), "riyadh").name} to ${need(cityById.get("jeddah"), "jeddah").name}, about 950 km` },
       { label: "Distances", value: "Approximate road distances" },
       { label: "Directions", value: "Both ways" },
@@ -980,7 +1046,10 @@ function routesIndex(): PlacePage {
         id: "routes",
         h2: "All routes",
         kind: "links",
-        items: routes.map((r) => ({ name: `${need(cityById.get(r.from), r.from).name} to ${need(cityById.get(r.to), r.to).name}`, href: `${BASE}/routes/${r.id}`, note: `about ${r.km} km` })),
+        items: [
+          ...routes.map((r) => ({ name: `${need(cityById.get(r.from), r.from).name} to ${need(cityById.get(r.to), r.to).name}`, href: `${BASE}/routes/${r.id}`, note: `about ${r.km} km` })),
+          ...townSpecs.map((s) => ({ name: `Riyadh to ${s.name}`, href: `${BASE}/routes/riyadh-to-${s.id}`, note: `about ${Math.round(s.km)} km` })),
+        ],
       },
       {
         id: "international",
@@ -992,11 +1061,14 @@ function routesIndex(): PlacePage {
     ],
     layout: { hero: "ledger", body: "tiles", form: "aside" },
     entities: [country],
-    children: routes.map((r) => ({ name: `${need(cityById.get(r.from), r.from).name} to ${need(cityById.get(r.to), r.to).name}`, path: `${BASE}/routes/${r.id}` })),
+    children: [
+      ...routes.map((r) => ({ name: `${need(cityById.get(r.from), r.from).name} to ${need(cityById.get(r.to), r.to).name}`, path: `${BASE}/routes/${r.id}` })),
+      ...townSpecs.map((s) => ({ name: `Riyadh to ${s.name}`, path: `${BASE}/routes/riyadh-to-${s.id}` })),
+    ],
   };
 }
 
-export const placePages: PlacePage[] = [hubPage(), ...regionPages(), ...cityPages(), ...areaPages(), ...airportPages(), routesIndex(), ...routePages(), internationalIndex(), ...internationalPages(), ...riyadhPairs.pages, ...umrahPages];
+export const placePages: PlacePage[] = [hubPage(), ...regionPages(), ...cityPages(), ...areaPages(), ...airportPages(), routesIndex(), ...routePages(), ...townRoutePages(), internationalIndex(), ...internationalPages(), ...riyadhPairs.pages, ...umrahPages];
 
 /** Pairs that the quality gate left out, for the build log. */
 export const droppedPairs = riyadhPairs.dropped;

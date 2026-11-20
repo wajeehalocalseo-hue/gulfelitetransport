@@ -193,6 +193,54 @@ function Steps({ s }: { s: Extract<Section, { kind: "steps" }> }) {
   );
 }
 
+/** The closing local-information area: map, driving directions, Google Maps links and live weather. Also used by the town route pages. */
+export function LocalBand({ s, tone }: { s: Extract<Section, { kind: "local" }>; tone: Tone }) {
+  const q = (query: string) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+  return (
+          <Band id={s.id} tone={tone}>
+            <Head id={s.id} title={s.h2} tone={tone} lead={s.intro} />
+            <div className="grid gap-8 lg:grid-cols-2">
+              <div className="overflow-hidden rounded-3xl border border-navy/10 bg-white shadow-sm lg:self-start">
+                <LazyMap title={`Map of ${s.mapLabel}`} src={`https://maps.google.com/maps?q=${encodeURIComponent(s.mapQuery)}&z=14&output=embed`} className="h-80 w-full border-0 sm:h-[30rem]" />
+              </div>
+              <div className="grid content-start gap-6">
+                <div className="rounded-3xl border border-navy/10 bg-white p-6 shadow-sm sm:p-8">
+                  <h3 className="text-xl font-extrabold tracking-tight text-navy">{s.directionsTitle}</h3>
+                  <p className="mt-3 leading-7 text-muted">{s.directions}</p>
+                </div>
+                <div className="rounded-3xl border border-navy/10 bg-white p-6 shadow-sm sm:p-8">
+                  <h3 className="text-xl font-extrabold tracking-tight text-navy">{s.linksTitle}</h3>
+                  {s.linkGroups.map((g) => (
+                    <div key={g.title} className="mt-4">
+                      <p className="text-xs font-bold uppercase tracking-wider text-accent">{g.title}</p>
+                      <ul className="mt-2 flex flex-wrap gap-2">
+                        {g.links.map((l) => (
+                          <li key={l.name}>
+                            <a href={q(l.query)} target="_blank" rel="noopener noreferrer" className="inline-block rounded-full border border-navy/15 bg-surface px-3.5 py-1.5 text-sm font-semibold text-navy transition hover:border-accent hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
+                              {l.name}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="mt-8">
+              <h3 className="mb-3 text-xl font-extrabold tracking-tight">{s.weatherTitle}</h3>
+              <WeatherWidget place={s.weather.place} lat={s.weather.lat} lng={s.weather.lng} variant="strip" />
+            </div>
+            {s.weather2 && (
+              <div className="mt-6">
+                <h3 className="mb-3 text-xl font-extrabold tracking-tight">{s.weather2Title}</h3>
+                <WeatherWidget place={s.weather2.place} lat={s.weather2.lat} lng={s.weather2.lng} variant="strip" />
+              </div>
+            )}
+          </Band>
+  );
+}
+
 export default function SectionBands({ page }: { page: PlacePage }) {
   const body = page.layout.body;
   // Which two-tone rhythm the page uses, so neighbouring pages do not look alike.
@@ -210,46 +258,7 @@ export default function SectionBands({ page }: { page: PlacePage }) {
         if (s.kind === "steps") return <Band key={s.id} id={s.id} tone="navy"><Head id={s.id} title={s.h2} tone="navy" /><Steps s={s} /></Band>;
         n += 1;
         const tone: Tone = (n % 2 === 0) !== flip ? "surface" : "white";
-        if (s.kind === "local") {
-          const q = (query: string) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
-          return (
-            <Band key={s.id} id={s.id} tone={tone}>
-              <Head id={s.id} title={s.h2} tone={tone} lead={s.intro} />
-              <div className="grid gap-8 lg:grid-cols-2">
-                <div className="overflow-hidden rounded-3xl border border-navy/10 bg-white shadow-sm lg:self-start">
-                  <LazyMap title={`Map of ${s.mapLabel}`} src={`https://maps.google.com/maps?q=${encodeURIComponent(s.mapQuery)}&z=14&output=embed`} className="h-80 w-full border-0 sm:h-[30rem]" />
-                </div>
-                <div className="grid content-start gap-6">
-                  <div className="rounded-3xl border border-navy/10 bg-white p-6 shadow-sm sm:p-8">
-                    <h3 className="text-xl font-extrabold tracking-tight text-navy">{s.directionsTitle}</h3>
-                    <p className="mt-3 leading-7 text-muted">{s.directions}</p>
-                  </div>
-                  <div className="rounded-3xl border border-navy/10 bg-white p-6 shadow-sm sm:p-8">
-                    <h3 className="text-xl font-extrabold tracking-tight text-navy">{s.linksTitle}</h3>
-                    {s.linkGroups.map((g) => (
-                      <div key={g.title} className="mt-4">
-                        <p className="text-xs font-bold uppercase tracking-wider text-accent">{g.title}</p>
-                        <ul className="mt-2 flex flex-wrap gap-2">
-                          {g.links.map((l) => (
-                            <li key={l.name}>
-                              <a href={q(l.query)} target="_blank" rel="noopener noreferrer" className="inline-block rounded-full border border-navy/15 bg-surface px-3.5 py-1.5 text-sm font-semibold text-navy transition hover:border-accent hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
-                                {l.name}
-                              </a>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <div className="mt-8">
-                <h3 className="mb-3 text-xl font-extrabold tracking-tight">{s.weatherTitle}</h3>
-                <WeatherWidget place={s.weather.place} lat={s.weather.lat} lng={s.weather.lng} variant="strip" />
-              </div>
-            </Band>
-          );
-        }
+        if (s.kind === "local") return <LocalBand key={s.id} s={s} tone={tone} />;
         return (
           <Band key={s.id} id={s.id} tone={tone}>
             {s.kind === "faq" ? (

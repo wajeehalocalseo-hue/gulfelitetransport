@@ -41,7 +41,7 @@ export function placeGraph(page: PlacePage) {
   if (webpage && primary && page.kind !== "hub") {
     webpage.about = [webpage.about, entityNode(primary)];
   }
-  const rich = page.landing?.rich;
+  const rich = page.landing?.rich ?? (page.town ? { faq: page.town.faq } : undefined);
   if (rich) {
     nodes.push({
       "@type": "FAQPage",

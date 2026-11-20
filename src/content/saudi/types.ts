@@ -58,6 +58,7 @@ export type Route = {
 };
 
 import type { RichRoute } from "./rich-types";
+import type { TownRich } from "./town-routes/types";
 
 export type PageKind = "hub" | "region" | "city" | "area" | "airport" | "route" | "pair" | "topic";
 
@@ -92,6 +93,9 @@ type SectionBody =
       linkGroups: { title: string; links: { name: string; query: string }[] }[];
       weatherTitle: string;
       weather: { place: string; lat: number; lng: number };
+      /** An optional second weather strip shown below the first (used on route pages: the origin first, then the arrival place). */
+      weather2Title?: string;
+      weather2?: { place: string; lat: number; lng: number };
     };
 
 export type PlaceLayout = {
@@ -144,6 +148,8 @@ export type PlacePage = {
     faq: Faq[];
     note: string;
   };
+  /** The Riyadh Region town route pages are drawn from this (components/RichTown.tsx). */
+  town?: TownRich;
   /** The bottom booking form is the short trip form used in the hero, with a route heading, instead of the long quote form. */
   compactForm?: boolean;
   /** Landing-page style: no breadcrumb row above the heading and no side form (the hero form and the final form remain). */
