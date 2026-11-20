@@ -1,7 +1,7 @@
-import type { ServiceSeo } from "./seo-types";
+import type { ServiceBase } from "./seo-types";
 
 /** Services 7 to 12: furniture moving, passenger transport, taxi, heavy equipment, industrial projects, cargo handling. */
-export const seoB: Record<string, ServiceSeo> = {
+export const seoB: Record<string, ServiceBase> = {
   "furniture-household-moving": {
     primary: "Furniture Moving Services Saudi Arabia",
     secondary: ["Household Moving Services", "Furniture Transportation Company", "Home Relocation Services Saudi Arabia", "Residential Moving Services", "Furniture Delivery Services", "Household Goods Transportation", "Home Furniture Transport", "Furniture Relocation Company"],

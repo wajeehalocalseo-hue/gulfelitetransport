@@ -13,7 +13,10 @@ export type IncludesStyle = "cards" | "ledger" | "tiles";
 export type StepsStyle = "grid" | "timeline" | "chevrons";
 export type UseCaseStyle = "navy" | "columns" | "list";
 export type PlanningStyle = "cards" | "split" | "table";
+/** Where and how the bottom enquiry form sits: a card centred on a light band, or a navy band with the copy beside it. Never a tall side column. */
 export type AsideStyle = "sticky" | "band";
+export type RailStyle = "arrows" | "stacked" | "chips";
+export type CoverageStyle = "grid" | "accordion" | "columns";
 export type SectionId = "overview" | "includes" | "solutions" | "how" | "audience" | "usecases" | "coverage" | "planning" | "info" | "faq" | "related";
 
 export type ServiceImage = {
@@ -24,7 +27,16 @@ export type ServiceImage = {
   label: string;
 };
 
+export type RailItem = { icon: string; title: string; text: string };
+
 export type ServiceSeo = {
+  /** What the visitor wants (commercial, transactional, B2B). Documentation only. */
+  intent: string;
+  /** Four service-specific stages shown as a visual strip under the hero. */
+  rail: { style: RailStyle; items: [RailItem, RailItem, RailItem, RailItem] };
+  coverageStyle: CoverageStyle;
+  /** Link each region name to its existing taxi page (only the passenger and taxi pages do this). */
+  linkRegions?: boolean;
   /** Exactly one primary keyword for the page. */
   primary: string;
   secondary: string[];
@@ -53,3 +65,9 @@ export type ServiceSeo = {
   waMessage: string;
   cta: { heading: string; text: string };
 };
+
+/** The per-page overrides written in seo-brief-a.ts and seo-brief-b.ts (keywords, copy, rail, coverage style). */
+export type ServiceBrief = Pick<ServiceSeo, "primary" | "secondary" | "intent" | "metaTitle" | "metaDescription" | "h1" | "lead" | "directAnswer" | "intro" | "h2" | "faqs" | "rail" | "coverageStyle"> & { linkRegions?: boolean };
+
+/** The original page data in seo-a/b/c.ts, before the brief overrides are applied. */
+export type ServiceBase = Omit<ServiceSeo, "intent" | "rail" | "coverageStyle" | "linkRegions">;

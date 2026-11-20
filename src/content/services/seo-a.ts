@@ -1,7 +1,7 @@
-import type { ServiceSeo } from "./seo-types";
+import type { ServiceBase } from "./seo-types";
 
 /** Services 1 to 6: freight and cargo, international forwarding, containers, express, refrigerated, vehicles. */
-export const seoA: Record<string, ServiceSeo> = {
+export const seoA: Record<string, ServiceBase> = {
   "freight-cargo-transport": {
     primary: "Freight Transport Services in Saudi Arabia",
     secondary: ["Cargo Transport Services Saudi Arabia", "Freight Transportation Company Saudi Arabia", "Domestic Freight Services", "Commercial Cargo Transportation", "Business Freight Solutions", "Goods Transportation Services", "Road Freight Services Saudi Arabia", "Nationwide Cargo Delivery"],

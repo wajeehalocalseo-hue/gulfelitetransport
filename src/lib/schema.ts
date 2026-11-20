@@ -77,6 +77,8 @@ type PageOpts = {
     parentPath?: string;
     /** Published child services (Level 1 and 2). */
     children?: { name: string; path: string }[];
+    /** Regions shown in the page's coverage section; they become AdministrativeArea entries inside Saudi Arabia. */
+    regions?: string[];
   };
   items?: { name: string; path: string }[];
   /** Questions and answers shown on the page (FAQPage). */
@@ -150,9 +152,11 @@ export function pageGraph(o: PageOpts) {
             },
           }
         : {}),
-      ...(site.serviceAreas.length
-        ? { areaServed: site.serviceAreas.map((a) => ({ "@type": "Place", name: a })) }
-        : {}),
+      ...(o.service.regions?.length
+        ? { areaServed: [{ "@type": "Country", name: site.country }, ...o.service.regions.map((r) => ({ "@type": "AdministrativeArea", name: r, containedInPlace: { "@type": "Country", name: site.country } }))] }
+        : site.serviceAreas.length
+          ? { areaServed: site.serviceAreas.map((a) => ({ "@type": "Place", name: a })) }
+          : {}),
     });
   }
   if (o.faq?.length) {

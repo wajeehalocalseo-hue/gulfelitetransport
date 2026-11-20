@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import Image from "next/image";
+import type { ReactNode } from "react";
 import { homePhotoSrc } from "./HomePhoto";
 
 const EXTS = ["webp", "avif", "jpg", "jpeg", "png"];
@@ -30,6 +31,7 @@ export default function ImageSlot({
   priority = false,
   fill = false,
   sizes = "(min-width: 1024px) 50vw, 100vw",
+  icon,
 }: {
   folder: string;
   slot: string;
@@ -44,6 +46,8 @@ export default function ImageSlot({
   /** Fill the parent box (it must be positioned). Used for background photos. */
   fill?: boolean;
   sizes?: string;
+  /** Optional small icon shown above the label in the placeholder. */
+  icon?: ReactNode;
 }) {
   const src = routePhotoSrc(folder, slot, homePhoto);
   if (src) {
@@ -66,6 +70,7 @@ export default function ImageSlot({
           <path d="M0 95 C80 40 140 110 220 60 S340 20 400 50" fill="none" stroke="#fff" strokeOpacity=".7" strokeWidth="1.5" strokeDasharray="8 10" />
         </svg>
       )}
+      {!fill && icon && <span className="relative mr-3 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-navy text-accent shadow-sm">{icon}</span>}
       {!fill && <span className="relative rounded-full bg-white/80 px-4 py-1.5 text-[11px] font-extrabold uppercase tracking-wider text-navy/60 ring-1 ring-navy/10">[{label}]</span>}
     </div>
   );

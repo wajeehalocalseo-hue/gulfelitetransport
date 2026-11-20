@@ -5,7 +5,8 @@ import { notFound } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
 import ServicePageView from "@/components/ServicePageView";
 import { getService, services } from "@/content/services";
-import { getServiceSeo } from "@/content/services/seo";
+import { coverageRegions } from "@/content/services/coverage-regions";
+import { getServiceSeo, pageFaqs } from "@/content/services/seo";
 import { breadcrumbFor, getNode, pathOf, publishedChildren } from "@/content/taxonomy";
 import { pageGraph } from "@/lib/schema";
 
@@ -68,7 +69,7 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
   if (!node) notFound();
   const crumbs = breadcrumbFor(node);
   const subs = publishedChildren(node.id);
-  const faq = [...seo.faqs, ...s.faqs];
+  const faq = pageFaqs(s.slug, seo, s.faqs);
 
   return (
     <>
@@ -83,6 +84,7 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
             name: s.title,
             description: seo.directAnswer,
             serviceType: s.title,
+            regions: coverageRegions.map((r) => r.name.replace(" (Al Jawf)", "")),
             children: subs.map((k) => ({ name: k.name, path: k.fullUrl })),
           },
         })}

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import LazyMap from "./LazyMap";
 import type { ReactNode } from "react";
+import { setLinkPage } from "@/lib/autolink";
 import Breadcrumbs from "./Breadcrumbs";
 import ContactButtons from "./ContactButtons";
 import FaqList from "./Faq";
@@ -337,6 +338,7 @@ function SectionBlock({ s, style }: { s: Section; style: PlacePage["layout"]["bo
 
 /* ------------------------------------------------------------------ page */
 export default function PlaceView({ page }: { page: PlacePage }) {
+  setLinkPage(page.path);
   const L0 = page.layout;
   // The booking form always sits in the hero (HeroBooking), so the old "hero" form placement falls back to the page-bottom form.
   const L = { ...L0, form: (page.simple || page.compactForm ? "bottom" : L0.form === "hero" ? "aside" : L0.form) as typeof L0.form };

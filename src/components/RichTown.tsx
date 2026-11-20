@@ -1,4 +1,5 @@
 import Link from "next/link";
+import RichText from "./RichText";
 import type { ReactNode } from "react";
 import Breadcrumbs from "./Breadcrumbs";
 import FaqList from "./Faq";
@@ -206,7 +207,7 @@ function Intro({ page, t }: P) {
     <div>
       <Title id="about" eyebrow="About this route">{t.introHeading}</Title>
       <p className="rounded-2xl border-l-4 border-accent bg-surface p-5 text-lg font-medium leading-8 text-navy">{page.directAnswer}</p>
-      <div className="mt-6 space-y-4 text-lg leading-8 text-muted">{t.intro.map((p) => <p key={p.slice(0, 26)}>{p}</p>)}</div>
+      <div className="mt-6 space-y-4 text-lg leading-8 text-muted">{t.intro.map((p) => <p key={p.slice(0, 26)}><RichText text={p} /></p>)}</div>
     </div>
   );
   const highway = img("highway", t.highwayAlt, "Saudi highway image", 800, 640);
@@ -230,7 +231,7 @@ function Both({ t }: P) {
   const body = (x: (typeof panels)[number]) => (
     <>
       <h3 className="text-xl font-extrabold text-navy">{x.heading}</h3>
-      <div className="mt-3 space-y-3 leading-7 text-muted">{x.paragraphs.map((p) => <p key={p.slice(0, 24)}>{p}</p>)}</div>
+      <div className="mt-3 space-y-3 leading-7 text-muted">{x.paragraphs.map((p) => <p key={p.slice(0, 24)}><RichText text={p} /></p>)}</div>
     </>
   );
   const head = <Title id="both" eyebrow="Both directions on one page" lead={`The road distance is the same either way, about ${Math.round(t.km)} km. One request can cover the trip out, the trip back or both.`}>{`Riyadh to ${t.toName} and back`}</Title>;
@@ -289,7 +290,7 @@ function Both({ t }: P) {
             <article key={x.n} className="rounded-3xl bg-navy p-7 text-white">
               <p className="text-xs font-extrabold uppercase tracking-wider text-accent">{x.label}</p>
               <h3 className="mt-2 text-xl font-extrabold">{x.heading}</h3>
-              <div className="mt-3 space-y-3 leading-7 text-white/80">{x.paragraphs.map((p) => <p key={p.slice(0, 24)}>{p}</p>)}</div>
+              <div className="mt-3 space-y-3 leading-7 text-white/80">{x.paragraphs.map((p) => <p key={p.slice(0, 24)}><RichText text={p} tone="dark" /></p>)}</div>
             </article>
           ))}
         </div>
@@ -317,7 +318,7 @@ function List({ items, style, id }: { items: { name: string; text: string }[]; s
         {items.map((x) => (
           <details key={x.name} className="group rounded-2xl border border-navy/10 bg-white p-5 open:shadow-sm">
             <summary className="flex cursor-pointer list-none items-center justify-between gap-3 font-extrabold text-navy">{x.name}<Icon name="arrow" className="h-4 w-4 shrink-0 text-accent transition group-open:rotate-90" /></summary>
-            <p className="mt-3 leading-7 text-muted">{x.text}</p>
+            <p className="mt-3 leading-7 text-muted"><RichText text={x.text} /></p>
           </details>
         ))}
       </div>
@@ -328,7 +329,7 @@ function List({ items, style, id }: { items: { name: string; text: string }[]; s
         <table className="w-full text-left text-sm">
           <caption className="sr-only">{id}</caption>
           <tbody className="divide-y divide-navy/10">
-            {items.map((x) => (<tr key={x.name} className="align-top"><th scope="row" className="w-1/3 px-4 py-3 font-bold text-navy">{x.name}</th><td className="px-4 py-3 leading-7 text-muted">{x.text}</td></tr>))}
+            {items.map((x) => (<tr key={x.name} className="align-top"><th scope="row" className="w-1/3 px-4 py-3 font-bold text-navy">{x.name}</th><td className="px-4 py-3 leading-7 text-muted"><RichText text={x.text} /></td></tr>))}
           </tbody>
         </table>
       </div>
@@ -339,7 +340,7 @@ function List({ items, style, id }: { items: { name: string; text: string }[]; s
         {items.map((x, i) => (
           <li key={x.name} className="grid gap-2 py-5 sm:grid-cols-[3rem_1fr]">
             <span className="font-display text-3xl text-gold">{String(i + 1).padStart(2, "0")}</span>
-            <div><h3 className="font-extrabold text-navy">{x.name}</h3><p className="mt-1 leading-7 text-muted">{x.text}</p></div>
+            <div><h3 className="font-extrabold text-navy">{x.name}</h3><p className="mt-1 leading-7 text-muted"><RichText text={x.text} /></p></div>
           </li>
         ))}
       </ol>
@@ -348,14 +349,14 @@ function List({ items, style, id }: { items: { name: string; text: string }[]; s
     return (
       <ul className="grid gap-4 sm:grid-cols-2">
         {items.map((x) => (
-          <li key={x.name} className="rounded-2xl border-t-4 border-accent bg-white p-5 shadow-sm ring-1 ring-navy/10"><h3 className="font-extrabold text-navy">{x.name}</h3><p className="mt-1 text-sm leading-6 text-muted">{x.text}</p></li>
+          <li key={x.name} className="rounded-2xl border-t-4 border-accent bg-white p-5 shadow-sm ring-1 ring-navy/10"><h3 className="font-extrabold text-navy">{x.name}</h3><p className="mt-1 text-sm leading-6 text-muted"><RichText text={x.text} /></p></li>
         ))}
       </ul>
     );
   return (
     <ul className="grid gap-4">
       {items.map((x) => (
-        <li key={x.name} className="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-navy/10"><h3 className="text-lg font-extrabold text-navy">{x.name}</h3><p className="mt-1 leading-7 text-muted">{x.text}</p></li>
+        <li key={x.name} className="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-navy/10"><h3 className="text-lg font-extrabold text-navy">{x.name}</h3><p className="mt-1 leading-7 text-muted"><RichText text={x.text} /></p></li>
       ))}
     </ul>
   );
@@ -402,7 +403,7 @@ function Places({ t }: P) {
           {t.places.map((p) => (
             <li key={p.name} className="grid gap-2 py-5 md:grid-cols-[14rem_1fr]">
               <div><h3 className="font-extrabold text-accent">{p.name}</h3><p className="text-xs font-extrabold uppercase tracking-wider text-white/60">{p.detail}</p></div>
-              <p className="leading-7 text-white/80">{p.text}</p>
+              <p className="leading-7 text-white/80"><RichText text={p.text} tone="dark" /></p>
             </li>
           ))}
         </ul>
@@ -412,7 +413,7 @@ function Places({ t }: P) {
             <li key={p.name} className={`rounded-3xl bg-white/5 p-6 ring-1 ring-white/10 ${scroll ? "min-w-[17rem] max-w-[19rem] shrink-0 snap-start" : ""}`}>
               <p className="text-[11px] font-extrabold uppercase tracking-wider text-accent">{p.detail}</p>
               <h3 className="mt-1 text-lg font-extrabold text-white">{p.name}</h3>
-              <p className="mt-2 text-sm leading-7 text-white/75">{p.text}</p>
+              <p className="mt-2 text-sm leading-7 text-white/75"><RichText text={p.text} tone="dark" /></p>
             </li>
           ))}
         </ul>
@@ -431,7 +432,7 @@ function Plan({ t }: P) {
           {t.plan.map((p, i) => (
             <li key={p.title} className="flex gap-4">
               <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-navy text-sm font-extrabold text-accent">{i + 1}</span>
-              <div><h3 className="text-lg font-extrabold text-navy">{p.title}</h3><p className="mt-1 leading-7 text-muted">{p.text}</p></div>
+              <div><h3 className="text-lg font-extrabold text-navy">{p.title}</h3><p className="mt-1 leading-7 text-muted"><RichText text={p.text} /></p></div>
             </li>
           ))}
         </ol>
@@ -457,7 +458,7 @@ function Info({ t }: P) {
           {t.info.map((x) => (
             <details key={x.title} className="group rounded-2xl border border-navy/10 bg-white p-5">
               <summary className="flex cursor-pointer list-none items-center justify-between gap-3 font-extrabold text-navy">{x.title}<Icon name="arrow" className="h-4 w-4 text-accent transition group-open:rotate-90" /></summary>
-              <p className="mt-3 leading-7 text-muted">{x.text}</p>
+              <p className="mt-3 leading-7 text-muted"><RichText text={x.text} /></p>
             </details>
           ))}
         </div>
@@ -466,7 +467,7 @@ function Info({ t }: P) {
           {t.info.map((x) => (
             <li key={x.title} className={t.style === "split" ? "rounded-2xl bg-white p-5 shadow-sm ring-1 ring-navy/10" : "flex gap-4"}>
               {t.style !== "split" && <span className="mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent text-navy"><Icon name="check" className="h-4 w-4" /></span>}
-              <div><h3 className="font-extrabold text-navy">{x.title}</h3><p className="leading-7 text-muted">{x.text}</p></div>
+              <div><h3 className="font-extrabold text-navy">{x.title}</h3><p className="leading-7 text-muted"><RichText text={x.text} /></p></div>
             </li>
           ))}
         </ul>

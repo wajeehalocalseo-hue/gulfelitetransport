@@ -28,7 +28,7 @@ export default function QuoteForm({
   dropoffDefault = "",
 }: {
   defaultService?: string;
-  variant?: "full" | "quick" | "booking";
+  variant?: "full" | "quick" | "booking" | "compact";
   /** Sub-service the visitor is viewing; added to the message as context, not to the fields. */
   topic?: string;
   /** Prefills for location pages. */
@@ -36,7 +36,8 @@ export default function QuoteForm({
   dropoffDefault?: string;
 }) {
   const booking = variant === "booking";
-  const quick = variant === "quick";
+  const compact = variant === "compact";
+  const quick = variant === "quick" || compact;
   const ride = defaultService === "Taxi & Cab Services";
   const uid = useId();
   const [errors, setErrors] = useState<Errors>({});
@@ -201,6 +202,59 @@ export default function QuoteForm({
           Submit another request
         </button>
       </div>
+    );
+  }
+
+  if (compact) {
+    // The short enquiry form used in service page heroes: the same fields, validation and submission as every other form here, in a small footprint.
+    const sm =
+      "w-full rounded-lg border border-navy/20 bg-white px-3 py-2 text-sm text-navy placeholder:text-muted/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/40 aria-[invalid=true]:border-red-600";
+    const lbl = "grid gap-1 text-xs font-bold uppercase tracking-wide text-navy/80";
+    return (
+      <form onSubmit={onSubmit} noValidate className="grid grid-cols-2 gap-x-3 gap-y-2.5" aria-describedby={`${uid}-note`}>
+        <input type="hidden" name="service" value={defaultService} />
+        <label className={lbl}>
+          Full name
+          <input {...common("name")} required autoComplete="name" className={sm} />
+          {msg("name")}
+        </label>
+        <label className={lbl}>
+          Phone
+          <input {...common("phone")} type="tel" required autoComplete="tel" placeholder="+966..." className={sm} />
+          {msg("phone")}
+        </label>
+        <label className={`${lbl} col-span-2`}>
+          Email
+          <input {...common("email")} type="email" required autoComplete="email" className={sm} />
+          {msg("email")}
+        </label>
+        <label className={`${lbl} col-span-2`}>
+          What do you need, and where?
+          <textarea {...common("details")} rows={2} required placeholder="Goods or requirement, from which city to which city" className={sm} />
+          {msg("details")}
+        </label>
+        <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+          <label>
+            Leave this field empty
+            <input name="company_website" tabIndex={-1} autoComplete="off" />
+          </label>
+        </div>
+        {status === "error" && (
+          <p role="alert" className="col-span-2 text-sm text-red-700">
+            Sorry, we could not send your request. Please try again or use WhatsApp.
+          </p>
+        )}
+        <button
+          type="submit"
+          disabled={status === "sending"}
+          className="col-span-2 rounded-full bg-accent px-6 py-2.5 font-extrabold text-navy transition hover:brightness-95 focus-visible:outline-navy disabled:opacity-60"
+        >
+          {status === "sending" ? "Sending..." : "Request a quote"}
+        </button>
+        <p id={`${uid}-note`} className="col-span-2 text-center text-xs leading-5 text-muted">
+          No payment now. We reply with questions or a quotation.
+        </p>
+      </form>
     );
   }
 

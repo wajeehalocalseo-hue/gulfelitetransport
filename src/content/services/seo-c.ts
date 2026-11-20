@@ -1,7 +1,7 @@
-import type { ServiceSeo } from "./seo-types";
+import type { ServiceBase } from "./seo-types";
 
 /** Services 13 to 18: exhibitions, contract fleet, last mile, distribution, warehousing, automotive. */
-export const seoC: Record<string, ServiceSeo> = {
+export const seoC: Record<string, ServiceBase> = {
   "trade-show-exhibition-logistics": {
     primary: "Exhibition Logistics Services Saudi Arabia",
     secondary: ["Trade Show Logistics", "Exhibition Transportation Services", "Event Cargo Transportation", "Exhibition Equipment Transport", "Trade Fair Logistics Company", "Event Logistics Services", "Exhibition Material Handling", "Exhibition Freight Solutions"],

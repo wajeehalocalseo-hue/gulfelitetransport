@@ -32,17 +32,17 @@ export function BookingCard({ service = "", topic = "", pickup = "", dropoff = "
 }
 
 /**
- * Puts the booking form on the right side of a page hero (wide screens) and directly under the hero
- * on smaller screens. The hero keeps its own design: on wide screens its content area is narrowed
+ * Puts the booking form on the right side of a page hero (wide screens) and directly under the header
+ * (above the hero text) on smaller screens, so a visitor on a phone sees the form first. The hero keeps its own design: on wide screens its content area is narrowed
  * to leave room for the form, and the form floats over the hero's right side.
  */
 export default function HeroBooking({ children, ...form }: FormProps & { children: ReactNode }) {
   return (
-    <div className="relative">
+    <div className="relative flex flex-col min-[1100px]:block">
       <div className="min-[1100px]:[&>section]:min-h-[640px] min-[1100px]:[&>section>div:last-child]:max-w-7xl min-[1100px]:[&>section>div:last-child]:pr-[450px]">
         {children}
       </div>
-      <div className="bg-navy px-5 pb-10 pt-6 min-[1100px]:pointer-events-none min-[1100px]:absolute min-[1100px]:inset-x-0 min-[1100px]:top-0 min-[1100px]:bg-transparent min-[1100px]:p-0">
+      <div className="order-first bg-navy px-5 pb-6 pt-5 min-[1100px]:order-none min-[1100px]:pointer-events-none min-[1100px]:absolute min-[1100px]:inset-x-0 min-[1100px]:top-0 min-[1100px]:bg-transparent min-[1100px]:p-0">
         <div className="mx-auto max-w-7xl min-[1100px]:flex min-[1100px]:justify-end min-[1100px]:px-5 min-[1100px]:pt-10">
           <BookingCard {...form} className="pointer-events-auto mx-auto w-full max-w-xl min-[1100px]:mx-0 min-[1100px]:w-[420px] min-[1100px]:max-w-none" />
         </div>

@@ -22,7 +22,7 @@ export default function PageHero({
   booking?: false | { service?: string; topic?: string };
 }) {
   const wa = whatsappUrl(`Hello ${site.name}, I would like to book a ride.`);
-  const right = aside ?? (booking === false ? null : <BookingCard service={booking.service} topic={booking.topic} className="w-full max-w-xl justify-self-end lg:max-w-none" />);
+  const right = aside ? <div className="max-lg:order-first">{aside}</div> : (booking === false ? null : <BookingCard service={booking.service} topic={booking.topic} className="w-full max-w-xl justify-self-end max-lg:order-first max-lg:mx-auto lg:max-w-none" />);
   return (
     <section className="bg-navy text-white">
       <div
