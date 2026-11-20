@@ -8,7 +8,7 @@ import type { TownRich, TownSectionId, TownStyle } from "./types";
  *  - the driving directions are exactly 100 words, one paragraph;
  *  - the Google Maps list has no duplicates and at most 25 entries (fewer only when the spec says why in `shortfall`);
  *  - the primary keyword "Riyadh to <name> taxi service" is in the title, H1 and lead;
- *  - the description is at most 158 characters (the page head cuts longer ones) and carries the verified phone number;
+ *  - the description is at most 158 characters (the page head cuts longer ones) and points the reader to WhatsApp (no phone number or call option anywhere);
  *  - the title is at most 60 characters, and there are at least five FAQs.
  * One page covers both directions (Riyadh to the town and the town to Riyadh); there is no separate reverse page.
  * The page is drawn by components/RichTown.tsx in one of six styles (TownStyle), so the pages do not share one layout.
@@ -81,10 +81,10 @@ const WORDINGS: Record<string, string[]> = {
     "You receive the vehicle, driver and fare from us. Nothing is booked until you agree.",
     "We reply with a vehicle, a driver and a fare for your request. The booking starts only when you accept.",
   ],
-  "Message us in the direction you need, or call +966 57 985 8464. The vehicle, driver and fare are confirmed with you before you commit.": [
-    "Send us the direction you need on WhatsApp, or ring +966 57 985 8464. We confirm the vehicle, driver and fare first, and you decide after that.",
-    "WhatsApp us the trip you want, or call +966 57 985 8464. Vehicle, driver and fare are confirmed before you commit to anything.",
-    "Use the WhatsApp button for your direction, or call +966 57 985 8464. We confirm every detail with you before the booking is final.",
+  "Message us on WhatsApp with the direction you need, or send the booking form. The vehicle, driver and fare are confirmed with you before you commit.": [
+    "Send us the direction you need on WhatsApp, or fill in the booking form. We confirm the vehicle, driver and fare first, and you decide after that.",
+    "WhatsApp us the trip you want, or use the booking form. Vehicle, driver and fare are confirmed before you commit to anything.",
+    "Use the WhatsApp button for your direction, or the booking form. We confirm every detail with you before the booking is final.",
   ],
   "Waiting can be requested. Tell us how long you expect, and we agree it and its cost before you commit.": [
     "You can ask for waiting time. Say how long you expect to need, and we agree the time and the cost with you first.",
@@ -153,7 +153,7 @@ export function buildTownRoute(spec: TownSpec, ctx: TownCtx): Pick<PlacePage, "t
   }
   if (spec.title.length > 60) throw new Error(`${spec.name}: the title is ${spec.title.length} characters`);
   if (spec.description.length > 158) throw new Error(`${spec.name}: the description is ${spec.description.length} characters (max 158)`);
-  if (!spec.description.includes(PHONE_DISPLAY)) throw new Error(`${spec.name}: the description must carry ${PHONE_DISPLAY}`);
+  if (!/whatsapp/i.test(spec.description) || /call|\+966|phone/i.test(spec.description)) throw new Error(`${spec.name}: the description must send readers to WhatsApp and must not mention a call or a number`);
   if (spec.faq.length < 5) throw new Error(`${spec.name}: fewer than five FAQs`);
   const words = wordCount(spec.directions);
   if (words !== 100) throw new Error(`${spec.name}: the driving directions have ${words} words, not 100`);
@@ -239,7 +239,7 @@ export function buildTownRoute(spec: TownSpec, ctx: TownCtx): Pick<PlacePage, "t
     related,
     faqHeading: `Riyadh to ${n}: questions`,
     faq: spec.faq.map((x, j) => ({ ...x, a: vary(x.a, ctx.index, 2 + j) })),
-    contact: { outUrl: out ?? undefined, backUrl: back ?? undefined, callUrl: `tel:+${PHONE_DIGITS}`, phone: PHONE_DISPLAY },
+    contact: { outUrl: out ?? undefined, backUrl: back ?? undefined },
     local,
     ctaHeading: spec.ctaHeading,
     ctaText: vary(spec.ctaText, ctx.index, 1),

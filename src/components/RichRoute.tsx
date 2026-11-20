@@ -38,14 +38,14 @@ export function Band({ id, tone = "white", children }: { id?: string; tone?: "wh
   const bg = tone === "surface" ? "bg-surface" : tone === "navy" ? "bg-navy text-white" : "bg-white";
   return (
     <section id={id} aria-labelledby={id ? `${id}-title` : undefined} className={bg}>
-      <div className={`${wrap} py-16 sm:py-20`}>{children}</div>
+      <div className={`${wrap} py-10 sm:py-14`}>{children}</div>
     </section>
   );
 }
 
 export function Title({ id, children, eyebrow, center = false, dark = false, lead }: { id: string; children: ReactNode; eyebrow?: string; center?: boolean; dark?: boolean; lead?: string }) {
   return (
-    <div className={`mb-10 max-w-3xl ${center ? "mx-auto text-center" : ""}`}>
+    <div className={`mb-7 max-w-3xl ${center ? "mx-auto text-center" : ""}`}>
       {eyebrow && <p className={`text-xs font-extrabold uppercase tracking-[0.2em] ${dark ? "text-accent" : "text-gold"}`}>{eyebrow}</p>}
       <h2 id={`${id}-title`} className="font-display mt-2 text-3xl leading-tight sm:text-4xl">{children}</h2>
       {lead && <p className={`mt-4 text-lg leading-8 ${dark ? "text-white/75" : "text-muted"}`}>{lead}</p>}

@@ -57,10 +57,16 @@ export default function ImageSlot({
     <div
       role="img"
       aria-label={alt}
-      style={fill ? undefined : { aspectRatio: `${width} / ${height}` }}
-      className={`flex items-center justify-center bg-gradient-to-br from-navy-2/15 via-surface to-accent/20 p-4 text-center ${fill ? "absolute inset-0" : "w-full"} ${className}`}
+      style={fill ? undefined : { aspectRatio: `${Math.max(width / height, 1.9)} / 1` }}
+      className={`relative flex items-center justify-center overflow-hidden bg-gradient-to-br from-navy-2/20 via-surface to-accent/25 p-4 text-center ${fill ? "absolute inset-0" : "w-full"} ${className}`}
     >
-      {!fill && <span className="rounded-full bg-white/80 px-4 py-1.5 text-[11px] font-extrabold uppercase tracking-wider text-navy/60 ring-1 ring-navy/10">[{label}]</span>}
+      {!fill && (
+        <svg aria-hidden="true" viewBox="0 0 400 120" preserveAspectRatio="none" className="absolute inset-0 h-full w-full text-navy/10">
+          <path d="M0 95 C80 40 140 110 220 60 S340 20 400 50" fill="none" stroke="currentColor" strokeWidth="10" strokeLinecap="round" />
+          <path d="M0 95 C80 40 140 110 220 60 S340 20 400 50" fill="none" stroke="#fff" strokeOpacity=".7" strokeWidth="1.5" strokeDasharray="8 10" />
+        </svg>
+      )}
+      {!fill && <span className="relative rounded-full bg-white/80 px-4 py-1.5 text-[11px] font-extrabold uppercase tracking-wider text-navy/60 ring-1 ring-navy/10">[{label}]</span>}
     </div>
   );
 }

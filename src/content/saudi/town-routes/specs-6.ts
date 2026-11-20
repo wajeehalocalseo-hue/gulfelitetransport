@@ -15,7 +15,7 @@ export const specs6: TownSpec[] = [
     lng: 46.5139,
     area: "Al Hariq, Riyadh Region",
     title: "Riyadh to Al Hariq Taxi Service | Private Rides",
-    description: "Riyadh to Al Hariq taxi service: private rides both ways south of Riyadh, fare first. Call +966 57 985 8464 or use WhatsApp to arrange a trip.",
+    description: "Riyadh to Al Hariq taxi service: private rides both ways south of Riyadh, fare first. Message us on WhatsApp to book.",
     h1: "Riyadh to Al Hariq Taxi Service",
     lead: "A private Riyadh to Al Hariq taxi service for the drive south on the Hawtat Bani Tamim road, in both directions. Send your pickup, drop-off, date and passengers, and we confirm the vehicle, driver and fare before you commit.",
     directAnswer:
@@ -81,7 +81,7 @@ export const specs6: TownSpec[] = [
     ],
     related: [],
     faq: [
-      { q: "How can I book a taxi from Riyadh to Al Hariq?", a: "Send the pickup in Riyadh, the drop-off in Al Hariq, the date, time and passengers by WhatsApp, phone (+966 57 985 8464) or the booking form. We confirm the vehicle, driver and fare before you commit." },
+      { q: "How can I book a taxi from Riyadh to Al Hariq?", a: "Send the pickup in Riyadh, the drop-off in Al Hariq, the date, time and passengers by WhatsApp or the booking form. We confirm the vehicle, driver and fare before you commit." },
       { q: "How far is Al Hariq from Riyadh?", a: "About 168 km by road, roughly 2 hours 25 minutes in light traffic. It is not a promised journey time." },
       { q: "Can I book Al Hariq to Riyadh on this page?", a: "Yes. This page covers both directions. Use the Al Hariq to Riyadh WhatsApp button, or send the pickup in Al Hariq and the drop-off in Riyadh." },
       { q: "Which road does the route use?", a: "Routing data shows Route 65, Al Haer Road, the Riyadh to Hawtat Bani Tamim Road and Route 5044. The exact route depends on your addresses and traffic." },
@@ -116,7 +116,7 @@ export const specs6: TownSpec[] = [
     ],
     shortfall: "OpenStreetMap lists only a handful of named places around Al Hariq (the town, its twin entry, one village and one larger town), so the list is completed with the road towns and the cities people travel to, and stops short of 25 rather than inventing places.",
     ctaHeading: "Ready to travel between Riyadh and Al Hariq?",
-    ctaText: "Message us in the direction you need, or call +966 57 985 8464. The vehicle, driver and fare are confirmed with you before you commit.",
+    ctaText: "Message us on WhatsApp with the direction you need, or send the booking form. The vehicle, driver and fare are confirmed with you before you commit.",
   },
 
   {
@@ -127,7 +127,7 @@ export const specs6: TownSpec[] = [
     lng: 46.8787,
     area: "Hawtat Bani Tamim, Riyadh Region",
     title: "Riyadh to Hotat Bani Tamim Taxi Service | Private",
-    description: "Riyadh to Hotat Bani Tamim taxi service: private rides both ways, fare confirmed first. Call +966 57 985 8464 or use WhatsApp to plan your trip.",
+    description: "Riyadh to Hotat Bani Tamim taxi service: private rides both ways, fare confirmed first. Book on WhatsApp in minutes.",
     h1: "Riyadh to Hotat Bani Tamim Taxi Service",
     lead: "A private Riyadh to Hotat Bani Tamim taxi service for the drive south, in both directions. Send your pickup, drop-off, date and passengers, and we confirm the vehicle, driver and fare before you commit.",
     directAnswer:
@@ -193,7 +193,7 @@ export const specs6: TownSpec[] = [
     ],
     related: [],
     faq: [
-      { q: "How can I book a taxi from Riyadh to Hotat Bani Tamim?", a: "Send the pickup in Riyadh, the drop-off in Hotat Bani Tamim, the date, time and passengers by WhatsApp, phone (+966 57 985 8464) or the booking form. We confirm the vehicle, driver and fare before you commit." },
+      { q: "How can I book a taxi from Riyadh to Hotat Bani Tamim?", a: "Send the pickup in Riyadh, the drop-off in Hotat Bani Tamim, the date, time and passengers by WhatsApp or the booking form. We confirm the vehicle, driver and fare before you commit." },
       { q: "How far is Hotat Bani Tamim from Riyadh?", a: "About 148 km by road, roughly 1 hour 50 minutes in light traffic. It is not a promised journey time." },
       { q: "Can I book Hotat Bani Tamim to Riyadh on this page?", a: "Yes. This page covers both directions. Use the Hotat Bani Tamim to Riyadh WhatsApp button, or send the pickup in Hotat Bani Tamim and the drop-off in Riyadh." },
       { q: "Is Hotat the same as Hawtat Bani Tamim?", a: "Yes. Maps use Hawtat Bani Tamim, and Hotat is a common way to write it. It is the same town." },
@@ -238,7 +238,7 @@ export const specs6: TownSpec[] = [
     ],
     shortfall: "OpenStreetMap lists about nine small settlements and three named places around Hotat Bani Tamim, so the list is completed with the road towns and the cities people travel to, and stops short of 25 rather than inventing places.",
     ctaHeading: "Ready to travel between Riyadh and Hotat Bani Tamim?",
-    ctaText: "Message us in the direction you need, or call +966 57 985 8464. The vehicle, driver and fare are confirmed with you before you commit.",
+    ctaText: "Message us on WhatsApp with the direction you need, or send the booking form. The vehicle, driver and fare are confirmed with you before you commit.",
   },
 
   {
@@ -249,7 +249,7 @@ export const specs6: TownSpec[] = [
     lng: 46.7172,
     area: "Layla, Al Aflaj, Riyadh Region",
     title: "Riyadh to Layla Taxi Service | Private Long-Distance",
-    description: "Riyadh to Layla taxi service: a private ride both ways to the Al Aflaj town, fare first. Call +966 57 985 8464 or use WhatsApp to plan your trip.",
+    description: "Riyadh to Layla taxi service: a private ride both ways to the Al Aflaj town, fare first. Message us on WhatsApp for a fare.",
     h1: "Riyadh to Layla Taxi Service",
     lead: "A private Riyadh to Layla taxi service for the main town of Al Aflaj, in both directions. Send your pickup, drop-off, date and passengers, and we confirm the vehicle, driver and fare before you commit.",
     directAnswer:
@@ -315,7 +315,7 @@ export const specs6: TownSpec[] = [
     ],
     related: [],
     faq: [
-      { q: "How can I book a taxi from Riyadh to Layla?", a: "Send the pickup in Riyadh, the drop-off in Layla, the date, time and passengers by WhatsApp, phone (+966 57 985 8464) or the booking form. We confirm the vehicle, driver and fare before you commit." },
+      { q: "How can I book a taxi from Riyadh to Layla?", a: "Send the pickup in Riyadh, the drop-off in Layla, the date, time and passengers by WhatsApp or the booking form. We confirm the vehicle, driver and fare before you commit." },
       { q: "How far is Layla from Riyadh?", a: "About 289 km by road, roughly 3 hours 30 minutes in light traffic. It is not a promised journey time." },
       { q: "Can I book Layla to Riyadh on this page?", a: "Yes. This page covers both directions. Use the Layla to Riyadh WhatsApp button, or send the pickup in Layla and the drop-off in Riyadh." },
       { q: "Is Layla part of Al Aflaj?", a: "Yes. Layla is the main town of the Al Aflaj area. Use this page for the town, and the Al Aflaj page for the wider area." },
@@ -359,7 +359,7 @@ export const specs6: TownSpec[] = [
     ],
     shortfall: "OpenStreetMap lists about nine villages and three named places around Layla, so the list is completed with the road towns and the cities people travel to, and stops short of 25 rather than inventing places.",
     ctaHeading: "Ready to travel between Riyadh and Layla?",
-    ctaText: "Message us in the direction you need, or call +966 57 985 8464. The vehicle, driver and fare are confirmed with you before you commit.",
+    ctaText: "Message us on WhatsApp with the direction you need, or send the booking form. The vehicle, driver and fare are confirmed with you before you commit.",
   },
 
   {
@@ -370,7 +370,7 @@ export const specs6: TownSpec[] = [
     lng: 45.5744,
     area: "As Sulayyil, Riyadh Region",
     title: "Riyadh to Al Sulayyil Taxi Service | Long-Distance",
-    description: "Riyadh to Al Sulayyil taxi service: a private long-distance ride both ways, fare confirmed first. Call +966 57 985 8464 or use WhatsApp to plan it.",
+    description: "Riyadh to Al Sulayyil taxi service: a private long-distance ride both ways, fare confirmed first. Send your trip on WhatsApp to book.",
     h1: "Riyadh to Al Sulayyil Taxi Service",
     lead: "A private Riyadh to Al Sulayyil taxi service for one of the longest road trips in Riyadh Region, in both directions. Share your addresses, dates and passengers, and we confirm the vehicle, driver and fare before you commit.",
     directAnswer:
@@ -436,7 +436,7 @@ export const specs6: TownSpec[] = [
     ],
     related: [],
     faq: [
-      { q: "How can I book a taxi from Riyadh to Al Sulayyil?", a: "Send the pickup in Riyadh, the drop-off in Al Sulayyil, the dates, time and passengers by WhatsApp, phone (+966 57 985 8464) or the booking form. We confirm the vehicle, driver and fare before you commit." },
+      { q: "How can I book a taxi from Riyadh to Al Sulayyil?", a: "Send the pickup in Riyadh, the drop-off in Al Sulayyil, the dates, time and passengers by WhatsApp or the booking form. We confirm the vehicle, driver and fare before you commit." },
       { q: "How far is Al Sulayyil from Riyadh?", a: "About 530 km by road, roughly 6 hours 20 minutes in light traffic. It is not a promised journey time." },
       { q: "Can I book Al Sulayyil to Riyadh on this page?", a: "Yes. This page covers both directions. Use the Al Sulayyil to Riyadh WhatsApp button, or send the pickup in Al Sulayyil and the drop-off in Riyadh." },
       { q: "Which road does the route use?", a: "Routing data shows Route 65, Al Haer Road, the Riyadh to Hawtat Bani Tamim Road and then Route 10 for about 380 km. The exact route depends on your addresses and traffic." },
@@ -473,6 +473,6 @@ export const specs6: TownSpec[] = [
     ],
     shortfall: "OpenStreetMap lists only a hospital, a park and four villages around Al Sulayyil, so the list is completed with the road towns and the cities people travel to, and stops short of 25 rather than inventing places.",
     ctaHeading: "Ready to travel between Riyadh and Al Sulayyil?",
-    ctaText: "Message us in the direction you need, or call +966 57 985 8464. The vehicle, driver and fare are confirmed with you before you commit.",
+    ctaText: "Message us on WhatsApp with the direction you need, or send the booking form. The vehicle, driver and fare are confirmed with you before you commit.",
   },
 ];

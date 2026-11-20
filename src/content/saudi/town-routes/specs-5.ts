@@ -15,7 +15,7 @@ export const specs5: TownSpec[] = [
     lng: 45.2844,
     area: "Al Quwayiyah, Riyadh Region",
     title: "Riyadh to Al Quwayiyah Taxi Service | Route 40",
-    description: "Riyadh to Al Quwayiyah taxi service: private rides both ways on the Makkah highway, fare first. Call +966 57 985 8464 or use WhatsApp to book.",
+    description: "Riyadh to Al Quwayiyah taxi service: private rides both ways on the Makkah highway, fare first. Message us on WhatsApp to book.",
     h1: "Riyadh to Al Quwayiyah Taxi Service",
     lead: "A private Riyadh to Al Quwayiyah taxi service on the long Makkah highway, in both directions. Send your pickup, drop-off, date and passengers, and we confirm the vehicle, driver and fare before you commit.",
     directAnswer:
@@ -81,7 +81,7 @@ export const specs5: TownSpec[] = [
     ],
     related: [],
     faq: [
-      { q: "How can I book a taxi from Riyadh to Al Quwayiyah?", a: "Send the pickup in Riyadh, the drop-off in Al Quwayiyah, the date, time and passengers by WhatsApp, phone (+966 57 985 8464) or the booking form. We confirm the vehicle, driver and fare before you commit." },
+      { q: "How can I book a taxi from Riyadh to Al Quwayiyah?", a: "Send the pickup in Riyadh, the drop-off in Al Quwayiyah, the date, time and passengers by WhatsApp or the booking form. We confirm the vehicle, driver and fare before you commit." },
       { q: "How far is Al Quwayiyah from Riyadh?", a: "About 171 km by road, roughly 1 hour 50 minutes in light traffic. It is not a promised journey time." },
       { q: "Can I book Al Quwayiyah to Riyadh on this page?", a: "Yes. This page covers both directions. Use the Al Quwayiyah to Riyadh WhatsApp button, or send the pickup in Al Quwayiyah and the drop-off in Riyadh." },
       { q: "Which road does the route use?", a: "Routing data shows King Fahd Road (Route 65) out of Riyadh, then Route 40, the Makkah Al Mukarramah Road, for almost all of the drive. The exact route depends on your addresses and traffic." },
@@ -128,7 +128,7 @@ export const specs5: TownSpec[] = [
       ],
     ],
     ctaHeading: "Ready to travel between Riyadh and Al Quwayiyah?",
-    ctaText: "Message us in the direction you need, or call +966 57 985 8464. The vehicle, driver and fare are confirmed with you before you commit.",
+    ctaText: "Message us on WhatsApp with the direction you need, or send the booking form. The vehicle, driver and fare are confirmed with you before you commit.",
   },
 
   {
@@ -139,7 +139,7 @@ export const specs5: TownSpec[] = [
     lng: 44.7996,
     area: "Wadi ad Dawasir, Riyadh Region",
     title: "Riyadh to Wadi Al-Dawasir Taxi Service | Long-Distance",
-    description: "Riyadh to Wadi Al-Dawasir taxi service: a private long-distance ride both ways, fare first. Call +966 57 985 8464 or use WhatsApp to plan it.",
+    description: "Riyadh to Wadi Al-Dawasir taxi service: a private long-distance ride both ways, fare first. Book on WhatsApp in minutes.",
     h1: "Riyadh to Wadi Al-Dawasir Taxi Service",
     lead: "A private Riyadh to Wadi Al-Dawasir taxi service for one of the longest drives in Riyadh Region, in both directions. Share your addresses, dates and passengers, and we confirm the vehicle, driver and fare before you commit.",
     directAnswer:
@@ -205,7 +205,7 @@ export const specs5: TownSpec[] = [
     ],
     related: [],
     faq: [
-      { q: "How can I book a taxi from Riyadh to Wadi Al-Dawasir?", a: "Send the pickup in Riyadh, the drop-off in Wadi Al-Dawasir, the dates, time and passengers by WhatsApp, phone (+966 57 985 8464) or the booking form. We confirm the vehicle, driver and fare before you commit." },
+      { q: "How can I book a taxi from Riyadh to Wadi Al-Dawasir?", a: "Send the pickup in Riyadh, the drop-off in Wadi Al-Dawasir, the dates, time and passengers by WhatsApp or the booking form. We confirm the vehicle, driver and fare before you commit." },
       { q: "How far is Wadi Al-Dawasir from Riyadh?", a: "About 615 km by road, roughly 7 hours 20 minutes of driving in light traffic. It is not a promised journey time." },
       { q: "Can I book Wadi Al-Dawasir to Riyadh on this page?", a: "Yes. This page covers both directions. Use the Wadi Al-Dawasir to Riyadh WhatsApp button, or send the pickup in Wadi Al-Dawasir and the drop-off in Riyadh." },
       { q: "Which road does the route use?", a: "Routing data shows Route 65, Al Haer Road and the Riyadh to Hawtat Bani Tamim Road, then Route 10 for almost 465 km. The exact route depends on your addresses and traffic." },
@@ -252,7 +252,7 @@ export const specs5: TownSpec[] = [
       ],
     ],
     ctaHeading: "Ready to travel between Riyadh and Wadi Al-Dawasir?",
-    ctaText: "Message us in the direction you need, or call +966 57 985 8464. The vehicle, driver and fare are confirmed with you before you commit.",
+    ctaText: "Message us on WhatsApp with the direction you need, or send the booking form. The vehicle, driver and fare are confirmed with you before you commit.",
   },
 
   {
@@ -263,7 +263,7 @@ export const specs5: TownSpec[] = [
     lng: 46.2706,
     area: "Al Muzahimiyah, Riyadh Region",
     title: "Riyadh to Al Muzahimiyah Taxi Service | Day Trips",
-    description: "Riyadh to Al Muzahimiyah taxi service: private rides both ways west of Riyadh, fare first. Call +966 57 985 8464 or use WhatsApp to arrange.",
+    description: "Riyadh to Al Muzahimiyah taxi service: private rides both ways west of Riyadh, fare first. Message us on WhatsApp for a fare.",
     h1: "Riyadh to Al Muzahimiyah Taxi Service",
     lead: "A private Riyadh to Al Muzahimiyah taxi service for the short drive west on Route 40, in both directions. Send your pickup, drop-off, date and passengers, and we confirm the vehicle, driver and fare before you commit.",
     directAnswer:
@@ -329,7 +329,7 @@ export const specs5: TownSpec[] = [
     ],
     related: [],
     faq: [
-      { q: "How can I book a taxi from Riyadh to Al Muzahimiyah?", a: "Send the pickup in Riyadh, the drop-off in Al Muzahimiyah, the date, time and passengers by WhatsApp, phone (+966 57 985 8464) or the booking form. We confirm the vehicle, driver and fare before you commit." },
+      { q: "How can I book a taxi from Riyadh to Al Muzahimiyah?", a: "Send the pickup in Riyadh, the drop-off in Al Muzahimiyah, the date, time and passengers by WhatsApp or the booking form. We confirm the vehicle, driver and fare before you commit." },
       { q: "How far is Al Muzahimiyah from Riyadh?", a: "About 56 km by road, roughly 40 minutes in light traffic. It is not a promised journey time." },
       { q: "Can I book Al Muzahimiyah to Riyadh on this page?", a: "Yes. This page covers both directions. Use the Al Muzahimiyah to Riyadh WhatsApp button, or send the pickup in Al Muzahimiyah and the drop-off in Riyadh." },
       { q: "Which road does the route use?", a: "Routing data shows King Fahd Road (Route 65), then Route 40 for about 26 km, then King Abdullah Road into the town. The exact route depends on your addresses and traffic." },
@@ -376,7 +376,7 @@ export const specs5: TownSpec[] = [
       ],
     ],
     ctaHeading: "Ready to travel between Riyadh and Al Muzahimiyah?",
-    ctaText: "Message us in the direction you need, or call +966 57 985 8464. The vehicle, driver and fare are confirmed with you before you commit.",
+    ctaText: "Message us on WhatsApp with the direction you need, or send the booking form. The vehicle, driver and fare are confirmed with you before you commit.",
   },
 
   {
@@ -387,7 +387,7 @@ export const specs5: TownSpec[] = [
     lng: 47.165,
     area: "Ad Dilam, Riyadh Region",
     title: "Riyadh to Ad Dilam Taxi Service | Via Al Kharj",
-    description: "Riyadh to Ad Dilam taxi service: private rides both ways past Al Kharj, fare confirmed first. Call +966 57 985 8464 or use WhatsApp to book.",
+    description: "Riyadh to Ad Dilam taxi service: private rides both ways past Al Kharj, fare confirmed first. Send your trip on WhatsApp to book.",
     h1: "Riyadh to Ad Dilam Taxi Service",
     lead: "A private Riyadh to Ad Dilam taxi service for the drive south past Al Kharj, in both directions. Send your pickup, drop-off, date and passengers, and we confirm the vehicle, driver and fare before you commit.",
     directAnswer:
@@ -453,7 +453,7 @@ export const specs5: TownSpec[] = [
     ],
     related: [],
     faq: [
-      { q: "How can I book a taxi from Riyadh to Ad Dilam?", a: "Send the pickup in Riyadh, the drop-off in Ad Dilam, the date, time and passengers by WhatsApp, phone (+966 57 985 8464) or the booking form. We confirm the vehicle, driver and fare before you commit." },
+      { q: "How can I book a taxi from Riyadh to Ad Dilam?", a: "Send the pickup in Riyadh, the drop-off in Ad Dilam, the date, time and passengers by WhatsApp or the booking form. We confirm the vehicle, driver and fare before you commit." },
       { q: "How far is Ad Dilam from Riyadh?", a: "About 107 km by road, roughly 1 hour 30 minutes in light traffic. It is not a promised journey time." },
       { q: "Can I book Ad Dilam to Riyadh on this page?", a: "Yes. This page covers both directions. Use the Ad Dilam to Riyadh WhatsApp button, or send the pickup in Ad Dilam and the drop-off in Riyadh." },
       { q: "Is Ad Dilam the same as Al Dilam?", a: "Yes. Maps and signs use both spellings for the same town in Riyadh Region." },
@@ -500,6 +500,6 @@ export const specs5: TownSpec[] = [
       ],
     ],
     ctaHeading: "Ready to travel between Riyadh and Ad Dilam?",
-    ctaText: "Message us in the direction you need, or call +966 57 985 8464. The vehicle, driver and fare are confirmed with you before you commit.",
+    ctaText: "Message us on WhatsApp with the direction you need, or send the booking form. The vehicle, driver and fare are confirmed with you before you commit.",
   },
 ];

@@ -15,7 +15,7 @@ export const specs1: TownSpec[] = [
     lng: 45.3456,
     area: "Al Majma'ah, Riyadh Region",
     title: "Riyadh to Al Majma'ah Taxi Service | Private Rides",
-    description: "Riyadh to Al Majma'ah taxi service: private rides both ways, fare confirmed before you commit. Call +966 57 985 8464 or message us on WhatsApp.",
+    description: "Riyadh to Al Majma'ah taxi service: private rides both ways, fare confirmed before you commit. Message us on WhatsApp to book.",
     h1: "Riyadh to Al Majma'ah Taxi Service",
     lead: "A private Riyadh to Al Majma'ah taxi service for the drive north-west on Route 65, in both directions. Send your pickup, drop-off, date and passengers, and we confirm the vehicle, driver and fare before you commit.",
     directAnswer:
@@ -81,7 +81,7 @@ export const specs1: TownSpec[] = [
     ],
     related: [],
     faq: [
-      { q: "How can I book a taxi from Riyadh to Al Majma'ah?", a: "Send us the pickup address in Riyadh, the drop-off in Al Majma'ah, the date and time and the number of passengers and bags by WhatsApp, phone (+966 57 985 8464) or the booking form. We confirm the vehicle, driver and fare before you commit." },
+      { q: "How can I book a taxi from Riyadh to Al Majma'ah?", a: "Send us the pickup address in Riyadh, the drop-off in Al Majma'ah, the date and time and the number of passengers and bags by WhatsApp or the booking form. We confirm the vehicle, driver and fare before you commit." },
       { q: "Can I book Al Majma'ah to Riyadh on this page?", a: "Yes. This page covers both directions. Use the Al Majma'ah to Riyadh WhatsApp button, or send the pickup in Al Majma'ah and the drop-off in Riyadh by any other route." },
       { q: "How far is Al Majma'ah from Riyadh by road?", a: "About 195 km by road, roughly 1 hour 55 minutes in light traffic. Traffic and stops change this, so it is not a promised journey time." },
       { q: "Which road do taxis use between Riyadh and Al Majma'ah?", a: "Routing data shows King Fahd Road and the Qassim Expressway, both Route 65, with a short final approach on King Fahd Road signed Route 535. The exact route depends on your addresses and traffic." },
@@ -129,6 +129,6 @@ export const specs1: TownSpec[] = [
       ],
     ],
     ctaHeading: "Ready to travel between Riyadh and Al Majma'ah?",
-    ctaText: "Message us in the direction you need, or call +966 57 985 8464. The vehicle, driver and fare are confirmed with you before you commit.",
+    ctaText: "Message us on WhatsApp with the direction you need, or send the booking form. The vehicle, driver and fare are confirmed with you before you commit.",
   },
 ];

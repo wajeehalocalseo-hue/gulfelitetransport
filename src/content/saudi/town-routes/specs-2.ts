@@ -15,7 +15,7 @@ export const specs2: TownSpec[] = [
     lng: 44.3833,
     area: "Ad Dawadimi, Riyadh Region",
     title: "Riyadh to Al Dawadmi Taxi Service | Long-Distance",
-    description: "Riyadh to Al Dawadmi taxi service: a private long-distance ride both ways with the fare confirmed first. Call +966 57 985 8464 or use WhatsApp.",
+    description: "Riyadh to Al Dawadmi taxi service: a private long-distance ride both ways with the fare confirmed first. Book on WhatsApp in minutes.",
     h1: "Riyadh to Al Dawadmi Taxi Service",
     lead: "A private Riyadh to Al Dawadmi taxi service for the long drive west across Riyadh Region, in both directions. Share your addresses, date and passengers, and we confirm the vehicle, driver and fare before you commit.",
     directAnswer:
@@ -81,7 +81,7 @@ export const specs2: TownSpec[] = [
     ],
     related: [],
     faq: [
-      { q: "How do I book a taxi from Riyadh to Al Dawadmi?", a: "Send the pickup in Riyadh, the drop-off in Al Dawadmi, the date, time and passengers by WhatsApp, phone (+966 57 985 8464) or the booking form. We confirm the vehicle, driver and fare before you commit." },
+      { q: "How do I book a taxi from Riyadh to Al Dawadmi?", a: "Send the pickup in Riyadh, the drop-off in Al Dawadmi, the date, time and passengers by WhatsApp or the booking form. We confirm the vehicle, driver and fare before you commit." },
       { q: "How far is Al Dawadmi from Riyadh?", a: "About 315 km by road, roughly 3 hours 40 minutes in light traffic. Stops, traffic and weather change this, so it is not a promised journey time." },
       { q: "Can I book from Al Dawadmi to Riyadh on this page?", a: "Yes. This page covers both directions. Use the Al Dawadmi to Riyadh WhatsApp button, or send the pickup in Al Dawadmi and the drop-off in Riyadh." },
       { q: "Is Ad Dawadimi the same place as Al Dawadmi?", a: "Yes. Ad Dawadimi, Ad Duwadimi and Dawadmi are spellings of the same city in Riyadh Region." },
@@ -128,7 +128,7 @@ export const specs2: TownSpec[] = [
       ],
     ],
     ctaHeading: "Ready to travel between Riyadh and Al Dawadmi?",
-    ctaText: "Message us in the direction you need, or call +966 57 985 8464. The vehicle, driver and fare are confirmed with you before you commit.",
+    ctaText: "Message us on WhatsApp with the direction you need, or send the booking form. The vehicle, driver and fare are confirmed with you before you commit.",
   },
 
   {
@@ -139,7 +139,7 @@ export const specs2: TownSpec[] = [
     lng: 44.8152,
     area: "Al Zulfi governorate, Riyadh Region",
     title: "Riyadh to Al Zulfi Taxi Service | Private Rides",
-    description: "Riyadh to Al Zulfi taxi service: private rides both ways, fare confirmed first. Call +966 57 985 8464 or message us on WhatsApp to arrange.",
+    description: "Riyadh to Al Zulfi taxi service: private rides both ways, fare confirmed first. Message us on WhatsApp for a fare.",
     h1: "Riyadh to Al Zulfi Taxi Service",
     lead: "A private Riyadh to Al Zulfi taxi service for the drive north-west past Al Majma'ah, in both directions. Send your pickup, drop-off, date and passengers, and we confirm the vehicle, driver and fare before you commit.",
     directAnswer:
@@ -205,7 +205,7 @@ export const specs2: TownSpec[] = [
     ],
     related: [],
     faq: [
-      { q: "How can I book a taxi from Riyadh to Al Zulfi?", a: "Send the pickup in Riyadh, the drop-off in Al Zulfi, the date, time and passengers by WhatsApp, phone (+966 57 985 8464) or the booking form. We confirm the vehicle, driver and fare before you commit." },
+      { q: "How can I book a taxi from Riyadh to Al Zulfi?", a: "Send the pickup in Riyadh, the drop-off in Al Zulfi, the date, time and passengers by WhatsApp or the booking form. We confirm the vehicle, driver and fare before you commit." },
       { q: "How far is Al Zulfi from Riyadh by road?", a: "About 270 km by road, roughly 2 hours 40 minutes in light traffic. It is not a promised journey time." },
       { q: "Can I book Al Zulfi to Riyadh on this page?", a: "Yes. This page covers both directions. Use the Al Zulfi to Riyadh WhatsApp button, or send the pickup in Al Zulfi and the drop-off in Riyadh." },
       { q: "Is Al Zulfi the same as Az Zulfi?", a: "Yes. Maps and signs use both spellings for the same town in Riyadh Region." },
@@ -252,7 +252,7 @@ export const specs2: TownSpec[] = [
       ],
     ],
     ctaHeading: "Ready to travel between Riyadh and Al Zulfi?",
-    ctaText: "Message us in the direction you need, or call +966 57 985 8464. The vehicle, driver and fare are confirmed with you before you commit.",
+    ctaText: "Message us on WhatsApp with the direction you need, or send the booking form. The vehicle, driver and fare are confirmed with you before you commit.",
   },
 
   {
@@ -263,7 +263,7 @@ export const specs2: TownSpec[] = [
     lng: 42.9151,
     area: "Afif, Riyadh Region",
     title: "Riyadh to Afif Taxi Service | Private Long-Distance",
-    description: "Riyadh to Afif taxi service: a private ride over the long road west, both ways, fare confirmed first. Call +966 57 985 8464 or use WhatsApp.",
+    description: "Riyadh to Afif taxi service: a private ride over the long road west, both ways, fare confirmed first. Send your trip on WhatsApp to book.",
     h1: "Riyadh to Afif Taxi Service",
     lead: "A private Riyadh to Afif taxi service for one of the longest road trips inside Riyadh Region, in both directions. Share your addresses, date and passengers, and we confirm the vehicle, driver and fare before you commit.",
     directAnswer:
@@ -329,7 +329,7 @@ export const specs2: TownSpec[] = [
     ],
     related: [],
     faq: [
-      { q: "How can I book a taxi from Riyadh to Afif?", a: "Send the pickup in Riyadh, the drop-off in Afif, the date, time and passengers by WhatsApp, phone (+966 57 985 8464) or the booking form. We confirm the vehicle, driver and fare before you commit." },
+      { q: "How can I book a taxi from Riyadh to Afif?", a: "Send the pickup in Riyadh, the drop-off in Afif, the date, time and passengers by WhatsApp or the booking form. We confirm the vehicle, driver and fare before you commit." },
       { q: "How far is Afif from Riyadh?", a: "About 485 km by road, roughly 5 hours 40 minutes in light traffic. It is not a promised journey time." },
       { q: "Can I book Afif to Riyadh on this page?", a: "Yes. This page covers both directions. Use the Afif to Riyadh WhatsApp button, or send the pickup in Afif and the drop-off in Riyadh." },
       { q: "Which road does the route use?", a: "Routing data shows Route 50 for most of the drive, after Route 65, Route 535 and Route 546 out of Riyadh. The exact route depends on your addresses and traffic." },
@@ -376,7 +376,7 @@ export const specs2: TownSpec[] = [
       ],
     ],
     ctaHeading: "Ready to travel between Riyadh and Afif?",
-    ctaText: "Message us in the direction you need, or call +966 57 985 8464. The vehicle, driver and fare are confirmed with you before you commit.",
+    ctaText: "Message us on WhatsApp with the direction you need, or send the booking form. The vehicle, driver and fare are confirmed with you before you commit.",
   },
 
   {
@@ -387,7 +387,7 @@ export const specs2: TownSpec[] = [
     lng: 42.9014,
     area: "Al Yamamah neighbourhood, Afif",
     title: "Riyadh to Al Yamamah Taxi Service | Afif",
-    description: "Riyadh to Al Yamamah taxi service for the Afif neighbourhood: private rides both ways, fare first. Call +966 57 985 8464 or use WhatsApp.",
+    description: "Riyadh to Al Yamamah taxi service for the Afif neighbourhood: private rides both ways, fare first. Message us on WhatsApp to book.",
     h1: "Riyadh to Al Yamamah Taxi Service (Afif)",
     lead: "A private Riyadh to Al Yamamah taxi service for the Al Yamamah neighbourhood of Afif, in both directions. Check the place first, then send your pickup, drop-off, date and passengers, and we confirm the vehicle, driver and fare before you commit.",
     directAnswer:
@@ -454,7 +454,7 @@ export const specs2: TownSpec[] = [
     related: [],
     faq: [
       { q: "Is this the Al Yamamah district in Riyadh?", a: "No. This page is for the Al Yamamah neighbourhood in Afif, in the far west of Riyadh Region. The Riyadh district is a short city ride and not covered here." },
-      { q: "How do I book a taxi from Riyadh to Al Yamamah, Afif?", a: "Send the pickup in Riyadh, the drop-off in Al Yamamah, the date, time and passengers by WhatsApp, phone (+966 57 985 8464) or the booking form. We confirm the vehicle, driver and fare before you commit." },
+      { q: "How do I book a taxi from Riyadh to Al Yamamah, Afif?", a: "Send the pickup in Riyadh, the drop-off in Al Yamamah, the date, time and passengers by WhatsApp or the booking form. We confirm the vehicle, driver and fare before you commit." },
       { q: "How far is it?", a: "About 485 km by road, roughly 5 hours 40 minutes in light traffic. It is not a promised journey time." },
       { q: "Can I book the return trip on this page?", a: "Yes. This page covers both directions. Use the Al Yamamah to Riyadh WhatsApp button, or send the pickup in Al Yamamah and the drop-off in Riyadh." },
       { q: "How is this different from the Riyadh to Afif page?", a: "The route is almost the same. This page is for the Al Yamamah neighbourhood, and the Afif page covers the wider city and governorate." },
@@ -500,6 +500,6 @@ export const specs2: TownSpec[] = [
       ],
     ],
     ctaHeading: "Ready to travel between Riyadh and Al Yamamah?",
-    ctaText: "Message us in the direction you need, or call +966 57 985 8464. The vehicle, driver and fare are confirmed with you before you commit.",
+    ctaText: "Message us on WhatsApp with the direction you need, or send the booking form. The vehicle, driver and fare are confirmed with you before you commit.",
   },
 ];

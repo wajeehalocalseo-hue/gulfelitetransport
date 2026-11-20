@@ -37,9 +37,9 @@ function Contact({ t, tone = "dark" }: { t: TownRich; tone?: "dark" | "light" })
           {t.toName} to Riyadh
         </a>
       )}
-      <a href={t.contact.callUrl} className={`${btn} ${secondary}`}>
-        <Icon name="phone" className="h-5 w-5" /> Call {t.contact.phone}
-      </a>
+      <Link href="/book" className={`${btn} ${secondary}`}>
+        Or use the booking form
+      </Link>
     </div>
   );
 }

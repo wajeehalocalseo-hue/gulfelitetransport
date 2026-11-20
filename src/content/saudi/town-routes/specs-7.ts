@@ -15,7 +15,7 @@ export const specs7: TownSpec[] = [
     lng: 47.1567,
     area: "Rumah, Riyadh Region",
     title: "Riyadh to Rumah Taxi Service | Private Rides East",
-    description: "Riyadh to Rumah taxi service: private rides both ways on the Dammam road and Rumah Road, fare first. Call +966 57 985 8464 or use WhatsApp.",
+    description: "Riyadh to Rumah taxi service: private rides both ways on the Dammam road and Rumah Road, fare first. Message us on WhatsApp to book.",
     h1: "Riyadh to Rumah Taxi Service",
     lead: "A private Riyadh to Rumah taxi service for the drive north-east on Dammam Road and the Rumah Road, in both directions. Send your pickup, drop-off, date and passengers, and we confirm the vehicle, driver and fare before you commit.",
     directAnswer:
@@ -81,7 +81,7 @@ export const specs7: TownSpec[] = [
     ],
     related: [],
     faq: [
-      { q: "How can I book a taxi from Riyadh to Rumah?", a: "Send the pickup in Riyadh, the drop-off in Rumah, the date, time and passengers by WhatsApp, phone (+966 57 985 8464) or the booking form. We confirm the vehicle, driver and fare before you commit." },
+      { q: "How can I book a taxi from Riyadh to Rumah?", a: "Send the pickup in Riyadh, the drop-off in Rumah, the date, time and passengers by WhatsApp or the booking form. We confirm the vehicle, driver and fare before you commit." },
       { q: "How far is Rumah from Riyadh?", a: "About 128 km by road, roughly 1 hour 35 minutes in light traffic. It is not a promised journey time." },
       { q: "Can I book Rumah to Riyadh on this page?", a: "Yes. This page covers both directions. Use the Rumah to Riyadh WhatsApp button, or send the pickup in Rumah and the drop-off in Riyadh." },
       { q: "Which roads does the route use?", a: "Routing data shows King Fahd Road (Route 65), the Northern Ring Road, Dammam Road (Route 40) and the Rumah Road. The exact route depends on your addresses and traffic." },
@@ -129,7 +129,7 @@ export const specs7: TownSpec[] = [
     ],
     shortfall: "OpenStreetMap lists 17 neighbourhoods, a hospital and a college in Rumah, so the list stops at 25 with the nearby villages and cities. The 14 neighbourhoods shown are the ones within about 4 km of the centre.",
     ctaHeading: "Ready to travel between Riyadh and Rumah?",
-    ctaText: "Message us in the direction you need, or call +966 57 985 8464. The vehicle, driver and fare are confirmed with you before you commit.",
+    ctaText: "Message us on WhatsApp with the direction you need, or send the booking form. The vehicle, driver and fare are confirmed with you before you commit.",
   },
 
   {
@@ -140,7 +140,7 @@ export const specs7: TownSpec[] = [
     lng: 45.863,
     area: "Thadiq, Riyadh Region",
     title: "Riyadh to Thadiq Taxi Service | Private Rides",
-    description: "Riyadh to Thadiq taxi service: private rides both ways, fare confirmed before you commit. Call +966 57 985 8464 or message us on WhatsApp to book.",
+    description: "Riyadh to Thadiq taxi service: private rides both ways, fare confirmed before you commit. Book on WhatsApp in minutes.",
     h1: "Riyadh to Thadiq Taxi Service",
     lead: "A private Riyadh to Thadiq taxi service for the drive north-west on Route 546, in both directions. Send your pickup, drop-off, date and passengers, and we confirm the vehicle, driver and fare before you commit.",
     directAnswer:
@@ -206,7 +206,7 @@ export const specs7: TownSpec[] = [
     ],
     related: [],
     faq: [
-      { q: "How can I book a taxi from Riyadh to Thadiq?", a: "Send the pickup in Riyadh, the drop-off in Thadiq, the date, time and passengers by WhatsApp, phone (+966 57 985 8464) or the booking form. We confirm the vehicle, driver and fare before you commit." },
+      { q: "How can I book a taxi from Riyadh to Thadiq?", a: "Send the pickup in Riyadh, the drop-off in Thadiq, the date, time and passengers by WhatsApp or the booking form. We confirm the vehicle, driver and fare before you commit." },
       { q: "How far is Thadiq from Riyadh?", a: "About 122 km by road, roughly 1 hour 30 minutes in light traffic. It is not a promised journey time." },
       { q: "Can I book Thadiq to Riyadh on this page?", a: "Yes. This page covers both directions. Use the Thadiq to Riyadh WhatsApp button, or send the pickup in Thadiq and the drop-off in Riyadh." },
       { q: "Is Thadiq the same as Thadig?", a: "Yes. Both spellings appear on maps for the same town in Riyadh Region." },
@@ -253,7 +253,7 @@ export const specs7: TownSpec[] = [
       ],
     ],
     ctaHeading: "Ready to travel between Riyadh and Thadiq?",
-    ctaText: "Message us in the direction you need, or call +966 57 985 8464. The vehicle, driver and fare are confirmed with you before you commit.",
+    ctaText: "Message us on WhatsApp with the direction you need, or send the booking form. The vehicle, driver and fare are confirmed with you before you commit.",
   },
 
   {
@@ -264,7 +264,7 @@ export const specs7: TownSpec[] = [
     lng: 46.1225,
     area: "Huraymila, Riyadh Region",
     title: "Riyadh to Huraymila Taxi Service | Day Trips",
-    description: "Riyadh to Huraymila taxi service: private rides both ways, easy for a day trip, fare first. Call +966 57 985 8464 or use WhatsApp to arrange.",
+    description: "Riyadh to Huraymila taxi service: private rides both ways, easy for a day trip, fare first. Message us on WhatsApp for a fare.",
     h1: "Riyadh to Huraymila Taxi Service",
     lead: "A private Riyadh to Huraymila taxi service for the short drive north-west on Salbukh Road, in both directions. Send your pickup, drop-off, date and passengers, and we confirm the vehicle, driver and fare before you commit.",
     directAnswer:
@@ -330,7 +330,7 @@ export const specs7: TownSpec[] = [
     ],
     related: [],
     faq: [
-      { q: "How can I book a taxi from Riyadh to Huraymila?", a: "Send the pickup in Riyadh, the drop-off in Huraymila, the date, time and passengers by WhatsApp, phone (+966 57 985 8464) or the booking form. We confirm the vehicle, driver and fare before you commit." },
+      { q: "How can I book a taxi from Riyadh to Huraymila?", a: "Send the pickup in Riyadh, the drop-off in Huraymila, the date, time and passengers by WhatsApp or the booking form. We confirm the vehicle, driver and fare before you commit." },
       { q: "How far is Huraymila from Riyadh?", a: "About 83 km by road, roughly 57 minutes in light traffic. It is not a promised journey time." },
       { q: "Can I book Huraymila to Riyadh on this page?", a: "Yes. This page covers both directions. Use the Huraymila to Riyadh WhatsApp button, or send the pickup in Huraymila and the drop-off in Riyadh." },
       { q: "Which roads does the route use?", a: "Routing data shows Route 65, Route 535 and Salbukh Road (Route 546). The exact route depends on your addresses and traffic." },
@@ -377,7 +377,7 @@ export const specs7: TownSpec[] = [
       ],
     ],
     ctaHeading: "Ready to travel between Riyadh and Huraymila?",
-    ctaText: "Message us in the direction you need, or call +966 57 985 8464. The vehicle, driver and fare are confirmed with you before you commit.",
+    ctaText: "Message us on WhatsApp with the direction you need, or send the booking form. The vehicle, driver and fare are confirmed with you before you commit.",
   },
 
   {
@@ -388,7 +388,7 @@ export const specs7: TownSpec[] = [
     lng: 45.4572,
     area: "Marat, Riyadh Region",
     title: "Riyadh to Marat Taxi Service | Private Rides",
-    description: "Riyadh to Marat taxi service: private rides both ways via Route 40 and Route 505, fare confirmed first. Call +966 57 985 8464 or use WhatsApp.",
+    description: "Riyadh to Marat taxi service: private rides both ways via Route 40 and Route 505, fare confirmed first. Send your trip on WhatsApp to book.",
     h1: "Riyadh to Marat Taxi Service",
     lead: "A private Riyadh to Marat taxi service for the drive west on Route 40 and Route 505, in both directions. Send your pickup, drop-off, date and passengers, and we confirm the vehicle, driver and fare before you commit.",
     directAnswer:
@@ -454,7 +454,7 @@ export const specs7: TownSpec[] = [
     ],
     related: [],
     faq: [
-      { q: "How can I book a taxi from Riyadh to Marat?", a: "Send the pickup in Riyadh, the drop-off in Marat, the date, time and passengers by WhatsApp, phone (+966 57 985 8464) or the booking form. We confirm the vehicle, driver and fare before you commit." },
+      { q: "How can I book a taxi from Riyadh to Marat?", a: "Send the pickup in Riyadh, the drop-off in Marat, the date, time and passengers by WhatsApp or the booking form. We confirm the vehicle, driver and fare before you commit." },
       { q: "How far is Marat from Riyadh?", a: "About 162 km by road, roughly 1 hour 50 minutes in light traffic. It is not a promised journey time." },
       { q: "Can I book Marat to Riyadh on this page?", a: "Yes. This page covers both directions. Use the Marat to Riyadh WhatsApp button, or send the pickup in Marat and the drop-off in Riyadh." },
       { q: "Which roads does the route use?", a: "Routing data shows Route 65, then Route 40 for about 25 km, then Route 505 for about 113 km. The exact route depends on your addresses and traffic." },
@@ -498,7 +498,7 @@ export const specs7: TownSpec[] = [
     ],
     shortfall: "OpenStreetMap lists only a hospital, a park and about a dozen villages and small places around Marat, so the list is completed with the nearby towns and cities, and stops short of 25 rather than inventing places.",
     ctaHeading: "Ready to travel between Riyadh and Marat?",
-    ctaText: "Message us in the direction you need, or call +966 57 985 8464. The vehicle, driver and fare are confirmed with you before you commit.",
+    ctaText: "Message us on WhatsApp with the direction you need, or send the booking form. The vehicle, driver and fare are confirmed with you before you commit.",
   },
 
   {
@@ -509,7 +509,7 @@ export const specs7: TownSpec[] = [
     lng: 44.9508,
     area: "Ghat (Al Ghat), Riyadh Region",
     title: "Riyadh to Ghat Taxi Service | Private Long-Distance",
-    description: "Riyadh to Ghat taxi service: private rides both ways on Route 65, fare confirmed first. Call +966 57 985 8464 or use WhatsApp to plan your trip.",
+    description: "Riyadh to Ghat taxi service: private rides both ways on Route 65, fare confirmed first. Message us on WhatsApp to book.",
     h1: "Riyadh to Ghat Taxi Service",
     lead: "A private Riyadh to Ghat taxi service for the long drive north-west on Route 65, in both directions. Send your pickup, drop-off, date and passengers, and we confirm the vehicle, driver and fare before you commit.",
     directAnswer:
@@ -575,7 +575,7 @@ export const specs7: TownSpec[] = [
     ],
     related: [],
     faq: [
-      { q: "How can I book a taxi from Riyadh to Ghat?", a: "Send the pickup in Riyadh, the drop-off in Ghat, the date, time and passengers by WhatsApp, phone (+966 57 985 8464) or the booking form. We confirm the vehicle, driver and fare before you commit." },
+      { q: "How can I book a taxi from Riyadh to Ghat?", a: "Send the pickup in Riyadh, the drop-off in Ghat, the date, time and passengers by WhatsApp or the booking form. We confirm the vehicle, driver and fare before you commit." },
       { q: "How far is Ghat from Riyadh?", a: "About 242 km by road, roughly 2 hours 20 minutes in light traffic. It is not a promised journey time." },
       { q: "Can I book Ghat to Riyadh on this page?", a: "Yes. This page covers both directions. Use the Ghat to Riyadh WhatsApp button, or send the pickup in Ghat and the drop-off in Riyadh." },
       { q: "Is Ghat the same as Al Ghat?", a: "Yes. Maps write the town as Al Ghat. Do not confuse it with Al Ghat streets inside Riyadh." },
@@ -621,6 +621,6 @@ export const specs7: TownSpec[] = [
     ],
     shortfall: "OpenStreetMap lists only a hospital, a park, a college and about a dozen villages around Ghat, so the list is completed with the nearby towns and cities, and stops short of 25 rather than inventing places.",
     ctaHeading: "Ready to travel between Riyadh and Ghat?",
-    ctaText: "Message us in the direction you need, or call +966 57 985 8464. The vehicle, driver and fare are confirmed with you before you commit.",
+    ctaText: "Message us on WhatsApp with the direction you need, or send the booking form. The vehicle, driver and fare are confirmed with you before you commit.",
   },
 ];

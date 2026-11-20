@@ -15,7 +15,7 @@ export const specs8: TownSpec[] = [
     lng: 45.8677,
     area: "Tumair (Tumayr), Riyadh Region",
     title: "Riyadh to Tumair Taxi Service | Private Rides",
-    description: "Riyadh to Tumair taxi service: private rides both ways on Route 65 towards Sudair, fare first. Call +966 57 985 8464 or use WhatsApp to arrange.",
+    description: "Riyadh to Tumair taxi service: private rides both ways on Route 65 towards Sudair, fare first. Book on WhatsApp in minutes.",
     h1: "Riyadh to Tumair Taxi Service",
     lead: "A private Riyadh to Tumair taxi service for the drive north on Route 65 into the Sudair area, in both directions. Send your pickup, drop-off, date and passengers, and we confirm the vehicle, driver and fare before you commit.",
     directAnswer:
@@ -81,7 +81,7 @@ export const specs8: TownSpec[] = [
     ],
     related: [],
     faq: [
-      { q: "How can I book a taxi from Riyadh to Tumair?", a: "Send the pickup in Riyadh, the drop-off in Tumair, the date, time and passengers by WhatsApp, phone (+966 57 985 8464) or the booking form. We confirm the vehicle, driver and fare before you commit." },
+      { q: "How can I book a taxi from Riyadh to Tumair?", a: "Send the pickup in Riyadh, the drop-off in Tumair, the date, time and passengers by WhatsApp or the booking form. We confirm the vehicle, driver and fare before you commit." },
       { q: "How far is Tumair from Riyadh?", a: "About 150 km by road, roughly 1 hour 35 minutes in light traffic. It is not a promised journey time." },
       { q: "Can I book Tumair to Riyadh on this page?", a: "Yes. This page covers both directions. Use the Tumair to Riyadh WhatsApp button, or send the pickup in Tumair and the drop-off in Riyadh." },
       { q: "Is Tumair the same as Tumayr?", a: "Yes. Maps write the town as Tumayr. Use either spelling and add a pin." },
@@ -128,7 +128,7 @@ export const specs8: TownSpec[] = [
       ],
     ],
     ctaHeading: "Ready to travel between Riyadh and Tumair?",
-    ctaText: "Message us in the direction you need, or call +966 57 985 8464. The vehicle, driver and fare are confirmed with you before you commit.",
+    ctaText: "Message us on WhatsApp with the direction you need, or send the booking form. The vehicle, driver and fare are confirmed with you before you commit.",
   },
 
   {
@@ -139,7 +139,7 @@ export const specs8: TownSpec[] = [
     lng: 44.6003,
     area: "Sajir, Ad Dawadimi area, Riyadh Region",
     title: "Riyadh to Sajir Taxi Service | Long-Distance Rides",
-    description: "Riyadh to Sajir taxi service: private long-distance rides both ways, fare confirmed first. Call +966 57 985 8464 or use WhatsApp to plan your trip.",
+    description: "Riyadh to Sajir taxi service: private long-distance rides both ways, fare confirmed first. Message us on WhatsApp for a fare.",
     h1: "Riyadh to Sajir Taxi Service",
     lead: "A private Riyadh to Sajir taxi service for the long drive west past Shaqra, in both directions. Send your pickup, drop-off, date and passengers, and we confirm the vehicle, driver and fare before you commit.",
     directAnswer:
@@ -205,7 +205,7 @@ export const specs8: TownSpec[] = [
     ],
     related: [],
     faq: [
-      { q: "How can I book a taxi from Riyadh to Sajir?", a: "Send the pickup in Riyadh, the drop-off in Sajir, the date, time and passengers by WhatsApp, phone (+966 57 985 8464) or the booking form. We confirm the vehicle, driver and fare before you commit." },
+      { q: "How can I book a taxi from Riyadh to Sajir?", a: "Send the pickup in Riyadh, the drop-off in Sajir, the date, time and passengers by WhatsApp or the booking form. We confirm the vehicle, driver and fare before you commit." },
       { q: "How far is Sajir from Riyadh?", a: "About 269 km by road, roughly 3 hours 20 minutes in light traffic. It is not a promised journey time." },
       { q: "Can I book Sajir to Riyadh on this page?", a: "Yes. This page covers both directions. Use the Sajir to Riyadh WhatsApp button, or send the pickup in Sajir and the drop-off in Riyadh." },
       { q: "Which roads does the route use?", a: "Routing data shows Routes 65, 535, 546 and 50, then Route 413 for the last 14 km. The exact route depends on your addresses and traffic." },
@@ -253,7 +253,7 @@ export const specs8: TownSpec[] = [
     ],
     shortfall: "OpenStreetMap lists about 18 villages and hamlets but no hospital, college or park around Sajir, so the list is completed with the nearby towns and cities, and stops short of 25 rather than inventing places.",
     ctaHeading: "Ready to travel between Riyadh and Sajir?",
-    ctaText: "Message us in the direction you need, or call +966 57 985 8464. The vehicle, driver and fare are confirmed with you before you commit.",
+    ctaText: "Message us on WhatsApp with the direction you need, or send the booking form. The vehicle, driver and fare are confirmed with you before you commit.",
   },
 
   {
@@ -264,7 +264,7 @@ export const specs8: TownSpec[] = [
     lng: 45.3539,
     area: "Al Artawiyah, Al Majma'ah area, Riyadh Region",
     title: "Riyadh to Al Artawiyah Taxi Service | North",
-    description: "Riyadh to Al Artawiyah taxi service: private rides both ways via Al Majma'ah, fare first. Call +966 57 985 8464 or use WhatsApp to arrange a trip.",
+    description: "Riyadh to Al Artawiyah taxi service: private rides both ways via Al Majma'ah, fare first. Send your trip on WhatsApp to book.",
     h1: "Riyadh to Al Artawiyah Taxi Service",
     lead: "A private Riyadh to Al Artawiyah taxi service for the long drive north through Al Majma'ah, in both directions. Send your pickup, drop-off, date and passengers, and we confirm the vehicle, driver and fare before you commit.",
     directAnswer:
@@ -330,7 +330,7 @@ export const specs8: TownSpec[] = [
     ],
     related: [],
     faq: [
-      { q: "How can I book a taxi from Riyadh to Al Artawiyah?", a: "Send the pickup in Riyadh, the drop-off in Al Artawiyah, the date, time and passengers by WhatsApp, phone (+966 57 985 8464) or the booking form. We confirm the vehicle, driver and fare before you commit." },
+      { q: "How can I book a taxi from Riyadh to Al Artawiyah?", a: "Send the pickup in Riyadh, the drop-off in Al Artawiyah, the date, time and passengers by WhatsApp or the booking form. We confirm the vehicle, driver and fare before you commit." },
       { q: "How far is Al Artawiyah from Riyadh?", a: "About 265 km by road, roughly 2 hours 45 minutes in light traffic. It is not a promised journey time." },
       { q: "Can I book Al Artawiyah to Riyadh on this page?", a: "Yes. This page covers both directions. Use the Al Artawiyah to Riyadh WhatsApp button, or send the pickup in Al Artawiyah and the drop-off in Riyadh." },
       { q: "Does the route pass through Al Majma'ah?", a: "Yes, routing data goes through Al Majma'ah on Route 535 and Route 50 before the final road to Al Artawiyah." },
@@ -375,7 +375,7 @@ export const specs8: TownSpec[] = [
     ],
     shortfall: "OpenStreetMap lists a hospital, a park, a college and 13 villages and hamlets around Al Artawiyah, so the list is completed with the nearby towns and cities, and stops short of 25 rather than inventing places.",
     ctaHeading: "Ready to travel between Riyadh and Al Artawiyah?",
-    ctaText: "Message us in the direction you need, or call +966 57 985 8464. The vehicle, driver and fare are confirmed with you before you commit.",
+    ctaText: "Message us on WhatsApp with the direction you need, or send the booking form. The vehicle, driver and fare are confirmed with you before you commit.",
   },
 
   {
@@ -386,7 +386,7 @@ export const specs8: TownSpec[] = [
     lng: 43.8195,
     area: "Nifi, Ad Dawadimi area, Riyadh Region",
     title: "Riyadh to Nifi Taxi Service | Long-Distance Rides",
-    description: "Riyadh to Nifi taxi service: a private ride over the long road west, both ways, fare first. Call +966 57 985 8464 or use WhatsApp to plan your trip.",
+    description: "Riyadh to Nifi taxi service: a private ride over the long road west, both ways, fare first. Message us on WhatsApp to book.",
     h1: "Riyadh to Nifi Taxi Service",
     lead: "A private Riyadh to Nifi taxi service for one of the longest drives west in Riyadh Region, in both directions. Share your addresses, dates and passengers, and we confirm the vehicle, driver and fare before you commit.",
     directAnswer:
@@ -452,7 +452,7 @@ export const specs8: TownSpec[] = [
     ],
     related: [],
     faq: [
-      { q: "How can I book a taxi from Riyadh to Nifi?", a: "Send the pickup in Riyadh, the drop-off in Nifi, the dates, time and passengers by WhatsApp, phone (+966 57 985 8464) or the booking form. We confirm the vehicle, driver and fare before you commit." },
+      { q: "How can I book a taxi from Riyadh to Nifi?", a: "Send the pickup in Riyadh, the drop-off in Nifi, the dates, time and passengers by WhatsApp or the booking form. We confirm the vehicle, driver and fare before you commit." },
       { q: "How far is Nifi from Riyadh?", a: "About 394 km by road, roughly 4 hours 55 minutes in light traffic. It is not a promised journey time." },
       { q: "Can I book Nifi to Riyadh on this page?", a: "Yes. This page covers both directions. Use the Nifi to Riyadh WhatsApp button, or send the pickup in Nifi and the drop-off in Riyadh." },
       { q: "Which road does the route use?", a: "Routing data shows Routes 65, 535, 546 and 50. The exact route depends on your addresses and traffic." },
@@ -500,7 +500,7 @@ export const specs8: TownSpec[] = [
     ],
     shortfall: "OpenStreetMap lists a hospital, a park and about 16 small villages and hamlets around Nifi, so the list is completed with the nearby towns and cities, and stops short of 25 rather than inventing places.",
     ctaHeading: "Ready to travel between Riyadh and Nifi?",
-    ctaText: "Message us in the direction you need, or call +966 57 985 8464. The vehicle, driver and fare are confirmed with you before you commit.",
+    ctaText: "Message us on WhatsApp with the direction you need, or send the booking form. The vehicle, driver and fare are confirmed with you before you commit.",
   },
 
   {
@@ -511,7 +511,7 @@ export const specs8: TownSpec[] = [
     lng: 46.1337,
     area: "Dhurma (Duruma), Riyadh Region",
     title: "Riyadh to Dhurma Taxi Service | Short Day Trips",
-    description: "Riyadh to Dhurma taxi service: private rides both ways, an easy day trip west of Riyadh, fare first. Call +966 57 985 8464 or use WhatsApp.",
+    description: "Riyadh to Dhurma taxi service: private rides both ways, an easy day trip west of Riyadh, fare first. Book on WhatsApp in minutes.",
     h1: "Riyadh to Dhurma Taxi Service",
     lead: "A private Riyadh to Dhurma taxi service for the short drive west on Route 40 and Route 505, in both directions. Send your pickup, drop-off, date and passengers, and we confirm the vehicle, driver and fare before you commit.",
     directAnswer:
@@ -577,7 +577,7 @@ export const specs8: TownSpec[] = [
     ],
     related: [],
     faq: [
-      { q: "How can I book a taxi from Riyadh to Dhurma?", a: "Send the pickup in Riyadh, the drop-off in Dhurma, the date, time and passengers by WhatsApp, phone (+966 57 985 8464) or the booking form. We confirm the vehicle, driver and fare before you commit." },
+      { q: "How can I book a taxi from Riyadh to Dhurma?", a: "Send the pickup in Riyadh, the drop-off in Dhurma, the date, time and passengers by WhatsApp or the booking form. We confirm the vehicle, driver and fare before you commit." },
       { q: "How far is Dhurma from Riyadh?", a: "About 73 km by road, roughly 50 minutes in light traffic. It is not a promised journey time." },
       { q: "Can I book Dhurma to Riyadh on this page?", a: "Yes. This page covers both directions. Use the Dhurma to Riyadh WhatsApp button, or send the pickup in Dhurma and the drop-off in Riyadh." },
       { q: "Is Dhurma the same as Duruma?", a: "Yes. Maps write the town as Duruma. Use either spelling and add a pin." },
@@ -625,6 +625,6 @@ export const specs8: TownSpec[] = [
     ],
     shortfall: "OpenStreetMap lists a park and about 17 villages around Dhurma, so the list is completed with the nearby towns and cities, and stops short of 25 rather than inventing places.",
     ctaHeading: "Ready to travel between Riyadh and Dhurma?",
-    ctaText: "Message us in the direction you need, or call +966 57 985 8464. The vehicle, driver and fare are confirmed with you before you commit.",
+    ctaText: "Message us on WhatsApp with the direction you need, or send the booking form. The vehicle, driver and fare are confirmed with you before you commit.",
   },
 ];

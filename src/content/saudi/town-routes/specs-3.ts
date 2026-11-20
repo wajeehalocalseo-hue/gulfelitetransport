@@ -16,7 +16,7 @@ export const specs3: TownSpec[] = [
     lng: 46.825,
     area: "Al Aflaj governorate, Riyadh Region",
     title: "Riyadh to Al Aflaj Taxi Service | Private Rides",
-    description: "Riyadh to Al Aflaj taxi service: private long-distance rides both ways, fare confirmed first. Call +966 57 985 8464 or use WhatsApp to arrange.",
+    description: "Riyadh to Al Aflaj taxi service: private long-distance rides both ways, fare confirmed first. Book on WhatsApp in minutes.",
     h1: "Riyadh to Al Aflaj Taxi Service",
     lead: "A private Riyadh to Al Aflaj taxi service for the long drive south, in both directions. Send your pickup, drop-off, date and passengers, and we confirm the vehicle, driver and fare before you commit.",
     directAnswer:
@@ -82,7 +82,7 @@ export const specs3: TownSpec[] = [
     ],
     related: [],
     faq: [
-      { q: "How can I book a taxi from Riyadh to Al Aflaj?", a: "Send the pickup in Riyadh, the town or village in Al Aflaj, the date, time and passengers by WhatsApp, phone (+966 57 985 8464) or the booking form. We confirm the vehicle, driver and fare before you commit." },
+      { q: "How can I book a taxi from Riyadh to Al Aflaj?", a: "Send the pickup in Riyadh, the town or village in Al Aflaj, the date, time and passengers by WhatsApp or the booking form. We confirm the vehicle, driver and fare before you commit." },
       { q: "How far is Al Aflaj from Riyadh by road?", a: "About 300 km, roughly 4 hours in light traffic. It is not a promised journey time." },
       { q: "Is Layla the same as Al Aflaj?", a: "Al Aflaj is the governorate and Layla is its main town. If you are going to the town itself, use the Layla page. For other places in the area, use this page." },
       { q: "Can I book the return trip on this page?", a: "Yes. This page covers both directions. Use the Al Aflaj to Riyadh WhatsApp button, or send the pickup in Al Aflaj and the drop-off in Riyadh." },
@@ -126,7 +126,7 @@ export const specs3: TownSpec[] = [
     ],
     shortfall: "OpenStreetMap lists only about 13 named places and one hospital around the Al Aflaj oasis, so the list is completed with the road towns and the cities people travel to, and stops short of 25 rather than inventing places.",
     ctaHeading: "Ready to travel between Riyadh and Al Aflaj?",
-    ctaText: "Message us in the direction you need, or call +966 57 985 8464. The vehicle, driver and fare are confirmed with you before you commit.",
+    ctaText: "Message us on WhatsApp with the direction you need, or send the booking form. The vehicle, driver and fare are confirmed with you before you commit.",
   },
 
   {
@@ -137,7 +137,7 @@ export const specs3: TownSpec[] = [
     lng: 46.7732,
     area: "As Sayh village, Al Aflaj, Riyadh Region",
     title: "Riyadh to Al Sih Taxi Service | As Sayh, Al Aflaj",
-    description: "Riyadh to Al Sih taxi service for As Sayh in Al Aflaj: private rides both ways, fare first. Call +966 57 985 8464 or use WhatsApp to book.",
+    description: "Riyadh to Al Sih taxi service for As Sayh in Al Aflaj: private rides both ways, fare first. Message us on WhatsApp for a fare.",
     h1: "Riyadh to Al Sih Taxi Service (As Sayh, Al Aflaj)",
     lead: "A private Riyadh to Al Sih taxi service for the village of As Sayh near Layla, in both directions. Check which Al Sih you mean, then send your pickup, drop-off, date and passengers, and we confirm the vehicle, driver and fare before you commit.",
     directAnswer:
@@ -204,7 +204,7 @@ export const specs3: TownSpec[] = [
     related: [],
     faq: [
       { q: "Which Al Sih does this page cover?", a: "The village of As Sayh in Al Aflaj, in the south of Riyadh Region. Al Saih in Al Kharj and As Sayh near Al Zulfi are different places with their own pages." },
-      { q: "How do I book a taxi from Riyadh to Al Sih?", a: "Send the pickup in Riyadh, the drop-off in As Sayh, the date, time and passengers by WhatsApp, phone (+966 57 985 8464) or the booking form. We confirm the vehicle, driver and fare before you commit." },
+      { q: "How do I book a taxi from Riyadh to Al Sih?", a: "Send the pickup in Riyadh, the drop-off in As Sayh, the date, time and passengers by WhatsApp or the booking form. We confirm the vehicle, driver and fare before you commit." },
       { q: "How far is Al Sih from Riyadh by road?", a: "About 300 km, roughly 3 hours 45 minutes in light traffic. It is not a promised journey time." },
       { q: "Can I book the return trip on this page?", a: "Yes. This page covers both directions. Use the Al Sih to Riyadh WhatsApp button, or send the pickup in As Sayh and the drop-off in Riyadh." },
       { q: "How is this different from the Al Aflaj page?", a: "Al Aflaj covers the whole oasis area. This page is for the village of As Sayh and its immediate neighbours." },
@@ -247,6 +247,6 @@ export const specs3: TownSpec[] = [
     ],
     shortfall: "OpenStreetMap lists only about 13 named places around As Sayh, so the list is completed with Layla, the road towns and the cities people travel to, and stops short of 25 rather than inventing places.",
     ctaHeading: "Ready to travel between Riyadh and Al Sih?",
-    ctaText: "Message us in the direction you need, or call +966 57 985 8464. The vehicle, driver and fare are confirmed with you before you commit.",
+    ctaText: "Message us on WhatsApp with the direction you need, or send the booking form. The vehicle, driver and fare are confirmed with you before you commit.",
   },
 ];

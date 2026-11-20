@@ -14,7 +14,7 @@ export const specs4: TownSpec[] = [
     lng: 45.2528,
     area: "Shaqra, Riyadh Region",
     title: "Riyadh to Shaqra Taxi Service | Private Rides",
-    description: "Riyadh to Shaqra taxi service: private rides both ways, fare confirmed before you commit. Call +966 57 985 8464 or message us on WhatsApp.",
+    description: "Riyadh to Shaqra taxi service: private rides both ways, fare confirmed before you commit. Send your trip on WhatsApp to book.",
     h1: "Riyadh to Shaqra Taxi Service",
     lead: "A private Riyadh to Shaqra taxi service for the drive west on Routes 546 and 50, in both directions. Send your pickup, drop-off, date and passengers, and we confirm the vehicle, driver and fare before you commit.",
     directAnswer:
@@ -80,7 +80,7 @@ export const specs4: TownSpec[] = [
     ],
     related: [],
     faq: [
-      { q: "How can I book a taxi from Riyadh to Shaqra?", a: "Send the pickup in Riyadh, the drop-off in Shaqra, the date, time and passengers by WhatsApp, phone (+966 57 985 8464) or the booking form. We confirm the vehicle, driver and fare before you commit." },
+      { q: "How can I book a taxi from Riyadh to Shaqra?", a: "Send the pickup in Riyadh, the drop-off in Shaqra, the date, time and passengers by WhatsApp or the booking form. We confirm the vehicle, driver and fare before you commit." },
       { q: "How far is Shaqra from Riyadh by road?", a: "About 187 km, roughly 2 hours 10 minutes in light traffic. It is not a promised journey time." },
       { q: "Can I book Shaqra to Riyadh on this page?", a: "Yes. This page covers both directions. Use the Shaqra to Riyadh WhatsApp button, or send the pickup in Shaqra and the drop-off in Riyadh." },
       { q: "Which roads does the route use?", a: "Routing data shows Route 65, Route 535 and Route 546 for most of the drive, with Route 50 for the last few kilometres. The exact route depends on your addresses and traffic." },
@@ -127,6 +127,6 @@ export const specs4: TownSpec[] = [
       ],
     ],
     ctaHeading: "Ready to travel between Riyadh and Shaqra?",
-    ctaText: "Message us in the direction you need, or call +966 57 985 8464. The vehicle, driver and fare are confirmed with you before you commit.",
+    ctaText: "Message us on WhatsApp with the direction you need, or send the booking form. The vehicle, driver and fare are confirmed with you before you commit.",
   },
 ];

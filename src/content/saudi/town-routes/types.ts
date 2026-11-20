@@ -47,7 +47,7 @@ export type TownRich = {
   faqHeading: string;
   faq: { q: string; a: string }[];
   /** Phone, WhatsApp (both directions) and the booking links shown in the contact strip. */
-  contact: { outUrl?: string; backUrl?: string; callUrl: string; phone: string };
+  contact: { outUrl?: string; backUrl?: string };
   local: Extract<Section, { kind: "local" }>;
   ctaHeading: string;
   ctaText: string;
