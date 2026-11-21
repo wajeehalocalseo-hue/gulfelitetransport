@@ -19,7 +19,7 @@ const TAIF = `${TAXI}/makkah-region/taif`;
 const JED = `${TAXI}/airports/king-abdulaziz-international-airport`;
 const MED = `${TAXI}/airports/prince-mohammad-bin-abdulaziz-international-airport`;
 const km = (id: string) => routes.find((r) => r.id === id)?.km ?? 0;
-const KM_JED_MAKKAH = km("jeddah-to-makkah");
+const KM_JED_MAKKAH = km("makkah-to-jeddah");
 const KM_JED_MADINAH = km("jeddah-to-madinah");
 const KM_MAKKAH_MADINAH = km("makkah-to-madinah");
 
@@ -127,7 +127,7 @@ const L = {
   jeddah: { name: "Taxi & Cab Service in Jeddah", href: JEDDAH, note: "City guide" },
   jed: { name: "King Abdulaziz International Airport (JED)", href: JED, note: "Airport guide" },
   med: { name: "Prince Mohammad bin Abdulaziz International Airport (MED)", href: MED, note: "Airport guide" },
-  jedMakkah: { name: "Jeddah to Makkah route", href: `${TAXI}/routes/jeddah-to-makkah`, note: `about ${KM_JED_MAKKAH} km` },
+  jedMakkah: { name: "Jeddah to Makkah route", href: `${TAXI}/routes/makkah-to-jeddah`, note: `about ${KM_JED_MAKKAH} km` },
   jedMadinah: { name: "Jeddah to Madinah route", href: `${TAXI}/routes/jeddah-to-madinah`, note: `about ${KM_JED_MADINAH} km` },
   makkahMadinah: { name: "Makkah to Madinah route", href: `${TAXI}/routes/makkah-to-madinah`, note: `about ${KM_MAKKAH_MADINAH} km` },
   taif: { name: "Makkah to Taif route", href: `${TAXI}/routes/makkah-to-taif`, note: "Route guide" },

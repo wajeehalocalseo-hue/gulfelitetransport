@@ -22,6 +22,11 @@ import type { TownRich, TownSectionId } from "@/content/saudi/town-routes/types"
 type P = { page: PlacePage; t: TownRich };
 
 const folder = (t: TownRich) => t.imageFolder;
+const DEFAULT_MORE = [
+  { href: "/riyadh-taxi-service", label: "Riyadh taxi service" },
+  { href: "/taxi-saudi-arabia/riyadh-region", label: "Riyadh Region" },
+  { href: "/taxi-saudi-arabia/airports/king-khalid-international-airport", label: "King Khalid International Airport" },
+];
 const frame = "overflow-hidden rounded-3xl shadow-xl ring-1 ring-navy/10";
 
 function Contact({ t, tone = "dark" }: { t: TownRich; tone?: "dark" | "light" }) {
@@ -30,12 +35,12 @@ function Contact({ t, tone = "dark" }: { t: TownRich; tone?: "dark" | "light" })
     <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
       {t.contact.outUrl && (
         <a href={t.contact.outUrl} target="_blank" rel="noopener noreferrer" className={waPill}>
-          <WhatsAppIcon className="h-5 w-5" /> WhatsApp: Riyadh to {t.toName}
+          <WhatsAppIcon className="h-5 w-5" /> WhatsApp: {t.fromName} to {t.toName}
         </a>
       )}
       {t.contact.backUrl && (
         <a href={t.contact.backUrl} target="_blank" rel="noopener noreferrer" className={`${btn} ${secondary}`}>
-          {t.toName} to Riyadh
+          {t.toName} to {t.fromName}
         </a>
       )}
       <Link href="/book" className={`${btn} ${secondary}`}>
@@ -58,8 +63,8 @@ export function TownHero({ page, town: t }: { page: PlacePage; town: TownRich })
           <Breadcrumbs items={crumbs} tone="light" />
           <p className="mt-8 text-xs font-extrabold uppercase tracking-[0.22em] text-gold">{t.eyebrow}</p>
           {title("mt-4 max-w-3xl text-4xl leading-[1.1] text-navy sm:text-5xl")}
-          <div className="mt-8 flex max-w-2xl items-center gap-3 text-navy" aria-label={`Route from Riyadh to ${t.toName}`}>
-            <span className="font-extrabold">Riyadh</span>
+          <div className="mt-8 flex max-w-2xl items-center gap-3 text-navy" aria-label={`Route from ${t.fromName} to ${t.toName}`}>
+            <span className="font-extrabold">{t.fromName}</span>
             <span aria-hidden="true" className="h-0.5 flex-1 bg-accent" />
             <span className="rounded-full bg-accent px-4 py-1 text-sm font-extrabold">about {Math.round(t.km)} km</span>
             <span aria-hidden="true" className="h-0.5 flex-1 bg-accent" />
@@ -85,7 +90,7 @@ export function TownHero({ page, town: t }: { page: PlacePage; town: TownRich })
           {title("mt-4 max-w-3xl text-4xl leading-[1.08] sm:text-6xl")}
           <p className="mt-6 max-w-2xl text-lg leading-8 text-white/85">{page.lead}</p>
           <div className={`${frame} mt-8 max-w-3xl`}>
-            <ImageSlot folder={folder(t)} slot="hero" alt={t.heroAlt} label={`Hero image: Riyadh to ${t.toName}`} width={1000} height={420} priority sizes="(min-width: 1100px) 45vw, 100vw" />
+            <ImageSlot folder={folder(t)} slot="hero" alt={t.heroAlt} label={`Hero image: ${t.fromName} to ${t.toName}`} width={1000} height={420} priority sizes="(min-width: 1100px) 45vw, 100vw" />
           </div>
           <div className="mt-8"><Contact t={t} /></div>
         </div>
@@ -120,7 +125,7 @@ export function TownHero({ page, town: t }: { page: PlacePage; town: TownRich })
           <p className="mt-8 text-xs font-extrabold uppercase tracking-[0.22em] text-accent">{t.eyebrow}</p>
           {title("mt-4 max-w-3xl text-4xl leading-[1.1] sm:text-5xl")}
           <dl className="mt-8 grid max-w-2xl grid-cols-2 gap-px overflow-hidden rounded-2xl bg-white/15 ring-1 ring-white/15 sm:grid-cols-4">
-            {[["From", "Riyadh"], ["To", t.toName], ["Distance", `about ${Math.round(t.km)} km`], ["Drive", `about ${t.min} min`]].map(([k, v]) => (
+            {[["From", t.fromName], ["To", t.toName], ["Distance", `about ${Math.round(t.km)} km`], ["Drive", `about ${t.min} min`]].map(([k, v]) => (
               <div key={k} className="bg-navy px-4 py-4">
                 <dt className="text-[11px] font-extrabold uppercase tracking-wider text-accent">{k}</dt>
                 <dd className="mt-1 text-lg font-extrabold">{v}</dd>
@@ -160,7 +165,7 @@ export function TownHero({ page, town: t }: { page: PlacePage; town: TownRich })
   // road: a full-width photo behind the text
   return (
     <section className="relative overflow-hidden bg-navy text-white">
-      <ImageSlot folder={folder(t)} slot="hero" alt={t.heroAlt} label={`Hero image: Riyadh to ${t.toName}`} width={1600} height={900} fill priority sizes="100vw" className="opacity-60" />
+      <ImageSlot folder={folder(t)} slot="hero" alt={t.heroAlt} label={`Hero image: ${t.fromName} to ${t.toName}`} width={1600} height={900} fill priority sizes="100vw" className="opacity-60" />
       <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-navy via-navy/90 to-navy/50" />
       <div className={`${wrap} relative py-14 sm:py-20`}>
         <Breadcrumbs items={crumbs} />
@@ -211,7 +216,7 @@ function Intro({ page, t }: P) {
     </div>
   );
   const highway = img("highway", t.highwayAlt, "Saudi highway image", 800, 640);
-  const hero = img("hero", t.heroAlt, `Hero image: Riyadh to ${t.toName}`, 800, 420);
+  const hero = img("hero", t.heroAlt, `Hero image: ${t.fromName} to ${t.toName}`, 800, 420);
   if (t.style === "journey" || t.style === "ledger")
     return <Band id="about"><div className="grid items-center gap-12 lg:grid-cols-[0.85fr_1.15fr]">{highway}{text}</div></Band>;
   if (t.style === "editorial")
@@ -225,8 +230,8 @@ function Intro({ page, t }: P) {
 
 function Both({ t }: P) {
   const panels = [
-    { n: "01", label: `Riyadh to ${t.toName}`, ...t.out },
-    { n: "02", label: `${t.toName} to Riyadh`, ...t.back },
+    { n: "01", label: `${t.fromName} to ${t.toName}`, ...t.out },
+    { n: "02", label: `${t.toName} to ${t.fromName}`, ...t.back },
   ];
   const body = (x: (typeof panels)[number]) => (
     <>
@@ -234,7 +239,7 @@ function Both({ t }: P) {
       <div className="mt-3 space-y-3 leading-7 text-muted">{x.paragraphs.map((p) => <p key={p.slice(0, 24)}><RichText text={p} /></p>)}</div>
     </>
   );
-  const head = <Title id="both" eyebrow="Both directions on one page" lead={`The road distance is the same either way, about ${Math.round(t.km)} km. One request can cover the trip out, the trip back or both.`}>{`Riyadh to ${t.toName} and back`}</Title>;
+  const head = <Title id="both" eyebrow="Both directions on one page" lead={`The road distance is the same either way, about ${Math.round(t.km)} km. One request can cover the trip out, the trip back or both.`}>{`${t.fromName} to ${t.toName} and back`}</Title>;
   if (t.style === "journey")
     return (
       <Band id="both" tone="surface">
@@ -368,10 +373,10 @@ function Pickups({ t }: P) {
     <Band id="pickup" tone="surface">
       <div className={`grid items-start gap-12 ${flip ? "lg:grid-cols-[1.2fr_0.8fr]" : "lg:grid-cols-[0.8fr_1.2fr]"}`}>
         <div className={`${flip ? "lg:order-2" : ""} lg:sticky lg:top-28`}>
-          <Title id="pickup" eyebrow="Starting in Riyadh" lead={t.pickupIntro}>{t.pickupHeading}</Title>
-          <div className={frame}><ImageSlot folder={folder(t)} slot="riyadh" alt={t.pickupAlt} label="Riyadh city image" width={800} height={600} sizes="(min-width: 1024px) 35vw, 100vw" /></div>
+          <Title id="pickup" eyebrow={`Starting in ${t.fromName}`} lead={t.pickupIntro}>{t.pickupHeading}</Title>
+          <div className={frame}><ImageSlot folder={folder(t)} slot={t.originSlot ?? "riyadh"} alt={t.pickupAlt} label={`${t.fromName} city image`} width={800} height={600} sizes="(min-width: 1024px) 35vw, 100vw" /></div>
         </div>
-        <div className={flip ? "lg:order-1" : ""}><List items={t.pickups} style={t.style} id="Pickup points in Riyadh" /></div>
+        <div className={flip ? "lg:order-1" : ""}><List items={t.pickups} style={t.style} id={`Pickup points in ${t.fromName}`} /></div>
       </div>
     </Band>
   );
@@ -439,9 +444,9 @@ function Plan({ t }: P) {
         {withMap && (
           <figure>
             <div className="overflow-hidden rounded-3xl bg-white shadow-xl ring-1 ring-navy/10">
-              <LazyMap title={`Route map from Riyadh to ${t.toName}`} src={`https://maps.google.com/maps?saddr=${encodeURIComponent(t.mapQuery.from)}&daddr=${encodeURIComponent(t.mapQuery.to)}&output=embed`} className="aspect-[4/3] w-full" />
+              <LazyMap title={`Route map from ${t.fromName} to ${t.toName}`} src={`https://maps.google.com/maps?saddr=${encodeURIComponent(t.mapQuery.from)}&daddr=${encodeURIComponent(t.mapQuery.to)}&output=embed`} className="aspect-[4/3] w-full" />
             </div>
-            <figcaption className="mt-3 text-sm text-muted">Map of the route from Riyadh to {t.toName}. The driver chooses the best road on the day.</figcaption>
+            <figcaption className="mt-3 text-sm text-muted">Map of the route from {t.fromName} to {t.toName}. The driver chooses the best road on the day.</figcaption>
           </figure>
         )}
       </div>
@@ -491,9 +496,7 @@ function Related({ t }: P) {
         ))}
       </ul>
       <p className="mt-8 text-sm text-muted">
-        More pages: <Link href="/riyadh-taxi-service" className={arrowLink}>Riyadh taxi service</Link>{" · "}
-        <Link href="/taxi-saudi-arabia/riyadh-region" className={arrowLink}>Riyadh Region</Link>{" · "}
-        <Link href="/taxi-saudi-arabia/airports/king-khalid-international-airport" className={arrowLink}>King Khalid International Airport</Link>{" · "}
+        More pages: {(t.moreLinks ?? DEFAULT_MORE).map((l) => (<span key={l.href}><Link href={l.href} className={arrowLink}>{l.label}</Link>{" · "}</span>))}
         <Link href="/taxi-saudi-arabia/routes" className={arrowLink}>All routes</Link>{" · "}
         <Link href="/book" className={arrowLink}>Book a ride</Link>{" · "}
         <Link href="/contact" className={arrowLink}>Contact us</Link>
@@ -551,7 +554,7 @@ export function TownBody({ page, town: t }: { page: PlacePage; town: TownRich })
 export const townChips = (t: TownRich) => [
   { href: "#about", label: "About" },
   { href: "#both", label: "Both directions" },
-  { href: "#pickup", label: "Pickup in Riyadh" },
+  { href: "#pickup", label: `Pickup in ${t.fromName}` },
   { href: "#drop", label: `Drop-off in ${t.toName}` },
   { href: "#places", label: `Around ${t.toName}` },
   { href: "#faq", label: "FAQ" },

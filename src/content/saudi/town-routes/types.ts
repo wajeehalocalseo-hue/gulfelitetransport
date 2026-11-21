@@ -13,6 +13,10 @@ export type TownRich = {
   toName: string;
   /** Folder under public/images/routes/ with the slots hero, highway, riyadh and destination. */
   imageFolder: string;
+  /** Image slot name for the starting-city photo (default "riyadh"). */
+  originSlot?: string;
+  /** Footer links under the related routes (default: the Riyadh links). */
+  moreLinks?: { href: string; label: string }[];
   eyebrow: string;
   heroPoints: string[];
   heroAlt: string;

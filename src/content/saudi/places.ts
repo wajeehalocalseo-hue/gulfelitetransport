@@ -554,9 +554,9 @@ export const routes: Route[] = [
     tips: ["Tell us if you are continuing to a border crossing, since access and documents are the traveller's responsibility.", "Plan for a long drive with rest stops."],
   },
   {
-    id: "jeddah-to-makkah",
-    from: "jeddah",
-    to: "makkah",
+    id: "makkah-to-jeddah",
+    from: "makkah",
+    to: "jeddah",
     km: 80,
     about:
       "Jeddah to Makkah is a short, very heavily used route that carries pilgrims from the Red Sea port and airport to the holy city. Traffic is intense in Ramadan and the Hajj season, and vehicle access to the area around the Haram is controlled. Entry to Makkah is restricted to Muslims.",

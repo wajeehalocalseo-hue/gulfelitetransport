@@ -35,7 +35,7 @@ const rides = [
   { name: "Makkah to Madinah", href: "/taxi-saudi-arabia/routes/makkah-to-madinah" },
   { name: "Madinah airport to Makkah", href: "/umrah-hajj-taxi/madinah-airport-to-makkah" },
   { name: "Taif airport to Makkah", href: "/umrah-hajj-taxi/taif-airport-to-makkah" },
-  { name: "Jeddah to Makkah", href: "/taxi-saudi-arabia/routes/jeddah-to-makkah" },
+  { name: "Jeddah to Makkah", href: "/taxi-saudi-arabia/routes/makkah-to-jeddah" },
   { name: "Taxi in all Saudi cities", href: "/taxi-saudi-arabia" },
 ];
 

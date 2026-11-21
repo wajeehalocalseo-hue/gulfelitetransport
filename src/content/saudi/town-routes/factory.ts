@@ -26,6 +26,10 @@ export type TownSpec = {
   lng: number;
   /** For example "Al Majma'ah Governorate, Riyadh Region". */
   area: string;
+  /** Region wording used in map queries and weather labels (default Riyadh Region). */
+  regionLabel?: string;
+  /** Suffix for default Maps queries, for example "Makkah Region, Saudi Arabia". */
+  areaSuffix?: string;
   title: string;
   description: string;
   h1: string;
@@ -128,7 +132,11 @@ const ORDERS: Record<TownStyle, TownSectionId[]> = {
   ledger: ["intro", "pickups", "both", "drops", "info", "places", "plan", "faq", "related"],
 };
 
+export type Origin = { name: string; slot: string; idPrefix: string; areaSuffix: string; moreLinks?: { href: string; label: string }[]; pickupIntro?: string };
+export const RIYADH_ORIGIN: Origin = { name: "Riyadh", slot: "riyadh", idPrefix: "riyadh-to-", areaSuffix: "Riyadh Region, Saudi Arabia" };
+
 export type TownCtx = {
+  origin?: Origin;
   riyadh: { lat: number; lng: number };
   /** Link targets that exist: every town route id and existing route id, mapped to its path and display name. */
   routeTargets: Record<string, { href: string; name: string; note: string }>;
@@ -147,7 +155,8 @@ const vary = (text: string, index: number, salt: number): string => {
 
 export function buildTownRoute(spec: TownSpec, ctx: TownCtx): Pick<PlacePage, "title" | "description" | "h1" | "lead" | "directAnswer" | "facts" | "sections" | "town"> & { whatsappMessage: string; keyword: string; mapCount: number } {
   if (site.whatsapp !== PHONE_DIGITS) throw new Error("site.whatsapp no longer matches the verified number used in the descriptions");
-  const keyword = `Riyadh to ${spec.name} taxi service`;
+  const O = ctx.origin ?? RIYADH_ORIGIN;
+  const keyword = `${O.name} to ${spec.name} taxi service`;
   for (const [label, v] of [["title", spec.title], ["h1", spec.h1], ["lead", spec.lead]] as const) {
     if (!v.toLowerCase().includes(keyword.toLowerCase())) throw new Error(`${spec.name}: the primary keyword "${keyword}" is missing from the ${label}`);
   }
@@ -158,14 +167,14 @@ export function buildTownRoute(spec: TownSpec, ctx: TownCtx): Pick<PlacePage, "t
   const words = wordCount(spec.directions);
   if (words !== 100) throw new Error(`${spec.name}: the driving directions have ${words} words, not 100`);
   const labels = spec.linkGroups.flat().map((e) => (typeof e === "string" ? e : e[0]));
-  const queries = spec.linkGroups.flat().map((e) => (typeof e === "string" ? `${e}, Riyadh Region, Saudi Arabia` : e[1]));
+  const queries = spec.linkGroups.flat().map((e) => (typeof e === "string" ? `${e}, ${spec.areaSuffix ?? O.areaSuffix}` : e[1]));
   if (labels.length > 25 || new Set(labels.map((x) => x.toLowerCase())).size !== labels.length || new Set(queries.map((x) => x.toLowerCase())).size !== queries.length) {
     throw new Error(`${spec.name}: the Maps list has ${labels.length} entries or contains duplicates`);
   }
   if (labels.length < 25 && !spec.shortfall) throw new Error(`${spec.name}: only ${labels.length} Maps entries and no shortfall note`);
 
-  const out = whatsappUrl(`Hello Gulf Elite Transport Group, I would like to request a private taxi from Riyadh to ${spec.name}. Please confirm availability, vehicle options and fare.`);
-  const back = whatsappUrl(`Hello Gulf Elite Transport Group, I would like to request a private taxi from ${spec.name} to Riyadh. Please confirm availability, vehicle options and fare.`);
+  const out = whatsappUrl(`Hello Gulf Elite Transport Group, I would like to request a private taxi from ${O.name} to ${spec.name}. Please confirm availability, vehicle options and fare.`);
+  const back = whatsappUrl(`Hello Gulf Elite Transport Group, I would like to request a private taxi from ${spec.name} to ${O.name}. Please confirm availability, vehicle options and fare.`);
 
   const related = spec.related.map((id) => {
     const t = ctx.routeTargets[id];
@@ -173,22 +182,22 @@ export function buildTownRoute(spec: TownSpec, ctx: TownCtx): Pick<PlacePage, "t
     return { name: t.name, href: t.href, text: t.note };
   });
 
-  const q = (e: LinkEntry) => ({ name: typeof e === "string" ? e : e[0], query: typeof e === "string" ? `${e}, Riyadh Region, Saudi Arabia` : e[1] });
+  const q = (e: LinkEntry) => ({ name: typeof e === "string" ? e : e[0], query: typeof e === "string" ? `${e}, ${spec.areaSuffix ?? O.areaSuffix}` : e[1] });
   const local: Extract<Section, { kind: "local" }> = {
     id: "local",
     h2: `Local information for ${spec.name}`,
     kind: "local",
     intro: spec.localIntro,
     mapQuery: `${spec.lat},${spec.lng}`,
-    mapLabel: `${spec.name}, Riyadh Region`,
-    directionsTitle: `Driving Directions from Riyadh to ${spec.name}`,
+    mapLabel: `${spec.name}, ${spec.regionLabel ?? "Riyadh Region"}`,
+    directionsTitle: `Driving Directions from ${O.name} to ${spec.name}`,
     directions: spec.directions,
     linksTitle: "Neighbourhoods and Destinations",
     linkGroups: spec.linkGroups.map((g, i) => ({ title: spec.linkTitles[i], links: g.map(q) })).filter((g) => g.links.length > 0),
-    weatherTitle: "Current Weather in Riyadh (departure)",
-    weather: { place: "Riyadh", lat: ctx.riyadh.lat, lng: ctx.riyadh.lng },
+    weatherTitle: `Current Weather in ${O.name} (departure)`,
+    weather: { place: O.name, lat: ctx.riyadh.lat, lng: ctx.riyadh.lng },
     weather2Title: `Current Weather in ${spec.name} (arrival)`,
-    weather2: { place: `${spec.name}, Riyadh Region`, lat: spec.lat, lng: spec.lng },
+    weather2: { place: `${spec.name}, ${spec.regionLabel ?? "Riyadh Region"}`, lat: spec.lat, lng: spec.lng },
   };
 
   const style = STYLES[ctx.index % STYLES.length];
@@ -197,12 +206,14 @@ export function buildTownRoute(spec: TownSpec, ctx: TownCtx): Pick<PlacePage, "t
   const town: TownRich = {
     style,
     order: ORDERS[style],
-    fromName: "Riyadh",
+    fromName: O.name,
+    originSlot: O.slot,
+    moreLinks: O.moreLinks,
     toName: n,
-    imageFolder: `riyadh-to-${spec.id}`,
+    imageFolder: `${O.idPrefix}${spec.id}`,
     eyebrow: spec.eyebrow,
     heroPoints: [...spec.heroPoints],
-    heroAlt: `The road between Riyadh and ${n} in Riyadh Region`,
+    heroAlt: `The road between ${O.name} and ${n} in ${spec.regionLabel ?? "Riyadh Region"}`,
     km: spec.km,
     min: spec.min,
     facts: [
@@ -212,32 +223,32 @@ export function buildTownRoute(spec: TownSpec, ctx: TownCtx): Pick<PlacePage, "t
       { label: "Directions", value: "Both ways, one page" },
       ...spec.facts,
     ],
-    factsNote: `Road distance and time are estimates from OpenStreetMap routing between the centres of Riyadh and ${n}, reviewed in November 2026. They are not straight-line distances or a promised journey time: traffic, your exact addresses, rest stops and the time of day change the drive.`,
+    factsNote: `Road distance and time are estimates from OpenStreetMap routing between the centres of ${O.name} and ${n}, reviewed in November 2026. They are not straight-line distances or a promised journey time: traffic, your exact addresses, rest stops and the time of day change the drive.`,
     introHeading: spec.introHeading,
     intro: spec.intro,
     out: spec.out,
     back: spec.back,
-    pickupHeading: `Starting in Riyadh: where we collect you`,
-    pickupIntro: `Tell us exactly where in Riyadh the trip begins. A clear pin or building name saves time on the day.`,
+    pickupHeading: `Starting in ${O.name}: where we collect you`,
+    pickupIntro: O.pickupIntro ?? `Tell us exactly where in ${O.name} the trip begins. A clear pin or building name saves time on the day.`,
     pickups: at(spec.pickups, 0),
-    pickupAlt: `A private car waiting for a passenger in Riyadh before a trip to ${n}`,
+    pickupAlt: `A private car waiting for a passenger in ${O.name} before a trip to ${n}`,
     dropHeading: `Arriving in ${n}: where we drop you`,
     dropIntro: `Give the street, district or place you are going to in ${n}. If you are not sure, send a map pin and we confirm the stop with you.`,
     drops: at(spec.drops, 1),
-    dropAlt: `${n} in Riyadh Region`,
-    highwayAlt: `The highway from Riyadh towards ${n}`,
+    dropAlt: `${n} in ${spec.regionLabel ?? "Riyadh Region"}`,
+    highwayAlt: `The highway from ${O.name} towards ${n}`,
     placesHeading: spec.placesHeading,
     placesIntro: vary(spec.placesIntro, ctx.index, 2),
     places: spec.places,
-    planHeading: `Plan your ride between Riyadh and ${n}`,
+    planHeading: `Plan your ride between ${O.name} and ${n}`,
     plan: at(spec.plan, 0),
-    mapQuery: { from: "Riyadh, Saudi Arabia", to: `${n}, Riyadh Region, Saudi Arabia` },
-    infoHeading: `What to know before you book Riyadh to ${n}`,
+    mapQuery: { from: `${O.name}, Saudi Arabia`, to: `${n}, ${spec.areaSuffix ?? O.areaSuffix}` },
+    infoHeading: `What to know before you book ${O.name} to ${n}`,
     infoIntro: `Four things decide how smoothly this trip runs. Having them ready also gives you a faster quotation.`,
     info: at(spec.info, 3),
-    relatedHeading: `Other routes from Riyadh`,
+    relatedHeading: `Other routes from ${O.name}`,
     related,
-    faqHeading: `Riyadh to ${n}: questions`,
+    faqHeading: `${O.name} to ${n}: questions`,
     faq: spec.faq.map((x, j) => ({ ...x, a: vary(x.a, ctx.index, 2 + j) })),
     contact: { outUrl: out ?? undefined, backUrl: back ?? undefined },
     local,
@@ -251,12 +262,20 @@ export function buildTownRoute(spec: TownSpec, ctx: TownCtx): Pick<PlacePage, "t
     { id: "faq", h2: town.faqHeading, kind: "faq", items: spec.faq },
     {
       id: "links",
-      h2: `More around Riyadh and ${n}`,
+      h2: `More around ${O.name} and ${n}`,
       kind: "links",
       items: [
-        { name: "Riyadh Taxi Service", href: "/riyadh-taxi-service", note: "City rides, districts and airport transfers" },
-        { name: "Riyadh Region taxi pages", href: ctx.regionHref, note: "Cities and towns in the region" },
-        { name: "King Khalid International Airport (RUH)", href: ctx.airportHref, note: "Airport transfers" },
+        ...(ctx.origin
+          ? [
+              { name: "Makkah Region taxi pages", href: ctx.regionHref, note: "Cities and towns in the region" },
+              { name: "Taxi and cab services", href: "/services/taxi-cab-services", note: "The service behind these routes" },
+              { name: "Passenger transport", href: "/services/passenger-transport", note: "Transport for groups and families" },
+            ]
+          : [
+              { name: "Riyadh Taxi Service", href: "/riyadh-taxi-service", note: "City rides, districts and airport transfers" },
+              { name: "Riyadh Region taxi pages", href: ctx.regionHref, note: "Cities and towns in the region" },
+              { name: "King Khalid International Airport (RUH)", href: ctx.airportHref, note: "Airport transfers" },
+            ]),
         ...related.map((r) => ({ name: r.name, href: r.href, note: r.text })),
         { name: "All intercity routes", href: ctx.routesHref, note: "Every route page" },
         { name: "Book a ride", href: "/book", note: "The booking form" },
@@ -275,7 +294,7 @@ export function buildTownRoute(spec: TownSpec, ctx: TownCtx): Pick<PlacePage, "t
     facts: town.facts.slice(0, 4),
     sections,
     town,
-    whatsappMessage: `Hello Gulf Elite Transport Group, I would like to request a private taxi from Riyadh to ${spec.name}. Please confirm availability, vehicle options and fare.`,
+    whatsappMessage: `Hello Gulf Elite Transport Group, I would like to request a private taxi from ${O.name} to ${spec.name}. Please confirm availability, vehicle options and fare.`,
     keyword,
     mapCount: labels.length,
   };
