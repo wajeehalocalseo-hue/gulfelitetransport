@@ -132,7 +132,7 @@ const ORDERS: Record<TownStyle, TownSectionId[]> = {
   ledger: ["intro", "pickups", "both", "drops", "info", "places", "plan", "faq", "related"],
 };
 
-export type Origin = { name: string; slot: string; idPrefix: string; areaSuffix: string; moreLinks?: { href: string; label: string }[]; pickupIntro?: string };
+export type Origin = { name: string; slot: string; idPrefix: string; areaSuffix: string; regionName?: string; moreLinks?: { href: string; label: string }[]; pickupIntro?: string };
 export const RIYADH_ORIGIN: Origin = { name: "Riyadh", slot: "riyadh", idPrefix: "riyadh-to-", areaSuffix: "Riyadh Region, Saudi Arabia" };
 
 export type TownCtx = {
@@ -265,9 +265,9 @@ export function buildTownRoute(spec: TownSpec, ctx: TownCtx): Pick<PlacePage, "t
       h2: `More around ${O.name} and ${n}`,
       kind: "links",
       items: [
-        ...(ctx.origin
+        ...(O.idPrefix !== RIYADH_ORIGIN.idPrefix
           ? [
-              { name: "Makkah Region taxi pages", href: ctx.regionHref, note: "Cities and towns in the region" },
+              { name: `${O.regionName ?? O.name + " Region"} taxi pages`, href: ctx.regionHref, note: "Cities and towns in the region" },
               { name: "Taxi and cab services", href: "/services/taxi-cab-services", note: "The service behind these routes" },
               { name: "Passenger transport", href: "/services/passenger-transport", note: "Transport for groups and families" },
             ]

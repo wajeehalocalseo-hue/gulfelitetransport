@@ -637,7 +637,7 @@ export const routes: Route[] = [
     id: "madinah-to-yanbu",
     from: "madinah",
     to: "yanbu",
-    km: 220,
+    km: 239,
     about:
       "Madinah to Yanbu crosses from the inland holy city to the Red Sea coast. The road is used by workers going to Yanbu Industrial City and by visitors who want to see the Red Sea coast after visiting Madinah.",
     riders: ["Industrial workers and contractors", "Visitors combining Madinah and the coast", "Families visiting relatives"],
