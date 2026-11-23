@@ -57,6 +57,12 @@ export default function PrivacyPage() {
           the website (for example clicks, scrolling and pages viewed) so we can improve it. It
           may set cookies and process data under Microsoft&apos;s privacy statement.
         </p>
+        <p>
+          The language menu offers Arabic and Urdu. Only if you choose one of them, the page you are viewing is translated by Google
+          Translate, which means the text of that page is sent to Google and a cookie named googtrans keeps your language choice. English
+          visitors do not load anything from Google Translate. The translation is made by a machine and may contain mistakes, so
+          please check important details such as the pickup point, date and fare with us on WhatsApp.
+        </p>
         <h2 className="text-2xl font-extrabold text-navy">Your choices</h2>
         <p>
           You can ask us to correct or delete information you have sent to us by contacting us

@@ -11,6 +11,7 @@ import StickyCta from "@/components/StickyCta";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import PromoBar from "@/components/PromoBar";
 import AnalyticsEvents from "@/components/AnalyticsEvents";
+import TranslateLoader from "@/components/TranslateLoader";
 import "./globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -65,6 +66,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="en" className={`${jakarta.variable} ${playfair.variable} h-full antialiased`} suppressHydrationWarning>
       <body className="flex min-h-full flex-col">
         <JsonLd data={baseGraph} />
+        <TranslateLoader />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-50 focus:rounded focus:bg-accent focus:px-4 focus:py-2 focus:text-navy"

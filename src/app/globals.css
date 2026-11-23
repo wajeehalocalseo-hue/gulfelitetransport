@@ -139,3 +139,13 @@ html.admin-dark textarea {
   font-weight: 700;
   letter-spacing: -0.01em;
 }
+
+/* Google website translator (Arabic and Urdu): hide its own banner and tooltips, keep the page where it is, and read right to left. */
+body { top: 0 !important; position: static !important; min-height: 0 !important; }
+iframe.VIpgJd-ZVi9od-ORHb-OEVmcd, .VIpgJd-ZVi9od-ORHb-OEVmcd, .VIpgJd-ZVi9od-aZ2wEe-wOHMyf, .VIpgJd-ZVi9od-xl07Ob-OEVmcd, .VIpgJd-yAWNEb-L7lbkb, body > .skiptranslate { display: none !important; visibility: hidden !important; height: 0 !important; }
+html[dir="rtl"], html[dir="rtl"] body { overflow-x: clip; }
+.skiptranslate iframe.goog-te-banner-frame, .goog-te-banner-frame, #goog-gt-tt, .goog-te-balloon-frame, .goog-tooltip { display: none !important; }
+.goog-text-highlight { background: none !important; box-shadow: none !important; }
+html.translated-rtl .goog-te-gadget, #google_translate_element { display: none !important; }
+html[dir="rtl"] { font-family: var(--font-jakarta), "Segoe UI", Tahoma, Arial, sans-serif; }
+html[dir="rtl"] .font-display { font-family: var(--font-jakarta), "Segoe UI", Tahoma, Arial, sans-serif; letter-spacing: 0; }

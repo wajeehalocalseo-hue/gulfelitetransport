@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Icon from "./Icon";
 import Logo from "./Logo";
+import LanguageSwitcher from "./LanguageSwitcher";
 import { site, telUrl, whatsappUrl } from "@/lib/site";
 import { WhatsAppIcon, waPillSm } from "./WhatsApp";
 
@@ -141,7 +142,7 @@ export default function HeaderNav({ menu }: { menu: MenuData }) {
       {/* Main bar */}
       <div className="border-b border-white/10 bg-navy/95 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3">
-          <Link href="/" aria-label="Gulf Elite Transport, home" className="rounded-lg" onMouseEnter={leave}>
+          <Link href="/" aria-label="Gulf Elite Transport, home" className="notranslate rounded-lg" translate="no" onMouseEnter={leave}>
             <Logo tone="dark" />
           </Link>
 
@@ -155,6 +156,7 @@ export default function HeaderNav({ menu }: { menu: MenuData }) {
           </nav>
 
           <div className="flex items-center gap-2" onMouseEnter={leave}>
+            <LanguageSwitcher className="hidden sm:inline-flex" />
             {telUrl && (
               <a
                 href={telUrl}
@@ -272,6 +274,7 @@ export default function HeaderNav({ menu }: { menu: MenuData }) {
       {/* Mobile menu */}
       {mobile && (
         <nav id="mobile-nav" aria-label="Mobile" className="max-h-[calc(100vh-4.5rem)] overflow-y-auto border-t border-white/10 bg-navy px-5 pb-6 lg:hidden">
+          <LanguageSwitcher variant="buttons" className="pt-4" />
           <ul className="grid gap-1 pt-3">
             <li>
               <Link href="/" className="block rounded-lg px-3 py-3 font-semibold text-white/95">Home</Link>
