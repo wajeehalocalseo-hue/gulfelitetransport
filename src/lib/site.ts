@@ -7,12 +7,13 @@
  */
 /** Social profile links. Leave a link empty until the real account exists: its icon stays hidden until then. */
 const social = {
-  facebook: "", // e.g. "https://www.facebook.com/yourpage"
-  instagram: "", // e.g. "https://www.instagram.com/yourhandle"
+  facebook: "https://www.facebook.com/profile.php?id=61596916677992",
+  instagram: "https://www.instagram.com/gulfelitetransportgroup/",
   tiktok: "", // e.g. "https://www.tiktok.com/@yourhandle"
-  x: "", // e.g. "https://x.com/yourhandle"
-  youtube: "", // e.g. "https://www.youtube.com/@yourchannel"
+  x: "https://x.com/taxiservicesa",
+  youtube: "https://www.youtube.com/@GulfelitetransportGroup",
   linkedin: "", // e.g. "https://www.linkedin.com/company/yourcompany"
+  pinterest: "https://www.pinterest.com/gulfelitetransportgroup/",
 };
 
 export const site = {
