@@ -4,7 +4,7 @@ import type { DistrictRichCtx } from "./olaya";
 
 /**
  * Banban Taxi Service: hand-written page for Banban, at the far-northern edge of Riyadh (built by factory.ts). Primary focus keyword: "Banban Taxi Service" only.
- * IMAGES: four reserved slots: area, journey, street and pickup (factory passes four to addImages). Suggested files in banban-taxi-service/: banban-private-taxi-service-riyadh.webp, banban-long-distance-taxi-pickup.webp, banban-airport-taxi-transfer.webp.
+ * IMAGES: five photos from the owner's Google Drive (Banban folder), resized to 1000 px wide WebP (35-115 KB) in public/images/routes/riyadh-districts/banban-taxi-service/ and placed in the about, pickup, airport, long-rides, nearby-rides sections. The photos show cars and drivers; the page never calls them Gulf Elite's fleet and the alt text describes only what is visible.
  *
  * CENTRE POINT: riyadh-areas.ts, 25.0017/46.5880, used unchanged. Very few places are mapped around it, so the page names none except roads and districts.
  * Figures (OSRM, light traffic, Nov 2026): RUH 51.9 km / 43 min (the straight line to the airport is only about 12 km; routing leaves along Banban Road and King Fahd Road and returns by King Salman Road, so the page says it is long and is confirmed per booking);
@@ -22,6 +22,13 @@ export function banbanRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "des
   return buildDistrictRich(
     {
       id: "banban",
+      images: {
+        about: { slot: "banban-edge-of-city-taxi-pickup", alt: "Two men beside a dark grey SUV on an empty desert roadside, one checking his phone, with a bag on the ground and street lights stretching into the distance", label: "Photo: banban-edge-of-city-taxi-pickup.webp", w: 1000, h: 558 },
+        pickup: { slot: "banban-family-taxi-pickup", alt: "A copper-brown SUV on a wide road outside a large villa as a man in a white thobe loads luggage while a family with a child walks up", label: "Photo: banban-family-taxi-pickup.webp", w: 1000, h: 558 },
+        airport: { slot: "banban-ruh-airport-transfer", alt: "A white saloon with its boot open at King Khalid International Airport as a woman in a black abaya, a man in a grey jacket and a woman in a scarf with suitcases stand beside it", label: "Photo: banban-ruh-airport-transfer.webp", w: 1000, h: 558 },
+        "long-rides": { slot: "banban-kafd-olaya-long-ride", alt: "A dark blue saloon with a driver and a passenger on a Riyadh highway under a sign for KAFD and Al Olaya, with the skyline behind", label: "Photo: banban-kafd-olaya-long-ride.webp", w: 1000, h: 558 },
+        "nearby-rides": { slot: "banban-ride-to-nearby-northern-districts", alt: "A silver SUV with its boot open on a road at the desert edge as a man in a blue shirt loads luggage for a family, beneath a sign for Al Arid, Al Qirawan and Al Narjis", label: "Photo: banban-ride-to-nearby-northern-districts.webp", w: 1000, h: 558 },
+      },
       name: "Banban",
       title: "Banban Taxi Service Riyadh | Pre-Booked Long Rides",
       description: "Banban Taxi Service for pre-booked pickups at the far-north edge of Riyadh: city rides, family trips and airport transfers. Fare confirmed before you commit.",

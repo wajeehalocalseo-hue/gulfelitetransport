@@ -4,7 +4,7 @@ import type { DistrictRichCtx } from "./olaya";
 
 /**
  * Al Wadi Taxi Service: hand-written page for Al Wadi, a residential district in north Riyadh (built by factory.ts). Primary focus keyword: "Al Wadi Taxi Service" only.
- * IMAGES: four reserved slots: area, journey, street and pickup (factory passes four to addImages). Suggested files in al-wadi-taxi-service/: al-wadi-private-taxi-service-riyadh.webp, al-wadi-to-kafd-business-taxi.webp, al-wadi-airport-taxi-transfer.webp.
+ * IMAGES: five photos from the owner's Google Drive (Al Wadi folder), resized to 1000 px wide WebP (35-115 KB) in public/images/routes/riyadh-districts/al-wadi-taxi-service/ and placed in the about, kafd-commute, airport, school-clinic, shopping sections. The photos show cars and drivers; the page never calls them Gulf Elite's fleet and the alt text describes only what is visible.
  *
  * CENTRE POINT: riyadh-areas.ts, 24.7894/46.6914, used unchanged. OpenStreetMap labels a primary health care clinic "AlWadi" at 24.7880/46.6973 and a school in "Al Wadi District" at 24.7835/46.6865, consistent with that point.
  * Figures (OSRM, light traffic, Nov 2026): RUH 24.0 km / 18 min; Olaya 16.9 / 17; KAFD 12.5 / 13; Ad Dirah 23.8 / 21; Al Malaz 17.5 / 17; Al Falah 3.0 / 5.
@@ -23,6 +23,13 @@ export function alWadiRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "des
   return buildDistrictRich(
     {
       id: "al-wadi",
+      images: {
+        about: { slot: "al-wadi-neighbourhood-taxi-pickup", alt: "A dark blue SUV on a street of walled houses as a man in a white thobe shakes hands with a man in a grey thobe while a woman and a small boy stand beside them", label: "Photo: al-wadi-neighbourhood-taxi-pickup.webp", w: 1000, h: 558 },
+        "kafd-commute": { slot: "al-wadi-kafd-commute-ride", alt: "A beige saloon with a woman at the wheel and a passenger on a Riyadh highway under signs for King Fahd Road and KAFD, with towers behind", label: "Photo: al-wadi-kafd-commute-ride.webp", w: 1000, h: 558 },
+        airport: { slot: "al-wadi-ruh-airport-transfer", alt: "A dark green SUV with its boot open at an airport passenger pickup area as a woman in a headscarf loads a case for a man and a woman with suitcases", label: "Photo: al-wadi-ruh-airport-transfer.webp", w: 1000, h: 558 },
+        "school-clinic": { slot: "al-wadi-school-run-taxi-pickup", alt: "A white car parked beside a school wall as a man in a grey shirt, a girl in school uniform with a backpack and a woman in a pink abaya stand next to it", label: "Photo: al-wadi-school-run-taxi-pickup.webp", w: 1000, h: 558 },
+        shopping: { slot: "al-wadi-shopping-family-trip", alt: "A silver SUV with its boot open outside a glass-fronted shopping centre as a family with children and shopping bags and a man in a dark shirt stand beside it", label: "Photo: al-wadi-shopping-family-trip.webp", w: 1000, h: 558 },
+      },
       name: "Al Wadi",
       title: "Al Wadi Taxi Service Riyadh | Home, KAFD and Airport Rides",
       description: "Al Wadi Taxi Service for home pickups, commutes to KAFD, school and shopping trips and airport rides from north Riyadh, about 24 km from RUH. Fare confirmed first.",

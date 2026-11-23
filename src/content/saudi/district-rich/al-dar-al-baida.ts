@@ -11,8 +11,7 @@ import type { DistrictRichCtx } from "./olaya";
  * Primary focus keyword: "Al Dar Al Baida Taxi Service" (title, H1, opening sentence, description). Written mostly as prose.
  * Not the Al Dar Al Baida of Riyadh Region (25.1664/45.3935); the page uses only the south Riyadh district.
  *
- * IMAGES: three reserved slots (area, journey, pickup) from addImages' defaults. No Drive photos exist yet for this page. Add them later as
- * public/images/routes/riyadh-districts/al-dar-al-baida-taxi-service/<name>.webp with a custom map in addImages (see al-naseem.ts for the pattern).
+ * IMAGES: five photos from the owner's Google Drive (Al Dar Al Baida folder), resized to 1000 px wide WebP (35-115 KB) in public/images/routes/riyadh-districts/al-dar-al-baida-taxi-service/ and placed in the about, residential, family, airport, business sections. The photos show cars and drivers; the page never calls them Gulf Elite's fleet and the alt text describes only what is visible.
  *
  * CENTRE POINT: riyadh-areas.ts stores Al Dar Al Baida at 24.5647/46.7883. The metro station (24.5596/46.7765) is about 1.3 km west-south-west of it and is NOT used as the district centre; the stored point is used
  * unchanged for the weather and the road estimates. It is not an official centre.
@@ -207,7 +206,13 @@ export function alDarAlBaidaRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" 
       { label: "Area type", value: "residential, southern edge of Riyadh" },
     ],
     sections: addLinks(
-      addImages([about, journeys, residential, family, airport, business, community, metro, prebook, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq, local], me.name),
+      addImages([about, journeys, residential, family, airport, business, community, metro, prebook, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq, local], me.name, {
+        about: { slot: "al-dar-al-baida-neighbourhood-taxi-pickup", alt: "A silver saloon on a street of walled villas as two men in white thobes, a woman in a black abaya and a boy talk beside it", label: "Photo: al-dar-al-baida-neighbourhood-taxi-pickup.webp", w: 1000, h: 558 },
+        residential: { slot: "al-dar-al-baida-doorstep-taxi-pickup", alt: "A man in a white thobe greets a man in a long pale-blue tunic who hands him a wheeled suitcase, beside a dark blue car at a house entrance", label: "Photo: al-dar-al-baida-doorstep-taxi-pickup.webp", w: 1000, h: 558 },
+        family: { slot: "al-dar-al-baida-family-group-taxi", alt: "A white SUV beside a shopping street with a driver at the wheel as a family with two children and shopping bags stand next to it", label: "Photo: al-dar-al-baida-family-group-taxi.webp", w: 1000, h: 558 },
+        airport: { slot: "al-dar-al-baida-ruh-airport-transfer", alt: "A silver SUV at an airport terminal canopy as a man in a white thobe and a man in a dark jacket stand with a woman and a wheeled suitcase", label: "Photo: al-dar-al-baida-ruh-airport-transfer.webp", w: 1000, h: 558 },
+        business: { slot: "al-dar-al-baida-city-journeys-olaya-ad-dirah", alt: "A dark red saloon with a woman and a man inside on a Riyadh highway beneath road signs for Olaya and Ad Dirah, with city towers behind", label: "Photo: al-dar-al-baida-city-journeys-olaya-ad-dirah.webp", w: 1000, h: 558 },
+      }),
       ctx,
       "al-dar-al-baida",
     ),

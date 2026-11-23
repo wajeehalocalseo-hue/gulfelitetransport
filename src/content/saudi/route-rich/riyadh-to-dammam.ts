@@ -62,8 +62,8 @@ export const dammamRich: RichRoute = {
   vehicles: [
     { slot: "sedan", homePhoto: "sedan", name: "Sedan", best: "One to three passengers", text: "A comfortable private car for a small group with light luggage. A good choice for a business traveller or a couple going to a hotel or the airport.", alt: "Private sedan for the Riyadh to Dammam road journey" },
     { slot: "suv", homePhoto: "suv", name: "SUV", best: "Families and extra luggage", text: "More room for passengers and bags, and a good choice for a four-hour road trip with children or older relatives.", alt: "Private SUV for families travelling from Riyadh to Dammam" },
-    { slot: "van", homePhoto: "family-van", name: "Van or minibus", best: "Teams and groups", text: "Seats for a larger group, with space for everyone's bags in one vehicle. Tell us the group size and we confirm what fits.", alt: "Private van for teams travelling from Riyadh to Dammam" },
-    { slot: "executive", name: "Executive vehicle", best: "Business guests and formal arrivals", text: "A chauffeur-driven premium car for guests who want extra comfort or a more formal arrival.", alt: "Executive vehicle for business travel from Riyadh to Dammam" },
+    { slot: "van", homePhoto: "family-van", name: "Van or minibus", best: "Teams and groups", text: "Seats for a larger group, with space for everyone's bags in one vehicle. Tell us the group size and we confirm what fits.", alt: "A silver van with its side door open in a desert roadside car park as a man with a folder speaks to travellers who have bags beside them" },
+    { slot: "executive", name: "Executive vehicle", best: "Business guests and formal arrivals", text: "A chauffeur-driven premium car for guests who want extra comfort or a more formal arrival.", alt: "A dark purple saloon with a woman stepping in beside a man in a navy suit with a briefcase, in front of glass towers and palm trees" },
   ],
   pickupHeading: "Pickup Locations in Riyadh",
   pickupIntro: "Rides start from your own address. These are the places people ask for most. Tell us the exact address or send a map pin when you request a quote.",
@@ -75,7 +75,7 @@ export const dammamRich: RichRoute = {
     { name: "City centre", text: "Hotels, offices and homes in central Riyadh. Share the address and a nearby landmark.", href: "/riyadh-taxi-service" },
     { name: "King Khalid International Airport (RUH)", text: "The main airport, in the north of Riyadh. Send your flight number and terminal.", href: "/taxi-saudi-arabia/airports/king-khalid-international-airport" },
   ],
-  pickupAlt: "Riyadh city skyline where private taxi rides to Dammam begin",
+  pickupAlt: "A white SUV with its boot open outside a walled villa as a woman loads luggage while a man, a boy, a girl and a woman wait",
   dropHeading: "Where Can Your Riyadh to Dammam Taxi Drop You?",
   dropIntro: "The driver can take you to any address in Dammam. These are places visitors often choose. The exact drop-off point is confirmed when you book.",
   drops: [
@@ -85,7 +85,7 @@ export const dammamRich: RichRoute = {
     { name: "Al Faisaliyah", text: "A central district of Dammam with hotels, offices and shops." },
     { name: "Hotels and offices", text: "Any hotel, office or home in Dammam. Share the address and a nearby landmark." },
   ],
-  dropAlt: "Dammam Corniche on the Arabian Gulf where the ride from Riyadh can end",
+  dropAlt: "A dark blue SUV with its boot open beside a seafront promenade as a driver loads suitcases for a man and a woman, with the sea and the city behind",
   eastern: {
     heading: "Beyond Dammam: Continue to the Eastern Province",
     intro: "Dammam sits next to several cities that many travellers need to reach. If your journey ends in one of them, tell us when you request a quote.",
@@ -119,7 +119,7 @@ export const dammamRich: RichRoute = {
     { title: "Arriving in Dammam", text: "Dammam, Al Khobar and Dhahran are close together. Give us the district or the hotel, and we confirm the best drop-off point." },
   ],
   mapQuery: { from: "Riyadh, Saudi Arabia", to: "Dammam, Saudi Arabia" },
-  highwayAlt: "Highway 40 crossing the desert between Riyadh and Dammam",
+  highwayAlt: "A brown SUV with a driver and passengers on an empty multi-lane highway crossing the desert",
   whoHeading: "Who Is This Private Taxi Service Suitable For?",
   who: [
     { title: "Business travellers", text: "Meet a schedule without waiting at a station, and work or rest on the way. A formal arrival is possible with an executive vehicle." },

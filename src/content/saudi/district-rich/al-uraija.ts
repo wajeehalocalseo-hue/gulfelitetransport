@@ -10,8 +10,7 @@ import type { DistrictRichCtx } from "./olaya";
  * Al Uraija Taxi Service: the hand-written landing page for Al Uraija (Al Uraija Al Wusta / Al Uraija Al Gharbiyah area), a residential district in west Riyadh (see district-rich/index.ts).
  * Primary focus keyword: "Al Uraija Taxi Service" (title, H1, opening sentence, description). Written mostly as prose.
  *
- * IMAGES: three reserved slots (area, journey, pickup) from addImages' defaults. No Drive photos exist yet for this page. Add them later as
- * public/images/routes/riyadh-districts/al-uraija-taxi-service/<name>.webp with a custom map in addImages (see al-naseem.ts for the pattern).
+ * IMAGES: five photos from the owner's Google Drive (Al Uraija folder), resized to 1000 px wide WebP (35-115 KB) in public/images/routes/riyadh-districts/al-uraija-taxi-service/ and placed in the about, residential, family, airport, business sections. The photos show cars and drivers; the page never calls them Gulf Elite's fleet and the alt text describes only what is visible.
  *
  * CENTRE POINT: riyadh-areas.ts stores Al Uraija at 24.6257/46.6566. It is used unchanged for the weather and the road estimates. It is not an official centre and it does not distinguish between
  * Al Uraija Al Wusta and Al Uraija Al Gharbiyah, so the page does not claim either sub-area.
@@ -205,7 +204,13 @@ export function alUraijaRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "d
       { label: "Area type", value: "residential, west Riyadh" },
     ],
     sections: addLinks(
-      addImages([about, journeys, residential, family, airport, business, community, metro, prebook, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq, local], me.name),
+      addImages([about, journeys, residential, family, airport, business, community, metro, prebook, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq, local], me.name, {
+        about: { slot: "al-uraija-neighbourhood-taxi-pickup", alt: "A dark green SUV on a street of walled villas as a man in a white thobe with a suitcase stands with a woman in a black abaya and a girl", label: "Photo: al-uraija-neighbourhood-taxi-pickup.webp", w: 1000, h: 558 },
+        residential: { slot: "al-uraija-doorstep-taxi-pickup", alt: "A copper SUV on a paved street in front of apartment buildings as a woman in a black abaya and a man in a white thobe with a bag stand beside it", label: "Photo: al-uraija-doorstep-taxi-pickup.webp", w: 1000, h: 558 },
+        family: { slot: "al-uraija-family-group-taxi", alt: "A silver minivan with its side door open on a shopping street as a family with two children and shopping bags stand beside it", label: "Photo: al-uraija-family-group-taxi.webp", w: 1000, h: 558 },
+        airport: { slot: "al-uraija-ruh-airport-transfer", alt: "A black minivan with its boot open at an airport terminal as a man in a white thobe loads suitcases while a man and a woman wait", label: "Photo: al-uraija-ruh-airport-transfer.webp", w: 1000, h: 558 },
+        business: { slot: "al-uraija-city-business-journeys", alt: "A white saloon with a driver and a passenger on a wide boulevard lined with palm trees and glass office towers", label: "Photo: al-uraija-city-business-journeys.webp", w: 1000, h: 558 },
+      }),
       ctx,
       "al-uraija",
     ),

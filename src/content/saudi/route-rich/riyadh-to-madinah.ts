@@ -91,7 +91,7 @@ export const madinahRich: RichRoute = {
     { slot: "sedan", homePhoto: "sedan", name: "Sedan", best: "Small groups with light luggage", text: "A private car for a small group, such as a couple or a few relatives travelling with a few bags.", alt: "Private sedan for a Riyadh to Madinah transfer" },
     { slot: "suv", homePhoto: "suv", name: "SUV", best: "Families with extra luggage", text: "More room for passengers and bags. Suitable for a family with children on a long road journey.", alt: "Private SUV for a family travelling from Riyadh to Madinah" },
     { slot: "van", homePhoto: "family-van", name: "Van or minibus", best: "Larger families and groups", text: "For groups who want to travel together with their luggage. Give us the group size and we confirm what fits.", alt: "Private van for a group travelling from Riyadh to Madinah" },
-    { slot: "executive", name: "Executive car", best: "Guests who want a more formal arrival", text: "A chauffeur-driven premium car for passengers who want extra comfort. Subject to availability.", alt: "Executive car for a Riyadh to Madinah transfer" },
+    { slot: "executive", name: "Executive car", best: "Guests who want a more formal arrival", text: "A chauffeur-driven premium car for passengers who want extra comfort. Subject to availability.", alt: "A dark saloon with its boot open on a paved street near the Prophet's Mosque as a driver loads a case for a man in a long tunic and a woman in a brown abaya" },
   ],
   pickupHeading: "Common Pickup Areas in Riyadh",
   pickupIntro: "Journeys start from your own address. Send the exact address or a map pin when you request a quote.",

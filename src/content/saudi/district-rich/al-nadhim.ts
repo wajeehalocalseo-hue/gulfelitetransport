@@ -4,7 +4,7 @@ import type { DistrictRichCtx } from "./olaya";
 
 /**
  * Al Nadhim Taxi Service: hand-written page for Al Nadhim (An Nazim on OpenStreetMap), a residential district in east Riyadh (built by factory.ts). Primary focus keyword: "Al Nadhim Taxi Service" only.
- * IMAGES: four reserved slots: area, journey, street and pickup (factory passes four to addImages). Suggested files in al-nadhim-taxi-service/: al-nadhim-private-taxi-service-riyadh.webp, al-nadhim-family-taxi-pickup.webp, al-nadhim-airport-taxi-transfer.webp.
+ * IMAGES: five photos from the owner's Google Drive (Al Nadhim folder), resized to 1000 px wide WebP (35-115 KB) in public/images/routes/riyadh-districts/al-nadhim-taxi-service/ and placed in the about, pickup, east-neighbours, airport, long-rides sections. The photos show cars and drivers; the page never calls them Gulf Elite's fleet and the alt text describes only what is visible.
  *
  * CENTRE POINT: riyadh-areas.ts, 24.8001/46.8960, used unchanged. OpenStreetMap labels schools in "Al-Nazim District" at 24.808/46.882-46.899, a mosque at 24.8172/46.8836 and Family Care Hospital (Al Rimayah District) at 24.8010/46.8715.
  * Figures (OSRM, light traffic, Nov 2026): RUH 37.3 km / 34 min; Olaya 28.3 / 25; KAFD 38.7 / 34; Ad Dirah 31.9 / 29; Al Malaz 26.6 / 24; Al Janadriyah 7.9 / 10; Al Khaleej 15.3 / 18.
@@ -22,6 +22,13 @@ export function alNadhimRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "d
   return buildDistrictRich(
     {
       id: "al-nadhim",
+      images: {
+        about: { slot: "al-nadhim-eastern-district-taxi-pickup", alt: "A blue SUV on a pavement beside high walls and gates as a man in a white thobe, a man in a patterned head-cloth with a suitcase and a woman in a green abaya walk up", label: "Photo: al-nadhim-eastern-district-taxi-pickup.webp", w: 1000, h: 558 },
+        pickup: { slot: "al-nadhim-taxi-pickup-phone-confirmation", alt: "A woman in a blue headscarf checks her phone beside a white SUV with a woman at the wheel, on a street of walled houses with a mosque minaret in the distance", label: "Photo: al-nadhim-taxi-pickup-phone-confirmation.webp", w: 1000, h: 558 },
+        "east-neighbours": { slot: "al-nadhim-family-ride-to-neighbouring-districts", alt: "A silver SUV with its door open on a street of walled villas as a man with a lanyard, a man in a thobe, a boy with a backpack, a woman in a black abaya and a girl stand beside it", label: "Photo: al-nadhim-family-ride-to-neighbouring-districts.webp", w: 1000, h: 558 },
+        airport: { slot: "al-nadhim-ruh-airport-transfer", alt: "A maroon SUV with its boot open at an airport departures kerb as a man with a bag, a man in a dark jacket and a woman with a suitcase stand beside it", label: "Photo: al-nadhim-ruh-airport-transfer.webp", w: 1000, h: 558 },
+        "long-rides": { slot: "al-nadhim-long-ride-to-central-riyadh", alt: "A silver SUV with a driver and a passenger on a multi-lane road under a sign for the Riyadh departure, with the city skyline behind", label: "Photo: al-nadhim-long-ride-to-central-riyadh.webp", w: 1000, h: 558 },
+      },
       name: "Al Nadhim",
       title: "Al Nadhim Taxi Service Riyadh | East Riyadh Home and Airport",
       description: "Al Nadhim Taxi Service for home pickups, family trips, long city rides and airport transfers from east Riyadh, about 37 km from RUH. Fare confirmed first.",

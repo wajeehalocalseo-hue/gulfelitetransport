@@ -10,11 +10,7 @@ import type { DistrictRichCtx } from "./olaya";
  * Granada Taxi Service: the hand-written landing page for Granada (Ghirnatah), an east Riyadh district with a mall, a business park and a metro station (see district-rich/index.ts).
  * Primary focus keyword: "Granada Taxi Service" (title, H1, opening sentence, description). Written mostly as prose.
  *
- * IMAGES (TODO for the owner): three slots are reserved, with these exact files in public/images/routes/riyadh-districts/granada-taxi-service/ :
- *   granada-neighbourhood.webp       a realistic Granada (Ghirnatah) streetscape or residential setting                       -> "about" section
- *   granada-mall-business-park.webp  Granada Mall or Granada Business Park, only if the image is authentic                    -> "community" section
- *   granada-local-transport.webp     the metro station or a local transport setting near Granada                             -> "metro" section
- * No supplied images were found in the project, so labelled placeholders are shown. Do not use fleet photographs that are not the company's own.
+ * IMAGES: five photos from the owner's Google Drive (Granada folder), resized to 1000 px wide WebP (35-115 KB) in public/images/routes/riyadh-districts/granada-taxi-service/ and placed in the about, community, metro, airport, business sections. The photos show cars and drivers; the page never calls them Gulf Elite's fleet and the alt text describes only what is visible.
  *
  * CENTRE POINT: riyadh-areas.ts stores Granada at 24.7912/46.7437. OpenStreetMap places Granada Mall (24.7818/46.7312), Hilton Riyadh Hotel and Residences (24.7852/46.7282), Mouwasat Hospital (24.7874/46.7327) and
  * Granada Business Park (24.7863/46.7273) in Granada, all within about 2 km of that point, so the shared point is used unchanged for routes, distances, the map and the weather (the brief suggests the mall point 24.7818/46.7312).
@@ -209,9 +205,11 @@ export function granadaRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "de
       [about, journeys, community, hotel, metro, airport, business, residential, prebook, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq, local],
       me.name,
       {
-        about: { slot: "granada-neighbourhood", alt: "Streets and buildings in Granada, Riyadh", label: "Photo: granada-neighbourhood.webp" },
-        community: { slot: "granada-mall-business-park", alt: "Granada Mall and Granada Business Park area in Riyadh", label: "Photo: granada-mall-business-park.webp" },
-        metro: { slot: "granada-local-transport", alt: "A local transport setting near Granada Metro Station in Riyadh", label: "Photo: granada-local-transport.webp" },
+        about: { slot: "granada-neighbourhood", alt: "A dark red SUV outside a residence building as a man in a white thobe opens the door for a woman in a navy abaya while a boy with a backpack stands beside her", label: "Photo: granada-neighbourhood.webp", w: 1000, h: 558 },
+        community: { slot: "granada-mall-business-park", alt: "A silver SUV on a pavement beside glass office buildings as a woman in a black abaya greets a man and a woman who hold shopping bags", label: "Photo: granada-mall-business-park.webp", w: 1000, h: 558 },
+        metro: { slot: "granada-local-transport", alt: "A white SUV with its rear door open on a street beneath an elevated station walkway as a man in a gold-trimmed cloak steps out, welcomed by a man in a white thobe and a woman in a green abaya", label: "Photo: granada-local-transport.webp", w: 1000, h: 558 },
+        airport: { slot: "granada-airport-transfer", alt: "A dark blue van at a terminal kerb as a man in a white thobe gestures towards its open door while a man in a jacket and two women stand with wheeled suitcases", label: "Photo: granada-airport-transfer.webp", w: 1000, h: 558 },
+        business: { slot: "granada-popular-journeys", alt: "A dark green saloon with a driver and two passengers on an elevated Riyadh road with the city skyline behind", label: "Photo: granada-popular-journeys.webp", w: 1000, h: 558 },
       },
     ), ctx, "granada"),
     whatsappMessage: GRANADA_WHATSAPP_MESSAGE,

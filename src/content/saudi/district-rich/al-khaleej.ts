@@ -6,7 +6,7 @@ import type { DistrictRichCtx } from "./olaya";
  * Al Khaleej Taxi Service: hand-written page for Al Khaleej (Al Khalij), a residential district in north-east Riyadh (built by factory.ts).
  * Primary focus keyword: "Al Khaleej Taxi Service" only.
  *
- * IMAGES: four reserved slots: area, journey, street and pickup (factory passes four to addImages). Suggested files in al-khaleej-taxi-service/: al-khaleej-private-taxi-service-riyadh.webp, al-khaleej-airport-taxi-transfer.webp, al-khaleej-metro-station-taxi-pickup.webp.
+ * IMAGES: five photos from the owner's Google Drive (Al Khaleej folder), resized to 1000 px wide WebP (35-115 KB) in public/images/routes/riyadh-districts/al-khaleej-taxi-service/ and placed in the about, airport, metro, shopping, north-east sections. The photos show cars and drivers; the page never calls them Gulf Elite's fleet and the alt text describes only what is visible.
  *
  * CENTRE POINT: riyadh-areas.ts, 24.7768/46.8035, used unchanged for weather and routing. OpenStreetMap spells the district "Al Khalij".
  * Figures (OSRM from that point, light traffic, Nov 2026): RUH 32.3 km / 26 min; Olaya 20.9 / 21; KAFD 23.6 / 25; Ad Dirah 24.5 / 24; Al Malaz 19.2 / 19.
@@ -24,6 +24,13 @@ export function alKhaleejRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "
   return buildDistrictRich(
     {
       id: "al-khaleej",
+      images: {
+        about: { slot: "al-khaleej-neighbourhood-taxi-pickup", alt: "A red saloon with a man in a white head-cloth at the wheel on a street of walled houses as a man in a tunic and a woman in a pink abaya walk past", label: "Photo: al-khaleej-neighbourhood-taxi-pickup.webp", w: 1000, h: 558 },
+        airport: { slot: "al-khaleej-ruh-airport-transfer", alt: "A brown SUV with its boot open at a glass-fronted airport terminal as a driver loads a case for a man and a woman with two suitcases", label: "Photo: al-khaleej-ruh-airport-transfer.webp", w: 1000, h: 558 },
+        metro: { slot: "al-khaleej-metro-station-connection", alt: "A white SUV with its door open beside a station canopy as a woman in a dark abaya gets out, with a man and a woman with a wheeled suitcase next to it", label: "Photo: al-khaleej-metro-station-connection.webp", w: 1000, h: 558 },
+        shopping: { slot: "al-khaleej-family-shopping-trip", alt: "A grey SUV outside a shopping frontage as a family with children and shopping bags and a man in a white shirt stand beside it", label: "Photo: al-khaleej-family-shopping-trip.webp", w: 1000, h: 558 },
+        "north-east": { slot: "al-khaleej-north-east-riyadh-ride", alt: "A dark green saloon with a driver and a woman passenger in a blue headscarf on a road beside villas", label: "Photo: al-khaleej-north-east-riyadh-ride.webp", w: 1000, h: 558 },
+      },
       name: "Al Khaleej",
       title: "Al Khaleej Taxi Service Riyadh | Metro, Home and Airport",
       description: "Al Khaleej Taxi Service for home pickups, metro transfers, family trips and airport rides from north-east Riyadh, about 32 km from RUH. Fare confirmed first.",

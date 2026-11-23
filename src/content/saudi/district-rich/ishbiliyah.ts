@@ -4,7 +4,7 @@ import type { DistrictRichCtx } from "./olaya";
 
 /**
  * Ishbiliyah Taxi Service: hand-written page for Ishbiliyah (Al Ishbiliyah on OpenStreetMap), a residential district in north-east Riyadh with a Line 2 metro station of the same name (built by factory.ts). Primary focus keyword: "Ishbiliyah Taxi Service" only.
- * IMAGES: four reserved slots: area, journey, street and pickup (factory passes four to addImages). Suggested files in ishbiliyah-taxi-service/: ishbiliyah-private-taxi-service-riyadh.webp, ishbiliyah-metro-station-taxi-pickup.webp, ishbiliyah-airport-taxi-transfer.webp.
+ * IMAGES: five photos from the owner's Google Drive (Ishbiliyah folder), resized to 1000 px wide WebP (35-115 KB) in public/images/routes/riyadh-districts/ishbiliyah-taxi-service/ and placed in the about, metro, streets, airport, shopping sections. The photos show cars and drivers; the page never calls them Gulf Elite's fleet and the alt text describes only what is visible.
  *
  * CENTRE POINT: riyadh-areas.ts, 24.7945/46.7942, used unchanged. OpenStreetMap labels Al Ishbiliyah District places at 24.7967/46.8040 and 24.7990/46.8144, consistent with that point.
  * Figures (OSRM, light traffic, Nov 2026): RUH 32.9 km / 26 min; Olaya 21.7 / 23; KAFD 24.2 / 25; Ad Dirah 28.1 / 26; Al Malaz 22.7 / 21; Al Yarmuk 4.6 / 6; Al Khaleej 5.3 / 9; Al Hamra 5.9 / 8.
@@ -22,6 +22,13 @@ export function ishbiliyahRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | 
   return buildDistrictRich(
     {
       id: "ishbiliyah",
+      images: {
+        about: { slot: "ishbiliyah-residential-taxi-pickup", alt: "A dark red SUV on a street of walled villas as a man in a white thobe talks to a man in a grey tunic and a woman in a blue abaya, with two suitcases beside them", label: "Photo: ishbiliyah-residential-taxi-pickup.webp", w: 1000, h: 558 },
+        metro: { slot: "ishbiliyah-metro-station-taxi-transfer", alt: "A teal SUV stopped beside a metro station with an elevated walkway as a man in a white shirt greets a woman in a dark abaya who has a wheeled suitcase", label: "Photo: ishbiliyah-metro-station-taxi-transfer.webp", w: 1000, h: 558 },
+        streets: { slot: "ishbiliyah-street-pickup-taxi-service", alt: "A dark blue saloon on a street of walled villas as a man in a grey shirt gestures to a man in a beige shirt who is looking at his phone", label: "Photo: ishbiliyah-street-pickup-taxi-service.webp", w: 1000, h: 558 },
+        airport: { slot: "ishbiliyah-riyadh-airport-transfer", alt: "A white SUV with its boot open on an airport road beneath a sign for King Khalid International Airport as a man loads a suitcase for a man and a woman", label: "Photo: ishbiliyah-riyadh-airport-transfer.webp", w: 1000, h: 558 },
+        shopping: { slot: "ishbiliyah-family-shopping-taxi", alt: "A beige SUV with its rear door open outside a shopping centre as a woman in a dark abaya welcomes a woman and two children while a man in a white thobe carries shopping bags", label: "Photo: ishbiliyah-family-shopping-taxi.webp", w: 1000, h: 558 },
+      },
       name: "Ishbiliyah",
       title: "Ishbiliyah Taxi Service Riyadh | Home, Metro and Airport",
       description: "Ishbiliyah Taxi Service for home pickups, Line 2 metro transfers, family trips and airport rides from north-east Riyadh, about 33 km from RUH. Fare confirmed first.",

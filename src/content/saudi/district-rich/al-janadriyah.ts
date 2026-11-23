@@ -4,7 +4,7 @@ import type { DistrictRichCtx } from "./olaya";
 
 /**
  * Al Janadriyah Taxi Service: hand-written page for Al Janadriyah (Al Janadiriyah on OpenStreetMap), a district in east Riyadh best known for its heritage festival (built by factory.ts). Primary focus keyword: "Al Janadriyah Taxi Service" only.
- * IMAGES: four reserved slots: area, journey, street and pickup (factory passes four to addImages). Suggested files in al-janadriyah-taxi-service/: al-janadriyah-private-taxi-service-riyadh.webp, al-janadriyah-heritage-festival-taxi.webp, al-janadriyah-airport-taxi-transfer.webp.
+ * IMAGES: five photos from the owner's Google Drive (Al Janadriyah folder), resized to 1000 px wide WebP (35-115 KB) in public/images/routes/riyadh-districts/al-janadriyah-taxi-service/ and placed in the about, festival-visits, pickup, airport, city sections. The photos show cars and drivers; the page never calls them Gulf Elite's fleet and the alt text describes only what is visible.
  *
  * CENTRE POINT: riyadh-areas.ts, 24.8192/46.8528, used unchanged. OpenStreetMap labels "Al Janadriyah District" schools at 24.800-24.810/46.860-46.863 and western and eastern parts (Al Gharbiyah, Ash Sharqiyah).
  * Figures (OSRM, light traffic, Nov 2026): RUH 30.2 km / 25 min; Olaya 27.4 / 22; KAFD 31.6 / 25; Ad Dirah 31.0 / 26; Al Malaz 25.7 / 21; Al Nadhim 8.3 / 10; Ishbiliyah 12.2 / 14; Al Khaleej 14.4 / 15.
@@ -23,6 +23,13 @@ export function alJanadriyahRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" 
   return buildDistrictRich(
     {
       id: "al-janadriyah",
+      images: {
+        about: { slot: "al-janadriyah-district-overview-taxi", alt: "An orange SUV driving along a street of high walls and gates in a residential area at sunset", label: "Photo: al-janadriyah-district-overview-taxi.webp", w: 1000, h: 558 },
+        "festival-visits": { slot: "al-janadriyah-heritage-festival-visit-taxi", alt: "A white SUV with a door open at the roadside as a woman in a dark abaya, a man holding a phone and a woman in a burgundy abaya stand beside it, with a mud-brick fort and buses in the distance", label: "Photo: al-janadriyah-heritage-festival-visit-taxi.webp", w: 1000, h: 558 },
+        pickup: { slot: "al-janadriyah-family-taxi-pickup", alt: "A silver SUV with a door open on a street of high walls as a man in a shirt, a man in a thobe, a woman and two children stand beside it", label: "Photo: al-janadriyah-family-taxi-pickup.webp", w: 1000, h: 558 },
+        airport: { slot: "al-janadriyah-ruh-airport-transfer", alt: "A maroon SUV with its boot open at an airport terminal as a driver in a dark shirt lifts a suitcase for a woman in a long coat and a man with a trolley bag", label: "Photo: al-janadriyah-ruh-airport-transfer.webp", w: 1000, h: 558 },
+        city: { slot: "al-janadriyah-city-rides-taxi", alt: "A dark green SUV with a driver and a passenger on a wide multi-lane road with palm trees and a distant skyline", label: "Photo: al-janadriyah-city-rides-taxi.webp", w: 1000, h: 558 },
+      },
       name: "Al Janadriyah",
       title: "Al Janadriyah Taxi Service Riyadh | Festival Visits and Airport",
       description: "Al Janadriyah Taxi Service for home pickups, heritage festival visits, family trips and airport rides from east Riyadh, about 30 km from RUH. Fare confirmed first.",

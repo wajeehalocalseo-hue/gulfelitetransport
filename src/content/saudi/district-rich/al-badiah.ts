@@ -6,8 +6,7 @@ import type { DistrictRichCtx } from "./olaya";
  * Al Badiah Taxi Service: hand-written page for Al Badiah (Al Badi'ah), a residential district in south-west central Riyadh (see district-rich/index.ts, built by factory.ts).
  * Primary focus keyword: "Al Badiah Taxi Service" (title, H1, lead, description). One primary keyword only.
  *
- * IMAGES: four reserved slots: area, journey, street and pickup (factory passes four to addImages). Suggested files: al-badiah-taxi-service/al-badiah-private-taxi-service-riyadh.webp (street scene with a car and driver),
- * al-badiah-airport-taxi-transfer.webp (luggage at a door), al-badiah-to-ad-dirah-city-taxi.webp. Wire them later with the custom map in addImages (see al-naseem.ts).
+ * IMAGES: five photos from the owner's Google Drive (Al Badi'ah folder), resized to 1000 px wide WebP (35-115 KB) in public/images/routes/riyadh-districts/al-badiah-taxi-service/ and placed in the about, short-rides, door-to-door, airport, metro sections. The photos show cars and drivers; the page never calls them Gulf Elite's fleet and the alt text describes only what is visible.
  *
  * CENTRE POINT: riyadh-areas.ts stores Al Badiah at 24.6156/46.6815. OpenStreetMap labels a park "Al Badiah District" at 24.6125/46.6847, which is consistent with that point. Used unchanged for weather and road estimates.
  * Figures (OpenStreetMap routing from that point, light traffic, reviewed November 2026): RUH 47.7 km / 36 min; Olaya 11.3 / 11; KAFD 23.5 / 22; Ad Dirah 5.0 / 6; Al Malaz 8.9 / 11.
@@ -27,6 +26,13 @@ export function alBadiahRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "d
   return buildDistrictRich(
     {
       id: "al-badiah",
+      images: {
+        about: { slot: "al-badiah-neighbourhood-taxi-pickup", alt: "A white saloon on a street of walled sand-coloured houses as a man in a white thobe talks to a man and a woman holding a bag", label: "Photo: al-badiah-neighbourhood-taxi-pickup.webp", w: 1000, h: 558 },
+        "short-rides": { slot: "al-badiah-city-street-private-ride", alt: "A dark blue SUV with a driver and a passenger on a busy city street with apartment blocks and palm trees", label: "Photo: al-badiah-city-street-private-ride.webp", w: 1000, h: 558 },
+        "door-to-door": { slot: "al-badiah-doorstep-taxi-pickup", alt: "A woman at the wheel of a silver saloon waves beside a high stone wall as a woman in a dark green abaya with a handbag walks towards the car", label: "Photo: al-badiah-doorstep-taxi-pickup.webp", w: 1000, h: 558 },
+        airport: { slot: "al-badiah-ruh-airport-transfer", alt: "A dark grey SUV with its boot open at an airport terminal as a man in a white thobe lifts a suitcase while a man in a suit and a woman wait with luggage", label: "Photo: al-badiah-ruh-airport-transfer.webp", w: 1000, h: 558 },
+        metro: { slot: "al-badiah-metro-station-connection", alt: "A bronze saloon with a door open and a driver at the wheel outside a curved metro station entrance as a man and a woman walk towards it", label: "Photo: al-badiah-metro-station-connection.webp", w: 1000, h: 558 },
+      },
       name: "Al Badiah",
       title: "Al Badiah Taxi Service Riyadh | Private Rides and Airport",
       description: "Al Badiah Taxi Service for home pickups, trips to Ad Dirah and Al Murabba, family visits and airport rides from south-west central Riyadh. Fare confirmed first.",

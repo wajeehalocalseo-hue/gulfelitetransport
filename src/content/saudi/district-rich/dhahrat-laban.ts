@@ -4,7 +4,7 @@ import type { DistrictRichCtx } from "./olaya";
 
 /**
  * Dhahrat Laban Taxi Service: hand-written page for Dhahrat Laban (Zahrat Laban / Hijrat Laban on OpenStreetMap), a residential district in west Riyadh (built by factory.ts). Primary focus keyword: "Dhahrat Laban Taxi Service" only.
- * IMAGES: four reserved slots: area, journey, street and pickup (factory passes four to addImages). Suggested files in dhahrat-laban-taxi-service/: dhahrat-laban-private-taxi-service-riyadh.webp, dhahrat-laban-park-family-taxi.webp, dhahrat-laban-airport-taxi-transfer.webp.
+ * IMAGES: five photos from the owner's Google Drive (Dhahrat Laban folder), resized to 1000 px wide WebP (35-115 KB) in public/images/routes/riyadh-districts/dhahrat-laban-taxi-service/ and placed in the about, pickup, family-parks, city, airport sections. The photos show cars and drivers; the page never calls them Gulf Elite's fleet and the alt text describes only what is visible.
  *
  * CENTRE POINT: riyadh-areas.ts, 24.6329/46.5531, used unchanged. OpenStreetMap labels Laban parks at 24.6368/46.5542, Al Hadaya Mall (Najd Road) at 24.6207/46.5475 and schools in Hijrat Laban at 24.652/46.574, all within the Municipality of Irqah.
  * Figures (OSRM, light traffic, Nov 2026): RUH 50.4 km / 36 min; Olaya 19.4 / 18; KAFD 25.2 / 24; Ad Dirah 24.1 / 22; Al Malaz 24.9 / 22; Al Irqah 10.9 / 15; Diplomatic Quarter 12.3 / 16; Al Uraija 17.9 / 20.
@@ -23,6 +23,13 @@ export function dhahratLabanRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" 
   return buildDistrictRich(
     {
       id: "dhahrat-laban",
+      images: {
+        about: { slot: "dhahrat-laban-family-taxi-pickup", alt: "A dark green SUV with a door open on a street of gated villas as a man in a white thobe greets a man, a woman and a boy with wheeled suitcases", label: "Photo: dhahrat-laban-family-taxi-pickup.webp", w: 1000, h: 558 },
+        pickup: { slot: "dhahrat-laban-door-to-door-taxi-pickup", alt: "A silver SUV on a paved street of villas as a man in a pale blue shirt greets a woman in a dark teal abaya who holds up her phone", label: "Photo: dhahrat-laban-door-to-door-taxi-pickup.webp", w: 1000, h: 558 },
+        "family-parks": { slot: "dhahrat-laban-family-park-outing-taxi", alt: "A white SUV beside a landscaped park with palm trees as a woman in a dark abaya at the open door greets a family of two adults and two children", label: "Photo: dhahrat-laban-family-park-outing-taxi.webp", w: 1000, h: 558 },
+        city: { slot: "dhahrat-laban-central-riyadh-ride", alt: "A dark purple saloon with a driver and two passengers on a multi-lane Riyadh highway beneath signs for Central Riyadh, with the city skyline behind", label: "Photo: dhahrat-laban-central-riyadh-ride.webp", w: 1000, h: 558 },
+        airport: { slot: "dhahrat-laban-ruh-airport-transfer", alt: "A copper-brown SUV with its boot open beneath a sign for King Khalid International Airport as two men load suitcases and a woman in a pink abaya waits", label: "Photo: dhahrat-laban-ruh-airport-transfer.webp", w: 1000, h: 558 },
+      },
       name: "Dhahrat Laban",
       title: "Dhahrat Laban Taxi Service Riyadh | West Riyadh Rides",
       description: "Dhahrat Laban Taxi Service for home pickups, family and school trips, rides to Olaya and Ad Dirah and airport transfers from west Riyadh. Fare confirmed first.",

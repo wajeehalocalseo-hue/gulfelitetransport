@@ -1,7 +1,7 @@
 import type { CityArea } from "../riyadh-areas";
 import { fmtKm } from "../riyadh-districts";
 import { bearing, haversine } from "../pairs";
-import type { PlacePage, Section } from "../types";
+import type { PlacePage, Section, SectionImage } from "../types";
 import { addImages } from "./images";
 import { addLinks } from "./linking";
 import type { DistrictRichCtx } from "./olaya";
@@ -50,6 +50,8 @@ export type DistrictSpec = {
   /** 25 Google Maps entries in four groups. Names are used as the search query; a trailing "Metro Station" or "Line n" adds the metro context. */
   linkLists: { districts: string[]; places: string[]; others: string[]; cities: string[]; titles: [string, string, string, string] };
   waMessage: string;
+  /** Photos supplied for this page, keyed by section id (about, or a block id). With none, four reserved placeholder slots are used. */
+  images?: Record<string, SectionImage>;
 };
 
 const COMPASS = ["north", "north-east", "east", "south-east", "south", "south-west", "west", "north-west"];
@@ -159,7 +161,7 @@ export function buildDistrictRich(spec: DistrictSpec, ctx: DistrictRichCtx): Pic
     lead: spec.lead,
     directAnswer: spec.directAnswer,
     facts: spec.facts,
-    sections: addLinks(addImages([about, journeys, ...blocks, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq, local], spec.name, undefined, 4), ctx, spec.id),
+    sections: addLinks(addImages([about, journeys, ...blocks, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq, local], spec.name, spec.images, 4), ctx, spec.id),
     whatsappMessage: spec.waMessage,
   };
 }

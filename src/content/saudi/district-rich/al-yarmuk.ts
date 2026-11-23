@@ -4,7 +4,7 @@ import type { DistrictRichCtx } from "./olaya";
 
 /**
  * Al Yarmuk Taxi Service: hand-written page for Al Yarmuk (Al Yarmouk on OpenStreetMap), a residential district in north-east Riyadh with a Line 6 metro station of the same name (built by factory.ts). Primary focus keyword: "Al Yarmuk Taxi Service" only.
- * IMAGES: four reserved slots: area, journey, street and pickup (factory passes four to addImages). Suggested files in al-yarmuk-taxi-service/: al-yarmuk-private-taxi-service-riyadh.webp, al-yarmuk-metro-station-taxi-pickup.webp, al-yarmuk-airport-taxi-transfer.webp.
+ * IMAGES: five photos from the owner's Google Drive (Al Yarmuk folder), resized to 1000 px wide WebP (35-115 KB) in public/images/routes/riyadh-districts/al-yarmuk-taxi-service/ and placed in the about, metro, shopping, airport, city sections. The photos show cars and drivers; the page never calls them Gulf Elite's fleet and the alt text describes only what is visible.
  *
  * CENTRE POINT: riyadh-areas.ts, 24.8085/46.7835, used unchanged. OpenStreetMap labels Al Yarmouk District places (Al Yarmouk Plaza 24.8118/46.7707, a dispensary 24.8103/46.7908), consistent with that point.
  * Figures (OSRM, light traffic, Nov 2026): RUH 28.0 km / 21 min; Olaya 26.4 / 23; KAFD 21.4 / 21; Ad Dirah 30.0 / 27; Al Malaz 24.6 / 21; Ishbiliyah 4.7 / 9; Qurtubah 9.1 / 11; Al Khaleej 11.1 / 12.
@@ -23,6 +23,13 @@ export function alYarmukRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "d
   return buildDistrictRich(
     {
       id: "al-yarmuk",
+      images: {
+        about: { slot: "al-yarmuk-residential-district-taxi-pickup", alt: "A dark blue SUV with a door open beside a walled house as two men in white thobes talk to a woman in a lilac abaya and a boy with a small suitcase", label: "Photo: al-yarmuk-residential-district-taxi-pickup.webp", w: 1000, h: 558 },
+        metro: { slot: "al-yarmuk-metro-station-transfer", alt: "A bronze SUV with a woman at the wheel stopped beside the Al Yarmuk metro station entrance as a man with a wheeled suitcase speaks to her", label: "Photo: al-yarmuk-metro-station-transfer.webp", w: 1000, h: 558 },
+        shopping: { slot: "al-yarmuk-shopping-family-trip", alt: "A white SUV with a door open on a pavement near office and retail buildings as a woman in a black abaya greets a family with shopping bags", label: "Photo: al-yarmuk-shopping-family-trip.webp", w: 1000, h: 558 },
+        airport: { slot: "al-yarmuk-ruh-airport-transfer", alt: "A grey SUV with its boot open beneath the arches of King Khalid International Airport as a man loads a case while a man and a woman with luggage talk", label: "Photo: al-yarmuk-ruh-airport-transfer.webp", w: 1000, h: 558 },
+        city: { slot: "al-yarmuk-neighbourhood-city-rides", alt: "A red saloon with a driver and passengers on a highway under a sign for Al Yarmuk, Ishbiliyah, Qurtubah and Granada", label: "Photo: al-yarmuk-neighbourhood-city-rides.webp", w: 1000, h: 558 },
+      },
       name: "Al Yarmuk",
       title: "Al Yarmuk Taxi Service Riyadh | Metro, Home and Airport",
       description: "Al Yarmuk Taxi Service for home pickups, metro transfers, shopping and family trips and airport rides from north-east Riyadh, about 28 km from RUH. Fare confirmed first.",

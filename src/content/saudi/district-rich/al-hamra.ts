@@ -10,11 +10,7 @@ import type { DistrictRichCtx } from "./olaya";
  * Al Hamra Taxi Service: the hand-written landing page for Al Hamra, a residential district in east Riyadh with a metro interchange (see district-rich/index.ts).
  * Primary focus keyword: "Al Hamra Taxi Service" (title, H1, opening sentence, description). Written mostly as prose.
  *
- * IMAGES (TODO for the owner): three slots are reserved, with these exact files in public/images/routes/riyadh-districts/al-hamra-taxi-service/ :
- *   al-hamra-neighbourhood.webp        a realistic Al Hamra residential street or local setting                    -> "about" section
- *   al-hamra-metro-interchange.webp    Al Hamra metro station or a local transport setting in east Riyadh          -> "metro" section
- *   al-hamra-local-destinations.webp   a shopping street or local destination in or near Al Hamra                   -> "community" section
- * No supplied images were found in the project, so labelled placeholders are shown. Do not use fleet photographs that are not the company's own.
+ * IMAGES: five photos from the owner's Google Drive (Al Hamra folder), resized to 1000 px wide WebP (35-115 KB) in public/images/routes/riyadh-districts/al-hamra-taxi-service/ and placed in the about, metro, community, airport, business sections. The photos show cars and drivers; the page never calls them Gulf Elite's fleet and the alt text describes only what is visible.
  *
  * CENTRE POINT: riyadh-areas.ts stores Al Hamra at 24.7762/46.7527, which matches the brief (24.77617/46.75265). OpenStreetMap places Al Hamra Square (24.7665/46.7546) and Aster Sanad Hospital (24.7792/46.7395)
  * in Al Hamra, both within about 1.5 km of that point, so the shared point is used unchanged. The metro station is listed at 24.7764/46.7768, about 2.4 km east of that point, so it is described as a station "listed
@@ -209,9 +205,11 @@ export function alHamraRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "de
       [about, journeys, metro, airport, residential, community, business, prebook, nearby, ctx.bookingSteps, whatsapp, ctx.notAssumed, links, faq, local],
       me.name,
       {
-        about: { slot: "al-hamra-neighbourhood", alt: "Residential streets in Al Hamra, Riyadh", label: "Photo: al-hamra-neighbourhood.webp" },
-        metro: { slot: "al-hamra-metro-interchange", alt: "A metro and local transport setting in Al Hamra, east Riyadh", label: "Photo: al-hamra-metro-interchange.webp" },
-        community: { slot: "al-hamra-local-destinations", alt: "A shopping street and local places in Al Hamra, Riyadh", label: "Photo: al-hamra-local-destinations.webp" },
+        about: { slot: "al-hamra-neighbourhood", alt: "A white saloon on a quiet street of beige villas as a man in a white thobe holds the rear door for a woman in a black abaya", label: "Photo: al-hamra-neighbourhood.webp", w: 1000, h: 558 },
+        metro: { slot: "al-hamra-metro-interchange", alt: "A white saloon with a man at the wheel beside a curved, modern metro station building as two women in black abayas walk to the door", label: "Photo: al-hamra-metro-interchange.webp", w: 1000, h: 558 },
+        community: { slot: "al-hamra-local-destinations", alt: "A dark minibus beside a row of shops at sunset as a man in a white thobe and two women in black abayas, one with shopping bags, stand at its open door", label: "Photo: al-hamra-local-destinations.webp", w: 1000, h: 558 },
+        airport: { slot: "al-hamra-airport-transfer", alt: "A white minivan at an airport terminal kerb as a man in a white thobe loads a case while a man and a woman with a wheeled suitcase wait", label: "Photo: al-hamra-airport-transfer.webp", w: 1000, h: 558 },
+        business: { slot: "al-hamra-popular-journeys", alt: "Inside a silver saloon, a woman in a black headscarf drives with a man in a grey suit in the back, with city towers behind", label: "Photo: al-hamra-popular-journeys.webp", w: 1000, h: 558 },
       },
     ), ctx, "al-hamra"),
     whatsappMessage: ALHAMRA_WHATSAPP_MESSAGE,

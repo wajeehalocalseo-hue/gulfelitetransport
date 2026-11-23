@@ -4,7 +4,7 @@ import type { DistrictRichCtx } from "./olaya";
 
 /**
  * Al Ghadir Taxi Service: hand-written page for Al Ghadir, a residential district in north Riyadh beside KAFD (built by factory.ts). Primary focus keyword: "Al Ghadir Taxi Service" only.
- * IMAGES: four reserved slots: area, journey, street and pickup (factory passes four to addImages). Suggested files in al-ghadir-taxi-service/: al-ghadir-private-taxi-service-riyadh.webp, al-ghadir-to-kafd-metro-taxi.webp, al-ghadir-airport-taxi-transfer.webp.
+ * IMAGES: five photos from the owner's Google Drive (Al Ghadir folder), resized to 1000 px wide WebP (35-115 KB) in public/images/routes/riyadh-districts/al-ghadir-taxi-service/ and placed in the about, kafd-side, metro, hospitals-malls, airport sections. The photos show cars and drivers; the page never calls them Gulf Elite's fleet and the alt text describes only what is visible.
  *
  * CENTRE POINT: riyadh-areas.ts, 24.7742/46.6556, used unchanged. OpenStreetMap labels Alghadeer Mosque in Al Ghadir District at 24.7733/46.6453, consistent with that point.
  * Figures (OSRM, light traffic, Nov 2026): RUH 30.1 km / 22 min; Olaya 12.3 / 13; KAFD 7.9 / 10; Ad Dirah 19.2 / 17; Al Malaz 16.4 / 16. The KAFD district centre is only about 1.5 km away in a straight line, but routing gives 7.9 km, so the page says so.
@@ -23,6 +23,13 @@ export function alGhadirRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "d
   return buildDistrictRich(
     {
       id: "al-ghadir",
+      images: {
+        about: { slot: "al-ghadir-residential-neighbourhood-taxi", alt: "A white SUV on a street of sand-coloured villas as a man in a white thobe shakes hands with a man in a beige thobe while a woman in a black abaya holds a handbag", label: "Photo: al-ghadir-residential-neighbourhood-taxi.webp", w: 1000, h: 558 },
+        "kafd-side": { slot: "al-ghadir-kafd-olaya-business-ride", alt: "A bronze SUV with a driver and a passenger on a multi-lane Riyadh highway with the city skyline behind", label: "Photo: al-ghadir-kafd-olaya-business-ride.webp", w: 1000, h: 558 },
+        metro: { slot: "al-ghadir-kafd-metro-transfer", alt: "A dark SUV with its boot open beside a Passenger Meeting Point sign near glass towers as a woman in a black abaya, a man with a suitcase and a woman in cream clothes talk", label: "Photo: al-ghadir-kafd-metro-transfer.webp", w: 1000, h: 558 },
+        "hospitals-malls": { slot: "al-ghadir-hospital-shopping-park-ride", alt: "A silver SUV with its rear door open on a busy shopping street as a driver in a white shirt helps a woman in a headscarf and a girl while a man in a grey tunic walks past with a bag", label: "Photo: al-ghadir-hospital-shopping-park-ride.webp", w: 1000, h: 558 },
+        airport: { slot: "al-ghadir-ruh-airport-transfer", alt: "A red minivan with its boot open at an airport passenger pickup area as a driver loads a case while a woman and a man with suitcases wait", label: "Photo: al-ghadir-ruh-airport-transfer.webp", w: 1000, h: 558 },
+      },
       name: "Al Ghadir",
       title: "Al Ghadir Taxi Service Riyadh | KAFD Side, Home and Airport",
       description: "Al Ghadir Taxi Service for home pickups, rides to KAFD and metro stations, hospital and mall trips and airport transfers from north Riyadh. Fare confirmed first.",

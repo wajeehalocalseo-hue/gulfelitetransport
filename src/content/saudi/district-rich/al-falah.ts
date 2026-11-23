@@ -4,7 +4,7 @@ import type { DistrictRichCtx } from "./olaya";
 
 /**
  * Al Falah Taxi Service: hand-written page for Al Falah, a residential district in north Riyadh (built by factory.ts). Primary focus keyword: "Al Falah Taxi Service" only.
- * IMAGES: four reserved slots: area, journey, street and pickup (factory passes four to addImages). Suggested files in al-falah-taxi-service/: al-falah-private-taxi-service-riyadh.webp, al-falah-school-run-taxi.webp, al-falah-airport-taxi-transfer.webp.
+ * IMAGES: five photos from the owner's Google Drive (Al Falah folder), resized to 1000 px wide WebP (35-115 KB) in public/images/routes/riyadh-districts/al-falah-taxi-service/ and placed in the about, airport, school-university, shopping-parks, city sections. The photos show cars and drivers; the page never calls them Gulf Elite's fleet and the alt text describes only what is visible.
  *
  * CENTRE POINT: riyadh-areas.ts, 24.7963/46.7088, used unchanged. OpenStreetMap labels "Falah Park" (24.7920/46.7064) and Dar Al Uloom International School (24.8001/46.7092) in Al Falah District, consistent with that point.
  * Figures (OSRM, light traffic, Nov 2026): RUH 21.8 km / 17 min; Olaya 19.1 / 18; KAFD 14.7 / 15; Ad Dirah 26.0 / 22; Al Malaz 20.9 / 18.
@@ -23,6 +23,13 @@ export function alFalahRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "de
   return buildDistrictRich(
     {
       id: "al-falah",
+      images: {
+        about: { slot: "al-falah-family-taxi-pickup-riyadh", alt: "A white SUV on a street of walled villas as a man in a white thobe, a woman and a boy walk towards it while a man in a shirt gestures", label: "Photo: al-falah-family-taxi-pickup-riyadh.webp", w: 1000, h: 558 },
+        airport: { slot: "al-falah-ruh-airport-arrivals-pickup", alt: "A grey SUV with its door open at King Khalid International Airport arrivals as a driver with a lanyard welcomes a man and a woman with suitcases", label: "Photo: al-falah-ruh-airport-arrivals-pickup.webp", w: 1000, h: 558 },
+        "school-university": { slot: "al-falah-school-university-ride", alt: "A beige saloon at a paved roadside outside a modern building as three women in abayas, one with a backpack, stand beside it", label: "Photo: al-falah-school-university-ride.webp", w: 1000, h: 558 },
+        "shopping-parks": { slot: "al-falah-shopping-family-trip", alt: "A blue SUV on a shopping street as a driver in a blue shirt and a family with shopping bags and a pushchair stand beside it", label: "Photo: al-falah-shopping-family-trip.webp", w: 1000, h: 558 },
+        city: { slot: "al-falah-kafd-olaya-private-ride", alt: "A black saloon with a driver and a passenger on a Riyadh highway under a sign for Al Falah, KAFD and Olaya, with city towers behind", label: "Photo: al-falah-kafd-olaya-private-ride.webp", w: 1000, h: 558 },
+      },
       name: "Al Falah",
       title: "Al Falah Taxi Service Riyadh | Home, School and Airport",
       description: "Al Falah Taxi Service for home pickups, school and university runs, family trips and airport rides from north Riyadh, about 22 km from RUH. Fare confirmed first.",

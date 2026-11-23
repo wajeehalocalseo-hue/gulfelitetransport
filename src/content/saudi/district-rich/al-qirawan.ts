@@ -4,7 +4,7 @@ import type { DistrictRichCtx } from "./olaya";
 
 /**
  * Al Qirawan Taxi Service: hand-written page for Al Qirawan, a residential district in north-west Riyadh (built by factory.ts). Primary focus keyword: "Al Qirawan Taxi Service" only.
- * IMAGES: four reserved slots: area, journey, street and pickup (factory passes four to addImages). Suggested files in al-qirawan-taxi-service/: al-qirawan-private-taxi-service-riyadh.webp, al-qirawan-hospital-appointment-taxi.webp, al-qirawan-airport-taxi-transfer.webp.
+ * IMAGES: five photos from the owner's Google Drive (Al Qirawan folder), resized to 1000 px wide WebP (35-115 KB) in public/images/routes/riyadh-districts/al-qirawan-taxi-service/ and placed in the about, hospital-campus, door-to-door, airport, city sections. The photos show cars and drivers; the page never calls them Gulf Elite's fleet and the alt text describes only what is visible.
  *
  * CENTRE POINT: riyadh-areas.ts, 24.8794/46.5626, used unchanged. OpenStreetMap addresses Al Habib hospital (24.8629/46.5873), Al Yamamah University (24.8628/46.5920) and Inaya Medical College (24.8638/46.5838) in Al Qirawan.
  * OpenStreetMap lists the district under the Ad Diriyah municipality; riyadh-areas.ts says it is on the way toward Diriyah.
@@ -22,6 +22,13 @@ export function alQirawanRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "
   return buildDistrictRich(
     {
       id: "al-qirawan",
+      images: {
+        about: { slot: "al-qirawan-new-district-taxi-pickup", alt: "A white SUV on a sandy, unfinished street of new villas as a man in a grey shirt and a woman in a blue abaya look at a phone", label: "Photo: al-qirawan-new-district-taxi-pickup.webp", w: 1000, h: 558 },
+        "hospital-campus": { slot: "al-qirawan-hospital-campus-ride", alt: "A man in a light blue shirt with a shoulder bag stands beside a beige SUV on a street of apartment blocks while a woman in a headscarf sits inside with the door open", label: "Photo: al-qirawan-hospital-campus-ride.webp", w: 1000, h: 558 },
+        "door-to-door": { slot: "al-qirawan-door-to-door-taxi-pickup", alt: "A dark green saloon with its door open on a street of villas as a man in a white thobe and a man in a red-checked head-cloth speak to a woman in a green abaya", label: "Photo: al-qirawan-door-to-door-taxi-pickup.webp", w: 1000, h: 558 },
+        airport: { slot: "al-qirawan-ruh-airport-transfer", alt: "A maroon SUV with its boot open at an airport Passenger Pickup area as a driver loads a suitcase for a woman and a man with a trolley bag", label: "Photo: al-qirawan-ruh-airport-transfer.webp", w: 1000, h: 558 },
+        city: { slot: "al-qirawan-city-ride-to-olaya-kafd", alt: "An orange SUV with a driver and a woman passenger on a Riyadh road with city towers and road signs behind", label: "Photo: al-qirawan-city-ride-to-olaya-kafd.webp", w: 1000, h: 558 },
+      },
       name: "Al Qirawan",
       title: "Al Qirawan Taxi Service Riyadh | Hospital, Campus and Airport",
       description: "Al Qirawan Taxi Service for home pickups, hospital and university visits, family trips and airport rides from north-west Riyadh. Fare confirmed first.",

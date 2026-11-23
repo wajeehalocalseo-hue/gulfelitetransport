@@ -1,7 +1,21 @@
 import journeysJson from "./riyadh-journeys.json";
 import type { CityArea } from "./riyadh-areas";
 import { bearing, haversine } from "./pairs";
-import type { Area, PlacePage, Section } from "./types";
+import type { Area, PlacePage, Section, SectionImage } from "./types";
+
+/** Photos for the template district pages that have no hand-written page yet (owner's Google Drive, 1000 px WebP in public/images/routes/riyadh-districts/<page>/), keyed by area id and section id. */
+const templateImages: Record<string, Record<string, SectionImage>> = {
+  "al-izdihar": {
+    about: { slot: "al-izdihar-neighbourhood-taxi-pickup", alt: "A brown saloon on a street of villas with a carved wooden door as a man in a white thobe and a man in a beige thobe talk to a man in a navy polo shirt holding a bag", label: "Photo: al-izdihar-neighbourhood-taxi-pickup.webp", w: 1000, h: 558 },
+    services: { slot: "al-izdihar-business-journeys-chauffeur", alt: "A grey saloon beside a glass office tower as a man in a cream cloak opens its door and a man in a navy suit with a briefcase walks up", label: "Photo: al-izdihar-business-journeys-chauffeur.webp", w: 1000, h: 558 },
+    pickup: { slot: "al-izdihar-local-taxi-pickup", alt: "A white SUV on a residential street with its door open as a man in a grey thobe and two women in black and beige abayas, one with a handbag, stand beside it", label: "Photo: al-izdihar-local-taxi-pickup.webp", w: 1000, h: 558 },
+  },
+  "al-mughrizat": {
+    about: { slot: "al-mughrizat-family-group-taxi", alt: "A silver minivan outside an apartment block as a man in a white thobe, two women and a boy with two suitcases stand beside it", label: "Photo: al-mughrizat-family-group-taxi.webp", w: 1000, h: 558 },
+    services: { slot: "al-mughrizat-popular-journeys-taxi", alt: "A white saloon in a car park beside office towers as a woman in a dark abaya stands next to a man in a jacket holding a briefcase", label: "Photo: al-mughrizat-popular-journeys-taxi.webp", w: 1000, h: 558 },
+    pickup: { slot: "al-mughrizat-pickup-dropoff-taxi", alt: "A dark green SUV on a residential street as a man in a white thobe stands beside it and a man in a patterned head-cloth checks his phone", label: "Photo: al-mughrizat-pickup-dropoff-taxi.webp", w: 1000, h: 558 },
+  },
+};
 
 /**
  * Landing-page content for each Riyadh district page.
@@ -258,6 +272,6 @@ export function districtOverrides(d: DistrictInput) {
     lead: k.lead(The),
     directAnswer: `Gulf Elite Transport takes bookings for private taxi and chauffeur rides to and from ${L} in Riyadh${ruh ? `, including transfers to King Khalid International Airport, about ${ruhKm} km away by road` : ""}. Send your pickup point, destination, date, time and number of passengers, and we confirm the vehicle, driver and fare before you commit. Fares are not published, because each ride is quoted for your request.`,
     facts,
-    sections,
+    sections: sections.map((s) => (templateImages[info.id]?.[s.id] ? { ...s, image: templateImages[info.id][s.id] } : s)),
   };
 }

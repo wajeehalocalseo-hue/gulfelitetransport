@@ -4,7 +4,7 @@ import type { DistrictRichCtx } from "./olaya";
 
 /**
  * Al Arid Taxi Service: hand-written page for Al Arid (Al Aarid), a newer residential district in far-north Riyadh (built by factory.ts). Primary focus keyword: "Al Arid Taxi Service" only.
- * IMAGES: four reserved slots: area, journey, street and pickup (factory passes four to addImages). Suggested files in al-arid-taxi-service/: al-arid-private-taxi-service-riyadh.webp, al-arid-new-district-taxi-pickup.webp, al-arid-airport-taxi-transfer.webp.
+ * IMAGES: five photos from the owner's Google Drive (Al Arid folder), resized to 1000 px wide WebP (35-115 KB) in public/images/routes/riyadh-districts/al-arid-taxi-service/ and placed in the about, new-streets, airport, long-rides, north-districts sections. The photos show cars and drivers; the page never calls them Gulf Elite's fleet and the alt text describes only what is visible.
  *
  * CENTRE POINT: riyadh-areas.ts, 24.8935/46.6060, used unchanged. OpenStreetMap shows few mapped places here (a mosque labelled Al Aarid, schools in Al Narjis), so the page leans on roads and nearby districts.
  * Figures (OSRM, light traffic, Nov 2026): RUH 26.2 km / 19 min; Olaya 27.2 / 26; KAFD 18.7 / 20; Ad Dirah 34.1 / 30; Al Malaz 30.6 / 27.
@@ -23,6 +23,13 @@ export function alAridRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "des
   return buildDistrictRich(
     {
       id: "al-arid",
+      images: {
+        about: { slot: "al-arid-family-taxi-pickup-new-villas-riyadh", alt: "A brown SUV with its boot open on a paved street of new sand-coloured villas, with a family and a man with two suitcases standing beside it", label: "Photo: al-arid-family-taxi-pickup-new-villas-riyadh.webp", w: 1000, h: 558 },
+        "new-streets": { slot: "al-arid-taxi-pickup-map-pin-driver", alt: "A woman in a grey headscarf shows her phone to the driver of a silver car on an unfinished sandy road lined with new villas", label: "Photo: al-arid-taxi-pickup-map-pin-driver.webp", w: 1000, h: 558 },
+        airport: { slot: "al-arid-ruh-airport-taxi-transfer", alt: "A white SUV with its boot open at the King Khalid International Airport departures kerb while a driver in a white shirt helps a man and a woman with two suitcases", label: "Photo: al-arid-ruh-airport-taxi-transfer.webp", w: 1000, h: 558 },
+        "long-rides": { slot: "al-arid-kafd-olaya-private-ride", alt: "A dark red saloon with a driver and a passenger on a Riyadh highway beneath a sign for KAFD and Olaya", label: "Photo: al-arid-kafd-olaya-private-ride.webp", w: 1000, h: 558 },
+        "north-districts": { slot: "al-arid-north-riyadh-door-to-door-pickup", alt: "A dark green SUV on a quiet street of new villas as a man in a white thobe opens the door for a man and a woman who walk up with a suitcase", label: "Photo: al-arid-north-riyadh-door-to-door-pickup.webp", w: 1000, h: 558 },
+      },
       name: "Al Arid",
       title: "Al Arid Taxi Service Riyadh | Far-North Rides and Airport",
       description: "Al Arid Taxi Service for home pickups, family trips, city journeys and airport rides from far-north Riyadh, about 26 km from RUH. Fare confirmed first.",

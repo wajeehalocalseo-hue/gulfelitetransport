@@ -4,7 +4,7 @@ import type { DistrictRichCtx } from "./olaya";
 
 /**
  * Al Irqah Taxi Service: hand-written page for Al Irqah (Irqah / Ergah on OpenStreetMap), a residential district in west Riyadh that gives its name to a municipality (built by factory.ts). Primary focus keyword: "Al Irqah Taxi Service" only.
- * IMAGES: four reserved slots: area, journey, street and pickup (factory passes four to addImages). Suggested files in al-irqah-taxi-service/: al-irqah-private-taxi-service-riyadh.webp, al-irqah-school-run-taxi.webp, al-irqah-airport-taxi-transfer.webp.
+ * IMAGES: five photos from the owner's Google Drive (Al Irqah folder), resized to 1000 px wide WebP (35-115 KB) in public/images/routes/riyadh-districts/al-irqah-taxi-service/ and placed in the door-to-door, school-hospital, airport, diplomatic-diriyah, city sections. The photos show cars and drivers; the page never calls them Gulf Elite's fleet and the alt text describes only what is visible.
  *
  * CENTRE POINT: riyadh-areas.ts, 24.6841/46.5826, used unchanged. OpenStreetMap labels, in Irqah District: Ergah Hospital (24.6927/46.5847), Ibn Khaldoun School (24.6918/46.5965 and 24.6888/46.5846), Misk Schools (24.6985/46.5875), Al Tayyar Mosque (24.6855/46.5770), Mosque of Prince Mishal (24.6932/46.6023).
  * riyadh-areas.ts: Al Irqah gives its name to the Irqah municipality, which also covers Dhahrat Laban.
@@ -23,6 +23,13 @@ export function alIrqahRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" | "de
   return buildDistrictRich(
     {
       id: "al-irqah",
+      images: {
+        "door-to-door": { slot: "al-irqah-door-to-door-taxi-pickup", alt: "A blue saloon on a street of walled villas as a man in a grey shirt, a man in a white thobe and a woman in a green abaya with a suitcase stand beside it", label: "Photo: al-irqah-door-to-door-taxi-pickup.webp", w: 1000, h: 558 },
+        "school-hospital": { slot: "al-irqah-school-run-family-ride", alt: "A white minivan with its side door open beside a pavement as a woman in a black abaya, a woman with a phone and a girl in school uniform with a backpack stand beside it", label: "Photo: al-irqah-school-run-family-ride.webp", w: 1000, h: 558 },
+        airport: { slot: "al-irqah-ruh-airport-transfer", alt: "A copper SUV with its boot open beneath a road sign for King Khalid International Airport and Al Irqah as a driver loads a suitcase for a man and a woman", label: "Photo: al-irqah-ruh-airport-transfer.webp", w: 1000, h: 558 },
+        "diplomatic-diriyah": { slot: "al-irqah-diplomatic-quarter-ride", alt: "A dark red saloon beside a paved road lined with offices, with a sign for the Diplomatic Quarter, as a man in a light blue shirt greets a man with a briefcase and a woman in a beige suit", label: "Photo: al-irqah-diplomatic-quarter-ride.webp", w: 1000, h: 558 },
+        city: { slot: "al-irqah-olaya-city-ride", alt: "A grey saloon with its door open on a wide avenue with city towers behind as a man in a dark shirt greets a woman in a headscarf and a man in a navy suit with a briefcase", label: "Photo: al-irqah-olaya-city-ride.webp", w: 1000, h: 558 },
+      },
       name: "Al Irqah",
       title: "Al Irqah Taxi Service Riyadh | Home, School and Airport",
       description: "Al Irqah Taxi Service for home pickups, school runs, hospital visits, rides to the Diplomatic Quarter and Diriyah and airport transfers from west Riyadh. Fare confirmed first.",

@@ -7,7 +7,7 @@ import type { DistrictRichCtx } from "./olaya";
 
 /**
  * Al Mansourah Taxi Service: hand-written page for Al Mansourah (Al Mansoura), a residential district at the southern edge of Riyadh (built by factory.ts). Primary focus keyword: "Al Mansourah Taxi Service" only.
- * IMAGES: four reserved slots: area, journey, street and pickup (factory passes four to addImages). Suggested files in al-mansourah-taxi-service/: al-mansourah-private-taxi-service-riyadh.webp, al-mansourah-to-ad-dirah-city-taxi.webp, al-mansourah-airport-taxi-transfer.webp.
+ * IMAGES: five photos from the owner's Google Drive (Al Mansourah folder), resized to 1000 px wide WebP (35-115 KB) in public/images/routes/riyadh-districts/al-mansourah-taxi-service/ and placed in the about, airport, pickup, old-centre, metro sections. The photos show cars and drivers; the page never calls them Gulf Elite's fleet and the alt text describes only what is visible.
  *
  * CENTRE POINT: riyadh-areas.ts, 24.5192/46.7996, used unchanged. Very few places are mapped around it (a search for "Al Mansoura District" found nothing), so the page names roads and districts only.
  * Figures (OSRM, light traffic, Nov 2026): RUH 61.9 km / 52 min; Olaya 25.8 / 33; KAFD 38.0 / 45; Ad Dirah 19.1 / 28; Al Malaz 25.2 / 28; Ad Dar Al Baida 11.7 / 19; Al Aziziyah 14.2 / 23; Al Shifa 17.6 / 27.
@@ -32,6 +32,13 @@ export function alMansourahRich(ctx: DistrictRichCtx): Pick<PlacePage, "title" |
   return buildDistrictRich(
     {
       id: "al-mansourah",
+      images: {
+        about: { slot: "al-mansourah-family-group-taxi", alt: "A white minivan with its boot open on a street of walled villas as a man in a white thobe and a woman in a black abaya load suitcases while a woman and two children wait", label: "Photo: al-mansourah-family-group-taxi.webp", w: 1000, h: 558 },
+        airport: { slot: "al-mansourah-ruh-airport-transfer", alt: "A grey SUV with a driver and two passengers on an elevated road beneath a blue sign for King Khalid International Airport, with the city skyline behind", label: "Photo: al-mansourah-ruh-airport-transfer.webp", w: 1000, h: 558 },
+        pickup: { slot: "al-mansourah-residential-taxi-pickup", alt: "A red saloon with its boot open on a paved street of villas as a man in a white thobe loads a suitcase for a man in a long tunic and a woman in a green abaya", label: "Photo: al-mansourah-residential-taxi-pickup.webp", w: 1000, h: 558 },
+        "old-centre": { slot: "al-mansourah-olaya-kafd-taxi-journey", alt: "A silver saloon with a driver and passengers on a highway beneath a green sign for Al Olaya and KAFD, with the skyline behind", label: "Photo: al-mansourah-olaya-kafd-taxi-journey.webp", w: 1000, h: 558 },
+        metro: { slot: "al-mansourah-metro-station-transfer", alt: "A teal SUV stopped beside a metro station and a sign for Al Mansourah Metro Station as a man in a long tunic and a woman in a blue abaya check a phone", label: "Photo: al-mansourah-metro-station-transfer.webp", w: 1000, h: 558 },
+      },
       name: "Al Mansourah",
       title: "Al Mansourah Taxi Service Riyadh | South Riyadh Rides",
       description: "Al Mansourah Taxi Service for pre-booked home pickups, family trips, rides to Ad Dirah and Olaya and airport transfers from south Riyadh. Fare confirmed first.",

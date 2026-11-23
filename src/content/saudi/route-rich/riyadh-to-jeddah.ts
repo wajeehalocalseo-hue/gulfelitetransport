@@ -20,7 +20,7 @@ export const jeddahRich: RichRoute = {
   imageFolder: "riyadh-to-jeddah",
   eyebrow: "Private intercity taxi service",
   heroPoints: ["Private door-to-door travel", "Vehicle options for your group and bags", "Planned pickup and drop-off", "Fare confirmed before you book"],
-  heroAlt: "A private taxi on a Saudi highway between Riyadh and Jeddah",
+  heroAlt: "A dark blue SUV with a driver and two passengers on a desert highway beneath a road sign for Jeddah and Riyadh",
   facts: [
     { label: "Road distance", value: "About 950 km" },
     { label: "Estimated driving time", value: "About 10 hr 25 min, without stops" },
@@ -50,7 +50,7 @@ export const jeddahRich: RichRoute = {
     { slot: "sedan", homePhoto: "sedan", name: "Sedan", best: "One to three passengers", text: "A comfortable private car for a small group with light luggage. It suits a business traveller or a couple going to a hotel or the airport.", alt: "Private sedan for the Riyadh to Jeddah road journey" },
     { slot: "suv", homePhoto: "suv", name: "SUV", best: "Families and extra luggage", text: "More room for passengers and bags, and a good choice for a full day on the road with children or older relatives.", alt: "Private SUV for families travelling from Riyadh to Jeddah" },
     { slot: "van", homePhoto: "family-van", name: "Family van or minibus", best: "Groups travelling together", text: "Seats for a larger group, with space for everyone's bags in one vehicle. Tell us the group size and we confirm what fits.", alt: "Private van for groups travelling from Riyadh to Jeddah" },
-    { slot: "executive", name: "Executive vehicle", best: "Business guests and special occasions", text: "A chauffeur-driven premium car for guests who want extra comfort or a more formal arrival.", alt: "Executive vehicle for business travel from Riyadh to Jeddah" },
+    { slot: "executive", name: "Executive vehicle", best: "Business guests and special occasions", text: "A chauffeur-driven premium car for guests who want extra comfort or a more formal arrival.", alt: "A champagne-coloured saloon outside a hotel among palm trees as a man in a light shirt, a man in a navy suit and a woman with wheeled suitcases stand beside it" },
   ],
   pickupHeading: "Pickup Locations in Riyadh",
   pickupIntro: "Rides start from your own address. These are the places people ask for most. Tell us the exact address or send a map pin when you request a quote.",
