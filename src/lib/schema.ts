@@ -67,7 +67,7 @@ type PageOpts = {
   path: string;
   name: string;
   description: string;
-  type?: "WebPage" | "AboutPage" | "ContactPage" | "CollectionPage";
+  type?: "WebPage" | "AboutPage" | "ContactPage" | "CollectionPage" | "ProfilePage";
   crumbs?: { name: string; path: string }[];
   service?: {
     name: string;

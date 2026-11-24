@@ -12,6 +12,7 @@ import TripBar from "@/components/TripBar";
 import { WhatsAppIcon } from "@/components/WhatsApp";
 import * as c from "@/content/home";
 import { blogPosts } from "@/content/extra-pages";
+import { formatDate } from "@/content/blog/types";
 import { airports, routes } from "@/content/saudi/places";
 import { routeProfiles } from "@/content/saudi/route-profiles";
 import routeTimes from "@/content/saudi/route-times.json";
@@ -594,15 +595,15 @@ export default function Home() {
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <h2 id="guides-title" className="font-display text-3xl text-navy sm:text-4xl">Taxi travel guides</h2>
-              <p className="mt-2 text-lg text-muted">Distances, driving times, border crossings and checklists for travel from Riyadh.</p>
+              <p className="mt-2 text-lg text-muted">Airports, Umrah, intercity routes and fares: practical guides for taxi travel in Saudi Arabia.</p>
             </div>
             <Link href="/blog" className="inline-flex items-center gap-2 text-sm font-extrabold text-navy underline decoration-accent decoration-2 underline-offset-4">View all guides <Icon name="arrow" className="h-4 w-4" /></Link>
           </div>
           <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {blogPosts.map((g) => (
+            {blogPosts.slice(0, 4).map((g) => (
               <li key={g.slug} className="flex flex-col overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-accent/25 transition hover:shadow-lg">
                 <div className="relative flex h-32 items-end bg-gradient-to-br from-navy to-navy-2 p-4">
-                  <span className="rounded-full bg-white px-3 py-1 text-[11px] font-extrabold text-navy">16 Nov 2026</span>
+                  <span className="rounded-full bg-white px-3 py-1 text-[11px] font-extrabold text-navy">{formatDate(g.published)}</span>
                   <Icon name="globe" className="absolute right-4 top-4 h-8 w-8 text-accent/60" />
                 </div>
                 <div className="flex flex-1 flex-col p-5">

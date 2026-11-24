@@ -21,6 +21,7 @@ const staticPages: SitemapEntry[] = [
   { path: "/book", priority: 0.7, changefreq: "yearly" },
   { path: "/fleet", priority: 0.7, changefreq: "monthly" },
   { path: "/blog", priority: 0.7, changefreq: "monthly" },
+  { path: "/author/wajeeha-amin", priority: 0.5, changefreq: "yearly" },
   ...blogPosts.map((p) => ({ path: p.page.path, priority: 0.6, changefreq: "monthly" as const })),
   { path: "/privacy-policy", priority: 0.2, changefreq: "yearly" },
   { path: "/terms-and-conditions", priority: 0.2, changefreq: "yearly" },

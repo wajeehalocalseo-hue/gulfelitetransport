@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import LazyMap from "./LazyMap";
 import type { ReactNode } from "react";
 import { setLinkPage } from "@/lib/autolink";
@@ -394,9 +395,16 @@ export default function PlaceView({ page }: { page: PlacePage }) {
           <section className="border-b border-navy/10 bg-white">
             <div className="mx-auto max-w-7xl px-5 py-12 sm:py-16">
               <Breadcrumbs items={crumbs} tone="light" />
-              <h1 className="mt-6 max-w-4xl text-4xl font-extrabold leading-tight tracking-tight text-navy sm:text-5xl">{page.h1}</h1>
-              <span aria-hidden="true" className="mt-5 block h-1.5 w-20 rounded-full bg-accent" />
-              <p className="mt-5 max-w-3xl text-lg leading-8 text-muted">{page.lead}</p>
+              <div className={page.portrait ? "mt-6 flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:gap-8" : ""}>
+                {page.portrait && (
+                  <Image src={page.portrait.src} alt={page.portrait.alt} width={page.portrait.width} height={page.portrait.height} priority className="h-36 w-36 shrink-0 rounded-full object-cover shadow-lg ring-4 ring-accent sm:h-44 sm:w-44" />
+                )}
+                <div>
+                  <h1 className={`${page.portrait ? "" : "mt-6 "}max-w-4xl text-4xl font-extrabold leading-tight tracking-tight text-navy sm:text-5xl`}>{page.h1}</h1>
+                  <span aria-hidden="true" className="mt-5 block h-1.5 w-20 rounded-full bg-accent" />
+                  <p className="mt-5 max-w-3xl text-lg leading-8 text-muted">{page.lead}</p>
+                </div>
+              </div>
               {btns("light")}
               <dl className="mt-10 grid gap-px overflow-hidden rounded-2xl bg-navy/10 sm:grid-cols-2 lg:grid-cols-4">
                 {page.facts.map((f) => (

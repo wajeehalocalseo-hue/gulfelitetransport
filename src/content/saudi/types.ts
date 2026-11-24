@@ -106,6 +106,8 @@ export type PlaceLayout = {
 
 export type PlacePage = {
   kind: PageKind;
+  /** A round portrait shown beside the heading (used by the author page). */
+  portrait?: { src: string; alt: string; width: number; height: number };
   /** A WhatsApp message written for this page. Used by the WhatsApp buttons in the hero. */
   whatsappMessage?: string;
   /** Full path, e.g. /taxi-saudi-arabia/riyadh-region/riyadh */

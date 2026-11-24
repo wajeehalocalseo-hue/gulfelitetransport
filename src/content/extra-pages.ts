@@ -6,6 +6,8 @@ import { cities } from "./saudi/cities";
 import { riyadhAreas } from "./saudi/riyadh-areas";
 import { fmtKm, fmtMin } from "./saudi/riyadh-districts";
 import type { PlacePage, Section } from "./saudi/types";
+import { articles } from "./blog";
+import { formatDate, type Article, type Block } from "./blog/types";
 
 /**
  * The Fleet page and the Blog (index plus four guides). The guides are built from data this site already holds
@@ -14,6 +16,16 @@ import type { PlacePage, Section } from "./saudi/types";
  */
 const BASE = "/taxi-saudi-arabia";
 const RIYADH = "/riyadh-taxi-service";
+/** The author of the blog. Only what the owner has confirmed is written about the author: name, role and that the guides are theirs. */
+export const AUTHOR = {
+  name: "Wajeeha Amin",
+  slug: "wajeeha-amin",
+  path: "/author/wajeeha-amin",
+  role: "Owner",
+  photo: "/images/author/wajeeha-amin.webp",
+  /** The author's own profiles, given by the author. */
+  profiles: ["https://www.linkedin.com/in/wajeeha-amin-3569233a4/", "https://www.facebook.com/share/1HJVZxgZmM/"],
+} as const;
 const PUBLISHED = "2026-11-16";
 const PUBLISHED_TEXT = "16 November 2026";
 
@@ -165,17 +177,23 @@ const CROSSING: Record<string, string> = {
 };
 const intlRows = intlRoutes.map((r) => ({ cells: [r.name, r.country, `~${r.km} km`, CROSSING[r.country] ?? "Confirmed per request"], href: `${BASE}/international/${r.id}` }));
 
-type Post = { slug: string; page: PlacePage };
-const post = (slug: string, o: Omit<Parameters<typeof base>[0], "crumbs">, hero: PlacePage["layout"]["hero"], body: PlacePage["layout"]["body"]): Post => ({
+type LegacyPost = { slug: string; page: PlacePage };
+/** A published blog post: the article (what is shown), and the page record used by the sitemap, the tracker and the blog index. */
+export type Post = { slug: string; page: PlacePage; article: Article; published: string };
+const post = (slug: string, o: Omit<Parameters<typeof base>[0], "crumbs">, hero: PlacePage["layout"]["hero"], body: PlacePage["layout"]["body"]): LegacyPost => ({
   slug,
   page: base({
     ...o,
+    sections: [
+      ...o.sections,
+      { id: "author", h2: "About the author", kind: "links", items: [{ name: AUTHOR.name, href: AUTHOR.path, note: "Owner of Gulf Elite Transport Group and author of this blog" }] },
+    ],
     path: `/blog/${slug}`,
     layout: { hero, body, form: "bottom" },
     crumbs: [{ name: "Home", path: "/" }, { name: "Blog", path: "/blog" }, { name: o.name, path: `/blog/${slug}` }],
     facts: [
       { label: "Published", value: PUBLISHED_TEXT },
-      { label: "By", value: "Gulf Elite Transport" },
+      { label: "By", value: AUTHOR.name },
       { label: "Data", value: "OpenStreetMap routing, reviewed November 2026" },
       { label: "Topic", value: o.facts[3]?.value ?? "Travel planning" },
     ],
@@ -189,11 +207,19 @@ const sourcesBlock = (what: string): Section => ({
   items: [
     { title: "Where the figures come from", text: `${what} They are estimates from OpenStreetMap routing between place centres, for light traffic, and were reviewed in November 2026.` },
     { title: "What they do not include", text: "Rest stops, border queues, peak-hour traffic and roadworks add time. Your own ride is planned and confirmed with you." },
-    { title: "Who wrote it", text: "Gulf Elite Transport, which arranges the rides described here." },
+    { title: "Who wrote it", text: "Wajeeha Amin, owner of Gulf Elite Transport Group, which arranges the rides described here. The author page tells you more." },
   ],
 });
 
-export const blogPosts: Post[] = [
+/** Tags shown under each post and in its sidebar, by post slug. */
+export const POST_TAGS: Record<string, string[]> = {
+  "riyadh-airport-to-city-districts-distance-and-time": ["Riyadh airport", "King Khalid Airport", "Riyadh districts", "Airport taxi", "Distance and time"],
+  "riyadh-to-saudi-cities-road-distance-and-driving-time": ["Intercity taxi", "Riyadh routes", "Road distance", "Driving time", "Saudi cities"],
+  "riyadh-to-gulf-by-road-border-crossings-and-documents": ["Gulf by road", "Border crossings", "Travel documents", "Riyadh to Dubai", "Riyadh to Doha"],
+  "how-to-plan-a-long-distance-taxi-from-riyadh": ["Long-distance taxi", "Trip planning", "Checklist", "Riyadh intercity", "Return trip"],
+};
+
+const legacyPosts: LegacyPost[] = [
   post(
     "riyadh-airport-to-city-districts-distance-and-time",
     {
@@ -358,15 +384,75 @@ export const blogPosts: Post[] = [
   ),
 ];
 
+/** The first four guides were written as page sections. This turns them into the article format, so every post is shown the same way. */
+function legacyArticle(l: LegacyPost): Article {
+  const sec = (id: string) => l.page.sections.find((s) => s.id === id);
+  const blocksOf = (s: Section): Block[] => {
+    switch (s.kind) {
+      case "text": return s.paragraphs.map((t) => ({ t: "p" as const, text: t }));
+      case "items": return [...(s.intro ? [{ t: "p" as const, text: s.intro }] : []), { t: "ul" as const, items: s.items }];
+      case "steps": return [{ t: "ol" as const, items: s.items }];
+      case "table": return [...(s.intro ? [{ t: "p" as const, text: s.intro }] : []), { t: "table" as const, head: s.head, rows: s.rows.map((r) => r.cells), hrefs: s.rows.map((r) => r.href), note: s.note }];
+      case "links": return [...(s.intro ? [{ t: "p" as const, text: s.intro }] : []), { t: "links" as const, items: s.items }];
+      default: return [];
+    }
+  };
+  const faq = sec("faq");
+  const limits = sec("limits");
+  return {
+    slug: l.slug,
+    h1: l.page.h1,
+    description: l.page.description,
+    category: l.page.facts.find((f) => f.label === "Topic")?.value ?? "Guide",
+    tags: POST_TAGS[l.slug] ?? [],
+    published: PUBLISHED,
+    answer: l.page.directAnswer,
+    sections: l.page.sections.filter((s) => !["faq", "limits", "author"].includes(s.id) && s.kind !== "topic" as never).map((s) => ({ id: s.id, h2: s.h2, blocks: blocksOf(s) })).filter((s) => s.blocks.length),
+    faq: faq && faq.kind === "faq" ? faq.items : [],
+    takeaways: limits && limits.kind === "items" ? { intro: limits.intro, items: limits.items } : undefined,
+  };
+}
+
+/** A page record for an article, so the sitemap, the tracker and the blog index list it like any other page. */
+function articlePage(a: Article): PlacePage {
+  return base({
+    path: `/blog/${a.slug}`,
+    name: a.h1,
+    title: a.h1,
+    description: a.description,
+    h1: a.h1,
+    lead: a.description,
+    directAnswer: a.answer,
+    crumbs: [{ name: "Home", path: "/" }, { name: "Blog", path: "/blog" }, { name: a.h1, path: `/blog/${a.slug}` }],
+    facts: [
+      { label: "Published", value: formatDate(a.published) },
+      { label: "By", value: AUTHOR.name },
+      { label: "Topic", value: a.category },
+      { label: "Type", value: "Guide" },
+    ],
+    sections: [
+      { id: "answer", h2: "Quick answer", kind: "text", paragraphs: [a.answer] },
+      ...a.sections.map((s) => ({ id: s.id, h2: s.h2, kind: "text" as const, paragraphs: s.blocks.flatMap((b) => (b.t === "p" ? [b.text] : b.t === "ul" || b.t === "ol" ? b.items.map((i) => (i.title ? `${i.title}. ${i.text}` : i.text)) : [])) })),
+      { id: "faq", h2: "Questions", kind: "faq", items: a.faq },
+    ],
+  });
+}
+
+/** Every published guide, newest first. */
+export const blogPosts: Post[] = [
+  ...articles.map((a) => ({ slug: a.slug, page: articlePage(a), article: a, published: a.published })),
+  ...legacyPosts.map((l) => ({ ...l, article: legacyArticle(l), published: PUBLISHED })),
+].sort((x, y) => (x.published < y.published ? 1 : x.published > y.published ? -1 : 0));
+
 // ------------------------------------------------------------------ Blog index
 export const blogIndex: PlacePage = base({
   path: "/blog",
   name: "Blog",
   title: "Taxi Travel Guides for Riyadh and Saudi Arabia",
-  description: "Practical guides for taxi travel from Riyadh: airport distances by district, road distances to Saudi cities, Gulf border crossings and a long-trip checklist.",
+  description: "Practical guides for taxi travel in Saudi Arabia: airports, Umrah arrivals, intercity routes, how fares work and how to plan a long trip.",
   h1: "Taxi Travel Guides for Riyadh and Saudi Arabia",
-  lead: "Distances, driving times, border crossings and planning checklists, written from the routes we arrange.",
-  directAnswer: "These guides explain the practical side of taxi travel from Riyadh: how far the airport is from each district, how long the road to each Saudi city takes, which borders you cross on the way to the Gulf, and what to settle before a long trip. Each guide is built from the same distance and route data used on our route pages, and each links to the pages where you can book.",
+  lead: "Airports, Umrah arrivals, intercity routes and fares: planning guides written from the rides we arrange.",
+  directAnswer: "These guides explain the practical side of taxi travel in Saudi Arabia: how an airport pickup works, how far each Riyadh district is from the airport, how long the road to each Saudi city takes, how fares are worked out, and what to settle before a long trip. Each guide uses the same distance and route data as our route pages, says clearly what is an estimate, and links to the pages where you can book.",
   crumbs: [{ name: "Home", path: "/" }, { name: "Blog", path: "/blog" }],
   facts: [
     { label: "Guides", value: String(blogPosts.length) },
@@ -385,5 +471,84 @@ export const blogIndex: PlacePage = base({
   ],
 });
 
-export const extraPages: PlacePage[] = [fleetPage, blogIndex, ...blogPosts.map((p) => p.page)];
+/** The author page: what it says is limited to the name, the role and how the guides are written. No qualifications, years or personal details are claimed. */
+export const authorPage: PlacePage = base({
+  path: AUTHOR.path,
+  name: AUTHOR.name,
+  title: "Wajeeha Amin, Owner and Author | Gulf Elite Transport",
+  description: "Wajeeha Amin, owner of Gulf Elite Transport Group, has 8 years in travel and transport and writes its guides on airports, Umrah, Hajj and routes.",
+  portrait: { src: AUTHOR.photo, alt: "Portrait of Wajeeha Amin, smiling, with long dark hair and round glasses, in a striped top against an orange background", width: 640, height: 640 },
+  h1: "Wajeeha Amin",
+  lead: "Owner of Gulf Elite Transport Group and author of the guides on this blog.",
+  directAnswer:
+    "Wajeeha Amin is the owner of Gulf Elite Transport Group, a taxi, cab and freight transport company serving Saudi Arabia, and the author of the guides on this website's blog. With 8 years of experience in travel and transportation, Wajeeha Amin focuses on airport transfers, Umrah and Hajj transport, and city-to-city routes.",
+  crumbs: [{ name: "Home", path: "/" }, { name: "Blog", path: "/blog" }, { name: AUTHOR.name, path: AUTHOR.path }],
+  facts: [
+    { label: "Role", value: "Owner, Gulf Elite Transport Group" },
+    { label: "Experience", value: "8 years in travel and transportation" },
+    { label: "Focus", value: "Airports, Umrah and Hajj, city-to-city routes" },
+    { label: "Guides", value: String(blogPosts.length) },
+  ],
+  sections: [
+    {
+      id: "about",
+      h2: "About Wajeeha Amin",
+      kind: "text",
+      paragraphs: [
+        "Wajeeha Amin is the owner of Gulf Elite Transport Group, which arranges private taxi and cab rides, airport transfers, intercity trips, Umrah and Hajj transport and freight services in Saudi Arabia.",
+        "With 8 years of experience in travel and transportation, Wajeeha Amin focuses on three things: airport transfers, Umrah and Hajj transport, and city-to-city routes. Wajeeha Amin also writes the blog on this website, and the guides are written to help a reader decide how to travel, and what to prepare, before contacting the company.",
+      ],
+    },
+    {
+      id: "covers",
+      h2: "What the guides cover",
+      kind: "items",
+      items: [
+        { title: "Airports and cities", text: "How airport pickups work, how to give a pickup point, and getting around Saudi cities." },
+        { title: "Intercity routes", text: "Road trips between cities, with distances and driving times where the figures are known, and what changes them." },
+        { title: "Umrah and Hajj travel", text: "Planning transport between the airport, Makkah and Madinah for individuals, families and groups." },
+        { title: "Freight and moving", text: "What to prepare before booking a vehicle for cargo, furniture or equipment." },
+      ],
+    },
+    {
+      id: "method",
+      h2: "How the guides are written",
+      kind: "items",
+      items: [
+        { title: "Figures are marked as estimates", text: "Distances and driving times come from published mapping data for light traffic. The guides say so, and give the review date." },
+        { title: "No fares are published", text: "Fares depend on the date, the route and the vehicle, so they are confirmed with you before you commit. A guide explains what changes a fare, and never promises one." },
+        { title: "Nothing is invented", text: "The guides do not claim ratings, awards, partnerships or guaranteed journey times. If something could not be checked, it is left out." },
+        { title: "Corrections", text: "If you find a mistake, tell us on WhatsApp or through the contact page and it will be checked and fixed." },
+      ],
+    },
+    {
+      id: "guides",
+      h2: "Guides by Wajeeha Amin",
+      kind: "links",
+      items: [...blogPosts.map((p) => ({ name: p.page.name, href: p.page.path, note: p.page.description })), { name: "All guides", href: "/blog", note: "The full list on the blog" }],
+    },
+    {
+      id: "profiles",
+      h2: "Find Wajeeha Amin online",
+      kind: "links",
+      intro: "The author's own profiles.",
+      items: [
+        { name: "LinkedIn", href: AUTHOR.profiles[0], note: "Professional profile" },
+        { name: "Facebook", href: AUTHOR.profiles[1], note: "Facebook profile" },
+      ],
+    },
+    {
+      id: "contact",
+      h2: "Contact",
+      kind: "links",
+      items: [
+        { name: "Contact page", href: "/contact", note: "Ways to reach the company" },
+        { name: "Book a ride", href: "/book", note: "The booking form" },
+        { name: "About Gulf Elite Transport", href: "/about", note: "The company" },
+      ],
+    },
+  ],
+});
+
+export const extraPages: PlacePage[] = [fleetPage, blogIndex, authorPage, ...blogPosts.map((p) => p.page)];
 export const extraByPath = new Map(extraPages.map((p) => [p.path, p]));
